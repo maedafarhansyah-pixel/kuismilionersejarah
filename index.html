@@ -19,7 +19,6 @@
   --ink:#eaf3ff;
   --ink-soft:#c7d8f0;
   --muted:#8fa4c4;
-  --muted-dim:#5f7characters;
 
   /* ===== TEMA UTAMA: BIRU PREMIUM ===== */
   --blue-deep:#040b1c;
@@ -28,19 +27,15 @@
   --blue-light:#3b6bb8;
   --blue-glow:#60a5fa;
 
-  /* ===== AKSEN 1: CYAN / AQUA (dingin) ===== */
+  /* ===== AKSEN: CYAN (dingin) ===== */
   --cyan:#22d3ee;
   --cyan-soft:#67e8f9;
   --cyan-glow:#a5f3fc;
 
-  /* ===== AKSEN 2: GOLD / AMBER (hangat) ===== */
+  /* ===== AKSEN: GOLD (hangat) ===== */
   --gold:#fbbf24;
   --gold-soft:#fde68a;
   --gold-deep:#b45309;
-
-  --shadow-blue:rgba(59,107,184,.45);
-  --shadow-cyan:rgba(34,211,238,.45);
-  --shadow-gold:rgba(251,191,36,.45);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -55,7 +50,6 @@ body{
     linear-gradient(165deg,#030916 0%,#061530 45%,#020612 100%);
   background-attachment:fixed;
   position:relative;
-  overflow-x:hidden;
 }
 body::before{
   content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.05;
@@ -71,30 +65,24 @@ body::before{
 }
 ::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#3b6bb8,#22d3ee,#67e8f9);}
 
-/* ============== AURORA BACKGROUND (bergerak halus) ============== */
+/* ============== AURORA ============== */
 .aurora{
   position:fixed; inset:-20%; pointer-events:none; z-index:0; overflow:hidden;
   filter:blur(100px); opacity:.35;
 }
-.aurora span{
-  position:absolute; border-radius:50%;
-  animation:auroraFloat 22s ease-in-out infinite;
-}
+.aurora span{position:absolute; border-radius:50%; animation:auroraFloat 22s ease-in-out infinite;}
 .aurora .a1{width:600px;height:600px;background:radial-gradient(circle,#3b6bb8,transparent 65%);top:-10%;left:-10%;}
 .aurora .a2{width:520px;height:520px;background:radial-gradient(circle,#22d3ee,transparent 65%);top:30%;right:-15%;animation-delay:-7s;}
 .aurora .a3{width:540px;height:540px;background:radial-gradient(circle,#fbbf24,transparent 65%);bottom:-15%;left:20%;animation-delay:-14s;opacity:.5;}
-.aurora .a4{width:400px;height:400px;background:radial-gradient(circle,#67e8f9,transparent 65%);top:60%;left:-15%;animation-delay:-4s;opacity:.6;}
+.aurora .a4{width:400px;height:400px;background:radial-gradient(circle,#a78bfa,transparent 65%);top:60%;left:-15%;animation-delay:-4s;opacity:.55;}
 @keyframes auroraFloat{
   0%,100%{transform:translate3d(0,0,0) scale(1);}
   33%{transform:translate3d(40px,-30px,0) scale(1.12);}
   66%{transform:translate3d(-30px,40px,0) scale(.92);}
 }
 
-/* Sparkle particles statis */
-.sparkles{
-  position:fixed; inset:0; pointer-events:none; z-index:1;
-  opacity:.55;
-}
+/* Sparkles */
+.sparkles{position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.55;}
 .sparkles span{
   position:absolute; width:3px; height:3px; border-radius:50%;
   background:#a5f3fc;
@@ -106,7 +94,7 @@ body::before{
 .sparkles span:nth-child(3){top:48%;left:4%;animation-delay:1.2s;}
 .sparkles span:nth-child(4){top:68%;left:88%;animation-delay:1.8s;background:#fde68a;box-shadow:0 0 8px #fbbf24;}
 .sparkles span:nth-child(5){top:82%;left:18%;animation-delay:2.4s;}
-.sparkles span:nth-child(6){top:35%;left:48%;animation-delay:3s;background:#fde68a;box-shadow:0 0 8px #fbbf24;}
+.sparkles span:nth-child(6){top:35%;left:48%;animation-delay:3s;background:#c4b5fd;box-shadow:0 0 8px #a78bfa;}
 .sparkles span:nth-child(7){top:88%;left:72%;animation-delay:.9s;}
 .sparkles span:nth-child(8){top:8%;left:58%;animation-delay:2.1s;}
 @keyframes twinkle{
@@ -122,7 +110,6 @@ body::before{
   overflow:hidden;
   z-index:2;
 }
-/* Ornamen candi biru */
 .hero::before{
   content:"";
   position:absolute;
@@ -134,7 +121,6 @@ body::before{
   pointer-events:none;
   z-index:0;
 }
-/* Garis bawah hero dengan shimmer */
 .hero::after{
   content:""; position:absolute; left:8%; right:8%; bottom:0; height:2px;
   background:linear-gradient(90deg,transparent,#3b6bb8,#22d3ee,#fbbf24,#22d3ee,#3b6bb8,transparent);
@@ -253,7 +239,6 @@ body::before{
   font-family:inherit;
   position:relative; overflow:hidden;
 }
-/* Ripple shimmer pada tombol */
 .hero .btn::before{
   content:"";
   position:absolute; inset:0;
@@ -532,7 +517,7 @@ body::before{
   gap:20px;
 }
 
-/* ============== CARD ============== */
+/* ============== CARD BASE ============== */
 .card{
   position:relative;
   display:flex; flex-direction:column;
@@ -542,13 +527,8 @@ body::before{
   overflow:hidden;
   cursor:pointer; text-decoration:none; color:inherit;
   transition:transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease, border-color .4s ease;
-  background:linear-gradient(155deg, rgba(10,26,61,.94) 0%, rgba(4,11,28,.96) 55%, rgba(12,30,68,.92) 100%);
   backdrop-filter:blur(16px);
   border:1px solid rgba(96,165,250,.20);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.05) inset,
-    0 30px 60px -30px rgba(0,0,0,.95),
-    0 18px 40px -22px rgba(59,107,184,.35);
   opacity:0;
   animation:cardIn .7s ease both, cardFloat 6s ease-in-out infinite;
   will-change:transform;
@@ -564,30 +544,30 @@ body::before{
 .card .corner{
   position:absolute;
   width:26px; height:26px;
-  border-top:1.5px solid rgba(96,165,250,.55);
-  border-left:1.5px solid rgba(96,165,250,.55);
+  border-top:1.5px solid currentColor;
+  border-left:1.5px solid currentColor;
   top:10px; left:10px;
   border-top-left-radius:6px;
   pointer-events:none;
   transition:all .4s ease;
+  opacity:.75;
 }
 .card .corner.br{
   top:auto; left:auto;
   bottom:10px; right:10px;
   border-top:none; border-left:none;
-  border-bottom:1.5px solid rgba(96,165,250,.55);
-  border-right:1.5px solid rgba(96,165,250,.55);
+  border-bottom:1.5px solid currentColor;
+  border-right:1.5px solid currentColor;
   border-top-left-radius:0;
   border-bottom-right-radius:6px;
 }
-.card:hover .corner{width:34px; height:34px; border-color:#22d3ee;}
+.card:hover .corner{width:34px; height:34px; opacity:1;}
 .card::before{
   content:"";
   position:absolute;
   right:-30%; top:-30%;
   width:70%; height:70%;
   border-radius:50%;
-  background:radial-gradient(circle,rgba(34,211,238,.28),transparent 65%);
   filter:blur(28px);
   pointer-events:none;
   opacity:.75;
@@ -596,104 +576,276 @@ body::before{
 .card::after{
   content:"";
   position:absolute; left:12%; right:12%; top:0; height:1.5px;
-  background:linear-gradient(90deg,transparent,#60a5fa,#22d3ee,#fbbf24,#22d3ee,#60a5fa,transparent);
   background-size:300% 100%;
   animation:shimmerLine 6s linear infinite;
 }
 .card:hover{
   transform:translateY(-6px) scale(1.01);
-  border-color:rgba(34,211,238,.55);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.10) inset,
-    0 50px 100px -35px rgba(0,0,0,.95),
-    0 30px 60px -22px rgba(34,211,238,.55),
-    0 0 60px -20px rgba(96,165,250,.60);
   animation-play-state:paused;
 }
 .card:focus-visible{outline:2px solid var(--cyan); outline-offset:6px;}
 
-/* ====== TEMA: ROYAL (biru dasar, Fase E) ====== */
+.card h3{
+  margin:0 0 8px;
+  font-family:'Cinzel',serif;
+  font-size:17px; font-weight:700;
+  line-height:1.28;
+  color:var(--ink);
+  letter-spacing:.01em;
+  position:relative; z-index:2;
+  padding-right:90px;
+  text-shadow:0 1px 2px rgba(0,0,0,.8), 0 0 30px rgba(96,165,250,.30);
+}
+.card .desc{
+  margin:0 0 16px;
+  font-size:12.5px; line-height:1.55;
+  color:rgba(143,164,196,.92);
+  flex-grow:1;
+  position:relative; z-index:2;
+}
+
+.kuis-box{
+  position:relative;
+  display:flex; align-items:center; justify-content:center;
+  margin:2px 0 18px;
+  padding:22px 10px;
+  border-radius:14px;
+  overflow:hidden;
+  z-index:2;
+}
+.kuis-box::before{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  animation:kuisGlow 5s ease-in-out infinite;
+}
+@keyframes kuisGlow{
+  0%,100%{opacity:.6;}
+  50%{opacity:1;}
+}
+.kuis-text{
+  position:relative; z-index:3;
+  font-family:'Cinzel',serif;
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  line-height:1;
+  text-shadow:0 0 20px currentColor;
+}
+
+.btn-buka{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:13px 16px;
+  font-size:12px; font-weight:800;
+  letter-spacing:.10em; text-transform:uppercase;
+  border-radius:11px;
+  position:relative; z-index:2;
+  margin-top:auto;
+  cursor:pointer;
+  transition:transform .3s ease, box-shadow .3s ease;
+  overflow:hidden;
+  box-shadow:
+    0 14px 28px -14px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.35),
+    inset 0 -6px 14px -8px rgba(0,0,0,.45);
+  font-family:inherit;
+}
+.btn-buka::before{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);
+  background-size:200% 100%;
+  background-position:200% 0;
+  transition:background-position .8s ease;
+  pointer-events:none;
+}
+.btn-buka:hover::before{background-position:-200% 0;}
+.card:hover .btn-buka{transform:translateY(-2px);}
+.btn-buka .play{
+  display:grid; place-items:center; width:18px; height:18px;
+  font-size:8px; border-radius:50%;
+  background:rgba(0,0,0,.22);
+  border:1px solid rgba(0,0,0,.30);
+}
+.btn-buka .arrow{font-size:12px; opacity:.85;}
+
+/* ============================================================
+   7 TEMA WARNA KARTU
+   ============================================================ */
+
+/* 1. ROYAL — Biru premium (default, Fase E) */
+.card.t-royal{
+  background:linear-gradient(155deg, rgba(10,26,61,.94) 0%, rgba(4,11,28,.96) 55%, rgba(12,30,68,.92) 100%);
+  color:#60a5fa;
+}
+.card.t-royal::before{background:radial-gradient(circle,rgba(34,211,238,.28),transparent 65%);}
+.card.t-royal::after{background:linear-gradient(90deg,transparent,#60a5fa,#22d3ee,#fbbf24,#22d3ee,#60a5fa,transparent);}
+.card.t-royal:hover{
+  border-color:rgba(34,211,238,.55);
+  box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(34,211,238,.55),0 0 60px -20px rgba(96,165,250,.60);
+}
 .card.t-royal .kuis-text{color:#a5f3fc;}
 .card.t-royal .kuis-box{
-  background:
-    radial-gradient(circle at 50% 50%, rgba(34,211,238,.16), transparent 70%),
-    linear-gradient(155deg, rgba(10,26,61,.92), rgba(4,11,28,.88));
-  border-color:rgba(96,165,250,.35);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.06),
-    inset 0 -8px 20px -12px rgba(0,0,0,.9),
-    0 8px 24px -14px rgba(34,211,238,.60);
+  background:radial-gradient(circle at 50% 50%, rgba(34,211,238,.16), transparent 70%), linear-gradient(155deg, rgba(10,26,61,.92), rgba(4,11,28,.88));
+  border:1px solid rgba(96,165,250,.35);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 -8px 20px -12px rgba(0,0,0,.9),0 8px 24px -14px rgba(34,211,238,.60);
 }
-.card.t-royal .btn-buka{
-  background:linear-gradient(120deg,#102a5c,#3b6bb8 50%,#60a5fa);
-  color:#eaf3ff;
-}
+.card.t-royal .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(165,243,252,.20), transparent 40%), radial-gradient(circle at 85% 70%, rgba(253,230,138,.14), transparent 40%);}
+.card.t-royal .btn-buka{background:linear-gradient(120deg,#102a5c,#3b6bb8 50%,#60a5fa); color:#eaf3ff;}
+.card.t-royal .badge.rarity-basic{color:#a5f3fc;background:linear-gradient(135deg,rgba(34,211,238,.16),rgba(59,107,184,.10));border-color:rgba(96,165,250,.55);}
 
-/* ====== TEMA: IMPERIAL (aksen emas hangat) ====== */
-.card.t-imperial::after{
-  background:linear-gradient(90deg,transparent,#60a5fa,#fbbf24,#fde68a,#fbbf24,#60a5fa,transparent);
-  background-size:300% 100%;
+/* 2. CYAN — Aqua (Fase E variant) */
+.card.t-cyan{
+  background:linear-gradient(155deg, rgba(4,32,42,.94) 0%, rgba(2,18,26,.96) 55%, rgba(6,42,54,.92) 100%);
+  color:#22d3ee;
 }
-.card.t-imperial::before{background:radial-gradient(circle,rgba(251,191,36,.26),transparent 65%);}
-.card.t-imperial .corner{border-color:rgba(251,191,36,.55);}
-.card.t-imperial:hover .corner{border-color:#fbbf24;}
-.card.t-imperial .kuis-text{color:#fde68a;}
-.card.t-imperial .kuis-box{
-  background:
-    radial-gradient(circle at 50% 50%, rgba(251,191,36,.16), transparent 70%),
-    linear-gradient(155deg, rgba(28,18,4,.92), rgba(12,8,2,.88));
-  border-color:rgba(251,191,36,.35);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.06),
-    inset 0 -8px 20px -12px rgba(0,0,0,.9),
-    0 8px 24px -14px rgba(251,191,36,.60);
+.card.t-cyan::before{background:radial-gradient(circle,rgba(34,211,238,.35),transparent 65%);}
+.card.t-cyan::after{background:linear-gradient(90deg,transparent,#22d3ee,#67e8f9,#a5f3fc,#67e8f9,#22d3ee,transparent);}
+.card.t-cyan:hover{
+  border-color:rgba(34,211,238,.60);
+  box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(34,211,238,.65),0 0 60px -20px rgba(103,232,249,.70);
 }
-.card.t-imperial .btn-buka{
-  background:linear-gradient(120deg,#78350f,#d97706 50%,#fbbf24);
-  color:#1a1004;
+.card.t-cyan .kuis-text{color:#a5f3fc;}
+.card.t-cyan .kuis-box{
+  background:radial-gradient(circle at 50% 50%, rgba(34,211,238,.20), transparent 70%), linear-gradient(155deg, rgba(4,32,42,.92), rgba(2,18,26,.88));
+  border:1px solid rgba(34,211,238,.42);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),inset 0 -8px 20px -12px rgba(0,0,0,.9),0 8px 28px -14px rgba(34,211,238,.75);
 }
-.card.t-imperial:hover{
-  border-color:rgba(251,191,36,.55);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.10) inset,
-    0 50px 100px -35px rgba(0,0,0,.95),
-    0 30px 60px -22px rgba(251,191,36,.55),
-    0 0 60px -20px rgba(96,165,250,.50);
-}
+.card.t-cyan .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(165,243,252,.28), transparent 40%), radial-gradient(circle at 85% 70%, rgba(34,211,238,.20), transparent 40%);}
+.card.t-cyan .btn-buka{background:linear-gradient(120deg,#0e7490,#22d3ee 50%,#67e8f9); color:#031519;}
+.card.t-cyan .badge.rarity-basic{color:#a5f3fc;background:linear-gradient(135deg,rgba(34,211,238,.22),rgba(6,182,212,.14));border-color:rgba(103,232,249,.65);}
 
-/* ====== TEMA: MYTHIC (cyan + gold, Kuis 25) ====== */
+/* 3. GOLD — Emas (Fase E variant) */
+.card.t-gold{
+  background:linear-gradient(155deg, rgba(28,18,4,.94) 0%, rgba(12,8,2,.96) 55%, rgba(38,26,8,.92) 100%);
+  color:#fbbf24;
+}
+.card.t-gold::before{background:radial-gradient(circle,rgba(251,191,36,.32),transparent 65%);}
+.card.t-gold::after{background:linear-gradient(90deg,transparent,#fbbf24,#fde68a,#f59e0b,#fde68a,#fbbf24,transparent);}
+.card.t-gold:hover{
+  border-color:rgba(251,191,36,.60);
+  box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(251,191,36,.60),0 0 60px -20px rgba(245,158,11,.70);
+}
+.card.t-gold .kuis-text{color:#fde68a;}
+.card.t-gold .kuis-box{
+  background:radial-gradient(circle at 50% 50%, rgba(251,191,36,.20), transparent 70%), linear-gradient(155deg, rgba(28,18,4,.92), rgba(12,8,2,.88));
+  border:1px solid rgba(251,191,36,.42);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),inset 0 -8px 20px -12px rgba(0,0,0,.9),0 8px 28px -14px rgba(251,191,36,.75);
+}
+.card.t-gold .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(253,230,138,.28), transparent 40%), radial-gradient(circle at 85% 70%, rgba(251,191,36,.20), transparent 40%);}
+.card.t-gold .btn-buka{background:linear-gradient(120deg,#78350f,#d97706 50%,#fbbf24); color:#1a1004;}
+.card.t-gold .badge.rarity-basic{color:#fde68a;background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(180,83,9,.14));border-color:rgba(253,230,138,.65);}
+
+/* 4. VIOLET — Ungu (Fase F) */
+.card.t-violet{
+  background:linear-gradient(155deg, rgba(28,16,56,.94) 0%, rgba(14,8,32,.96) 55%, rgba(36,22,68,.92) 100%);
+  color:#a78bfa;
+}
+.card.t-violet::before{background:radial-gradient(circle,rgba(167,139,250,.32),transparent 65%);}
+.card.t-violet::after{background:linear-gradient(90deg,transparent,#a78bfa,#c4b5fd,#8b5cf6,#c4b5fd,#a78bfa,transparent);}
+.card.t-violet:hover{
+  border-color:rgba(167,139,250,.60);
+  box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(167,139,250,.60),0 0 60px -20px rgba(139,92,246,.70);
+}
+.card.t-violet .kuis-text{color:#ddd6fe;}
+.card.t-violet .kuis-box{
+  background:radial-gradient(circle at 50% 50%, rgba(167,139,250,.20), transparent 70%), linear-gradient(155deg, rgba(28,16,56,.92), rgba(14,8,32,.88));
+  border:1px solid rgba(167,139,250,.42);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),inset 0 -8px 20px -12px rgba(0,0,0,.9),0 8px 28px -14px rgba(167,139,250,.75);
+}
+.card.t-violet .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(221,214,254,.28), transparent 40%), radial-gradient(circle at 85% 70%, rgba(167,139,250,.20), transparent 40%);}
+.card.t-violet .btn-buka{background:linear-gradient(120deg,#4c1d95,#7c3aed 50%,#a78bfa); color:#f4f0ff;}
+.card.t-violet .badge.rarity-basic{color:#ddd6fe;background:linear-gradient(135deg,rgba(167,139,250,.22),rgba(109,40,217,.14));border-color:rgba(196,181,253,.65);}
+
+/* 5. EMERALD — Hijau (Fase F) */
+.card.t-emerald{
+  background:linear-gradient(155deg, rgba(4,36,28,.94) 0%, rgba(2,18,14,.96) 55%, rgba(6,48,36,.92) 100%);
+  color:#34d399;
+}
+.card.t-emerald::before{background:radial-gradient(circle,rgba(52,211,153,.32),transparent 65%);}
+.card.t-emerald::after{background:linear-gradient(90deg,transparent,#34d399,#6ee7b7,#10b981,#6ee7b7,#34d399,transparent);}
+.card.t-emerald:hover{
+  border-color:rgba(52,211,153,.60);
+  box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(52,211,153,.60),0 0 60px -20px rgba(16,185,129,.70);
+}
+.card.t-emerald .kuis-text{color:#a7f3d0;}
+.card.t-emerald .kuis-box{
+  background:radial-gradient(circle at 50% 50%, rgba(52,211,153,.20), transparent 70%), linear-gradient(155deg, rgba(4,36,28,.92), rgba(2,18,14,.88));
+  border:1px solid rgba(52,211,153,.42);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),inset 0 -8px 20px -12px rgba(0,0,0,.9),0 8px 28px -14px rgba(52,211,153,.75);
+}
+.card.t-emerald .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(167,243,208,.28), transparent 40%), radial-gradient(circle at 85% 70%, rgba(52,211,153,.20), transparent 40%);}
+.card.t-emerald .btn-buka{background:linear-gradient(120deg,#064e3b,#059669 50%,#34d399); color:#041a12;}
+.card.t-emerald .badge.rarity-basic{color:#a7f3d0;background:linear-gradient(135deg,rgba(52,211,153,.22),rgba(5,150,105,.14));border-color:rgba(110,231,183,.65);}
+
+/* 6. ROSE — Pink/Merah muda (Fase F) */
+.card.t-rose{
+  background:linear-gradient(155deg, rgba(46,10,24,.94) 0%, rgba(24,5,12,.96) 55%, rgba(58,14,32,.92) 100%);
+  color:#fb7185;
+}
+.card.t-rose::before{background:radial-gradient(circle,rgba(251,113,133,.32),transparent 65%);}
+.card.t-rose::after{background:linear-gradient(90deg,transparent,#fb7185,#fda4af,#f43f5e,#fda4af,#fb7185,transparent);}
+.card.t-rose:hover{
+  border-color:rgba(251,113,133,.60);
+  box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(251,113,133,.60),0 0 60px -20px rgba(244,63,94,.70);
+}
+.card.t-rose .kuis-text{color:#fecdd3;}
+.card.t-rose .kuis-box{
+  background:radial-gradient(circle at 50% 50%, rgba(251,113,133,.20), transparent 70%), linear-gradient(155deg, rgba(46,10,24,.92), rgba(24,5,12,.88));
+  border:1px solid rgba(251,113,133,.42);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),inset 0 -8px 20px -12px rgba(0,0,0,.9),0 8px 28px -14px rgba(251,113,133,.75);
+}
+.card.t-rose .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(254,205,211,.28), transparent 40%), radial-gradient(circle at 85% 70%, rgba(251,113,133,.20), transparent 40%);}
+.card.t-rose .btn-buka{background:linear-gradient(120deg,#881337,#e11d48 50%,#fb7185); color:#fff1f2;}
+.card.t-rose .badge.rarity-basic{color:#fecdd3;background:linear-gradient(135deg,rgba(251,113,133,.22),rgba(190,18,60,.14));border-color:rgba(253,164,175,.65);}
+
+/* 7. ORANGE — Oranye (Fase F variant) */
+.card.t-orange{
+  background:linear-gradient(155deg, rgba(46,18,4,.94) 0%, rgba(24,10,2,.96) 55%, rgba(58,24,6,.92) 100%);
+  color:#fb923c;
+}
+.card.t-orange::before{background:radial-gradient(circle,rgba(251,146,60,.32),transparent 65%);}
+.card.t-orange::after{background:linear-gradient(90deg,transparent,#fb923c,#fdba74,#f97316,#fdba74,#fb923c,transparent);}
+.card.t-orange:hover{
+  border-color:rgba(251,146,60,.60);
+  box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(251,146,60,.60),0 0 60px -20px rgba(249,115,22,.70);
+}
+.card.t-orange .kuis-text{color:#fed7aa;}
+.card.t-orange .kuis-box{
+  background:radial-gradient(circle at 50% 50%, rgba(251,146,60,.20), transparent 70%), linear-gradient(155deg, rgba(46,18,4,.92), rgba(24,10,2,.88));
+  border:1px solid rgba(251,146,60,.42);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),inset 0 -8px 20px -12px rgba(0,0,0,.9),0 8px 28px -14px rgba(251,146,60,.75);
+}
+.card.t-orange .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(254,215,170,.28), transparent 40%), radial-gradient(circle at 85% 70%, rgba(251,146,60,.20), transparent 40%);}
+.card.t-orange .btn-buka{background:linear-gradient(120deg,#7c2d12,#ea580c 50%,#fb923c); color:#1a0d04;}
+.card.t-orange .badge.rarity-basic{color:#fed7aa;background:linear-gradient(135deg,rgba(251,146,60,.22),rgba(154,52,18,.14));border-color:rgba(253,186,116,.65);}
+
+/* 8. MYTHIC — Cyan + Gold (Kuis 25, legendaris) */
 .card.t-mythic::after{
   background:linear-gradient(90deg,transparent,#22d3ee,#fbbf24,#67e8f9,#fde68a,#22d3ee,transparent);
   background-size:300% 100%;
 }
-.card.t-mythic::before{background:radial-gradient(circle,rgba(34,211,238,.32),transparent 65%);}
-.card.t-mythic .corner{border-color:rgba(34,211,238,.65);}
-.card.t-mythic:hover .corner{border-color:#fbbf24;}
+.card.t-mythic{
+  background:linear-gradient(155deg, rgba(4,42,52,.94) 0%, rgba(4,11,28,.96) 55%, rgba(8,32,52,.92) 100%);
+  color:#22d3ee;
+}
+.card.t-mythic::before{background:radial-gradient(circle,rgba(34,211,238,.35),transparent 65%);}
+.card.t-mythic:hover{
+  border-color:rgba(251,191,36,.65);
+  box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(34,211,238,.65),0 0 60px -18px rgba(251,191,36,.60);
+}
 .card.t-mythic .kuis-text{color:#fde68a;}
 .card.t-mythic .kuis-box{
-  background:
-    radial-gradient(circle at 50% 50%, rgba(34,211,238,.20), transparent 70%),
-    linear-gradient(155deg, rgba(4,32,42,.92), rgba(4,11,28,.88));
-  border-color:rgba(34,211,238,.42);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    inset 0 -8px 20px -12px rgba(0,0,0,.9),
-    0 8px 28px -14px rgba(34,211,238,.75);
+  background:radial-gradient(circle at 50% 50%, rgba(34,211,238,.22), transparent 70%), linear-gradient(155deg, rgba(4,42,52,.92), rgba(4,11,28,.88));
+  border:1px solid rgba(34,211,238,.50);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),inset 0 -8px 20px -12px rgba(0,0,0,.9),0 8px 32px -14px rgba(34,211,238,.85),0 0 50px -20px rgba(251,191,36,.60);
 }
-.card.t-mythic .btn-buka{
-  background:linear-gradient(120deg,#0e7490,#22d3ee 45%,#fbbf24);
-  color:#03132b;
-}
-.card.t-mythic:hover{
-  border-color:rgba(251,191,36,.60);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.10) inset,
-    0 50px 100px -35px rgba(0,0,0,.95),
-    0 30px 60px -22px rgba(34,211,238,.60),
-    0 0 60px -18px rgba(251,191,36,.55);
-}
+.card.t-mythic .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(253,230,138,.30), transparent 40%), radial-gradient(circle at 85% 70%, rgba(103,232,249,.26), transparent 40%);}
+.card.t-mythic .btn-buka{background:linear-gradient(120deg,#0e7490,#22d3ee 45%,#fbbf24); color:#03132b;}
+.card.t-mythic .badge.rarity-legend{color:#03132b;background:linear-gradient(135deg,#fde68a,#22d3ee,#67e8f9);border-color:rgba(253,230,138,.85);box-shadow:0 0 22px -4px rgba(251,191,36,.85),0 0 30px -4px rgba(34,211,238,.65),inset 0 1px 0 rgba(255,255,255,.55);}
 
-/* Badge */
+/* Badge default (jika bukan legend/boss) */
 .badge{
   position:absolute; top:14px; right:14px;
   display:inline-flex; align-items:center; gap:5px;
@@ -703,12 +855,6 @@ body::before{
   letter-spacing:.10em; text-transform:uppercase;
   z-index:3;
   backdrop-filter:blur(8px);
-}
-.badge.rarity-basic{
-  color:#a5f3fc;
-  background:linear-gradient(135deg,rgba(34,211,238,.16),rgba(59,107,184,.10));
-  border:1px solid rgba(96,165,250,.55);
-  box-shadow:0 0 16px -6px rgba(34,211,238,.70);
 }
 .badge.rarity-boss{
   color:#fff;
@@ -745,100 +891,6 @@ body::before{
   box-shadow:0 0 14px rgba(16,185,129,.65);
   z-index:3;
 }
-
-.card h3{
-  margin:0 0 8px;
-  font-family:'Cinzel',serif;
-  font-size:17px; font-weight:700;
-  line-height:1.28;
-  color:var(--ink);
-  letter-spacing:.01em;
-  position:relative; z-index:2;
-  padding-right:90px;
-  text-shadow:0 1px 2px rgba(0,0,0,.8), 0 0 30px rgba(96,165,250,.30);
-}
-.card .desc{
-  margin:0 0 16px;
-  font-size:12.5px; line-height:1.55;
-  color:rgba(143,164,196,.92);
-  flex-grow:1;
-  position:relative; z-index:2;
-}
-
-/* Kotak kuis dengan efek glow berlapis */
-.kuis-box{
-  position:relative;
-  display:flex; align-items:center; justify-content:center;
-  margin:2px 0 18px;
-  padding:22px 10px;
-  border-radius:14px;
-  border:1px solid rgba(96,165,250,.35);
-  overflow:hidden;
-  z-index:2;
-}
-/* Sparkle di dalam kuis-box */
-.kuis-box::before{
-  content:"";
-  position:absolute; inset:0;
-  background:
-    radial-gradient(circle at 15% 30%, rgba(165,243,252,.20), transparent 40%),
-    radial-gradient(circle at 85% 70%, rgba(253,230,138,.16), transparent 40%);
-  pointer-events:none;
-  animation:kuisGlow 5s ease-in-out infinite;
-}
-@keyframes kuisGlow{
-  0%,100%{opacity:.6;}
-  50%{opacity:1;}
-}
-.kuis-text{
-  position:relative; z-index:3;
-  font-family:'Cinzel',serif;
-  font-size:26px;
-  font-weight:700;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  line-height:1;
-  text-shadow:
-    0 0 20px currentColor,
-    0 0 40px rgba(34,211,238,.45);
-}
-
-.btn-buka{
-  display:inline-flex; align-items:center; justify-content:center; gap:8px;
-  padding:13px 16px;
-  font-size:12px; font-weight:800;
-  letter-spacing:.10em; text-transform:uppercase;
-  border-radius:11px;
-  position:relative; z-index:2;
-  margin-top:auto;
-  cursor:pointer;
-  transition:transform .3s ease, box-shadow .3s ease;
-  overflow:hidden;
-  box-shadow:
-    0 14px 28px -14px rgba(59,107,184,.95),
-    inset 0 1px 0 rgba(255,255,255,.35),
-    inset 0 -6px 14px -8px rgba(0,0,0,.45);
-  font-family:inherit;
-}
-/* Ripple di btn-buka */
-.btn-buka::before{
-  content:"";
-  position:absolute; inset:0;
-  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);
-  background-size:200% 100%;
-  background-position:200% 0;
-  transition:background-position .8s ease;
-  pointer-events:none;
-}
-.btn-buka:hover::before{background-position:-200% 0;}
-.card:hover .btn-buka{transform:translateY(-2px);}
-.btn-buka .play{
-  display:grid; place-items:center; width:18px; height:18px;
-  font-size:8px; border-radius:50%;
-  background:rgba(0,0,0,.22);
-  border:1px solid rgba(0,0,0,.30);
-}
-.btn-buka .arrow{font-size:12px; opacity:.85;}
 
 /* Modal */
 .modal-backdrop{
@@ -915,7 +967,6 @@ body::before{
 .modal .step .txt{font-size:13.5px; line-height:1.65; color:rgba(199,216,240,.92);}
 .modal .step .txt b{color:var(--gold-soft); font-weight:700;}
 
-/* Footer */
 .footer{
   text-align:center;
   padding:60px 22px 50px;
@@ -947,7 +998,6 @@ body::before{
   color:rgba(143,164,196,.60);
 }
 
-/* Empty state */
 .empty-state{
   display:none;
   padding:60px 30px;
@@ -960,7 +1010,6 @@ body::before{
 .empty-state .ico{font-size:36px; margin-bottom:14px; opacity:.6;}
 .empty-state p{font-size:14px; color:rgba(143,164,196,.9);}
 
-/* Responsive */
 @media (max-width:768px){
   .hero{padding:60px 18px 80px;}
   .container{padding:50px 18px 40px;}
@@ -986,19 +1035,16 @@ body::before{
 </head>
 <body>
 
-<!-- Aurora background -->
 <div class="aurora" aria-hidden="true">
   <span class="a1"></span><span class="a2"></span>
   <span class="a3"></span><span class="a4"></span>
 </div>
 
-<!-- Sparkles -->
 <div class="sparkles" aria-hidden="true">
   <span></span><span></span><span></span><span></span>
   <span></span><span></span><span></span><span></span>
 </div>
 
-<!-- ============== HERO ============== -->
 <header class="hero">
   <span class="eyebrow"><span class="dot"></span> Interactive Quiz Platform · 2025</span>
 
@@ -1036,7 +1082,6 @@ body::before{
   </div>
 </header>
 
-<!-- ============== MAIN ============== -->
 <main class="container" id="kuis-section">
 
   <div class="progress-global">
@@ -1068,7 +1113,6 @@ body::before{
   </div>
 </main>
 
-<!-- ============== MODAL PANDUAN ============== -->
 <div class="modal-backdrop" id="modal-panduan">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <button class="close" id="modal-close" aria-label="Tutup">✕</button>
@@ -1108,7 +1152,6 @@ body::before{
   </div>
 </div>
 
-<!-- ============== FOOTER ============== -->
 <footer class="footer">
   <div class="line"></div>
   <span class="brand">Kuis Millionaire E-Sejarah</span>
@@ -1123,12 +1166,14 @@ body::before{
 const BASE = "https://maedafarhansyah-pixel.github.io/kuismilionersejarah";
 const STORAGE_KEY = "kuis_sejarah_progress_v1";
 
+/* 7 tema warna yang dipakai bergantian */
+const THEMES = ["t-royal","t-cyan","t-gold","t-violet","t-emerald","t-rose","t-orange"];
+
 const BAB_UTAMA = [
   {
     bab: 1,
     nama:"Pengantar Ilmu Sejarah",
     slug:"pengantarilmusejarah",
-    fase:"royal",
     desc:"Hakikat sejarah, diakronik & sinkronik, sumber, dan konsep waktu.",
     urls: [
       `${BASE}/pis_1.html`,
@@ -1142,28 +1187,24 @@ const BAB_UTAMA = [
     bab: 2,
     nama:"Penelitian Sejarah",
     slug:"penelitiansejarah",
-    fase:"royal",
     desc:"Heuristik, kritik sumber, interpretasi, dan historiografi."
   },
   {
     bab: 3,
     nama:"Masa Praaksara",
     slug:"praaksara",
-    fase:"royal",
     desc:"Pembabakan zaman batu, manusia purba, dan kehidupan praaksara."
   },
   {
     bab: 4,
     nama:"Masa Hindu-Buddha",
     slug:"masahindubudha",
-    fase:"imperial",
     desc:"Masuknya Hindu-Buddha hingga Kutai, Sriwijaya, Majapahit."
   },
   {
     bab: 5,
     nama:"Masa Islam",
     slug:"masaislamdiindonesia",
-    fase:"imperial",
     desc:"Masuk & penyebaran Islam, Walisongo, hingga Demak & Mataram."
   }
 ];
@@ -1199,6 +1240,8 @@ const KUIS_BY_BAB = BAB_UTAMA.map(bab => {
     const url = bab.urls
       ? bab.urls[i - 1]
       : `${BASE}/${bab.slug}${i}.html`;
+    /* Tema berputar: t-royal, t-cyan, t-gold, ... */
+    const theme = isLegend ? "t-mythic" : THEMES[(kuisNumber - 1) % THEMES.length];
     list.push({
       id: `b${bab.bab}-k${i}`,
       bab: bab.bab,
@@ -1206,6 +1249,7 @@ const KUIS_BY_BAB = BAB_UTAMA.map(bab => {
       kuisNumber,
       label: `Kuis ${kuisNumber}`,
       isBoss, isLegend,
+      theme,
       url
     });
   }
@@ -1234,7 +1278,7 @@ function renderAll(){
       <span class="num">${String(bab.bab).padStart(2,"0")}</span>
       <div class="info">
         <h2>${bab.nama}</h2>
-        <div class="meta">5 kuis · Fase ${bab.fase === "royal" ? "E" : "E"} · <b>${doneBab}/${totalBab}</b> selesai</div>
+        <div class="meta">5 kuis · Fase E · <b>${doneBab}/${totalBab}</b> selesai</div>
       </div>
       <div class="progress">
         <div class="mini-bar"><div class="fill" style="width:${pct}%"></div></div>
@@ -1276,8 +1320,7 @@ function matchesFilter(k){
 function buildCard(bab, k, idx){
   const card = document.createElement("a");
   const done = isDone(k.id);
-  const themeClass = k.isLegend ? "t-mythic" : `t-${bab.fase}`;
-  card.className = `card ${themeClass}${done ? " done" : ""}`;
+  card.className = `card ${k.theme}${done ? " done" : ""}`;
   card.href = k.url;
   card.target = "_blank";
   card.rel = "noopener noreferrer";
