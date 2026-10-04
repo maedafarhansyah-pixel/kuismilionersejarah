@@ -6,331 +6,448 @@
 <title>Kuis Millionaire E-Sejarah — SMAN 3 Kasongan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#eaf2ff; --muted:#8ea3c4; --muted-dim:#6b7fa3;
-  --sky:#0ea5e9; --sky-light:#38bdf8; --gold:#fbbf24; --gold-light:#fde68a;
-  --emerald:#10b981; --emerald-light:#6ee7b7;
+  --ink:#eaf2ff; --muted:#93a8c9; --muted-dim:#6b7fa3;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{
   font-family:'Plus Jakarta Sans',system-ui,sans-serif;
   color:var(--ink); min-height:100vh; overflow-x:hidden;
-  background:
-    radial-gradient(900px 620px at 6% -8%, rgba(14,165,233,.16), transparent 62%),
-    radial-gradient(820px 600px at 96% -4%, rgba(99,102,241,.15), transparent 58%),
-    radial-gradient(950px 720px at 50% 112%, rgba(30,58,138,.26), transparent 62%),
-    linear-gradient(165deg,#040814 0%,#060d20 42%,#03060f 100%);
+  background:#03060f;
+  background-image:
+    radial-gradient(1000px 700px at 8% -10%, rgba(14,165,233,.22), transparent 60%),
+    radial-gradient(900px 650px at 95% -5%, rgba(99,102,241,.20), transparent 55%),
+    radial-gradient(1100px 800px at 50% 115%, rgba(30,58,138,.30), transparent 60%),
+    linear-gradient(165deg,#03060f 0%,#05102a 40%,#02040c 100%);
   background-attachment:fixed;
+  position:relative;
 }
-::selection{background:rgba(56,189,248,.35);color:#fff;}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.035;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode:overlay;
+}
+::selection{background:rgba(56,189,248,.40);color:#fff;}
 ::-webkit-scrollbar{width:11px;}
-::-webkit-scrollbar-track{background:#050b18;}
-::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#1e3a8a,#0ea5e9);border-radius:99px;border:2px solid #050b18;}
+::-webkit-scrollbar-track{background:#03060f;}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#1e3a8a,#0ea5e9);border-radius:99px;border:2px solid #03060f;}
 
 /* ============== HEADER ============== */
 .header{
-  position:relative; padding:60px 22px 84px; text-align:center;
-  background:
-    radial-gradient(700px 320px at 20% 0%, rgba(99,102,241,.40), transparent 62%),
-    radial-gradient(700px 340px at 85% 10%, rgba(14,165,233,.30), transparent 62%),
-    linear-gradient(135deg,#03060f 0%, #071229 45%, #0b1e46 100%);
-  border-radius:0 0 44px 44px; overflow:hidden;
-  box-shadow:0 34px 80px -34px rgba(0,0,0,.95), inset 0 -1px 0 rgba(125,211,252,.16);
+  position:relative; padding:70px 22px 96px; text-align:center; z-index:2;
+  overflow:hidden;
 }
 .header::after{
-  content:""; position:absolute; left:0;right:0;bottom:0; height:2px;
-  background:linear-gradient(90deg,transparent,rgba(56,189,248,.55),rgba(99,102,241,.65),rgba(103,232,249,.55),transparent);
-  background-size:200% 100%; animation:lineSlide 6s linear infinite;
+  content:""; position:absolute; left:5%; right:5%; bottom:0; height:1.5px;
+  background:linear-gradient(90deg,transparent,rgba(56,189,248,.7),rgba(99,102,241,.85),rgba(34,211,238,.7),transparent);
+  box-shadow:0 0 24px rgba(56,189,248,.55);
 }
-@keyframes lineSlide{0%{background-position:0 0}100%{background-position:200% 0}}
+.header .eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:7px 16px; border-radius:999px; margin-bottom:22px;
+  font-size:11.5px; font-weight:800; letter-spacing:.18em; text-transform:uppercase;
+  color:#bae6fd;
+  background:linear-gradient(135deg,rgba(56,189,248,.12),rgba(99,102,241,.12));
+  border:1px solid rgba(56,189,248,.35);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  box-shadow:0 8px 24px -10px rgba(14,165,233,.65), inset 0 1px 0 rgba(255,255,255,.10);
+}
+.header .eyebrow .dot{
+  width:6px; height:6px; border-radius:50%; background:#38bdf8;
+  box-shadow:0 0 10px #38bdf8, 0 0 20px #38bdf8;
+}
 .header h1{
-  font-size:clamp(28px,5vw,46px); font-weight:900; line-height:1.15;
-  letter-spacing:.02em; text-transform:uppercase; margin-bottom:14px;
-  animation:fadeUp .8s .15s both;
+  font-size:clamp(34px,6.5vw,64px); font-weight:900; line-height:1.05;
+  letter-spacing:-.02em; margin-bottom:18px;
 }
 .header h1 .grad{
-  display:inline-block; padding:6px 4px; letter-spacing:.05em;
-  background:linear-gradient(100deg,#fff 0%,#bae6fd 8%,#38bdf8 20%,#22d3ee 30%,#a5b4fc 45%,#c4b5fd 55%,#fde68a 68%,#fbbf24 78%,#7dd3fc 88%,#fff 100%);
+  display:inline-block; padding:2px 4px;
+  background:linear-gradient(100deg,#fff 0%,#bae6fd 10%,#38bdf8 22%,#22d3ee 34%,#a5b4fc 48%,#c4b5fd 58%,#fde68a 70%,#fbbf24 80%,#7dd3fc 90%,#fff 100%);
   background-size:300% 100%;
   -webkit-background-clip:text; background-clip:text;
   -webkit-text-fill-color:transparent; color:transparent;
-  animation:premiumShine 8s linear infinite;
-  filter:drop-shadow(0 2px 6px rgba(0,0,0,.95)) drop-shadow(0 4px 18px rgba(56,189,248,.70)) drop-shadow(0 0 34px rgba(99,102,241,.60)) drop-shadow(0 0 60px rgba(251,191,36,.30));
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.95)) drop-shadow(0 6px 22px rgba(56,189,248,.7)) drop-shadow(0 0 40px rgba(99,102,241,.55)) drop-shadow(0 0 70px rgba(251,191,36,.25));
 }
-@keyframes premiumShine{0%{background-position:0% 50%}100%{background-position:300% 50%}}
-.header h1 .sub{
-  display:block; margin-top:10px; font-size:.55em; font-weight:800;
-  letter-spacing:.16em;
+.header .sub{
+  display:block; margin-top:14px; font-size:clamp(12px,2vw,16px); font-weight:800;
+  letter-spacing:.28em; text-transform:uppercase;
   background:linear-gradient(100deg,#38bdf8 0%,#7dd3fc 30%,#e0f2fe 50%,#7dd3fc 70%,#38bdf8 100%);
-  background-size:200% 100%; -webkit-background-clip:text; background-clip:text;
+  -webkit-background-clip:text; background-clip:text;
   color:transparent; -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 12px rgba(56,189,248,.85));
-  animation:gradientMove 4s linear infinite;
-}
-@keyframes gradientMove{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.header p{
-  max-width:640px; margin:20px auto 0; font-size:15px; line-height:1.7;
-  color:rgba(198,216,242,.88); animation:fadeUp .8s .25s both;
+  filter:drop-shadow(0 0 14px rgba(56,189,248,.85));
 }
 .header .teacher{
-  display:inline-block; margin:18px auto 0; padding:10px 24px;
-  border-radius:16px; background:rgba(125,211,252,.07);
-  border:1px solid rgba(56,189,248,.38); backdrop-filter:blur(12px);
+  display:inline-block; margin:26px auto 0; padding:12px 26px;
+  border-radius:18px;
+  background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(99,102,241,.06));
+  border:1px solid rgba(56,189,248,.32);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   color:#dcecff; font-size:13px; font-weight:600; text-align:center;
-  box-shadow:0 10px 30px -14px rgba(14,165,233,.85), inset 0 1px 0 rgba(255,255,255,.14);
+  box-shadow:0 14px 40px -18px rgba(14,165,233,.85), inset 0 1px 0 rgba(255,255,255,.14);
 }
-.header .teacher b{color:#7dd3fc; font-weight:800; text-shadow:0 0 16px rgba(56,189,248,.85);}
-.header .teacher .nip{display:block; margin-top:4px; font-size:11.5px; color:rgba(158,190,228,.75); letter-spacing:.08em;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.header .teacher b{color:#7dd3fc; font-weight:800;}
+.header .teacher .nip{display:block; margin-top:5px; font-size:11.5px; color:rgba(158,190,228,.72); letter-spacing:.10em;}
+.header .lead{
+  max-width:680px; margin:24px auto 0; font-size:15px; line-height:1.75;
+  color:rgba(198,216,242,.85);
+}
+.header .lead b{color:#bae6fd; font-weight:800;}
 
 /* ============== CONTAINER ============== */
-.container{max-width:1180px; margin:-56px auto 0; padding:0 20px 40px; position:relative; z-index:2;}
+.container{max-width:1240px; margin:0 auto; padding:60px 22px 40px; position:relative; z-index:2;}
 
 .section-label{
-  margin:34px 0 16px; font-size:12.5px; font-weight:800;
-  letter-spacing:.12em; text-transform:uppercase; color:#a8c6ea;
+  display:flex; align-items:center; gap:14px;
+  margin:44px 0 22px;
 }
-.section-label span{
-  display:inline-block; padding:5px 15px; border-radius:999px;
-  background:rgba(56,189,248,.09); border:1px solid rgba(56,189,248,.24);
-  box-shadow:0 6px 20px -12px rgba(14,165,233,.9), inset 0 1px 0 rgba(255,255,255,.06);
+.section-label:first-child{margin-top:0;}
+.section-label .pill{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:8px 20px; border-radius:999px;
+  font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+  color:#bae6fd;
+  background:linear-gradient(135deg,rgba(56,189,248,.14),rgba(99,102,241,.10));
+  border:1px solid rgba(56,189,248,.34);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 8px 26px -12px rgba(14,165,233,.85), inset 0 1px 0 rgba(255,255,255,.10);
 }
-.section-label.fase-f span{
-  background:rgba(251,191,36,.10); border-color:rgba(251,191,36,.32);
-  box-shadow:0 6px 20px -12px rgba(251,191,36,.85), inset 0 1px 0 rgba(255,255,255,.08);
+.section-label .pill::before{
+  content:""; width:8px; height:8px; border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,#7dd3fc,#0ea5e9);
+  box-shadow:0 0 12px #38bdf8, 0 0 22px rgba(56,189,248,.7);
+}
+.section-label.fase-f .pill{
+  color:#fde68a;
+  background:linear-gradient(135deg,rgba(251,191,36,.14),rgba(217,119,6,.10));
+  border-color:rgba(251,191,36,.36);
+  box-shadow:0 8px 26px -12px rgba(251,191,36,.85), inset 0 1px 0 rgba(255,255,255,.10);
+}
+.section-label.fase-f .pill::before{
+  background:radial-gradient(circle at 30% 30%,#fde68a,#f59e0b);
+  box-shadow:0 0 12px #fbbf24, 0 0 22px rgba(251,191,36,.7);
+}
+.section-label .line{
+  flex:1; height:1px;
+  background:linear-gradient(90deg,rgba(56,189,248,.45),rgba(56,189,248,0));
+}
+.section-label.fase-f .line{
+  background:linear-gradient(90deg,rgba(251,191,36,.45),rgba(251,191,36,0));
 }
 
-.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:22px;}
 
 /* ============== CARD ============== */
 .card{
-  position:relative; display:flex; flex-direction:column; min-height:240px;
-  border-radius:22px; padding:26px 22px 20px; overflow:hidden;
+  position:relative; display:flex; flex-direction:column;
+  min-height:300px;
+  border-radius:24px;
+  padding:24px 22px 20px;
+  overflow:hidden;
   cursor:pointer; text-decoration:none; color:inherit;
-  transition:transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s, filter .5s;
-  background:
-    linear-gradient(90deg,#38bdf8 0%,#22d3ee 22%,#6366f1 52%,#a5b4fc 78%,#67e8f9 100%) top/100% 4px no-repeat,
-    radial-gradient(ellipse 260px 220px at 100% 0%, rgba(56,189,248,.18), transparent 68%),
-    linear-gradient(145deg, rgba(17,30,55,.94) 0%, rgba(12,22,42,.96) 55%, rgba(18,32,58,.94) 100%);
-  box-shadow:0 28px 56px -24px rgba(0,0,0,.90), 0 14px 32px -18px rgba(14,165,233,.28), inset 0 1.5px 0 rgba(125,211,252,.16);
-  animation:cardIn .9s both;
+  transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  background:linear-gradient(145deg, rgba(15,26,50,.85) 0%, rgba(10,20,40,.92) 55%, rgba(14,26,52,.85) 100%);
+  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(125,211,252,.14);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.06) inset,
+    0 30px 60px -30px rgba(0,0,0,.95),
+    0 18px 40px -22px rgba(14,165,233,.30);
 }
-@keyframes cardIn{from{opacity:0;transform:translateY(38px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.card::after{
+  content:""; position:absolute; left:10%; right:10%; top:0; height:1.5px;
+}
 .card::before{
-  content:""; position:absolute; inset:0; border-radius:inherit; padding:1.5px;
-  background:linear-gradient(145deg,rgba(56,189,248,.75) 0%,rgba(99,102,241,.65) 25%,rgba(125,211,252,.55) 50%,rgba(165,180,252,.70) 75%,rgba(103,232,249,.80) 100%);
-  background-size:200% 200%;
-  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor; mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0); mask-composite:exclude;
-  pointer-events:none; opacity:.55; transition:opacity .5s; animation:borderShift 7s ease-in-out infinite;
+  content:""; position:absolute; right:-40%; top:-40%; width:80%; height:80%;
+  border-radius:50%;
+  filter:blur(30px); pointer-events:none;
+  opacity:.7;
 }
-@keyframes borderShift{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
-.card:hover{transform:translateY(-10px) scale(1.012); filter:saturate(1.12) brightness(1.05);
-  box-shadow:0 48px 92px -30px rgba(0,0,0,.95),0 24px 50px -20px rgba(14,165,233,.50),inset 0 1.5px 0 rgba(125,211,252,.28);}
-.card:hover::before{opacity:1;}
-.card:focus-visible{outline:3px solid var(--sky-light); outline-offset:5px;}
-
-.badge{
-  position:absolute; top:16px; right:16px; font-size:10.5px; font-weight:800;
-  letter-spacing:.09em; text-transform:uppercase; padding:5px 12px; border-radius:999px;
-  color:#bfe3ff; background:linear-gradient(135deg,rgba(56,189,248,.16),rgba(99,102,241,.16));
-  border:1px solid rgba(56,189,248,.42); box-shadow:0 4px 14px -4px rgba(14,165,233,.60);
+.card:hover{
+  transform:translateY(-6px);
 }
-.badge.gold{color:#fde68a; background:linear-gradient(135deg,rgba(251,191,36,.18),rgba(234,88,12,.16)); border-color:rgba(251,191,36,.45); box-shadow:0 4px 14px -4px rgba(251,191,36,.65);}
+.card:focus-visible{outline:2px solid #38bdf8; outline-offset:6px;}
 
-.card .ico{
-  display:grid; place-items:center; width:54px; height:54px; font-size:26px;
-  border-radius:16px; margin-bottom:14px;
-  background:linear-gradient(135deg,#1e3a8a 0%,#2e4ba8 45%,#0ea5e9 100%);
-  box-shadow:0 16px 30px -12px rgba(14,165,233,.75), inset 0 1.5px 0 rgba(255,255,255,.28);
-  transition:transform .45s cubic-bezier(.2,.8,.2,1);
+/* ====== 8 TEMA WARNA ====== */
+
+/* 1. BLUE */
+.card.theme-blue::after{background:linear-gradient(90deg,transparent,#38bdf8,#6366f1,#67e8f9,transparent);}
+.card.theme-blue::before{background:radial-gradient(circle,rgba(56,189,248,.30),transparent 65%);}
+.card.theme-blue .kuis-box{background:radial-gradient(circle at 50% 50%, rgba(56,189,248,.18), transparent 70%), linear-gradient(145deg, rgba(6,14,30,.90), rgba(10,22,46,.80));border-color:rgba(56,189,248,.28);}
+.card.theme-blue .kuis-text{color:#bae6fd;text-shadow:0 0 18px rgba(56,189,248,.85),0 0 36px rgba(56,189,248,.45);}
+.card.theme-blue .mini-btn{background:linear-gradient(120deg,#1e3a8a,#2e4ba8 50%,#38bdf8);}
+.card.theme-blue:hover{border-color:rgba(125,211,252,.35);box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(14,165,233,.55);}
+
+/* 2. VIOLET */
+.card.theme-violet::after{background:linear-gradient(90deg,transparent,#a78bfa,#8b5cf6,#c4b5fd,transparent);}
+.card.theme-violet::before{background:radial-gradient(circle,rgba(167,139,250,.30),transparent 65%);}
+.card.theme-violet .kuis-box{background:radial-gradient(circle at 50% 50%, rgba(167,139,250,.18), transparent 70%), linear-gradient(145deg, rgba(20,14,42,.90), rgba(28,18,56,.80));border-color:rgba(167,139,250,.30);}
+.card.theme-violet .kuis-text{color:#ddd6fe;text-shadow:0 0 18px rgba(167,139,250,.85),0 0 36px rgba(139,92,246,.45);}
+.card.theme-violet .mini-btn{background:linear-gradient(120deg,#4c1d95,#6d28d9 50%,#a78bfa);}
+.card.theme-violet:hover{border-color:rgba(167,139,250,.40);box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(139,92,246,.55);}
+
+/* 3. GOLD */
+.card.theme-gold::after{background:linear-gradient(90deg,transparent,#fbbf24,#f59e0b,#fde68a,transparent);}
+.card.theme-gold::before{background:radial-gradient(circle,rgba(251,191,36,.30),transparent 65%);}
+.card.theme-gold .kuis-box{background:radial-gradient(circle at 50% 50%, rgba(251,191,36,.18), transparent 70%), linear-gradient(145deg, rgba(30,15,4,.90), rgba(46,26,10,.80));border-color:rgba(251,191,36,.30);}
+.card.theme-gold .kuis-text{color:#fde68a;text-shadow:0 0 18px rgba(251,191,36,.85),0 0 36px rgba(245,158,11,.45);}
+.card.theme-gold .mini-btn{background:linear-gradient(120deg,#78350f,#b45309 50%,#fbbf24);}
+.card.theme-gold:hover{border-color:rgba(251,191,36,.40);box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(251,191,36,.55);}
+
+/* 4. EMERALD */
+.card.theme-emerald::after{background:linear-gradient(90deg,transparent,#34d399,#10b981,#6ee7b7,transparent);}
+.card.theme-emerald::before{background:radial-gradient(circle,rgba(52,211,153,.30),transparent 65%);}
+.card.theme-emerald .kuis-box{background:radial-gradient(circle at 50% 50%, rgba(52,211,153,.18), transparent 70%), linear-gradient(145deg, rgba(4,26,20,.90), rgba(8,40,30,.80));border-color:rgba(52,211,153,.30);}
+.card.theme-emerald .kuis-text{color:#a7f3d0;text-shadow:0 0 18px rgba(52,211,153,.85),0 0 36px rgba(16,185,129,.45);}
+.card.theme-emerald .mini-btn{background:linear-gradient(120deg,#064e3b,#059669 50%,#34d399);}
+.card.theme-emerald:hover{border-color:rgba(52,211,153,.40);box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(16,185,129,.55);}
+
+/* 5. ROSE / PINK */
+.card.theme-rose::after{background:linear-gradient(90deg,transparent,#fb7185,#f43f5e,#fda4af,transparent);}
+.card.theme-rose::before{background:radial-gradient(circle,rgba(251,113,133,.30),transparent 65%);}
+.card.theme-rose .kuis-box{background:radial-gradient(circle at 50% 50%, rgba(251,113,133,.18), transparent 70%), linear-gradient(145deg, rgba(36,10,22,.90), rgba(50,14,30,.80));border-color:rgba(251,113,133,.30);}
+.card.theme-rose .kuis-text{color:#fecdd3;text-shadow:0 0 18px rgba(251,113,133,.85),0 0 36px rgba(244,63,94,.45);}
+.card.theme-rose .mini-btn{background:linear-gradient(120deg,#881337,#e11d48 50%,#fb7185);}
+.card.theme-rose:hover{border-color:rgba(251,113,133,.40);box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(244,63,94,.55);}
+
+/* 6. CYAN / TEAL */
+.card.theme-cyan::after{background:linear-gradient(90deg,transparent,#22d3ee,#06b6d4,#67e8f9,transparent);}
+.card.theme-cyan::before{background:radial-gradient(circle,rgba(34,211,238,.30),transparent 65%);}
+.card.theme-cyan .kuis-box{background:radial-gradient(circle at 50% 50%, rgba(34,211,238,.18), transparent 70%), linear-gradient(145deg, rgba(4,26,32,.90), rgba(6,40,48,.80));border-color:rgba(34,211,238,.30);}
+.card.theme-cyan .kuis-text{color:#a5f3fc;text-shadow:0 0 18px rgba(34,211,238,.85),0 0 36px rgba(6,182,212,.45);}
+.card.theme-cyan .mini-btn{background:linear-gradient(120deg,#155e75,#0891b2 50%,#22d3ee);}
+.card.theme-cyan:hover{border-color:rgba(34,211,238,.40);box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(6,182,212,.55);}
+
+/* 7. ORANGE */
+.card.theme-orange::after{background:linear-gradient(90deg,transparent,#fb923c,#f97316,#fdba74,transparent);}
+.card.theme-orange::before{background:radial-gradient(circle,rgba(251,146,60,.30),transparent 65%);}
+.card.theme-orange .kuis-box{background:radial-gradient(circle at 50% 50%, rgba(251,146,60,.18), transparent 70%), linear-gradient(145deg, rgba(32,14,4,.90), rgba(46,22,8,.80));border-color:rgba(251,146,60,.30);}
+.card.theme-orange .kuis-text{color:#fed7aa;text-shadow:0 0 18px rgba(251,146,60,.85),0 0 36px rgba(249,115,22,.45);}
+.card.theme-orange .mini-btn{background:linear-gradient(120deg,#7c2d12,#ea580c 50%,#fb923c);}
+.card.theme-orange:hover{border-color:rgba(251,146,60,.40);box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(249,115,22,.55);}
+
+/* 8. INDIGO */
+.card.theme-indigo::after{background:linear-gradient(90deg,transparent,#818cf8,#6366f1,#a5b4fc,transparent);}
+.card.theme-indigo::before{background:radial-gradient(circle,rgba(129,140,248,.30),transparent 65%);}
+.card.theme-indigo .kuis-box{background:radial-gradient(circle at 50% 50%, rgba(129,140,248,.18), transparent 70%), linear-gradient(145deg, rgba(14,16,42,.90), rgba(20,24,60,.80));border-color:rgba(129,140,248,.30);}
+.card.theme-indigo .kuis-text{color:#c7d2fe;text-shadow:0 0 18px rgba(129,140,248,.85),0 0 36px rgba(99,102,241,.45);}
+.card.theme-indigo .mini-btn{background:linear-gradient(120deg,#312e81,#4f46e5 50%,#818cf8);}
+.card.theme-indigo:hover{border-color:rgba(129,140,248,.40);box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(99,102,241,.55);}
+
+.card h3{
+  margin:0 0 8px; font-size:17px; font-weight:800; line-height:1.3;
+  color:#eaf3ff; letter-spacing:-.005em;
+  position:relative; z-index:2;
+  text-shadow:0 1px 2px rgba(0,0,0,.6);
 }
-.card:hover .ico{transform:rotate(-8deg) scale(1.10);}
+.card .desc{
+  margin:0 0 18px; font-size:12.5px; line-height:1.55;
+  color:var(--muted); flex-grow:1;
+  position:relative; z-index:2;
+}
 
-.card h3{margin:0 0 8px; font-size:16px; font-weight:800; line-height:1.32; color:#eaf3ff;}
-.card .desc{margin:0 0 16px; font-size:13px; line-height:1.6; color:var(--muted); flex-grow:1;}
-.card .desc b{color:#dbe7fb; font-weight:700;}
+/* ============== KUIS BOX (statis, teks flat) ============== */
+.kuis-box{
+  position:relative;
+  display:flex; align-items:center; justify-content:center;
+  margin:2px 0 18px;
+  padding:24px 10px;
+  border-radius:16px;
+  border:1px solid rgba(56,189,248,.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -10px 24px -12px rgba(0,0,0,.9),
+    inset 0 0 30px -5px rgba(56,189,248,.20),
+    0 10px 30px -16px rgba(14,165,233,.6);
+  overflow:hidden;
+  z-index:2;
+}
+
+/* tulisan "Kuis X" — flat, tanpa 3D, font Space Grotesk */
+.kuis-text{
+  position:relative; z-index:3;
+  font-family:'Space Grotesk','Plus Jakarta Sans',sans-serif;
+  font-size:30px;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  line-height:1;
+}
 
 .mini-btn{
   display:inline-flex; align-items:center; justify-content:center; gap:8px;
-  padding:12px 16px; font-size:13px; font-weight:800; letter-spacing:.02em;
+  padding:13px 16px; font-size:12.5px; font-weight:800; letter-spacing:.04em;
+  text-transform:uppercase;
   color:#fff; border-radius:12px; position:relative; overflow:hidden;
-  background:linear-gradient(120deg,#1e3a8a,#2e4ba8 50%,#38bdf8); background-size:200% 100%;
-  box-shadow:0 16px 30px -16px rgba(14,165,233,.95), inset 0 1px 0 rgba(255,255,255,.28);
-  transition:transform .35s, background-position .6s;
+  box-shadow:
+    0 16px 30px -16px rgba(14,165,233,.95),
+    inset 0 1px 0 rgba(255,255,255,.28),
+    inset 0 -6px 14px -8px rgba(0,0,0,.6);
+  transition:transform .3s ease, box-shadow .3s ease;
   margin-top:auto;
+  position:relative; z-index:2;
+  cursor:pointer;
 }
-.card:hover .mini-btn{transform:translateY(-2px); background-position:100% 0;}
+.card:hover .mini-btn{
+  transform:translateY(-2px);
+}
 .mini-btn .play{
   display:grid; place-items:center; width:18px; height:18px; font-size:8px;
   border-radius:50%; background:rgba(255,255,255,.24); border:1px solid rgba(255,255,255,.42);
 }
 .mini-btn .arrow{
-  font-size:12px; opacity:.9; transition:transform .35s;
+  font-size:12px; opacity:.9;
 }
-.card:hover .mini-btn .arrow{transform:translate(3px,-3px);}
 
 /* ============== FOOTER ============== */
-.footer{text-align:center; padding:38px 20px 46px; font-size:13.5px; color:var(--muted-dim); position:relative; z-index:2;}
-.footer .line{width:70px; height:4px; margin:0 auto 18px; border-radius:999px;
-  background:linear-gradient(90deg,#38bdf8,#2e4ba8,#a5b4fc,#67e8f9); background-size:200% 100%;
-  animation:lineSlide 4s linear infinite; box-shadow:0 0 18px rgba(56,189,248,.55);}
-.footer .brand{display:block; margin-bottom:6px; font-weight:800; color:#c6dcff; letter-spacing:.03em;}
+.footer{
+  text-align:center; padding:50px 20px 60px; font-size:13.5px;
+  color:var(--muted-dim); position:relative; z-index:2;
+  border-top:1px solid rgba(56,189,248,.10);
+  margin-top:40px;
+}
+.footer .line{
+  width:80px; height:4px; margin:0 auto 20px; border-radius:999px;
+  background:linear-gradient(90deg,#38bdf8,#2e4ba8,#a5b4fc,#67e8f9);
+  box-shadow:0 0 22px rgba(56,189,248,.65);
+}
+.footer .brand{display:block; margin-bottom:8px; font-weight:800; color:#c6dcff; letter-spacing:.04em; font-size:14px;}
 
-/* ============== BG DECOR ============== */
+/* ============== BG DECOR (statis) ============== */
 .bg-decor{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
-.blob{position:absolute; border-radius:50%; filter:blur(90px); opacity:.28; animation:float 16s ease-in-out infinite;}
-.blob.b1{width:360px;height:360px;background:#0ea5e9;top:-100px;left:-80px;}
-.blob.b2{width:300px;height:300px;background:#6366f1;top:35%;right:-100px;animation-delay:-4s;}
-.blob.b3{width:340px;height:340px;background:#1e3a8a;bottom:-120px;left:18%;animation-delay:-8s;}
-@keyframes float{0%,100%{transform:translate3d(0,0,0)}33%{transform:translate3d(30px,-35px,0) scale(1.08)}66%{transform:translate3d(-25px,25px,0) scale(.95)}}
+.blob{position:absolute; border-radius:50%; filter:blur(110px); opacity:.32;}
+.blob.b1{width:420px;height:420px;background:#0ea5e9;top:-120px;left:-100px;}
+.blob.b2{width:360px;height:360px;background:#6366f1;top:30%;right:-120px;}
+.blob.b3{width:400px;height:400px;background:#1e3a8a;bottom:-140px;left:15%;}
+.blob.b4{width:300px;height:300px;background:#22d3ee;top:60%;left:-80px;opacity:.20;}
 
-@media (max-width:600px){
-  .header{padding:50px 16px 76px; border-radius:0 0 32px 32px;}
-  .container{margin-top:-46px; padding:0 14px 30px;}
+/* ============== RESPONSIVE ============== */
+@media (max-width:768px){
+  .header{padding:56px 18px 80px;}
+  .container{padding:50px 16px 30px;}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:18px;}
+}
+@media (max-width:520px){
   .grid{grid-template-columns:1fr; gap:16px;}
-  .card{padding:22px 18px 18px; min-height:0;}
+  .card{min-height:0; padding:20px 18px 16px;}
+  .kuis-text{font-size:24px;}
+  .section-label .pill{font-size:11px; padding:6px 14px;}
 }
 </style>
 </head>
 <body>
 
 <div class="bg-decor" aria-hidden="true">
-  <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+  <span class="blob b1"></span><span class="blob b2"></span>
+  <span class="blob b3"></span><span class="blob b4"></span>
 </div>
 
 <header class="header">
+  <span class="eyebrow"><span class="dot"></span> Interactive Quiz Platform</span>
   <h1>
-    <span class="grad">💰 Kuis Millionaire</span>
+    <span class="grad">Kuis Millionaire</span>
     <span class="sub">E-Sejarah · SMAN 3 Kasongan</span>
   </h1>
   <p class="teacher">
     Guru Pengampu: <b>SYAHRANI, S.Pd</b>
     <span class="nip">NIP. 197512172005011016</span>
   </p>
-  <p>
+  <p class="lead">
     Uji pemahamanmu tentang sejarah Nusantara &amp; perjuangan bangsa melalui
-    <b>14 bab</b> kuis interaktif. Klik kartu untuk membuka kuis di tab baru —
+    <b>25 kuis</b> interaktif. Klik kartu untuk membuka kuis di tab baru —
     masing-masing berisi <b>5 kuis berjenjang</b> dengan <b>25 soal unik</b>.
   </p>
 </header>
 
 <main class="container">
   <!-- FASE E -->
-  <div class="section-label"><span>📘 Fase E — Kelas X · Dasar &amp; Peradaban Nusantara</span></div>
+  <div class="section-label">
+    <span class="pill">Fase E — Kelas X · Dasar &amp; Peradaban Nusantara</span>
+    <span class="line"></span>
+  </div>
   <div class="grid" id="gridE"></div>
 
   <!-- FASE F -->
-  <div class="section-label fase-f"><span>🇮🇩 Fase F — Kelas XI · Kolonialisme, Kemerdekaan &amp; Modern</span></div>
+  <div class="section-label fase-f">
+    <span class="pill">Fase F — Kelas XI · Kolonialisme, Kemerdekaan &amp; Modern</span>
+    <span class="line"></span>
+  </div>
   <div class="grid" id="gridF"></div>
 </main>
 
 <footer class="footer">
   <div class="line"></div>
   <span class="brand">Kuis Millionaire E-Sejarah · SMAN 3 Kasongan</span>
-  Menjelajahi masa lalu, memahami masa kini, membangun masa depan ⛵✨
+  Menjelajahi masa lalu, memahami masa kini, membangun masa depan
 </footer>
 
 <script>
 /* =====================================================
-   DATA BAB — cukup ganti `quizUrl` dengan link kuis masing-masing
-   Link saat ini memakai pola:
-   https://maedafarhansyah-pixel.github.io/kuismilionersejarah/[slug].html
+   DATA KUIS — 5 bab utama × 5 kuis = 25 kuis
+   Bab 1 (Pengantar Ilmu Sejarah) memakai link khusus pis_1 s/d pis_5.
+   Bab lain memakai pola default: [slug][1..5].html
    ===================================================== */
 const BASE = "https://maedafarhansyah-pixel.github.io/kuismilionersejarah";
 
-const BAB = [
-  /* ============ FASE E — KELAS X ============ */
+const BAB_UTAMA = [
   {
-    fase:"e", icon:"📜", badge:"Bab 1",
-    title:"Pengantar Ilmu Sejarah",
+    nama:"Pengantar Ilmu Sejarah", slug:"pengantarilmusejarah",
     desc:"Hakikat sejarah, diakronik & sinkronik, sumber, dan konsep waktu.",
-    quizUrl:`${BASE}/pengantarilmusejarah.html`
+    urls: [
+      `${BASE}/pis_1.html`,
+      `${BASE}/pis_2.html`,
+      `${BASE}/pis_3.html`,
+      `${BASE}/pis_4.html`,
+      `${BASE}/pis_5.html`
+    ]
   },
   {
-    fase:"e", icon:"🔍", badge:"Bab 2",
-    title:"Penelitian Sejarah",
-    desc:"Heuristik, kritik sumber, interpretasi, dan historiografi.",
-    quizUrl:`${BASE}/penelitiansejarah.html`
+    nama:"Penelitian Sejarah", slug:"penelitiansejarah",
+    desc:"Heuristik, kritik sumber, interpretasi, dan historiografi."
   },
   {
-    fase:"e", icon:"🦴", badge:"Bab 3",
-    title:"Masyarakat Praaksara",
-    desc:"Pembabakan zaman batu, manusia purba, dan kehidupan praaksara.",
-    quizUrl:`${BASE}/praaksara.html`
+    nama:"Masa Praaksara", slug:"praaksara",
+    desc:"Pembabakan zaman batu, manusia purba, dan kehidupan praaksara."
   },
   {
-    fase:"e", icon:"🛕", badge:"Bab 4",
-    title:"Kerajaan Hindu-Buddha",
-    desc:"Masuknya Hindu-Buddha hingga Kutai, Sriwijaya, Majapahit.",
-    quizUrl:`${BASE}/masahindubudha.html`
+    nama:"Masa Hindu-Buddha", slug:"masahindubudha",
+    desc:"Masuknya Hindu-Buddha hingga Kutai, Sriwijaya, Majapahit."
   },
   {
-    fase:"e", icon:"🕌", badge:"Bab 5",
-    title:"Kerajaan Islam di Indonesia",
-    desc:"Masuk & penyebaran Islam, Walisongo, hingga Demak & Mataram.",
-    quizUrl:`${BASE}/masaislamdiindonesia.html`
-  },
-
-  /* ============ FASE F — KELAS XI ============ */
-  {
-    fase:"f", icon:"⚓", badge:"Bab 6",
-    title:"Kolonialisme & Imperialisme",
-    desc:"Kedatangan Eropa, VOC, kebijakan kolonial, dan tanam paksa.",
-    quizUrl:`${BASE}/kolonialismeimperialisme.html`
-  },
-  {
-    fase:"f", icon:"⚔️", badge:"Bab 7",
-    title:"Perlawanan thd Penjajahan",
-    desc:"Diponegoro, Pattimura, Imam Bonjol, Perang Aceh & Banjar.",
-    quizUrl:`${BASE}/perlawananthdpenjajahan.html`
-  },
-  {
-    fase:"f", icon:"🚩", badge:"Bab 8",
-    title:"Pergerakan Nasional",
-    desc:"Budi Utomo, Sarekat Islam, Sumpah Pemuda, dan PNI.",
-    quizUrl:`${BASE}/pergerakannasional.html`
-  },
-  {
-    fase:"f", icon:"🎌", badge:"Bab 9",
-    title:"Pendudukan Jepang",
-    desc:"Pemerintahan militer, romusha, PETA, dan perlawanan rakyat.",
-    quizUrl:`${BASE}/jepangdiindonesia.html`
-  },
-  {
-    fase:"f", icon:"🇮🇩", badge:"Bab 10",
-    title:"Proklamasi Kemerdekaan 1945",
-    desc:"Kekosongan kekuasaan, Rengasdengklok, perumusan teks, & detik proklamasi.",
-    quizUrl:`${BASE}/proklamasi1945.html`
-  },
-  {
-    fase:"f", icon:"✊", badge:"Bab 11",
-    title:"Mempertahankan Kemerdekaan",
-    desc:"Pertempuran Surabaya, Agresi Militer Belanda, & KMB.",
-    quizUrl:`${BASE}/mempertahankankemerdekaan.html`
-  },
-  {
-    fase:"f", icon:"🏛️", badge:"Bab 12",
-    title:"Pemerintahan Sukarno",
-    desc:"Demokrasi Liberal, Pemilu 1955, Demokrasi Terpimpin, & G30S/PKI.",
-    quizUrl:`${BASE}/pemerintahansoekarno.html`
-  },
-  {
-    fase:"f", icon:"📊", badge:"Bab 13",
-    title:"Pemerintahan Soeharto",
-    desc:"Orde Baru, pembangunan ekonomi, hingga krisis 1997.",
-    quizUrl:`${BASE}/pemerintahansoeharto.html`
-  },
-  {
-    fase:"f", icon:"🗳️", badge:"Bab 14",
-    title:"Reformasi 1998",
-    desc:"Tragedi Trisakti, kejatuhan Soeharto, & demokratisasi.",
-    quizUrl:`${BASE}/reformasi1998.html`
+    nama:"Masa Islam", slug:"masaislamdiindonesia",
+    desc:"Masuk & penyebaran Islam, Walisongo, hingga Demak & Mataram."
   }
 ];
+
+/* 8 tema warna yang dipakai bergantian */
+const THEMES = [
+  "theme-blue", "theme-violet", "theme-gold", "theme-emerald",
+  "theme-rose", "theme-cyan", "theme-orange", "theme-indigo"
+];
+
+/* Bangun 25 kuis */
+const KUIS = [];
+BAB_UTAMA.forEach((bab, babIdx) => {
+  for (let i = 1; i <= 5; i++) {
+    const kuisNumber = babIdx * 5 + i;
+
+    /* Jika bab punya daftar `urls`, pakai itu.
+       Jika tidak, pakai pola default [slug][nomor].html */
+    const url = bab.urls
+      ? bab.urls[i - 1]
+      : `${BASE}/${bab.slug}${i}.html`;
+
+    KUIS.push({
+      title: bab.nama,
+      kuisLabel: `Kuis ${kuisNumber}`,
+      desc: bab.desc,
+      theme: THEMES[(kuisNumber - 1) % THEMES.length],
+      quizUrl: url
+    });
+  }
+});
 
 /* ---------- Render kartu ---------- */
 function renderLanding(){
@@ -339,25 +456,28 @@ function renderLanding(){
   gridE.innerHTML = '';
   gridF.innerHTML = '';
 
-  BAB.forEach(b=>{
+  KUIS.forEach((b, idx)=>{
     const card = document.createElement('a');
-    card.className = 'card';
+    card.className = `card ${b.theme}`;
     card.href = b.quizUrl;
     card.target = '_blank';
     card.rel = 'noopener noreferrer';
-    card.setAttribute('aria-label', `Buka Kuis ${b.title} di tab baru`);
+    card.setAttribute('aria-label', `Buka ${b.title} ${b.kuisLabel} di tab baru`);
 
     card.innerHTML = `
-      <span class="badge ${b.fase==='f'?'gold':''}">${b.badge}</span>
-      <span class="ico">${b.icon}</span>
       <h3>${b.title}</h3>
       <p class="desc">${b.desc}</p>
+
+      <div class="kuis-box">
+        <span class="kuis-text">${b.kuisLabel}</span>
+      </div>
+
       <span class="mini-btn">
         <span class="play">▶</span> Buka Kuis
         <span class="arrow">↗</span>
       </span>
     `;
-    (b.fase==='e' ? gridE : gridF).appendChild(card);
+    (idx < 15 ? gridE : gridF).appendChild(card);
   });
 }
 
