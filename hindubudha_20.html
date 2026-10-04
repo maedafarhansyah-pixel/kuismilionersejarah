@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+<meta name="theme-color" content="#05060f" />
+<title>🎮 Kuis 20 · Majapahit, Sunda, Sistem Pemerintahan &amp; Warisan Budaya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+:root{
+  --font-display:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'Space Grotesk',ui-monospace,monospace;
+  --primary:#8B5CF6;--primary-light:#C4B5FD;--primary-dark:#5B21B6;
+  --accent:#F59E0B;--accent-light:#FCD34D;--accent-dark:#B45309;
+  --emerald:#34D399;--violet:#A78BFA;--rose:#FB7185;--sky:#38BDF8;--gold:#FBBF24;
+  --bg:#05060f;--bg-2:#0b0d1c;
+  --glass:rgba(255,255,255,0.045);
+  --glass-strong:rgba(255,255,255,0.08);
+  --glass-border:rgba(255,255,255,0.10);
+  --text:#f7f5ff;--text-dim:#a8a8c0;--text-mute:#6b6b85;
+  --radius:24px;--radius-md:18px;--radius-sm:14px;--radius-xs:10px;
+  --shadow-card:0 24px 60px rgba(0,0,0,.55);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-display);background:var(--bg);color:var(--text);line-height:1.65;
+  overflow-x:hidden;min-height:100vh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+::selection{background:var(--primary);color:#05060f}
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%,rgba(139,92,246,.18),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 100%,rgba(245,158,11,.14),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 50%,rgba(196,181,253,.08),transparent 65%);
+  animation:bgShift 20s ease-in-out infinite alternate}
+@keyframes bgShift{0%{transform:scale(1) rotate(0deg);filter:hue-rotate(0deg)}100%{transform:scale(1.1) rotate(3deg);filter:hue-rotate(-10deg)}}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25;
+  background-image:
+    linear-gradient(rgba(139,92,246,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(139,92,246,.06) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%)}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
+#confettiCanvas{position:fixed;inset:0;z-index:9998;pointer-events:none}
+#loader{position:fixed;inset:0;z-index:99999;
+  background:radial-gradient(ellipse at center,#0b0d1c 0%,#05060f 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:20px;text-align:center;transition:opacity .8s ease,visibility .8s ease}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-orb{width:120px;height:120px;position:relative;display:grid;place-items:center}
+.loader-orb::before,.loader-orb::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent}
+.loader-orb::before{border-top-color:var(--primary);border-right-color:var(--primary-light);animation:spin 2s linear infinite;filter:drop-shadow(0 0 20px rgba(139,92,246,.6))}
+.loader-orb::after{inset:14px;border-bottom-color:var(--accent);border-left-color:var(--sky);animation:spin 1.6s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-core{width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 40px rgba(139,92,246,.7),inset 0 0 20px rgba(255,255,255,.25);
+  display:grid;place-items:center;font-size:1.5rem;color:#fff;
+  animation:pulseCore 2s ease-in-out infinite}
+@keyframes pulseCore{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.loader-title{font-family:var(--font-display);font-weight:900;font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:3px;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary),var(--accent));
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.loader-sub{font-size:.85rem;color:var(--text-dim);font-weight:500;letter-spacing:1px}
+.loader-bar{width:min(300px,70vw);height:4px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+.loader-bar span{display:block;height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 20px rgba(139,92,246,.6);transition:width .3s ease}
+.loader-pct{font-family:var(--font-mono);font-size:.72rem;font-weight:700;color:var(--text-mute);letter-spacing:2px}
+.game-header{position:fixed;top:0;left:0;right:0;height:60px;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:10px;
+  background:rgba(5,6,15,.72);backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border-bottom:1px solid var(--glass-border)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:.9rem;color:var(--text)}
+.brand-logo{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:.9rem;
+  box-shadow:0 0 22px rgba(139,92,246,.5);animation:logoPulse 3s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 22px rgba(139,92,246,.5)}50%{box-shadow:0 0 32px rgba(139,92,246,.8)}}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .t1{font-size:.62rem;color:var(--text-mute);letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+.brand-text .t2{font-size:.92rem;font-weight:800;color:var(--text)}
+.header-actions{display:flex;gap:6px}
+.icon-btn{width:36px;height:36px;border-radius:11px;border:1px solid var(--glass-border);
+  background:var(--glass);color:var(--text-dim);display:grid;place-items:center;cursor:pointer;
+  font-size:.85rem;transition:all .3s var(--ease-out)}
+.icon-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 0 22px rgba(139,92,246,.6);transform:translateY(-2px)}
+.wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;
+  padding:calc(60px + 20px) 16px 60px;min-height:100vh}
+.start-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:calc(100vh - 100px);text-align:center;gap:18px;padding:20px 0}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:40px;
+  background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(245,158,11,.10));
+  border:1px solid rgba(139,92,246,.30);font-size:.7rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary-light);box-shadow:0 0 30px rgba(139,92,246,.20);
+  animation:badgeFloat 3s ease-in-out infinite}
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-title{font-family:var(--font-display);font-size:clamp(2rem,7vw,3.4rem);
+  font-weight:900;line-height:1.05;letter-spacing:-1.5px;
+  background:linear-gradient(135deg,#fff 0%,var(--primary-light) 40%,var(--primary) 70%,var(--accent) 100%);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 8px 30px rgba(139,92,246,.3))}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text-dim);max-width:580px;line-height:1.75}
+.hero-sub strong{color:var(--primary-light);font-weight:700}
+.stats-showcase{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+.stat-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;
+  background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(10px);
+  font-size:.8rem;color:var(--text-dim);font-weight:600;transition:all .3s var(--ease-out)}
+.stat-pill:hover{transform:translateY(-3px);border-color:rgba(139,92,246,.4);box-shadow:0 8px 24px rgba(139,92,246,.15)}
+.stat-pill i{font-size:.95rem}
+.rules-card{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:22px 24px;
+  max-width:520px;width:100%;text-align:left;margin-top:6px;backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.rules-card h4{font-size:.85rem;font-weight:800;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.rules-card ul{list-style:none;display:grid;gap:10px}
+.rules-card li{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-dim);line-height:1.6}
+.rule-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+  border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 4px 14px rgba(139,92,246,.4)}
+.btn-play{position:relative;display:inline-flex;align-items:center;gap:14px;
+  padding:18px 54px;border-radius:60px;border:none;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;font-family:var(--font-display);font-weight:900;font-size:1.05rem;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;overflow:hidden;
+  box-shadow:0 12px 40px rgba(139,92,246,.45),inset 0 -3px 0 rgba(0,0,0,.2);
+  transition:all .4s var(--ease-spring);margin-top:14px}
+.btn-play::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.35),transparent 70%);
+  transform:translateX(-100%);transition:transform .8s ease}
+.btn-play:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 20px 60px rgba(139,92,246,.65)}
+.btn-play:hover::before{transform:translateX(100%)}
+.btn-play:active{transform:translateY(-1px) scale(.98)}
+.game-hud{display:none;flex-direction:column;gap:14px;animation:fadeSlideIn .5s var(--ease-out)}
+.game-hud.active{display:flex}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hud-top{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+  padding:14px 18px;border-radius:var(--radius-md);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.hud-hp{display:flex;align-items:center;gap:4px}
+.hud-hp .heart{font-size:1.15rem;color:var(--rose);
+  filter:drop-shadow(0 0 8px rgba(251,113,133,.6));transition:all .4s var(--ease-out)}
+.hud-hp .heart.empty{color:rgba(255,255,255,.10);filter:none;transform:scale(.85)}
+.hud-hp .heart.losing{animation:heartBreak .6s ease}
+@keyframes heartBreak{0%{transform:scale(1)}30%{transform:scale(1.4);color:#fff}100%{transform:scale(.85);opacity:.3}}
+.hud-xp{display:flex;flex-direction:column;gap:4px;min-width:0}
+.hud-xp-head{display:flex;justify-content:space-between;align-items:center;font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.hud-xp-head .lvl{color:var(--primary-light)}
+.hud-xp-head .val{color:var(--text-mute);font-family:var(--font-mono)}
+.xp-track{height:8px;border-radius:10px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+.xp-fill{height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 16px rgba(139,92,246,.7);transition:width .8s var(--ease-spring);position:relative}
+.xp-fill::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  animation:xpShine 2s linear infinite}
+@keyframes xpShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.hud-timer{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:40px;
+  background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.30);
+  font-family:var(--font-mono);font-weight:800;font-size:.85rem;color:var(--primary-light);
+  letter-spacing:1px;transition:all .3s ease}
+.hud-timer.warning{background:rgba(251,113,133,.15);border-color:rgba(251,113,133,.5);color:#fecdd3;animation:pulseWarn 1s ease-in-out infinite}
+@keyframes pulseWarn{0%,100%{box-shadow:0 0 0 0 rgba(251,113,133,.4)}50%{box-shadow:0 0 0 8px rgba(251,113,133,0)}}
+.hud-middle{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:.75rem;color:var(--text-mute);font-weight:700;padding:0 4px}
+.hud-middle .combo-tag{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:800;transition:all .3s var(--ease-spring)}
+.hud-middle .combo-tag.hot{color:var(--primary-light);animation:comboPulse .5s var(--ease-spring)}
+@keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+.q-card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:26px 26px 22px;
+  backdrop-filter:blur(20px);box-shadow:var(--shadow-card);animation:qEnter .55s var(--ease-out);overflow:hidden}
+.q-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(135deg,rgba(139,92,246,.4),transparent 40%,transparent 60%,rgba(245,158,11,.3));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+@keyframes qEnter{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.q-card.shake{animation:shake .5s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+.q-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:30px;
+  background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(139,92,246,.06));
+  border:1px solid rgba(139,92,246,.30);font-size:.72rem;font-weight:800;letter-spacing:1px;color:var(--primary-light)}
+.q-topic{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;
+  background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.28);font-size:.68rem;
+  font-weight:800;letter-spacing:.8px;color:var(--accent);text-transform:uppercase}
+.q-text{font-size:clamp(1rem,2.2vw,1.12rem);font-weight:600;line-height:1.75;color:var(--text);
+  margin-bottom:20px;white-space:pre-line}
+.q-text strong{color:var(--primary-light);font-weight:800}
+.options{display:grid;gap:10px}
+.opt{position:relative;display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;
+  padding:15px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--glass-border);
+  background:rgba(255,255,255,.03);color:var(--text-dim);font-family:inherit;font-size:.92rem;
+  line-height:1.6;cursor:pointer;transition:all .3s var(--ease-out);overflow:hidden}
+.opt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(90deg,rgba(139,92,246,.15),transparent);
+  transition:width .4s var(--ease-out);z-index:0}
+.opt:hover:not(.locked){border-color:rgba(139,92,246,.55);transform:translateX(5px);
+  color:var(--text);box-shadow:0 8px 24px rgba(139,92,246,.15)}
+.opt:hover:not(.locked)::before{width:100%}
+.opt-letter{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;flex-shrink:0;background:rgba(255,255,255,.06);
+  color:var(--text-mute);font-weight:800;font-size:.85rem;transition:all .3s var(--ease-out);
+  border:1px solid rgba(255,255,255,.06)}
+.opt-text{position:relative;z-index:1;flex:1}
+.opt:hover:not(.locked) .opt-letter{background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;border-color:transparent;box-shadow:0 0 20px rgba(139,92,246,.6)}
+.opt.correct{border-color:var(--emerald);background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(52,211,153,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(52,211,153,.15),0 12px 32px rgba(52,211,153,.25);
+  animation:correctPop .5s var(--ease-spring)}
+@keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.02)}100%{transform:scale(1)}}
+.opt.correct .opt-letter{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(52,211,153,.7)}
+.opt.wrong{border-color:var(--rose);background:linear-gradient(135deg,rgba(251,113,133,.15),rgba(251,113,133,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(251,113,133,.15),0 12px 32px rgba(251,113,133,.25)}
+.opt.wrong .opt-letter{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(251,113,133,.7)}
+.opt.locked{pointer-events:none}
+.opt.disabled-50{opacity:.2;pointer-events:none;filter:grayscale(1) blur(.5px)}
+.feedback{display:none;padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(16px);box-shadow:var(--shadow-card);
+  animation:qEnter .5s var(--ease-out)}
+.feedback.show{display:block}
+.fb-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.fb-icon{width:48px;height:48px;border-radius:15px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;transition:all .4s var(--ease-spring)}
+.fb-icon.correct{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;box-shadow:0 0 32px rgba(52,211,153,.6)}
+.fb-icon.wrong{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;box-shadow:0 0 32px rgba(251,113,133,.6)}
+.fb-icon.info{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 0 32px rgba(139,92,246,.6)}
+.fb-title{font-size:1.05rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
+.fb-title.correct{color:var(--emerald)}
+.fb-title.wrong{color:#fecdd3}
+.fb-title.info{color:var(--primary-light)}
+.fb-body{font-size:.9rem;color:var(--text-dim);line-height:1.75}
+.fb-body strong{color:var(--text);font-weight:700}
+.fb-sec{margin-top:12px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.10)}
+.fb-label{font-size:.68rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--primary-light);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.fb-points{margin-top:12px;padding:14px 16px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(245,158,11,.10),rgba(245,158,11,.03));border-left:3px solid var(--accent)}
+.fb-points .fb-label{color:var(--accent)}
+.fb-points p{font-size:.87rem;color:var(--text-dim);line-height:1.7}
+.hud-bottom{display:flex;flex-direction:column;gap:12px}
+.power-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.power-btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;
+  border-radius:50px;border:1px solid var(--glass-border);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  color:var(--text-dim);font-family:inherit;font-weight:800;font-size:.78rem;letter-spacing:.5px;
+  cursor:pointer;transition:all .3s var(--ease-spring);overflow:hidden}
+.power-btn i{font-size:.9rem}
+.power-btn:hover:not(:disabled):not(.used){transform:translateY(-3px);border-color:rgba(139,92,246,.5);color:var(--text);box-shadow:0 8px 24px rgba(139,92,246,.25)}
+.power-btn:active:not(:disabled):not(.used){transform:scale(.96)}
+.power-btn .cnt{font-size:.62rem;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.10);font-weight:900;font-family:var(--font-mono)}
+.power-btn.used{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.power-btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.power-btn.p50{color:var(--accent)}
+.power-btn.phint{color:var(--primary-light)}
+.power-btn.pskip{color:var(--rose)}
+.action-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 30px;border-radius:50px;border:none;
+  font-family:inherit;font-weight:900;font-size:.88rem;letter-spacing:.5px;cursor:pointer;
+  transition:all .35s var(--ease-spring)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;
+  box-shadow:0 10px 32px rgba(139,92,246,.4),inset 0 -2px 0 rgba(0,0,0,.15)}
+.btn-primary:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 44px rgba(139,92,246,.6)}
+.btn-primary:active:not(:disabled){transform:scale(.96)}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--text-dim);border:1px solid var(--glass-border)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(139,92,246,.4);transform:translateY(-2px)}
+.result-screen{display:none;flex-direction:column;gap:16px;text-align:center;animation:fadeSlideIn .6s var(--ease-out)}
+.result-screen.active{display:flex}
+.result-hero{position:relative;padding:38px 26px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);box-shadow:var(--shadow-card);overflow:hidden}
+.result-hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center top,rgba(139,92,246,.20),transparent 60%);pointer-events:none}
+.result-trophy{font-size:4rem;line-height:1;margin-bottom:8px;
+  filter:drop-shadow(0 8px 30px rgba(139,92,246,.6));animation:trophyFloat 3s ease-in-out infinite}
+@keyframes trophyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.result-title{font-family:var(--font-display);font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:900;
+  letter-spacing:-.5px;background:linear-gradient(135deg,#fff,var(--primary-light),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.result-sub{font-size:.9rem;color:var(--text-dim);margin-bottom:6px}
+.grade-ring{position:relative;width:130px;height:130px;margin:16px auto;border-radius:50%;
+  background:conic-gradient(var(--primary) var(--grade-deg,0deg),rgba(255,255,255,.08) 0deg);
+  padding:8px;box-shadow:0 0 40px rgba(139,92,246,.4);animation:ringPop .8s var(--ease-spring)}
+@keyframes ringPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.grade-inner{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at center,#0b0d1c,#05060f);display:grid;place-items:center;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.6)}
+.grade-letter{font-size:2.6rem;font-weight:900;line-height:1;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent}
+.grade-label{font-size:.62rem;font-weight:800;letter-spacing:2px;color:var(--text-mute);text-transform:uppercase;margin-top:2px}
+.result-title-text{font-size:1.1rem;font-weight:900;color:var(--primary-light);letter-spacing:.5px;margin-top:8px;text-transform:uppercase}
+.result-xp-line{font-size:.88rem;color:var(--text-dim);margin-top:6px}
+.result-xp-line strong{color:var(--accent);font-family:var(--font-mono);font-weight:800}
+.result-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:20px 0 8px}
+.rs-box{padding:16px 10px;border-radius:var(--radius-sm);background:rgba(255,255,255,.04);
+  border:1px solid var(--glass-border);transition:all .3s var(--ease-out)}
+.rs-box:hover{transform:translateY(-3px);border-color:rgba(139,92,246,.3)}
+.rs-val{font-size:1.7rem;font-weight:900;line-height:1.1;font-family:var(--font-mono)}
+.rs-val.green{color:var(--emerald);text-shadow:0 0 20px rgba(52,211,153,.5)}
+.rs-val.red{color:#fecdd3;text-shadow:0 0 20px rgba(251,113,133,.5)}
+.rs-val.cyan{color:var(--accent);text-shadow:0 0 20px rgba(245,158,11,.5)}
+.rs-val.violet{color:var(--primary-light);text-shadow:0 0 20px rgba(196,181,253,.5)}
+.rs-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.5px;color:var(--text-mute);text-transform:uppercase;margin-top:6px}
+.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:14px 18px;border-radius:12px;
+  background:rgba(139,92,246,.06);border-left:3px solid var(--primary);margin-top:6px;text-align:left}
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.review-panel{padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);text-align:left}
+.review-panel h4{font-size:.9rem;font-weight:900;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.review-list{display:grid;gap:8px}
+.review-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-radius:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:.84rem;
+  line-height:1.6;transition:all .3s var(--ease-out)}
+.review-item:hover{background:rgba(255,255,255,.06);transform:translateX(3px)}
+.review-item .ri-num{font-weight:900;color:var(--text-mute);flex-shrink:0;font-family:var(--font-mono);font-size:.78rem;min-width:26px}
+.review-item .ri-text{flex:1;color:var(--text-dim)}
+.review-item .ri-status{font-size:.68rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:20px;flex-shrink:0}
+.ri-status.correct{background:rgba(52,211,153,.15);color:#6ee7b7}
+.ri-status.wrong{background:rgba(251,113,133,.15);color:#fecdd3}
+.ri-status.skipped{background:rgba(255,255,255,.06);color:var(--text-mute)}
+.toast-wrap{position:fixed;top:74px;right:16px;z-index:9999;display:flex;flex-direction:column;
+  gap:10px;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast{display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(11,13,28,.95),rgba(5,6,15,.95));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);
+  box-shadow:0 16px 40px rgba(0,0,0,.6),0 0 0 1px rgba(139,92,246,.15);
+  pointer-events:auto;animation:toastIn .5s var(--ease-spring);max-width:340px}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast.out{animation:toastOut .4s ease forwards}
+@keyframes toastOut{to{transform:translateX(120%);opacity:0}}
+.toast-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 24px rgba(139,92,246,.6)}
+.toast-icon.green{background:linear-gradient(135deg,var(--emerald),#059669);box-shadow:0 0 24px rgba(52,211,153,.6)}
+.toast-icon.cyan{background:linear-gradient(135deg,var(--accent),var(--accent-dark));box-shadow:0 0 24px rgba(245,158,11,.6)}
+.toast-icon.violet{background:linear-gradient(135deg,var(--violet),#6C63FF);box-shadow:0 0 24px rgba(167,139,250,.6)}
+.toast-content{flex:1;min-width:0}
+.toast-title{font-size:.85rem;font-weight:900;color:var(--text);letter-spacing:.3px}
+.toast-desc{font-size:.75rem;color:var(--text-dim);line-height:1.5;margin-top:2px}
+.score-pop{position:fixed;z-index:9997;pointer-events:none;font-family:var(--font-display);
+  font-weight:900;font-size:1.6rem;color:var(--primary-light);text-shadow:0 0 20px rgba(139,92,246,.8);
+  animation:scorePop 1s var(--ease-out) forwards}
+@keyframes scorePop{0%{transform:translate(-50%,0) scale(.5);opacity:0}
+  20%{transform:translate(-50%,-20px) scale(1.2);opacity:1}
+  100%{transform:translate(-50%,-80px) scale(1);opacity:0}}
+@media (max-width:600px){
+  .wrap{padding:calc(60px + 14px) 12px 50px}
+  .q-card{padding:20px 18px}
+  .opt{padding:13px 14px;font-size:.87rem;gap:11px}
+  .opt-letter{width:30px;height:30px;font-size:.78rem}
+  .hud-top{padding:12px 14px;gap:8px}
+  .hud-timer{padding:6px 11px;font-size:.78rem}
+  .hud-hp .heart{font-size:1rem}
+  .power-btn{padding:9px 14px;font-size:.72rem}
+  .btn{padding:12px 22px;font-size:.82rem;width:100%;justify-content:center}
+  .action-bar{flex-direction:column}
+  .result-hero{padding:28px 18px}
+  .grade-ring{width:110px;height:110px}
+  .grade-letter{font-size:2.2rem}
+  .rs-val{font-size:1.4rem}
+  .toast{max-width:calc(100vw - 24px);padding:12px 14px}
+  .toast-icon{width:36px;height:36px;font-size:1rem}
+}
+@media print{
+  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap{display:none!important}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+<canvas id="particles"></canvas>
+<canvas id="confettiCanvas"></canvas>
+
+<div id="loader">
+  <div class="loader-orb">
+    <div class="loader-core"><i class="fas fa-dragon"></i></div>
+  </div>
+  <div class="loader-title">HISTOEXPLORER</div>
+  <div class="loader-sub">Kuis 20 · Majapahit, Sunda, Sistem Pemerintahan &amp; Warisan Budaya</div>
+  <div class="loader-bar"><span id="loaderBar"></span></div>
+  <div class="loader-pct" id="loaderPct">0%</div>
+</div>
+
+<header class="game-header">
+  <div class="brand">
+    <div class="brand-logo"><i class="fas fa-dragon"></i></div>
+    <div class="brand-text">
+      <span class="t1">KUIS 20 · HINDU-BUDDHA</span>
+      <span class="t2">Majapahit &amp; Warisan Budaya</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="Suara"><i class="fas fa-volume-up"></i></button>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema"><i class="fas fa-sun"></i></button>
+  </div>
+</header>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<main class="wrap">
+
+  <section class="start-screen" id="startScreen">
+    <span class="hero-badge"><i class="fas fa-crown"></i> PREMIUM GAME MODE · LEVEL 20</span>
+    <h1 class="hero-title">Majapahit, Sunda<br>&amp; Warisan Budaya</h1>
+    <p class="hero-sub">
+      Kuasai <strong>Sumpah Palapa Gajah Mada</strong>, kejayaan <strong>Hayam Wuruk</strong>, tragedi <strong>Perang Bubat</strong>, struktur <strong>Sapta Prabu</strong>, serta warisan <strong>bahasa Sanskerta, kakawin &amp; kalender</strong>!
+    </p>
+
+    <div class="stats-showcase">
+      <span class="stat-pill" style="color:#C4B5FD"><i class="fas fa-question-circle"></i> 15 Soal Acak</span>
+      <span class="stat-pill" style="color:#FCD34D"><i class="fas fa-stopwatch"></i> 20 Menit</span>
+      <span class="stat-pill" style="color:#FB7185"><i class="fas fa-heart"></i> 3 Nyawa</span>
+      <span class="stat-pill" style="color:#34D399"><i class="fas fa-bolt"></i> Combo &amp; XP</span>
+    </div>
+
+    <div class="rules-card">
+      <h4><i class="fas fa-list-check"></i> Cara Bermain</h4>
+      <ul>
+        <li><span class="rule-num">1</span> Jawab 15 soal HOTS dari bank 40 soal — dipilih acak setiap sesi.</li>
+        <li><span class="rule-num">2</span> Jawaban benar memberi <strong>XP</strong> + memicu <strong>combo</strong>. Salah mengurangi <strong>1 nyawa</strong>.</li>
+        <li><span class="rule-num">3</span> Power-up: <strong>50:50</strong>, <strong>Petunjuk</strong>, <strong>Lewati</strong> (masing-masing 1×).</li>
+        <li><span class="rule-num">4</span> Raih <strong>Achievement</strong> dan taklukkan peringkat <strong>MAHA PATIH MAJAPAHIT</strong>!</li>
+      </ul>
+    </div>
+
+    <button class="btn-play" onclick="startGame()">
+      <i class="fas fa-play"></i> Mulai Bermain
+    </button>
+  </section>
+
+  <section class="game-hud" id="gameHud">
+    <div class="hud-top">
+      <div class="hud-hp" id="hudHp"></div>
+      <div class="hud-xp">
+        <div class="hud-xp-head">
+          <span class="lvl">LV <span id="hudLevel">1</span></span>
+          <span class="val"><span id="hudXp">0</span> / <span id="hudXpMax">100</span> XP</span>
+        </div>
+        <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
+      </div>
+      <div class="hud-timer" id="hudTimer">
+        <i class="fas fa-stopwatch"></i> <span id="hudTimerVal">20:00</span>
+      </div>
+    </div>
+
+    <div class="hud-middle">
+      <span><i class="fas fa-question-circle" style="color:var(--primary)"></i> Soal <strong id="hudQNum">1</strong>/<strong>15</strong></span>
+      <span class="combo-tag" id="comboTag"><i class="fas fa-fire"></i> Combo ×<span id="comboVal">0</span></span>
+      <span><i class="fas fa-star" style="color:var(--accent)"></i> Skor <strong id="hudScore" style="font-family:var(--font-mono)">0</strong></span>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-meta">
+        <span class="q-num"><i class="fas fa-bookmark"></i> <span id="qNumLabel">Soal 1</span></span>
+        <span class="q-topic" id="qTopic"><i class="fas fa-tag"></i> <span id="qTopicText">Majapahit</span></span>
+      </div>
+      <div class="q-text" id="qText">Memuat soal...</div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <div class="feedback" id="feedback">
+      <div class="fb-head">
+        <div class="fb-icon" id="fbIcon"><i class="fas fa-check"></i></div>
+        <div class="fb-title" id="fbTitle">BENAR!</div>
+      </div>
+      <div class="fb-body" id="fbBody"></div>
+    </div>
+
+    <div class="hud-bottom">
+      <div class="power-bar">
+        <button class="power-btn p50" id="p50" onclick="usePower('50')">
+          <i class="fas fa-compress-alt"></i> 50:50 <span class="cnt" id="c50">1</span>
+        </button>
+        <button class="power-btn phint" id="phint" onclick="usePower('hint')">
+          <i class="fas fa-lightbulb"></i> Petunjuk <span class="cnt" id="chint">1</span>
+        </button>
+        <button class="power-btn pskip" id="pskip" onclick="usePower('skip')">
+          <i class="fas fa-forward"></i> Lewati <span class="cnt" id="cskip">1</span>
+        </button>
+      </div>
+      <div class="action-bar">
+        <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>
+          Selanjutnya <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="btn btn-primary" id="btnFinish" onclick="finishGame()" style="display:none">
+          Lihat Hasil <i class="fas fa-flag-checkered"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="result-screen" id="resultScreen">
+    <div class="result-hero">
+      <div class="result-trophy" id="rTrophy">🏆</div>
+      <h2 class="result-title" id="rTitle">Luar Biasa!</h2>
+      <p class="result-sub" id="rSub">Kuis 20 · Majapahit, Sunda, Sistem Pemerintahan &amp; Warisan Budaya</p>
+      <div class="grade-ring" id="gradeRing">
+        <div class="grade-inner">
+          <div class="grade-letter" id="gradeLetter">A</div>
+          <div class="grade-label" id="gradeLabel">Sangat Baik</div>
+        </div>
+      </div>
+      <div class="result-title-text" id="rRank">MAHA PATIH MAJAPAHIT</div>
+      <div class="result-xp-line">Total XP: <strong id="rXp">0</strong> · Best Combo: <strong id="rBestCombo">0</strong></div>
+      <div class="result-stats">
+        <div class="rs-box"><div class="rs-val green" id="rBenar">0</div><div class="rs-lbl">Benar</div></div>
+        <div class="rs-box"><div class="rs-val red" id="rSalah">0</div><div class="rs-lbl">Salah</div></div>
+        <div class="rs-box"><div class="rs-val cyan" id="rSkor">0</div><div class="rs-lbl">Skor</div></div>
+        <div class="rs-box"><div class="rs-val violet" id="rXpTotal">0</div><div class="rs-lbl">XP Total</div></div>
+      </div>
+      <div class="result-msg" id="rMsg"></div>
+      <div class="result-actions">
+        <button class="btn btn-primary" onclick="resetGame()"><i class="fas fa-redo"></i> Main Lagi</button>
+        <button class="btn btn-ghost" onclick="window.location.reload()"><i class="fas fa-home"></i> Menu Awal</button>
+      </div>
+    </div>
+    <div class="review-panel">
+      <h4><i class="fas fa-list-check"></i> Rincian Jawaban</h4>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ============================================================
+   BANK SOAL — 40 SOAL HOTS · KUIS 20
+   Fokus: Majapahit (Raden Wijaya, Gajah Mada, Hayam Wuruk,
+   Perang Bubat, Sapta Prabu), Kitab & Sastra, Bahasa Sanskerta,
+   Kalender, Transisi Islam, Kerajaan Bali
+   ============================================================ */
+const BANK_SOAL = [
+  /* ===== RADEN WIJAYA & PENDIRIAN MAJAPAHIT (4 soal) ===== */
+  { id:2001, topic:"Majapahit: Pendirian",
+    question:"Pendiri Kerajaan Majapahit pada 1293 M adalah...",
+    options:[
+      {letter:"A",text:"Ken Arok",correct:false,explanation:"Ken Arok = Singasari."},
+      {letter:"B",text:"Kertanegara",correct:false,explanation:"Kertanegara = Singasari."},
+      {letter:"C",text:"Raden Wijaya",correct:true,explanation:"Tepat! Raden Wijaya = pendiri Majapahit."},
+      {letter:"D",text:"Hayam Wuruk",correct:false,explanation:"Hayam Wuruk = raja ke-4."},
+      {letter:"E",text:"Gajah Mada",correct:false,explanation:"Gajah Mada = patih."}
+    ], difficulty:"easy", hint:"Raden Wijaya = pendiri Majapahit.", points:50 },
+
+  { id:2002, topic:"Majapahit: Pendirian",
+    question:"Raden Wijaya adalah menantu dari raja Singasari...",
+    options:[
+      {letter:"A",text:"Ken Arok",correct:false,explanation:"Ken Arok sudah wafat."},
+      {letter:"B",text:"Kertanegara",correct:true,explanation:"Tepat! Raden Wijaya = menantu Kertanegara."},
+      {letter:"C",text:"Jayakatwang",correct:false,explanation:"Jayakatwang = pemberontak."},
+      {letter:"D",text:"Tohjaya",correct:false,explanation:"Tohjaya = raja sebelumnya."},
+      {letter:"E",text:"Anusapati",correct:false,explanation:"Anusapati = raja sebelumnya."}
+    ], difficulty:"medium", hint:"Raden Wijaya = menantu Kertanegara.", points:60 },
+
+  { id:2003, topic:"Majapahit: Pendirian",
+    question:"Strategi Raden Wijaya untuk mengalahkan Jayakatwang adalah...",
+    options:[
+      {letter:"A",text:"Bersekutu dengan Sriwijaya.",correct:false,explanation:"Bukan itu."},
+      {letter:"B",text:"Memanfaatkan pasukan Mongol untuk mengalahkan Jayakatwang, lalu mengusir Mongol.",correct:true,explanation:"Tepat! Manfaatkan Mongol, lalu usir mereka."},
+      {letter:"C",text:"Menyerang langsung tanpa strategi.",correct:false,explanation:"Justru strategi."},
+      {letter:"D",text:"Bersekutu dengan Tiongkok.",correct:false,explanation:"Mongol = Tiongkok, tapi strateginya bukan sekutu."},
+      {letter:"E",text:"Menyerah kepada Jayakatwang.",correct:false,explanation:"Justru menang."}
+    ], difficulty:"hard", hint:"Manfaatkan Mongol, lalu usir Mongol.", points:70 },
+
+  { id:2004, topic:"Majapahit: Pendirian",
+    question:"Analisis yang paling tepat tentang mengapa Raden Wijaya dianggap sebagai pendiri Majapahit yang cerdik adalah...",
+    options:[
+      {letter:"A",text:"Karena ia menyerah kepada Mongol.",correct:false,explanation:"Justru mengusir."},
+      {letter:"B",text:"Karena ia memanfaatkan konflik eksternal (Mongol) untuk kepentingan politik dalam negeri, lalu mengusir mereka.",correct:true,explanation:"Tepat! Memanfaatkan konflik eksternal."},
+      {letter:"C",text:"Karena ia tidak punya strategi.",correct:false,explanation:"Justru cerdik."},
+      {letter:"D",text:"Karena ia membangun candi.",correct:false,explanation:"Bukan itu."},
+      {letter:"E",text:"Karena ia menikah dengan putri Mongol.",correct:false,explanation:"Tidak benar."}
+    ], difficulty:"hard", hint:"Memanfaatkan konflik eksternal.", points:70 },
+
+  /* ===== GAJAH MADA & SUMPAH PALAPA (5 soal) ===== */
+  { id:2005, topic:"Gajah Mada & Palapa",
+    question:"Patih Majapahit yang mengucapkan Sumpah Palapa adalah...",
+    options:[
+      {letter:"A",text:"Hayam Wuruk",correct:false,explanation:"Hayam Wuruk = raja."},
+      {letter:"B",text:"Gajah Mada",correct:true,explanation:"Tepat! Gajah Mada = pengucap Sumpah Palapa."},
+      {letter:"C",text:"Mpu Prapanca",correct:false,explanation:"Mpu Prapanca = pujangga."},
+      {letter:"D",text:"Raden Wijaya",correct:false,explanation:"Raden Wijaya = pendiri."},
+      {letter:"E",text:"Nambi",correct:false,explanation:"Nambi = patih lain."}
+    ], difficulty:"easy", hint:"Gajah Mada = pengucap Sumpah Palapa.", points:50 },
+
+  { id:2006, topic:"Gajah Mada & Palapa",
+    question:"Isi Sumpah Palapa yang diucapkan Gajah Mada adalah...",
+    options:[
+      {letter:"A",text:"Tidak akan menikmati kenikmatan duniawi sebelum Nusantara bersatu.",correct:true,explanation:"Tepat! Tidak menikmati palapa sebelum Nusantara bersatu."},
+      {letter:"B",text:"Akan menaklukkan Tiongkok.",correct:false,explanation:"Bukan itu."},
+      {letter:"C",text:"Akan membangun 1000 candi.",correct:false,explanation:"Bukan itu."},
+      {letter:"D",text:"Akan menikah dengan putri Sunda.",correct:false,explanation:"Bukan itu."},
+      {letter:"E",text:"Akan mengundurkan diri.",correct:false,explanation:"Bukan itu."}
+    ], difficulty:"easy", hint:"Tidak menikmati palapa sebelum Nusantara bersatu.", points:50 },
+
+  { id:2007, topic:"Gajah Mada & Palapa",
+    question:"Kata 'palapa' dalam Sumpah Palapa berarti...",
+    options:[
+      {letter:"A",text:"Rempah-rempah/kenikmatan duniawi",correct:true,explanation:"Tepat! Palapa = rempah/kenikmatan duniawi."},
+      {letter:"B",text:"Pedang",correct:false,explanation:"Bukan pedang."},
+      {letter:"C",text:"Kapal",correct:false,explanation:"Bukan kapal."},
+      {letter:"D",text:"Candi",correct:false,explanation:"Bukan candi."},
+      {letter:"E",text:"Mahkota",correct:false,explanation:"Bukan mahkota."}
+    ], difficulty:"medium", hint:"Palapa = rempah/kenikmatan duniawi.", points:60 },
+
+  { id:2008, topic:"Gajah Mada & Palapa",
+    question:"Analisis yang paling tepat tentang makna Sumpah Palapa bagi persatuan Indonesia adalah...",
+    options:[
+      {letter:"A",text:"Sumpah Palapa hanya janji kosong.",correct:false,explanation:"Justru berdampak."},
+      {letter:"B",text:"Sumpah Palapa menunjukkan semangat persatuan & pengorbanan untuk kepentingan bangsa di atas kepentingan pribadi.",correct:true,explanation:"Tepat! Semangat persatuan & pengorbanan."},
+      {letter:"C",text:"Sumpah Palapa tidak relevan.",correct:false,explanation:"Justru relevan."},
+      {letter:"D",text:"Sumpah Palapa hanya untuk Majapahit.",correct:false,explanation:"Berlaku universal."},
+      {letter:"E",text:"Sumpah Palapa adalah mitos.",correct:false,explanation:"Bukan mitos."}
+    ], difficulty:"hard", hint:"Semangat persatuan & pengorbanan.", points:70 },
+
+  { id:2009, topic:"Gajah Mada & Palapa",
+    question:"Kontroversi yang melibatkan Gajah Mada dalam sejarah Majapahit adalah...",
+    options:[
+      {letter:"A",text:"Pendirian Borobudur.",correct:false,explanation:"Bukan itu."},
+      {letter:"B",text:"Perang Bubat 1357 M dengan Kerajaan Sunda.",correct:true,explanation:"Tepat! Perang Bubat = kontroversi Gajah Mada."},
+      {letter:"C",text:"Penaklukan Sriwijaya.",correct:false,explanation:"Bukan itu."},
+      {letter:"D",text:"Pemberontakan terhadap Hayam Wuruk.",correct:false,explanation:"Tidak terjadi."},
+      {letter:"E",text:"Pengunduran diri.",correct:false,explanation:"Bukan itu."}
+    ], difficulty:"medium", hint:"Perang Bubat = kontroversi Gajah Mada.", points:60 },
+
+  /* ===== HAYAM WURUK & PUNCAK KEJAYAAN (5 soal) ===== */
+  { id:2010, topic:"Hayam Wuruk",
+    question:"Raja Majapahit yang membawa kerajaan ke puncak kejayaan adalah...",
+    options:[
+      {letter:"A",text:"Raden Wijaya",correct:false,explanation:"Raden Wijaya = pendiri."},
+      {letter:"B",text:"Hayam Wuruk",correct:true,explanation:"Tepat! Hayam Wuruk = puncak kejayaan."},
+      {letter:"C",text:"Kertanegara",correct:false,explanation:"Kertanegara = Singasari."},
+      {letter:"D",text:"Ken Arok",correct:false,explanation:"Ken Arok = Singasari."},
+      {letter:"E",text:"Jayabaya",correct:false,explanation:"Jayabaya = Kediri."}
+    ], difficulty:"easy", hint:"Hayam Wuruk = puncak kejayaan.", points:50 },
+
+  { id:2011, topic:"Hayam Wuruk",
+    question:"Masa pemerintahan Hayam Wuruk berlangsung sekitar tahun...",
+    options:[
+      {letter:"A",text:"1293–1309 M",correct:false,explanation:"Itu Raden Wijaya."},
+      {letter:"B",text:"1350–1389 M",correct:true,explanation:"Tepat! Hayam Wuruk = 1350–1389 M."},
+      {letter:"C",text:"1222–1292 M",correct:false,explanation:"Itu Singasari."},
+      {letter:"D",text:"1042–1222 M",correct:false,explanation:"Itu Kediri."},
+      {letter:"E",text:"1478–1527 M",correct:false,explanation:"Itu akhir Majapahit."}
+    ], difficulty:"medium", hint:"Hayam Wuruk = 1350–1389 M.", points:60 },
+
+  { id:2012, topic:"Hayam Wuruk",
+    question:"Kitab yang mencatat pemerintahan Hayam Wuruk & wilayah Majapahit adalah...",
+    options:[
+      {letter:"A",text:"Pararaton",correct:false,explanation:"Pararaton = raja-raja Jawa."},
+      {letter:"B",text:"Negarakertagama",correct:true,explanation:"Tepat! Negarakertagama = Hayam Wuruk."},
+      {letter:"C",text:"Sutasoma",correct:false,explanation:"Sutasoma = Mpu Tantular."},
+      {letter:"D",text:"Bharatayuddha",correct:false,explanation:"Bharatayuddha = Kediri."},
+      {letter:"E",text:"Arjunawiwaha",correct:false,explanation:"Arjunawiwaha = Airlangga."}
+    ], difficulty:"medium", hint:"Negarakertagama = Hayam Wuruk.", points:60 },
+
+  { id:2013, topic:"Hayam Wuruk",
+    question:"Analisis yang paling tepat tentang mengapa Majapahit disebut mencapai puncak kejayaan pada masa Hayam Wuruk adalah...",
+    options:[
+      {letter:"A",text:"Karena wilayahnya luas, perdagangan maju, & pemerintahan stabil berkat kerja sama Hayam Wuruk-Gajah Mada.",correct:true,explanation:"Tepat! Wilayah luas + perdagangan + stabilitas."},
+      {letter:"B",text:"Karena Hayam Wuruk raja tertua.",correct:false,explanation:"Bukan itu."},
+      {letter:"C",text:"Karena tidak ada perang.",correct:false,explanation:"Justru ada Perang Bubat."},
+      {letter:"D",text:"Karena wilayahnya kecil.",correct:false,explanation:"Justru luas."},
+      {letter:"E",text:"Karena tidak ada patih.",correct:false,explanation:"Justru ada Gajah Mada."}
+    ], difficulty:"hard", hint:"Wilayah luas + perdagangan + stabilitas.", points:70 },
+
+  { id:2014, topic:"Hayam Wuruk",
+    question:"Wilayah kekuasaan Majapahit pada masa Hayam Wuruk meliputi...",
+    options:[
+      {letter:"A",text:"Hanya Jawa Timur.",correct:false,explanation:"Jauh lebih luas."},
+      {letter:"B",text:"Hanya Jawa.",correct:false,explanation:"Jauh lebih luas."},
+      {letter:"C",text:"Hampir seluruh Nusantara (Sumatera, Jawa, Kalimantan, Sulawesi, Maluku, Bali, dll).",correct:true,explanation:"Tepat! Hampir seluruh Nusantara."},
+      {letter:"D",text:"Hanya Sumatera.",correct:false,explanation:"Jauh lebih luas."},
+      {letter:"E",text:"Hanya Bali.",correct:false,explanation:"Jauh lebih luas."}
+    ], difficulty:"medium", hint:"Hampir seluruh Nusantara.", points:60 },
+
+  /* ===== PERANG BUBAT (5 soal) ===== */
+  { id:2015, topic:"Perang Bubat",
+    question:"Perang Bubat terjadi pada tahun...",
+    options:[
+      {letter:"A",text:"1275 M",correct:false,explanation:"Itu Pamalayu."},
+      {letter:"B",text:"1292 M",correct:false,explanation:"Itu runtuhnya Singasari."},
+      {letter:"C",text:"1357 M",correct:true,explanation:"Tepat! Perang Bubat = 1357 M."},
+      {letter:"D",text:"1478 M",correct:false,explanation:"Itu akhir Majapahit."},
+      {letter:"E",text:"1527 M",correct:false,explanation:"Itu akhir Majapahit di Demak."}
+    ], difficulty:"medium", hint:"Perang Bubat = 1357 M.", points:60 },
+
+  { id:2016, topic:"Perang Bubat",
+    question:"Perang Bubat terjadi antara Majapahit dan Kerajaan...",
+    options:[
+      {letter:"A",text:"Sunda",correct:true,explanation:"Tepat! Perang Bubat = Majapahit vs Sunda."},
+      {letter:"B",text:"Sriwijaya",correct:false,explanation:"Bukan Sriwijaya."},
+      {letter:"C",text:"Singasari",correct:false,explanation:"Sudah runtuh."},
+      {letter:"D",text:"Kediri",correct:false,explanation:"Sudah runtuh."},
+      {letter:"E",text:"Bali",correct:false,explanation:"Bukan Bali."}
+    ], difficulty:"medium", hint:"Perang Bubat = Majapahit vs Sunda.", points:60 },
+
+  { id:2017, topic:"Perang Bubat",
+    question:"Tokoh dari Kerajaan Sunda yang menjadi korban dalam Perang Bubat adalah...",
+    options:[
+      {letter:"A",text:"Raja Linggabuana & Dyah Pitaloka",correct:true,explanation:"Tepat! Linggabuana & Dyah Pitaloka."},
+      {letter:"B",text:"Ken Arok & Ken Dedes",correct:false,explanation:"Itu Singasari."},
+      {letter:"C",text:"Hayam Wuruk & Gajah Mada",correct:false,explanation:"Itu Majapahit."},
+      {letter:"D",text:"Airlangga & Putri",correct:false,explanation:"Itu Kahuripan."},
+      {letter:"E",text:"Raden Wijaya & Tribhuwana",correct:false,explanation:"Itu Majapahit awal."}
+    ], difficulty:"medium", hint:"Linggabuana & Dyah Pitaloka.", points:60 },
+
+  { id:2018, topic:"Perang Bubat",
+    question:"Analisis yang paling tepat tentang penyebab Perang Bubat adalah...",
+    options:[
+      {letter:"A",text:"Kesalahpahaman biasa.",correct:false,explanation:"Lebih dari itu."},
+      {letter:"B",text:"Gajah Mada menuntut agar pernikahan Hayam Wuruk-Dyah Pitaloka disertai pengakuan kekuasaan Majapahit atas Sunda — dianggap merendahkan martabat Sunda.",correct:true,explanation:"Tepat! Tuntutan pengakuan kekuasaan."},
+      {letter:"C",text:"Sunda menyerang Majapahit terlebih dahulu.",correct:false,explanation:"Justru Sunda datang untuk pernikahan."},
+      {letter:"D",text:"Hayam Wuruk menolak menikah.",correct:false,explanation:"Justru ingin menikah."},
+      {letter:"E",text:"Perebutan wilayah.",correct:false,explanation:"Bukan itu."}
+    ], difficulty:"hard", hint:"Tuntutan pengakuan kekuasaan Majapahit.", points:70 },
+
+  { id:2019, topic:"Perang Bubat",
+    question:"Pelajaran penting dari Perang Bubat bagi diplomasi modern adalah...",
+    options:[
+      {letter:"A",text:"Diplomasi harus dilakukan dengan kekerasan.",correct:false,explanation:"Justru sebaliknya."},
+      {letter:"B",text:"Diplomasi harus setara & menghormati martabat pihak lain.",correct:true,explanation:"Tepat! Diplomasi setara & hormati martabat."},
+      {letter:"C",text:"Diplomasi tidak perlu etika.",correct:false,explanation:"Justru perlu etika."},
+      {letter:"D",text:"Diplomasi hanya untuk kepentingan satu pihak.",correct:false,explanation:"Justru dua pihak."},
+      {letter:"E",text:"Diplomasi tidak penting.",correct:false,explanation:"Justru penting."}
+    ], difficulty:"hard", hint:"Diplomasi setara & hormati martabat.", points:70 },
+
+  /* ===== SISTEM PEMERINTAHAN (5 soal) ===== */
+  { id:2020, topic:"Sistem Pemerintahan",
+    question:"Dalam struktur pemerintahan Majapahit, dewan penasihat raja yang terdiri dari tujuh pejabat tinggi disebut...",
+    options:[
+      {letter:"A",text:"Bhre",correct:false,explanation:"Bhre = gelar penguasa."},
+      {letter:"B",text:"Rakai",correct:false,explanation:"Rakai = bangsawan tinggi."},
+      {letter:"C",text:"Sapta Prabu",correct:true,explanation:"Tepat! Sapta Prabu = dewan penasihat raja."},
+      {letter:"D",text:"Kedatuan",correct:false,explanation:"Kedatuan = wilayah otonom Sriwijaya."},
+      {letter:"E",text:"Patih",correct:false,explanation:"Patih = perdana menteri."}
+    ], difficulty:"medium", hint:"Sapta Prabu = dewan penasihat raja.", points:60 },
+
+  { id:2021, topic:"Sistem Pemerintahan",
+    question:"Gelar penguasa di Majapahit yang digunakan untuk raja utama dan penguasa daerah adalah...",
+    options:[
+      {letter:"A",text:"Bhre (Bhatara)",correct:true,explanation:"Tepat! Bhre = gelar penguasa Majapahit."},
+      {letter:"B",text:"Datu",correct:false,explanation:"Datu = kepala wilayah Sriwijaya."},
+      {letter:"C",text:"Yuvaraja",correct:false,explanation:"Yuvaraja = putra mahkota."},
+      {letter:"D",text:"Rakai",correct:false,explanation:"Rakai = bangsawan tinggi."},
+      {letter:"E",text:"Patih",correct:false,explanation:"Patih = perdana menteri."}
+    ], difficulty:"medium", hint:"Bhre = gelar penguasa Majapahit.", points:60 },
+
+  { id:2022, topic:"Sistem Pemerintahan",
+    question:"Pejabat tertinggi setelah raja di Majapahit yang bertanggung jawab sebagai perdana menteri adalah...",
+    options:[
+      {letter:"A",text:"Patih (Mahapatih)",correct:true,explanation:"Tepat! Patih = perdana menteri."},
+      {letter:"B",text:"Bhre",correct:false,explanation:"Bhre = penguasa daerah."},
+      {letter:"C",text:"Rakai",correct:false,explanation:"Rakai = bangsawan."},
+      {letter:"D",text:"Datu",correct:false,explanation:"Datu = Sriwijaya."},
+      {letter:"E",text:"Yuvaraja",correct:false,explanation:"Yuvaraja = putra mahkota."}
+    ], difficulty:"easy", hint:"Patih = perdana menteri.", points:50 },
+
+  { id:2023, topic:"Sistem Pemerintahan",
+    question:"Analisis yang paling tepat tentang sistem pemerintahan Majapahit adalah...",
+    options:[
+      {letter:"A",text:"Sistem sentralistis berlapis — raja sebagai pusat, dibantu Sapta Prabu, Patih, & para Bhre yang memimpin daerah otonom.",correct:true,explanation:"Tepat! Sentralistis berlapis dengan otonomi daerah."},
+      {letter:"B",text:"Sistem republik demokratis.",correct:false,explanation:"Bukan republik."},
+      {letter:"C",text:"Sistem tanpa birokrasi.",correct:false,explanation:"Justru terstruktur."},
+      {letter:"D",text:"Sistem federatif murni.",correct:false,explanation:"Bukan federatif murni."},
+      {letter:"E",text:"Sistem militer murni.",correct:false,explanation:"Bukan militer murni."}
+    ], difficulty:"hard", hint:"Sentralistis berlapis dengan otonomi daerah.", points:70 },
+
+  { id:2024, topic:"Sistem Pemerintahan",
+    question:"Relevansi struktur pemerintahan Majapahit dengan Indonesia modern adalah...",
+    options:[
+      {letter:"A",text:"Tidak ada relevansi.",correct:false,explanation:"Justru ada."},
+      {letter:"B",text:"Mirip dengan sistem kabinet & pemerintahan daerah (otonomi) Indonesia modern.",correct:true,explanation:"Tepat! Mirip kabinet & otonomi daerah."},
+      {letter:"C",text:"Sama persis dengan Indonesia.",correct:false,explanation:"Tidak sama persis."},
+      {letter:"D",text:"Bertentangan dengan Indonesia.",correct:false,explanation:"Justru sejalan."},
+      {letter:"E",text:"Hanya berlaku untuk Jawa.",correct:false,explanation:"Berlaku untuk Indonesia."}
+    ], difficulty:"hard", hint:"Mirip kabinet & otonomi daerah.", points:70 },
+
+  /* ===== KITAB & SASTRA (5 soal) ===== */
+  { id:2025, topic:"Kitab & Sastra",
+    question:"Kitab Negarakertagama ditulis oleh...",
+    options:[
+      {letter:"A",text:"Mpu Sedah",correct:false,explanation:"Mpu Sedah = Bharatayuddha."},
+      {letter:"B",text:"Mpu Panuluh",correct:false,explanation:"Mpu Panuluh = Hariwangsa."},
+      {letter:"C",text:"Mpu Prapanca",correct:true,explanation:"Tepat! Mpu Prapanca = Negarakertagama."},
+      {letter:"D",text:"Mpu Tantular",correct:false,explanation:"Mpu Tantular = Sutasoma."},
+      {letter:"E",text:"Mpu Dharmaja",correct:false,explanation:"Mpu Dharmaja = Smaradahana."}
+    ], difficulty:"easy", hint:"Mpu Prapanca = Negarakertagama.", points:50 },
+
+  { id:2026, topic:"Kitab & Sastra",
+    question:"Semboyan 'Bhinneka Tunggal Ika' berasal dari kitab...",
+    options:[
+      {letter:"A",text:"Negarakertagama",correct:false,explanation:"Negarakertagama = Mpu Prapanca."},
+      {letter:"B",text:"Sutasoma",correct:true,explanation:"Tepat! Sutasoma = Mpu Tantular."},
+      {letter:"C",text:"Pararaton",correct:false,explanation:"Pararaton = raja-raja Jawa."},
+      {letter:"D",text:"Bharatayuddha",correct:false,explanation:"Bharatayuddha = Kediri."},
+      {letter:"E",text:"Arjunawiwaha",correct:false,explanation:"Arjunawiwaha = Airlangga."}
+    ], difficulty:"medium", hint:"Sutasoma = Mpu Tantular.", points:60 },
+
+  { id:2027, topic:"Kitab & Sastra",
+    question:"Mpu Tantular, penulis Kitab Sutasoma, menganut aliran...",
+    options:[
+      {letter:"A",text:"Hindu Siwa murni",correct:false,explanation:"Bukan murni."},
+      {letter:"B",text:"Buddha murni",correct:false,explanation:"Bukan murni."},
+      {letter:"C",text:"Siwa-Buddha (sinkretis)",correct:true,explanation:"Tepat! Siwa-Buddha = sinkretis."},
+      {letter:"D",text:"Islam",correct:false,explanation:"Belum Islam."},
+      {letter:"E",text:"Animisme",correct:false,explanation:"Bukan animisme."}
+    ], difficulty:"medium", hint:"Siwa-Buddha = sinkretis.", points:60 },
+
+  { id:2028, topic:"Kitab & Sastra",
+    question:"Kitab Pararaton menceritakan tentang...",
+    options:[
+      {letter:"A",text:"Sejarah raja-raja Singasari & Majapahit",correct:true,explanation:"Tepat! Pararaton = raja-raja Singasari-Majapahit."},
+      {letter:"B",text:"Perang Bharatayuddha",correct:false,explanation:"Itu Bharatayuddha."},
+      {letter:"C",text:"Perjalanan Hayam Wuruk",correct:false,explanation:"Itu Negarakertagama."},
+      {letter:"D",text:"Ajaran Buddha",correct:false,explanation:"Itu Sutasoma."},
+      {letter:"E",text:"Kisah Ramayana",correct:false,explanation:"Itu relief Prambanan."}
+    ], difficulty:"medium", hint:"Pararaton = raja-raja Singasari-Majapahit.", points:60 },
+
+  { id:2029, topic:"Kitab & Sastra",
+    question:"Analisis yang paling tepat tentang peran Mpu Prapanca & Mpu Tantular bagi Indonesia adalah...",
+    options:[
+      {letter:"A",text:"Mereka hanya penulis biasa.",correct:false,explanation:"Justru besar."},
+      {letter:"B",text:"Mereka mewariskan sumber sejarah utama Majapahit & semboyan bangsa (Bhinneka Tunggal Ika).",correct:true,explanation:"Tepat! Sumber sejarah + semboyan bangsa."},
+      {letter:"C",text:"Mereka tidak berkaitan dengan sejarah.",correct:false,explanation:"Justru berkaitan."},
+      {letter:"D",text:"Mereka menulis dalam bahasa Arab.",correct:false,explanation:"Bukan Arab."},
+      {letter:"E",text:"Mereka tidak berpengaruh.",correct:false,explanation:"Justru berpengaruh besar."}
+    ], difficulty:"hard", hint:"Sumber sejarah + semboyan bangsa.", points:70 },
+
+  /* ===== BAHASA SANSKERTA & KALENDER (5 soal) ===== */
+  { id:2030, topic:"Bahasa & Kalender",
+    question:"Kata 'raja', 'putra', 'guru', dan 'bahasa' dalam Bahasa Indonesia diserap dari bahasa...",
+    options:[
+      {letter:"A",text:"Arab",correct:false,explanation:"Bukan Arab."},
+      {letter:"B",text:"Sanskerta",correct:true,explanation:"Tepat! Sanskerta = sumber kata serapan."},
+      {letter:"C",text:"Tionghoa",correct:false,explanation:"Bukan Tionghoa."},
+      {letter:"D",text:"Belanda",correct:false,explanation:"Bukan Belanda."},
+      {letter:"E",text:"Jepang",correct:false,explanation:"Bukan Jepang."}
+    ], difficulty:"easy", hint:"Sanskerta = sumber kata serapan.", points:50 },
+
+  { id:2031, topic:"Bahasa & Kalender",
+    question:"Kalender yang digunakan pada masa Hindu-Buddha dan masih digunakan hingga kini di Jawa adalah...",
+    options:[
+      {letter:"A",text:"Kalender Saka",correct:true,explanation:"Tepat! Kalender Saka = kalender Hindu."},
+      {letter:"B",text:"Kalender Masehi",correct:false,explanation:"Bukan Masehi."},
+      {letter:"C",text:"Kalender Hijriah",correct:false,explanation:"Bukan Hijriah."},
+      {letter:"D",text:"Kalender Tionghoa",correct:false,explanation:"Bukan Tionghoa."},
+      {letter:"E",text:"Kalender Maya",correct:false,explanation:"Bukan Maya."}
+    ], difficulty:"medium", hint:"Kalender Saka = kalender Hindu.", points:60 },
+
+  { id:2032, topic:"Bahasa & Kalender",
+    question:"Nama hari 'Senin, Selasa, Rabu, Kamis, Jumat, Sabtu, Minggu' berasal dari bahasa...",
+    options:[
+      {letter:"A",text:"Arab",correct:false,explanation:"Bukan Arab."},
+      {letter:"B",text:"Sanskerta",correct:true,explanation:"Tepat! Sanskerta = asal nama hari."},
+      {letter:"C",text:"Tionghoa",correct:false,explanation:"Bukan Tionghoa."},
+      {letter:"D",text:"Belanda",correct:false,explanation:"Bukan Belanda."},
+      {letter:"E",text:"Jawa Kuno",correct:false,explanation:"Jawa Kuno menyerap dari Sanskerta."}
+    ], difficulty:"medium", hint:"Sanskerta = asal nama hari.", points:60 },
+
+  { id:2033, topic:"Bahasa & Kalender",
+    question:"Bentuk puisi Jawa Kuno dengan metrum India disebut...",
+    options:[
+      {letter:"A",text:"Kakawin",correct:true,explanation:"Tepat! Kakawin = puisi Jawa Kuno metrum India."},
+      {letter:"B",text:"Kidung",correct:false,explanation:"Kidung = puisi Jawa Pertengahan."},
+      {letter:"C",text:"Pantun",correct:false,explanation:"Pantun = Melayu."},
+      {letter:"D",text:"Syair",correct:false,explanation:"Syair = Arab/Melayu."},
+      {letter:"E",text:"Gurindam",correct:false,explanation:"Gurindam = Melayu."}
+    ], difficulty:"medium", hint:"Kakawin = puisi Jawa Kuno metrum India.", points:60 },
+
+  { id:2034, topic:"Bahasa & Kalender",
+    question:"Analisis yang paling tepat tentang warisan bahasa Sanskerta bagi Bahasa Indonesia adalah...",
+    options:[
+      {letter:"A",text:"Sanskerta tidak berpengaruh.",correct:false,explanation:"Justru sangat berpengaruh."},
+      {letter:"B",text:"Sanskerta menyumbang ribuan kata dalam Bahasa Indonesia, terutama di bidang agama, politik, & budaya.",correct:true,explanation:"Tepat! Ribuan kata Sanskerta."},
+      {letter:"C",text:"Sanskerta hanya untuk prasasti.",correct:false,explanation:"Justru banyak kata serapan."},
+      {letter:"D",text:"Sanskerta hanya digunakan raja.",correct:false,explanation:"Justru luas."},
+      {letter:"E",text:"Sanskerta tidak relevan.",correct:false,explanation:"Justru sangat relevan."}
+    ], difficulty:"hard", hint:"Ribuan kata Sanskerta di Bahasa Indonesia.", points:70 },
+
+  /* ===== TRANSISI ISLAM & BALI (5 soal) ===== */
+  { id:2035, topic:"Transisi & Bali",
+    question:"Faktor internal yang menyebabkan kemunduran Majapahit adalah...",
+    options:[
+      {letter:"A",text:"Perang Paregreg (perang saudara) setelah wafatnya Hayam Wuruk.",correct:true,explanation:"Tepat! Perang Paregreg = faktor internal."},
+      {letter:"B",text:"Serangan Mongol.",correct:false,explanation:"Mongol sudah diusir."},
+      {letter:"C",text:"Bencana alam.",correct:false,explanation:"Bukan faktor utama."},
+      {letter:"D",text:"Serangan Sriwijaya.",correct:false,explanation:"Sriwijaya sudah melemah."},
+      {letter:"E",text:"Wabah penyakit.",correct:false,explanation:"Bukan faktor utama."}
+    ], difficulty:"medium", hint:"Perang Paregreg = faktor internal.", points:60 },
+
+  { id:2036, topic:"Transisi & Bali",
+    question:"Proses masuknya Islam ke Nusantara terjadi melalui...",
+    options:[
+      {letter:"A",text:"Penaklukan militer besar-besaran.",correct:false,explanation:"Justru damai."},
+      {letter:"B",text:"Perdagangan, dakwah ulama/Wali Songo, perkawinan, & pendidikan pesantren.",correct:true,explanation:"Tepat! Perdagangan + dakwah + perkawinan."},
+      {letter:"C",text:"Paksaan penguasa asing.",correct:false,explanation:"Bukan paksaan."},
+      {letter:"D",text:"Bencana alam.",correct:false,explanation:"Bukan itu."},
+      {letter:"E",text:"Perang antar kerajaan.",correct:false,explanation:"Bukan itu."}
+    ], difficulty:"medium", hint:"Perdagangan + dakwah + perkawinan.", points:60 },
+
+  { id:2037, topic:"Transisi & Bali",
+    question:"Kerajaan Bali merupakan contoh...",
+    options:[
+      {letter:"A",text:"Keberlanjutan budaya Hindu di Indonesia setelah masuknya Islam.",correct:true,explanation:"Tepat! Bali = keberlanjutan Hindu."},
+      {letter:"B",text:"Kerajaan Islam pertama.",correct:false,explanation:"Bukan Islam."},
+      {letter:"C",text:"Kerajaan Buddha.",correct:false,explanation:"Bukan Buddha."},
+      {letter:"D",text:"Kerajaan sekuler.",correct:false,explanation:"Bukan sekuler."},
+      {letter:"E",text:"Kerajaan tanpa peninggalan.",correct:false,explanation:"Justru banyak peninggalan."}
+    ], difficulty:"medium", hint:"Bali = keberlanjutan Hindu.", points:60 },
+
+  { id:2038, topic:"Transisi & Bali",
+    question:"Peninggalan penting Kerajaan Bali yang menjadi Warisan Dunia UNESCO adalah...",
+    options:[
+      {letter:"A",text:"Pura Besakih & sistem subak",correct:true,explanation:"Tepat! Besakih & subak = warisan Bali."},
+      {letter:"B",text:"Candi Borobudur",correct:false,explanation:"Itu Jawa Tengah."},
+      {letter:"C",text:"Candi Prambanan",correct:false,explanation:"Itu Jawa Tengah."},
+      {letter:"D",text:"Candi Kidal",correct:false,explanation:"Itu Jawa Timur."},
+      {letter:"E",text:"Candi Sukuh",correct:false,explanation:"Itu Jawa Tengah."}
+    ], difficulty:"medium", hint:"Besakih & subak = warisan Bali.", points:60 },
+
+  { id:2039, topic:"Transisi & Bali",
+    question:"Analisis yang paling tepat tentang akulturasi Hindu-Buddha dengan Islam di Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Islam menghapus semua warisan Hindu-Buddha.",correct:false,explanation:"Justru berakulturasi."},
+      {letter:"B",text:"Islam berakulturasi dengan Hindu-Buddha — terlihat pada arsitektur masjid kuno, wayang, gamelan, & tradisi selamatan.",correct:true,explanation:"Tepat! Akulturasi budaya."},
+      {letter:"C",text:"Islam dan Hindu-Buddha tidak pernah bertemu.",correct:false,explanation:"Justru bertemu."},
+      {letter:"D",text:"Islam menolak semua tradisi lokal.",correct:false,explanation:"Justru berakulturasi."},
+      {letter:"E",text:"Hindu-Buddha menghapus Islam.",correct:false,explanation:"Tidak terjadi."}
+    ], difficulty:"hard", hint:"Akulturasi budaya.", points:70 },
+
+  /* ===== SINTESIS (1 soal) ===== */
+  { id:2040, topic:"Sintesis Majapahit",
+    question:"Kesimpulan yang paling tepat tentang peran Majapahit dalam sejarah Indonesia adalah...",
+    options:[
+      {letter:"A",text:"Majapahit tidak penting.",correct:false,explanation:"Justru sangat penting."},
+      {letter:"B",text:"Majapahit adalah kerajaan besar yang menyatukan Nusantara, mewariskan semboyan Bhinneka Tunggal Ika, & menjadi inspirasi persatuan Indonesia.",correct:true,explanation:"Tepat! Penyatu Nusantara + Bhinneka Tunggal Ika."},
+      {letter:"C",text:"Majapahit hanya kerajaan kecil.",correct:false,explanation:"Justru besar."},
+      {letter:"D",text:"Majapahit tidak punya warisan.",correct:false,explanation:"Justru banyak."},
+      {letter:"E",text:"Majapahit hanya kerajaan agama.",correct:false,explanation:"Bukan hanya agama."}
+    ], difficulty:"hard", hint:"Penyatu Nusantara + Bhinneka Tunggal Ika.", points:70 }
+];
+
+/* ============================================================
+   CONSTANTS & STATE
+   ============================================================ */
+const TOTAL_Q = 15;
+const TIME_LIMIT = 20 * 60;
+
+const state = {
+  questions: [], currentIndex: 0, answers: [], score: 0,
+  xp: 0, level: 1, hp: 3, maxHp: 3, combo: 0, bestCombo: 0,
+  timer: null, timeLeft: TIME_LIMIT, started: false, finished: false,
+  powers: { p50:1, hint:1, skip:1 }, soundOn: true
+};
+
+/* ============================================================
+   AUDIO
+   ============================================================ */
+let audioCtx = null;
+function ensureAudio(){
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}
+function playTone(freq, dur, type, vol){
+  if (!state.soundOn) return;
+  ensureAudio(); if (!audioCtx) return;
+  try {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = type || 'sine'; o.frequency.value = freq;
+    g.gain.setValueAtTime(vol || 0.08, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + dur);
+  } catch(e){}
+}
+function sfxClick(){ playTone(520, .08, 'triangle', .06); }
+function sfxCorrect(){ playTone(660, .12, 'sine', .10); setTimeout(()=>playTone(880, .15, 'sine', .10), 80); setTimeout(()=>playTone(1100, .20, 'sine', .08), 160); }
+function sfxWrong(){ playTone(200, .18, 'sawtooth', .10); setTimeout(()=>playTone(150, .25, 'sawtooth', .08), 120); }
+function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(()=>playTone(1200, .12, 'triangle', .07), 60); }
+function sfxLevelUp(){ [523, 659, 784, 1046].forEach((f, i) => setTimeout(()=>playTone(f, .16, 'sine', .10), i*90)); }
+function sfxFinish(){ [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(()=>playTone(f, .22, 'sine', .10), i*120)); }
+function toggleSound(){
+  state.soundOn = !state.soundOn;
+  document.getElementById('soundBtn').innerHTML = state.soundOn ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+  if (state.soundOn) sfxClick();
+}
+function toggleTheme(){
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').innerHTML = next === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  sfxClick();
+}
+
+(function(){
+  const bar = document.getElementById('loaderBar');
+  const pct = document.getElementById('loaderPct');
+  const loader = document.getElementById('loader');
+  const t0 = Date.now();
+  (function tick(){
+    const p = Math.min((Date.now() - t0) / 1800 * 100, 100);
+    bar.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+    if (p < 100) requestAnimationFrame(tick);
+    else setTimeout(()=>{ loader.classList.add('hidden'); setTimeout(()=>loader.style.display='none', 700); }, 300);
+  })();
+})();
+
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  function makeP(){ return { x: Math.random()*W, y: Math.random()*H, r: Math.random()*2 + 0.4, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3 - 0.15, a: Math.random()*0.5 + 0.15, hue: Math.random() < 0.5 ? 270 : 40 }; }
+  function init(){ resize(); particles = Array.from({length: Math.min(60, Math.floor(W*H/25000))}, makeP); }
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.shadowBlur = 8; ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.fill();
+    });
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+function fireConfetti(count){
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const colors = ['#8B5CF6','#C4B5FD','#F59E0B','#FCD34D','#34D399','#38BDF8'];
+  const pieces = Array.from({length: count || 60}, () => ({
+    x: window.innerWidth/2 + (Math.random()-0.5)*200,
+    y: window.innerHeight/2,
+    vx: (Math.random()-0.5)*14, vy: Math.random()*-16 - 4,
+    g: 0.5, r: Math.random()*8 + 4,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    rot: Math.random()*Math.PI, vr: (Math.random()-0.5)*0.3, life: 1
+  }));
+  let frame = 0;
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    pieces.forEach(p => {
+      if (p.life <= 0) return;
+      alive = true;
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.012;
+      ctx.save(); ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      ctx.restore();
+    });
+    if (alive && frame < 200) { frame++; requestAnimationFrame(animate); }
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  animate();
+}
+
+function showToast(icon, title, desc, variant){
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<div class="toast-icon ${variant||''}">${icon}</div>
+    <div class="toast-content"><div class="toast-title">${title}</div><div class="toast-desc">${desc}</div></div>`;
+  wrap.appendChild(el);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 450); }, 3200);
+}
+function scorePopup(text, x, y, color){
+  const el = document.createElement('div');
+  el.className = 'score-pop';
+  el.textContent = text;
+  el.style.left = (x || window.innerWidth/2) + 'px';
+  el.style.top = (y || window.innerHeight/2) + 'px';
+  if (color) el.style.color = color;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1100);
+}
+function shuffle(a){ const arr = a.slice(); for (let i = arr.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+function updateHpHud(){
+  const hp = document.getElementById('hudHp'); hp.innerHTML = '';
+  for (let i = 0; i < state.maxHp; i++){
+    const heart = document.createElement('i');
+    heart.className = 'fas fa-heart heart' + (i < state.hp ? '' : ' empty');
+    hp.appendChild(heart);
+  }
+}
+function updateXpHud(){
+  const xpForLevel = state.level * 100;
+  const pct = Math.min((state.xp % xpForLevel) / xpForLevel * 100, 100);
+  document.getElementById('hudLevel').textContent = state.level;
+  document.getElementById('hudXp').textContent = state.xp % xpForLevel;
+  document.getElementById('hudXpMax').textContent = xpForLevel;
+  document.getElementById('xpFill').style.width = pct + '%';
+}
+function updateComboHud(){
+  document.getElementById('comboVal').textContent = state.combo;
+  const tag = document.getElementById('comboTag');
+  if (state.combo >= 3){ tag.classList.add('hot'); setTimeout(()=>tag.classList.remove('hot'), 500); }
+}
+function updatePowers(){
+  document.getElementById('c50').textContent = state.powers.p50;
+  document.getElementById('chint').textContent = state.powers.hint;
+  document.getElementById('cskip').textContent = state.powers.skip;
+  document.getElementById('p50').disabled = state.powers.p50 <= 0;
+  document.getElementById('phint').disabled = state.powers.hint <= 0;
+  document.getElementById('pskip').disabled = state.powers.skip <= 0;
+}
+
+function startGame(){
+  ensureAudio();
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('gameHud').classList.add('active');
+  state.questions = shuffle(BANK_SOAL).slice(0, TOTAL_Q);
+  state.currentIndex = 0; state.answers = [];
+  state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.timeLeft = TIME_LIMIT; state.started = true; state.finished = false;
+  state.powers = { p50:1, hint:1, skip:1 };
+  updateHpHud(); updateXpHud(); updateComboHud(); updatePowers();
+  showToast('🐉', 'Arena Level 20 Dimulai!', 'Kuasai Majapahit & Warisan Budaya Hindu-Buddha!', '');
+  sfxClick();
+  startTimer();
+  renderQuestion();
+}
+
+function startTimer(){
+  if (state.timer) clearInterval(state.timer);
+  state.timer = setInterval(() => {
+    state.timeLeft--;
+    updateTimerHud();
+    if (state.timeLeft <= 0){ clearInterval(state.timer); finishGame(true); }
+  }, 1000);
+  updateTimerHud();
+}
+function updateTimerHud(){
+  const m = Math.floor(state.timeLeft / 60), s = state.timeLeft % 60;
+  document.getElementById('hudTimerVal').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  const el = document.getElementById('hudTimer');
+  if (state.timeLeft <= 120) el.classList.add('warning'); else el.classList.remove('warning');
+}
+
+function renderQuestion(){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  document.getElementById('qNumLabel').textContent = 'Soal ' + (state.currentIndex+1);
+  document.getElementById('qTopicText').textContent = q.topic || 'Majapahit';
+  document.getElementById('qText').innerHTML = q.question;
+  document.getElementById('hudQNum').textContent = state.currentIndex+1;
+  const opts = document.getElementById('options'); opts.innerHTML = '';
+  q.options.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.dataset.letter = o.letter;
+    btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
+    btn.addEventListener('click', () => selectOption(o.letter, btn));
+    opts.appendChild(btn);
+  });
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('btnNext').disabled = true;
+  document.getElementById('btnNext').style.display = '';
+  document.getElementById('btnFinish').style.display = 'none';
+  document.getElementById('qCard').classList.remove('shake');
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'qEnter .55s cubic-bezier(.16,1,.3,1)';
+  if (state.currentIndex === TOTAL_Q - 1){
+    document.getElementById('btnNext').style.display = 'none';
+    document.getElementById('btnFinish').style.display = '';
+  }
+}
+
+function selectOption(letter, btnEl){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  const selected = q.options.find(o => o.letter === letter);
+  if (!selected) return;
+  const correct = selected.correct;
+  document.querySelectorAll('#options .opt').forEach(b => {
+    b.classList.add('locked');
+    const o = q.options.find(x => x.letter === b.dataset.letter);
+    if (o.correct) b.classList.add('correct');
+    else if (b.dataset.letter === letter && !correct) b.classList.add('wrong');
+  });
+  state.answers.push({ qid: q.id, selected: letter, correct, skipped: false,
+    questionText: q.question, topic: q.topic,
+    correctLetter: q.options.find(o => o.correct).letter,
+    explanation: selected.explanation });
+  if (correct){
+    state.combo++;
+    if (state.combo > state.bestCombo) state.bestCombo = state.combo;
+    const bonus = Math.max(0, state.combo - 1) * 5;
+    const gained = (q.points || 50) + bonus;
+    state.score += gained; state.xp += gained;
+    const prevLevel = state.level;
+    state.level = Math.floor(state.xp / 100) + 1;
+    if (state.level > prevLevel){
+      sfxLevelUp();
+      showToast('⭐', 'LEVEL UP!', `Kamu naik ke Level ${state.level}!`, 'cyan');
+      fireConfetti(40);
+    }
+    sfxCorrect();
+    fireConfetti(state.combo >= 3 ? 80 : 45);
+    const rect = btnEl ? btnEl.getBoundingClientRect() : null;
+    scorePopup('+' + gained + ' XP', rect ? rect.left + rect.width/2 : window.innerWidth/2, rect ? rect.top : window.innerHeight/2, '#C4B5FD');
+    if (state.combo >= 3) showToast('🔥', `COMBO ×${state.combo}!`, `Bonus +${bonus} XP!`, '');
+  } else {
+    state.combo = 0; state.hp--; sfxWrong();
+    updateHpHud();
+    const hpEls = document.querySelectorAll('.hud-hp .heart');
+    if (hpEls[state.hp]) hpEls[state.hp].classList.add('losing');
+    const card = document.getElementById('qCard');
+    card.classList.add('shake'); setTimeout(() => card.classList.remove('shake'), 550);
+    if (state.hp <= 0) showToast('💔', 'Nyawa Habis!', 'Kamu kehilangan semua nyawa.', 'violet');
+  }
+  document.getElementById('hudScore').textContent = state.score;
+  updateXpHud(); updateComboHud();
+  showFeedback(correct, q, selected);
+  document.getElementById('btnNext').disabled = false;
+}
+
+function showFeedback(correct, q, selected){
+  const panel = document.getElementById('feedback');
+  const icon = document.getElementById('fbIcon');
+  const title = document.getElementById('fbTitle');
+  const body = document.getElementById('fbBody');
+  panel.classList.add('show');
+  if (correct){
+    icon.className = 'fb-icon correct'; icon.innerHTML = '<i class="fas fa-check"></i>';
+    title.className = 'fb-title correct'; title.textContent = 'BENAR!';
+  } else {
+    icon.className = 'fb-icon wrong'; icon.innerHTML = '<i class="fas fa-times"></i>';
+    title.className = 'fb-title wrong'; title.textContent = 'BELUM TEPAT';
+  }
+  const correctOpt = q.options.find(o => o.correct);
+  let html = `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
+  html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
+  if (!correct && selected) html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
+  html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
+  body.innerHTML = html;
+}
+
+function nextQuestion(){
+  if (state.currentIndex < TOTAL_Q - 1){
+    state.currentIndex++;
+    renderQuestion();
+    document.getElementById('qCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+function usePower(type){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  if (type === '50'){
+    if (state.powers.p50 <= 0) return;
+    const wrongs = q.options.filter(o => !o.correct);
+    const remove = shuffle(wrongs).slice(0, 2);
+    document.querySelectorAll('#options .opt').forEach(b => {
+      if (remove.some(o => o.letter === b.dataset.letter)) b.classList.add('disabled-50');
+    });
+    state.powers.p50 = 0; updatePowers(); sfxPower();
+    showToast('✂️', '50:50 Aktif!', 'Dua jawaban salah dihilangkan.', 'cyan');
+  } else if (type === 'hint'){
+    if (state.powers.hint <= 0) return;
+    const panel = document.getElementById('feedback');
+    const icon = document.getElementById('fbIcon');
+    const title = document.getElementById('fbTitle');
+    const body = document.getElementById('fbBody');
+    panel.classList.add('show');
+    icon.className = 'fb-icon info'; icon.innerHTML = '<i class="fas fa-lightbulb"></i>';
+    title.className = 'fb-title info'; title.textContent = 'PETUNJUK';
+    body.innerHTML = `<p>${q.hint || 'Tidak ada petunjuk.'}</p>`;
+    state.powers.hint = 0; updatePowers(); sfxPower();
+    showToast('💡', 'Petunjuk Digunakan!', 'Perhatikan dengan saksama.', '');
+  } else if (type === 'skip'){
+    if (state.powers.skip <= 0) return;
+    state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+      questionText: q.question, topic: q.topic,
+      correctLetter: q.options.find(o => o.correct).letter,
+      explanation: q.options.find(o => o.correct).explanation });
+    document.querySelectorAll('#options .opt').forEach(b => {
+      b.classList.add('locked');
+      const o = q.options.find(x => x.letter === b.dataset.letter);
+      if (o.correct) b.classList.add('correct');
+    });
+    showFeedback(false, q, null);
+    document.getElementById('btnNext').disabled = false;
+    state.powers.skip = 0; updatePowers(); sfxPower();
+    showToast('⏭️', 'Soal Dilewati', 'Jawaban benar ditampilkan.', 'violet');
+    if (state.currentIndex === TOTAL_Q - 1){
+      document.getElementById('btnNext').style.display = 'none';
+      document.getElementById('btnFinish').style.display = '';
+    }
+  }
+}
+
+function finishGame(timeout){
+  if (state.finished) return;
+  state.finished = true;
+  clearInterval(state.timer); state.timer = null;
+  const answered = state.answers.map(a => a.qid);
+  state.questions.forEach(q => {
+    if (!answered.includes(q.id)){
+      state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+        questionText: q.question, topic: q.topic,
+        correctLetter: q.options.find(o => o.correct).letter,
+        explanation: q.options.find(o => o.correct).explanation });
+    }
+  });
+  let benar = 0, salah = 0;
+  state.answers.forEach(a => { if (a.skipped) return; if (a.correct) benar++; else salah++; });
+  const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
+  const finalScore = Math.round((state.score / maxScore) * 100);
+  const grade = finalScore >= 90 ? 'A' : finalScore >= 80 ? 'B' : finalScore >= 70 ? 'C' : finalScore >= 60 ? 'D' : 'E';
+  const gradeLabel = finalScore >= 90 ? 'Sangat Baik' : finalScore >= 80 ? 'Baik' : finalScore >= 70 ? 'Cukup' : finalScore >= 60 ? 'Perlu Bimbingan' : 'Remedial';
+  const rank = finalScore >= 90 ? 'MAHA PATIH MAJAPAHIT' : finalScore >= 80 ? 'PENELITI SEJARAH' : finalScore >= 70 ? 'PELAJAR SEJARAH' : 'PEMULA';
+  const trophy = finalScore >= 90 ? '🏆' : finalScore >= 80 ? '🥇' : finalScore >= 70 ? '🥈' : finalScore >= 60 ? '🥉' : '📚';
+  const title = finalScore >= 90 ? 'Luar Biasa!' : finalScore >= 80 ? 'Kerja Bagus!' : finalScore >= 70 ? 'Terus Belajar!' : 'Jangan Menyerah!';
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('resultScreen').classList.add('active');
+  document.getElementById('rTrophy').textContent = trophy;
+  document.getElementById('rTitle').textContent = title;
+  document.getElementById('rSub').textContent = 'Kuis 20 · Majapahit, Sunda, Sistem Pemerintahan & Warisan Budaya';
+  document.getElementById('gradeLetter').textContent = grade;
+  document.getElementById('gradeLabel').textContent = gradeLabel;
+  document.getElementById('rRank').textContent = rank;
+  document.getElementById('rXp').textContent = state.xp;
+  document.getElementById('rBestCombo').textContent = state.bestCombo;
+  document.getElementById('rBenar').textContent = benar;
+  document.getElementById('rSalah').textContent = salah;
+  document.getElementById('rSkor').textContent = finalScore;
+  document.getElementById('rXpTotal').textContent = state.xp;
+  document.getElementById('gradeRing').style.setProperty('--grade-deg', (finalScore/100*360) + 'deg');
+  document.getElementById('rMsg').textContent = finalScore >= 70
+    ? '🎯 Luar biasa! Kamu telah menuntaskan seluruh rangkaian Kuis 16–20 tentang Kerajaan Hindu-Buddha. Lanjutkan ke materi Kerajaan Islam!'
+    : '📚 Pelajari kembali materi Majapahit, Sunda, Sistem Pemerintahan & Warisan Budaya, lalu coba lagi!';
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  state.answers.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
+                   a.correct ? '<span class="ri-status correct">Benar</span>' :
+                   '<span class="ri-status wrong">Salah</span>';
+    const q = a.questionText.length > 80 ? a.questionText.substring(0, 80) + '...' : a.questionText;
+    div.innerHTML = `<span class="ri-num">${i+1}.</span><span class="ri-text">${q}</span>${status}`;
+    reviewList.appendChild(div);
+  });
+  sfxFinish();
+  if (finalScore >= 70){
+    fireConfetti(180);
+    setTimeout(() => fireConfetti(120), 400);
+    setTimeout(() => showToast('🏆', 'Achievement Unlocked!', rank, ''), 500);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetGame(){
+  clearInterval(state.timer); state.timer = null;
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('startScreen').style.display = 'flex';
+  state.answers = []; state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.currentIndex = 0; state.finished = false; state.started = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('keydown', e => {
+  if (!state.started || state.finished) return;
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea') return;
+  if (['a','A','1'].includes(e.key)) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
+  else if (['b','B','2'].includes(e.key)) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
+  else if (['c','C','3'].includes(e.key)) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
+  else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
+  else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
+  else if (e.key === 'ArrowRight' || e.key === 'Enter'){
+    if (!document.getElementById('btnNext').disabled) nextQuestion();
+  }
+});
+</script>
+
+</body>
+</html>
