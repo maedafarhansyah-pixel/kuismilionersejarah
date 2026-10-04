@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+<meta name="theme-color" content="#05060f" />
+<title>🎮 Kuis 7 · Teknik Wawancara &amp; Sumber Sejarah — Premium Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+:root{
+  --font-display:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'Space Grotesk',ui-monospace,monospace;
+  --primary:#10B981;--primary-light:#6EE7B7;--primary-dark:#047857;
+  --accent:#2DD4BF;--accent-light:#5EEAD4;--accent-dark:#0F766E;
+  --emerald:#34D399;--violet:#8B83FF;--rose:#FB7185;--sky:#38BDF8;--gold:#E3B96B;
+  --bg:#05060f;--bg-2:#0b0d1c;
+  --glass:rgba(255,255,255,0.045);
+  --glass-strong:rgba(255,255,255,0.08);
+  --glass-border:rgba(255,255,255,0.10);
+  --text:#f7f5ff;--text-dim:#a8a8c0;--text-mute:#6b6b85;
+  --radius:24px;--radius-md:18px;--radius-sm:14px;--radius-xs:10px;
+  --shadow-card:0 24px 60px rgba(0,0,0,.55);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-display);background:var(--bg);color:var(--text);line-height:1.65;
+  overflow-x:hidden;min-height:100vh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+::selection{background:var(--primary);color:#05060f}
+
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%,rgba(16,185,129,.18),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 100%,rgba(45,212,191,.14),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 50%,rgba(110,231,183,.08),transparent 65%);
+  animation:bgShift 20s ease-in-out infinite alternate}
+@keyframes bgShift{0%{transform:scale(1) rotate(0deg);filter:hue-rotate(0deg)}100%{transform:scale(1.1) rotate(-3deg);filter:hue-rotate(10deg)}}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25;
+  background-image:
+    linear-gradient(rgba(16,185,129,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(16,185,129,.06) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%)}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
+#confettiCanvas{position:fixed;inset:0;z-index:9998;pointer-events:none}
+
+#loader{position:fixed;inset:0;z-index:99999;
+  background:radial-gradient(ellipse at center,#0b0d1c 0%,#05060f 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:20px;text-align:center;transition:opacity .8s ease,visibility .8s ease}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-orb{width:120px;height:120px;position:relative;display:grid;place-items:center}
+.loader-orb::before,.loader-orb::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent}
+.loader-orb::before{border-top-color:var(--primary);border-right-color:var(--primary-light);animation:spin 2s linear infinite;filter:drop-shadow(0 0 20px rgba(16,185,129,.6))}
+.loader-orb::after{inset:14px;border-bottom-color:var(--accent);border-left-color:var(--sky);animation:spin 1.6s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-core{width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 40px rgba(16,185,129,.7),inset 0 0 20px rgba(255,255,255,.25);
+  display:grid;place-items:center;font-size:1.5rem;color:#fff;
+  animation:pulseCore 2s ease-in-out infinite}
+@keyframes pulseCore{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.loader-title{font-family:var(--font-display);font-weight:900;font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:3px;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary),var(--accent));
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.loader-sub{font-size:.85rem;color:var(--text-dim);font-weight:500;letter-spacing:1px}
+.loader-bar{width:min(300px,70vw);height:4px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+.loader-bar span{display:block;height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 20px rgba(16,185,129,.6);transition:width .3s ease}
+.loader-pct{font-family:var(--font-mono);font-size:.72rem;font-weight:700;color:var(--text-mute);letter-spacing:2px}
+
+.game-header{position:fixed;top:0;left:0;right:0;height:60px;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:10px;
+  background:rgba(5,6,15,.72);backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border-bottom:1px solid var(--glass-border)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:.9rem;color:var(--text)}
+.brand-logo{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:.9rem;
+  box-shadow:0 0 22px rgba(16,185,129,.5);animation:logoPulse 3s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 22px rgba(16,185,129,.5)}50%{box-shadow:0 0 32px rgba(16,185,129,.8)}}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .t1{font-size:.62rem;color:var(--text-mute);letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+.brand-text .t2{font-size:.92rem;font-weight:800;color:var(--text)}
+.header-actions{display:flex;gap:6px}
+.icon-btn{width:36px;height:36px;border-radius:11px;border:1px solid var(--glass-border);
+  background:var(--glass);color:var(--text-dim);display:grid;place-items:center;cursor:pointer;
+  font-size:.85rem;transition:all .3s var(--ease-out)}
+.icon-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 0 22px rgba(16,185,129,.6);transform:translateY(-2px)}
+
+.wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;
+  padding:calc(60px + 20px) 16px 60px;min-height:100vh}
+
+.start-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:calc(100vh - 100px);text-align:center;gap:18px;padding:20px 0}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:40px;
+  background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(45,212,191,.10));
+  border:1px solid rgba(16,185,129,.30);font-size:.7rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary-light);box-shadow:0 0 30px rgba(16,185,129,.20);
+  animation:badgeFloat 3s ease-in-out infinite}
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-title{font-family:var(--font-display);font-size:clamp(2rem,7vw,3.4rem);
+  font-weight:900;line-height:1.05;letter-spacing:-1.5px;
+  background:linear-gradient(135deg,#fff 0%,var(--primary-light) 40%,var(--primary) 70%,var(--accent) 100%);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 8px 30px rgba(16,185,129,.3))}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text-dim);max-width:580px;line-height:1.75}
+.hero-sub strong{color:var(--primary-light);font-weight:700}
+
+.stats-showcase{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+.stat-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;
+  background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(10px);
+  font-size:.8rem;color:var(--text-dim);font-weight:600;transition:all .3s var(--ease-out)}
+.stat-pill:hover{transform:translateY(-3px);border-color:rgba(16,185,129,.4);box-shadow:0 8px 24px rgba(16,185,129,.15)}
+.stat-pill i{font-size:.95rem}
+
+.rules-card{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:22px 24px;
+  max-width:520px;width:100%;text-align:left;margin-top:6px;backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.rules-card h4{font-size:.85rem;font-weight:800;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.rules-card ul{list-style:none;display:grid;gap:10px}
+.rules-card li{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-dim);line-height:1.6}
+.rule-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+  border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 4px 14px rgba(16,185,129,.4)}
+
+.btn-play{position:relative;display:inline-flex;align-items:center;gap:14px;
+  padding:18px 54px;border-radius:60px;border:none;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;font-family:var(--font-display);font-weight:900;font-size:1.05rem;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;overflow:hidden;
+  box-shadow:0 12px 40px rgba(16,185,129,.45),inset 0 -3px 0 rgba(0,0,0,.2);
+  transition:all .4s var(--ease-spring);margin-top:14px}
+.btn-play::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.35),transparent 70%);
+  transform:translateX(-100%);transition:transform .8s ease}
+.btn-play:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 20px 60px rgba(16,185,129,.65)}
+.btn-play:hover::before{transform:translateX(100%)}
+.btn-play:active{transform:translateY(-1px) scale(.98)}
+
+.game-hud{display:none;flex-direction:column;gap:14px;animation:fadeSlideIn .5s var(--ease-out)}
+.game-hud.active{display:flex}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.hud-top{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+  padding:14px 18px;border-radius:var(--radius-md);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.hud-hp{display:flex;align-items:center;gap:4px}
+.hud-hp .heart{font-size:1.15rem;color:var(--rose);
+  filter:drop-shadow(0 0 8px rgba(251,113,133,.6));transition:all .4s var(--ease-out)}
+.hud-hp .heart.empty{color:rgba(255,255,255,.10);filter:none;transform:scale(.85)}
+.hud-hp .heart.losing{animation:heartBreak .6s ease}
+@keyframes heartBreak{0%{transform:scale(1)}30%{transform:scale(1.4);color:#fff}100%{transform:scale(.85);opacity:.3}}
+.hud-xp{display:flex;flex-direction:column;gap:4px;min-width:0}
+.hud-xp-head{display:flex;justify-content:space-between;align-items:center;font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.hud-xp-head .lvl{color:var(--primary-light)}
+.hud-xp-head .val{color:var(--text-mute);font-family:var(--font-mono)}
+.xp-track{height:8px;border-radius:10px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+.xp-fill{height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 16px rgba(16,185,129,.7);transition:width .8s var(--ease-spring);position:relative}
+.xp-fill::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  animation:xpShine 2s linear infinite}
+@keyframes xpShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.hud-timer{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:40px;
+  background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.30);
+  font-family:var(--font-mono);font-weight:800;font-size:.85rem;color:var(--primary-light);
+  letter-spacing:1px;transition:all .3s ease}
+.hud-timer.warning{background:rgba(251,113,133,.15);border-color:rgba(251,113,133,.5);color:#fecdd3;animation:pulseWarn 1s ease-in-out infinite}
+@keyframes pulseWarn{0%,100%{box-shadow:0 0 0 0 rgba(251,113,133,.4)}50%{box-shadow:0 0 0 8px rgba(251,113,133,0)}}
+
+.hud-middle{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:.75rem;color:var(--text-mute);font-weight:700;padding:0 4px}
+.hud-middle .combo-tag{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:800;transition:all .3s var(--ease-spring)}
+.hud-middle .combo-tag.hot{color:var(--primary-light);animation:comboPulse .5s var(--ease-spring)}
+@keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+.q-card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:26px 26px 22px;
+  backdrop-filter:blur(20px);box-shadow:var(--shadow-card);animation:qEnter .55s var(--ease-out);overflow:hidden}
+.q-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(135deg,rgba(16,185,129,.4),transparent 40%,transparent 60%,rgba(45,212,191,.3));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+@keyframes qEnter{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.q-card.shake{animation:shake .5s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+
+.q-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:30px;
+  background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(16,185,129,.06));
+  border:1px solid rgba(16,185,129,.30);font-size:.72rem;font-weight:800;letter-spacing:1px;color:var(--primary-light)}
+.q-topic{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;
+  background:rgba(45,212,191,.10);border:1px solid rgba(45,212,191,.28);font-size:.68rem;
+  font-weight:800;letter-spacing:.8px;color:var(--accent);text-transform:uppercase}
+
+.q-text{font-size:clamp(1rem,2.2vw,1.12rem);font-weight:600;line-height:1.75;color:var(--text);
+  margin-bottom:20px;white-space:pre-line}
+.q-text strong{color:var(--primary-light);font-weight:800}
+
+.options{display:grid;gap:10px}
+.opt{position:relative;display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;
+  padding:15px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--glass-border);
+  background:rgba(255,255,255,.03);color:var(--text-dim);font-family:inherit;font-size:.92rem;
+  line-height:1.6;cursor:pointer;transition:all .3s var(--ease-out);overflow:hidden}
+.opt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(90deg,rgba(16,185,129,.15),transparent);
+  transition:width .4s var(--ease-out);z-index:0}
+.opt:hover:not(.locked){border-color:rgba(16,185,129,.55);transform:translateX(5px);
+  color:var(--text);box-shadow:0 8px 24px rgba(16,185,129,.15)}
+.opt:hover:not(.locked)::before{width:100%}
+.opt-letter{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;flex-shrink:0;background:rgba(255,255,255,.06);
+  color:var(--text-mute);font-weight:800;font-size:.85rem;transition:all .3s var(--ease-out);
+  border:1px solid rgba(255,255,255,.06)}
+.opt-text{position:relative;z-index:1;flex:1}
+.opt:hover:not(.locked) .opt-letter{background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;border-color:transparent;box-shadow:0 0 20px rgba(16,185,129,.6)}
+.opt.correct{border-color:var(--emerald);background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(52,211,153,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(52,211,153,.15),0 12px 32px rgba(52,211,153,.25);
+  animation:correctPop .5s var(--ease-spring)}
+@keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.02)}100%{transform:scale(1)}}
+.opt.correct .opt-letter{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(52,211,153,.7)}
+.opt.wrong{border-color:var(--rose);background:linear-gradient(135deg,rgba(251,113,133,.15),rgba(251,113,133,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(251,113,133,.15),0 12px 32px rgba(251,113,133,.25)}
+.opt.wrong .opt-letter{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(251,113,133,.7)}
+.opt.locked{pointer-events:none}
+.opt.disabled-50{opacity:.2;pointer-events:none;filter:grayscale(1) blur(.5px)}
+
+.feedback{display:none;padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(16px);box-shadow:var(--shadow-card);
+  animation:qEnter .5s var(--ease-out)}
+.feedback.show{display:block}
+.fb-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.fb-icon{width:48px;height:48px;border-radius:15px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;transition:all .4s var(--ease-spring)}
+.fb-icon.correct{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;box-shadow:0 0 32px rgba(52,211,153,.6)}
+.fb-icon.wrong{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;box-shadow:0 0 32px rgba(251,113,133,.6)}
+.fb-icon.info{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 0 32px rgba(16,185,129,.6)}
+.fb-title{font-size:1.05rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
+.fb-title.correct{color:var(--emerald)}
+.fb-title.wrong{color:#fecdd3}
+.fb-title.info{color:var(--primary-light)}
+.fb-body{font-size:.9rem;color:var(--text-dim);line-height:1.75}
+.fb-body strong{color:var(--text);font-weight:700}
+.fb-sec{margin-top:12px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.10)}
+.fb-label{font-size:.68rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--primary-light);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.fb-points{margin-top:12px;padding:14px 16px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(45,212,191,.10),rgba(45,212,191,.03));border-left:3px solid var(--accent)}
+.fb-points .fb-label{color:var(--accent)}
+.fb-points p{font-size:.87rem;color:var(--text-dim);line-height:1.7}
+
+.hud-bottom{display:flex;flex-direction:column;gap:12px}
+.power-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.power-btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;
+  border-radius:50px;border:1px solid var(--glass-border);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  color:var(--text-dim);font-family:inherit;font-weight:800;font-size:.78rem;letter-spacing:.5px;
+  cursor:pointer;transition:all .3s var(--ease-spring);overflow:hidden}
+.power-btn i{font-size:.9rem}
+.power-btn:hover:not(:disabled):not(.used){transform:translateY(-3px);border-color:rgba(16,185,129,.5);color:var(--text);box-shadow:0 8px 24px rgba(16,185,129,.25)}
+.power-btn:active:not(:disabled):not(.used){transform:scale(.96)}
+.power-btn .cnt{font-size:.62rem;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.10);font-weight:900;font-family:var(--font-mono)}
+.power-btn.used{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.power-btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.power-btn.p50{color:var(--accent)}
+.power-btn.phint{color:var(--primary-light)}
+.power-btn.pskip{color:var(--rose)}
+
+.action-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 30px;border-radius:50px;border:none;
+  font-family:inherit;font-weight:900;font-size:.88rem;letter-spacing:.5px;cursor:pointer;
+  transition:all .35s var(--ease-spring)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;
+  box-shadow:0 10px 32px rgba(16,185,129,.4),inset 0 -2px 0 rgba(0,0,0,.15)}
+.btn-primary:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 44px rgba(16,185,129,.6)}
+.btn-primary:active:not(:disabled){transform:scale(.96)}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--text-dim);border:1px solid var(--glass-border)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(16,185,129,.4);transform:translateY(-2px)}
+
+.result-screen{display:none;flex-direction:column;gap:16px;text-align:center;animation:fadeSlideIn .6s var(--ease-out)}
+.result-screen.active{display:flex}
+.result-hero{position:relative;padding:38px 26px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);box-shadow:var(--shadow-card);overflow:hidden}
+.result-hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center top,rgba(16,185,129,.20),transparent 60%);pointer-events:none}
+.result-trophy{font-size:4rem;line-height:1;margin-bottom:8px;
+  filter:drop-shadow(0 8px 30px rgba(16,185,129,.6));animation:trophyFloat 3s ease-in-out infinite}
+@keyframes trophyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.result-title{font-family:var(--font-display);font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:900;
+  letter-spacing:-.5px;background:linear-gradient(135deg,#fff,var(--primary-light),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.result-sub{font-size:.9rem;color:var(--text-dim);margin-bottom:6px}
+.grade-ring{position:relative;width:130px;height:130px;margin:16px auto;border-radius:50%;
+  background:conic-gradient(var(--primary) var(--grade-deg,0deg),rgba(255,255,255,.08) 0deg);
+  padding:8px;box-shadow:0 0 40px rgba(16,185,129,.4);animation:ringPop .8s var(--ease-spring)}
+@keyframes ringPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.grade-inner{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at center,#0b0d1c,#05060f);display:grid;place-items:center;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.6)}
+.grade-letter{font-size:2.6rem;font-weight:900;line-height:1;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent}
+.grade-label{font-size:.62rem;font-weight:800;letter-spacing:2px;color:var(--text-mute);text-transform:uppercase;margin-top:2px}
+.result-title-text{font-size:1.1rem;font-weight:900;color:var(--primary-light);letter-spacing:.5px;margin-top:8px;text-transform:uppercase}
+.result-xp-line{font-size:.88rem;color:var(--text-dim);margin-top:6px}
+.result-xp-line strong{color:var(--accent);font-family:var(--font-mono);font-weight:800}
+.result-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:20px 0 8px}
+.rs-box{padding:16px 10px;border-radius:var(--radius-sm);background:rgba(255,255,255,.04);
+  border:1px solid var(--glass-border);transition:all .3s var(--ease-out)}
+.rs-box:hover{transform:translateY(-3px);border-color:rgba(16,185,129,.3)}
+.rs-val{font-size:1.7rem;font-weight:900;line-height:1.1;font-family:var(--font-mono)}
+.rs-val.green{color:var(--emerald);text-shadow:0 0 20px rgba(52,211,153,.5)}
+.rs-val.red{color:#fecdd3;text-shadow:0 0 20px rgba(251,113,133,.5)}
+.rs-val.cyan{color:var(--accent);text-shadow:0 0 20px rgba(45,212,191,.5)}
+.rs-val.violet{color:var(--primary-light);text-shadow:0 0 20px rgba(110,231,183,.5)}
+.rs-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.5px;color:var(--text-mute);text-transform:uppercase;margin-top:6px}
+.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:14px 18px;border-radius:12px;
+  background:rgba(16,185,129,.06);border-left:3px solid var(--primary);margin-top:6px;text-align:left}
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+
+.review-panel{padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);text-align:left}
+.review-panel h4{font-size:.9rem;font-weight:900;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.review-list{display:grid;gap:8px}
+.review-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-radius:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:.84rem;
+  line-height:1.6;transition:all .3s var(--ease-out)}
+.review-item:hover{background:rgba(255,255,255,.06);transform:translateX(3px)}
+.review-item .ri-num{font-weight:900;color:var(--text-mute);flex-shrink:0;font-family:var(--font-mono);font-size:.78rem;min-width:26px}
+.review-item .ri-text{flex:1;color:var(--text-dim)}
+.review-item .ri-status{font-size:.68rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:20px;flex-shrink:0}
+.ri-status.correct{background:rgba(52,211,153,.15);color:#6ee7b7}
+.ri-status.wrong{background:rgba(251,113,133,.15);color:#fecdd3}
+.ri-status.skipped{background:rgba(255,255,255,.06);color:var(--text-mute)}
+
+.toast-wrap{position:fixed;top:74px;right:16px;z-index:9999;display:flex;flex-direction:column;
+  gap:10px;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast{display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(11,13,28,.95),rgba(5,6,15,.95));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);
+  box-shadow:0 16px 40px rgba(0,0,0,.6),0 0 0 1px rgba(16,185,129,.15);
+  pointer-events:auto;animation:toastIn .5s var(--ease-spring);max-width:340px}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast.out{animation:toastOut .4s ease forwards}
+@keyframes toastOut{to{transform:translateX(120%);opacity:0}}
+.toast-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 24px rgba(16,185,129,.6)}
+.toast-icon.green{background:linear-gradient(135deg,var(--emerald),#059669);box-shadow:0 0 24px rgba(52,211,153,.6)}
+.toast-icon.cyan{background:linear-gradient(135deg,var(--accent),var(--accent-dark));box-shadow:0 0 24px rgba(45,212,191,.6)}
+.toast-icon.violet{background:linear-gradient(135deg,var(--violet),#6C63FF);box-shadow:0 0 24px rgba(139,131,255,.6)}
+.toast-content{flex:1;min-width:0}
+.toast-title{font-size:.85rem;font-weight:900;color:var(--text);letter-spacing:.3px}
+.toast-desc{font-size:.75rem;color:var(--text-dim);line-height:1.5;margin-top:2px}
+
+.score-pop{position:fixed;z-index:9997;pointer-events:none;font-family:var(--font-display);
+  font-weight:900;font-size:1.6rem;color:var(--primary-light);text-shadow:0 0 20px rgba(16,185,129,.8);
+  animation:scorePop 1s var(--ease-out) forwards}
+@keyframes scorePop{0%{transform:translate(-50%,0) scale(.5);opacity:0}
+  20%{transform:translate(-50%,-20px) scale(1.2);opacity:1}
+  100%{transform:translate(-50%,-80px) scale(1);opacity:0}}
+
+@media (max-width:600px){
+  .wrap{padding:calc(60px + 14px) 12px 50px}
+  .q-card{padding:20px 18px}
+  .opt{padding:13px 14px;font-size:.87rem;gap:11px}
+  .opt-letter{width:30px;height:30px;font-size:.78rem}
+  .hud-top{padding:12px 14px;gap:8px}
+  .hud-timer{padding:6px 11px;font-size:.78rem}
+  .hud-hp .heart{font-size:1rem}
+  .power-btn{padding:9px 14px;font-size:.72rem}
+  .btn{padding:12px 22px;font-size:.82rem;width:100%;justify-content:center}
+  .action-bar{flex-direction:column}
+  .result-hero{padding:28px 18px}
+  .grade-ring{width:110px;height:110px}
+  .grade-letter{font-size:2.2rem}
+  .rs-val{font-size:1.4rem}
+  .toast{max-width:calc(100vw - 24px);padding:12px 14px}
+  .toast-icon{width:36px;height:36px;font-size:1rem}
+}
+@media print{
+  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap{display:none!important}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+<canvas id="particles"></canvas>
+<canvas id="confettiCanvas"></canvas>
+
+<div id="loader">
+  <div class="loader-orb">
+    <div class="loader-core"><i class="fas fa-microphone"></i></div>
+  </div>
+  <div class="loader-title">HISTOEXPLORER</div>
+  <div class="loader-sub">Kuis 7 · Teknik Wawancara &amp; Sumber Sejarah</div>
+  <div class="loader-bar"><span id="loaderBar"></span></div>
+  <div class="loader-pct" id="loaderPct">0%</div>
+</div>
+
+<header class="game-header">
+  <div class="brand">
+    <div class="brand-logo"><i class="fas fa-microphone"></i></div>
+    <div class="brand-text">
+      <span class="t1">KUIS 7 · PENELITIAN SEJARAH</span>
+      <span class="t2">Wawancara &amp; Sumber Sejarah</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="Suara"><i class="fas fa-volume-up"></i></button>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema"><i class="fas fa-sun"></i></button>
+  </div>
+</header>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<main class="wrap">
+
+  <section class="start-screen" id="startScreen">
+    <span class="hero-badge"><i class="fas fa-crown"></i> PREMIUM GAME MODE · LEVEL 7</span>
+    <h1 class="hero-title">Teknik Wawancara<br>&amp; Sumber Sejarah</h1>
+    <p class="hero-sub">
+      Kuasai <strong>teknik wawancara sejarah</strong>, <strong>etika narasumber</strong>, <strong>transkrip</strong>, serta <strong>perbedaan sumber primer vs sekunder</strong> dan 4 bentuk sumber sejarah. Jadilah pewawancara profesional!
+    </p>
+
+    <div class="stats-showcase">
+      <span class="stat-pill" style="color:#6EE7B7"><i class="fas fa-question-circle"></i> 15 Soal Acak</span>
+      <span class="stat-pill" style="color:#2DD4BF"><i class="fas fa-stopwatch"></i> 20 Menit</span>
+      <span class="stat-pill" style="color:#FB7185"><i class="fas fa-heart"></i> 3 Nyawa</span>
+      <span class="stat-pill" style="color:#34D399"><i class="fas fa-bolt"></i> Combo &amp; XP</span>
+    </div>
+
+    <div class="rules-card">
+      <h4><i class="fas fa-list-check"></i> Cara Bermain</h4>
+      <ul>
+        <li><span class="rule-num">1</span> Jawab 15 soal HOTS dari bank 40 soal — dipilih acak setiap sesi.</li>
+        <li><span class="rule-num">2</span> Jawaban benar memberi <strong>XP</strong> + memicu <strong>combo</strong>. Salah mengurangi <strong>1 nyawa</strong>.</li>
+        <li><span class="rule-num">3</span> Power-up: <strong>50:50</strong>, <strong>Petunjuk</strong>, <strong>Lewati</strong> (masing-masing 1×).</li>
+        <li><span class="rule-num">4</span> Raih <strong>Achievement</strong> dan taklukkan peringkat <strong>Wartawan Sejarah</strong>!</li>
+      </ul>
+    </div>
+
+    <button class="btn-play" onclick="startGame()">
+      <i class="fas fa-play"></i> Mulai Bermain
+    </button>
+  </section>
+
+  <section class="game-hud" id="gameHud">
+    <div class="hud-top">
+      <div class="hud-hp" id="hudHp"></div>
+      <div class="hud-xp">
+        <div class="hud-xp-head">
+          <span class="lvl">LV <span id="hudLevel">1</span></span>
+          <span class="val"><span id="hudXp">0</span> / <span id="hudXpMax">100</span> XP</span>
+        </div>
+        <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
+      </div>
+      <div class="hud-timer" id="hudTimer">
+        <i class="fas fa-stopwatch"></i> <span id="hudTimerVal">20:00</span>
+      </div>
+    </div>
+
+    <div class="hud-middle">
+      <span><i class="fas fa-question-circle" style="color:var(--primary)"></i> Soal <strong id="hudQNum">1</strong>/<strong>15</strong></span>
+      <span class="combo-tag" id="comboTag"><i class="fas fa-fire"></i> Combo ×<span id="comboVal">0</span></span>
+      <span><i class="fas fa-star" style="color:var(--accent)"></i> Skor <strong id="hudScore" style="font-family:var(--font-mono)">0</strong></span>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-meta">
+        <span class="q-num"><i class="fas fa-bookmark"></i> <span id="qNumLabel">Soal 1</span></span>
+        <span class="q-topic" id="qTopic"><i class="fas fa-tag"></i> <span id="qTopicText">Pertanyaan Wawancara</span></span>
+      </div>
+      <div class="q-text" id="qText">Memuat soal...</div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <div class="feedback" id="feedback">
+      <div class="fb-head">
+        <div class="fb-icon" id="fbIcon"><i class="fas fa-check"></i></div>
+        <div class="fb-title" id="fbTitle">BENAR!</div>
+      </div>
+      <div class="fb-body" id="fbBody"></div>
+    </div>
+
+    <div class="hud-bottom">
+      <div class="power-bar">
+        <button class="power-btn p50" id="p50" onclick="usePower('50')">
+          <i class="fas fa-compress-alt"></i> 50:50 <span class="cnt" id="c50">1</span>
+        </button>
+        <button class="power-btn phint" id="phint" onclick="usePower('hint')">
+          <i class="fas fa-lightbulb"></i> Petunjuk <span class="cnt" id="chint">1</span>
+        </button>
+        <button class="power-btn pskip" id="pskip" onclick="usePower('skip')">
+          <i class="fas fa-forward"></i> Lewati <span class="cnt" id="cskip">1</span>
+        </button>
+      </div>
+      <div class="action-bar">
+        <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>
+          Selanjutnya <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="btn btn-primary" id="btnFinish" onclick="finishGame()" style="display:none">
+          Lihat Hasil <i class="fas fa-flag-checkered"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="result-screen" id="resultScreen">
+    <div class="result-hero">
+      <div class="result-trophy" id="rTrophy">🏆</div>
+      <h2 class="result-title" id="rTitle">Luar Biasa!</h2>
+      <p class="result-sub" id="rSub">Kuis 7 · Teknik Wawancara &amp; Sumber Sejarah</p>
+      <div class="grade-ring" id="gradeRing">
+        <div class="grade-inner">
+          <div class="grade-letter" id="gradeLetter">A</div>
+          <div class="grade-label" id="gradeLabel">Sangat Baik</div>
+        </div>
+      </div>
+      <div class="result-title-text" id="rRank">WARTAWAN SEJARAH</div>
+      <div class="result-xp-line">Total XP: <strong id="rXp">0</strong> · Best Combo: <strong id="rBestCombo">0</strong></div>
+      <div class="result-stats">
+        <div class="rs-box"><div class="rs-val green" id="rBenar">0</div><div class="rs-lbl">Benar</div></div>
+        <div class="rs-box"><div class="rs-val red" id="rSalah">0</div><div class="rs-lbl">Salah</div></div>
+        <div class="rs-box"><div class="rs-val cyan" id="rSkor">0</div><div class="rs-lbl">Skor</div></div>
+        <div class="rs-box"><div class="rs-val violet" id="rXpTotal">0</div><div class="rs-lbl">XP Total</div></div>
+      </div>
+      <div class="result-msg" id="rMsg"></div>
+      <div class="result-actions">
+        <button class="btn btn-primary" onclick="resetGame()"><i class="fas fa-redo"></i> Main Lagi</button>
+        <button class="btn btn-ghost" onclick="window.location.reload()"><i class="fas fa-home"></i> Menu Awal</button>
+      </div>
+    </div>
+    <div class="review-panel">
+      <h4><i class="fas fa-list-check"></i> Rincian Jawaban</h4>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ============================================================
+   BANK SOAL — 40 SOAL HOTS · KUIS 7
+   Fokus: Teknik Wawancara Sejarah, Etika, Transkrip,
+          Sumber Primer vs Sekunder, 4 Bentuk Sumber
+   ============================================================ */
+const BANK_SOAL = [
+  /* ===== PENYUSUNAN PERTANYAAN (8 soal) ===== */
+  { id:701, topic:"Pertanyaan Wawancara",
+    question:"Perbedaan paling mendasar antara pertanyaan <strong>terbuka</strong> dan <strong>tertutup</strong> dalam wawancara sejarah adalah...",
+    options:[
+      {letter:"A",text:"Pertanyaan terbuka untuk orang tua; tertutup untuk anak muda.",correct:false,explanation:"Bukan berdasarkan usia."},
+      {letter:"B",text:"Pertanyaan terbuka mengundang narasi panjang; tertutup hanya jawaban ya/tidak atau singkat.",correct:true,explanation:"Tepat! Terbuka = narasi; tertutup = singkat."},
+      {letter:"C",text:"Pertanyaan terbuka selalu salah; tertutup selalu benar.",correct:false,explanation:"Keduanya punya peran berbeda."},
+      {letter:"D",text:"Pertanyaan terbuka untuk sekolah; tertutup untuk museum.",correct:false,explanation:"Bukan berdasarkan lokasi."},
+      {letter:"E",text:"Keduanya sama saja.",correct:false,explanation:"Ada perbedaan mendasar."}
+    ], difficulty:"easy", hint:"Terbuka = narasi; tertutup = ya/tidak.", points:50 },
+
+  { id:702, topic:"Pertanyaan Wawancara",
+    question:"Seorang siswa ingin mewawancarai kakeknya tentang masa kecil. Pertanyaan pembuka yang PALING TEPAT adalah...",
+    options:[
+      {letter:"A",text:"'Apakah kakek pernah bohong waktu kecil?'",correct:false,explanation:"Terlalu sensitif untuk pembuka."},
+      {letter:"B",text:"'Bagaimana cerita masa kecil kakek dulu?'",correct:true,explanation:"Tepat! Pertanyaan terbuka & ringan sebagai pembuka."},
+      {letter:"C",text:"'Kakek lahir tahun berapa?'",correct:false,explanation:"Bisa jadi pertanyaan lanjutan, bukan pembuka."},
+      {letter:"D",text:"'Mengapa kakek tidak kuliah?'",correct:false,explanation:"Bisa sensitif untuk pembuka."},
+      {letter:"E",text:"'Apakah kakek pernah menyesal?'",correct:false,explanation:"Terlalu personal untuk pembuka."}
+    ], difficulty:"medium", hint:"Pembuka = ringan, terbuka, mengundang cerita.", points:60 },
+
+  { id:703, topic:"Pertanyaan Wawancara",
+    question:"Perhatikan urutan pertanyaan wawancara berikut!\n\n'Mulai dengan pertanyaan ringan (perkenalan), baru masuk ke pertanyaan inti.'\n\nAlasan utama menerapkan strategi tersebut adalah...",
+    options:[
+      {letter:"A",text:"Agar wawancara cepat selesai.",correct:false,explanation:"Bukan soal kecepatan."},
+      {letter:"B",text:"Agar narasumber merasa nyaman dan terbuka sebelum membahas hal yang lebih sensitif.",correct:true,explanation:"Tepat! Membangun kepercayaan dulu."},
+      {letter:"C",text:"Agar siswa tidak perlu belajar.",correct:false,explanation:"Bukan alasannya."},
+      {letter:"D",text:"Agar pertanyaan inti tidak perlu diajukan.",correct:false,explanation:"Justru pertanyaan inti tetap diajukan."},
+      {letter:"E",text:"Agar narasumber tidak bisa berbohong.",correct:false,explanation:"Bukan jaminan."}
+    ], difficulty:"medium", hint:"Bangun kepercayaan dulu sebelum pertanyaan sensitif.", points:60 },
+
+  { id:704, topic:"Pertanyaan Wawancara",
+    question:"Seorang siswa telah bertanya: 'Bagaimana kondisi kampung dulu?' Narasumber menjawab singkat. Pertanyaan lanjutan yang paling tepat adalah...",
+    options:[
+      {letter:"A",text:"'Apakah Bapak sudah tua?'",correct:false,explanation:"Tidak relevan & tidak sopan."},
+      {letter:"B",text:"'Bisa diceritakan lebih detail tentang kondisi kampung saat itu?'",correct:true,explanation:"Tepat! Pertanyaan lanjutan yang menggali detail."},
+      {letter:"C",text:"'Ya sudah, cukup.'",correct:false,explanation:"Menutup wawancara, bukan lanjutan."},
+      {letter:"D",text:"'Apakah Bapak yakin?'",correct:false,explanation:"Menyinggung & tidak membangun."},
+      {letter:"E",text:"'Berapa jumlah penduduk pasti?'",correct:false,explanation:"Bisa jadi follow-up, tapi terlalu sempit."}
+    ], difficulty:"medium", hint:"Follow-up = menggali detail dari jawaban sebelumnya.", points:60 },
+
+  { id:705, topic:"Pertanyaan Wawancara",
+    question:"Seorang siswa menyusun daftar pertanyaan wawancara berikut:\n(1) 'Kapan Bapak lahir?'\n(2) 'Bagaimana cerita pernikahan Bapak?'\n(3) 'Apakah Bapak pernah melihat banjir besar?'\n\nAnalisis yang paling tepat tentang daftar pertanyaan tersebut adalah...",
+    options:[
+      {letter:"A",text:"Semua pertanyaan tepat karena mencakup latar belakang, cerita, dan peristiwa.",correct:true,explanation:"Tepat! Mencakup tiga aspek: latar, cerita, peristiwa."},
+      {letter:"B",text:"Pertanyaan (2) tidak tepat karena terlalu pribadi.",correct:false,explanation:"Pertanyaan (2) masih wajar & relevan."},
+      {letter:"C",text:"Pertanyaan (1) tidak boleh diajukan.",correct:false,explanation:"Pertanyaan (1) faktual & penting."},
+      {letter:"D",text:"Pertanyaan (3) tidak relevan.",correct:false,explanation:"Banjir besar = peristiwa sejarah."},
+      {letter:"E",text:"Semua pertanyaan salah.",correct:false,explanation:"Justru tepat."}
+    ], difficulty:"hard", hint:"Daftar pertanyaan harus mencakup latar, cerita, peristiwa.", points:70 },
+
+  { id:706, topic:"Pertanyaan Wawancara",
+    question:"Seorang siswa berpendapat: 'Semua pertanyaan wawancara harus pertanyaan terbuka agar narasumber bercerita panjang.' Bagaimana kritik yang tepat terhadap pendapat tersebut?",
+    options:[
+      {letter:"A",text:"Pendapat benar sepenuhnya.",correct:false,explanation:"Pertanyaan tertutup juga penting untuk konfirmasi data."},
+      {letter:"B",text:"Pendapat terlalu menyederhanakan: pertanyaan tertutup juga penting untuk konfirmasi data faktual & spesifik.",correct:true,explanation:"Tepat! Kedua jenis pertanyaan memiliki fungsi berbeda."},
+      {letter:"C",text:"Pendapat salah karena semua pertanyaan harus tertutup.",correct:false,explanation:"Justru sebaliknya."},
+      {letter:"D",text:"Pendapat tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."},
+      {letter:"E",text:"Pendapat salah karena wawancara tidak perlu pertanyaan.",correct:false,explanation:"Wawancara butuh pertanyaan."}
+    ], difficulty:"hard", hint:"Pertanyaan terbuka & tertutup = kombinasi ideal.", points:70 },
+
+  { id:707, topic:"Pertanyaan Wawancara",
+    question:"Contoh pertanyaan tertutup yang paling tepat digunakan untuk konfirmasi data faktual dalam wawancara sejarah adalah...",
+    options:[
+      {letter:"A",text:"'Bagaimana perasaan Bapak saat itu?'",correct:false,explanation:"Ini pertanyaan terbuka."},
+      {letter:"B",text:"'Apakah peristiwa itu terjadi pada tahun 1965?'",correct:true,explanation:"Tepat! Pertanyaan tertutup untuk konfirmasi tahun."},
+      {letter:"C",text:"'Mengapa Bapak memutuskan pindah?'",correct:false,explanation:"Ini pertanyaan terbuka."},
+      {letter:"D",text:"'Ceritakan tentang keluarga Bapak.'",correct:false,explanation:"Ini pertanyaan terbuka."},
+      {letter:"E",text:"'Apa saja tradisi di kampung Bapak?'",correct:false,explanation:"Ini pertanyaan terbuka."}
+    ], difficulty:"easy", hint:"Pertanyaan tertutup = ya/tidak atau data spesifik.", points:50 },
+
+  { id:708, topic:"Pertanyaan Wawancara",
+    question:"Mengapa penting menyusun pertanyaan wawancara <em>sebelum</em> bertemu narasumber?",
+    options:[
+      {letter:"A",text:"Agar wawancara cepat selesai.",correct:false,explanation:"Bukan tujuan utama."},
+      {letter:"B",text:"Agar pertanyaan terstruktur, tidak ada yang terlewat, & wawancara berjalan efisien.",correct:true,explanation:"Tepat! Terstruktur, lengkap, efisien."},
+      {letter:"C",text:"Agar narasumber terkesan.",correct:false,explanation:"Bukan tujuan utama."},
+      {letter:"D",text:"Agar tidak perlu mendengarkan narasumber.",correct:false,explanation:"Justru harus mendengarkan."},
+      {letter:"E",text:"Agar bisa selesai tanpa narasumber.",correct:false,explanation:"Wawancara butuh narasumber."}
+    ], difficulty:"medium", hint:"Pertanyaan terstruktur → wawancara efisien & lengkap.", points:60 },
+
+  /* ===== TEKNIK MEREKAM (6 soal) ===== */
+  { id:709, topic:"Teknik Merekam",
+    question:"Langkah pertama yang harus dilakukan sebelum merekam wawancara sejarah adalah...",
+    options:[
+      {letter:"A",text:"Langsung merekam tanpa bertanya.",correct:false,explanation:"Melanggar etika."},
+      {letter:"B",text:"Meminta izin kepada narasumber.",correct:true,explanation:"Tepat! Izin adalah langkah pertama yang wajib."},
+      {letter:"C",text:"Mematikan HP.",correct:false,explanation:"Justru HP digunakan untuk merekam."},
+      {letter:"D",text:"Menyembunyikan alat rekam.",correct:false,explanation:"Melanggar etika."},
+      {letter:"E",text:"Merekam diam-diam.",correct:false,explanation:"Melanggar etika & hukum."}
+    ], difficulty:"easy", hint:"Izin = langkah pertama wajib.", points:50 },
+
+  { id:710, topic:"Teknik Merekam",
+    question:"Mengapa seorang pewawancara perlu <strong>menguji alat rekam</strong> sebelum memulai wawancara?",
+    options:[
+      {letter:"A",text:"Agar terlihat profesional.",correct:false,explanation:"Bukan tujuan utama."},
+      {letter:"B",text:"Agar memastikan rekaman berfungsi & tidak kehilangan momen penting.",correct:true,explanation:"Tepat! Uji rekaman mencegah kehilangan data."},
+      {letter:"C",text:"Agar narasumber gugup.",correct:false,explanation:"Justru sebaliknya."},
+      {letter:"D",text:"Agar wawancara cepat selesai.",correct:false,explanation:"Bukan tujuan utama."},
+      {letter:"E",text:"Agar tidak perlu mencatat.",correct:false,explanation:"Mencatat tetap perlu."}
+    ], difficulty:"medium", hint:"Uji rekaman = mencegah kehilangan data.", points:60 },
+
+  { id:711, topic:"Teknik Merekam",
+    question:"Seorang siswa mewawancarai sesepuh kampung di pasar yang ramai. Rekaman terdengar tidak jelas karena suara bising. Analisis yang paling tepat adalah...",
+    options:[
+      {letter:"A",text:"Siswa seharusnya memilih tempat yang tenang untuk wawancara.",correct:true,explanation:"Tepat! Tempat tenang = rekaman jelas."},
+      {letter:"B",text:"Siswa seharusnya tidak usah merekam.",correct:false,explanation:"Merekam tetap penting."},
+      {letter:"C",text:"Siswa seharusnya meminta narasumber bicara lebih keras.",correct:false,explanation:"Solusi lebih baik: pindah tempat."},
+      {letter:"D",text:"Siswa seharusnya merekam dengan HP yang lebih mahal.",correct:false,explanation:"Bukan solusi utama."},
+      {letter:"E",text:"Siswa seharusnya tidak mewawancarai sesepuh.",correct:false,explanation:"Justru sesepuh penting."}
+    ], difficulty:"medium", hint:"Tempat tenang = rekaman jelas.", points:60 },
+
+  { id:712, topic:"Teknik Merekam",
+    question:"Sambil merekam wawancara, seorang pewawancara sebaiknya juga...",
+    options:[
+      {letter:"A",text:"Membaca buku.",correct:false,explanation:"Mengganggu konsentrasi."},
+      {letter:"B",text:"Mencatat poin-poin penting (nama, tanggal, tempat, angka).",correct:true,explanation:"Tepat! Catatan poin penting membantu transkrip."},
+      {letter:"C",text:"Bermain HP.",correct:false,explanation:"Mengganggu konsentrasi."},
+      {letter:"D",text:"Menelepon teman.",correct:false,explanation:"Tidak sopan."},
+      {letter:"E",text:"Tidur.",correct:false,explanation:"Tidak sopan."}
+    ], difficulty:"easy", hint:"Catat poin penting sambil mendengarkan.", points:50 },
+
+  { id:713, topic:"Teknik Merekam",
+    question:"Analisis yang paling tepat tentang pentingnya dokumentasi video (bukan hanya audio) dalam wawancara sejarah adalah...",
+    options:[
+      {letter:"A",text:"Video lebih mudah dibuat dari audio.",correct:false,explanation:"Justru lebih rumit."},
+      {letter:"B",text:"Video menangkap suara + ekspresi + bahasa tubuh + konteks visual yang tidak terekam audio.",correct:true,explanation:"Tepat! Video = audio + visual + konteks."},
+      {letter:"C",text:"Video tidak berguna untuk sejarah.",correct:false,explanation:"Justru sangat berguna."},
+      {letter:"D",text:"Video hanya untuk hiburan.",correct:false,explanation:"Bukan hiburan semata."},
+      {letter:"E",text:"Video menggantikan transkrip.",correct:false,explanation:"Transkrip tetap diperlukan."}
+    ], difficulty:"medium", hint:"Video = audio + visual + konteks.", points:60 },
+
+  { id:714, topic:"Teknik Merekam",
+    question:"Seorang siswa berpendapat: 'Kalau sudah merekam, tidak perlu mencatat.' Bagaimana kritik yang tepat terhadap pendapat tersebut?",
+    options:[
+      {letter:"A",text:"Pendapat benar karena rekaman sudah lengkap.",correct:false,explanation:"Catatan tetap penting untuk transkrip."},
+      {letter:"B",text:"Pendapat salah: catatan penting untuk menandai poin kunci, angka, nama, dan konteks yang mungkin terlewat saat mendengarkan rekaman ulang.",correct:true,explanation:"Tepat! Catatan = penanda poin penting."},
+      {letter:"C",text:"Pendapat benar karena catatan tidak ilmiah.",correct:false,explanation:"Catatan justru ilmiah."},
+      {letter:"D",text:"Pendapat tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."},
+      {letter:"E",text:"Pendapat salah karena rekaman selalu gagal.",correct:false,explanation:"Rekaman tidak selalu gagal."}
+    ], difficulty:"medium", hint:"Catatan = penanda poin penting untuk transkrip.", points:60 },
+
+  /* ===== ETIKA WAWANCARA (7 soal) ===== */
+  { id:715, topic:"Etika Wawancara",
+    question:"Perhatikan pernyataan berikut!\n'Wawancara sejarah melibatkan manusia, bukan benda.'\n\nImplikasi paling penting dari pernyataan tersebut adalah...",
+    options:[
+      {letter:"A",text:"Wawancara harus dilakukan dengan etika & rasa hormat kepada narasumber.",correct:true,explanation:"Tepat! Etika & rasa hormat adalah implikasi utama."},
+      {letter:"B",text:"Wawancara tidak perlu dilakukan.",correct:false,explanation:"Wawancara tetap perlu."},
+      {letter:"C",text:"Wawancara hanya untuk orang dewasa.",correct:false,explanation:"Untuk semua kalangan."},
+      {letter:"D",text:"Wawancara harus dilakukan dengan cepat.",correct:false,explanation:"Tidak ada kaitan."},
+      {letter:"E",text:"Wawancara tidak ilmiah.",correct:false,explanation:"Justru ilmiah."}
+    ], difficulty:"medium", hint:"Melibatkan manusia = etika & hormat.", points:60 },
+
+  { id:716, topic:"Etika Wawancara",
+    question:"Seorang siswa mewawancarai seorang veteran. Ketika sampai pada pertanyaan tentang perang, narasumber tampak tidak nyaman dan ingin menghindari topik. Tindakan paling tepat adalah...",
+    options:[
+      {letter:"A",text:"Tetap memaksa narasumber menjawab.",correct:false,explanation:"Melanggar etika."},
+      {letter:"B",text:"Menghormati keinginan narasumber & mengalihkan ke topik lain yang nyaman.",correct:true,explanation:"Tepat! Hormati keinginan narasumber."},
+      {letter:"C",text:"Merekam diam-diam.",correct:false,explanation:"Melanggar etika."},
+      {letter:"D",text:"Marah kepada narasumber.",correct:false,explanation:"Tidak sopan."},
+      {letter:"E",text:"Menghentikan wawancara tanpa penjelasan.",correct:false,explanation:"Kurang sopan."}
+    ], difficulty:"medium", hint:"Hormati ketidaknyamanan narasumber.", points:60 },
+
+  { id:717, topic:"Etika Wawancara",
+    question:"Ketika mewawancarai sesepuh kampung, sikap yang PALING TEPAT dilakukan adalah...",
+    options:[
+      {letter:"A",text:"Berbicara dengan bahasa gaul agar terlihat akrab.",correct:false,explanation:"Kurang sopan untuk orang tua."},
+      {letter:"B",text:"Menggunakan bahasa yang sopan & pantas, sesuai dengan norma budaya setempat.",correct:true,explanation:"Tepat! Bahasa sopan & sesuai budaya."},
+      {letter:"C",text:"Berbicara dengan cepat agar tidak membuang waktu.",correct:false,explanation:"Justru bisa membingungkan."},
+      {letter:"D",text:"Menyela setiap kalimat.",correct:false,explanation:"Melanggar etika."},
+      {letter:"E",text:"Tidak perlu menyapa.",correct:false,explanation:"Sapaan = dasar etika."}
+    ], difficulty:"easy", hint:"Sopan & sesuai budaya setempat.", points:50 },
+
+  { id:718, topic:"Etika Wawancara",
+    question:"Seorang siswa selesai mewawancarai narasumber. Tindakan yang PALING TEPAT dilakukan setelahnya adalah...",
+    options:[
+      {letter:"A",text:"Langsung pergi tanpa berkata apa-apa.",correct:false,explanation:"Kurang sopan."},
+      {letter:"B",text:"Mengucapkan terima kasih & menawarkan untuk mengirimkan hasil wawancara jika diminta.",correct:true,explanation:"Tepat! Etika & profesionalisme."},
+      {letter:"C",text:"Meminta uang kembali.",correct:false,explanation:"Tidak relevan."},
+      {letter:"D",text:"Menghapus semua rekaman.",correct:false,explanation:"Justru rekaman penting."},
+      {letter:"E",text:"Menyebarkan foto narasumber tanpa izin.",correct:false,explanation:"Melanggar etika."}
+    ], difficulty:"easy", hint:"Ucapan terima kasih = dasar etika.", points:50 },
+
+  { id:719, topic:"Etika Wawancara",
+    question:"Seorang narasumber meminta bagian tertentu dari wawancaranya untuk <strong>tidak dipublikasikan</strong>. Analisis yang paling tepat tentang permintaan tersebut adalah...",
+    options:[
+      {letter:"A",text:"Permintaan harus ditolak karena semua wawancara harus transparan.",correct:false,explanation:"Narasumber punya hak privasi."},
+      {letter:"B",text:"Permintaan harus dihormati dengan menjaga kerahasiaan bagian tersebut.",correct:true,explanation:"Tepat! Hormati permintaan narasumber."},
+      {letter:"C",text:"Permintaan dapat diabaikan.",correct:false,explanation:"Melanggar etika."},
+      {letter:"D",text:"Permintaan menunjukkan narasumber berbohong.",correct:false,explanation:"Belum tentu."},
+      {letter:"E",text:"Wawancara harus dibatalkan total.",correct:false,explanation:"Berlebihan."}
+    ], difficulty:"hard", hint:"Narasumber punya hak privasi & kerahasiaan.", points:70 },
+
+  { id:720, topic:"Etika Wawancara",
+    question:"Analisis yang paling tepat tentang pentingnya menyampaikan <strong>tujuan wawancara</strong> kepada narasumber di awal adalah...",
+    options:[
+      {letter:"A",text:"Agar narasumber tahu konteks & dapat memberikan informasi yang relevan secara sadar.",correct:true,explanation:"Tepat! Tujuan = konteks & kesadaran narasumber."},
+      {letter:"B",text:"Agar wawancara cepat selesai.",correct:false,explanation:"Bukan tujuan utama."},
+      {letter:"C",text:"Agar narasumber gugup.",correct:false,explanation:"Justru sebaliknya."},
+      {letter:"D",text:"Agar siswa terlihat pintar.",correct:false,explanation:"Bukan tujuan utama."},
+      {letter:"E",text:"Agar narasumber tidak bisa menolak.",correct:false,explanation:"Narasumber tetap bisa menolak."}
+    ], difficulty:"medium", hint:"Tujuan = konteks & kesadaran narasumber.", points:60 },
+
+  { id:721, topic:"Etika Wawancara",
+    question:"Seorang siswa mewawancarai tokoh adat dan memotong ucapan narasumber karena ingin segera menanyakan hal lain. Analisis yang paling tepat adalah...",
+    options:[
+      {letter:"A",text:"Memotong pembicaraan adalah tindakan yang tepat agar efisien.",correct:false,explanation:"Justru melanggar etika."},
+      {letter:"B",text:"Memotong pembicaraan tidak sopan & bisa membuat narasumber merasa tidak dihargai.",correct:true,explanation:"Tepat! Tidak sopan & merugikan."},
+      {letter:"C",text:"Memotong pembicaraan wajar dalam wawancara.",correct:false,explanation:"Justru tidak etis."},
+      {letter:"D",text:"Memotong pembicaraan mempercepat hasil.",correct:false,explanation:"Bisa jadi kehilangan cerita penting."},
+      {letter:"E",text:"Memotong pembicaraan menunjukkan ketelitian.",correct:false,explanation:"Tidak ada kaitannya."}
+    ], difficulty:"medium", hint:"Memotong = tidak sopan & merugikan.", points:60 },
+
+  /* ===== TRANSKRIP (7 soal) ===== */
+  { id:722, topic:"Transkrip",
+    question:"Kegiatan mengubah rekaman wawancara menjadi teks tertulis disebut...",
+    options:[
+      {letter:"A",text:"Transkrip",correct:true,explanation:"Tepat! Transkrip = pengubahan rekaman ke teks."},
+      {letter:"B",text:"Katalogisasi",correct:false,explanation:"Katalogisasi = penyusunan daftar."},
+      {letter:"C",text:"Interpretasi",correct:false,explanation:"Interpretasi = penafsiran."},
+      {letter:"D",text:"Kritik",correct:false,explanation:"Kritik = verifikasi."},
+      {letter:"E",text:"Historiografi",correct:false,explanation:"Historiografi = penulisan."}
+    ], difficulty:"easy", hint:"Transkrip = rekaman → teks.", points:50 },
+
+  { id:723, topic:"Transkrip",
+    question:"Langkah pertama dalam membuat transkrip wawancara adalah...",
+    options:[
+      {letter:"A",text:"Menyusun laporan akhir.",correct:false,explanation:"Ini langkah terakhir."},
+      {letter:"B",text:"Mendengarkan ulang rekaman dengan saksama.",correct:true,explanation:"Tepat! Dengarkan ulang dulu."},
+      {letter:"C",text:"Menyimpulkan hasil.",correct:false,explanation:"Belum sampai menyimpulkan."},
+      {letter:"D",text:"Menghapus rekaman.",correct:false,explanation:"Jangan dihapus."},
+      {letter:"E",text:"Menyusun katalog sumber.",correct:false,explanation:"Bukan langkah transkrip."}
+    ], difficulty:"easy", hint:"Dengarkan ulang dulu sebelum menulis.", points:50 },
+
+  { id:724, topic:"Transkrip",
+    question:"Mengapa transkrip sebaiknya tetap mempertahankan <strong>bahasa asli</strong> narasumber?",
+    options:[
+      {letter:"A",text:"Agar terlihat keren.",correct:false,explanation:"Bukan alasan ilmiah."},
+      {letter:"B",text:"Agar informasi tetap otentik & tidak kehilangan nuansa budaya/ungkapan khas narasumber.",correct:true,explanation:"Tepat! Bahasa asli = otentik & bernuansa."},
+      {letter:"C",text:"Agar laporan lebih panjang.",correct:false,explanation:"Bukan untuk memperpanjang."},
+      {letter:"D",text:"Agar guru terkesan.",correct:false,explanation:"Bukan alasan ilmiah."},
+      {letter:"E",text:"Agar tidak perlu diterjemahkan.",correct:false,explanation:"Justru bisa jadi perlu terjemahan."}
+    ], difficulty:"medium", hint:"Bahasa asli = otentik & bernuansa budaya.", points:60 },
+
+  { id:725, topic:"Transkrip",
+    question:"Pemberian <strong>tanda waktu</strong> (menit ke-berapa) pada bagian penting transkrip berfungsi untuk...",
+    options:[
+      {letter:"A",text:"Menghias laporan.",correct:false,explanation:"Bukan untuk hiasan."},
+      {letter:"B",text:"Memudahkan pencarian kembali bagian penting dalam rekaman saat dibutuhkan.",correct:true,explanation:"Tepat! Tanda waktu = memudahkan pencarian."},
+      {letter:"C",text:"Memperpanjang laporan.",correct:false,explanation:"Bukan untuk memperpanjang."},
+      {letter:"D",text:"Mempersulit pembaca.",correct:false,explanation:"Justru memudahkan."},
+      {letter:"E",text:"Menghilangkan bagian yang tidak penting.",correct:false,explanation:"Bukan fungsi utama."}
+    ], difficulty:"medium", hint:"Tanda waktu = memudahkan pencarian bagian penting.", points:60 },
+
+  { id:726, topic:"Transkrip",
+    question:"Transkrip wawancara yang baik harus mencantumkan...",
+    options:[
+      {letter:"A",text:"Hanya isi wawancara.",correct:false,explanation:"Identitas narasumber juga penting."},
+      {letter:"B",text:"Identitas narasumber (nama, usia, pekerjaan, tempat, tanggal wawancara) & isi wawancara.",correct:true,explanation:"Tepat! Identitas + isi = transkrip lengkap."},
+      {letter:"C",text:"Hanya identitas narasumber.",correct:false,explanation:"Isi wawancara juga penting."},
+      {letter:"D",text:"Hanya opini pewawancara.",correct:false,explanation:"Bukan opini, tapi isi wawancara."},
+      {letter:"E",text:"Hanya kesimpulan.",correct:false,explanation:"Kesimpulan belum di transkrip."}
+    ], difficulty:"medium", hint:"Transkrip = identitas + isi wawancara.", points:60 },
+
+  { id:727, topic:"Transkrip",
+    question:"Analisis yang paling tepat tentang tindakan <strong>meringkas</strong> bagian wawancara yang tidak relevan dalam transkrip adalah...",
+    options:[
+      {letter:"A",text:"Tindakan yang tepat: meringkas bagian tidak relevan membuat transkrip lebih fokus pada topik penelitian.",correct:true,explanation:"Tepat! Ringkas = fokus & efisien."},
+      {letter:"B",text:"Tindakan yang salah: semua isi wawancara harus ditulis utuh.",correct:false,explanation:"Bisa diringkas jika tidak relevan."},
+      {letter:"C",text:"Tindakan yang salah: merusak otentisitas.",correct:false,explanation:"Tidak merusak jika bagian relevan tetap utuh."},
+      {letter:"D",text:"Tindakan yang salah: melanggar etika.",correct:false,explanation:"Bukan pelanggaran etika."},
+      {letter:"E",text:"Tindakan yang tidak perlu dinilai.",correct:false,explanation:"Dapat dinilai."}
+    ], difficulty:"hard", hint:"Ringkas bagian tidak relevan = fokus pada topik.", points:70 },
+
+  { id:728, topic:"Transkrip",
+    question:"Seorang siswa selesai mewawancarai 3 narasumber tentang topik yang sama. Langkah paling tepat setelah membuat transkrip masing-masing adalah...",
+    options:[
+      {letter:"A",text:"Membuang 2 transkrip & menyimpan 1.",correct:false,explanation:"Ketiganya penting."},
+      {letter:"B",text:"Membandingkan & mengategorikan isi ketiga transkrip sesuai pertanyaan penelitian.",correct:true,explanation:"Tepat! Bandingkan & kategorikan."},
+      {letter:"C",text:"Menyalin satu transkrip saja.",correct:false,explanation:"Semua transkrip berguna."},
+      {letter:"D",text:"Menggabungkan semua tanpa kategorisasi.",correct:false,explanation:"Justru perlu kategorisasi."},
+      {letter:"E",text:"Menghapus semua transkrip.",correct:false,explanation:"Justru penting."}
+    ], difficulty:"medium", hint:"Bandingkan & kategorikan transkrip sesuai topik.", points:60 },
+
+  /* ===== SUMBER PRIMER vs SEKUNDER (7 soal) ===== */
+  { id:729, topic:"Primer vs Sekunder",
+    question:"Sumber sejarah yang dibuat pada saat peristiwa terjadi atau oleh pelaku/saksi langsung disebut...",
+    options:[
+      {letter:"A",text:"Sumber primer",correct:true,explanation:"Tepat! Primer = dari masa/pelaku/saksi langsung."},
+      {letter:"B",text:"Sumber sekunder",correct:false,explanation:"Sekunder = berdasarkan sumber lain."},
+      {letter:"C",text:"Sumber tersier",correct:false,explanation:"Bukan kategori ini."},
+      {letter:"D",text:"Sumber fiktif",correct:false,explanation:"Bukan fiktif."},
+      {letter:"E",text:"Sumber imajiner",correct:false,explanation:"Bukan imajiner."}
+    ], difficulty:"easy", hint:"Primer = langsung dari masa/pelaku/saksi.", points:50 },
+
+  { id:730, topic:"Primer vs Sekunder",
+    question:"Seorang siswa ingin meneliti pernikahan kakek-neneknya pada tahun 1965. Sumber berikut yang termasuk sumber <strong>primer</strong> adalah...",
+    options:[
+      {letter:"A",text:"Buku sejarah tentang pernikahan adat tahun 1960-an",correct:false,explanation:"Ini sumber sekunder."},
+      {letter:"B",text:"Foto pernikahan asli kakek-nenek & undangan pernikahan asli",correct:true,explanation:"Tepat! Keduanya sumber primer dari peristiwa."},
+      {letter:"C",text:"Artikel tentang pernikahan tradisional",correct:false,explanation:"Ini sumber sekunder."},
+      {letter:"D",text:"Buku biografi tokoh pernikahan",correct:false,explanation:"Ini sumber sekunder."},
+      {letter:"E",text:"Film dokumenter tentang pernikahan",correct:false,explanation:"Tergantung kapan dibuat, tapi biasanya sekunder."}
+    ], difficulty:"medium", hint:"Primer = dari masa/pelaku/saksi langsung.", points:60 },
+
+  { id:731, topic:"Primer vs Sekunder",
+    question:"Perbedaan paling mendasar antara sumber primer dan sekunder terletak pada...",
+    options:[
+      {letter:"A",text:"Bentuk fisiknya.",correct:false,explanation:"Bentuk fisik bukan pembeda utama."},
+      {letter:"B",text:"Kedekatan & keterlibatan langsung dengan peristiwa yang dikaji.",correct:true,explanation:"Tepat! Primer = langsung; sekunder = tidak langsung."},
+      {letter:"C",text:"Bahasa yang digunakan.",correct:false,explanation:"Bukan pembeda utama."},
+      {letter:"D",text:"Jumlah halamannya.",correct:false,explanation:"Bukan pembeda utama."},
+      {letter:"E",text:"Tempat penyimpanannya.",correct:false,explanation:"Bukan pembeda utama."}
+    ], difficulty:"medium", hint:"Primer = langsung; Sekunder = tidak langsung.", points:60 },
+
+  { id:732, topic:"Primer vs Sekunder",
+    question:"Seorang siswa menemukan sebuah buku pelajaran sejarah yang membahas Proklamasi 1945. Buku tersebut termasuk sumber...",
+    options:[
+      {letter:"A",text:"Primer",correct:false,explanation:"Buku pelajaran = sumber sekunder."},
+      {letter:"B",text:"Sekunder",correct:true,explanation:"Tepat! Buku pelajaran = sumber sekunder."},
+      {letter:"C",text:"Tersier",correct:false,explanation:"Bukan tersier."},
+      {letter:"D",text:"Asli",correct:false,explanation:"Bukan asli."},
+      {letter:"E",text:"Utama",correct:false,explanation:"Bukan utama."}
+    ], difficulty:"easy", hint:"Buku pelajaran = sumber sekunder.", points:50 },
+
+  { id:733, topic:"Primer vs Sekunder",
+    question:"Perhatikan pernyataan berikut!\n'Sejarah adalah ilmu yang rekonstruktif, sehingga memerlukan berbagai jenis sumber untuk membangun narasi yang utuh.'\n\nImplikasi paling penting dari pernyataan tersebut bagi sejarawan adalah...",
+    options:[
+      {letter:"A",text:"Sejarawan hanya boleh menggunakan sumber primer.",correct:false,explanation:"Sumber sekunder juga berguna."},
+      {letter:"B",text:"Sejarawan sebaiknya memanfaatkan kombinasi sumber primer & sekunder untuk saling melengkapi.",correct:true,explanation:"Tepat! Kombinasi = narasi utuh."},
+      {letter:"C",text:"Sejarawan hanya boleh menggunakan sumber sekunder.",correct:false,explanation:"Primer juga penting."},
+      {letter:"D",text:"Sejarawan tidak memerlukan sumber.",correct:false,explanation:"Justru memerlukan sumber."},
+      {letter:"E",text:"Sejarawan hanya boleh menggunakan sumber lisan.",correct:false,explanation:"Bukan hanya lisan."}
+    ], difficulty:"hard", hint:"Kombinasi primer & sekunder = narasi utuh.", points:70 },
+
+  { id:734, topic:"Primer vs Sekunder",
+    question:"Mengapa sumber sekunder sering menjadi <strong>pintu masuk</strong> yang baik untuk penelitian sejarah?",
+    options:[
+      {letter:"A",text:"Karena sumber sekunder lebih akurat dari sumber primer.",correct:false,explanation:"Tidak selalu lebih akurat."},
+      {letter:"B",text:"Karena sumber sekunder memberikan gambaran besar & peta topik, sebelum menelusuri sumber primer.",correct:true,explanation:"Tepat! Gambaran besar & peta topik."},
+      {letter:"C",text:"Karena sumber primer tidak diperlukan.",correct:false,explanation:"Primer tetap diperlukan."},
+      {letter:"D",text:"Karena sumber sekunder lebih mudah dipalsukan.",correct:false,explanation:"Justru sebaliknya, cenderung lebih mudah dikritik."},
+      {letter:"E",text:"Karena sumber sekunder lebih tua.",correct:false,explanation:"Biasanya lebih muda."}
+    ], difficulty:"medium", hint:"Sekunder = gambaran besar & peta topik.", points:60 },
+
+  { id:735, topic:"Primer vs Sekunder",
+    question:"Seorang siswa berpendapat: 'Sumber primer selalu benar, sumber sekunder selalu salah.' Bagaimana kritik yang tepat terhadap pendapat tersebut?",
+    options:[
+      {letter:"A",text:"Pendapat benar sepenuhnya.",correct:false,explanation:"Sumber primer pun bisa memuat bias."},
+      {letter:"B",text:"Pendapat terlalu menyederhanakan: sumber primer bisa memuat bias/kekeliruan; sumber sekunder bisa sangat kredibel jika dikritik.",correct:true,explanation:"Tepat! Keduanya perlu dikritik, tidak ada yang otomatis benar/salah."},
+      {letter:"C",text:"Pendapat salah karena sumber sekunder selalu benar.",correct:false,explanation:"Justru sumber sekunder bisa keliru."},
+      {letter:"D",text:"Pendapat tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."},
+      {letter:"E",text:"Pendapat benar karena sumber sekunder bukan sumber sejarah.",correct:false,explanation:"Sekunder tetap sumber sejarah."}
+    ], difficulty:"hard", hint:"Baik primer maupun sekunder perlu kritik.", points:70 },
+
+  /* ===== 4 BENTUK SUMBER (5 soal) ===== */
+  { id:736, topic:"Bentuk Sumber",
+    question:"Berikut ini yang termasuk sumber sejarah <strong>tertulis</strong> adalah...",
+    options:[
+      {letter:"A",text:"Wawancara dengan saksi mata",correct:false,explanation:"Wawancara = sumber lisan."},
+      {letter:"B",text:"Surat kabar lama & buku tahunan sekolah",correct:true,explanation:"Tepat! Keduanya sumber tertulis."},
+      {letter:"C",text:"Candi & arca",correct:false,explanation:"Candi & arca = sumber benda."},
+      {letter:"D",text:"Rekaman video upacara adat",correct:false,explanation:"Video = sumber audiovisual."},
+      {letter:"E",text:"Foto keluarga",correct:false,explanation:"Foto = sumber visual/audiovisual."}
+    ], difficulty:"easy", hint:"Tertulis = naskah, surat, buku, koran, arsip.", points:50 },
+
+  { id:737, topic:"Bentuk Sumber",
+    question:"Contoh yang tepat untuk sumber <strong>lisan</strong> adalah...",
+    options:[
+      {letter:"A",text:"Prasasti kuno",correct:false,explanation:"Prasasti = tertulis/benda."},
+      {letter:"B",text:"Cerita rakyat & wawancara dengan sesepuh",correct:true,explanation:"Tepat! Keduanya sumber lisan."},
+      {letter:"C",text:"Buku biografi",correct:false,explanation:"Buku = tertulis."},
+      {letter:"D",text:"Film dokumenter modern",correct:false,explanation:"Film modern = audiovisual."},
+      {letter:"E",text:"Koin kuno",correct:false,explanation:"Koin = benda."}
+    ], difficulty:"easy", hint:"Lisan = cerita rakyat, wawancara, pidato.", points:50 },
+
+  { id:738, topic:"Bentuk Sumber",
+    question:"Seorang sejarawan mengunjungi Museum Balanga dan mengamati koleksi peralatan rumah tangga kuno suku Dayak Ngaju. Sumber yang ia gunakan termasuk...",
+    options:[
+      {letter:"A",text:"Sumber tertulis",correct:false,explanation:"Bukan tulisan."},
+      {letter:"B",text:"Sumber lisan",correct:false,explanation:"Bukan lisan."},
+      {letter:"C",text:"Sumber benda",correct:true,explanation:"Tepat! Peralatan rumah tangga = sumber benda."},
+      {letter:"D",text:"Sumber audiovisual",correct:false,explanation:"Bukan audiovisual."},
+      {letter:"E",text:"Sumber fiktif",correct:false,explanation:"Bukan fiktif."}
+    ], difficulty:"easy", hint:"Peralatan, artefak, bangunan = sumber benda.", points:50 },
+
+  { id:739, topic:"Bentuk Sumber",
+    question:"Rekaman video kegiatan tradisi Tiwah pada tahun 1990-an termasuk sumber...",
+    options:[
+      {letter:"A",text:"Tertulis",correct:false,explanation:"Video bukan tulisan."},
+      {letter:"B",text:"Lisan",correct:false,explanation:"Bukan hanya lisan."},
+      {letter:"C",text:"Benda",correct:false,explanation:"Bukan benda material."},
+      {letter:"D",text:"Audiovisual",correct:true,explanation:"Tepat! Video = audiovisual (suara + gambar)."},
+      {letter:"E",text:"Tersier",correct:false,explanation:"Bukan tersier."}
+    ], difficulty:"easy", hint:"Video = audio + visual.", points:50 },
+
+  { id:740, topic:"Bentuk Sumber",
+    question:"Seorang siswa meneliti sejarah kampungnya. Ia mengumpulkan: (1) arsip desa, (2) wawancara dengan sesepuh, (3) foto lama, dan (4) benda pusaka keluarga. Keempat sumber tersebut secara berurutan termasuk...",
+    options:[
+      {letter:"A",text:"Tertulis, lisan, visual, benda",correct:true,explanation:"Tepat! Arsip = tertulis; wawancara = lisan; foto = visual; pusaka = benda."},
+      {letter:"B",text:"Lisan, tertulis, benda, visual",correct:false,explanation:"Urutan tidak sesuai."},
+      {letter:"C",text:"Benda, lisan, tertulis, visual",correct:false,explanation:"Urutan tidak sesuai."},
+      {letter:"D",text:"Tertulis, benda, visual, lisan",correct:false,explanation:"Urutan tidak sesuai."},
+      {letter:"E",text:"Audiovisual, lisan, tertulis, benda",correct:false,explanation:"Urutan tidak sesuai."}
+    ], difficulty:"medium", hint:"Arsip=tertulis; wawancara=lisan; foto=visual; pusaka=benda.", points:60 },
+
+  /* ===== STUDI KASUS LOKAL (4 soal) ===== */
+  { id:741, topic:"Studi Kasus Lokal",
+    question:"Seorang siswa ingin meneliti <strong>Rumah Betang</strong> suku Dayak. Sumber primer yang paling tepat ia kumpulkan adalah...",
+    options:[
+      {letter:"A",text:"Bangunan Rumah Betang itu sendiri & wawancara dengan penghuninya",correct:true,explanation:"Tepat! Bangunan + wawancara penghuni = sumber primer."},
+      {letter:"B",text:"Buku antropologi tentang Rumah Betang",correct:false,explanation:"Buku = sumber sekunder."},
+      {letter:"C",text:"Artikel online tentang Rumah Betang",correct:false,explanation:"Artikel = sumber sekunder."},
+      {letter:"D",text:"Film dokumenter tentang Dayak",correct:false,explanation:"Film = sumber sekunder jika dibuat belakangan."},
+      {letter:"E",text:"Postingan media sosial tentang Rumah Betang",correct:false,explanation:"Bukan sumber primer."}
+    ], difficulty:"medium", hint:"Bangunan + wawancara penghuni = sumber primer.", points:60 },
+
+  { id:742, topic:"Studi Kasus Lokal",
+    question:"Seorang siswa meneliti <strong>Tradisi Tiwah</strong> suku Dayak Ngaju. Ia mewawancarai tokoh adat, merekam upacara, dan memotret benda ritual. Ketiga sumber tersebut termasuk sumber...",
+    options:[
+      {letter:"A",text:"Primer (semuanya dari masa/pelaku/saksi langsung)",correct:true,explanation:"Tepat! Ketiganya dari pelaku/saksi langsung."},
+      {letter:"B",text:"Sekunder (semuanya berdasarkan sumber lain)",correct:false,explanation:"Justru primer."},
+      {letter:"C",text:"Tersier",correct:false,explanation:"Bukan tersier."},
+      {letter:"D",text:"Fiktif",correct:false,explanation:"Bukan fiktif."},
+      {letter:"E",text:"Tidak dapat dikategorikan.",correct:false,explanation:"Dapat dikategorikan."}
+    ], difficulty:"medium", hint:"Wawancara pelaku + rekaman upacara + foto = sumber primer.", points:60 },
+
+  { id:743, topic:"Studi Kasus Lokal",
+    question:"Seorang siswa ingin meneliti asal-usul nama <strong>Kasongan</strong> sebagai ibu kota Kabupaten Katingan. Sumber lisan yang paling tepat ia cari berasal dari...",
+    options:[
+      {letter:"A",text:"Sesepuh kampung & warga senior yang tinggal lama di Kasongan.",correct:true,explanation:"Tepat! Sesepuh = sumber lisan utama."},
+      {letter:"B",text:"Turis yang pernah berkunjung.",correct:false,explanation:"Bukan saksi relevan."},
+      {letter:"C",text:"Anak-anak sekolah setempat.",correct:false,explanation:"Bukan saksi relevan."},
+      {letter:"D",text:"Akun media sosial anonim.",correct:false,explanation:"Bukan sumber lisan kredibel."},
+      {letter:"E",text:"Pendatang baru yang baru sebulan tinggal.",correct:false,explanation:"Bukan saksi relevan."}
+    ], difficulty:"easy", hint:"Sesepuh & warga senior = sumber lisan utama.", points:50 },
+
+  { id:744, topic:"Studi Kasus Lokal",
+    question:"Perhatikan pernyataan berikut!\n'Seorang siswa ingin meneliti sejarah Sungai Katingan sebagai jalur perdagangan. Ia mengumpulkan foto perahu tradisional, wawancara pedagang sungai, dan peta lama.'\n\nAnalisis yang paling tepat tentang strategi heuristik siswa tersebut adalah...",
+    options:[
+      {letter:"A",text:"Strategi tepat: siswa mengumpulkan sumber dari berbagai bentuk (visual, lisan, tertulis).",correct:true,explanation:"Tepat! Multi-bentuk sumber = strategi kuat."},
+      {letter:"B",text:"Strategi salah: siswa hanya boleh menggunakan satu jenis sumber.",correct:false,explanation:"Multi-bentuk justru lebih baik."},
+      {letter:"C",text:"Strategi salah: siswa mengabaikan kritik.",correct:false,explanation:"Kritik dilakukan setelah heuristik."},
+      {letter:"D",text:"Strategi salah: topik terlalu sempit.",correct:false,explanation:"Topik spesifik lebih baik."},
+      {letter:"E",text:"Strategi tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."}
+    ], difficulty:"hard", hint:"Multi-bentuk sumber = strategi heuristik yang kuat.", points:70 }
+];
+
+/* ============================================================
+   CONSTANTS & STATE
+   ============================================================ */
+const TOTAL_Q = 15;
+const TIME_LIMIT = 20 * 60;
+
+const state = {
+  questions: [], currentIndex: 0, answers: [], score: 0,
+  xp: 0, level: 1, hp: 3, maxHp: 3, combo: 0, bestCombo: 0,
+  timer: null, timeLeft: TIME_LIMIT, started: false, finished: false,
+  powers: { p50:1, hint:1, skip:1 }, soundOn: true
+};
+
+/* ============================================================
+   AUDIO
+   ============================================================ */
+let audioCtx = null;
+function ensureAudio(){
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}
+function playTone(freq, dur, type, vol){
+  if (!state.soundOn) return;
+  ensureAudio(); if (!audioCtx) return;
+  try {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = type || 'sine'; o.frequency.value = freq;
+    g.gain.setValueAtTime(vol || 0.08, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + dur);
+  } catch(e){}
+}
+function sfxClick(){ playTone(520, .08, 'triangle', .06); }
+function sfxCorrect(){ playTone(660, .12, 'sine', .10); setTimeout(()=>playTone(880, .15, 'sine', .10), 80); setTimeout(()=>playTone(1100, .20, 'sine', .08), 160); }
+function sfxWrong(){ playTone(200, .18, 'sawtooth', .10); setTimeout(()=>playTone(150, .25, 'sawtooth', .08), 120); }
+function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(()=>playTone(1200, .12, 'triangle', .07), 60); }
+function sfxLevelUp(){ [523, 659, 784, 1046].forEach((f, i) => setTimeout(()=>playTone(f, .16, 'sine', .10), i*90)); }
+function sfxFinish(){ [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(()=>playTone(f, .22, 'sine', .10), i*120)); }
+function toggleSound(){
+  state.soundOn = !state.soundOn;
+  document.getElementById('soundBtn').innerHTML = state.soundOn ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+  if (state.soundOn) sfxClick();
+}
+
+function toggleTheme(){
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').innerHTML = next === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  sfxClick();
+}
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+(function(){
+  const bar = document.getElementById('loaderBar');
+  const pct = document.getElementById('loaderPct');
+  const loader = document.getElementById('loader');
+  const t0 = Date.now();
+  (function tick(){
+    const p = Math.min((Date.now() - t0) / 1800 * 100, 100);
+    bar.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+    if (p < 100) requestAnimationFrame(tick);
+    else setTimeout(()=>{ loader.classList.add('hidden'); setTimeout(()=>loader.style.display='none', 700); }, 300);
+  })();
+})();
+
+/* ============================================================
+   PARTICLES
+   ============================================================ */
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  function makeP(){ return { x: Math.random()*W, y: Math.random()*H, r: Math.random()*2 + 0.4, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3 - 0.15, a: Math.random()*0.5 + 0.15, hue: Math.random() < 0.5 ? 160 : 180 }; }
+  function init(){ resize(); particles = Array.from({length: Math.min(60, Math.floor(W*H/25000))}, makeP); }
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.shadowBlur = 8; ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.fill();
+    });
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+/* ============================================================
+   CONFETTI
+   ============================================================ */
+function fireConfetti(count){
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const colors = ['#10B981','#6EE7B7','#2DD4BF','#5EEAD4','#38BDF8','#34D399'];
+  const pieces = Array.from({length: count || 60}, () => ({
+    x: window.innerWidth/2 + (Math.random()-0.5)*200,
+    y: window.innerHeight/2,
+    vx: (Math.random()-0.5)*14, vy: Math.random()*-16 - 4,
+    g: 0.5, r: Math.random()*8 + 4,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    rot: Math.random()*Math.PI, vr: (Math.random()-0.5)*0.3, life: 1
+  }));
+  let frame = 0;
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    pieces.forEach(p => {
+      if (p.life <= 0) return;
+      alive = true;
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.012;
+      ctx.save(); ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      ctx.restore();
+    });
+    if (alive && frame < 200) { frame++; requestAnimationFrame(animate); }
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  animate();
+}
+
+function showToast(icon, title, desc, variant){
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<div class="toast-icon ${variant||''}">${icon}</div>
+    <div class="toast-content"><div class="toast-title">${title}</div><div class="toast-desc">${desc}</div></div>`;
+  wrap.appendChild(el);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 450); }, 3200);
+}
+function scorePopup(text, x, y, color){
+  const el = document.createElement('div');
+  el.className = 'score-pop';
+  el.textContent = text;
+  el.style.left = (x || window.innerWidth/2) + 'px';
+  el.style.top = (y || window.innerHeight/2) + 'px';
+  if (color) el.style.color = color;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1100);
+}
+
+function shuffle(a){ const arr = a.slice(); for (let i = arr.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+function updateHpHud(){
+  const hp = document.getElementById('hudHp'); hp.innerHTML = '';
+  for (let i = 0; i < state.maxHp; i++){
+    const heart = document.createElement('i');
+    heart.className = 'fas fa-heart heart' + (i < state.hp ? '' : ' empty');
+    hp.appendChild(heart);
+  }
+}
+function updateXpHud(){
+  const xpForLevel = state.level * 100;
+  const pct = Math.min((state.xp % xpForLevel) / xpForLevel * 100, 100);
+  document.getElementById('hudLevel').textContent = state.level;
+  document.getElementById('hudXp').textContent = state.xp % xpForLevel;
+  document.getElementById('hudXpMax').textContent = xpForLevel;
+  document.getElementById('xpFill').style.width = pct + '%';
+}
+function updateComboHud(){
+  document.getElementById('comboVal').textContent = state.combo;
+  const tag = document.getElementById('comboTag');
+  if (state.combo >= 3){ tag.classList.add('hot'); setTimeout(()=>tag.classList.remove('hot'), 500); }
+}
+function updatePowers(){
+  document.getElementById('c50').textContent = state.powers.p50;
+  document.getElementById('chint').textContent = state.powers.hint;
+  document.getElementById('cskip').textContent = state.powers.skip;
+  document.getElementById('p50').disabled = state.powers.p50 <= 0;
+  document.getElementById('phint').disabled = state.powers.hint <= 0;
+  document.getElementById('pskip').disabled = state.powers.skip <= 0;
+}
+
+/* ============================================================
+   GAME FLOW
+   ============================================================ */
+function startGame(){
+  ensureAudio();
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('gameHud').classList.add('active');
+
+  state.questions = shuffle(BANK_SOAL).slice(0, TOTAL_Q);
+  state.currentIndex = 0; state.answers = [];
+  state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.timeLeft = TIME_LIMIT; state.started = true; state.finished = false;
+  state.powers = { p50:1, hint:1, skip:1 };
+
+  updateHpHud(); updateXpHud(); updateComboHud(); updatePowers();
+  showToast('🎙️', 'Arena Level 7 Dimulai!', 'Kuasai wawancara & sumber sejarah!', '');
+  sfxClick();
+  startTimer();
+  renderQuestion();
+}
+
+function startTimer(){
+  if (state.timer) clearInterval(state.timer);
+  state.timer = setInterval(() => {
+    state.timeLeft--;
+    updateTimerHud();
+    if (state.timeLeft <= 0){ clearInterval(state.timer); finishGame(true); }
+  }, 1000);
+  updateTimerHud();
+}
+function updateTimerHud(){
+  const m = Math.floor(state.timeLeft / 60), s = state.timeLeft % 60;
+  document.getElementById('hudTimerVal').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  const el = document.getElementById('hudTimer');
+  if (state.timeLeft <= 120) el.classList.add('warning'); else el.classList.remove('warning');
+}
+
+function renderQuestion(){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  document.getElementById('qNumLabel').textContent = 'Soal ' + (state.currentIndex+1);
+  document.getElementById('qTopicText').textContent = q.topic || 'Penelitian Sejarah';
+  document.getElementById('qText').innerHTML = q.question;
+  document.getElementById('hudQNum').textContent = state.currentIndex+1;
+
+  const opts = document.getElementById('options'); opts.innerHTML = '';
+  q.options.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.dataset.letter = o.letter;
+    btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
+    btn.addEventListener('click', () => selectOption(o.letter, btn));
+    opts.appendChild(btn);
+  });
+
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('btnNext').disabled = true;
+  document.getElementById('btnNext').style.display = '';
+  document.getElementById('btnFinish').style.display = 'none';
+  document.getElementById('qCard').classList.remove('shake');
+
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'qEnter .55s cubic-bezier(.16,1,.3,1)';
+
+  if (state.currentIndex === TOTAL_Q - 1){
+    document.getElementById('btnNext').style.display = 'none';
+    document.getElementById('btnFinish').style.display = '';
+  }
+}
+
+function selectOption(letter, btnEl){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  const selected = q.options.find(o => o.letter === letter);
+  if (!selected) return;
+  const correct = selected.correct;
+
+  document.querySelectorAll('#options .opt').forEach(b => {
+    b.classList.add('locked');
+    const o = q.options.find(x => x.letter === b.dataset.letter);
+    if (o.correct) b.classList.add('correct');
+    else if (b.dataset.letter === letter && !correct) b.classList.add('wrong');
+  });
+
+  state.answers.push({ qid: q.id, selected: letter, correct, skipped: false,
+    questionText: q.question, topic: q.topic,
+    correctLetter: q.options.find(o => o.correct).letter,
+    explanation: selected.explanation });
+
+  if (correct){
+    state.combo++;
+    if (state.combo > state.bestCombo) state.bestCombo = state.combo;
+    const bonus = Math.max(0, state.combo - 1) * 5;
+    const gained = (q.points || 50) + bonus;
+    state.score += gained; state.xp += gained;
+
+    const prevLevel = state.level;
+    state.level = Math.floor(state.xp / 100) + 1;
+    if (state.level > prevLevel){
+      sfxLevelUp();
+      showToast('⭐', 'LEVEL UP!', `Kamu naik ke Level ${state.level}!`, 'cyan');
+      fireConfetti(40);
+    }
+    sfxCorrect();
+    fireConfetti(state.combo >= 3 ? 80 : 45);
+    const rect = btnEl ? btnEl.getBoundingClientRect() : null;
+    scorePopup('+' + gained + ' XP', rect ? rect.left + rect.width/2 : window.innerWidth/2, rect ? rect.top : window.innerHeight/2, '#6EE7B7');
+    if (state.combo >= 3) showToast('🔥', `COMBO ×${state.combo}!`, `Bonus +${bonus} XP!`, '');
+  } else {
+    state.combo = 0; state.hp--; sfxWrong();
+    updateHpHud();
+    const hpEls = document.querySelectorAll('.hud-hp .heart');
+    if (hpEls[state.hp]) hpEls[state.hp].classList.add('losing');
+    const card = document.getElementById('qCard');
+    card.classList.add('shake'); setTimeout(() => card.classList.remove('shake'), 550);
+    if (state.hp <= 0) showToast('💔', 'Nyawa Habis!', 'Kamu kehilangan semua nyawa.', 'violet');
+  }
+
+  document.getElementById('hudScore').textContent = state.score;
+  updateXpHud(); updateComboHud();
+  showFeedback(correct, q, selected);
+  document.getElementById('btnNext').disabled = false;
+}
+
+function showFeedback(correct, q, selected){
+  const panel = document.getElementById('feedback');
+  const icon = document.getElementById('fbIcon');
+  const title = document.getElementById('fbTitle');
+  const body = document.getElementById('fbBody');
+  panel.classList.add('show');
+
+  if (correct){
+    icon.className = 'fb-icon correct'; icon.innerHTML = '<i class="fas fa-check"></i>';
+    title.className = 'fb-title correct'; title.textContent = 'BENAR!';
+  } else {
+    icon.className = 'fb-icon wrong'; icon.innerHTML = '<i class="fas fa-times"></i>';
+    title.className = 'fb-title wrong'; title.textContent = 'BELUM TEPAT';
+  }
+
+  const correctOpt = q.options.find(o => o.correct);
+  let html = `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
+  html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
+  if (!correct && selected) html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
+  html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
+  body.innerHTML = html;
+}
+
+function nextQuestion(){
+  if (state.currentIndex < TOTAL_Q - 1){
+    state.currentIndex++;
+    renderQuestion();
+    document.getElementById('qCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+function usePower(type){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+
+  if (type === '50'){
+    if (state.powers.p50 <= 0) return;
+    const wrongs = q.options.filter(o => !o.correct);
+    const remove = shuffle(wrongs).slice(0, 2);
+    document.querySelectorAll('#options .opt').forEach(b => {
+      if (remove.some(o => o.letter === b.dataset.letter)) b.classList.add('disabled-50');
+    });
+    state.powers.p50 = 0; updatePowers(); sfxPower();
+    showToast('✂️', '50:50 Aktif!', 'Dua jawaban salah dihilangkan.', 'cyan');
+  } else if (type === 'hint'){
+    if (state.powers.hint <= 0) return;
+    const panel = document.getElementById('feedback');
+    const icon = document.getElementById('fbIcon');
+    const title = document.getElementById('fbTitle');
+    const body = document.getElementById('fbBody');
+    panel.classList.add('show');
+    icon.className = 'fb-icon info'; icon.innerHTML = '<i class="fas fa-lightbulb"></i>';
+    title.className = 'fb-title info'; title.textContent = 'PETUNJUK';
+    body.innerHTML = `<p>${q.hint || 'Tidak ada petunjuk.'}</p>`;
+    state.powers.hint = 0; updatePowers(); sfxPower();
+    showToast('💡', 'Petunjuk Digunakan!', 'Perhatikan dengan saksama.', '');
+  } else if (type === 'skip'){
+    if (state.powers.skip <= 0) return;
+    state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+      questionText: q.question, topic: q.topic,
+      correctLetter: q.options.find(o => o.correct).letter,
+      explanation: q.options.find(o => o.correct).explanation });
+    document.querySelectorAll('#options .opt').forEach(b => {
+      b.classList.add('locked');
+      const o = q.options.find(x => x.letter === b.dataset.letter);
+      if (o.correct) b.classList.add('correct');
+    });
+    showFeedback(false, q, null);
+    document.getElementById('btnNext').disabled = false;
+    state.powers.skip = 0; updatePowers(); sfxPower();
+    showToast('⏭️', 'Soal Dilewati', 'Jawaban benar ditampilkan.', 'violet');
+    if (state.currentIndex === TOTAL_Q - 1){
+      document.getElementById('btnNext').style.display = 'none';
+      document.getElementById('btnFinish').style.display = '';
+    }
+  }
+}
+
+function finishGame(timeout){
+  if (state.finished) return;
+  state.finished = true;
+  clearInterval(state.timer); state.timer = null;
+
+  const answered = state.answers.map(a => a.qid);
+  state.questions.forEach(q => {
+    if (!answered.includes(q.id)){
+      state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+        questionText: q.question, topic: q.topic,
+        correctLetter: q.options.find(o => o.correct).letter,
+        explanation: q.options.find(o => o.correct).explanation });
+    }
+  });
+
+  let benar = 0, salah = 0;
+  state.answers.forEach(a => { if (a.skipped) return; if (a.correct) benar++; else salah++; });
+
+  const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
+  const finalScore = Math.round((state.score / maxScore) * 100);
+  const grade = finalScore >= 90 ? 'A' : finalScore >= 80 ? 'B' : finalScore >= 70 ? 'C' : finalScore >= 60 ? 'D' : 'E';
+  const gradeLabel = finalScore >= 90 ? 'Sangat Baik' : finalScore >= 80 ? 'Baik' : finalScore >= 70 ? 'Cukup' : finalScore >= 60 ? 'Perlu Bimbingan' : 'Remedial';
+  const rank = finalScore >= 90 ? 'WARTAWAN SEJARAH' : finalScore >= 80 ? 'PENELITI LISAN' : finalScore >= 70 ? 'PEWAWANCARA MUDA' : 'PELAJAR SEJARAH';
+  const trophy = finalScore >= 90 ? '🏆' : finalScore >= 80 ? '🥇' : finalScore >= 70 ? '🥈' : finalScore >= 60 ? '🥉' : '📚';
+  const title = finalScore >= 90 ? 'Luar Biasa!' : finalScore >= 80 ? 'Kerja Bagus!' : finalScore >= 70 ? 'Terus Belajar!' : 'Jangan Menyerah!';
+
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('resultScreen').classList.add('active');
+
+  document.getElementById('rTrophy').textContent = trophy;
+  document.getElementById('rTitle').textContent = title;
+  document.getElementById('rSub').textContent = 'Kuis 7 · Teknik Wawancara & Sumber Sejarah';
+  document.getElementById('gradeLetter').textContent = grade;
+  document.getElementById('gradeLabel').textContent = gradeLabel;
+  document.getElementById('rRank').textContent = rank;
+  document.getElementById('rXp').textContent = state.xp;
+  document.getElementById('rBestCombo').textContent = state.bestCombo;
+  document.getElementById('rBenar').textContent = benar;
+  document.getElementById('rSalah').textContent = salah;
+  document.getElementById('rSkor').textContent = finalScore;
+  document.getElementById('rXpTotal').textContent = state.xp;
+
+  document.getElementById('gradeRing').style.setProperty('--grade-deg', (finalScore/100*360) + 'deg');
+
+  document.getElementById('rMsg').textContent = finalScore >= 70
+    ? '🎯 Pertahankan semangat belajarmu! Lanjutkan ke Kuis 8 untuk materi Ilmu Bantu Sejarah & Kritik Sumber.'
+    : '📚 Pelajari kembali materi Pertemuan 1 bagian B & C, lalu coba lagi! Kamu pasti bisa!';
+
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  state.answers.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
+                   a.correct ? '<span class="ri-status correct">Benar</span>' :
+                   '<span class="ri-status wrong">Salah</span>';
+    const q = a.questionText.length > 80 ? a.questionText.substring(0, 80) + '...' : a.questionText;
+    div.innerHTML = `<span class="ri-num">${i+1}.</span><span class="ri-text">${q}</span>${status}`;
+    reviewList.appendChild(div);
+  });
+
+  sfxFinish();
+  if (finalScore >= 70){
+    fireConfetti(180);
+    setTimeout(() => fireConfetti(120), 400);
+    setTimeout(() => showToast('🏆', 'Achievement Unlocked!', rank, ''), 500);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetGame(){
+  clearInterval(state.timer); state.timer = null;
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('startScreen').style.display = 'flex';
+  state.answers = []; state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.currentIndex = 0; state.finished = false; state.started = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('keydown', e => {
+  if (!state.started || state.finished) return;
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea') return;
+  if (['a','A','1'].includes(e.key)) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
+  else if (['b','B','2'].includes(e.key)) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
+  else if (['c','C','3'].includes(e.key)) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
+  else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
+  else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
+  else if (e.key === 'ArrowRight' || e.key === 'Enter'){
+    if (!document.getElementById('btnNext').disabled) nextQuestion();
+  }
+});
+</script>
+
+</body>
+</html>
