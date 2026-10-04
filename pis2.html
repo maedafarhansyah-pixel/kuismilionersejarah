@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+<meta name="theme-color" content="#05060f" />
+<title>🎮 Kuis 2 · Berpikir Sejarah — Premium Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<style>
+:root{
+  --font-display:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'Space Grotesk',ui-monospace,monospace;
+  --primary:#F59E0B;--primary-light:#FCD34D;--primary-dark:#B45309;
+  --accent:#06B6D4;--accent-rgb:6,182,212;
+  --emerald:#10B981;--violet:#8B5CF6;--rose:#F43F5E;--sky:#38BDF8;
+  --bg:#05060f;--bg-2:#0b0d1c;
+  --glass:rgba(255,255,255,0.045);
+  --glass-strong:rgba(255,255,255,0.08);
+  --glass-border:rgba(255,255,255,0.10);
+  --text:#f7f5ff;--text-dim:#a8a8c0;--text-mute:#6b6b85;
+  --radius:24px;--radius-md:18px;--radius-sm:14px;--radius-xs:10px;
+  --shadow-glow:0 0 40px rgba(245,158,11,.25);
+  --shadow-card:0 24px 60px rgba(0,0,0,.55);
+  --shadow-btn:0 12px 32px rgba(245,158,11,.35);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font-display);background:var(--bg);color:var(--text);
+  line-height:1.65;overflow-x:hidden;min-height:100vh;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+::selection{background:var(--primary);color:#0b0d1c}
+
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%,rgba(139,92,246,.15),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 100%,rgba(6,182,212,.12),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 50%,rgba(245,158,11,.08),transparent 65%);
+  animation:bgShift 20s ease-in-out infinite alternate}
+@keyframes bgShift{0%{transform:scale(1) rotate(0deg);filter:hue-rotate(0deg)}100%{transform:scale(1.1) rotate(-3deg);filter:hue-rotate(-15deg)}}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25;
+  background-image:
+    linear-gradient(rgba(139,92,246,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(139,92,246,.06) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%)}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
+#confettiCanvas{position:fixed;inset:0;z-index:9998;pointer-events:none}
+
+#loader{position:fixed;inset:0;z-index:99999;
+  background:radial-gradient(ellipse at center,#0b0d1c 0%,#05060f 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:20px;text-align:center;transition:opacity .8s ease,visibility .8s ease}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-orb{width:120px;height:120px;position:relative;display:grid;place-items:center}
+.loader-orb::before,.loader-orb::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent}
+.loader-orb::before{border-top-color:var(--violet);border-right-color:var(--accent);animation:spin 2s linear infinite;filter:drop-shadow(0 0 20px rgba(139,92,246,.6))}
+.loader-orb::after{inset:14px;border-bottom-color:var(--emerald);border-left-color:var(--primary);animation:spin 1.6s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-core{width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--violet),var(--primary));
+  box-shadow:0 0 40px rgba(139,92,246,.7),inset 0 0 20px rgba(255,255,255,.25);
+  display:grid;place-items:center;font-size:1.5rem;color:#fff;
+  animation:pulseCore 2s ease-in-out infinite}
+@keyframes pulseCore{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.loader-title{font-family:var(--font-display);font-weight:900;font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:3px;
+  background:linear-gradient(135deg,var(--primary-light),var(--violet),var(--accent));
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.loader-sub{font-size:.85rem;color:var(--text-dim);font-weight:500;letter-spacing:1px}
+.loader-bar{width:min(300px,70vw);height:4px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+.loader-bar span{display:block;height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--violet),var(--primary-light),var(--accent));
+  box-shadow:0 0 20px rgba(139,92,246,.6);transition:width .3s ease}
+.loader-pct{font-family:var(--font-mono);font-size:.72rem;font-weight:700;color:var(--text-mute);letter-spacing:2px}
+
+.game-header{position:fixed;top:0;left:0;right:0;height:60px;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:10px;
+  background:rgba(5,6,15,.72);backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border-bottom:1px solid var(--glass-border)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:.9rem;color:var(--text)}
+.brand-logo{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--violet),var(--primary));color:#fff;font-size:.9rem;
+  box-shadow:0 0 22px rgba(139,92,246,.5);animation:logoPulse 3s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 22px rgba(139,92,246,.5)}50%{box-shadow:0 0 32px rgba(139,92,246,.8)}}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .t1{font-size:.62rem;color:var(--text-mute);letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+.brand-text .t2{font-size:.92rem;font-weight:800;color:var(--text)}
+.header-actions{display:flex;gap:6px}
+.icon-btn{width:36px;height:36px;border-radius:11px;border:1px solid var(--glass-border);
+  background:var(--glass);color:var(--text-dim);display:grid;place-items:center;cursor:pointer;
+  font-size:.85rem;transition:all .3s var(--ease-out)}
+.icon-btn:hover{background:var(--violet);color:#fff;border-color:var(--violet);box-shadow:0 0 22px rgba(139,92,246,.6);transform:translateY(-2px)}
+
+.wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;
+  padding:calc(60px + 20px) 16px 60px;min-height:100vh}
+
+.start-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:calc(100vh - 100px);text-align:center;gap:18px;padding:20px 0}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:40px;
+  background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(6,182,212,.10));
+  border:1px solid rgba(139,92,246,.30);font-size:.7rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:#C4B5FD;box-shadow:0 0 30px rgba(139,92,246,.20);
+  animation:badgeFloat 3s ease-in-out infinite}
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-title{font-family:var(--font-display);font-size:clamp(2rem,7vw,3.6rem);
+  font-weight:900;line-height:1.05;letter-spacing:-1.5px;
+  background:linear-gradient(135deg,#fff 0%,#C4B5FD 40%,var(--violet) 70%,var(--accent) 100%);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 8px 30px rgba(139,92,246,.3))}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text-dim);max-width:560px;line-height:1.75}
+.hero-sub strong{color:#C4B5FD;font-weight:700}
+
+.stats-showcase{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+.stat-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;
+  background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(10px);
+  font-size:.8rem;color:var(--text-dim);font-weight:600;transition:all .3s var(--ease-out)}
+.stat-pill:hover{transform:translateY(-3px);border-color:rgba(139,92,246,.4);box-shadow:0 8px 24px rgba(139,92,246,.15)}
+.stat-pill i{font-size:.95rem}
+
+.rules-card{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:22px 24px;
+  max-width:520px;width:100%;text-align:left;margin-top:6px;backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.rules-card h4{font-size:.85rem;font-weight:800;color:#C4B5FD;margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.rules-card ul{list-style:none;display:grid;gap:10px}
+.rules-card li{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-dim);line-height:1.6}
+.rule-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+  border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--violet),var(--primary));
+  color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 4px 14px rgba(139,92,246,.4)}
+
+.btn-play{position:relative;display:inline-flex;align-items:center;gap:14px;
+  padding:18px 54px;border-radius:60px;border:none;
+  background:linear-gradient(135deg,var(--violet),var(--primary));
+  color:#fff;font-family:var(--font-display);font-weight:900;font-size:1.05rem;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;overflow:hidden;
+  box-shadow:0 12px 40px rgba(139,92,246,.45),inset 0 -3px 0 rgba(0,0,0,.2);
+  transition:all .4s var(--ease-spring);margin-top:14px}
+.btn-play::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.35),transparent 70%);
+  transform:translateX(-100%);transition:transform .8s ease}
+.btn-play:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 20px 60px rgba(139,92,246,.65)}
+.btn-play:hover::before{transform:translateX(100%)}
+.btn-play:active{transform:translateY(-1px) scale(.98)}
+
+.game-hud{display:none;flex-direction:column;gap:14px;animation:fadeSlideIn .5s var(--ease-out)}
+.game-hud.active{display:flex}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.hud-top{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+  padding:14px 18px;border-radius:var(--radius-md);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.hud-hp{display:flex;align-items:center;gap:4px}
+.hud-hp .heart{font-size:1.15rem;color:var(--rose);
+  filter:drop-shadow(0 0 8px rgba(244,63,94,.6));transition:all .4s var(--ease-out)}
+.hud-hp .heart.empty{color:rgba(255,255,255,.10);filter:none;transform:scale(.85)}
+.hud-hp .heart.losing{animation:heartBreak .6s ease}
+@keyframes heartBreak{0%{transform:scale(1)}30%{transform:scale(1.4);color:#fff}100%{transform:scale(.85);opacity:.3}}
+.hud-xp{display:flex;flex-direction:column;gap:4px;min-width:0}
+.hud-xp-head{display:flex;justify-content:space-between;align-items:center;font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.hud-xp-head .lvl{color:#C4B5FD}
+.hud-xp-head .val{color:var(--text-mute);font-family:var(--font-mono)}
+.xp-track{height:8px;border-radius:10px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+.xp-fill{height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--violet),var(--primary-light),var(--accent));
+  box-shadow:0 0 16px rgba(139,92,246,.7);transition:width .8s var(--ease-spring);position:relative}
+.xp-fill::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  animation:xpShine 2s linear infinite}
+@keyframes xpShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.hud-timer{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:40px;
+  background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.30);
+  font-family:var(--font-mono);font-weight:800;font-size:.85rem;color:#C4B5FD;letter-spacing:1px;transition:all .3s ease}
+.hud-timer.warning{background:rgba(244,63,94,.15);border-color:rgba(244,63,94,.5);color:#FCA5A5;animation:pulseWarn 1s ease-in-out infinite}
+@keyframes pulseWarn{0%,100%{box-shadow:0 0 0 0 rgba(244,63,94,.4)}50%{box-shadow:0 0 0 8px rgba(244,63,94,0)}}
+
+.hud-middle{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:.75rem;color:var(--text-mute);font-weight:700;padding:0 4px}
+.hud-middle .combo-tag{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:800;transition:all .3s var(--ease-spring)}
+.hud-middle .combo-tag.hot{color:#C4B5FD;animation:comboPulse .5s var(--ease-spring)}
+@keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+.q-card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:26px 26px 22px;
+  backdrop-filter:blur(20px);box-shadow:var(--shadow-card);animation:qEnter .55s var(--ease-out);overflow:hidden}
+.q-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(135deg,rgba(139,92,246,.4),transparent 40%,transparent 60%,rgba(6,182,212,.3));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+@keyframes qEnter{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.q-card.shake{animation:shake .5s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+
+.q-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:30px;
+  background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(139,92,246,.06));
+  border:1px solid rgba(139,92,246,.30);font-size:.72rem;font-weight:800;letter-spacing:1px;color:#C4B5FD}
+.q-topic{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;
+  background:rgba(6,182,212,.10);border:1px solid rgba(6,182,212,.28);font-size:.68rem;
+  font-weight:800;letter-spacing:.8px;color:var(--accent);text-transform:uppercase}
+
+.q-text{font-size:clamp(1rem,2.2vw,1.12rem);font-weight:600;line-height:1.75;color:var(--text);
+  margin-bottom:20px;white-space:pre-line}
+.q-text strong{color:#C4B5FD;font-weight:800}
+
+.options{display:grid;gap:10px}
+.opt{position:relative;display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;
+  padding:15px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--glass-border);
+  background:rgba(255,255,255,.03);color:var(--text-dim);font-family:inherit;font-size:.92rem;
+  line-height:1.6;cursor:pointer;transition:all .3s var(--ease-out);overflow:hidden}
+.opt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(90deg,rgba(139,92,246,.15),transparent);
+  transition:width .4s var(--ease-out);z-index:0}
+.opt:hover:not(.locked){border-color:rgba(139,92,246,.55);transform:translateX(5px);
+  color:var(--text);box-shadow:0 8px 24px rgba(139,92,246,.15)}
+.opt:hover:not(.locked)::before{width:100%}
+.opt-letter{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;flex-shrink:0;background:rgba(255,255,255,.06);
+  color:var(--text-mute);font-weight:800;font-size:.85rem;transition:all .3s var(--ease-out);
+  border:1px solid rgba(255,255,255,.06)}
+.opt-text{position:relative;z-index:1;flex:1}
+.opt:hover:not(.locked) .opt-letter{background:linear-gradient(135deg,var(--violet),var(--primary));
+  color:#fff;border-color:transparent;box-shadow:0 0 20px rgba(139,92,246,.6)}
+.opt.correct{border-color:var(--emerald);background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(16,185,129,.15),0 12px 32px rgba(16,185,129,.25);
+  animation:correctPop .5s var(--ease-spring)}
+@keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.02)}100%{transform:scale(1)}}
+.opt.correct .opt-letter{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(16,185,129,.7)}
+.opt.wrong{border-color:var(--rose);background:linear-gradient(135deg,rgba(244,63,94,.15),rgba(244,63,94,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(244,63,94,.15),0 12px 32px rgba(244,63,94,.25)}
+.opt.wrong .opt-letter{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(244,63,94,.7)}
+.opt.locked{pointer-events:none}
+.opt.disabled-50{opacity:.2;pointer-events:none;filter:grayscale(1) blur(.5px)}
+
+.feedback{display:none;padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(16px);box-shadow:var(--shadow-card);
+  animation:qEnter .5s var(--ease-out)}
+.feedback.show{display:block}
+.fb-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.fb-icon{width:48px;height:48px;border-radius:15px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;transition:all .4s var(--ease-spring)}
+.fb-icon.correct{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;box-shadow:0 0 32px rgba(16,185,129,.6)}
+.fb-icon.wrong{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;box-shadow:0 0 32px rgba(244,63,94,.6)}
+.fb-icon.info{background:linear-gradient(135deg,var(--accent),#0891b2);color:#fff;box-shadow:0 0 32px rgba(6,182,212,.6)}
+.fb-title{font-size:1.05rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
+.fb-title.correct{color:var(--emerald)}
+.fb-title.wrong{color:#FCA5A5}
+.fb-title.info{color:var(--accent)}
+.fb-body{font-size:.9rem;color:var(--text-dim);line-height:1.75}
+.fb-body strong{color:var(--text);font-weight:700}
+.fb-sec{margin-top:12px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.10)}
+.fb-label{font-size:.68rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;
+  color:#C4B5FD;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.fb-points{margin-top:12px;padding:14px 16px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(139,92,246,.10),rgba(139,92,246,.03));border-left:3px solid var(--violet)}
+.fb-points .fb-label{color:#C4B5FD}
+.fb-points p{font-size:.87rem;color:var(--text-dim);line-height:1.7}
+
+.hud-bottom{display:flex;flex-direction:column;gap:12px}
+.power-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.power-btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;
+  border-radius:50px;border:1px solid var(--glass-border);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  color:var(--text-dim);font-family:inherit;font-weight:800;font-size:.78rem;letter-spacing:.5px;
+  cursor:pointer;transition:all .3s var(--ease-spring);overflow:hidden}
+.power-btn i{font-size:.9rem}
+.power-btn:hover:not(:disabled):not(.used){transform:translateY(-3px);border-color:rgba(139,92,246,.5);color:var(--text);box-shadow:0 8px 24px rgba(139,92,246,.25)}
+.power-btn:active:not(:disabled):not(.used){transform:scale(.96)}
+.power-btn .cnt{font-size:.62rem;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.10);font-weight:900;font-family:var(--font-mono)}
+.power-btn.used{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.power-btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.power-btn.p50{color:var(--accent)}
+.power-btn.phint{color:#C4B5FD}
+.power-btn.pskip{color:var(--rose)}
+
+.action-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 30px;border-radius:50px;border:none;
+  font-family:inherit;font-weight:900;font-size:.88rem;letter-spacing:.5px;cursor:pointer;
+  transition:all .35s var(--ease-spring)}
+.btn-primary{background:linear-gradient(135deg,var(--violet),var(--primary));color:#fff;
+  box-shadow:0 10px 32px rgba(139,92,246,.4),inset 0 -2px 0 rgba(0,0,0,.15)}
+.btn-primary:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 44px rgba(139,92,246,.6)}
+.btn-primary:active:not(:disabled){transform:scale(.96)}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--text-dim);border:1px solid var(--glass-border)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(139,92,246,.4);transform:translateY(-2px)}
+
+.result-screen{display:none;flex-direction:column;gap:16px;text-align:center;animation:fadeSlideIn .6s var(--ease-out)}
+.result-screen.active{display:flex}
+.result-hero{position:relative;padding:38px 26px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);box-shadow:var(--shadow-card);overflow:hidden}
+.result-hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center top,rgba(139,92,246,.20),transparent 60%);pointer-events:none}
+.result-trophy{font-size:4rem;line-height:1;margin-bottom:8px;
+  filter:drop-shadow(0 8px 30px rgba(139,92,246,.6));animation:trophyFloat 3s ease-in-out infinite}
+@keyframes trophyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.result-title{font-family:var(--font-display);font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:900;
+  letter-spacing:-.5px;background:linear-gradient(135deg,#fff,#C4B5FD,var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.result-sub{font-size:.9rem;color:var(--text-dim);margin-bottom:6px}
+.grade-ring{position:relative;width:130px;height:130px;margin:16px auto;border-radius:50%;
+  background:conic-gradient(var(--violet) var(--grade-deg,0deg),rgba(255,255,255,.08) 0deg);
+  padding:8px;box-shadow:0 0 40px rgba(139,92,246,.4);animation:ringPop .8s var(--ease-spring)}
+@keyframes ringPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.grade-inner{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at center,#0b0d1c,#05060f);display:grid;place-items:center;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.6)}
+.grade-letter{font-size:2.6rem;font-weight:900;line-height:1;
+  background:linear-gradient(135deg,#C4B5FD,var(--violet));-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent}
+.grade-label{font-size:.62rem;font-weight:800;letter-spacing:2px;color:var(--text-mute);text-transform:uppercase;margin-top:2px}
+.result-title-text{font-size:1.1rem;font-weight:900;color:#C4B5FD;letter-spacing:.5px;margin-top:8px;text-transform:uppercase}
+.result-xp-line{font-size:.88rem;color:var(--text-dim);margin-top:6px}
+.result-xp-line strong{color:var(--accent);font-family:var(--font-mono);font-weight:800}
+.result-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:20px 0 8px}
+.rs-box{padding:16px 10px;border-radius:var(--radius-sm);background:rgba(255,255,255,.04);
+  border:1px solid var(--glass-border);transition:all .3s var(--ease-out)}
+.rs-box:hover{transform:translateY(-3px);border-color:rgba(139,92,246,.3)}
+.rs-val{font-size:1.7rem;font-weight:900;line-height:1.1;font-family:var(--font-mono)}
+.rs-val.green{color:var(--emerald);text-shadow:0 0 20px rgba(16,185,129,.5)}
+.rs-val.red{color:#FCA5A5;text-shadow:0 0 20px rgba(244,63,94,.5)}
+.rs-val.cyan{color:var(--accent);text-shadow:0 0 20px rgba(6,182,212,.5)}
+.rs-val.violet{color:#C4B5FD;text-shadow:0 0 20px rgba(139,92,246,.5)}
+.rs-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.5px;color:var(--text-mute);text-transform:uppercase;margin-top:6px}
+.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:14px 18px;border-radius:12px;
+  background:rgba(139,92,246,.06);border-left:3px solid var(--violet);margin-top:6px;text-align:left}
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+
+.review-panel{padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);text-align:left}
+.review-panel h4{font-size:.9rem;font-weight:900;color:#C4B5FD;margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.review-list{display:grid;gap:8px}
+.review-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-radius:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:.84rem;
+  line-height:1.6;transition:all .3s var(--ease-out)}
+.review-item:hover{background:rgba(255,255,255,.06);transform:translateX(3px)}
+.review-item .ri-num{font-weight:900;color:var(--text-mute);flex-shrink:0;font-family:var(--font-mono);font-size:.78rem;min-width:26px}
+.review-item .ri-text{flex:1;color:var(--text-dim)}
+.review-item .ri-status{font-size:.68rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:20px;flex-shrink:0}
+.ri-status.correct{background:rgba(16,185,129,.15);color:#34D399}
+.ri-status.wrong{background:rgba(244,63,94,.15);color:#FCA5A5}
+.ri-status.skipped{background:rgba(255,255,255,.06);color:var(--text-mute)}
+
+.toast-wrap{position:fixed;top:74px;right:16px;z-index:9999;display:flex;flex-direction:column;
+  gap:10px;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast{display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(11,13,28,.95),rgba(5,6,15,.95));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);
+  box-shadow:0 16px 40px rgba(0,0,0,.6),0 0 0 1px rgba(139,92,246,.15);
+  pointer-events:auto;animation:toastIn .5s var(--ease-spring);max-width:340px}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast.out{animation:toastOut .4s ease forwards}
+@keyframes toastOut{to{transform:translateX(120%);opacity:0}}
+.toast-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;color:#fff;background:linear-gradient(135deg,var(--violet),var(--primary));
+  box-shadow:0 0 24px rgba(139,92,246,.6)}
+.toast-icon.green{background:linear-gradient(135deg,var(--emerald),#059669);box-shadow:0 0 24px rgba(16,185,129,.6)}
+.toast-icon.cyan{background:linear-gradient(135deg,var(--accent),#0891b2);box-shadow:0 0 24px rgba(6,182,212,.6)}
+.toast-icon.violet{background:linear-gradient(135deg,var(--violet),#7c3aed);box-shadow:0 0 24px rgba(139,92,246,.6)}
+.toast-content{flex:1;min-width:0}
+.toast-title{font-size:.85rem;font-weight:900;color:var(--text);letter-spacing:.3px}
+.toast-desc{font-size:.75rem;color:var(--text-dim);line-height:1.5;margin-top:2px}
+
+.score-pop{position:fixed;z-index:9997;pointer-events:none;font-family:var(--font-display);
+  font-weight:900;font-size:1.6rem;color:#C4B5FD;text-shadow:0 0 20px rgba(139,92,246,.8);
+  animation:scorePop 1s var(--ease-out) forwards}
+@keyframes scorePop{0%{transform:translate(-50%,0) scale(.5);opacity:0}
+  20%{transform:translate(-50%,-20px) scale(1.2);opacity:1}
+  100%{transform:translate(-50%,-80px) scale(1);opacity:0}}
+
+@media (max-width:600px){
+  .wrap{padding:calc(60px + 14px) 12px 50px}
+  .q-card{padding:20px 18px}
+  .opt{padding:13px 14px;font-size:.87rem;gap:11px}
+  .opt-letter{width:30px;height:30px;font-size:.78rem}
+  .hud-top{padding:12px 14px;gap:8px}
+  .hud-timer{padding:6px 11px;font-size:.78rem}
+  .hud-hp .heart{font-size:1rem}
+  .power-btn{padding:9px 14px;font-size:.72rem}
+  .btn{padding:12px 22px;font-size:.82rem;width:100%;justify-content:center}
+  .action-bar{flex-direction:column}
+  .result-hero{padding:28px 18px}
+  .grade-ring{width:110px;height:110px}
+  .grade-letter{font-size:2.2rem}
+  .rs-val{font-size:1.4rem}
+  .toast{max-width:calc(100vw - 24px);padding:12px 14px}
+  .toast-icon{width:36px;height:36px;font-size:1rem}
+}
+@media print{
+  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap{display:none!important}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+<canvas id="particles"></canvas>
+<canvas id="confettiCanvas"></canvas>
+
+<div id="loader">
+  <div class="loader-orb">
+    <div class="loader-core"><i class="fas fa-brain"></i></div>
+  </div>
+  <div class="loader-title">HISTOEXPLORER</div>
+  <div class="loader-sub">Kuis 2 · Berpikir Sejarah &amp; Definisi Ahli (1)</div>
+  <div class="loader-bar"><span id="loaderBar"></span></div>
+  <div class="loader-pct" id="loaderPct">0%</div>
+</div>
+
+<header class="game-header">
+  <div class="brand">
+    <div class="brand-logo"><i class="fas fa-brain"></i></div>
+    <div class="brand-text">
+      <span class="t1">KUIS 2 · PERTEMUAN 2</span>
+      <span class="t2">Berpikir Sejarah &amp; Ahli (1)</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="Suara"><i class="fas fa-volume-up"></i></button>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema"><i class="fas fa-sun"></i></button>
+  </div>
+</header>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<main class="wrap">
+
+  <section class="start-screen" id="startScreen">
+    <span class="hero-badge"><i class="fas fa-crown"></i> PREMIUM GAME MODE · LEVEL 2</span>
+    <h1 class="hero-title">Berpikir Sejarah<br>&amp; Definisi Ahli (1)</h1>
+    <p class="hero-sub">
+      Kuasai cara berpikir <strong>diakronik</strong> &amp; <strong>sinkronik</strong>, serta definisi sejarah menurut <strong>Poerwodarminta</strong>, <strong>R. Moh. Ali</strong>, <strong>Herodotus</strong>, dan <strong>Ibnu Khaldun</strong>. Lanjutkan perjalananmu, Sejarawan Muda!
+    </p>
+
+    <div class="stats-showcase">
+      <span class="stat-pill" style="color:#C4B5FD"><i class="fas fa-question-circle"></i> 15 Soal Acak</span>
+      <span class="stat-pill" style="color:var(--accent)"><i class="fas fa-stopwatch"></i> 20 Menit</span>
+      <span class="stat-pill" style="color:var(--emerald)"><i class="fas fa-heart"></i> 3 Nyawa</span>
+      <span class="stat-pill" style="color:#FBBF24"><i class="fas fa-bolt"></i> Combo &amp; XP</span>
+    </div>
+
+    <div class="rules-card">
+      <h4><i class="fas fa-list-check"></i> Cara Bermain</h4>
+      <ul>
+        <li><span class="rule-num">1</span> Jawab 15 soal HOTS dari bank 30 soal — dipilih acak setiap sesi.</li>
+        <li><span class="rule-num">2</span> Jawaban benar memberi <strong>XP</strong> + memicu <strong>combo</strong>. Salah mengurangi <strong>1 nyawa</strong>.</li>
+        <li><span class="rule-num">3</span> Gunakan power-up: <strong>50:50</strong>, <strong>Petunjuk</strong>, <strong>Lewati</strong> (masing-masing 1×).</li>
+        <li><span class="rule-num">4</span> Raih <strong>Achievement</strong> dan taklukkan peringkat <strong>Sejarawan Muda</strong>!</li>
+      </ul>
+    </div>
+
+    <button class="btn-play" onclick="startGame()">
+      <i class="fas fa-play"></i> Mulai Bermain
+    </button>
+  </section>
+
+  <section class="game-hud" id="gameHud">
+    <div class="hud-top">
+      <div class="hud-hp" id="hudHp"></div>
+      <div class="hud-xp">
+        <div class="hud-xp-head">
+          <span class="lvl">LV <span id="hudLevel">1</span></span>
+          <span class="val"><span id="hudXp">0</span> / <span id="hudXpMax">100</span> XP</span>
+        </div>
+        <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
+      </div>
+      <div class="hud-timer" id="hudTimer">
+        <i class="fas fa-stopwatch"></i> <span id="hudTimerVal">20:00</span>
+      </div>
+    </div>
+
+    <div class="hud-middle">
+      <span><i class="fas fa-question-circle" style="color:var(--violet)"></i> Soal <strong id="hudQNum">1</strong>/<strong>15</strong></span>
+      <span class="combo-tag" id="comboTag"><i class="fas fa-fire"></i> Combo ×<span id="comboVal">0</span></span>
+      <span><i class="fas fa-star" style="color:#C4B5FD"></i> Skor <strong id="hudScore" style="font-family:var(--font-mono)">0</strong></span>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-meta">
+        <span class="q-num"><i class="fas fa-bookmark"></i> <span id="qNumLabel">Soal 1</span></span>
+        <span class="q-topic" id="qTopic"><i class="fas fa-tag"></i> <span id="qTopicText">Diakronik</span></span>
+      </div>
+      <div class="q-text" id="qText">Memuat soal...</div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <div class="feedback" id="feedback">
+      <div class="fb-head">
+        <div class="fb-icon" id="fbIcon"><i class="fas fa-check"></i></div>
+        <div class="fb-title" id="fbTitle">BENAR!</div>
+      </div>
+      <div class="fb-body" id="fbBody"></div>
+    </div>
+
+    <div class="hud-bottom">
+      <div class="power-bar">
+        <button class="power-btn p50" id="p50" onclick="usePower('50')">
+          <i class="fas fa-compress-alt"></i> 50:50 <span class="cnt" id="c50">1</span>
+        </button>
+        <button class="power-btn phint" id="phint" onclick="usePower('hint')">
+          <i class="fas fa-lightbulb"></i> Petunjuk <span class="cnt" id="chint">1</span>
+        </button>
+        <button class="power-btn pskip" id="pskip" onclick="usePower('skip')">
+          <i class="fas fa-forward"></i> Lewati <span class="cnt" id="cskip">1</span>
+        </button>
+      </div>
+      <div class="action-bar">
+        <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>
+          Selanjutnya <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="btn btn-primary" id="btnFinish" onclick="finishGame()" style="display:none">
+          Lihat Hasil <i class="fas fa-flag-checkered"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="result-screen" id="resultScreen">
+    <div class="result-hero">
+      <div class="result-trophy" id="rTrophy">🏆</div>
+      <h2 class="result-title" id="rTitle">Luar Biasa!</h2>
+      <p class="result-sub" id="rSub">Kuis 2 · Pertemuan 2</p>
+      <div class="grade-ring" id="gradeRing">
+        <div class="grade-inner">
+          <div class="grade-letter" id="gradeLetter">A</div>
+          <div class="grade-label" id="gradeLabel">Sangat Baik</div>
+        </div>
+      </div>
+      <div class="result-title-text" id="rRank">SEJARAWAN MUDA</div>
+      <div class="result-xp-line">Total XP: <strong id="rXp">0</strong> · Best Combo: <strong id="rBestCombo">0</strong></div>
+      <div class="result-stats">
+        <div class="rs-box"><div class="rs-val green" id="rBenar">0</div><div class="rs-lbl">Benar</div></div>
+        <div class="rs-box"><div class="rs-val red" id="rSalah">0</div><div class="rs-lbl">Salah</div></div>
+        <div class="rs-box"><div class="rs-val cyan" id="rSkor">0</div><div class="rs-lbl">Skor</div></div>
+        <div class="rs-box"><div class="rs-val violet" id="rXpTotal">0</div><div class="rs-lbl">XP Total</div></div>
+      </div>
+      <div class="result-msg" id="rMsg"></div>
+      <div class="result-actions">
+        <button class="btn btn-primary" onclick="resetGame()"><i class="fas fa-redo"></i> Main Lagi</button>
+        <button class="btn btn-ghost" onclick="window.location.reload()"><i class="fas fa-home"></i> Menu Awal</button>
+      </div>
+    </div>
+    <div class="review-panel">
+      <h4><i class="fas fa-list-check"></i> Rincian Jawaban</h4>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ============================================================
+   BANK SOAL — 30 SOAL HOTS · PERTEMUAN 2
+   Materi: Diakronik, Sinkronik, Poerwodarminta, R. Moh. Ali,
+           Herodotus, Ibnu Khaldun
+   ============================================================ */
+const BANK_SOAL = [
+  /* ===== DIAKRONIK (5 soal) ===== */
+  { id:101, topic:"Diakronik",
+    question:"Perhatikan ciri-ciri berikut!\n(1) Memanjang dalam waktu.\n(2) Meluas dalam waktu.\n(3) Menekankan struktur dan keterkaitan aspek.\n(4) Menekankan proses perubahan dan perkembangan.\n\nCiri-ciri berpikir diakronik ditunjukkan oleh nomor...",
+    options:[
+      {letter:"A",text:"(1) dan (2)",correct:false,explanation:"(2) adalah ciri sinkronik."},
+      {letter:"B",text:"(1) dan (4)",correct:true,explanation:"Tepat! Diakronik memanjang dalam waktu (1) dan menekankan proses perubahan (4)."},
+      {letter:"C",text:"(2) dan (3)",correct:false,explanation:"(2) dan (3) adalah ciri sinkronik."},
+      {letter:"D",text:"(3) dan (4)",correct:false,explanation:"(3) adalah ciri sinkronik."},
+      {letter:"E",text:"(1) dan (3)",correct:false,explanation:"(3) adalah ciri sinkronik."}
+    ], difficulty:"medium", hint:"Diakronik = memanjang dalam waktu (vertikal).", points:60 },
+
+  { id:102, topic:"Diakronik",
+    question:"Seorang sejarawan meneliti perkembangan Kerajaan Majapahit mulai dari berdiri (1293 M), masa kejayaan di bawah Hayam Wuruk, hingga keruntuhannya (1527 M). Pendekatan berpikir yang digunakan adalah...",
+    options:[
+      {letter:"A",text:"Sinkronik",correct:false,explanation:"Sinkronik meluas dalam waktu, bukan memanjang."},
+      {letter:"B",text:"Diakronik",correct:true,explanation:"Tepat! Meneliti perkembangan dari waktu ke waktu = diakronik."},
+      {letter:"C",text:"Kronologis terbalik",correct:false,explanation:"Bukan pendekatan yang dimaksud."},
+      {letter:"D",text:"Deskriptif",correct:false,explanation:"Bukan pendekatan diakronik/sinkronik."},
+      {letter:"E",text:"Kausalitas saja",correct:false,explanation:"Bukan pendekatan utama."}
+    ], difficulty:"medium", hint:"Meneliti proses perkembangan dari waktu ke waktu = diakronik.", points:60 },
+
+  { id:103, topic:"Diakronik",
+    question:"Jika seorang sejarawan ingin memahami BAGAIMANA suatu peristiwa berkembang dari waktu ke waktu — misalnya evolusi sistem demokrasi di Indonesia dari 1945 hingga sekarang — maka pendekatan yang paling tepat adalah...",
+    options:[
+      {letter:"A",text:"Sinkronik",correct:false,explanation:"Sinkronik fokus pada satu masa tertentu."},
+      {letter:"B",text:"Diakronik",correct:true,explanation:"Tepat! Diakronik menganalisis proses perkembangan dari waktu ke waktu."},
+      {letter:"C",text:"Kronologis terbalik",correct:false,explanation:"Bukan pendekatan yang dimaksud."},
+      {letter:"D",text:"Statis",correct:false,explanation:"Sejarah justru dinamis."},
+      {letter:"E",text:"Deskriptif murni",correct:false,explanation:"Bukan pendekatan utama."}
+    ], difficulty:"medium", hint:"Fokus pada 'bagaimana berkembang dari waktu ke waktu' = diakronik.", points:60 },
+
+  { id:104, topic:"Diakronik",
+    question:"Perhatikan pernyataan berikut!\n\n'Pendekatan diakronik melihat sejarah sebagai proses perubahan dan kesinambungan.'\n\nContoh penerapan pendekatan diakronik yang paling tepat adalah...",
+    options:[
+      {letter:"A",text:"Menganalisis kondisi sosial-ekonomi Indonesia pada tahun 1998 saja",correct:false,explanation:"Fokus satu tahun = sinkronik."},
+      {letter:"B",text:"Menelusuri perkembangan sistem pendidikan Indonesia dari masa kolonial hingga reformasi",correct:true,explanation:"Tepat! Menelusuri perkembangan dari waktu ke waktu = diakronik."},
+      {letter:"C",text:"Mendaftar peristiwa penting di tahun 1945",correct:false,explanation:"Mendaftar bukan analisis diakronik."},
+      {letter:"D",text:"Mengurutkan nama presiden Indonesia",correct:false,explanation:"Hanya urutan, bukan analisis proses."},
+      {letter:"E",text:"Membandingkan dua candi di Jawa",correct:false,explanation:"Bukan diakronik."}
+    ], difficulty:"medium", hint:"Menelusuri perkembangan dari waktu ke waktu = diakronik.", points:60 },
+
+  { id:105, topic:"Diakronik",
+    question:"Analisis kritis yang tepat tentang kelemahan jika hanya menggunakan pendekatan diakronik dalam penelitian sejarah adalah...",
+    options:[
+      {letter:"A",text:"Tidak dapat melihat urutan waktu peristiwa.",correct:false,explanation:"Justru diakronik fokus pada urutan waktu."},
+      {letter:"B",text:"Kurang mampu melihat keterkaitan antar aspek (sosial, ekonomi, politik) pada satu masa tertentu.",correct:true,explanation:"Tepat! Diakronik fokus pada perubahan, kurang melihat struktur pada satu masa."},
+      {letter:"C",text:"Tidak dapat menganalisis perubahan.",correct:false,explanation:"Justru diakronik fokus pada perubahan."},
+      {letter:"D",text:"Tidak dapat digunakan untuk sejarah lokal.",correct:false,explanation:"Berlaku untuk semua skala."},
+      {letter:"E",text:"Tidak memerlukan sumber sejarah.",correct:false,explanation:"Semua pendekatan butuh sumber."}
+    ], difficulty:"hard", hint:"Diakronik kurang fokus pada struktur/keterkaitan aspek pada satu masa.", points:70 },
+
+  /* ===== SINKRONIK (5 soal) ===== */
+  { id:106, topic:"Sinkronik",
+    question:"Seorang sejarawan menganalisis kondisi sosial, ekonomi, dan politik Indonesia pada tahun 1965 tanpa membahas sebelum atau sesudahnya. Pendekatan berpikir yang digunakan adalah...",
+    options:[
+      {letter:"A",text:"Diakronik",correct:false,explanation:"Diakronik memanjang dalam waktu."},
+      {letter:"B",text:"Sinkronik",correct:true,explanation:"Tepat! Fokus pada satu masa tertentu = sinkronik."},
+      {letter:"C",text:"Kronologis",correct:false,explanation:"Kronologis adalah urutan waktu."},
+      {letter:"D",text:"Periodisasi",correct:false,explanation:"Periodisasi adalah pembagian waktu."},
+      {letter:"E",text:"Kausalitas",correct:false,explanation:"Kausalitas adalah sebab-akibat."}
+    ], difficulty:"medium", hint:"Fokus pada satu masa tertentu = sinkronik.", points:60 },
+
+  { id:107, topic:"Sinkronik",
+    question:"Perhatikan pernyataan berikut!\n\n'Cara berpikir sinkronik menekankan pada struktur dan keterkaitan antar aspek pada suatu masa tertentu.'\n\nContoh penerapan pendekatan sinkronik yang paling tepat adalah...",
+    options:[
+      {letter:"A",text:"Menelusuri perkembangan Islam di Nusantara dari abad ke-13 hingga ke-16",correct:false,explanation:"Ini diakronik."},
+      {letter:"B",text:"Menganalisis keterkaitan antara kondisi ekonomi, politik, dan sosial masyarakat Jawa pada abad ke-19",correct:true,explanation:"Tepat! Menganalisis keterkaitan aspek pada satu masa = sinkronik."},
+      {letter:"C",text:"Mengurutkan peristiwa sekitar Proklamasi 1945",correct:false,explanation:"Hanya kronologi, bukan sinkronik."},
+      {letter:"D",text:"Membandingkan dua tokoh pahlawan",correct:false,explanation:"Bukan sinkronik."},
+      {letter:"E",text:"Menghafal tahun-tahun penting",correct:false,explanation:"Bukan sinkronik."}
+    ], difficulty:"medium", hint:"Menganalisis keterkaitan aspek pada satu masa = sinkronik.", points:60 },
+
+  { id:108, topic:"Sinkronik",
+    question:"Analisis kritis yang tepat tentang kelemahan jika hanya menggunakan pendekatan sinkronik dalam penelitian sejarah adalah...",
+    options:[
+      {letter:"A",text:"Tidak dapat menganalisis keterkaitan antar aspek.",correct:false,explanation:"Justru sinkronik fokus pada keterkaitan aspek."},
+      {letter:"B",text:"Tidak dapat melihat proses perubahan dan perkembangan dari waktu ke waktu.",correct:true,explanation:"Tepat! Sinkronik fokus pada struktur, kurang melihat proses perubahan."},
+      {letter:"C",text:"Tidak dapat digunakan untuk sejarah lokal.",correct:false,explanation:"Berlaku untuk semua skala."},
+      {letter:"D",text:"Tidak memerlukan sumber sejarah.",correct:false,explanation:"Semua pendekatan butuh sumber."},
+      {letter:"E",text:"Tidak dapat menganalisis struktur sosial.",correct:false,explanation:"Justru sinkronik unggul dalam analisis struktur."}
+    ], difficulty:"hard", hint:"Sinkronik kurang fokus pada proses perubahan/perkembangan.", points:70 },
+
+  { id:109, topic:"Sinkronik",
+    question:"Jika seorang sejarawan ingin memahami BAGAIMANA keterkaitan antara aspek politik, ekonomi, sosial, dan budaya pada masa pemerintahan tertentu, maka pendekatan yang paling tepat adalah...",
+    options:[
+      {letter:"A",text:"Diakronik",correct:false,explanation:"Diakronik fokus pada perubahan waktu."},
+      {letter:"B",text:"Sinkronik",correct:true,explanation:"Tepat! Sinkronik menganalisis keterkaitan aspek pada satu masa."},
+      {letter:"C",text:"Kronologis terbalik",correct:false,explanation:"Bukan pendekatan yang dimaksud."},
+      {letter:"D",text:"Deskriptif murni",correct:false,explanation:"Bukan pendekatan utama."},
+      {letter:"E",text:"Statis",correct:false,explanation:"Sejarah dinamis."}
+    ], difficulty:"medium", hint:"Fokus pada keterkaitan aspek di satu masa = sinkronik.", points:60 },
+
+  { id:110, topic:"Sinkronik",
+    question:"Seorang siswa berpendapat: 'Pendekatan sinkronik sama saja dengan pendekatan diakronik.' Bagaimana kritik yang tepat terhadap pendapat tersebut?",
+    options:[
+      {letter:"A",text:"Pendapat benar karena keduanya sama-sama pendekatan sejarah.",correct:false,explanation:"Ada perbedaan mendasar."},
+      {letter:"B",text:"Pendapat salah karena diakronik memanjang dalam waktu (vertikal), sedangkan sinkronik meluas dalam waktu (horizontal).",correct:true,explanation:"Tepat! Perbedaan mendasar terletak pada dimensi waktu."},
+      {letter:"C",text:"Pendapat salah karena sinkronik lebih penting.",correct:false,explanation:"Keduanya sama penting."},
+      {letter:"D",text:"Pendapat benar karena keduanya tidak berbeda.",correct:false,explanation:"Justru berbeda."},
+      {letter:"E",text:"Pendapat tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai berdasarkan konsep."}
+    ], difficulty:"medium", hint:"Diakronik = vertikal (memanjang); Sinkronik = horizontal (meluas).", points:60 },
+
+  /* ===== DIAKRONIK vs SINKRONIK (2 soal) ===== */
+  { id:111, topic:"Diakronik vs Sinkronik",
+    question:"Perbedaan paling mendasar antara cara berpikir diakronik dan sinkronik terletak pada...",
+    options:[
+      {letter:"A",text:"Objek kajiannya: diakronik tentang manusia, sinkronik tentang alam.",correct:false,explanation:"Keduanya tentang manusia."},
+      {letter:"B",text:"Dimensi waktunya: diakronik memanjang (vertikal), sinkronik meluas (horizontal).",correct:true,explanation:"Tepat! Perbedaan utama terletak pada dimensi waktu."},
+      {letter:"C",text:"Sumber yang digunakan: diakronik primer, sinkronik sekunder.",correct:false,explanation:"Keduanya dapat menggunakan sumber apapun."},
+      {letter:"D",text:"Wilayah kajiannya: diakronik lokal, sinkronik nasional.",correct:false,explanation:"Tidak ada kaitan wilayah."},
+      {letter:"E",text:"Bahasa yang digunakan.",correct:false,explanation:"Bukan perbedaan utama."}
+    ], difficulty:"medium", hint:"Diakronik = vertikal (memanjang); Sinkronik = horizontal (meluas).", points:60 },
+
+  { id:112, topic:"Diakronik vs Sinkronik",
+    question:"Seorang sejarawan menganalisis peristiwa G30S/PKI dengan cara: (1) melihat konteks Perang Dingin global, dan (2) menganalisis kondisi politik dalam negeri 1965. Analisis ini menunjukkan bahwa sejarawan tersebut menggunakan pendekatan...",
+    options:[
+      {letter:"A",text:"Diakronik saja",correct:false,explanation:"Ada juga analisis struktur."},
+      {letter:"B",text:"Sinkronik saja",correct:false,explanation:"Ada juga konteks global."},
+      {letter:"C",text:"Kombinasi diakronik dan sinkronik",correct:true,explanation:"Tepat! Menggabungkan konteks waktu (diakronik) dan analisis struktur (sinkronik)."},
+      {letter:"D",text:"Kronologis saja",correct:false,explanation:"Bukan kronologi."},
+      {letter:"E",text:"Kausalitas saja",correct:false,explanation:"Bukan hanya kausalitas."}
+    ], difficulty:"hard", hint:"Kombinasi konteks waktu dan analisis struktur.", points:70 },
+
+  /* ===== POERWODARMINTA (4 soal) ===== */
+  { id:113, topic:"Poerwodarminta",
+    question:"Menurut W.J.S. Poerwodarminta dalam Kamus Umum Bahasa Indonesia, kata 'sejarah' mengandung tiga arti berikut, KECUALI...",
+    options:[
+      {letter:"A",text:"Kesusasteraan lama, silsilah, dan asal-usul",correct:false,explanation:"Ini arti ke-1."},
+      {letter:"B",text:"Kejadian yang benar-benar terjadi di masa lampau",correct:false,explanation:"Ini arti ke-2."},
+      {letter:"C",text:"Ilmu pengetahuan, cerita pengalaman tentang",correct:false,explanation:"Ini arti ke-3."},
+      {letter:"D",text:"Ramalan tentang peristiwa yang akan datang",correct:true,explanation:"Tepat! Ini BUKAN arti sejarah menurut Poerwodarminta."},
+      {letter:"E",text:"Semua jawaban benar",correct:false,explanation:"Ada satu yang bukan."}
+    ], difficulty:"medium", hint:"Poerwodarminta menyebut 3 arti: silsilah, kejadian, ilmu pengetahuan.", points:60 },
+
+  { id:114, topic:"Poerwodarminta",
+    question:"Tiga arti sejarah menurut Poerwodarminta (silsilah, kejadian nyata, ilmu pengetahuan) menggambarkan tiga dimensi yang...",
+    options:[
+      {letter:"A",text:"Saling bertentangan dan tidak dapat disatukan",correct:false,explanation:"Justru saling melengkapi."},
+      {letter:"B",text:"Saling melengkapi: genealogis, faktual, dan ilmiah",correct:true,explanation:"Tepat! Ketiganya memberi dimensi berbeda yang saling melengkapi."},
+      {letter:"C",text:"Hanya berlaku untuk sejarah lokal",correct:false,explanation:"Berlaku universal."},
+      {letter:"D",text:"Hanya berlaku untuk sejarah kerajaan",correct:false,explanation:"Berlaku untuk semua skala."},
+      {letter:"E",text:"Sama saja, hanya berbeda kata",correct:false,explanation:"Ada perbedaan dimensi."}
+    ], difficulty:"hard", hint:"Genealogis (silsilah), faktual (kejadian), ilmiah (ilmu pengetahuan).", points:70 },
+
+  { id:115, topic:"Poerwodarminta",
+    question:"Analisis yang paling tepat tentang relevansi definisi Poerwodarminta bagi kajian sejarah modern adalah...",
+    options:[
+      {letter:"A",text:"Definisi tidak relevan lagi karena sudah kuno",correct:false,explanation:"Justru tetap relevan."},
+      {letter:"B",text:"Definisi tetap relevan karena mencakup aspek genealogis, faktual, dan ilmiah yang menjadi fondasi ilmu sejarah.",correct:true,explanation:"Tepat! Ketiga aspek tersebut menjadi fondasi kajian sejarah."},
+      {letter:"C",text:"Definisi hanya berlaku untuk sejarah silsilah",correct:false,explanation:"Berlaku untuk semua aspek."},
+      {letter:"D",text:"Definisi tidak mencakup aspek faktual",correct:false,explanation:"Justru mencakup."},
+      {letter:"E",text:"Definisi hanya untuk siswa SD",correct:false,explanation:"Berlaku untuk semua jenjang."}
+    ], difficulty:"hard", hint:"Definisi mencakup tiga dimensi yang tetap relevan.", points:70 },
+
+  { id:116, topic:"Poerwodarminta",
+    question:"Persamaan antara definisi sejarah menurut Poerwodarminta dan KBBI terletak pada...",
+    options:[
+      {letter:"A",text:"Keduanya hanya menyebut aspek silsilah",correct:false,explanation:"Keduanya menyebut lebih dari satu aspek."},
+      {letter:"B",text:"Keduanya mencakup aspek silsilah, kejadian nyata, dan ilmu pengetahuan",correct:true,explanation:"Tepat! Keduanya mencakup tiga dimensi tersebut."},
+      {letter:"C",text:"Keduanya menolak aspek silsilah",correct:false,explanation:"Justru mencakup."},
+      {letter:"D",text:"Keduanya hanya menyebut aspek faktual",correct:false,explanation:"Keduanya menyebut lebih dari itu."},
+      {letter:"E",text:"Keduanya tidak relevan dengan kajian sejarah",correct:false,explanation:"Justru sangat relevan."}
+    ], difficulty:"hard", hint:"Bandingkan tiga arti KBBI dengan tiga arti Poerwodarminta.", points:70 },
+
+  /* ===== R. MOH. ALI (5 soal) ===== */
+  { id:117, topic:"R. Moh. Ali",
+    question:"Menurut R. Moh. Ali dalam 'Pengantar Ilmu Sejarah', sejarah adalah...",
+    options:[
+      {letter:"A",text:"Catatan tentang peradaban dunia",correct:false,explanation:"Ini definisi Ibnu Khaldun."},
+      {letter:"B",text:"Jumlah perubahan-perubahan, kejadian, dan peristiwa dalam kenyataan sekitar kita",correct:true,explanation:"Tepat! R. Moh. Ali menekankan konsep perubahan."},
+      {letter:"C",text:"Penyelidikan terhadap peristiwa masa lalu",correct:false,explanation:"Ini Herodotus."},
+      {letter:"D",text:"Upaya membangun kembali masa lalu",correct:false,explanation:"Ini Kuntowijoyo."},
+      {letter:"E",text:"Sistem yang meneliti kejadian sejak awal",correct:false,explanation:"Ini Aristoteles."}
+    ], difficulty:"easy", hint:"R. Moh. Ali menekankan konsep perubahan.", points:50 },
+
+  { id:118, topic:"R. Moh. Ali",
+    question:"Makna terpenting dari definisi sejarah menurut R. Moh. Ali adalah...",
+    options:[
+      {letter:"A",text:"Kronologi",correct:false,explanation:"Kronologi bukan makna terpenting menurut R. Moh. Ali."},
+      {letter:"B",text:"Perubahan",correct:true,explanation:"Tepat! R. Moh. Ali menekankan konsep perubahan."},
+      {letter:"C",text:"Silsilah",correct:false,explanation:"Silsilah lebih dekat ke Syajaratun."},
+      {letter:"D",text:"Rekonstruksi",correct:false,explanation:"Rekonstruksi adalah Kuntowijoyo."},
+      {letter:"E",text:"Seni",correct:false,explanation:"Seni adalah dimensi hakikat."}
+    ], difficulty:"easy", hint:"R. Moh. Ali = perubahan.", points:50 },
+
+  { id:119, topic:"R. Moh. Ali",
+    question:"R. Moh. Ali menyebut sejarah dalam tiga makna. Makna ketiga menurutnya adalah...",
+    options:[
+      {letter:"A",text:"Jumlah perubahan dalam kenyataan sekitar kita",correct:false,explanation:"Ini makna pertama."},
+      {letter:"B",text:"Cerita tentang perubahan yang merupakan realitas tersebut",correct:false,explanation:"Ini makna kedua."},
+      {letter:"C",text:"Ilmu yang bertugas menyelidiki perubahan-perubahan, kejadian, dan peristiwa yang merupakan realitas tersebut",correct:true,explanation:"Tepat! Makna ketiga menekankan sejarah sebagai ilmu."},
+      {letter:"D",text:"Catatan tentang masyarakat dan peradaban",correct:false,explanation:"Ini Ibnu Khaldun."},
+      {letter:"E",text:"Penyelidikan terhadap peristiwa masa lalu",correct:false,explanation:"Ini Herodotus."}
+    ], difficulty:"hard", hint:"Makna ketiga = sejarah sebagai ilmu yang menyelidiki.", points:70 },
+
+  { id:120, topic:"R. Moh. Ali",
+    question:"Seorang siswa menganalisis perubahan sistem pemerintahan Indonesia dari Orde Baru ke Reformasi 1998. Analisis ini paling relevan dengan definisi sejarah menurut...",
+    options:[
+      {letter:"A",text:"Herodotus",correct:false,explanation:"Herodotus menekankan penyelidikan."},
+      {letter:"B",text:"Ibnu Khaldun",correct:false,explanation:"Ibnu Khaldun menekankan masyarakat dan peradaban."},
+      {letter:"C",text:"R. Moh. Ali",correct:true,explanation:"Tepat! R. Moh. Ali menekankan konsep perubahan."},
+      {letter:"D",text:"Poerwodarminta",correct:false,explanation:"Poerwodarminta menekankan 3 dimensi."},
+      {letter:"E",text:"Aristoteles",correct:false,explanation:"Aristoteles menekankan kronologi."}
+    ], difficulty:"medium", hint:"Fokus pada 'perubahan' → R. Moh. Ali.", points:60 },
+
+  { id:121, topic:"R. Moh. Ali",
+    question:"Analisis kritis yang tepat tentang kontribusi definisi R. Moh. Ali bagi ilmu sejarah adalah...",
+    options:[
+      {letter:"A",text:"Definisinya terlalu sempit karena hanya fokus pada politik.",correct:false,explanation:"Justru mencakup semua aspek kenyataan."},
+      {letter:"B",text:"Definisinya menekankan bahwa sejarah adalah dinamis (selalu berubah), bukan statis.",correct:true,explanation:"Tepat! R. Moh. Ali menekankan perubahan sebagai inti sejarah."},
+      {letter:"C",text:"Definisinya tidak relevan untuk sejarah modern.",correct:false,explanation:"Justru sangat relevan."},
+      {letter:"D",text:"Definisinya hanya berlaku untuk sejarah lokal.",correct:false,explanation:"Berlaku universal."},
+      {letter:"E",text:"Definisinya menolak aspek ilmu pengetahuan.",correct:false,explanation:"Justru mencakup aspek ilmu."}
+    ], difficulty:"hard", hint:"R. Moh. Ali = sejarah dinamis, selalu berubah.", points:70 },
+
+  /* ===== HERODOTUS (5 soal) ===== */
+  { id:122, topic:"Herodotus",
+    question:"Herodotus dijuluki sebagai 'The Father of History' karena...",
+    options:[
+      {letter:"A",text:"Ia adalah sejarawan pertama yang menulis sejarah secara sistematis dalam karyanya Historia",correct:true,explanation:"Tepat! Herodotus menulis sejarah secara sistematis dalam Historia."},
+      {letter:"B",text:"Ia adalah raja pertama yang menulis sejarah",correct:false,explanation:"Bukan raja."},
+      {letter:"C",text:"Ia menemukan mesin waktu",correct:false,explanation:"Tidak relevan."},
+      {letter:"D",text:"Ia menulis sejarah tentang Mesir kuno",correct:false,explanation:"Karyanya tentang Perang Yunani-Persia."},
+      {letter:"E",text:"Ia adalah murid Aristoteles",correct:false,explanation:"Bukan murid Aristoteles."}
+    ], difficulty:"easy", hint:"Herodotus menulis Historia secara sistematis.", points:50 },
+
+  { id:123, topic:"Herodotus",
+    question:"Karya monumental Herodotus yang mengisahkan Perang Yunani-Persia berjudul...",
+    options:[
+      {letter:"A",text:"Muqaddimah",correct:false,explanation:"Ini karya Ibnu Khaldun."},
+      {letter:"B",text:"Historia",correct:true,explanation:"Tepat! Karya Herodotus berjudul Historia."},
+      {letter:"C",text:"The Idea of History",correct:false,explanation:"Ini karya Collingwood."},
+      {letter:"D",text:"Pengantar Ilmu Sejarah",correct:false,explanation:"Ini karya R. Moh. Ali."},
+      {letter:"E",text:"Babad Tanah Jawi",correct:false,explanation:"Ini karya sastra Jawa."}
+    ], difficulty:"easy", hint:"Karya Herodotus = Historia.", points:50 },
+
+  { id:124, topic:"Herodotus",
+    question:"Menurut Herodotus, sejarah bergerak seperti garis lingkaran yang tinggi rendahnya diakibatkan oleh...",
+    options:[
+      {letter:"A",text:"Kehendak dewa-dewa",correct:false,explanation:"Bukan penekanan utama Herodotus."},
+      {letter:"B",text:"Keadaan manusia",correct:true,explanation:"Tepat! Menurut Herodotus, sejarah bergerak seperti lingkaran yang dipengaruhi keadaan manusia."},
+      {letter:"C",text:"Ramalan para nabi",correct:false,explanation:"Bukan penekanan Herodotus."},
+      {letter:"D",text:"Bencana alam",correct:false,explanation:"Bukan penekanan utama."},
+      {letter:"E",text:"Keputusan raja",correct:false,explanation:"Bukan penekanan utama."}
+    ], difficulty:"medium", hint:"Herodotus: sejarah seperti lingkaran yang dipengaruhi keadaan manusia.", points:60 },
+
+  { id:125, topic:"Herodotus",
+    question:"Pendekatan Herodotus dalam menulis sejarah menekankan pentingnya...",
+    options:[
+      {letter:"A",text:"Mitos dan legenda",correct:false,explanation:"Justru Historia menekankan bukti."},
+      {letter:"B",text:"Bukti dan kesaksian dalam penulisan sejarah",correct:true,explanation:"Tepat! Herodotus menekankan bukti dan kesaksian."},
+      {letter:"C",text:"Ramalan dan takhayul",correct:false,explanation:"Bukan penekanan Herodotus."},
+      {letter:"D",text:"Pujian kepada raja",correct:false,explanation:"Bukan penekanan utama."},
+      {letter:"E",text:"Cerita fiktif",correct:false,explanation:"Herodotus menekankan fakta."}
+    ], difficulty:"medium", hint:"Herodotus menekankan bukti dan kesaksian.", points:60 },
+
+  { id:126, topic:"Herodotus",
+    question:"Analisis kritis yang tepat tentang kontribusi Herodotus bagi perkembangan ilmu sejarah adalah...",
+    options:[
+      {letter:"A",text:"Ia memperkenalkan pendekatan penyelidikan berbasis bukti dan kesaksian.",correct:true,explanation:"Tepat! Herodotus memperkenalkan pendekatan penyelidikan berbasis bukti."},
+      {letter:"B",text:"Ia menolak penggunaan sumber lisan.",correct:false,explanation:"Justru ia menggunakan kesaksian."},
+      {letter:"C",text:"Ia hanya menulis tentang mitologi Yunani.",correct:false,explanation:"Ia menulis tentang peristiwa nyata."},
+      {letter:"D",text:"Ia tidak menggunakan sumber apapun.",correct:false,explanation:"Ia menggunakan sumber dan kesaksian."},
+      {letter:"E",text:"Ia mengabaikan konteks sejarah.",correct:false,explanation:"Justru ia memperhatikan konteks."}
+    ], difficulty:"hard", hint:"Herodotus = penyelidikan berbasis bukti dan kesaksian.", points:70 },
+
+  /* ===== IBNU KHALDUN (5 soal) ===== */
+  { id:127, topic:"Ibnu Khaldun",
+    question:"Menurut Ibnu Khaldun dalam kitab Muqaddimah, sejarah adalah...",
+    options:[
+      {letter:"A",text:"Penyelidikan terhadap peristiwa masa lalu",correct:false,explanation:"Ini Herodotus."},
+      {letter:"B",text:"Catatan tentang masyarakat, umat manusia, atau peradaban dunia, dan perubahan watak masyarakat",correct:true,explanation:"Tepat! Ibnu Khaldun menekankan masyarakat dan peradaban."},
+      {letter:"C",text:"Jumlah perubahan dalam kenyataan sekitar",correct:false,explanation:"Ini R. Moh. Ali."},
+      {letter:"D",text:"Upaya membangun kembali masa lalu",correct:false,explanation:"Ini Kuntowijoyo."},
+      {letter:"E",text:"Sistem yang meneliti kejadian sejak awal",correct:false,explanation:"Ini Aristoteles."}
+    ], difficulty:"easy", hint:"Ibnu Khaldun menekankan masyarakat dan peradaban.", points:50 },
+
+  { id:128, topic:"Ibnu Khaldun",
+    question:"Ibnu Khaldun dijuluki sebagai...",
+    options:[
+      {letter:"A",text:"The Father of History",correct:false,explanation:"Ini Herodotus."},
+      {letter:"B",text:"Bapak Pendiri Historiografi, Sosiologi, dan Ekonomi",correct:true,explanation:"Tepat! Ibnu Khaldun dijuluki sebagai Bapak Pendiri Historiografi, Sosiologi, dan Ekonomi."},
+      {letter:"C",text:"Bapak Sejarah Indonesia",correct:false,explanation:"Ini Kuntowijoyo."},
+      {letter:"D",text:"Bapak Filsafat Yunani",correct:false,explanation:"Ini Aristoteles."},
+      {letter:"E",text:"Bapak Kebudayaan Nusantara",correct:false,explanation:"Bukan julukan Ibnu Khaldun."}
+    ], difficulty:"easy", hint:"Ibnu Khaldun = Bapak Historiografi, Sosiologi, Ekonomi.", points:50 },
+
+  { id:129, topic:"Ibnu Khaldun",
+    question:"Karya Ibnu Khaldun yang memuat definisi sejarah sebagai catatan tentang masyarakat dan peradaban adalah...",
+    options:[
+      {letter:"A",text:"Historia",correct:false,explanation:"Ini karya Herodotus."},
+      {letter:"B",text:"Muqaddimah",correct:true,explanation:"Tepat! Muqaddimah adalah karya Ibnu Khaldun."},
+      {letter:"C",text:"The Idea of History",correct:false,explanation:"Ini karya Collingwood."},
+      {letter:"D",text:"Pengantar Ilmu Sejarah",correct:false,explanation:"Ini karya R. Moh. Ali."},
+      {letter:"E",text:"Sejarah Melayu",correct:false,explanation:"Ini karya sastra Melayu."}
+    ], difficulty:"easy", hint:"Karya Ibnu Khaldun = Muqaddimah.", points:50 },
+
+  { id:130, topic:"Ibnu Khaldun",
+    question:"Ibnu Khaldun menekankan bahwa sejarah mencakup seluruh proses perubahan secara nyata dengan segala...",
+    options:[
+      {letter:"A",text:"Mitos dan legenda",correct:false,explanation:"Bukan penekanan Ibnu Khaldun."},
+      {letter:"B",text:"Sebab dan akibatnya",correct:true,explanation:"Tepat! Ibnu Khaldun menekankan sebab-akibat (kausalitas) dalam sejarah."},
+      {letter:"C",text:"Ramalan dan takhayul",correct:false,explanation:"Bukan penekanan Ibnu Khaldun."},
+      {letter:"D",text:"Pujian kepada raja",correct:false,explanation:"Bukan penekanan utama."},
+      {letter:"E",text:"Cerita fiktif",correct:false,explanation:"Ibnu Khaldun menekankan fakta."}
+    ], difficulty:"hard", hint:"Ibnu Khaldun menekankan sebab-akibat (kausalitas).", points:70 },
+
+  { id:131, topic:"Ibnu Khaldun",
+    question:"Analisis kritis yang tepat tentang kontribusi Ibnu Khaldun bagi ilmu sejarah adalah...",
+    options:[
+      {letter:"A",text:"Ia hanya menulis tentang sejarah Islam.",correct:false,explanation:"Ia menulis tentang peradaban universal."},
+      {letter:"B",text:"Ia memperluas kajian sejarah dari sekadar peristiwa politik menjadi analisis peradaban dan masyarakat.",correct:true,explanation:"Tepat! Ibnu Khaldun memperluas kajian sejarah ke peradaban dan masyarakat."},
+      {letter:"C",text:"Ia menolak penggunaan metode ilmiah.",correct:false,explanation:"Justru ia menggunakan pendekatan ilmiah."},
+      {letter:"D",text:"Ia hanya mengandalkan sumber lisan.",correct:false,explanation:"Ia menggunakan berbagai sumber."},
+      {letter:"E",text:"Ia mengabaikan aspek sosial.",correct:false,explanation:"Justru ia menekankan aspek sosial."}
+    ], difficulty:"hard", hint:"Ibnu Khaldun memperluas kajian sejarah ke peradaban & masyarakat.", points:70 },
+
+  /* ===== SINTESIS (2 soal) ===== */
+  { id:132, topic:"Sintesis Tokoh",
+    question:"Perbedaan utama antara Herodotus dan Ibnu Khaldun dalam memandang sejarah adalah...",
+    options:[
+      {letter:"A",text:"Herodotus fokus pada penyelidikan peristiwa; Ibnu Khaldun fokus pada masyarakat dan peradaban.",correct:true,explanation:"Tepat! Herodotus = penyelidikan peristiwa; Ibnu Khaldun = masyarakat & peradaban."},
+      {letter:"B",text:"Herodotus fokus pada mitos; Ibnu Khaldun fokus pada ramalan.",correct:false,explanation:"Keduanya menolak mitos dan ramalan."},
+      {letter:"C",text:"Herodotus adalah sejarawan Muslim; Ibnu Khaldun adalah sejarawan Yunani.",correct:false,explanation:"Terbalik."},
+      {letter:"D",text:"Keduanya sama saja pandangannya.",correct:false,explanation:"Ada perbedaan signifikan."},
+      {letter:"E",text:"Herodotus menolak bukti; Ibnu Khaldun menolak sebab-akibat.",correct:false,explanation:"Justru keduanya menekankan bukti dan sebab-akibat."}
+    ], difficulty:"hard", hint:"Herodotus = peristiwa; Ibnu Khaldun = masyarakat & peradaban.", points:70 },
+
+  { id:133, topic:"Sintesis Tokoh",
+    question:"Analisis yang paling tepat tentang hubungan antara definisi R. Moh. Ali dan Ibnu Khaldun adalah...",
+    options:[
+      {letter:"A",text:"Keduanya saling bertentangan.",correct:false,explanation:"Justru saling melengkapi."},
+      {letter:"B",text:"Keduanya menekankan aspek perubahan dalam masyarakat, namun R. Moh. Ali lebih fokus pada perubahan umum sedangkan Ibnu Khaldun lebih fokus pada perubahan peradaban.",correct:true,explanation:"Tepat! Keduanya menekankan perubahan, dengan fokus yang berbeda."},
+      {letter:"C",text:"Keduanya sama persis.",correct:false,explanation:"Ada perbedaan penekanan."},
+      {letter:"D",text:"Keduanya menolak konsep perubahan.",correct:false,explanation:"Justru keduanya menekankan perubahan."},
+      {letter:"E",text:"Keduanya hanya berlaku untuk sejarah lokal.",correct:false,explanation:"Berlaku universal."}
+    ], difficulty:"hard", hint:"Keduanya menekankan perubahan, dengan fokus berbeda.", points:70 },
+
+  /* ===== SINTESIS 3 (untuk melengkapi 30 soal) ===== */
+  { id:134, topic:"Sintesis Tokoh",
+    question:"Jika seorang siswa ingin memahami sejarah secara utuh, maka ia harus mengombinasikan definisi dari berbagai tokoh karena...",
+    options:[
+      {letter:"A",text:"Setiap definisi pasti salah.",correct:false,explanation:"Bukan karena salah."},
+      {letter:"B",text:"Setiap definisi menekankan aspek berbeda yang saling melengkapi untuk pemahaman holistik.",correct:true,explanation:"Tepat! Setiap definisi menekankan aspek berbeda yang saling melengkapi."},
+      {letter:"C",text:"Hanya definisi Herodotus yang benar.",correct:false,explanation:"Semua definisi memiliki kontribusi."},
+      {letter:"D",text:"Definisi para tokoh tidak penting.",correct:false,explanation:"Justru penting."},
+      {letter:"E",text:"Definisi hanya berlaku untuk sejarah lokal.",correct:false,explanation:"Berlaku universal."}
+    ], difficulty:"hard", hint:"Setiap definisi menekankan aspek berbeda yang saling melengkapi.", points:70 },
+
+  { id:135, topic:"Sintesis Tokoh",
+    question:"Perhatikan pernyataan berikut!\n\n'Sejarah adalah penyelidikan (Herodotus), catatan peradaban (Ibnu Khaldun), perubahan (R. Moh. Ali), dan memiliki tiga dimensi: silsilah, fakta, ilmu (Poerwodarminta).'\n\nAnalisis yang paling tepat tentang pernyataan tersebut adalah...",
+    options:[
+      {letter:"A",text:"Pernyataan salah karena definisi-definisi tersebut tidak dapat disatukan.",correct:false,explanation:"Justru dapat disatukan."},
+      {letter:"B",text:"Pernyataan tepat karena keempat definisi saling melengkapi dan membentuk pemahaman komprehensif tentang sejarah.",correct:true,explanation:"Tepat! Keempat definisi saling melengkapi."},
+      {letter:"C",text:"Pernyataan hanya benar untuk definisi Herodotus.",correct:false,explanation:"Semua definisi valid."},
+      {letter:"D",text:"Pernyataan tidak relevan dengan kajian sejarah.",correct:false,explanation:"Sangat relevan."},
+      {letter:"E",text:"Pernyataan hanya berlaku untuk sejarah Yunani.",correct:false,explanation:"Berlaku universal."}
+    ], difficulty:"hard", hint:"Keempat definisi saling melengkapi membentuk pemahaman komprehensif.", points:70 },
+
+  /* ===== SOAL TAMBAHAN DIAKRONIK-SINKRONIK (melengkapi) ===== */
+  { id:136, topic:"Diakronik",
+    question:"Pendekatan diakronik dalam sejarah paling erat kaitannya dengan konsep...",
+    options:[
+      {letter:"A",text:"Struktur",correct:false,explanation:"Struktur lebih dekat ke sinkronik."},
+      {letter:"B",text:"Kronologi dan periodisasi",correct:true,explanation:"Tepat! Diakronik berkaitan dengan kronologi dan periodisasi."},
+      {letter:"C",text:"Sinkronisitas",correct:false,explanation:"Sinkronisitas lebih dekat ke sinkronik."},
+      {letter:"D",text:"Statis",correct:false,explanation:"Diakronik justru dinamis."},
+      {letter:"E",text:"Keterkaitan aspek",correct:false,explanation:"Lebih dekat ke sinkronik."}
+    ], difficulty:"medium", hint:"Diakronik = kronologi & periodisasi.", points:60 },
+
+  { id:137, topic:"Sinkronik",
+    question:"Pendekatan sinkronik dalam sejarah paling erat kaitannya dengan konsep...",
+    options:[
+      {letter:"A",text:"Kronologi",correct:false,explanation:"Kronologi lebih dekat ke diakronik."},
+      {letter:"B",text:"Struktur dan keterkaitan antar aspek",correct:true,explanation:"Tepat! Sinkronik berkaitan dengan struktur dan keterkaitan aspek."},
+      {letter:"C",text:"Periodisasi",correct:false,explanation:"Periodisasi lebih dekat ke diakronik."},
+      {letter:"D",text:"Urutan waktu",correct:false,explanation:"Urutan waktu lebih dekat ke diakronik."},
+      {letter:"E",text:"Perubahan jangka panjang",correct:false,explanation:"Lebih dekat ke diakronik."}
+    ], difficulty:"medium", hint:"Sinkronik = struktur & keterkaitan aspek.", points:60 },
+
+  { id:138, topic:"Herodotus",
+    question:"Perbedaan pandangan Herodotus dan R. Moh. Ali tentang sejarah terletak pada...",
+    options:[
+      {letter:"A",text:"Herodotus menekankan penyelidikan; R. Moh. Ali menekankan perubahan.",correct:true,explanation:"Tepat! Herodotus = penyelidikan; R. Moh. Ali = perubahan."},
+      {letter:"B",text:"Herodotus menekankan perubahan; R. Moh. Ali menekankan penyelidikan.",correct:false,explanation:"Terbalik."},
+      {letter:"C",text:"Keduanya sama saja pandangannya.",correct:false,explanation:"Ada perbedaan penekanan."},
+      {letter:"D",text:"Herodotus menolak bukti; R. Moh. Ali menolak perubahan.",correct:false,explanation:"Keduanya tidak menolak."},
+      {letter:"E",text:"Keduanya hanya fokus pada peradaban.",correct:false,explanation:"Bukan fokus keduanya."}
+    ], difficulty:"hard", hint:"Herodotus = penyelidikan; R. Moh. Ali = perubahan.", points:70 },
+
+  { id:139, topic:"Poerwodarminta",
+    question:"Analisis yang tepat tentang hubungan antara definisi Poerwodarminta dan R. Moh. Ali adalah...",
+    options:[
+      {letter:"A",text:"Keduanya saling bertentangan.",correct:false,explanation:"Justru saling melengkapi."},
+      {letter:"B",text:"Poerwodarminta menekankan tiga dimensi (silsilah, fakta, ilmu); R. Moh. Ali menekankan perubahan — keduanya saling melengkapi.",correct:true,explanation:"Tepat! Keduanya saling melengkapi."},
+      {letter:"C",text:"Keduanya sama persis.",correct:false,explanation:"Ada perbedaan penekanan."},
+      {letter:"D",text:"Keduanya menolak konsep perubahan.",correct:false,explanation:"R. Moh. Ali justru menekankan perubahan."},
+      {letter:"E",text:"Keduanya hanya berlaku untuk sejarah lokal.",correct:false,explanation:"Berlaku universal."}
+    ], difficulty:"hard", hint:"Poerwodarminta = 3 dimensi; R. Moh. Ali = perubahan.", points:70 },
+
+  { id:140, topic:"Sintesis Tokoh",
+    question:"Kesimpulan yang paling tepat tentang definisi sejarah dari berbagai tokoh adalah...",
+    options:[
+      {letter:"A",text:"Hanya satu definisi yang benar, lainnya salah.",correct:false,explanation:"Semua definisi memiliki kontribusi."},
+      {letter:"B",text:"Setiap definisi menekankan aspek berbeda dan saling melengkapi untuk pemahaman komprehensif tentang sejarah.",correct:true,explanation:"Tepat! Setiap definisi memberi kontribusi berbeda."},
+      {letter:"C",text:"Definisi para tokoh tidak perlu dipelajari.",correct:false,explanation:"Justru perlu dipelajari."},
+      {letter:"D",text:"Definisi hanya berlaku untuk zamannya masing-masing.",correct:false,explanation:"Banyak yang tetap relevan."},
+      {letter:"E",text:"Definisi hanya berlaku untuk sejarah Barat.",correct:false,explanation:"Berlaku universal."}
+    ], difficulty:"hard", hint:"Setiap definisi menekankan aspek berbeda & saling melengkapi.", points:70 }
+];
+
+/* ============================================================
+   CONSTANTS & STATE
+   ============================================================ */
+const TOTAL_Q = 15;
+const TIME_LIMIT = 20 * 60;
+
+const state = {
+  questions: [], currentIndex: 0, answers: [], score: 0,
+  xp: 0, level: 1, hp: 3, maxHp: 3, combo: 0, bestCombo: 0,
+  timer: null, timeLeft: TIME_LIMIT, started: false, finished: false,
+  powers: { p50:1, hint:1, skip:1 }, soundOn: true
+};
+
+/* ============================================================
+   AUDIO
+   ============================================================ */
+let audioCtx = null;
+function ensureAudio(){
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}
+function playTone(freq, dur, type, vol){
+  if (!state.soundOn) return;
+  ensureAudio();
+  if (!audioCtx) return;
+  try {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = type || 'sine';
+    o.frequency.value = freq;
+    g.gain.setValueAtTime(vol || 0.08, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + dur);
+  } catch(e){}
+}
+function sfxClick(){ playTone(520, .08, 'triangle', .06); }
+function sfxCorrect(){
+  playTone(660, .12, 'sine', .10);
+  setTimeout(()=>playTone(880, .15, 'sine', .10), 80);
+  setTimeout(()=>playTone(1100, .20, 'sine', .08), 160);
+}
+function sfxWrong(){
+  playTone(200, .18, 'sawtooth', .10);
+  setTimeout(()=>playTone(150, .25, 'sawtooth', .08), 120);
+}
+function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(()=>playTone(1200, .12, 'triangle', .07), 60); }
+function sfxLevelUp(){ [523, 659, 784, 1046].forEach((f, i) => setTimeout(()=>playTone(f, .16, 'sine', .10), i*90)); }
+function sfxFinish(){ [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(()=>playTone(f, .22, 'sine', .10), i*120)); }
+
+function toggleSound(){
+  state.soundOn = !state.soundOn;
+  document.getElementById('soundBtn').innerHTML = state.soundOn ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+  if (state.soundOn) sfxClick();
+}
+
+/* ============================================================
+   THEME
+   ============================================================ */
+function toggleTheme(){
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').innerHTML = next === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  sfxClick();
+}
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+(function(){
+  const bar = document.getElementById('loaderBar');
+  const pct = document.getElementById('loaderPct');
+  const loader = document.getElementById('loader');
+  const t0 = Date.now();
+  (function tick(){
+    const p = Math.min((Date.now() - t0) / 1800 * 100, 100);
+    bar.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+    if (p < 100) requestAnimationFrame(tick);
+    else setTimeout(()=>{ loader.classList.add('hidden'); setTimeout(()=>loader.style.display='none', 700); }, 300);
+  })();
+})();
+
+/* ============================================================
+   PARTICLES
+   ============================================================ */
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  function makeP(){ return { x: Math.random()*W, y: Math.random()*H, r: Math.random()*2 + 0.4, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3 - 0.15, a: Math.random()*0.5 + 0.15, hue: Math.random() < 0.5 ? 270 : 190 }; }
+  function init(){ resize(); particles = Array.from({length: Math.min(60, Math.floor(W*H/25000))}, makeP); }
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.fill();
+    });
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+/* ============================================================
+   CONFETTI
+   ============================================================ */
+function fireConfetti(count){
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const colors = ['#F59E0B','#FCD34D','#06B6D4','#10B981','#8B5CF6','#F43F5E','#38BDF8','#C4B5FD'];
+  const pieces = Array.from({length: count || 60}, () => ({
+    x: window.innerWidth/2 + (Math.random()-0.5)*200,
+    y: window.innerHeight/2,
+    vx: (Math.random()-0.5)*14,
+    vy: Math.random()*-16 - 4,
+    g: 0.5, r: Math.random()*8 + 4,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    rot: Math.random()*Math.PI, vr: (Math.random()-0.5)*0.3, life: 1
+  }));
+  let frame = 0;
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    pieces.forEach(p => {
+      if (p.life <= 0) return;
+      alive = true;
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.012;
+      ctx.save();
+      ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      ctx.restore();
+    });
+    if (alive && frame < 200) { frame++; requestAnimationFrame(animate); }
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  animate();
+}
+
+/* ============================================================
+   TOAST & SCORE POPUP
+   ============================================================ */
+function showToast(icon, title, desc, variant){
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<div class="toast-icon ${variant||''}">${icon}</div>
+    <div class="toast-content"><div class="toast-title">${title}</div><div class="toast-desc">${desc}</div></div>`;
+  wrap.appendChild(el);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 450); }, 3200);
+}
+function scorePopup(text, x, y, color){
+  const el = document.createElement('div');
+  el.className = 'score-pop';
+  el.textContent = text;
+  el.style.left = (x || window.innerWidth/2) + 'px';
+  el.style.top = (y || window.innerHeight/2) + 'px';
+  if (color) el.style.color = color;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1100);
+}
+
+/* ============================================================
+   UTILS
+   ============================================================ */
+function shuffle(a){ const arr = a.slice(); for (let i = arr.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+function updateHpHud(){
+  const hp = document.getElementById('hudHp');
+  hp.innerHTML = '';
+  for (let i = 0; i < state.maxHp; i++){
+    const heart = document.createElement('i');
+    heart.className = 'fas fa-heart heart' + (i < state.hp ? '' : ' empty');
+    hp.appendChild(heart);
+  }
+}
+function updateXpHud(){
+  const xpForLevel = state.level * 100;
+  const pct = Math.min((state.xp % xpForLevel) / xpForLevel * 100, 100);
+  document.getElementById('hudLevel').textContent = state.level;
+  document.getElementById('hudXp').textContent = state.xp % xpForLevel;
+  document.getElementById('hudXpMax').textContent = xpForLevel;
+  document.getElementById('xpFill').style.width = pct + '%';
+}
+function updateComboHud(){
+  document.getElementById('comboVal').textContent = state.combo;
+  const tag = document.getElementById('comboTag');
+  if (state.combo >= 3){ tag.classList.add('hot'); setTimeout(()=>tag.classList.remove('hot'), 500); }
+}
+function updatePowers(){
+  document.getElementById('c50').textContent = state.powers.p50;
+  document.getElementById('chint').textContent = state.powers.hint;
+  document.getElementById('cskip').textContent = state.powers.skip;
+  document.getElementById('p50').disabled = state.powers.p50 <= 0;
+  document.getElementById('phint').disabled = state.powers.hint <= 0;
+  document.getElementById('pskip').disabled = state.powers.skip <= 0;
+}
+
+/* ============================================================
+   GAME FLOW
+   ============================================================ */
+function startGame(){
+  ensureAudio();
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('gameHud').classList.add('active');
+
+  state.questions = shuffle(BANK_SOAL).slice(0, TOTAL_Q);
+  state.currentIndex = 0; state.answers = [];
+  state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.timeLeft = TIME_LIMIT; state.started = true; state.finished = false;
+  state.powers = { p50:1, hint:1, skip:1 };
+
+  updateHpHud(); updateXpHud(); updateComboHud(); updatePowers();
+
+  showToast('🚀', 'Arena Level 2 Dimulai!', 'Kuasai diakronik, sinkronik & para ahli!', '');
+  sfxClick();
+  startTimer();
+  renderQuestion();
+}
+
+function startTimer(){
+  if (state.timer) clearInterval(state.timer);
+  state.timer = setInterval(() => {
+    state.timeLeft--;
+    updateTimerHud();
+    if (state.timeLeft <= 0){ clearInterval(state.timer); finishGame(true); }
+  }, 1000);
+  updateTimerHud();
+}
+function updateTimerHud(){
+  const m = Math.floor(state.timeLeft / 60), s = state.timeLeft % 60;
+  document.getElementById('hudTimerVal').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  const el = document.getElementById('hudTimer');
+  if (state.timeLeft <= 120) el.classList.add('warning'); else el.classList.remove('warning');
+}
+
+function renderQuestion(){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  document.getElementById('qNumLabel').textContent = 'Soal ' + (state.currentIndex+1);
+  document.getElementById('qTopicText').textContent = q.topic || 'Pertemuan 2';
+  document.getElementById('qText').textContent = q.question;
+  document.getElementById('hudQNum').textContent = state.currentIndex+1;
+
+  const opts = document.getElementById('options');
+  opts.innerHTML = '';
+  q.options.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.dataset.letter = o.letter;
+    btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
+    btn.addEventListener('click', () => selectOption(o.letter, btn));
+    opts.appendChild(btn);
+  });
+
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('btnNext').disabled = true;
+  document.getElementById('btnNext').style.display = '';
+  document.getElementById('btnFinish').style.display = 'none';
+  document.getElementById('qCard').classList.remove('shake');
+
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'qEnter .55s cubic-bezier(.16,1,.3,1)';
+
+  if (state.currentIndex === TOTAL_Q - 1){
+    document.getElementById('btnNext').style.display = 'none';
+    document.getElementById('btnFinish').style.display = '';
+  }
+}
+
+function selectOption(letter, btnEl){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  const selected = q.options.find(o => o.letter === letter);
+  if (!selected) return;
+  const correct = selected.correct;
+
+  document.querySelectorAll('#options .opt').forEach(b => {
+    b.classList.add('locked');
+    const l = b.dataset.letter;
+    const o = q.options.find(x => x.letter === l);
+    if (o.correct) b.classList.add('correct');
+    else if (l === letter && !correct) b.classList.add('wrong');
+  });
+
+  state.answers.push({ qid: q.id, selected: letter, correct, skipped: false,
+    questionText: q.question, topic: q.topic,
+    correctLetter: q.options.find(o => o.correct).letter,
+    explanation: selected.explanation });
+
+  if (correct){
+    state.combo++;
+    if (state.combo > state.bestCombo) state.bestCombo = state.combo;
+    const bonus = Math.max(0, state.combo - 1) * 5;
+    const gained = (q.points || 50) + bonus;
+    state.score += gained; state.xp += gained;
+
+    const prevLevel = state.level;
+    state.level = Math.floor(state.xp / 100) + 1;
+    if (state.level > prevLevel){
+      sfxLevelUp();
+      showToast('⭐', 'LEVEL UP!', `Kamu naik ke Level ${state.level}!`, 'cyan');
+      fireConfetti(40);
+    }
+    sfxCorrect();
+    fireConfetti(state.combo >= 3 ? 80 : 45);
+    const rect = btnEl ? btnEl.getBoundingClientRect() : null;
+    scorePopup('+' + gained + ' XP', rect ? rect.left + rect.width/2 : window.innerWidth/2, rect ? rect.top : window.innerHeight/2, '#C4B5FD');
+    if (state.combo >= 3) showToast('🔥', `COMBO ×${state.combo}!`, `Bonus +${bonus} XP!`, '');
+  } else {
+    state.combo = 0; state.hp--; sfxWrong();
+    updateHpHud();
+    const hpEls = document.querySelectorAll('.hud-hp .heart');
+    if (hpEls[state.hp]) hpEls[state.hp].classList.add('losing');
+    const card = document.getElementById('qCard');
+    card.classList.add('shake'); setTimeout(() => card.classList.remove('shake'), 550);
+    if (state.hp <= 0) showToast('💔', 'Nyawa Habis!', 'Kamu kehilangan semua nyawa.', 'violet');
+  }
+
+  document.getElementById('hudScore').textContent = state.score;
+  updateXpHud(); updateComboHud();
+  showFeedback(correct, q, selected);
+  document.getElementById('btnNext').disabled = false;
+}
+
+function showFeedback(correct, q, selected){
+  const panel = document.getElementById('feedback');
+  const icon = document.getElementById('fbIcon');
+  const title = document.getElementById('fbTitle');
+  const body = document.getElementById('fbBody');
+  panel.classList.add('show');
+
+  if (correct){
+    icon.className = 'fb-icon correct'; icon.innerHTML = '<i class="fas fa-check"></i>';
+    title.className = 'fb-title correct'; title.textContent = 'BENAR!';
+  } else {
+    icon.className = 'fb-icon wrong'; icon.innerHTML = '<i class="fas fa-times"></i>';
+    title.className = 'fb-title wrong'; title.textContent = 'BELUM TEPAT';
+  }
+
+  const correctOpt = q.options.find(o => o.correct);
+  let html = `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
+  html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
+  if (!correct && selected) html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
+  html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
+  body.innerHTML = html;
+}
+
+function nextQuestion(){
+  if (state.currentIndex < TOTAL_Q - 1){
+    state.currentIndex++;
+    renderQuestion();
+    document.getElementById('qCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+function usePower(type){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+
+  if (type === '50'){
+    if (state.powers.p50 <= 0) return;
+    const wrongs = q.options.filter(o => !o.correct);
+    const remove = shuffle(wrongs).slice(0, 2);
+    document.querySelectorAll('#options .opt').forEach(b => {
+      if (remove.some(o => o.letter === b.dataset.letter)) b.classList.add('disabled-50');
+    });
+    state.powers.p50 = 0; updatePowers(); sfxPower();
+    showToast('✂️', '50:50 Aktif!', 'Dua jawaban salah dihilangkan.', 'cyan');
+  } else if (type === 'hint'){
+    if (state.powers.hint <= 0) return;
+    const panel = document.getElementById('feedback');
+    const icon = document.getElementById('fbIcon');
+    const title = document.getElementById('fbTitle');
+    const body = document.getElementById('fbBody');
+    panel.classList.add('show');
+    icon.className = 'fb-icon info'; icon.innerHTML = '<i class="fas fa-lightbulb"></i>';
+    title.className = 'fb-title info'; title.textContent = 'PETUNJUK';
+    body.innerHTML = `<p>${q.hint || 'Tidak ada petunjuk.'}</p>`;
+    state.powers.hint = 0; updatePowers(); sfxPower();
+    showToast('💡', 'Petunjuk Digunakan!', 'Perhatikan dengan saksama.', '');
+  } else if (type === 'skip'){
+    if (state.powers.skip <= 0) return;
+    state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+      questionText: q.question, topic: q.topic,
+      correctLetter: q.options.find(o => o.correct).letter,
+      explanation: q.options.find(o => o.correct).explanation });
+    document.querySelectorAll('#options .opt').forEach(b => {
+      b.classList.add('locked');
+      const o = q.options.find(x => x.letter === b.dataset.letter);
+      if (o.correct) b.classList.add('correct');
+    });
+    showFeedback(false, q, null);
+    document.getElementById('btnNext').disabled = false;
+    state.powers.skip = 0; updatePowers(); sfxPower();
+    showToast('⏭️', 'Soal Dilewati', 'Jawaban benar ditampilkan.', 'violet');
+    if (state.currentIndex === TOTAL_Q - 1){
+      document.getElementById('btnNext').style.display = 'none';
+      document.getElementById('btnFinish').style.display = '';
+    }
+  }
+}
+
+function finishGame(timeout){
+  if (state.finished) return;
+  state.finished = true;
+  clearInterval(state.timer); state.timer = null;
+
+  const answered = state.answers.map(a => a.qid);
+  state.questions.forEach(q => {
+    if (!answered.includes(q.id)){
+      state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+        questionText: q.question, topic: q.topic,
+        correctLetter: q.options.find(o => o.correct).letter,
+        explanation: q.options.find(o => o.correct).explanation });
+    }
+  });
+
+  let benar = 0, salah = 0;
+  state.answers.forEach(a => { if (a.skipped) return; if (a.correct) benar++; else salah++; });
+
+  const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
+  const finalScore = Math.round((state.score / maxScore) * 100);
+  const grade = finalScore >= 90 ? 'A' : finalScore >= 80 ? 'B' : finalScore >= 70 ? 'C' : finalScore >= 60 ? 'D' : 'E';
+  const gradeLabel = finalScore >= 90 ? 'Sangat Baik' : finalScore >= 80 ? 'Baik' : finalScore >= 70 ? 'Cukup' : finalScore >= 60 ? 'Perlu Bimbingan' : 'Remedial';
+  const rank = finalScore >= 90 ? 'SEJARAWAN MUDA' : finalScore >= 80 ? 'PENELITI SEJARAH' : finalScore >= 70 ? 'PELAJAR SEJARAH' : 'PEMULA SEJARAH';
+  const trophy = finalScore >= 90 ? '🏆' : finalScore >= 80 ? '🥇' : finalScore >= 70 ? '🥈' : finalScore >= 60 ? '🥉' : '📚';
+  const title = finalScore >= 90 ? 'Luar Biasa!' : finalScore >= 80 ? 'Kerja Bagus!' : finalScore >= 70 ? 'Terus Belajar!' : 'Jangan Menyerah!';
+
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('resultScreen').classList.add('active');
+
+  document.getElementById('rTrophy').textContent = trophy;
+  document.getElementById('rTitle').textContent = title;
+  document.getElementById('rSub').textContent = 'Kuis 2 · Pertemuan 2 · Berpikir Sejarah & Definisi Ahli (1)';
+  document.getElementById('gradeLetter').textContent = grade;
+  document.getElementById('gradeLabel').textContent = gradeLabel;
+  document.getElementById('rRank').textContent = rank;
+  document.getElementById('rXp').textContent = state.xp;
+  document.getElementById('rBestCombo').textContent = state.bestCombo;
+  document.getElementById('rBenar').textContent = benar;
+  document.getElementById('rSalah').textContent = salah;
+  document.getElementById('rSkor').textContent = finalScore;
+  document.getElementById('rXpTotal').textContent = state.xp;
+
+  document.getElementById('gradeRing').style.setProperty('--grade-deg', (finalScore/100*360) + 'deg');
+
+  document.getElementById('rMsg').textContent = finalScore >= 70
+    ? '🎯 Pertahankan semangat belajarmu! Lanjutkan ke Kuis 3 untuk materi Definisi Ahli (2), Hakikat & Sumber Sejarah.'
+    : '📚 Pelajari kembali materi Pertemuan 2, lalu coba lagi! Kamu pasti bisa!';
+
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  state.answers.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
+                   a.correct ? '<span class="ri-status correct">Benar</span>' :
+                   '<span class="ri-status wrong">Salah</span>';
+    const q = a.questionText.length > 80 ? a.questionText.substring(0, 80) + '...' : a.questionText;
+    div.innerHTML = `<span class="ri-num">${i+1}.</span><span class="ri-text">${q}</span>${status}`;
+    reviewList.appendChild(div);
+  });
+
+  sfxFinish();
+  if (finalScore >= 70){
+    fireConfetti(180);
+    setTimeout(() => fireConfetti(120), 400);
+    setTimeout(() => showToast('🏆', 'Achievement Unlocked!', rank, ''), 500);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetGame(){
+  clearInterval(state.timer); state.timer = null;
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('startScreen').style.display = 'flex';
+  state.answers = []; state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.currentIndex = 0; state.finished = false; state.started = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('keydown', e => {
+  if (!state.started || state.finished) return;
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea') return;
+  if (['a','A','1'].includes(e.key)) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
+  else if (['b','B','2'].includes(e.key)) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
+  else if (['c','C','3'].includes(e.key)) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
+  else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
+  else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
+  else if (e.key === 'ArrowRight' || e.key === 'Enter'){
+    if (!document.getElementById('btnNext').disabled) nextQuestion();
+  }
+});
+</script>
+
+</body>
+</html>
