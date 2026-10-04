@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+<meta name="theme-color" content="#05060f" />
+<title>🎮 Kuis 13 · Periodisasi, Kehidupan &amp; Kepercayaan — Premium Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+:root{
+  --font-display:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'Space Grotesk',ui-monospace,monospace;
+  --primary:#14B8A6;--primary-light:#5EEAD4;--primary-dark:#0F766E;
+  --accent:#F59E0B;--accent-light:#FCD34D;--accent-dark:#B45309;
+  --emerald:#34D399;--violet:#A78BFA;--rose:#FB7185;--sky:#38BDF8;--gold:#FBBF24;
+  --bg:#05060f;--bg-2:#0b0d1c;
+  --glass:rgba(255,255,255,0.045);
+  --glass-strong:rgba(255,255,255,0.08);
+  --glass-border:rgba(255,255,255,0.10);
+  --text:#f7f5ff;--text-dim:#a8a8c0;--text-mute:#6b6b85;
+  --radius:24px;--radius-md:18px;--radius-sm:14px;--radius-xs:10px;
+  --shadow-card:0 24px 60px rgba(0,0,0,.55);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-display);background:var(--bg);color:var(--text);line-height:1.65;
+  overflow-x:hidden;min-height:100vh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+::selection{background:var(--primary);color:#05060f}
+
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%,rgba(20,184,166,.18),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 100%,rgba(245,158,11,.14),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 50%,rgba(94,234,212,.08),transparent 65%);
+  animation:bgShift 20s ease-in-out infinite alternate}
+@keyframes bgShift{0%{transform:scale(1) rotate(0deg);filter:hue-rotate(0deg)}100%{transform:scale(1.1) rotate(-3deg);filter:hue-rotate(10deg)}}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25;
+  background-image:
+    linear-gradient(rgba(20,184,166,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(20,184,166,.06) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%)}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
+#confettiCanvas{position:fixed;inset:0;z-index:9998;pointer-events:none}
+
+#loader{position:fixed;inset:0;z-index:99999;
+  background:radial-gradient(ellipse at center,#0b0d1c 0%,#05060f 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:20px;text-align:center;transition:opacity .8s ease,visibility .8s ease}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-orb{width:120px;height:120px;position:relative;display:grid;place-items:center}
+.loader-orb::before,.loader-orb::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent}
+.loader-orb::before{border-top-color:var(--primary);border-right-color:var(--primary-light);animation:spin 2s linear infinite;filter:drop-shadow(0 0 20px rgba(20,184,166,.6))}
+.loader-orb::after{inset:14px;border-bottom-color:var(--accent);border-left-color:var(--sky);animation:spin 1.6s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-core{width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 40px rgba(20,184,166,.7),inset 0 0 20px rgba(255,255,255,.25);
+  display:grid;place-items:center;font-size:1.5rem;color:#fff;
+  animation:pulseCore 2s ease-in-out infinite}
+@keyframes pulseCore{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.loader-title{font-family:var(--font-display);font-weight:900;font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:3px;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary),var(--accent));
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.loader-sub{font-size:.85rem;color:var(--text-dim);font-weight:500;letter-spacing:1px}
+.loader-bar{width:min(300px,70vw);height:4px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+.loader-bar span{display:block;height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 20px rgba(20,184,166,.6);transition:width .3s ease}
+.loader-pct{font-family:var(--font-mono);font-size:.72rem;font-weight:700;color:var(--text-mute);letter-spacing:2px}
+
+.game-header{position:fixed;top:0;left:0;right:0;height:60px;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:10px;
+  background:rgba(5,6,15,.72);backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border-bottom:1px solid var(--glass-border)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:.9rem;color:var(--text)}
+.brand-logo{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:.9rem;
+  box-shadow:0 0 22px rgba(20,184,166,.5);animation:logoPulse 3s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 22px rgba(20,184,166,.5)}50%{box-shadow:0 0 32px rgba(20,184,166,.8)}}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .t1{font-size:.62rem;color:var(--text-mute);letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+.brand-text .t2{font-size:.92rem;font-weight:800;color:var(--text)}
+.header-actions{display:flex;gap:6px}
+.icon-btn{width:36px;height:36px;border-radius:11px;border:1px solid var(--glass-border);
+  background:var(--glass);color:var(--text-dim);display:grid;place-items:center;cursor:pointer;
+  font-size:.85rem;transition:all .3s var(--ease-out)}
+.icon-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 0 22px rgba(20,184,166,.6);transform:translateY(-2px)}
+
+.wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;
+  padding:calc(60px + 20px) 16px 60px;min-height:100vh}
+
+.start-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:calc(100vh - 100px);text-align:center;gap:18px;padding:20px 0}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:40px;
+  background:linear-gradient(135deg,rgba(20,184,166,.18),rgba(245,158,11,.10));
+  border:1px solid rgba(20,184,166,.30);font-size:.7rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary-light);box-shadow:0 0 30px rgba(20,184,166,.20);
+  animation:badgeFloat 3s ease-in-out infinite}
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-title{font-family:var(--font-display);font-size:clamp(2rem,7vw,3.4rem);
+  font-weight:900;line-height:1.05;letter-spacing:-1.5px;
+  background:linear-gradient(135deg,#fff 0%,var(--primary-light) 40%,var(--primary) 70%,var(--accent) 100%);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 8px 30px rgba(20,184,166,.3))}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text-dim);max-width:580px;line-height:1.75}
+.hero-sub strong{color:var(--primary-light);font-weight:700}
+
+.stats-showcase{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+.stat-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;
+  background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(10px);
+  font-size:.8rem;color:var(--text-dim);font-weight:600;transition:all .3s var(--ease-out)}
+.stat-pill:hover{transform:translateY(-3px);border-color:rgba(20,184,166,.4);box-shadow:0 8px 24px rgba(20,184,166,.15)}
+.stat-pill i{font-size:.95rem}
+
+.rules-card{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:22px 24px;
+  max-width:520px;width:100%;text-align:left;margin-top:6px;backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.rules-card h4{font-size:.85rem;font-weight:800;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.rules-card ul{list-style:none;display:grid;gap:10px}
+.rules-card li{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-dim);line-height:1.6}
+.rule-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+  border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 4px 14px rgba(20,184,166,.4)}
+
+.btn-play{position:relative;display:inline-flex;align-items:center;gap:14px;
+  padding:18px 54px;border-radius:60px;border:none;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;font-family:var(--font-display);font-weight:900;font-size:1.05rem;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;overflow:hidden;
+  box-shadow:0 12px 40px rgba(20,184,166,.45),inset 0 -3px 0 rgba(0,0,0,.2);
+  transition:all .4s var(--ease-spring);margin-top:14px}
+.btn-play::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.35),transparent 70%);
+  transform:translateX(-100%);transition:transform .8s ease}
+.btn-play:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 20px 60px rgba(20,184,166,.65)}
+.btn-play:hover::before{transform:translateX(100%)}
+.btn-play:active{transform:translateY(-1px) scale(.98)}
+
+.game-hud{display:none;flex-direction:column;gap:14px;animation:fadeSlideIn .5s var(--ease-out)}
+.game-hud.active{display:flex}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.hud-top{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+  padding:14px 18px;border-radius:var(--radius-md);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.hud-hp{display:flex;align-items:center;gap:4px}
+.hud-hp .heart{font-size:1.15rem;color:var(--rose);
+  filter:drop-shadow(0 0 8px rgba(251,113,133,.6));transition:all .4s var(--ease-out)}
+.hud-hp .heart.empty{color:rgba(255,255,255,.10);filter:none;transform:scale(.85)}
+.hud-hp .heart.losing{animation:heartBreak .6s ease}
+@keyframes heartBreak{0%{transform:scale(1)}30%{transform:scale(1.4);color:#fff}100%{transform:scale(.85);opacity:.3}}
+.hud-xp{display:flex;flex-direction:column;gap:4px;min-width:0}
+.hud-xp-head{display:flex;justify-content:space-between;align-items:center;font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.hud-xp-head .lvl{color:var(--primary-light)}
+.hud-xp-head .val{color:var(--text-mute);font-family:var(--font-mono)}
+.xp-track{height:8px;border-radius:10px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+.xp-fill{height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 16px rgba(20,184,166,.7);transition:width .8s var(--ease-spring);position:relative}
+.xp-fill::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  animation:xpShine 2s linear infinite}
+@keyframes xpShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.hud-timer{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:40px;
+  background:rgba(20,184,166,.12);border:1px solid rgba(20,184,166,.30);
+  font-family:var(--font-mono);font-weight:800;font-size:.85rem;color:var(--primary-light);
+  letter-spacing:1px;transition:all .3s ease}
+.hud-timer.warning{background:rgba(251,113,133,.15);border-color:rgba(251,113,133,.5);color:#fecdd3;animation:pulseWarn 1s ease-in-out infinite}
+@keyframes pulseWarn{0%,100%{box-shadow:0 0 0 0 rgba(251,113,133,.4)}50%{box-shadow:0 0 0 8px rgba(251,113,133,0)}}
+
+.hud-middle{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:.75rem;color:var(--text-mute);font-weight:700;padding:0 4px}
+.hud-middle .combo-tag{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:800;transition:all .3s var(--ease-spring)}
+.hud-middle .combo-tag.hot{color:var(--primary-light);animation:comboPulse .5s var(--ease-spring)}
+@keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+.q-card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:26px 26px 22px;
+  backdrop-filter:blur(20px);box-shadow:var(--shadow-card);animation:qEnter .55s var(--ease-out);overflow:hidden}
+.q-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(135deg,rgba(20,184,166,.4),transparent 40%,transparent 60%,rgba(245,158,11,.3));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+@keyframes qEnter{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.q-card.shake{animation:shake .5s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+
+.q-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:30px;
+  background:linear-gradient(135deg,rgba(20,184,166,.18),rgba(20,184,166,.06));
+  border:1px solid rgba(20,184,166,.30);font-size:.72rem;font-weight:800;letter-spacing:1px;color:var(--primary-light)}
+.q-topic{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;
+  background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.28);font-size:.68rem;
+  font-weight:800;letter-spacing:.8px;color:var(--accent);text-transform:uppercase}
+
+.q-text{font-size:clamp(1rem,2.2vw,1.12rem);font-weight:600;line-height:1.75;color:var(--text);
+  margin-bottom:20px;white-space:pre-line}
+.q-text strong{color:var(--primary-light);font-weight:800}
+
+.options{display:grid;gap:10px}
+.opt{position:relative;display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;
+  padding:15px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--glass-border);
+  background:rgba(255,255,255,.03);color:var(--text-dim);font-family:inherit;font-size:.92rem;
+  line-height:1.6;cursor:pointer;transition:all .3s var(--ease-out);overflow:hidden}
+.opt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(90deg,rgba(20,184,166,.15),transparent);
+  transition:width .4s var(--ease-out);z-index:0}
+.opt:hover:not(.locked){border-color:rgba(20,184,166,.55);transform:translateX(5px);
+  color:var(--text);box-shadow:0 8px 24px rgba(20,184,166,.15)}
+.opt:hover:not(.locked)::before{width:100%}
+.opt-letter{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;flex-shrink:0;background:rgba(255,255,255,.06);
+  color:var(--text-mute);font-weight:800;font-size:.85rem;transition:all .3s var(--ease-out);
+  border:1px solid rgba(255,255,255,.06)}
+.opt-text{position:relative;z-index:1;flex:1}
+.opt:hover:not(.locked) .opt-letter{background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;border-color:transparent;box-shadow:0 0 20px rgba(20,184,166,.6)}
+.opt.correct{border-color:var(--emerald);background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(52,211,153,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(52,211,153,.15),0 12px 32px rgba(52,211,153,.25);
+  animation:correctPop .5s var(--ease-spring)}
+@keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.02)}100%{transform:scale(1)}}
+.opt.correct .opt-letter{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(52,211,153,.7)}
+.opt.wrong{border-color:var(--rose);background:linear-gradient(135deg,rgba(251,113,133,.15),rgba(251,113,133,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(251,113,133,.15),0 12px 32px rgba(251,113,133,.25)}
+.opt.wrong .opt-letter{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(251,113,133,.7)}
+.opt.locked{pointer-events:none}
+.opt.disabled-50{opacity:.2;pointer-events:none;filter:grayscale(1) blur(.5px)}
+
+.feedback{display:none;padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(16px);box-shadow:var(--shadow-card);
+  animation:qEnter .5s var(--ease-out)}
+.feedback.show{display:block}
+.fb-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.fb-icon{width:48px;height:48px;border-radius:15px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;transition:all .4s var(--ease-spring)}
+.fb-icon.correct{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;box-shadow:0 0 32px rgba(52,211,153,.6)}
+.fb-icon.wrong{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;box-shadow:0 0 32px rgba(251,113,133,.6)}
+.fb-icon.info{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 0 32px rgba(20,184,166,.6)}
+.fb-title{font-size:1.05rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
+.fb-title.correct{color:var(--emerald)}
+.fb-title.wrong{color:#fecdd3}
+.fb-title.info{color:var(--primary-light)}
+.fb-body{font-size:.9rem;color:var(--text-dim);line-height:1.75}
+.fb-body strong{color:var(--text);font-weight:700}
+.fb-sec{margin-top:12px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.10)}
+.fb-label{font-size:.68rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--primary-light);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.fb-points{margin-top:12px;padding:14px 16px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(245,158,11,.10),rgba(245,158,11,.03));border-left:3px solid var(--accent)}
+.fb-points .fb-label{color:var(--accent)}
+.fb-points p{font-size:.87rem;color:var(--text-dim);line-height:1.7}
+
+.hud-bottom{display:flex;flex-direction:column;gap:12px}
+.power-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.power-btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;
+  border-radius:50px;border:1px solid var(--glass-border);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  color:var(--text-dim);font-family:inherit;font-weight:800;font-size:.78rem;letter-spacing:.5px;
+  cursor:pointer;transition:all .3s var(--ease-spring);overflow:hidden}
+.power-btn i{font-size:.9rem}
+.power-btn:hover:not(:disabled):not(.used){transform:translateY(-3px);border-color:rgba(20,184,166,.5);color:var(--text);box-shadow:0 8px 24px rgba(20,184,166,.25)}
+.power-btn:active:not(:disabled):not(.used){transform:scale(.96)}
+.power-btn .cnt{font-size:.62rem;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.10);font-weight:900;font-family:var(--font-mono)}
+.power-btn.used{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.power-btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.power-btn.p50{color:var(--accent)}
+.power-btn.phint{color:var(--primary-light)}
+.power-btn.pskip{color:var(--rose)}
+
+.action-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 30px;border-radius:50px;border:none;
+  font-family:inherit;font-weight:900;font-size:.88rem;letter-spacing:.5px;cursor:pointer;
+  transition:all .35s var(--ease-spring)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;
+  box-shadow:0 10px 32px rgba(20,184,166,.4),inset 0 -2px 0 rgba(0,0,0,.15)}
+.btn-primary:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 44px rgba(20,184,166,.6)}
+.btn-primary:active:not(:disabled){transform:scale(.96)}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--text-dim);border:1px solid var(--glass-border)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(20,184,166,.4);transform:translateY(-2px)}
+
+.result-screen{display:none;flex-direction:column;gap:16px;text-align:center;animation:fadeSlideIn .6s var(--ease-out)}
+.result-screen.active{display:flex}
+.result-hero{position:relative;padding:38px 26px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);box-shadow:var(--shadow-card);overflow:hidden}
+.result-hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center top,rgba(20,184,166,.20),transparent 60%);pointer-events:none}
+.result-trophy{font-size:4rem;line-height:1;margin-bottom:8px;
+  filter:drop-shadow(0 8px 30px rgba(20,184,166,.6));animation:trophyFloat 3s ease-in-out infinite}
+@keyframes trophyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.result-title{font-family:var(--font-display);font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:900;
+  letter-spacing:-.5px;background:linear-gradient(135deg,#fff,var(--primary-light),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.result-sub{font-size:.9rem;color:var(--text-dim);margin-bottom:6px}
+.grade-ring{position:relative;width:130px;height:130px;margin:16px auto;border-radius:50%;
+  background:conic-gradient(var(--primary) var(--grade-deg,0deg),rgba(255,255,255,.08) 0deg);
+  padding:8px;box-shadow:0 0 40px rgba(20,184,166,.4);animation:ringPop .8s var(--ease-spring)}
+@keyframes ringPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.grade-inner{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at center,#0b0d1c,#05060f);display:grid;place-items:center;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.6)}
+.grade-letter{font-size:2.6rem;font-weight:900;line-height:1;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent}
+.grade-label{font-size:.62rem;font-weight:800;letter-spacing:2px;color:var(--text-mute);text-transform:uppercase;margin-top:2px}
+.result-title-text{font-size:1.1rem;font-weight:900;color:var(--primary-light);letter-spacing:.5px;margin-top:8px;text-transform:uppercase}
+.result-xp-line{font-size:.88rem;color:var(--text-dim);margin-top:6px}
+.result-xp-line strong{color:var(--accent);font-family:var(--font-mono);font-weight:800}
+.result-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:20px 0 8px}
+.rs-box{padding:16px 10px;border-radius:var(--radius-sm);background:rgba(255,255,255,.04);
+  border:1px solid var(--glass-border);transition:all .3s var(--ease-out)}
+.rs-box:hover{transform:translateY(-3px);border-color:rgba(20,184,166,.3)}
+.rs-val{font-size:1.7rem;font-weight:900;line-height:1.1;font-family:var(--font-mono)}
+.rs-val.green{color:var(--emerald);text-shadow:0 0 20px rgba(52,211,153,.5)}
+.rs-val.red{color:#fecdd3;text-shadow:0 0 20px rgba(251,113,133,.5)}
+.rs-val.cyan{color:var(--accent);text-shadow:0 0 20px rgba(245,158,11,.5)}
+.rs-val.violet{color:var(--primary-light);text-shadow:0 0 20px rgba(94,234,212,.5)}
+.rs-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.5px;color:var(--text-mute);text-transform:uppercase;margin-top:6px}
+.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:14px 18px;border-radius:12px;
+  background:rgba(20,184,166,.06);border-left:3px solid var(--primary);margin-top:6px;text-align:left}
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+
+.review-panel{padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);text-align:left}
+.review-panel h4{font-size:.9rem;font-weight:900;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.review-list{display:grid;gap:8px}
+.review-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-radius:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:.84rem;
+  line-height:1.6;transition:all .3s var(--ease-out)}
+.review-item:hover{background:rgba(255,255,255,.06);transform:translateX(3px)}
+.review-item .ri-num{font-weight:900;color:var(--text-mute);flex-shrink:0;font-family:var(--font-mono);font-size:.78rem;min-width:26px}
+.review-item .ri-text{flex:1;color:var(--text-dim)}
+.review-item .ri-status{font-size:.68rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:20px;flex-shrink:0}
+.ri-status.correct{background:rgba(52,211,153,.15);color:#6ee7b7}
+.ri-status.wrong{background:rgba(251,113,133,.15);color:#fecdd3}
+.ri-status.skipped{background:rgba(255,255,255,.06);color:var(--text-mute)}
+
+.toast-wrap{position:fixed;top:74px;right:16px;z-index:9999;display:flex;flex-direction:column;
+  gap:10px;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast{display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(11,13,28,.95),rgba(5,6,15,.95));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);
+  box-shadow:0 16px 40px rgba(0,0,0,.6),0 0 0 1px rgba(20,184,166,.15);
+  pointer-events:auto;animation:toastIn .5s var(--ease-spring);max-width:340px}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast.out{animation:toastOut .4s ease forwards}
+@keyframes toastOut{to{transform:translateX(120%);opacity:0}}
+.toast-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 24px rgba(20,184,166,.6)}
+.toast-icon.green{background:linear-gradient(135deg,var(--emerald),#059669);box-shadow:0 0 24px rgba(52,211,153,.6)}
+.toast-icon.cyan{background:linear-gradient(135deg,var(--accent),var(--accent-dark));box-shadow:0 0 24px rgba(245,158,11,.6)}
+.toast-icon.violet{background:linear-gradient(135deg,var(--violet),#6C63FF);box-shadow:0 0 24px rgba(167,139,250,.6)}
+.toast-content{flex:1;min-width:0}
+.toast-title{font-size:.85rem;font-weight:900;color:var(--text);letter-spacing:.3px}
+.toast-desc{font-size:.75rem;color:var(--text-dim);line-height:1.5;margin-top:2px}
+
+.score-pop{position:fixed;z-index:9997;pointer-events:none;font-family:var(--font-display);
+  font-weight:900;font-size:1.6rem;color:var(--primary-light);text-shadow:0 0 20px rgba(20,184,166,.8);
+  animation:scorePop 1s var(--ease-out) forwards}
+@keyframes scorePop{0%{transform:translate(-50%,0) scale(.5);opacity:0}
+  20%{transform:translate(-50%,-20px) scale(1.2);opacity:1}
+  100%{transform:translate(-50%,-80px) scale(1);opacity:0}}
+
+@media (max-width:600px){
+  .wrap{padding:calc(60px + 14px) 12px 50px}
+  .q-card{padding:20px 18px}
+  .opt{padding:13px 14px;font-size:.87rem;gap:11px}
+  .opt-letter{width:30px;height:30px;font-size:.78rem}
+  .hud-top{padding:12px 14px;gap:8px}
+  .hud-timer{padding:6px 11px;font-size:.78rem}
+  .hud-hp .heart{font-size:1rem}
+  .power-btn{padding:9px 14px;font-size:.72rem}
+  .btn{padding:12px 22px;font-size:.82rem;width:100%;justify-content:center}
+  .action-bar{flex-direction:column}
+  .result-hero{padding:28px 18px}
+  .grade-ring{width:110px;height:110px}
+  .grade-letter{font-size:2.2rem}
+  .rs-val{font-size:1.4rem}
+  .toast{max-width:calc(100vw - 24px);padding:12px 14px}
+  .toast-icon{width:36px;height:36px;font-size:1rem}
+}
+@media print{
+  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap{display:none!important}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+<canvas id="particles"></canvas>
+<canvas id="confettiCanvas"></canvas>
+
+<div id="loader">
+  <div class="loader-orb">
+    <div class="loader-core"><i class="fas fa-fire"></i></div>
+  </div>
+  <div class="loader-title">HISTOEXPLORER</div>
+  <div class="loader-sub">Kuis 13 · Periodisasi, Kehidupan &amp; Kepercayaan</div>
+  <div class="loader-bar"><span id="loaderBar"></span></div>
+  <div class="loader-pct" id="loaderPct">0%</div>
+</div>
+
+<header class="game-header">
+  <div class="brand">
+    <div class="brand-logo"><i class="fas fa-fire"></i></div>
+    <div class="brand-text">
+      <span class="t1">KUIS 13 · PRAKSARA</span>
+      <span class="t2">Periodisasi, Kehidupan &amp; Kepercayaan</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="Suara"><i class="fas fa-volume-up"></i></button>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema"><i class="fas fa-sun"></i></button>
+  </div>
+</header>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<main class="wrap">
+
+  <section class="start-screen" id="startScreen">
+    <span class="hero-badge"><i class="fas fa-crown"></i> PREMIUM GAME MODE · LEVEL 13</span>
+    <h1 class="hero-title">Periodisasi, Kehidupan<br>&amp; Kepercayaan</h1>
+    <p class="hero-sub">
+      Kuasai <strong>periodisasi zaman batu</strong> (Paleolitikum, Mesolitikum, Neolitikum, Megalitikum), <strong>masa perundagian</strong>, <strong>pola kehidupan</strong> praaksara, dan <strong>sistem kepercayaan</strong> (animisme, dinamisme, totemisme)!
+    </p>
+
+    <div class="stats-showcase">
+      <span class="stat-pill" style="color:#5EEAD4"><i class="fas fa-question-circle"></i> 15 Soal Acak</span>
+      <span class="stat-pill" style="color:#FCD34D"><i class="fas fa-stopwatch"></i> 20 Menit</span>
+      <span class="stat-pill" style="color:#FB7185"><i class="fas fa-heart"></i> 3 Nyawa</span>
+      <span class="stat-pill" style="color:#34D399"><i class="fas fa-bolt"></i> Combo &amp; XP</span>
+    </div>
+
+    <div class="rules-card">
+      <h4><i class="fas fa-list-check"></i> Cara Bermain</h4>
+      <ul>
+        <li><span class="rule-num">1</span> Jawab 15 soal HOTS dari bank 40 soal — dipilih acak setiap sesi.</li>
+        <li><span class="rule-num">2</span> Jawaban benar memberi <strong>XP</strong> + memicu <strong>combo</strong>. Salah mengurangi <strong>1 nyawa</strong>.</li>
+        <li><span class="rule-num">3</span> Power-up: <strong>50:50</strong>, <strong>Petunjuk</strong>, <strong>Lewati</strong> (masing-masing 1×).</li>
+        <li><span class="rule-num">4</span> Raih <strong>Achievement</strong> dan taklukkan peringkat <strong>Arkeolog Praaksara</strong>!</li>
+      </ul>
+    </div>
+
+    <button class="btn-play" onclick="startGame()">
+      <i class="fas fa-play"></i> Mulai Bermain
+    </button>
+  </section>
+
+  <section class="game-hud" id="gameHud">
+    <div class="hud-top">
+      <div class="hud-hp" id="hudHp"></div>
+      <div class="hud-xp">
+        <div class="hud-xp-head">
+          <span class="lvl">LV <span id="hudLevel">1</span></span>
+          <span class="val"><span id="hudXp">0</span> / <span id="hudXpMax">100</span> XP</span>
+        </div>
+        <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
+      </div>
+      <div class="hud-timer" id="hudTimer">
+        <i class="fas fa-stopwatch"></i> <span id="hudTimerVal">20:00</span>
+      </div>
+    </div>
+
+    <div class="hud-middle">
+      <span><i class="fas fa-question-circle" style="color:var(--primary)"></i> Soal <strong id="hudQNum">1</strong>/<strong>15</strong></span>
+      <span class="combo-tag" id="comboTag"><i class="fas fa-fire"></i> Combo ×<span id="comboVal">0</span></span>
+      <span><i class="fas fa-star" style="color:var(--accent)"></i> Skor <strong id="hudScore" style="font-family:var(--font-mono)">0</strong></span>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-meta">
+        <span class="q-num"><i class="fas fa-bookmark"></i> <span id="qNumLabel">Soal 1</span></span>
+        <span class="q-topic" id="qTopic"><i class="fas fa-tag"></i> <span id="qTopicText">Periodisasi</span></span>
+      </div>
+      <div class="q-text" id="qText">Memuat soal...</div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <div class="feedback" id="feedback">
+      <div class="fb-head">
+        <div class="fb-icon" id="fbIcon"><i class="fas fa-check"></i></div>
+        <div class="fb-title" id="fbTitle">BENAR!</div>
+      </div>
+      <div class="fb-body" id="fbBody"></div>
+    </div>
+
+    <div class="hud-bottom">
+      <div class="power-bar">
+        <button class="power-btn p50" id="p50" onclick="usePower('50')">
+          <i class="fas fa-compress-alt"></i> 50:50 <span class="cnt" id="c50">1</span>
+        </button>
+        <button class="power-btn phint" id="phint" onclick="usePower('hint')">
+          <i class="fas fa-lightbulb"></i> Petunjuk <span class="cnt" id="chint">1</span>
+        </button>
+        <button class="power-btn pskip" id="pskip" onclick="usePower('skip')">
+          <i class="fas fa-forward"></i> Lewati <span class="cnt" id="cskip">1</span>
+        </button>
+      </div>
+      <div class="action-bar">
+        <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>
+          Selanjutnya <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="btn btn-primary" id="btnFinish" onclick="finishGame()" style="display:none">
+          Lihat Hasil <i class="fas fa-flag-checkered"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="result-screen" id="resultScreen">
+    <div class="result-hero">
+      <div class="result-trophy" id="rTrophy">🏆</div>
+      <h2 class="result-title" id="rTitle">Luar Biasa!</h2>
+      <p class="result-sub" id="rSub">Kuis 13 · Periodisasi, Kehidupan &amp; Kepercayaan</p>
+      <div class="grade-ring" id="gradeRing">
+        <div class="grade-inner">
+          <div class="grade-letter" id="gradeLetter">A</div>
+          <div class="grade-label" id="gradeLabel">Sangat Baik</div>
+        </div>
+      </div>
+      <div class="result-title-text" id="rRank">ARKEOLOG PRAAKSARA</div>
+      <div class="result-xp-line">Total XP: <strong id="rXp">0</strong> · Best Combo: <strong id="rBestCombo">0</strong></div>
+      <div class="result-stats">
+        <div class="rs-box"><div class="rs-val green" id="rBenar">0</div><div class="rs-lbl">Benar</div></div>
+        <div class="rs-box"><div class="rs-val red" id="rSalah">0</div><div class="rs-lbl">Salah</div></div>
+        <div class="rs-box"><div class="rs-val cyan" id="rSkor">0</div><div class="rs-lbl">Skor</div></div>
+        <div class="rs-box"><div class="rs-val violet" id="rXpTotal">0</div><div class="rs-lbl">XP Total</div></div>
+      </div>
+      <div class="result-msg" id="rMsg"></div>
+      <div class="result-actions">
+        <button class="btn btn-primary" onclick="resetGame()"><i class="fas fa-redo"></i> Main Lagi</button>
+        <button class="btn btn-ghost" onclick="window.location.reload()"><i class="fas fa-home"></i> Menu Awal</button>
+      </div>
+    </div>
+    <div class="review-panel">
+      <h4><i class="fas fa-list-check"></i> Rincian Jawaban</h4>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ============================================================
+   BANK SOAL — 40 SOAL HOTS · KUIS 13
+   Fokus: Periodisasi Zaman Batu, Perundagian, Pola Kehidupan,
+          Sistem Kepercayaan, Peninggalan Budaya
+   ============================================================ */
+const BANK_SOAL = [
+  /* ===== PALEOLITIKUM (5 soal) ===== */
+  { id:1301, topic:"Paleolitikum",
+    question:"Ciri khas alat batu Paleolitikum adalah...",
+    options:[
+      {letter:"A",text:"Masih kasar — hanya dipangkas pada satu atau kedua sisinya",correct:true,explanation:"Tepat! Paleolitikum = batu masih kasar."},
+      {letter:"B",text:"Sudah diasah halus & dipoles",correct:false,explanation:"Itu Neolitikum."},
+      {letter:"C",text:"Terbuat dari logam",correct:false,explanation:"Logam baru di Perundagian."},
+      {letter:"D",text:"Dibuat dari tembikar",correct:false,explanation:"Tembikar = Neolitikum."},
+      {letter:"E",text:"Berbentuk perhiasan",correct:false,"explanation":"Bukan ciri utama Paleolitikum."}
+    ], difficulty:"easy", hint:"Paleolitikum = batu kasar (dipangkas).", points:50 },
+
+  { id:1302, topic:"Paleolitikum",
+    question:"Pola kehidupan masyarakat Paleolitikum adalah...",
+    options:[
+      {letter:"A",text:"Nomaden (berpindah-pindah) mengikuti hewan buruan",correct:true,explanation:"Tepat! Paleolitikum = nomaden & berburu-meramu."},
+      {letter:"B",text:"Menetap di desa permanen",correct:false,explanation:"Itu Neolitikum."},
+      {letter:"C",text:"Bercocok tanam",correct:false,explanation:"Itu Neolitikum."},
+      {letter:"D",text:"Membuat logam",correct:false,explanation:"Itu Perundagian."},
+      {letter:"E",text:"Membangun megalitik",correct:false,"explanation":"Itu Megalitikum."}
+    ], difficulty:"easy", hint:"Paleolitikum = nomaden & berburu-meramu.", points:50 },
+
+  { id:1303, topic:"Paleolitikum",
+    question:"Contoh alat batu dari masa Paleolitikum adalah...",
+    options:[
+      {letter:"A",text:"Kapak genggam & kapak perimbas",correct:true,explanation:"Tepat! Paleolitikum = kapak genggam & perimbas."},
+      {letter:"B",text:"Kapak persegi",correct:false,explanation:"Itu Neolitikum."},
+      {letter:"C",text:"Nekara perunggu",correct:false,explanation:"Itu Perundagian."},
+      {letter:"D",text:"Menhir",correct:false,explanation:"Itu Megalitikum."},
+      {letter:"E",text:"Kapak corong",correct:false,"explanation":"Itu Perundagian (perunggu)."}
+    ], difficulty:"easy", hint:"Paleolitikum = kapak genggam & perimbas.", points:50 },
+
+  { id:1304, topic:"Paleolitikum",
+    question:"Perhatikan pernyataan berikut!\n'Manusia Paleolitikum hidup dalam kelompok kecil & berpindah-pindah.'\n\nAlasan utama pola hidup tersebut adalah...",
+    options:[
+      {letter:"A",text:"Karena sumber makanan (hewan buruan & tanaman) terbatas di satu tempat sehingga harus berpindah.",correct:true,explanation:"Tepat! Sumber makanan terbatas → berpindah."},
+      {letter:"B",text:"Karena tidak suka menetap.",correct:false,explanation:"Bukan soal selera."},
+      {letter:"C",text:"Karena diperintah pemimpin.",correct:false,explanation:"Bukan karena perintah."},
+      {letter:"D",text:"Karena dilarang menetap.",correct:false,explanation:"Tidak ada larangan."},
+      {letter:"E",text:"Karena tidak punya rumah.",correct:false,"explanation":"Karena belum bisa membangun rumah permanen — tapi penyebab utamanya adalah sumber makanan."}
+    ], difficulty:"medium", hint:"Sumber makanan terbatas di satu tempat → harus berpindah.", points:60 },
+
+  { id:1305, topic:"Paleolitikum",
+    question:"Analisis yang paling tepat tentang hubungan antara kondisi lingkungan Paleolitikum & pola hidup manusia pada masa itu adalah...",
+    options:[
+      {letter:"A",text:"Lingkungan yang keras & sumber makanan berpindah membuat manusia Paleolitikum juga harus berpindah (nomaden).",correct:true,explanation:"Tepat! Lingkungan keras → manusia nomaden."},
+      {letter:"B",text:"Lingkungan tidak berpengaruh.",correct:false,explanation:"Justru sangat berpengaruh."},
+      {letter:"C",text:"Manusia Paleolitikum sudah bisa mengendalikan lingkungan.",correct:false,explanation:"Belum bisa banyak."},
+      {letter:"D",text:"Manusia Paleolitikum hidup santai.",correct:false,explanation:"Justru penuh tantangan."},
+      {letter:"E",text:"Tidak dapat dianalisis.",correct:false,"explanation":"Dapat dianalisis."}
+    ], difficulty:"hard", hint:"Lingkungan keras → manusia nomaden.", points:70 },
+
+  /* ===== MESOLITIKUM (4 soal) ===== */
+  { id:1306, topic:"Mesolitikum",
+    question:"Ciri khas zaman Mesolitikum adalah...",
+    options:[
+      {letter:"A",text:"Alat batu mulai lebih halus & muncul lukisan gua",correct:true,explanation:"Tepat! Mesolitikum = alat lebih halus & lukisan gua."},
+      {letter:"B",text:"Sudah mengenal logam",correct:false,explanation:"Logam = Perundagian."},
+      {letter:"C",text:"Bangunan megalitik",correct:false,explanation:"Megalitikum = batu besar."},
+      {letter:"D",text:"Bercocok tanam permanen",correct:false,explanation:"Itu Neolitikum."},
+      {letter:"E",text:"Sudah ada tulisan",correct:false,"explanation":"Belum ada tulisan."}
+    ], difficulty:"easy", hint:"Mesolitikum = alat lebih halus & lukisan gua.", points:50 },
+
+  { id:1307, topic:"Mesolitikum",
+    question:"Contoh peninggalan khas Mesolitikum adalah...",
+    options:[
+      {letter:"A",text:"Lukisan gua & alat serpih (flake)",correct:true,explanation:"Tepat! Mesolitikum = lukisan gua & alat serpih."},
+      {letter:"B",text:"Kapak persegi",correct:false,explanation:"Itu Neolitikum."},
+      {letter:"C",text:"Nekara",correct:false,explanation:"Itu Perundagian."},
+      {letter:"D",text:"Menhir",correct:false,explanation:"Itu Megalitikum."},
+      {letter:"E",text:"Kapak logam",correct:false,"explanation":"Itu Perundagian."}
+    ], difficulty:"easy", hint:"Mesolitikum = lukisan gua & alat serpih.", points:50 },
+
+  { id:1308, topic:"Mesolitikum",
+    question:"Kebudayaan Mesolitikum yang sangat berpengaruh di Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Bacson-Hoabinh dari Vietnam Utara",correct:true,explanation:"Tepat! Bacson-Hoabinh = kebudayaan Mesolitikum dari Vietnam."},
+      {letter:"B",text:"Dong Son dari Vietnam Utara",correct:false,explanation:"Dong Son = kebudayaan perunggu."},
+      {letter:"C",text:"Lapita dari Pasifik",correct:false,explanation:"Lapita bukan dari Nusantara."},
+      {letter:"D",text:"Megalitik dari Eropa",correct:false,"explanation":"Megalitik = periode terpisah."},
+      {letter:"E",text:"Sa Huynh dari Vietnam",correct:false,"explanation":"Sa Huynh = kebudayaan logam."}
+    ], difficulty:"medium", hint:"Bacson-Hoabinh = Mesolitikum dari Vietnam Utara.", points:60 },
+
+  { id:1309, topic:"Mesolitikum",
+    question:"Analisis yang paling tepat tentang mengapa manusia Mesolitikum mulai hidup semi-nomaden adalah...",
+    options:[
+      {letter:"A",text:"Karena mulai mengenal sedikit pertanian & mulai memanfaatkan sumber daya lokal secara lebih intensif.",correct:true,explanation:"Tepat! Semi-nomaden karena mulai ada pertanian awal."},
+      {letter:"B",text:"Karena sudah bisa membangun kota.",correct:false,explanation:"Belum ada kota."},
+      {letter:"C",text:"Karena dilarang berpindah.",correct:false,explanation:"Tidak ada larangan."},
+      {letter:"D",text:"Karena sudah memiliki kendaraan.",correct:false,explanation:"Belum ada kendaraan."},
+      {letter:"E",text:"Karena suka tinggal di satu tempat.",correct:false,"explanation":"Semi-nomaden = kadang pindah, kadang tinggal."}
+    ], difficulty:"hard", hint:"Semi-nomaden = mulai ada pertanian awal.", points:70 },
+
+  /* ===== NEOLITIKUM (5 soal) ===== */
+  { id:1310, topic:"Neolitikum",
+    question:"Ciri khas zaman Neolitikum adalah...",
+    options:[
+      {letter:"A",text:"Alat batu diasah halus & dipoles; manusia mulai bercocok tanam & menetap",correct:true,explanation:"Tepat! Neolitikum = batu diasah + bercocok tanam + menetap."},
+      {letter:"B",text:"Alat batu masih kasar",correct:false,explanation:"Itu Paleolitikum."},
+      {letter:"C",text:"Mengenal logam",correct:false,explanation:"Logam = Perundagian."},
+      {letter:"D",text:"Tidak bercocok tanam",correct:false,explanation:"Justru bercocok tanam."},
+      {letter:"E",text:"Nomaden murni",correct:false,"explanation":"Justru menetap."}
+    ], difficulty:"easy", hint:"Neolitikum = batu diasah + bercocok tanam + menetap.", points:50 },
+
+  { id:1311, topic:"Neolitikum",
+    question:"Contoh alat batu dari masa Neolitikum adalah...",
+    options:[
+      {letter:"A",text:"Kapak persegi & kapak lonjong",correct:true,explanation:"Tepat! Neolitikum = kapak persegi & lonjong."},
+      {letter:"B",text:"Kapak genggam",correct:false,explanation:"Itu Paleolitikum."},
+      {letter:"C",text:"Nekara perunggu",correct:false,explanation:"Itu Perundagian."},
+      {letter:"D",text:"Menhir",correct:false,explanation:"Itu Megalitikum."},
+      {letter:"E",text:"Alat serpih",correct:false,"explanation":"Itu Mesolitikum."}
+    ], difficulty:"easy", hint:"Neolitikum = kapak persegi & kapak lonjong.", points:50 },
+
+  { id:1312, topic:"Neolitikum",
+    question:"Revolusi Neolitikum menandai perubahan besar dari...",
+    options:[
+      {letter:"A",text:"Food gathering (mengumpulkan makanan) ke food producing (menghasilkan makanan)",correct:true,explanation:"Tepat! Food gathering → food producing."},
+      {letter:"B",text:"Batu ke logam",correct:false,explanation:"Itu Perundagian."},
+      {letter:"C",text:"Nomaden ke batu besar",correct:false,explanation:"Bukan itu."},
+      {letter:"D",text:"Monoteisme ke politeisme",correct:false,explanation:"Bukan itu."},
+      {letter:"E",text:"Tulisan ke praaksara",correct:false,"explanation":"Terbalik."}
+    ], difficulty:"medium", hint:"Food gathering → food producing.", points:60 },
+
+  { id:1313, topic:"Neolitikum",
+    question:"Mengapa munculnya bercocok tanam pada masa Neolitikum disebut sebagai 'revolusi'?",
+    options:[
+      {letter:"A",text:"Karena mengubah total cara hidup manusia — dari nomaden menjadi menetap, dari mengambil menjadi menghasilkan.",correct:true,explanation:"Tepat! Perubahan total cara hidup manusia."},
+      {letter:"B",text:"Karena terjadi dalam satu malam.",correct:false,explanation:"Bertahap, bukan revolusi cepat."},
+      {letter:"C",text:"Karena hanya terjadi di satu tempat.",correct:false,explanation:"Terjadi di banyak tempat."},
+      {letter:"D",text:"Karena dipimpin raja.",correct:false,explanation:"Belum ada raja."},
+      {letter:"E",text:"Karena menggunakan mesin.",correct:false,"explanation":"Belum ada mesin."}
+    ], difficulty:"medium", hint:"Mengubah total cara hidup manusia (nomaden → menetap).", points:60 },
+
+  { id:1314, topic:"Neolitikum",
+    question:"Analisis yang paling tepat tentang dampak sosial dari kehidupan menetap pada masa Neolitikum adalah...",
+    options:[
+      {letter:"A",text:"Muncul desa permanen, kepemilikan tanah, spesialisasi kerja, & lapisan sosial.",correct:true,explanation:"Tepat! Menetap → desa, kepemilikan, spesialisasi."},
+      {letter:"B",text:"Tidak ada dampak sosial.",correct:false,explanation:"Justru banyak dampak."},
+      {letter:"C",text:"Masyarakat tetap nomaden.",correct:false,explanation:"Justru menetap."},
+      {letter:"D",text:"Masyarakat kembali berburu.",correct:false,explanation:"Justru bercocok tanam."},
+      {letter:"E",text:"Tidak ada perubahan.",correct:false,"explanation":"Justru banyak perubahan."}
+    ], difficulty:"hard", hint:"Menetap → desa, kepemilikan, spesialisasi kerja.", points:70 },
+
+  /* ===== MEGALITIKUM (4 soal) ===== */
+  { id:1315, topic:"Megalitikum",
+    question:"Zaman Megalitikum ditandai dengan...",
+    options:[
+      {letter:"A",text:"Pembangunan bangunan dari batu besar untuk keperluan kepercayaan",correct:true,explanation:"Tepat! Megalitikum = bangunan batu besar."},
+      {letter:"B",text:"Alat batu kasar",correct:false,explanation:"Itu Paleolitikum."},
+      {letter:"C",text:"Penggunaan logam",correct:false,explanation:"Itu Perundagian."},
+      {letter:"D",text:"Lukisan gua",correct:false,explanation:"Itu Mesolitikum."},
+      {letter:"E",text:"Tembikar halus",correct:false,"explanation":"Tembikar muncul di Neolitikum."}
+    ], difficulty:"easy", hint:"Megalitikum = bangunan batu besar.", points:50 },
+
+  { id:1316, topic:"Megalitikum",
+    question:"Contoh peninggalan Megalitikum yang berupa tugu batu untuk memperingati leluhur adalah...",
+    options:[
+      {letter:"A",text:"Menhir",correct:true,explanation:"Tepat! Menhir = tugu batu untuk peringatan/pemujaan leluhur."},
+      {letter:"B",text:"Dolmen",correct:false,explanation:"Dolmen = meja batu untuk sesaji."},
+      {letter:"C",text:"Sarkofagus",correct:false,explanation:"Sarkofagus = peti jenazah batu."},
+      {letter:"D",text:"Waruga",correct:false,explanation:"Waruga = kubur rumah kecil (Minahasa)."},
+      {letter:"E",text:"Nekara",correct:false,"explanation":"Nekara = drum perunggu (Perundagian)."}
+    ], difficulty:"easy", hint:"Menhir = tugu batu peringatan leluhur.", points:50 },
+
+  { id:1317, topic:"Megalitikum",
+    question:"Situs megalitikum terbesar di Asia Tenggara yang terletak di Jawa Barat adalah...",
+    options:[
+      {letter:"A",text:"Gunung Padang",correct:true,explanation:"Tepat! Gunung Padang = situs megalitikum terbesar di Asia Tenggara."},
+      {letter:"B",text:"Sangiran",correct:false,explanation:"Sangiran = situs fosil."},
+      {letter:"C",text:"Trinil",correct:false,explanation:"Trinil = situs fosil."},
+      {letter:"D",text:"Liang Bua",correct:false,explanation:"Liang Bua = situs Homo floresiensis."},
+      {letter:"E",text:"Leang-Leang",correct:false,"explanation":"Leang-Leang = situs lukisan gua."}
+    ], difficulty:"medium", hint:"Gunung Padang = situs megalitikum terbesar di Asia Tenggara.", points:60 },
+
+  { id:1318, topic:"Megalitikum",
+    question:"Analisis yang paling tepat tentang keterkaitan antara bangunan megalitikum & sistem kepercayaan praaksara adalah...",
+    options:[
+      {letter:"A",text:"Bangunan megalitikum dibangun untuk menghormati leluhur — menunjukkan sistem kepercayaan animisme/dinamisme yang kuat.",correct:true,explanation:"Tepat! Megalitikum = bukti kepercayaan pada leluhur."},
+      {letter:"B",text:"Bangunan megalitikum hanya untuk tempat tinggal.",correct:false,explanation:"Bukan tempat tinggal."},
+      {letter:"C",text:"Bangunan megalitikum tidak terkait kepercayaan.",correct:false,explanation:"Justru sangat terkait."},
+      {letter:"D",text:"Bangunan megalitikum hanya hiasan.",correct:false,explanation:"Bukan hiasan."},
+      {letter:"E",text:"Bangunan megalitikum tidak ilmiah.",correct:false,"explanation":"Justru bukti ilmiah."}
+    ], difficulty:"hard", hint:"Megalitikum = bukti kepercayaan pada leluhur.", points:70 },
+
+  /* ===== PERUNDAGIAN (4 soal) ===== */
+  { id:1319, topic:"Perundagian",
+    question:"Masa perundagian ditandai dengan...",
+    options:[
+      {letter:"A",text:"Kemampuan manusia melebur & mengecor logam (perunggu & besi)",correct:true,explanation:"Tepat! Perundagian = peleburan & pengecoran logam."},
+      {letter:"B",text:"Penggunaan batu kasar",correct:false,explanation:"Itu Paleolitikum."},
+      {letter:"C",text:"Membangun megalitik",correct:false,explanation:"Itu Megalitikum."},
+      {letter:"D",text:"Lukisan gua",correct:false,explanation:"Itu Mesolitikum."},
+      {letter:"E",text:"Nomaden murni",correct:false,"explanation":"Perundagian = menetap."}
+    ], difficulty:"easy", hint:"Perundagian = peleburan & pengecoran logam.", points:50 },
+
+  { id:1320, topic:"Perundagian",
+    question:"Contoh peninggalan masa perundagian adalah...",
+    options:[
+      {letter:"A",text:"Nekara, kapak corong, & arca perunggu",correct:true,explanation:"Tepat! Nekara, kapak corong, arca = peninggalan perunggu."},
+      {letter:"B",text:"Kapak genggam",correct:false,explanation:"Itu Paleolitikum."},
+      {letter:"C",text:"Kapak persegi",correct:false,explanation:"Itu Neolitikum."},
+      {letter:"D",text:"Menhir",correct:false,explanation:"Itu Megalitikum."},
+      {letter:"E",text:"Lukisan gua",correct:false,"explanation":"Itu Mesolitikum."}
+    ], difficulty:"easy", hint:"Perundagian = nekara, kapak corong, arca perunggu.", points:50 },
+
+  { id:1321, topic:"Perundagian",
+    question:"Nekara terbesar di dunia ditemukan di...",
+    options:[
+      {letter:"A",text:"Pejeng, Bali",correct:true,explanation:"Tepat! Nekara Pejeng = terbesar di dunia."},
+      {letter:"B",text:"Makassar",correct:false,explanation:"Bukan Pejeng."},
+      {letter:"C",text:"Sangiran",correct:false,explanation:"Sangiran = situs fosil."},
+      {letter:"D",text:"Liang Bua",correct:false,explanation:"Liang Bua = Homo floresiensis."},
+      {letter:"E",text:"Gunung Padang",correct:false,"explanation":"Gunung Padang = megalitikum."}
+    ], difficulty:"easy", hint:"Nekara Pejeng, Bali = terbesar di dunia.", points:50 },
+
+  { id:1322, topic:"Perundagian",
+    question:"Analisis yang paling tepat tentang pentingnya kemampuan melebur logam bagi masyarakat perundagian adalah...",
+    options:[
+      {letter:"A",text:"Membuka peluang spesialisasi kerja — muncul golongan undagi (tukang logam) sebagai keahlian khusus.",correct:true,explanation:"Tepat! Undagi = spesialisasi tukang logam."},
+      {letter:"B",text:"Tidak penting.",correct:false,explanation:"Justru sangat penting."},
+      {letter:"C",text:"Membuat manusia kembali nomaden.",correct:false,explanation:"Justru tetap menetap."},
+      {letter:"D",text:"Membuat manusia kembali berburu.",correct:false,explanation:"Tidak."},
+      {letter:"E",text:"Menghilangkan budaya.",correct:false,"explanation":"Justru memperkaya budaya."}
+    ], difficulty:"hard", hint:"Undagi = spesialisasi tukang logam.", points:70 },
+
+  /* ===== POLA KEHIDUPAN (5 soal) ===== */
+  { id:1323, topic:"Pola Kehidupan",
+    question:"Pola hidup 'food gathering' berarti...",
+    options:[
+      {letter:"A",text:"Mengumpulkan & mengambil makanan langsung dari alam (berburu & meramu)",correct:true,explanation:"Tepat! Food gathering = mengambil langsung dari alam."},
+      {letter:"B",text:"Menghasilkan makanan sendiri",correct:false,explanation:"Itu food producing."},
+      {letter:"C",text:"Membeli makanan di pasar",correct:false,explanation:"Belum ada pasar."},
+      {letter:"D",text:"Membuat makanan dari logam",correct:false,explanation:"Tidak relevan."},
+      {letter:"E",text:"Menanam padi",correct:false,"explanation":"Itu food producing."}
+    ], difficulty:"easy", hint:"Food gathering = mengambil langsung dari alam.", points:50 },
+
+  { id:1324, topic:"Pola Kehidupan",
+    question:"Pola hidup 'food producing' berarti...",
+    options:[
+      {letter:"A",text:"Menghasilkan makanan sendiri melalui bercocok tanam & beternak",correct:true,explanation:"Tepat! Food producing = bercocok tanam & beternak."},
+      {letter:"B",text:"Mengambil makanan dari hutan",correct:false,explanation:"Itu food gathering."},
+      {letter:"C",text:"Berburu hewan liar",correct:false,explanation:"Itu food gathering."},
+      {letter:"D",text:"Meramu tumbuhan liar",correct:false,explanation:"Itu food gathering."},
+      {letter:"E",text:"Meminta makanan",correct:false,"explanation":"Bukan definisinya."}
+    ], difficulty:"easy", hint:"Food producing = bercocok tanam & beternak.", points:50 },
+
+  { id:1325, topic:"Pola Kehidupan",
+    question:"Analisis yang paling tepat tentang perubahan sosial akibat dari peralihan food gathering ke food producing adalah...",
+    options:[
+      {letter:"A",text:"Masyarakat berubah dari nomaden menjadi menetap, muncul kepemilikan pribadi & desa permanen.",correct:true,explanation:"Tepat! Nomaden → menetap, muncul desa & kepemilikan."},
+      {letter:"B",text:"Tidak ada perubahan sosial.",correct:false,explanation:"Justru banyak perubahan."},
+      {letter:"C",text:"Masyarakat kembali berburu.",correct:false,explanation:"Justru bercocok tanam."},
+      {letter:"D",text:"Masyarakat menjadi lebih primitif.",correct:false,explanation:"Justru lebih maju."},
+      {letter:"E",text:"Tidak dapat dianalisis.",correct:false,"explanation":"Dapat dianalisis."}
+    ], difficulty:"medium", hint:"Nomaden → menetap, muncul desa & kepemilikan.", points:60 },
+
+  { id:1326, topic:"Pola Kehidupan",
+    question:"Mengapa munculnya pertanian dianggap sebagai faktor penting dalam perkembangan peradaban manusia?",
+    options:[
+      {letter:"A",text:"Karena pertanian memungkinkan surplus pangan → spesialisasi kerja → munculnya peradaban kompleks.",correct:true,explanation:"Tepat! Surplus pangan → spesialisasi → peradaban kompleks."},
+      {letter:"B",text:"Karena pertanian lebih mudah dari berburu.",correct:false,explanation:"Justru butuh kerja keras."},
+      {letter:"C",text:"Karena pertanian tidak butuh lahan.",correct:false,explanation:"Justru butuh lahan."},
+      {letter:"D",text:"Karena pertanian tidak butuh air.",correct:false,explanation:"Butuh air."},
+      {letter:"E",text:"Karena pertanian tidak memerlukan pengetahuan.",correct:false,"explanation":"Justru butuh pengetahuan."}
+    ], difficulty:"hard", hint:"Surplus pangan → spesialisasi → peradaban kompleks.", points:70 },
+
+  { id:1327, topic:"Pola Kehidupan",
+    question:"Perhatikan pernyataan berikut!\n'Revolusi Neolitikum bukan hanya perubahan teknologi, tetapi juga perubahan cara berpikir.'\n\nAnalisis yang paling tepat adalah...",
+    options:[
+      {letter:"A",text:"Tepat: manusia mulai berpikir jangka panjang (menanam → panen) & merencanakan masa depan.",correct:true,explanation:"Tepat! Berpikir jangka panjang & merencanakan."},
+      {letter:"B",text:"Salah: hanya soal teknologi.",correct:false,explanation:"Justru juga cara berpikir."},
+      {letter:"C",text:"Salah: manusia tetap berpikir pendek.",correct:false,explanation:"Justru mulai berpikir panjang."},
+      {letter:"D",text:"Tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."},
+      {letter:"E",text:"Hanya berlaku untuk Indonesia.",correct:false,"explanation":"Berlaku universal."}
+    ], difficulty:"hard", hint:"Berpikir jangka panjang & merencanakan masa depan.", points:70 },
+
+  /* ===== SISTEM KEPERCAYAAN (6 soal) ===== */
+  { id:1328, topic:"Kepercayaan: Animisme",
+    question:"Kepercayaan bahwa segala sesuatu (benda, tumbuhan, hewan, tempat) memiliki roh disebut...",
+    options:[
+      {letter:"A",text:"Animisme",correct:true,explanation:"Tepat! Animisme = segala sesuatu punya roh."},
+      {letter:"B",text:"Dinamisme",correct:false,explanation:"Dinamisme = benda tertentu punya kekuatan gaib."},
+      {letter:"C",text:"Totemisme",correct:false,explanation:"Totemisme = hubungan khusus dengan hewan/tumbuhan."},
+      {letter:"D",text:"Monoteisme",correct:false,explanation:"Monoteisme = percaya satu Tuhan."},
+      {letter:"E",text:"Ateisme",correct:false,"explanation":"Ateisme = tidak percaya Tuhan."}
+    ], difficulty:"easy", hint:"Animisme = segala sesuatu punya roh.", points:50 },
+
+  { id:1329, topic:"Kepercayaan: Dinamisme",
+    question:"Kepercayaan bahwa benda-benda tertentu memiliki kekuatan gaib disebut...",
+    options:[
+      {letter:"A",text:"Dinamisme",correct:true,explanation:"Tepat! Dinamisme = benda tertentu punya kekuatan gaib."},
+      {letter:"B",text:"Animisme",correct:false,explanation:"Animisme = roh pada segala sesuatu."},
+      {letter:"C",text:"Totemisme",correct:false,explanation:"Totemisme = hubungan dengan hewan/tumbuhan."},
+      {letter:"D",text:"Monoteisme",correct:false,explanation:"Monoteisme = percaya satu Tuhan."},
+      {letter:"E",text:"Politeisme",correct:false,"explanation":"Politeisme = percaya banyak dewa."}
+    ], difficulty:"easy", hint:"Dinamisme = benda tertentu punya kekuatan gaib.", points:50 },
+
+  { id:1330, topic:"Kepercayaan: Totemisme",
+    question:"Kepercayaan bahwa suatu kelompok manusia memiliki hubungan khusus dengan hewan/tumbuhan tertentu disebut...",
+    options:[
+      {letter:"A",text:"Totemisme",correct:true,explanation:"Tepat! Totemisme = hubungan khusus dengan hewan/tumbuhan."},
+      {letter:"B",text:"Animisme",correct:false,explanation:"Animisme = roh pada segala sesuatu."},
+      {letter:"C",text:"Dinamisme",correct:false,explanation:"Dinamisme = benda punya kekuatan gaib."},
+      {letter:"D",text:"Monoteisme",correct:false,explanation:"Monoteisme = percaya satu Tuhan."},
+      {letter:"E",text:"Ateisme",correct:false,"explanation":"Ateisme = tidak percaya Tuhan."}
+    ], difficulty:"easy", hint:"Totemisme = hubungan khusus dengan hewan/tumbuhan.", points:50 },
+
+  { id:1331, topic:"Kepercayaan",
+    question:"Contoh konkret penerapan animisme dalam kehidupan praaksara adalah...",
+    options:[
+      {letter:"A",text:"Meminta izin sebelum menebang pohon besar karena dianggap berpenghuni roh.",correct:true,explanation:"Tepat! Meminta izin = penerapan animisme."},
+      {letter:"B",text:"Menggunakan keris pusaka.",correct:false,explanation:"Itu dinamisme."},
+      {letter:"C",text:"Melarang memakan hewan totem.",correct:false,explanation:"Itu totemisme."},
+      {letter:"D",text:"Berdoa kepada satu Tuhan.",correct:false,explanation:"Itu monoteisme."},
+      {letter:"E",text:"Menyembah matahari.",correct:false,"explanation":"Bisa jadi bentuk lain."}
+    ], difficulty:"medium", hint:"Meminta izin pada pohon = animisme.", points:60 },
+
+  { id:1332, topic:"Kepercayaan",
+    question:"Perhatikan pernyataan berikut!\n'Sistem kepercayaan praaksara masih dapat kita temukan jejaknya dalam tradisi Indonesia modern.'\n\nAnalisis yang paling tepat adalah...",
+    options:[
+      {letter:"A",text:"Tepat: tradisi seperti sedekah laut, ziarah kubur, & penghormatan pada benda pusaka adalah warisan nilai dari masa praaksara.",correct:true,explanation:"Tepat! Tradisi modern = warisan nilai praaksara."},
+      {letter:"B",text:"Salah: kepercayaan praaksara sudah hilang total.",correct:false,explanation:"Justru masih ada jejaknya."},
+      {letter:"C",text:"Salah: tidak ada tradisi yang bertahan.",correct:false,explanation:"Justru banyak yang bertahan."},
+      {letter:"D",text:"Tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."},
+      {letter:"E",text:"Hanya berlaku untuk Papua.",correct:false,"explanation":"Berlaku di banyak daerah."}
+    ], difficulty:"hard", hint:"Sedekah laut, ziarah kubur = warisan nilai praaksara.", points:70 },
+
+  { id:1333, topic:"Kepercayaan",
+    question:"Analisis kritis yang paling tepat tentang makna bangunan megalitikum seperti menhir & dolmen bagi masyarakat praaksara adalah...",
+    options:[
+      {letter:"A",text:"Bangunan tersebut merupakan wujud nyata dari kepercayaan mereka pada roh leluhur (animisme) & kekuatan gaib (dinamisme).",correct:true,explanation:"Tepat! Megalitikum = wujud animisme & dinamisme."},
+      {letter:"B",text:"Bangunan tersebut hanya untuk keindahan.",correct:false,explanation:"Bukan sekadar keindahan."},
+      {letter:"C",text:"Bangunan tersebut tidak memiliki makna.",correct:false,explanation:"Justru penuh makna."},
+      {letter:"D",text:"Bangunan tersebut adalah tempat tinggal.",correct:false,explanation:"Bukan tempat tinggal."},
+      {letter:"E",text:"Bangunan tersebut tidak terkait kepercayaan.",correct:false,"explanation":"Justru sangat terkait."}
+    ], difficulty:"hard", hint:"Megalitikum = wujud animisme & dinamisme.", points:70 },
+
+  /* ===== PENINGGALAN BUDAYA (4 soal) ===== */
+  { id:1334, topic:"Peninggalan Budaya",
+    question:"Perbedaan antara dolmen & sarkofagus adalah...",
+    options:[
+      {letter:"A",text:"Dolmen = meja batu untuk sesaji; sarkofagus = peti jenazah dari batu",correct:true,explanation:"Tepat! Dolmen = meja sesaji; sarkofagus = peti jenazah."},
+      {letter:"B",text:"Keduanya sama saja.",correct:false,explanation:"Berbeda fungsi."},
+      {letter:"C",text:"Dolmen = peti jenazah; sarkofagus = meja sesaji",correct:false,explanation:"Terbalik."},
+      {letter:"D",text:"Dolmen = tugu batu; sarkofagus = drum perunggu",correct:false,explanation:"Bukan itu."},
+      {letter:"E",text:"Dolmen = perhiasan; sarkofagus = senjata",correct:false,"explanation":"Bukan itu."}
+    ], difficulty:"medium", hint:"Dolmen = meja sesaji; sarkofagus = peti jenazah.", points:60 },
+
+  { id:1335, topic:"Peninggalan Budaya",
+    question:"Peninggalan megalitikum berupa kubur berbentuk rumah kecil dari batu yang khas Minahasa disebut...",
+    options:[
+      {letter:"A",text:"Waruga",correct:true,explanation:"Tepat! Waruga = kubur rumah kecil khas Minahasa."},
+      {letter:"B",text:"Sarkofagus",correct:false,explanation:"Sarkofagus = peti jenazah (Bali)."},
+      {letter:"C",text:"Menhir",correct:false,explanation:"Menhir = tugu batu."},
+      {letter:"D",text:"Dolmen",correct:false,explanation:"Dolmen = meja batu sesaji."},
+      {letter:"E",text:"Nekara",correct:false,"explanation":"Nekara = drum perunggu."}
+    ], difficulty:"medium", hint:"Waruga = kubur rumah kecil khas Minahasa.", points:60 },
+
+  { id:1336, topic:"Peninggalan Budaya",
+    question:"Perhatikan peninggalan praaksara berikut!\n(1) Kapak persegi, (2) Nekara, (3) Menhir, (4) Lukisan gua\n\nUrutan peninggalan tersebut dari yang paling tua (Paleolitikum/Mesolitikum) ke yang paling muda (Perundagian) adalah...",
+    options:[
+      {letter:"A",text:"(4) Lukisan gua → (1) Kapak persegi → (3) Menhir → (2) Nekara",correct:true,explanation:"Tepat! Mesolitikum → Neolitikum → Megalitikum → Perundagian."},
+      {letter:"B",text:"(2) → (3) → (1) → (4)",correct:false,explanation:"Terbalik."},
+      {letter:"C",text:"(3) → (4) → (2) → (1)",correct:false,explanation:"Urutan tidak tepat."},
+      {letter:"D",text:"(1) → (2) → (3) → (4)",correct:false,explanation:"Urutan tidak tepat."},
+      {letter:"E",text:"Semua sama tua.",correct:false,"explanation":"Berbeda periode."}
+    ], difficulty:"hard", hint:"Lukisan gua (Mesolitikum) → Kapak persegi (Neolitikum) → Menhir (Megalitikum) → Nekara (Perundagian).", points:70 },
+
+  { id:1337, topic:"Peninggalan Budaya",
+    question:"Analisis yang paling tepat tentang nilai penting peninggalan budaya praaksara bagi pelajar Indonesia adalah...",
+    options:[
+      {letter:"A",text:"Peninggalan tersebut adalah jendela untuk memahami cara hidup, teknologi, & kepercayaan nenek moyang kita.",correct:true,explanation:"Tepat! Peninggalan = jendela memahami nenek moyang."},
+      {letter:"B",text:"Peninggalan tersebut tidak berguna.",correct:false,explanation:"Justru sangat berguna."},
+      {letter:"C",text:"Peninggalan tersebut hanya untuk museum.",correct:false,explanation:"Untuk semua orang."},
+      {letter:"D",text:"Peninggalan tersebut hanya untuk arkeolog.",correct:false,explanation:"Untuk semua pelajar sejarah."},
+      {letter:"E",text:"Peninggalan tersebut hanya mitos.",correct:false,"explanation":"Justru bukti ilmiah."}
+    ], difficulty:"hard", hint:"Peninggalan = jendela memahami nenek moyang.", points:70 },
+
+  /* ===== KONSEP PERUBAHAN & KEBERLANJUTAN (3 soal) ===== */
+  { id:1338, topic:"Perubahan & Keberlanjutan",
+    question:"Perubahan besar dari Paleolitikum ke Neolitikum mencakup...",
+    options:[
+      {letter:"A",text:"Alat: dari kasar → halus; Hidup: dari nomaden → menetap; Makanan: dari food gathering → food producing",correct:true,explanation:"Tepat! Perubahan menyeluruh dari Paleolitikum ke Neolitikum."},
+      {letter:"B",text:"Hanya perubahan alat.",correct:false,explanation:"Banyak aspek berubah."},
+      {letter:"C",text:"Hanya perubahan makanan.",correct:false,explanation:"Banyak aspek berubah."},
+      {letter:"D",text:"Tidak ada perubahan.",correct:false,explanation:"Justru banyak perubahan."},
+      {letter:"E",text:"Masyarakat kembali ke masa sebelumnya.",correct:false,"explanation":"Justru maju ke depan."}
+    ], difficulty:"medium", hint:"Alat, hidup, makanan — semua berubah.", points:60 },
+
+  { id:1339, topic:"Perubahan & Keberlanjutan",
+    question:"Nilai gotong royong yang masih hidup dalam masyarakat Indonesia modern paling erat kaitannya dengan tradisi praaksara berikut...",
+    options:[
+      {letter:"A",text:"Gotong royong membangun megalitik & mengerjakan lahan pertanian bersama",correct:true,explanation:"Tepat! Gotong royong berakar dari tradisi megalitik & pertanian bersama."},
+      {letter:"B",text:"Perang antar suku",correct:false,explanation:"Bukan gotong royong."},
+      {letter:"C",text:"Perburuan sendirian",correct:false,explanation:"Bukan gotong royong."},
+      {letter:"D",text:"Nomaden",correct:false,explanation:"Bukan gotong royong."},
+      {letter:"E",text:"Menghafal cerita",correct:false,"explanation":"Bukan gotong royong."}
+    ], difficulty:"hard", hint:"Gotong royong = tradisi megalitik & pertanian bersama.", points:70 },
+
+  { id:1340, topic:"Perubahan & Keberlanjutan",
+    question:"Kesimpulan yang paling tepat tentang perkembangan masyarakat praaksara dari Paleolitikum hingga Perundagian adalah...",
+    options:[
+      {letter:"A",text:"Perkembangan bertahap: dari pengumpul makanan menjadi penghasil makanan, dari batu ke logam, dari nomaden ke menetap, & dari kepercayaan sederhana ke sistem kepercayaan kompleks.",correct:true,explanation:"Tepat! Perkembangan bertahap menyeluruh."},
+      {letter:"B",text:"Perkembangan instan.",correct:false,explanation:"Justru bertahap."},
+      {letter:"C",text:"Tidak ada perkembangan.",correct:false,explanation:"Justru banyak perkembangan."},
+      {letter:"D",text:"Perkembangan mundur.",correct:false,explanation:"Justru maju."},
+      {letter:"E",text:"Hanya satu aspek yang berkembang.",correct:false,"explanation":"Banyak aspek berkembang."}
+    ], difficulty:"hard", hint:"Bertahap: makanan, teknologi, hunian, kepercayaan — semua berkembang.", points:70 }
+];
+
+/* ============================================================
+   CONSTANTS & STATE
+   ============================================================ */
+const TOTAL_Q = 15;
+const TIME_LIMIT = 20 * 60;
+
+const state = {
+  questions: [], currentIndex: 0, answers: [], score: 0,
+  xp: 0, level: 1, hp: 3, maxHp: 3, combo: 0, bestCombo: 0,
+  timer: null, timeLeft: TIME_LIMIT, started: false, finished: false,
+  powers: { p50:1, hint:1, skip:1 }, soundOn: true
+};
+
+/* ============================================================
+   AUDIO
+   ============================================================ */
+let audioCtx = null;
+function ensureAudio(){
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}
+function playTone(freq, dur, type, vol){
+  if (!state.soundOn) return;
+  ensureAudio(); if (!audioCtx) return;
+  try {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = type || 'sine'; o.frequency.value = freq;
+    g.gain.setValueAtTime(vol || 0.08, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + dur);
+  } catch(e){}
+}
+function sfxClick(){ playTone(520, .08, 'triangle', .06); }
+function sfxCorrect(){ playTone(660, .12, 'sine', .10); setTimeout(()=>playTone(880, .15, 'sine', .10), 80); setTimeout(()=>playTone(1100, .20, 'sine', .08), 160); }
+function sfxWrong(){ playTone(200, .18, 'sawtooth', .10); setTimeout(()=>playTone(150, .25, 'sawtooth', .08), 120); }
+function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(()=>playTone(1200, .12, 'triangle', .07), 60); }
+function sfxLevelUp(){ [523, 659, 784, 1046].forEach((f, i) => setTimeout(()=>playTone(f, .16, 'sine', .10), i*90)); }
+function sfxFinish(){ [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(()=>playTone(f, .22, 'sine', .10), i*120)); }
+function toggleSound(){
+  state.soundOn = !state.soundOn;
+  document.getElementById('soundBtn').innerHTML = state.soundOn ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+  if (state.soundOn) sfxClick();
+}
+function toggleTheme(){
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').innerHTML = next === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  sfxClick();
+}
+
+(function(){
+  const bar = document.getElementById('loaderBar');
+  const pct = document.getElementById('loaderPct');
+  const loader = document.getElementById('loader');
+  const t0 = Date.now();
+  (function tick(){
+    const p = Math.min((Date.now() - t0) / 1800 * 100, 100);
+    bar.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+    if (p < 100) requestAnimationFrame(tick);
+    else setTimeout(()=>{ loader.classList.add('hidden'); setTimeout(()=>loader.style.display='none', 700); }, 300);
+  })();
+})();
+
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  function makeP(){ return { x: Math.random()*W, y: Math.random()*H, r: Math.random()*2 + 0.4, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3 - 0.15, a: Math.random()*0.5 + 0.15, hue: Math.random() < 0.5 ? 180 : 40 }; }
+  function init(){ resize(); particles = Array.from({length: Math.min(60, Math.floor(W*H/25000))}, makeP); }
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.shadowBlur = 8; ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.fill();
+    });
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+function fireConfetti(count){
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const colors = ['#14B8A6','#5EEAD4','#F59E0B','#FCD34D','#34D399','#38BDF8'];
+  const pieces = Array.from({length: count || 60}, () => ({
+    x: window.innerWidth/2 + (Math.random()-0.5)*200,
+    y: window.innerHeight/2,
+    vx: (Math.random()-0.5)*14, vy: Math.random()*-16 - 4,
+    g: 0.5, r: Math.random()*8 + 4,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    rot: Math.random()*Math.PI, vr: (Math.random()-0.5)*0.3, life: 1
+  }));
+  let frame = 0;
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    pieces.forEach(p => {
+      if (p.life <= 0) return;
+      alive = true;
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.012;
+      ctx.save(); ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      ctx.restore();
+    });
+    if (alive && frame < 200) { frame++; requestAnimationFrame(animate); }
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  animate();
+}
+
+function showToast(icon, title, desc, variant){
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<div class="toast-icon ${variant||''}">${icon}</div>
+    <div class="toast-content"><div class="toast-title">${title}</div><div class="toast-desc">${desc}</div></div>`;
+  wrap.appendChild(el);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 450); }, 3200);
+}
+function scorePopup(text, x, y, color){
+  const el = document.createElement('div');
+  el.className = 'score-pop';
+  el.textContent = text;
+  el.style.left = (x || window.innerWidth/2) + 'px';
+  el.style.top = (y || window.innerHeight/2) + 'px';
+  if (color) el.style.color = color;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1100);
+}
+function shuffle(a){ const arr = a.slice(); for (let i = arr.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+function updateHpHud(){
+  const hp = document.getElementById('hudHp'); hp.innerHTML = '';
+  for (let i = 0; i < state.maxHp; i++){
+    const heart = document.createElement('i');
+    heart.className = 'fas fa-heart heart' + (i < state.hp ? '' : ' empty');
+    hp.appendChild(heart);
+  }
+}
+function updateXpHud(){
+  const xpForLevel = state.level * 100;
+  const pct = Math.min((state.xp % xpForLevel) / xpForLevel * 100, 100);
+  document.getElementById('hudLevel').textContent = state.level;
+  document.getElementById('hudXp').textContent = state.xp % xpForLevel;
+  document.getElementById('hudXpMax').textContent = xpForLevel;
+  document.getElementById('xpFill').style.width = pct + '%';
+}
+function updateComboHud(){
+  document.getElementById('comboVal').textContent = state.combo;
+  const tag = document.getElementById('comboTag');
+  if (state.combo >= 3){ tag.classList.add('hot'); setTimeout(()=>tag.classList.remove('hot'), 500); }
+}
+function updatePowers(){
+  document.getElementById('c50').textContent = state.powers.p50;
+  document.getElementById('chint').textContent = state.powers.hint;
+  document.getElementById('cskip').textContent = state.powers.skip;
+  document.getElementById('p50').disabled = state.powers.p50 <= 0;
+  document.getElementById('phint').disabled = state.powers.hint <= 0;
+  document.getElementById('pskip').disabled = state.powers.skip <= 0;
+}
+
+function startGame(){
+  ensureAudio();
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('gameHud').classList.add('active');
+  state.questions = shuffle(BANK_SOAL).slice(0, TOTAL_Q);
+  state.currentIndex = 0; state.answers = [];
+  state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.timeLeft = TIME_LIMIT; state.started = true; state.finished = false;
+  state.powers = { p50:1, hint:1, skip:1 };
+  updateHpHud(); updateXpHud(); updateComboHud(); updatePowers();
+  showToast('🔥', 'Arena Level 13 Dimulai!', 'Kuasai periodisasi, kehidupan & kepercayaan!', '');
+  sfxClick();
+  startTimer();
+  renderQuestion();
+}
+
+function startTimer(){
+  if (state.timer) clearInterval(state.timer);
+  state.timer = setInterval(() => {
+    state.timeLeft--;
+    updateTimerHud();
+    if (state.timeLeft <= 0){ clearInterval(state.timer); finishGame(true); }
+  }, 1000);
+  updateTimerHud();
+}
+function updateTimerHud(){
+  const m = Math.floor(state.timeLeft / 60), s = state.timeLeft % 60;
+  document.getElementById('hudTimerVal').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  const el = document.getElementById('hudTimer');
+  if (state.timeLeft <= 120) el.classList.add('warning'); else el.classList.remove('warning');
+}
+
+function renderQuestion(){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  document.getElementById('qNumLabel').textContent = 'Soal ' + (state.currentIndex+1);
+  document.getElementById('qTopicText').textContent = q.topic || 'Praaksara';
+  document.getElementById('qText').innerHTML = q.question;
+  document.getElementById('hudQNum').textContent = state.currentIndex+1;
+  const opts = document.getElementById('options'); opts.innerHTML = '';
+  q.options.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.dataset.letter = o.letter;
+    btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
+    btn.addEventListener('click', () => selectOption(o.letter, btn));
+    opts.appendChild(btn);
+  });
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('btnNext').disabled = true;
+  document.getElementById('btnNext').style.display = '';
+  document.getElementById('btnFinish').style.display = 'none';
+  document.getElementById('qCard').classList.remove('shake');
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'qEnter .55s cubic-bezier(.16,1,.3,1)';
+  if (state.currentIndex === TOTAL_Q - 1){
+    document.getElementById('btnNext').style.display = 'none';
+    document.getElementById('btnFinish').style.display = '';
+  }
+}
+
+function selectOption(letter, btnEl){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  const selected = q.options.find(o => o.letter === letter);
+  if (!selected) return;
+  const correct = selected.correct;
+  document.querySelectorAll('#options .opt').forEach(b => {
+    b.classList.add('locked');
+    const o = q.options.find(x => x.letter === b.dataset.letter);
+    if (o.correct) b.classList.add('correct');
+    else if (b.dataset.letter === letter && !correct) b.classList.add('wrong');
+  });
+  state.answers.push({ qid: q.id, selected: letter, correct, skipped: false,
+    questionText: q.question, topic: q.topic,
+    correctLetter: q.options.find(o => o.correct).letter,
+    explanation: selected.explanation });
+  if (correct){
+    state.combo++;
+    if (state.combo > state.bestCombo) state.bestCombo = state.combo;
+    const bonus = Math.max(0, state.combo - 1) * 5;
+    const gained = (q.points || 50) + bonus;
+    state.score += gained; state.xp += gained;
+    const prevLevel = state.level;
+    state.level = Math.floor(state.xp / 100) + 1;
+    if (state.level > prevLevel){
+      sfxLevelUp();
+      showToast('⭐', 'LEVEL UP!', `Kamu naik ke Level ${state.level}!`, 'cyan');
+      fireConfetti(40);
+    }
+    sfxCorrect();
+    fireConfetti(state.combo >= 3 ? 80 : 45);
+    const rect = btnEl ? btnEl.getBoundingClientRect() : null;
+    scorePopup('+' + gained + ' XP', rect ? rect.left + rect.width/2 : window.innerWidth/2, rect ? rect.top : window.innerHeight/2, '#5EEAD4');
+    if (state.combo >= 3) showToast('🔥', `COMBO ×${state.combo}!`, `Bonus +${bonus} XP!`, '');
+  } else {
+    state.combo = 0; state.hp--; sfxWrong();
+    updateHpHud();
+    const hpEls = document.querySelectorAll('.hud-hp .heart');
+    if (hpEls[state.hp]) hpEls[state.hp].classList.add('losing');
+    const card = document.getElementById('qCard');
+    card.classList.add('shake'); setTimeout(() => card.classList.remove('shake'), 550);
+    if (state.hp <= 0) showToast('💔', 'Nyawa Habis!', 'Kamu kehilangan semua nyawa.', 'violet');
+  }
+  document.getElementById('hudScore').textContent = state.score;
+  updateXpHud(); updateComboHud();
+  showFeedback(correct, q, selected);
+  document.getElementById('btnNext').disabled = false;
+}
+
+function showFeedback(correct, q, selected){
+  const panel = document.getElementById('feedback');
+  const icon = document.getElementById('fbIcon');
+  const title = document.getElementById('fbTitle');
+  const body = document.getElementById('fbBody');
+  panel.classList.add('show');
+  if (correct){
+    icon.className = 'fb-icon correct'; icon.innerHTML = '<i class="fas fa-check"></i>';
+    title.className = 'fb-title correct'; title.textContent = 'BENAR!';
+  } else {
+    icon.className = 'fb-icon wrong'; icon.innerHTML = '<i class="fas fa-times"></i>';
+    title.className = 'fb-title wrong'; title.textContent = 'BELUM TEPAT';
+  }
+  const correctOpt = q.options.find(o => o.correct);
+  let html = `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
+  html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
+  if (!correct && selected) html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
+  html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
+  body.innerHTML = html;
+}
+
+function nextQuestion(){
+  if (state.currentIndex < TOTAL_Q - 1){
+    state.currentIndex++;
+    renderQuestion();
+    document.getElementById('qCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+function usePower(type){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  if (type === '50'){
+    if (state.powers.p50 <= 0) return;
+    const wrongs = q.options.filter(o => !o.correct);
+    const remove = shuffle(wrongs).slice(0, 2);
+    document.querySelectorAll('#options .opt').forEach(b => {
+      if (remove.some(o => o.letter === b.dataset.letter)) b.classList.add('disabled-50');
+    });
+    state.powers.p50 = 0; updatePowers(); sfxPower();
+    showToast('✂️', '50:50 Aktif!', 'Dua jawaban salah dihilangkan.', 'cyan');
+  } else if (type === 'hint'){
+    if (state.powers.hint <= 0) return;
+    const panel = document.getElementById('feedback');
+    const icon = document.getElementById('fbIcon');
+    const title = document.getElementById('fbTitle');
+    const body = document.getElementById('fbBody');
+    panel.classList.add('show');
+    icon.className = 'fb-icon info'; icon.innerHTML = '<i class="fas fa-lightbulb"></i>';
+    title.className = 'fb-title info'; title.textContent = 'PETUNJUK';
+    body.innerHTML = `<p>${q.hint || 'Tidak ada petunjuk.'}</p>`;
+    state.powers.hint = 0; updatePowers(); sfxPower();
+    showToast('💡', 'Petunjuk Digunakan!', 'Perhatikan dengan saksama.', '');
+  } else if (type === 'skip'){
+    if (state.powers.skip <= 0) return;
+    state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+      questionText: q.question, topic: q.topic,
+      correctLetter: q.options.find(o => o.correct).letter,
+      explanation: q.options.find(o => o.correct).explanation });
+    document.querySelectorAll('#options .opt').forEach(b => {
+      b.classList.add('locked');
+      const o = q.options.find(x => x.letter === b.dataset.letter);
+      if (o.correct) b.classList.add('correct');
+    });
+    showFeedback(false, q, null);
+    document.getElementById('btnNext').disabled = false;
+    state.powers.skip = 0; updatePowers(); sfxPower();
+    showToast('⏭️', 'Soal Dilewati', 'Jawaban benar ditampilkan.', 'violet');
+    if (state.currentIndex === TOTAL_Q - 1){
+      document.getElementById('btnNext').style.display = 'none';
+      document.getElementById('btnFinish').style.display = '';
+    }
+  }
+}
+
+function finishGame(timeout){
+  if (state.finished) return;
+  state.finished = true;
+  clearInterval(state.timer); state.timer = null;
+  const answered = state.answers.map(a => a.qid);
+  state.questions.forEach(q => {
+    if (!answered.includes(q.id)){
+      state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+        questionText: q.question, topic: q.topic,
+        correctLetter: q.options.find(o => o.correct).letter,
+        explanation: q.options.find(o => o.correct).explanation });
+    }
+  });
+  let benar = 0, salah = 0;
+  state.answers.forEach(a => { if (a.skipped) return; if (a.correct) benar++; else salah++; });
+  const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
+  const finalScore = Math.round((state.score / maxScore) * 100);
+  const grade = finalScore >= 90 ? 'A' : finalScore >= 80 ? 'B' : finalScore >= 70 ? 'C' : finalScore >= 60 ? 'D' : 'E';
+  const gradeLabel = finalScore >= 90 ? 'Sangat Baik' : finalScore >= 80 ? 'Baik' : finalScore >= 70 ? 'Cukup' : finalScore >= 60 ? 'Perlu Bimbingan' : 'Remedial';
+  const rank = finalScore >= 90 ? 'ARKEOLOG PRAAKSARA' : finalScore >= 80 ? 'PENELITI KEBUDAYAAN' : finalScore >= 70 ? 'PELAJAR SEJARAH' : 'PEMULA';
+  const trophy = finalScore >= 90 ? '🏆' : finalScore >= 80 ? '🥇' : finalScore >= 70 ? '🥈' : finalScore >= 60 ? '🥉' : '📚';
+  const title = finalScore >= 90 ? 'Luar Biasa!' : finalScore >= 80 ? 'Kerja Bagus!' : finalScore >= 70 ? 'Terus Belajar!' : 'Jangan Menyerah!';
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('resultScreen').classList.add('active');
+  document.getElementById('rTrophy').textContent = trophy;
+  document.getElementById('rTitle').textContent = title;
+  document.getElementById('rSub').textContent = 'Kuis 13 · Periodisasi, Kehidupan & Kepercayaan';
+  document.getElementById('gradeLetter').textContent = grade;
+  document.getElementById('gradeLabel').textContent = gradeLabel;
+  document.getElementById('rRank').textContent = rank;
+  document.getElementById('rXp').textContent = state.xp;
+  document.getElementById('rBestCombo').textContent = state.bestCombo;
+  document.getElementById('rBenar').textContent = benar;
+  document.getElementById('rSalah').textContent = salah;
+  document.getElementById('rSkor').textContent = finalScore;
+  document.getElementById('rXpTotal').textContent = state.xp;
+  document.getElementById('gradeRing').style.setProperty('--grade-deg', (finalScore/100*360) + 'deg');
+  document.getElementById('rMsg').textContent = finalScore >= 70
+    ? '🎯 Pertahankan semangat belajarmu! Lanjutkan ke Kuis 14 untuk materi Kebudayaan Bacson-Hoabinh & Dong Son.'
+    : '📚 Pelajari kembali materi Periodisasi, Kehidupan & Kepercayaan, lalu coba lagi!';
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  state.answers.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
+                   a.correct ? '<span class="ri-status correct">Benar</span>' :
+                   '<span class="ri-status wrong">Salah</span>';
+    const q = a.questionText.length > 80 ? a.questionText.substring(0, 80) + '...' : a.questionText;
+    div.innerHTML = `<span class="ri-num">${i+1}.</span><span class="ri-text">${q}</span>${status}`;
+    reviewList.appendChild(div);
+  });
+  sfxFinish();
+  if (finalScore >= 70){
+    fireConfetti(180);
+    setTimeout(() => fireConfetti(120), 400);
+    setTimeout(() => showToast('🏆', 'Achievement Unlocked!', rank, ''), 500);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetGame(){
+  clearInterval(state.timer); state.timer = null;
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('startScreen').style.display = 'flex';
+  state.answers = []; state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.currentIndex = 0; state.finished = false; state.started = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('keydown', e => {
+  if (!state.started || state.finished) return;
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea') return;
+  if (['a','A','1'].includes(e.key)) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
+  else if (['b','B','2'].includes(e.key)) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
+  else if (['c','C','3'].includes(e.key)) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
+  else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
+  else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
+  else if (e.key === 'ArrowRight' || e.key === 'Enter'){
+    if (!document.getElementById('btnNext').disabled) nextQuestion();
+  }
+});
+</script>
+
+</body>
+</html>
