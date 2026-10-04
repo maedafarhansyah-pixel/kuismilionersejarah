@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+<meta name="theme-color" content="#05060f" />
+<title>🕌 Kuis 23 · Walisongo, Pesantren &amp; Jaringan Haramain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+:root{
+  --font-display:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'Space Grotesk',ui-monospace,monospace;
+  --primary:#8B5CF6;--primary-light:#C4B5FD;--primary-dark:#5B21B6;
+  --accent:#06B6D4;--accent-light:#67E8F9;--accent-dark:#0E7490;
+  --emerald:#34D399;--violet:#A78BFA;--rose:#FB7185;--sky:#38BDF8;--gold:#FBBF24;
+  --bg:#05060f;--bg-2:#0b0d1c;
+  --glass:rgba(255,255,255,0.045);
+  --glass-strong:rgba(255,255,255,0.08);
+  --glass-border:rgba(255,255,255,0.10);
+  --text:#f7f5ff;--text-dim:#a8a8c0;--text-mute:#6b6b85;
+  --radius:24px;--radius-md:18px;--radius-sm:14px;--radius-xs:10px;
+  --shadow-card:0 24px 60px rgba(0,0,0,.55);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-display);background:var(--bg);color:var(--text);line-height:1.65;
+  overflow-x:hidden;min-height:100vh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+::selection{background:var(--primary);color:#05060f}
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%,rgba(139,92,246,.18),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 100%,rgba(6,182,212,.14),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 50%,rgba(196,181,253,.08),transparent 65%);
+  animation:bgShift 20s ease-in-out infinite alternate}
+@keyframes bgShift{0%{transform:scale(1) rotate(0deg);filter:hue-rotate(0deg)}100%{transform:scale(1.1) rotate(3deg);filter:hue-rotate(-10deg)}}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25;
+  background-image:
+    linear-gradient(rgba(139,92,246,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(139,92,246,.06) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%)}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
+#confettiCanvas{position:fixed;inset:0;z-index:9998;pointer-events:none}
+#loader{position:fixed;inset:0;z-index:99999;
+  background:radial-gradient(ellipse at center,#0b0d1c 0%,#05060f 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:20px;text-align:center;transition:opacity .8s ease,visibility .8s ease}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-orb{width:120px;height:120px;position:relative;display:grid;place-items:center}
+.loader-orb::before,.loader-orb::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent}
+.loader-orb::before{border-top-color:var(--primary);border-right-color:var(--primary-light);animation:spin 2s linear infinite;filter:drop-shadow(0 0 20px rgba(139,92,246,.6))}
+.loader-orb::after{inset:14px;border-bottom-color:var(--accent);border-left-color:var(--sky);animation:spin 1.6s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-core{width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 40px rgba(139,92,246,.7),inset 0 0 20px rgba(255,255,255,.25);
+  display:grid;place-items:center;font-size:1.5rem;color:#fff;
+  animation:pulseCore 2s ease-in-out infinite}
+@keyframes pulseCore{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.loader-title{font-family:var(--font-display);font-weight:900;font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:3px;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary),var(--accent));
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.loader-sub{font-size:.85rem;color:var(--text-dim);font-weight:500;letter-spacing:1px}
+.loader-bar{width:min(300px,70vw);height:4px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+.loader-bar span{display:block;height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 20px rgba(139,92,246,.6);transition:width .3s ease}
+.loader-pct{font-family:var(--font-mono);font-size:.72rem;font-weight:700;color:var(--text-mute);letter-spacing:2px}
+.game-header{position:fixed;top:0;left:0;right:0;height:60px;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:10px;
+  background:rgba(5,6,15,.72);backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border-bottom:1px solid var(--glass-border)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:.9rem;color:var(--text)}
+.brand-logo{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:.9rem;
+  box-shadow:0 0 22px rgba(139,92,246,.5);animation:logoPulse 3s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 22px rgba(139,92,246,.5)}50%{box-shadow:0 0 32px rgba(139,92,246,.8)}}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .t1{font-size:.62rem;color:var(--text-mute);letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+.brand-text .t2{font-size:.92rem;font-weight:800;color:var(--text)}
+.header-actions{display:flex;gap:6px}
+.icon-btn{width:36px;height:36px;border-radius:11px;border:1px solid var(--glass-border);
+  background:var(--glass);color:var(--text-dim);display:grid;place-items:center;cursor:pointer;
+  font-size:.85rem;transition:all .3s var(--ease-out)}
+.icon-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 0 22px rgba(139,92,246,.6);transform:translateY(-2px)}
+.wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;
+  padding:calc(60px + 20px) 16px 60px;min-height:100vh}
+.start-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:calc(100vh - 100px);text-align:center;gap:18px;padding:20px 0}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:40px;
+  background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(6,182,212,.10));
+  border:1px solid rgba(139,92,246,.30);font-size:.7rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary-light);box-shadow:0 0 30px rgba(139,92,246,.20);
+  animation:badgeFloat 3s ease-in-out infinite}
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-title{font-family:var(--font-display);font-size:clamp(2rem,7vw,3.4rem);
+  font-weight:900;line-height:1.05;letter-spacing:-1.5px;
+  background:linear-gradient(135deg,#fff 0%,var(--primary-light) 40%,var(--primary) 70%,var(--accent) 100%);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 8px 30px rgba(139,92,246,.3))}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text-dim);max-width:580px;line-height:1.75}
+.hero-sub strong{color:var(--primary-light);font-weight:700}
+.stats-showcase{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+.stat-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;
+  background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(10px);
+  font-size:.8rem;color:var(--text-dim);font-weight:600;transition:all .3s var(--ease-out)}
+.stat-pill:hover{transform:translateY(-3px);border-color:rgba(139,92,246,.4);box-shadow:0 8px 24px rgba(139,92,246,.15)}
+.stat-pill i{font-size:.95rem}
+.rules-card{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:22px 24px;
+  max-width:520px;width:100%;text-align:left;margin-top:6px;backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.rules-card h4{font-size:.85rem;font-weight:800;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.rules-card ul{list-style:none;display:grid;gap:10px}
+.rules-card li{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-dim);line-height:1.6}
+.rule-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+  border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 4px 14px rgba(139,92,246,.4)}
+.btn-play{position:relative;display:inline-flex;align-items:center;gap:14px;
+  padding:18px 54px;border-radius:60px;border:none;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;font-family:var(--font-display);font-weight:900;font-size:1.05rem;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;overflow:hidden;
+  box-shadow:0 12px 40px rgba(139,92,246,.45),inset 0 -3px 0 rgba(0,0,0,.2);
+  transition:all .4s var(--ease-spring);margin-top:14px}
+.btn-play::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.35),transparent 70%);
+  transform:translateX(-100%);transition:transform .8s ease}
+.btn-play:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 20px 60px rgba(139,92,246,.65)}
+.btn-play:hover::before{transform:translateX(100%)}
+.btn-play:active{transform:translateY(-1px) scale(.98)}
+.game-hud{display:none;flex-direction:column;gap:14px;animation:fadeSlideIn .5s var(--ease-out)}
+.game-hud.active{display:flex}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hud-top{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+  padding:14px 18px;border-radius:var(--radius-md);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.hud-hp{display:flex;align-items:center;gap:4px}
+.hud-hp .heart{font-size:1.15rem;color:var(--rose);
+  filter:drop-shadow(0 0 8px rgba(251,113,133,.6));transition:all .4s var(--ease-out)}
+.hud-hp .heart.empty{color:rgba(255,255,255,.10);filter:none;transform:scale(.85)}
+.hud-hp .heart.losing{animation:heartBreak .6s ease}
+@keyframes heartBreak{0%{transform:scale(1)}30%{transform:scale(1.4);color:#fff}100%{transform:scale(.85);opacity:.3}}
+.hud-xp{display:flex;flex-direction:column;gap:4px;min-width:0}
+.hud-xp-head{display:flex;justify-content:space-between;align-items:center;font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.hud-xp-head .lvl{color:var(--primary-light)}
+.hud-xp-head .val{color:var(--text-mute);font-family:var(--font-mono)}
+.xp-track{height:8px;border-radius:10px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+.xp-fill{height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 16px rgba(139,92,246,.7);transition:width .8s var(--ease-spring);position:relative}
+.xp-fill::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  animation:xpShine 2s linear infinite}
+@keyframes xpShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.hud-timer{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:40px;
+  background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.30);
+  font-family:var(--font-mono);font-weight:800;font-size:.85rem;color:var(--primary-light);
+  letter-spacing:1px;transition:all .3s ease}
+.hud-timer.warning{background:rgba(251,113,133,.15);border-color:rgba(251,113,133,.5);color:#fecdd3;animation:pulseWarn 1s ease-in-out infinite}
+@keyframes pulseWarn{0%,100%{box-shadow:0 0 0 0 rgba(251,113,133,.4)}50%{box-shadow:0 0 0 8px rgba(251,113,133,0)}}
+.hud-middle{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:.75rem;color:var(--text-mute);font-weight:700;padding:0 4px}
+.hud-middle .combo-tag{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:800;transition:all .3s var(--ease-spring)}
+.hud-middle .combo-tag.hot{color:var(--primary-light);animation:comboPulse .5s var(--ease-spring)}
+@keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+.q-card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:26px 26px 22px;
+  backdrop-filter:blur(20px);box-shadow:var(--shadow-card);animation:qEnter .55s var(--ease-out);overflow:hidden}
+.q-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(135deg,rgba(139,92,246,.4),transparent 40%,transparent 60%,rgba(6,182,212,.3));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+@keyframes qEnter{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.q-card.shake{animation:shake .5s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+.q-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:30px;
+  background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(139,92,246,.06));
+  border:1px solid rgba(139,92,246,.30);font-size:.72rem;font-weight:800;letter-spacing:1px;color:var(--primary-light)}
+.q-topic{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;
+  background:rgba(6,182,212,.10);border:1px solid rgba(6,182,212,.28);font-size:.68rem;
+  font-weight:800;letter-spacing:.8px;color:var(--accent);text-transform:uppercase}
+.q-text{font-size:clamp(1rem,2.2vw,1.12rem);font-weight:600;line-height:1.75;color:var(--text);
+  margin-bottom:20px;white-space:pre-line}
+.q-text strong{color:var(--primary-light);font-weight:800}
+.options{display:grid;gap:10px}
+.opt{position:relative;display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;
+  padding:15px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--glass-border);
+  background:rgba(255,255,255,.03);color:var(--text-dim);font-family:inherit;font-size:.92rem;
+  line-height:1.6;cursor:pointer;transition:all .3s var(--ease-out);overflow:hidden}
+.opt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(90deg,rgba(139,92,246,.15),transparent);
+  transition:width .4s var(--ease-out);z-index:0}
+.opt:hover:not(.locked){border-color:rgba(139,92,246,.55);transform:translateX(5px);
+  color:var(--text);box-shadow:0 8px 24px rgba(139,92,246,.15)}
+.opt:hover:not(.locked)::before{width:100%}
+.opt-letter{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;flex-shrink:0;background:rgba(255,255,255,.06);
+  color:var(--text-mute);font-weight:800;font-size:.85rem;transition:all .3s var(--ease-out);
+  border:1px solid rgba(255,255,255,.06)}
+.opt-text{position:relative;z-index:1;flex:1}
+.opt:hover:not(.locked) .opt-letter{background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;border-color:transparent;box-shadow:0 0 20px rgba(139,92,246,.6)}
+.opt.correct{border-color:var(--emerald);background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(52,211,153,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(52,211,153,.15),0 12px 32px rgba(52,211,153,.25);
+  animation:correctPop .5s var(--ease-spring)}
+@keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.02)}100%{transform:scale(1)}}
+.opt.correct .opt-letter{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(52,211,153,.7)}
+.opt.wrong{border-color:var(--rose);background:linear-gradient(135deg,rgba(251,113,133,.15),rgba(251,113,133,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(251,113,133,.15),0 12px 32px rgba(251,113,133,.25)}
+.opt.wrong .opt-letter{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(251,113,133,.7)}
+.opt.locked{pointer-events:none}
+.opt.disabled-50{opacity:.2;pointer-events:none;filter:grayscale(1) blur(.5px)}
+.feedback{display:none;padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(16px);box-shadow:var(--shadow-card);
+  animation:qEnter .5s var(--ease-out)}
+.feedback.show{display:block}
+.fb-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.fb-icon{width:48px;height:48px;border-radius:15px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;transition:all .4s var(--ease-spring)}
+.fb-icon.correct{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;box-shadow:0 0 32px rgba(52,211,153,.6)}
+.fb-icon.wrong{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;box-shadow:0 0 32px rgba(251,113,133,.6)}
+.fb-icon.info{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 0 32px rgba(139,92,246,.6)}
+.fb-title{font-size:1.05rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
+.fb-title.correct{color:var(--emerald)}
+.fb-title.wrong{color:#fecdd3}
+.fb-title.info{color:var(--primary-light)}
+.fb-body{font-size:.9rem;color:var(--text-dim);line-height:1.75}
+.fb-body strong{color:var(--text);font-weight:700}
+.fb-sec{margin-top:12px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.10)}
+.fb-label{font-size:.68rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--primary-light);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.fb-points{margin-top:12px;padding:14px 16px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(6,182,212,.10),rgba(6,182,212,.03));border-left:3px solid var(--accent)}
+.fb-points .fb-label{color:var(--accent)}
+.fb-points p{font-size:.87rem;color:var(--text-dim);line-height:1.7}
+.hud-bottom{display:flex;flex-direction:column;gap:12px}
+.power-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.power-btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;
+  border-radius:50px;border:1px solid var(--glass-border);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  color:var(--text-dim);font-family:inherit;font-weight:800;font-size:.78rem;letter-spacing:.5px;
+  cursor:pointer;transition:all .3s var(--ease-spring);overflow:hidden}
+.power-btn i{font-size:.9rem}
+.power-btn:hover:not(:disabled):not(.used){transform:translateY(-3px);border-color:rgba(139,92,246,.5);color:var(--text);box-shadow:0 8px 24px rgba(139,92,246,.25)}
+.power-btn:active:not(:disabled):not(.used){transform:scale(.96)}
+.power-btn .cnt{font-size:.62rem;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.10);font-weight:900;font-family:var(--font-mono)}
+.power-btn.used{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.power-btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.power-btn.p50{color:var(--accent)}
+.power-btn.phint{color:var(--primary-light)}
+.power-btn.pskip{color:var(--rose)}
+.action-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 30px;border-radius:50px;border:none;
+  font-family:inherit;font-weight:900;font-size:.88rem;letter-spacing:.5px;cursor:pointer;
+  transition:all .35s var(--ease-spring)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;
+  box-shadow:0 10px 32px rgba(139,92,246,.4),inset 0 -2px 0 rgba(0,0,0,.15)}
+.btn-primary:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 44px rgba(139,92,246,.6)}
+.btn-primary:active:not(:disabled){transform:scale(.96)}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--text-dim);border:1px solid var(--glass-border)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(139,92,246,.4);transform:translateY(-2px)}
+.result-screen{display:none;flex-direction:column;gap:16px;text-align:center;animation:fadeSlideIn .6s var(--ease-out)}
+.result-screen.active{display:flex}
+.result-hero{position:relative;padding:38px 26px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);box-shadow:var(--shadow-card);overflow:hidden}
+.result-hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center top,rgba(139,92,246,.20),transparent 60%);pointer-events:none}
+.result-trophy{font-size:4rem;line-height:1;margin-bottom:8px;
+  filter:drop-shadow(0 8px 30px rgba(139,92,246,.6));animation:trophyFloat 3s ease-in-out infinite}
+@keyframes trophyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.result-title{font-family:var(--font-display);font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:900;
+  letter-spacing:-.5px;background:linear-gradient(135deg,#fff,var(--primary-light),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.result-sub{font-size:.9rem;color:var(--text-dim);margin-bottom:6px}
+.grade-ring{position:relative;width:130px;height:130px;margin:16px auto;border-radius:50%;
+  background:conic-gradient(var(--primary) var(--grade-deg,0deg),rgba(255,255,255,.08) 0deg);
+  padding:8px;box-shadow:0 0 40px rgba(139,92,246,.4);animation:ringPop .8s var(--ease-spring)}
+@keyframes ringPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.grade-inner{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at center,#0b0d1c,#05060f);display:grid;place-items:center;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.6)}
+.grade-letter{font-size:2.6rem;font-weight:900;line-height:1;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent}
+.grade-label{font-size:.62rem;font-weight:800;letter-spacing:2px;color:var(--text-mute);text-transform:uppercase;margin-top:2px}
+.result-title-text{font-size:1.1rem;font-weight:900;color:var(--primary-light);letter-spacing:.5px;margin-top:8px;text-transform:uppercase}
+.result-xp-line{font-size:.88rem;color:var(--text-dim);margin-top:6px}
+.result-xp-line strong{color:var(--accent);font-family:var(--font-mono);font-weight:800}
+.result-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:20px 0 8px}
+.rs-box{padding:16px 10px;border-radius:var(--radius-sm);background:rgba(255,255,255,.04);
+  border:1px solid var(--glass-border);transition:all .3s var(--ease-out)}
+.rs-box:hover{transform:translateY(-3px);border-color:rgba(139,92,246,.3)}
+.rs-val{font-size:1.7rem;font-weight:900;line-height:1.1;font-family:var(--font-mono)}
+.rs-val.green{color:var(--emerald);text-shadow:0 0 20px rgba(52,211,153,.5)}
+.rs-val.red{color:#fecdd3;text-shadow:0 0 20px rgba(251,113,133,.5)}
+.rs-val.cyan{color:var(--accent);text-shadow:0 0 20px rgba(6,182,212,.5)}
+.rs-val.violet{color:var(--primary-light);text-shadow:0 0 20px rgba(196,181,253,.5)}
+.rs-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.5px;color:var(--text-mute);text-transform:uppercase;margin-top:6px}
+.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:14px 18px;border-radius:12px;
+  background:rgba(139,92,246,.06);border-left:3px solid var(--primary);margin-top:6px;text-align:left}
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.review-panel{padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);text-align:left}
+.review-panel h4{font-size:.9rem;font-weight:900;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.review-list{display:grid;gap:8px}
+.review-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-radius:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:.84rem;
+  line-height:1.6;transition:all .3s var(--ease-out)}
+.review-item:hover{background:rgba(255,255,255,.06);transform:translateX(3px)}
+.review-item .ri-num{font-weight:900;color:var(--text-mute);flex-shrink:0;font-family:var(--font-mono);font-size:.78rem;min-width:26px}
+.review-item .ri-text{flex:1;color:var(--text-dim)}
+.review-item .ri-status{font-size:.68rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:20px;flex-shrink:0}
+.ri-status.correct{background:rgba(52,211,153,.15);color:#6ee7b7}
+.ri-status.wrong{background:rgba(251,113,133,.15);color:#fecdd3}
+.ri-status.skipped{background:rgba(255,255,255,.06);color:var(--text-mute)}
+.toast-wrap{position:fixed;top:74px;right:16px;z-index:9999;display:flex;flex-direction:column;
+  gap:10px;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast{display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(11,13,28,.95),rgba(5,6,15,.95));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);
+  box-shadow:0 16px 40px rgba(0,0,0,.6),0 0 0 1px rgba(139,92,246,.15);
+  pointer-events:auto;animation:toastIn .5s var(--ease-spring);max-width:340px}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast.out{animation:toastOut .4s ease forwards}
+@keyframes toastOut{to{transform:translateX(120%);opacity:0}}
+.toast-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 24px rgba(139,92,246,.6)}
+.toast-icon.green{background:linear-gradient(135deg,var(--emerald),#059669);box-shadow:0 0 24px rgba(52,211,153,.6)}
+.toast-icon.cyan{background:linear-gradient(135deg,var(--accent),var(--accent-dark));box-shadow:0 0 24px rgba(6,182,212,.6)}
+.toast-icon.violet{background:linear-gradient(135deg,var(--violet),#6C63FF);box-shadow:0 0 24px rgba(167,139,250,.6)}
+.toast-content{flex:1;min-width:0}
+.toast-title{font-size:.85rem;font-weight:900;color:var(--text);letter-spacing:.3px}
+.toast-desc{font-size:.75rem;color:var(--text-dim);line-height:1.5;margin-top:2px}
+.score-pop{position:fixed;z-index:9997;pointer-events:none;font-family:var(--font-display);
+  font-weight:900;font-size:1.6rem;color:var(--primary-light);text-shadow:0 0 20px rgba(139,92,246,.8);
+  animation:scorePop 1s var(--ease-out) forwards}
+@keyframes scorePop{0%{transform:translate(-50%,0) scale(.5);opacity:0}
+  20%{transform:translate(-50%,-20px) scale(1.2);opacity:1}
+  100%{transform:translate(-50%,-80px) scale(1);opacity:0}}
+@media (max-width:600px){
+  .wrap{padding:calc(60px + 14px) 12px 50px}
+  .q-card{padding:20px 18px}
+  .opt{padding:13px 14px;font-size:.87rem;gap:11px}
+  .opt-letter{width:30px;height:30px;font-size:.78rem}
+  .hud-top{padding:12px 14px;gap:8px}
+  .hud-timer{padding:6px 11px;font-size:.78rem}
+  .hud-hp .heart{font-size:1rem}
+  .power-btn{padding:9px 14px;font-size:.72rem}
+  .btn{padding:12px 22px;font-size:.82rem;width:100%;justify-content:center}
+  .action-bar{flex-direction:column}
+  .result-hero{padding:28px 18px}
+  .grade-ring{width:110px;height:110px}
+  .grade-letter{font-size:2.2rem}
+  .rs-val{font-size:1.4rem}
+  .toast{max-width:calc(100vw - 24px);padding:12px 14px}
+  .toast-icon{width:36px;height:36px;font-size:1rem}
+}
+@media print{
+  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap{display:none!important}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+<canvas id="particles"></canvas>
+<canvas id="confettiCanvas"></canvas>
+
+<div id="loader">
+  <div class="loader-orb">
+    <div class="loader-core"><i class="fas fa-user-graduate"></i></div>
+  </div>
+  <div class="loader-title">HISTOEXPLORER</div>
+  <div class="loader-sub">Kuis 23 · Walisongo, Pesantren &amp; Jaringan Haramain</div>
+  <div class="loader-bar"><span id="loaderBar"></span></div>
+  <div class="loader-pct" id="loaderPct">0%</div>
+</div>
+
+<header class="game-header">
+  <div class="brand">
+    <div class="brand-logo"><i class="fas fa-user-graduate"></i></div>
+    <div class="brand-text">
+      <span class="t1">KUIS 23 · KERAJAAN ISLAM</span>
+      <span class="t2">Walisongo, Pesantren &amp; Jaringan Haramain</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="Suara"><i class="fas fa-volume-up"></i></button>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema"><i class="fas fa-sun"></i></button>
+  </div>
+</header>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<main class="wrap">
+
+  <section class="start-screen" id="startScreen">
+    <span class="hero-badge"><i class="fas fa-star-and-crescent"></i> PREMIUM GAME MODE · LEVEL 23</span>
+    <h1 class="hero-title">Walisongo, Pesantren<br>&amp; Jaringan Haramain</h1>
+    <p class="hero-sub">
+      Kuasai <strong>9 Walisongo</strong>, <strong>pesantren tertua</strong> (Ampeldenta, Giri Kedaton, Tebu Ireng), <strong>jaringan intelektual Haramain</strong>, dan <strong>strategi dakwah budaya</strong> yang mengubah Nusantara tanpa kekerasan!
+    </p>
+
+    <div class="stats-showcase">
+      <span class="stat-pill" style="color:#C4B5FD"><i class="fas fa-question-circle"></i> 15 Soal Acak</span>
+      <span class="stat-pill" style="color:#67E8F9"><i class="fas fa-stopwatch"></i> 20 Menit</span>
+      <span class="stat-pill" style="color:#FB7185"><i class="fas fa-heart"></i> 3 Nyawa</span>
+      <span class="stat-pill" style="color:#34D399"><i class="fas fa-bolt"></i> Combo &amp; XP</span>
+    </div>
+
+    <div class="rules-card">
+      <h4><i class="fas fa-list-check"></i> Cara Bermain</h4>
+      <ul>
+        <li><span class="rule-num">1</span> Jawab 15 soal HOTS dari bank 40 soal — dipilih acak setiap sesi.</li>
+        <li><span class="rule-num">2</span> Jawaban benar memberi <strong>XP</strong> + memicu <strong>combo</strong>. Salah mengurangi <strong>1 nyawa</strong>.</li>
+        <li><span class="rule-num">3</span> Power-up: <strong>50:50</strong>, <strong>Petunjuk</strong>, <strong>Lewati</strong> (masing-masing 1×).</li>
+        <li><span class="rule-num">4</span> Raih <strong>Achievement</strong> dan taklukkan peringkat <strong>WALI SANTRI</strong>!</li>
+      </ul>
+    </div>
+
+    <button class="btn-play" onclick="startGame()">
+      <i class="fas fa-play"></i> Mulai Bermain
+    </button>
+  </section>
+
+  <section class="game-hud" id="gameHud">
+    <div class="hud-top">
+      <div class="hud-hp" id="hudHp"></div>
+      <div class="hud-xp">
+        <div class="hud-xp-head">
+          <span class="lvl">LV <span id="hudLevel">1</span></span>
+          <span class="val"><span id="hudXp">0</span> / <span id="hudXpMax">100</span> XP</span>
+        </div>
+        <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
+      </div>
+      <div class="hud-timer" id="hudTimer">
+        <i class="fas fa-stopwatch"></i> <span id="hudTimerVal">20:00</span>
+      </div>
+    </div>
+
+    <div class="hud-middle">
+      <span><i class="fas fa-question-circle" style="color:var(--primary)"></i> Soal <strong id="hudQNum">1</strong>/<strong>15</strong></span>
+      <span class="combo-tag" id="comboTag"><i class="fas fa-fire"></i> Combo ×<span id="comboVal">0</span></span>
+      <span><i class="fas fa-star" style="color:var(--accent)"></i> Skor <strong id="hudScore" style="font-family:var(--font-mono)">0</strong></span>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-meta">
+        <span class="q-num"><i class="fas fa-bookmark"></i> <span id="qNumLabel">Soal 1</span></span>
+        <span class="q-topic" id="qTopic"><i class="fas fa-tag"></i> <span id="qTopicText">Walisongo</span></span>
+      </div>
+      <div class="q-text" id="qText">Memuat soal...</div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <div class="feedback" id="feedback">
+      <div class="fb-head">
+        <div class="fb-icon" id="fbIcon"><i class="fas fa-check"></i></div>
+        <div class="fb-title" id="fbTitle">BENAR!</div>
+      </div>
+      <div class="fb-body" id="fbBody"></div>
+    </div>
+
+    <div class="hud-bottom">
+      <div class="power-bar">
+        <button class="power-btn p50" id="p50" onclick="usePower('50')">
+          <i class="fas fa-compress-alt"></i> 50:50 <span class="cnt" id="c50">1</span>
+        </button>
+        <button class="power-btn phint" id="phint" onclick="usePower('hint')">
+          <i class="fas fa-lightbulb"></i> Petunjuk <span class="cnt" id="chint">1</span>
+        </button>
+        <button class="power-btn pskip" id="pskip" onclick="usePower('skip')">
+          <i class="fas fa-forward"></i> Lewati <span class="cnt" id="cskip">1</span>
+        </button>
+      </div>
+      <div class="action-bar">
+        <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>
+          Selanjutnya <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="btn btn-primary" id="btnFinish" onclick="finishGame()" style="display:none">
+          Lihat Hasil <i class="fas fa-flag-checkered"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="result-screen" id="resultScreen">
+    <div class="result-hero">
+      <div class="result-trophy" id="rTrophy">🏆</div>
+      <h2 class="result-title" id="rTitle">Luar Biasa!</h2>
+      <p class="result-sub" id="rSub">Kuis 23 · Walisongo, Pesantren &amp; Jaringan Haramain</p>
+      <div class="grade-ring" id="gradeRing">
+        <div class="grade-inner">
+          <div class="grade-letter" id="gradeLetter">A</div>
+          <div class="grade-label" id="gradeLabel">Sangat Baik</div>
+        </div>
+      </div>
+      <div class="result-title-text" id="rRank">WALI SANTRI</div>
+      <div class="result-xp-line">Total XP: <strong id="rXp">0</strong> · Best Combo: <strong id="rBestCombo">0</strong></div>
+      <div class="result-stats">
+        <div class="rs-box"><div class="rs-val green" id="rBenar">0</div><div class="rs-lbl">Benar</div></div>
+        <div class="rs-box"><div class="rs-val red" id="rSalah">0</div><div class="rs-lbl">Salah</div></div>
+        <div class="rs-box"><div class="rs-val cyan" id="rSkor">0</div><div class="rs-lbl">Skor</div></div>
+        <div class="rs-box"><div class="rs-val violet" id="rXpTotal">0</div><div class="rs-lbl">XP Total</div></div>
+      </div>
+      <div class="result-msg" id="rMsg"></div>
+      <div class="result-actions">
+        <button class="btn btn-primary" onclick="resetGame()"><i class="fas fa-redo"></i> Main Lagi</button>
+        <button class="btn btn-ghost" onclick="window.location.reload()"><i class="fas fa-home"></i> Menu Awal</button>
+      </div>
+    </div>
+    <div class="review-panel">
+      <h4><i class="fas fa-list-check"></i> Rincian Jawaban</h4>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ============================================================
+   BANK SOAL — 40 SOAL HOTS · KUIS 23
+   Fokus: Walisongo (9 Wali), Pesantren, Jaringan Haramain,
+          Strategi Dakwah Budaya
+   Distribusi: A=8, B=8, C=8, D=8, E=8 (SEIMBANG)
+   ============================================================ */
+const BANK_SOAL = [
+  /* ============ 9 WALISONGO — INDIVIDUAL (9 soal) ============ */
+  { id:2301, topic:"Walisongo",
+    question:"Wali tertua yang dianggap sebagai perintis dakwah Walisongo & berdakwah melalui perdagangan serta pertanian di Gresik adalah...",
+    options:[
+      {letter:"A",text:"Maulana Malik Ibrahim (Sunan Gresik)",correct:true,explanation:"Tepat! Sunan Gresik = perintis Walisongo."},
+      {letter:"B",text:"Raden Rahmat (Sunan Ampel)",correct:false,explanation:"Itu Sunan Ampel."},
+      {letter:"C",text:"Raden Said (Sunan Kalijaga)",correct:false,explanation:"Itu Sunan Kalijaga."},
+      {letter:"D",text:"Ja'far Shadiq (Sunan Kudus)",correct:false,explanation:"Itu Sunan Kudus."},
+      {letter:"E",text:"Raden Paku (Sunan Giri)",correct:false,explanation:"Itu Sunan Giri."}
+    ], difficulty:"easy", hint:"Sunan Gresik = perintis Walisongo.", points:50 },
+
+  { id:2302, topic:"Walisongo",
+    question:"Falsafah 'Moh Limo' — tidak mau madat, main, minum, mencuri, & maling — merupakan ajaran dari...",
+    options:[
+      {letter:"A",text:"Sunan Bonang",correct:false,explanation:"Sunan Bonang = tembang."},
+      {letter:"B",text:"Sunan Ampel (Raden Rahmat)",correct:true,explanation:"Tepat! Sunan Ampel = Moh Limo."},
+      {letter:"C",text:"Sunan Drajat",correct:false,explanation:"Sunan Drajat = Catur Piwulang."},
+      {letter:"D",text:"Sunan Kudus",correct:false,explanation:"Sunan Kudus = Wali Al-Ilmi."},
+      {letter:"E",text:"Sunan Giri",correct:false,explanation:"Sunan Giri = Giri Kedaton."}
+    ], difficulty:"easy", hint:"Sunan Ampel = Moh Limo.", points:50 },
+
+  { id:2303, topic:"Walisongo",
+    question:"Tembang 'Tombo Ati' & 'Gending Durma' yang menjadi media dakwah diciptakan oleh wali...",
+    options:[
+      {letter:"A",text:"Sunan Gresik",correct:false,explanation:"Sunan Gresik = perintis."},
+      {letter:"B",text:"Sunan Ampel",correct:false,explanation:"Sunan Ampel = Moh Limo."},
+      {letter:"C",text:"Sunan Bonang (Raden Makhdum Ibrahim)",correct:true,explanation:"Tepat! Sunan Bonang = Tombo Ati."},
+      {letter:"D",text:"Sunan Kalijaga",correct:false,explanation:"Sunan Kalijaga = Ilir-Ilir."},
+      {letter:"E",text:"Sunan Muria",correct:false,explanation:"Sunan Muria = Sinom."}
+    ], difficulty:"easy", hint:"Sunan Bonang = Tombo Ati.", points:50 },
+
+  { id:2304, topic:"Walisongo",
+    question:"Wali yang berdakwah melalui pendekatan sosial dengan menyantuni fakir miskin & anak yatim, serta mengajarkan 'Catur Piwulang' adalah...",
+    options:[
+      {letter:"A",text:"Sunan Gresik",correct:false,explanation:"Sunan Gresik = perintis."},
+      {letter:"B",text:"Sunan Ampel",correct:false,explanation:"Sunan Ampel = Moh Limo."},
+      {letter:"C",text:"Sunan Bonang",correct:false,explanation:"Sunan Bonang = Tombo Ati."},
+      {letter:"D",text:"Sunan Drajat (Raden Qasim)",correct:true,explanation:"Tepat! Sunan Drajat = Catur Piwulang."},
+      {letter:"E",text:"Sunan Kudus",correct:false,explanation:"Sunan Kudus = Wali Al-Ilmi."}
+    ], difficulty:"easy", hint:"Sunan Drajat = Catur Piwulang.", points:50 },
+
+  { id:2305, topic:"Walisongo",
+    question:"Wali yang dikenal sebagai 'Wali Al-Ilmi' & mengharamkan penyembelihan sapi di Kudus sebagai bentuk toleransi terhadap umat Hindu adalah...",
+    options:[
+      {letter:"A",text:"Sunan Ampel",correct:false,explanation:"Sunan Ampel = Moh Limo."},
+      {letter:"B",text:"Sunan Bonang",correct:false,explanation:"Sunan Bonang = Tombo Ati."},
+      {letter:"C",text:"Sunan Drajat",correct:false,explanation:"Sunan Drajat = Catur Piwulang."},
+      {letter:"D",text:"Sunan Giri",correct:false,explanation:"Sunan Giri = Giri Kedaton."},
+      {letter:"E",text:"Sunan Kudus (Ja'far Shadiq)",correct:true,explanation:"Tepat! Sunan Kudus = Wali Al-Ilmi."}
+    ], difficulty:"easy", hint:"Sunan Kudus = Wali Al-Ilmi.", points:50 },
+
+  { id:2306, topic:"Walisongo",
+    question:"Wali yang mendirikan Pesantren Giri Kedaton & dijuluki 'Paus dari Timur' karena pengaruhnya hingga Maluku & Sulawesi adalah...",
+    options:[
+      {letter:"A",text:"Sunan Giri (Raden Paku)",correct:true,explanation:"Tepat! Sunan Giri = Paus dari Timur."},
+      {letter:"B",text:"Sunan Ampel",correct:false,explanation:"Sunan Ampel = Ampeldenta."},
+      {letter:"C",text:"Sunan Bonang",correct:false,explanation:"Sunan Bonang = Tombo Ati."},
+      {letter:"D",text:"Sunan Kalijaga",correct:false,explanation:"Sunan Kalijaga = wayang."},
+      {letter:"E",text:"Sunan Muria",correct:false,explanation:"Sunan Muria = pedesaan."}
+    ], difficulty:"easy", hint:"Sunan Giri = Paus dari Timur.", points:50 },
+
+  { id:2307, topic:"Walisongo",
+    question:"Wali yang paling akomodatif terhadap budaya lokal & menciptakan wayang kulit bernuansa Islam sebagai media dakwah adalah...",
+    options:[
+      {letter:"A",text:"Sunan Giri",correct:false,explanation:"Sunan Giri = Giri Kedaton."},
+      {letter:"B",text:"Sunan Kalijaga (Raden Said)",correct:true,explanation:"Tepat! Sunan Kalijaga = wayang kulit."},
+      {letter:"C",text:"Sunan Kudus",correct:false,explanation:"Sunan Kudus = toleransi sapi."},
+      {letter:"D",text:"Sunan Muria",correct:false,explanation:"Sunan Muria = pedesaan."},
+      {letter:"E",text:"Sunan Gunung Jati",correct:false,explanation:"Sunan Gunung Jati = Sultan Cirebon."}
+    ], difficulty:"easy", hint:"Sunan Kalijaga = wayang kulit.", points:50 },
+
+  { id:2308, topic:"Walisongo",
+    question:"Wali yang berdakwah di pedesaan & pegunungan Muria, serta menciptakan tembang 'Sinom' & 'Kinanthi' adalah...",
+    options:[
+      {letter:"A",text:"Sunan Gresik",correct:false,explanation:"Sunan Gresik = perintis."},
+      {letter:"B",text:"Sunan Ampel",correct:false,explanation:"Sunan Ampel = Moh Limo."},
+      {letter:"C",text:"Sunan Muria (Raden Umar Said)",correct:true,explanation:"Tepat! Sunan Muria = pedesaan Muria."},
+      {letter:"D",text:"Sunan Bonang",correct:false,explanation:"Sunan Bonang = Tombo Ati."},
+      {letter:"E",text:"Sunan Kudus",correct:false,explanation:"Sunan Kudus = Wali Al-Ilmi."}
+    ], difficulty:"easy", hint:"Sunan Muria = pedesaan Muria.", points:50 },
+
+  { id:2309, topic:"Walisongo",
+    question:"Satu-satunya wali yang juga menjadi raja (Sultan Cirebon) & merupakan pendiri Kesultanan Banten adalah...",
+    options:[
+      {letter:"A",text:"Sunan Ampel",correct:false,explanation:"Sunan Ampel = Moh Limo."},
+      {letter:"B",text:"Sunan Giri",correct:false,explanation:"Sunan Giri = Giri Kedaton."},
+      {letter:"C",text:"Sunan Kalijaga",correct:false,explanation:"Sunan Kalijaga = wayang."},
+      {letter:"D",text:"Sunan Gunung Jati (Syarif Hidayatullah)",correct:true,explanation:"Tepat! Sunan Gunung Jati = Sultan Cirebon."},
+      {letter:"E",text:"Sunan Kudus",correct:false,explanation:"Sunan Kudus = toleransi sapi."}
+    ], difficulty:"easy", hint:"Sunan Gunung Jati = Sultan Cirebon.", points:50 },
+
+  /* ============ 9 WALISONGO — ANALISIS (3 soal) ============ */
+  { id:2310, topic:"Walisongo: Analisis",
+    question:"Analisis yang paling tepat tentang mengapa Sunan Gresik dianggap sebagai perintis dakwah Walisongo adalah...",
+    options:[
+      {letter:"A",text:"Karena ia wali paling kaya & berpengaruh",correct:false,explanation:"Bukan kekayaan."},
+      {letter:"B",text:"Karena ia keturunan langsung Nabi Muhammad",correct:false,explanation:"Bukan itu alasan utamanya."},
+      {letter:"C",text:"Karena ia berdakwah dengan kekuatan militer",correct:false,explanation:"Justru damai."},
+      {letter:"D",text:"Karena ia paling lama hidup di antara wali",correct:false,explanation:"Bukan itu."},
+      {letter:"E",text:"Karena ia membuka jalan dakwah damai melalui perdagangan & pertanian di Gresik, yang kemudian dilanjutkan oleh wali-wali berikutnya",correct:true,explanation:"Tepat! Pembuka jalan dakwah damai."}
+    ], difficulty:"hard", hint:"Pembuka jalan dakwah damai.", points:70 },
+
+  { id:2311, topic:"Walisongo: Analisis",
+    question:"Analisis yang paling tepat tentang kontribusi Sunan Giri bagi Islamisasi Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Mendirikan Giri Kedaton sebagai pusat pendidikan Islam & kaderisasi dai ke Maluku, Sulawesi, hingga Nusa Tenggara",correct:true,explanation:"Tepat! Giri Kedaton = pusat kaderisasi dai."},
+      {letter:"B",text:"Menciptakan wayang kulit bernuansa Islam",correct:false,explanation:"Itu Sunan Kalijaga."},
+      {letter:"C",text:"Menyusun kitab fikih pertama di Nusantara",correct:false,explanation:"Bukan Sunan Giri."},
+      {letter:"D",text:"Menjadi mufti tertinggi Kesultanan Aceh",correct:false,explanation:"Itu Abdurrauf."},
+      {letter:"E",text:"Mendirikan Kesultanan Banten",correct:false,explanation:"Itu Sunan Gunung Jati."}
+    ], difficulty:"hard", hint:"Giri Kedaton = pusat kaderisasi dai.", points:70 },
+
+  { id:2312, topic:"Walisongo: Analisis",
+    question:"Analisis yang paling tepat tentang strategi dakwah Sunan Kalijaga adalah...",
+    options:[
+      {letter:"A",text:"Menolak semua budaya lokal sebagai bid'ah",correct:false,explanation:"Justru akomodatif."},
+      {letter:"B",text:"Menggunakan pendekatan budaya (wayang, tembang, tradisi) sebagai media dakwah agar Islam diterima tanpa konflik",correct:true,explanation:"Tepat! Pendekatan budaya = kunci."},
+      {letter:"C",text:"Memaksa rakyat masuk Islam dengan kekuatan militer",correct:false,explanation:"Justru damai."},
+      {letter:"D",text:"Hanya berdakwah kepada bangsawan kerajaan",correct:false,explanation:"Justru ke semua."},
+      {letter:"E",text:"Menghindari interaksi dengan masyarakat awam",correct:false,explanation:"Justru berinteraksi."}
+    ], difficulty:"hard", hint:"Pendekatan budaya = kunci dakwah.", points:70 },
+
+  /* ============ PESANTREN (8 soal) ============ */
+  { id:2313, topic:"Pesantren",
+    question:"Pesantren tertua di Nusantara yang didirikan oleh Sunan Ampel di Surabaya adalah...",
+    options:[
+      {letter:"A",text:"Giri Kedaton",correct:false,explanation:"Giri Kedaton = Sunan Giri."},
+      {letter:"B",text:"Tebu Ireng",correct:false,explanation:"Tebu Ireng = KH. Hasyim Asy'ari."},
+      {letter:"C",text:"Ampeldenta",correct:true,explanation:"Tepat! Ampeldenta = pesantren tertua."},
+      {letter:"D",text:"Krapyak",correct:false,explanation:"Krapyak = Yogyakarta."},
+      {letter:"E",text:"Mlangi",correct:false,explanation:"Mlangi = Yogyakarta."}
+    ], difficulty:"medium", hint:"Ampeldenta = pesantren tertua.", points:60 },
+
+  { id:2314, topic:"Pesantren",
+    question:"Sistem pengajaran klasik di pesantren yang dilakukan secara individual (guru membaca, santri menyimak) & klasikal disebut...",
+    options:[
+      {letter:"A",text:"Wetonan & Selapanan",correct:false,explanation:"Bukan itu."},
+      {letter:"B",text:"Musyawarah & Muhadatsah",correct:false,explanation:"Bukan itu."},
+      {letter:"C",text:"Halaqah & Talaqqi",correct:false,explanation:"Bukan istilah utama."},
+      {letter:"D",text:"Sorogan & Bandongan",correct:true,explanation:"Tepat! Sorogan & Bandongan."},
+      {letter:"E",text:"Ziarah & Tawassul",correct:false,explanation:"Bukan sistem pengajaran."}
+    ], difficulty:"medium", hint:"Sorogan & Bandongan = sistem pesantren.", points:60 },
+
+  { id:2315, topic:"Pesantren",
+    question:"Pesantren Tebu Ireng di Jombang didirikan pada 1899 oleh...",
+    options:[
+      {letter:"A",text:"KH. Ahmad Dahlan",correct:false,explanation:"Ahmad Dahlan = Muhammadiyah."},
+      {letter:"B",text:"KH. Wahid Hasyim",correct:false,explanation:"Wahid Hasyim = putra Hasyim Asy'ari."},
+      {letter:"C",text:"KH. Wahab Chasbullah",correct:false,explanation:"Wahab = NU."},
+      {letter:"D",text:"KH. Bisri Syansuri",correct:false,explanation:"Bisri = NU."},
+      {letter:"E",text:"KH. Hasyim Asy'ari",correct:true,explanation:"Tepat! KH. Hasyim Asy'ari = pendiri Tebu Ireng."}
+    ], difficulty:"medium", hint:"KH. Hasyim Asy'ari = pendiri Tebu Ireng.", points:60 },
+
+  { id:2316, topic:"Pesantren",
+    question:"Analisis yang paling tepat tentang fungsi pesantren dalam Islamisasi Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Pesantren berfungsi sebagai pusat pendidikan Islam, pusat kaderisasi dai, & basis perlawanan terhadap penjajah",correct:true,explanation:"Tepat! 3 fungsi pesantren."},
+      {letter:"B",text:"Pesantren hanya sebagai tempat ibadah",correct:false,explanation:"Bukan hanya ibadah."},
+      {letter:"C",text:"Pesantren hanya untuk kalangan bangsawan",correct:false,explanation:"Justru untuk semua."},
+      {letter:"D",text:"Pesantren tidak berkaitan dengan Islamisasi",correct:false,explanation:"Justru pusat Islamisasi."},
+      {letter:"E",text:"Pesantren menolak semua budaya lokal",correct:false,explanation:"Justru akomodatif."}
+    ], difficulty:"hard", hint:"3 fungsi utama pesantren.", points:70 },
+
+  { id:2317, topic:"Pesantren",
+    question:"Resolusi Jihad 1945 yang mewajibkan umat Islam mempertahankan kemerdekaan Indonesia dicetuskan oleh...",
+    options:[
+      {letter:"A",text:"Muhammadiyah",correct:false,explanation:"Bukan Muhammadiyah."},
+      {letter:"B",text:"Nahdlatul Ulama (NU)",correct:true,explanation:"Tepat! NU = pencetus Resolusi Jihad."},
+      {letter:"C",text:"Sarekat Islam",correct:false,explanation:"Bukan SI."},
+      {letter:"D",text:"Muhammadiyah & NU bersama",correct:false,explanation:"Bukan bersama."},
+      {letter:"E",text:"Persis",correct:false,explanation:"Bukan Persis."}
+    ], difficulty:"medium", hint:"NU = pencetus Resolusi Jihad 1945.", points:60 },
+
+  { id:2318, topic:"Pesantren",
+    question:"Analisis yang paling tepat tentang transformasi pesantren pada abad ke-20 adalah...",
+    options:[
+      {letter:"A",text:"Pesantren menolak semua sistem modern",correct:false,explanation:"Justru mengadopsi."},
+      {letter:"B",text:"Pesantren menghapus kitab kuning",correct:false,explanation:"Justru mempertahankan."},
+      {letter:"C",text:"Pesantren mengadopsi sistem madrasah & sekolah modern, namun tetap mempertahankan kitab kuning sebagai ruh pendidikan",correct:true,explanation:"Tepat! Modern + tetap kitab kuning."},
+      {letter:"D",text:"Pesantren berubah menjadi universitas sekuler",correct:false,explanation:"Tidak sepenuhnya sekuler."},
+      {letter:"E",text:"Pesantren menghilang dari Nusantara",correct:false,explanation:"Justru berkembang."}
+    ], difficulty:"hard", hint:"Modern + tetap kitab kuning.", points:70 },
+
+  { id:2319, topic:"Pesantren",
+    question:"Kitab kuning yang menjadi rujukan utama pendidikan pesantren adalah...",
+    options:[
+      {letter:"A",text:"Kitab berbahasa Indonesia modern",correct:false,explanation:"Bukan itu."},
+      {letter:"B",text:"Kitab terjemahan bebas",correct:false,explanation:"Bukan itu."},
+      {letter:"C",text:"Kitab digital",correct:false,explanation:"Bukan itu."},
+      {letter:"D",text:"Kitab klasik Islam berbahasa Arab (tanpa harakat), karya ulama klasik seperti Imam Syafi'i, Al-Ghazali, dll",correct:true,explanation:"Tepat! Kitab klasik Islam."},
+      {letter:"E",text:"Kitab berbahasa Jawa Kuno",correct:false,explanation:"Bukan Jawa Kuno."}
+    ], difficulty:"medium", hint:"Kitab klasik Islam berbahasa Arab.", points:60 },
+
+  { id:2320, topic:"Pesantren",
+    question:"Analisis yang paling tepat tentang mengapa pesantren disebut 'jantung pendidikan Islam Nusantara' adalah...",
+    options:[
+      {letter:"A",text:"Karena pesantren tertua di dunia",correct:false,explanation:"Bukan itu."},
+      {letter:"B",text:"Karena pesantren paling kaya",correct:false,explanation:"Bukan kekayaan."},
+      {letter:"C",text:"Karena pesantren hanya mengajarkan Al-Qur'an",correct:false,explanation:"Bukan hanya Qur'an."},
+      {letter:"D",text:"Karena pesantren paling besar",correct:false,explanation:"Bukan ukuran."},
+      {letter:"E",text:"Karena pesantren menjadi pusat pendidikan & kaderisasi ulama sejak abad ke-15 M hingga kini, tanpa terputus",correct:true,explanation:"Tepat! Pusat pendidikan sejak abad 15."}
+    ], difficulty:"hard", hint:"Pusat pendidikan sejak abad 15 M.", points:70 },
+
+  /* ============ JARINGAN HARAMAIN (8 soal) ============ */
+  { id:2321, topic:"Jaringan Haramain",
+    question:"Istilah 'Haramain' dalam jaringan intelektual Islam Nusantara merujuk pada...",
+    options:[
+      {letter:"A",text:"Dua sungai di Arab",correct:false,explanation:"Bukan sungai."},
+      {letter:"B",text:"Dua kerajaan Arab",correct:false,explanation:"Bukan kerajaan."},
+      {letter:"C",text:"Dua kota suci: Mekkah & Madinah",correct:true,explanation:"Tepat! Haramain = Mekkah & Madinah."},
+      {letter:"D",text:"Dua masjid di Arab",correct:false,explanation:"Bukan masjid."},
+      {letter:"E",text:"Dua ulama besar Arab",correct:false,explanation:"Bukan ulama."}
+    ], difficulty:"easy", hint:"Haramain = Mekkah & Madinah.", points:50 },
+
+  { id:2322, topic:"Jaringan Haramain",
+    question:"Tarekat-tarekat sufi yang berkembang di Nusantara & menghubungkan ulama Nusantara dengan jaringan Timur Tengah adalah...",
+    options:[
+      {letter:"A",text:"Sunni, Syiah, Khawarij",correct:false,explanation:"Itu aliran politik."},
+      {letter:"B",text:"Hanafi, Maliki, Syafi'i",correct:false,explanation:"Itu madzhab fikih."},
+      {letter:"C",text:"Asy'ari, Maturidi, Mu'tazilah",correct:false,explanation:"Itu ilmu kalam."},
+      {letter:"D",text:"Qadiriyah, Naqsyabandiyah, Syattariyah, Khalwatiyah",correct:true,explanation:"Tepat! Tarekat Nusantara."},
+      {letter:"E",text:"Wahabi, Salafi, Ikhwanul Muslimin",correct:false,explanation:"Itu gerakan modern."}
+    ], difficulty:"medium", hint:"Qadiriyah, Naqsyabandiyah, Syattariyah, Khalwatiyah.", points:60 },
+
+  { id:2323, topic:"Jaringan Haramain",
+    question:"Ulama Nusantara asal Banten yang menjadi Imam Masjidil Haram & karyanya diakui dunia Islam adalah...",
+    options:[
+      {letter:"A",text:"Hamzah Fansuri",correct:false,explanation:"Itu dari Aceh."},
+      {letter:"B",text:"Nuruddin ar-Raniri",correct:false,explanation:"Itu dari Gujarat."},
+      {letter:"C",text:"Abdurrauf Singkil",correct:false,explanation:"Itu dari Aceh."},
+      {letter:"D",text:"Syekh Yusuf al-Makassari",correct:false,explanation:"Itu dari Gowa."},
+      {letter:"E",text:"Syekh Nawawi al-Bantani",correct:true,explanation:"Tepat! Syekh Nawawi = Imam Masjidil Haram dari Banten."}
+    ], difficulty:"medium", hint:"Syekh Nawawi al-Bantani = Imam Masjidil Haram.", points:60 },
+
+  { id:2324, topic:"Jaringan Haramain",
+    question:"Ulama Minangkabau yang menjadi Syekh di Masjidil Haram & penyebar tarekat Syattariyah di Sumatra adalah...",
+    options:[
+      {letter:"A",text:"Syekh Khatib Minangkabau",correct:true,explanation:"Tepat! Syekh Khatib = ulama Minangkabau."},
+      {letter:"B",text:"Syekh Burhanuddin Ulakan",correct:false,explanation:"Itu murid Abdurrauf."},
+      {letter:"C",text:"Syekh Ahmad Khatib",correct:false,explanation:"Itu abad 19-20."},
+      {letter:"D",text:"Syekh Muhammad Arsyad al-Banjari",correct:false,explanation:"Itu dari Banjar."},
+      {letter:"E",text:"Syekh Abdul Samad al-Palimbani",correct:false,explanation:"Itu dari Palembang."}
+    ], difficulty:"medium", hint:"Syekh Khatib = ulama Minangkabau.", points:60 },
+
+  { id:2325, topic:"Jaringan Haramain",
+    question:"Tafsir Al-Qur'an pertama dalam bahasa Melayu yang menjadi jembatan ilmu dari Haramain ke Nusantara ditulis oleh...",
+    options:[
+      {letter:"A",text:"Hamzah Fansuri",correct:false,explanation:"Itu sufi."},
+      {letter:"B",text:"Abdurrauf Singkil",correct:true,explanation:"Tepat! Tarjuman al-Mustafid = Abdurrauf."},
+      {letter:"C",text:"Nuruddin ar-Raniri",correct:false,explanation:"Itu mufti fikih."},
+      {letter:"D",text:"Syekh Nawawi al-Bantani",correct:false,explanation:"Itu dari Banten."},
+      {letter:"E",text:"Syekh Yusuf al-Makassari",correct:false,explanation:"Itu dari Gowa."}
+    ], difficulty:"medium", hint:"Tarjuman al-Mustafid = Abdurrauf.", points:60 },
+
+  { id:2326, topic:"Jaringan Haramain",
+    question:"Analisis yang paling tepat tentang jaringan kitab antara Nusantara & Haramain adalah...",
+    options:[
+      {letter:"A",text:"Kitab-kitab Haramain ditolak oleh ulama Nusantara",correct:false,explanation:"Justru diterima."},
+      {letter:"B",text:"Kitab-kitab Nusantara lebih unggul",correct:false,explanation:"Tidak begitu."},
+      {letter:"C",text:"Kitab klasik dari Haramain dibawa ke Nusantara, diterjemahkan & dikomentari dalam bahasa Melayu/Jawa, sehingga terjadi transfer ilmu dua arah",correct:true,explanation:"Tepat! Transfer ilmu dua arah."},
+      {letter:"D",text:"Tidak ada jaringan kitab",correct:false,explanation:"Justru ada."},
+      {letter:"E",text:"Kitab hanya digunakan raja",correct:false,explanation:"Justru digunakan ulama."}
+    ], difficulty:"hard", hint:"Transfer ilmu dua arah.", points:70 },
+
+  { id:2327, topic:"Jaringan Haramain",
+    question:"Analisis yang paling tepat tentang peran jaringan Haramain bagi Islamisasi Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Tidak ada peran",correct:false,explanation:"Justru besar."},
+      {letter:"B",text:"Hanya jalur haji",correct:false,explanation:"Bukan hanya haji."},
+      {letter:"C",text:"Hanya jalur ekonomi",correct:false,explanation:"Bukan hanya ekonomi."},
+      {letter:"D",text:"Jaringan Haramain menjadi jalur transfer ilmu, tarekat, & kitab dari pusat Islam dunia ke Nusantara, sehingga ulama Nusantara memiliki otoritas keilmuan internasional",correct:true,explanation:"Tepat! Jalur transfer ilmu & tarekat."},
+      {letter:"E",text:"Jaringan Haramain menghambat Islamisasi",correct:false,explanation:"Justru mendukung."}
+    ], difficulty:"hard", hint:"Jalur transfer ilmu & tarekat.", points:70 },
+
+  { id:2328, topic:"Jaringan Haramain",
+    question:"Analisis yang paling tepat tentang hubungan ulama Nusantara dengan jaringan intelektual Haramain adalah...",
+    options:[
+      {letter:"A",text:"Ulama Nusantara terisolasi dari dunia Islam",correct:false,explanation:"Justru terhubung."},
+      {letter:"B",text:"Ulama Nusantara belajar hanya di dalam negeri",correct:false,explanation:"Justru ke Haramain."},
+      {letter:"C",text:"Ulama Nusantara menolak jaringan internasional",correct:false,explanation:"Justru menerima."},
+      {letter:"D",text:"Ulama Nusantara hanya berdagang, bukan belajar",correct:false,explanation:"Justru belajar."},
+      {letter:"E",text:"Ulama Nusantara belajar di Haramain bertahun-tahun (misalnya Abdurrauf 19 tahun), lalu kembali mengajar di Nusantara & menjadi penghubung Islam Nusantara dengan dunia Islam global",correct:true,explanation:"Tepat! Belajar di Haramain lalu mengajar di Nusantara."}
+    ], difficulty:"hard", hint:"Belajar di Haramain → mengajar di Nusantara.", points:70 },
+
+  /* ============ STRATEGI DAKWAH BUDAYA (8 soal) ============ */
+  { id:2329, topic:"Dakwah Budaya",
+    question:"Tembang 'Ilir-Ilir' yang menjadi sarana dakwah Sunan Kalijaga berisi pesan tentang...",
+    options:[
+      {letter:"A",text:"Peperangan",correct:false,explanation:"Bukan peperangan."},
+      {letter:"B",text:"Perdagangan",correct:false,explanation:"Bukan perdagangan."},
+      {letter:"C",text:"Ajaran Islam tentang kebangkitan spiritual & pentingnya menuntut ilmu agama",correct:true,explanation:"Tepat! Kebangkitan spiritual & ilmu."},
+      {letter:"D",text:"Politik kerajaan",correct:false,explanation:"Bukan politik."},
+      {letter:"E",text:"Ramalan cuaca",correct:false,explanation:"Bukan ramalan."}
+    ], difficulty:"medium", hint:"Ilir-Ilir = kebangkitan spiritual.", points:60 },
+
+  { id:2330, topic:"Dakwah Budaya",
+    question:"Gamelan Sekaten yang ditabuh pada perayaan Maulid Nabi di Yogyakarta & Surakarta merupakan tradisi dakwah yang dipelopori oleh...",
+    options:[
+      {letter:"A",text:"Sunan Gresik",correct:false,explanation:"Sunan Gresik = perintis."},
+      {letter:"B",text:"Sunan Ampel",correct:false,explanation:"Sunan Ampel = Moh Limo."},
+      {letter:"C",text:"Sunan Giri",correct:false,explanation:"Sunan Giri = Giri Kedaton."},
+      {letter:"D",text:"Sunan Bonang",correct:true,explanation:"Tepat! Gamelan Sekaten = Sunan Bonang."},
+      {letter:"E",text:"Sunan Gunung Jati",correct:false,explanation:"Sunan Gunung Jati = Cirebon."}
+    ], difficulty:"medium", hint:"Gamelan Sekaten = Sunan Bonang.", points:60 },
+
+  { id:2331, topic:"Dakwah Budaya",
+    question:"Tradisi 'Grebeg Maulud' yang masih dilestarikan hingga kini di Yogyakarta & Surakarta berkaitan dengan...",
+    options:[
+      {letter:"A",text:"Peringatan Isra Mi'raj",correct:false,explanation:"Bukan Isra Mi'raj."},
+      {letter:"B",text:"Peringatan Nuzulul Qur'an",correct:false,explanation:"Bukan Nuzulul Qur'an."},
+      {letter:"C",text:"Peringatan 1 Muharram",correct:false,explanation:"Bukan 1 Muharram."},
+      {letter:"D",text:"Peringatan Idul Fitri",correct:false,explanation:"Bukan Idul Fitri."},
+      {letter:"E",text:"Peringatan Maulid Nabi Muhammad SAW",correct:true,explanation:"Tepat! Grebeg Maulud = Maulid Nabi."}
+    ], difficulty:"medium", hint:"Grebeg Maulud = Maulid Nabi.", points:60 },
+
+  { id:2332, topic:"Dakwah Budaya",
+    question:"Permainan anak bernuansa Islam seperti 'Jelungan' & 'Cublak-Cublak Suweng' diciptakan oleh...",
+    options:[
+      {letter:"A",text:"Sunan Giri",correct:true,explanation:"Tepat! Sunan Giri = pencipta permainan anak Islam."},
+      {letter:"B",text:"Sunan Bonang",correct:false,explanation:"Sunan Bonang = gamelan sekaten."},
+      {letter:"C",text:"Sunan Drajat",correct:false,explanation:"Sunan Drajat = Catur Piwulang."},
+      {letter:"D",text:"Sunan Kudus",correct:false,explanation:"Sunan Kudus = toleransi sapi."},
+      {letter:"E",text:"Sunan Kalijaga",correct:false,explanation:"Sunan Kalijaga = wayang."}
+    ], difficulty:"medium", hint:"Sunan Giri = pencipta permainan anak Islam.", points:60 },
+
+  { id:2333, topic:"Dakwah Budaya",
+    question:"Analisis yang paling tepat tentang mengapa Sunan Kudus mengharamkan penyembelihan sapi bagi umat Muslim di Kudus adalah...",
+    options:[
+      {letter:"A",text:"Karena sapi mahal",correct:false,explanation:"Bukan harga."},
+      {letter:"B",text:"Sebagai bentuk toleransi & penghormatan terhadap umat Hindu yang menganggap sapi sebagai hewan suci, sehingga Islam diterima tanpa konflik",correct:true,explanation:"Tepat! Toleransi terhadap Hindu."},
+      {letter:"C",text:"Karena sapi tidak halal",correct:false,explanation:"Justru halal."},
+      {letter:"D",text:"Karena sapi dilarang dalam Al-Qur'an",correct:false,explanation:"Tidak dilarang."},
+      {letter:"E",text:"Karena tidak ada sapi di Kudus",correct:false,explanation:"Justru banyak."}
+    ], difficulty:"hard", hint:"Toleransi terhadap Hindu.", points:70 },
+
+  { id:2334, topic:"Dakwah Budaya",
+    question:"Analisis yang paling tepat tentang mengapa Walisongo menggunakan pendekatan budaya dalam dakwah adalah...",
+    options:[
+      {letter:"A",text:"Karena tidak menguasai bahasa Arab",correct:false,explanation:"Justru menguasai."},
+      {letter:"B",text:"Karena tidak punya pilihan lain",correct:false,explanation:"Justru strategi."},
+      {letter:"C",text:"Karena masyarakat Nusantara sudah memiliki budaya yang kuat (Hindu-Buddha & lokal), sehingga pendekatan budaya lebih efektif & menghindari konflik",correct:true,explanation:"Tepat! Budaya kuat = pendekatan budaya efektif."},
+      {letter:"D",text:"Karena diperintah kerajaan",correct:false,explanation:"Bukan diperintah."},
+      {letter:"E",text:"Karena ingin mengubah total budaya",correct:false,explanation:"Justru akomodatif."}
+    ], difficulty:"hard", hint:"Budaya kuat = pendekatan budaya efektif.", points:70 },
+
+  { id:2335, topic:"Dakwah Budaya",
+    question:"Analisis yang paling tepat tentang efektivitas pendekatan budaya Walisongo dibandingkan dakwah konfrontatif adalah...",
+    options:[
+      {letter:"A",text:"Dakwah konfrontatif lebih cepat",correct:false,explanation:"Justru memicu konflik."},
+      {letter:"B",text:"Dakwah budaya terlalu lama",correct:false,explanation:"Justru efektif."},
+      {letter:"C",text:"Dakwah budaya tidak berdampak",correct:false,explanation:"Justru berdampak besar."},
+      {letter:"D",text:"Pendekatan budaya membuat Islam diterima secara sukarela, mengakar kuat di masyarakat, & menghasilkan akulturasi budaya Islam-Nusantara yang khas",correct:true,explanation:"Tepat! Diterima sukarela & mengakar."},
+      {letter:"E",text:"Dakwah konfrontatif lebih Islami",correct:false,explanation:"Justru tidak."}
+    ], difficulty:"hard", hint:"Diterima sukarela & mengakar.", points:70 },
+
+  { id:2336, topic:"Dakwah Budaya",
+    question:"Kesimpulan yang paling tepat tentang strategi dakwah Walisongo bagi generasi muda Indonesia adalah...",
+    options:[
+      {letter:"A",text:"Strategi dakwah Walisongo sudah tidak relevan",correct:false,explanation:"Justru relevan."},
+      {letter:"B",text:"Dakwah harus dengan kekerasan",correct:false,explanation:"Justru damai."},
+      {letter:"C",text:"Budaya lokal harus dihilangkan",correct:false,explanation:"Justru dihormati."},
+      {letter:"D",text:"Dakwah hanya untuk orang tua",correct:false,explanation:"Untuk semua."},
+      {letter:"E",text:"Strategi dakwah damai, akomodatif, & menghargai budaya lokal tetap relevan untuk menyebarkan nilai-nilai kebaikan di Indonesia masa kini",correct:true,explanation:"Tepat! Strategi damai & akomodatif tetap relevan."}
+    ], difficulty:"hard", hint:"Strategi damai & akomodatif tetap relevan.", points:70 },
+
+  /* ============ SINTESIS (4 soal) ============ */
+  { id:2337, topic:"Sintesis",
+    question:"Analisis yang paling tepat tentang keberhasilan Walisongo dalam Islamisasi Jawa adalah...",
+    options:[
+      {letter:"A",text:"Kombinasi dakwah damai (perdagangan, perkawinan, tasawuf, pendidikan) + pendekatan budaya + keteladanan akhlak, sehingga Islam diterima tanpa kekerasan",correct:true,explanation:"Tepat! Kombinasi strategi damai."},
+      {letter:"B",text:"Karena kekuatan militer",correct:false,explanation:"Justru damai."},
+      {letter:"C",text:"Karena dukungan Kerajaan Hindu",correct:false,explanation:"Tidak."},
+      {letter:"D",text:"Karena keberuntungan semata",correct:false,explanation:"Bukan keberuntungan."},
+      {letter:"E",text:"Karena kekayaan Walisongo",correct:false,explanation:"Bukan kekayaan."}
+    ], difficulty:"hard", hint:"Kombinasi strategi damai.", points:70 },
+
+  { id:2338, topic:"Sintesis",
+    question:"Perbandingan yang paling tepat antara pesantren & universitas modern dalam konteks Islamisasi Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Keduanya sama saja",correct:false,explanation:"Berbeda."},
+      {letter:"B",text:"Pesantren berperan sejak abad ke-15 M sebagai pusat kaderisasi dai & ulama, sementara universitas modern baru muncul belakangan & berperan dalam kajian Islam kontemporer",correct:true,explanation:"Tepat! Pesantren jauh lebih awal."},
+      {letter:"C",text:"Universitas lebih berperan daripada pesantren",correct:false,explanation:"Pesantren lebih awal."},
+      {letter:"D",text:"Pesantren tidak berperan penting",correct:false,explanation:"Justru sangat penting."},
+      {letter:"E",text:"Universitas menghapus peran pesantren",correct:false,explanation:"Justru keduanya berdampingan."}
+    ], difficulty:"hard", hint:"Pesantren jauh lebih awal.", points:70 },
+
+  { id:2339, topic:"Sintesis",
+    question:"Kesimpulan yang paling tepat tentang warisan Walisongo bagi Indonesia modern adalah...",
+    options:[
+      {letter:"A",text:"Tidak ada warisan",correct:false,explanation:"Justru banyak."},
+      {letter:"B",text:"Hanya warisan bangunan",correct:false,explanation:"Bukan hanya bangunan."},
+      {letter:"C",text:"Warisan berupa Islam Nusantara yang damai, akomodatif, penuh tradisi (wayang, tembang, gamelan, selamatan), & tetap hidup hingga kini",correct:true,explanation:"Tepat! Islam Nusantara yang damai & akomodatif."},
+      {letter:"D",text:"Hanya warisan bahasa",correct:false,explanation:"Bukan hanya bahasa."},
+      {letter:"E",text:"Tidak ada relevansi",correct:false,explanation:"Justru sangat relevan."}
+    ], difficulty:"hard", hint:"Islam Nusantara yang damai & akomodatif.", points:70 },
+
+  { id:2340, topic:"Sintesis",
+    question:"Pelajaran yang paling berharga dari Walisongo & pesantren bagi generasi muda Indonesia adalah...",
+    options:[
+      {letter:"A",text:"Dakwah harus dengan kekerasan",correct:false,explanation:"Justru damai."},
+      {letter:"B",text:"Budaya lokal tidak penting",correct:false,explanation:"Justru penting."},
+      {letter:"C",text:"Pendidikan agama tidak perlu",correct:false,explanation:"Justru perlu."},
+      {letter:"D",text:"Islam hanya untuk orang tua",correct:false,explanation:"Untuk semua."},
+      {letter:"E",text:"Pendidikan agama yang damai, akomodatif budaya, & berbasis keteladanan akhlak adalah cara terbaik membangun generasi berkarakter, seperti yang dicontohkan Walisongo & pesantren",correct:true,explanation:"Tepat! Pendidikan damai & berbasis akhlak."}
+    ], difficulty:"hard", hint:"Pendidikan damai & berbasis akhlak.", points:70 }
+];
+
+/* ============================================================
+   CONSTANTS & STATE
+   ============================================================ */
+const TOTAL_Q = 15;
+const TIME_LIMIT = 20 * 60;
+
+const state = {
+  questions: [], currentIndex: 0, answers: [], score: 0,
+  xp: 0, level: 1, hp: 3, maxHp: 3, combo: 0, bestCombo: 0,
+  timer: null, timeLeft: TIME_LIMIT, started: false, finished: false,
+  powers: { p50:1, hint:1, skip:1 }, soundOn: true
+};
+
+/* ============================================================
+   AUDIO
+   ============================================================ */
+let audioCtx = null;
+function ensureAudio(){
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}
+function playTone(freq, dur, type, vol){
+  if (!state.soundOn) return;
+  ensureAudio(); if (!audioCtx) return;
+  try {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = type || 'sine'; o.frequency.value = freq;
+    g.gain.setValueAtTime(vol || 0.08, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + dur);
+  } catch(e){}
+}
+function sfxClick(){ playTone(520, .08, 'triangle', .06); }
+function sfxCorrect(){ playTone(660, .12, 'sine', .10); setTimeout(()=>playTone(880, .15, 'sine', .10), 80); setTimeout(()=>playTone(1100, .20, 'sine', .08), 160); }
+function sfxWrong(){ playTone(200, .18, 'sawtooth', .10); setTimeout(()=>playTone(150, .25, 'sawtooth', .08), 120); }
+function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(()=>playTone(1200, .12, 'triangle', .07), 60); }
+function sfxLevelUp(){ [523, 659, 784, 1046].forEach((f, i) => setTimeout(()=>playTone(f, .16, 'sine', .10), i*90)); }
+function sfxFinish(){ [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(()=>playTone(f, .22, 'sine', .10), i*120)); }
+function toggleSound(){
+  state.soundOn = !state.soundOn;
+  document.getElementById('soundBtn').innerHTML = state.soundOn ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+  if (state.soundOn) sfxClick();
+}
+function toggleTheme(){
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').innerHTML = next === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  sfxClick();
+}
+
+(function(){
+  const bar = document.getElementById('loaderBar');
+  const pct = document.getElementById('loaderPct');
+  const loader = document.getElementById('loader');
+  const t0 = Date.now();
+  (function tick(){
+    const p = Math.min((Date.now() - t0) / 1800 * 100, 100);
+    bar.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+    if (p < 100) requestAnimationFrame(tick);
+    else setTimeout(()=>{ loader.classList.add('hidden'); setTimeout(()=>loader.style.display='none', 700); }, 300);
+  })();
+})();
+
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  function makeP(){ return { x: Math.random()*W, y: Math.random()*H, r: Math.random()*2 + 0.4, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3 - 0.15, a: Math.random()*0.5 + 0.15, hue: Math.random() < 0.5 ? 270 : 190 }; }
+  function init(){ resize(); particles = Array.from({length: Math.min(60, Math.floor(W*H/25000))}, makeP); }
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.shadowBlur = 8; ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.fill();
+    });
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+function fireConfetti(count){
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const colors = ['#8B5CF6','#C4B5FD','#06B6D4','#67E8F9','#34D399','#38BDF8'];
+  const pieces = Array.from({length: count || 60}, () => ({
+    x: window.innerWidth/2 + (Math.random()-0.5)*200,
+    y: window.innerHeight/2,
+    vx: (Math.random()-0.5)*14, vy: Math.random()*-16 - 4,
+    g: 0.5, r: Math.random()*8 + 4,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    rot: Math.random()*Math.PI, vr: (Math.random()-0.5)*0.3, life: 1
+  }));
+  let frame = 0;
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    pieces.forEach(p => {
+      if (p.life <= 0) return;
+      alive = true;
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.012;
+      ctx.save(); ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      ctx.restore();
+    });
+    if (alive && frame < 200) { frame++; requestAnimationFrame(animate); }
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  animate();
+}
+
+function showToast(icon, title, desc, variant){
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<div class="toast-icon ${variant||''}">${icon}</div>
+    <div class="toast-content"><div class="toast-title">${title}</div><div class="toast-desc">${desc}</div></div>`;
+  wrap.appendChild(el);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 450); }, 3200);
+}
+function scorePopup(text, x, y, color){
+  const el = document.createElement('div');
+  el.className = 'score-pop';
+  el.textContent = text;
+  el.style.left = (x || window.innerWidth/2) + 'px';
+  el.style.top = (y || window.innerHeight/2) + 'px';
+  if (color) el.style.color = color;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1100);
+}
+function shuffle(a){ const arr = a.slice(); for (let i = arr.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+function updateHpHud(){
+  const hp = document.getElementById('hudHp'); hp.innerHTML = '';
+  for (let i = 0; i < state.maxHp; i++){
+    const heart = document.createElement('i');
+    heart.className = 'fas fa-heart heart' + (i < state.hp ? '' : ' empty');
+    hp.appendChild(heart);
+  }
+}
+function updateXpHud(){
+  const xpForLevel = state.level * 100;
+  const pct = Math.min((state.xp % xpForLevel) / xpForLevel * 100, 100);
+  document.getElementById('hudLevel').textContent = state.level;
+  document.getElementById('hudXp').textContent = state.xp % xpForLevel;
+  document.getElementById('hudXpMax').textContent = xpForLevel;
+  document.getElementById('xpFill').style.width = pct + '%';
+}
+function updateComboHud(){
+  document.getElementById('comboVal').textContent = state.combo;
+  const tag = document.getElementById('comboTag');
+  if (state.combo >= 3){ tag.classList.add('hot'); setTimeout(()=>tag.classList.remove('hot'), 500); }
+}
+function updatePowers(){
+  document.getElementById('c50').textContent = state.powers.p50;
+  document.getElementById('chint').textContent = state.powers.hint;
+  document.getElementById('cskip').textContent = state.powers.skip;
+  document.getElementById('p50').disabled = state.powers.p50 <= 0;
+  document.getElementById('phint').disabled = state.powers.hint <= 0;
+  document.getElementById('pskip').disabled = state.powers.skip <= 0;
+}
+
+function startGame(){
+  ensureAudio();
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('gameHud').classList.add('active');
+  state.questions = shuffle(BANK_SOAL).slice(0, TOTAL_Q);
+  state.currentIndex = 0; state.answers = [];
+  state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.timeLeft = TIME_LIMIT; state.started = true; state.finished = false;
+  state.powers = { p50:1, hint:1, skip:1 };
+  updateHpHud(); updateXpHud(); updateComboHud(); updatePowers();
+  showToast('🕌', 'Arena Level 23 Dimulai!', 'Kuasai Walisongo, Pesantren & Jaringan Haramain!', '');
+  sfxClick();
+  startTimer();
+  renderQuestion();
+}
+
+function startTimer(){
+  if (state.timer) clearInterval(state.timer);
+  state.timer = setInterval(() => {
+    state.timeLeft--;
+    updateTimerHud();
+    if (state.timeLeft <= 0){ clearInterval(state.timer); finishGame(true); }
+  }, 1000);
+  updateTimerHud();
+}
+function updateTimerHud(){
+  const m = Math.floor(state.timeLeft / 60), s = state.timeLeft % 60;
+  document.getElementById('hudTimerVal').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  const el = document.getElementById('hudTimer');
+  if (state.timeLeft <= 120) el.classList.add('warning'); else el.classList.remove('warning');
+}
+
+function renderQuestion(){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  document.getElementById('qNumLabel').textContent = 'Soal ' + (state.currentIndex+1);
+  document.getElementById('qTopicText').textContent = q.topic || 'Islam Nusantara';
+  document.getElementById('qText').innerHTML = q.question;
+  document.getElementById('hudQNum').textContent = state.currentIndex+1;
+  const opts = document.getElementById('options'); opts.innerHTML = '';
+  q.options.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.dataset.letter = o.letter;
+    btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
+    btn.addEventListener('click', () => selectOption(o.letter, btn));
+    opts.appendChild(btn);
+  });
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('btnNext').disabled = true;
+  document.getElementById('btnNext').style.display = '';
+  document.getElementById('btnFinish').style.display = 'none';
+  document.getElementById('qCard').classList.remove('shake');
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'qEnter .55s cubic-bezier(.16,1,.3,1)';
+  if (state.currentIndex === TOTAL_Q - 1){
+    document.getElementById('btnNext').style.display = 'none';
+    document.getElementById('btnFinish').style.display = '';
+  }
+}
+
+function selectOption(letter, btnEl){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  const selected = q.options.find(o => o.letter === letter);
+  if (!selected) return;
+  const correct = selected.correct;
+  document.querySelectorAll('#options .opt').forEach(b => {
+    b.classList.add('locked');
+    const o = q.options.find(x => x.letter === b.dataset.letter);
+    if (o.correct) b.classList.add('correct');
+    else if (b.dataset.letter === letter && !correct) b.classList.add('wrong');
+  });
+  state.answers.push({ qid: q.id, selected: letter, correct, skipped: false,
+    questionText: q.question, topic: q.topic,
+    correctLetter: q.options.find(o => o.correct).letter,
+    explanation: selected.explanation });
+  if (correct){
+    state.combo++;
+    if (state.combo > state.bestCombo) state.bestCombo = state.combo;
+    const bonus = Math.max(0, state.combo - 1) * 5;
+    const gained = (q.points || 50) + bonus;
+    state.score += gained; state.xp += gained;
+    const prevLevel = state.level;
+    state.level = Math.floor(state.xp / 100) + 1;
+    if (state.level > prevLevel){
+      sfxLevelUp();
+      showToast('⭐', 'LEVEL UP!', `Kamu naik ke Level ${state.level}!`, 'cyan');
+      fireConfetti(40);
+    }
+    sfxCorrect();
+    fireConfetti(state.combo >= 3 ? 80 : 45);
+    const rect = btnEl ? btnEl.getBoundingClientRect() : null;
+    scorePopup('+' + gained + ' XP', rect ? rect.left + rect.width/2 : window.innerWidth/2, rect ? rect.top : window.innerHeight/2, '#C4B5FD');
+    if (state.combo >= 3) showToast('🔥', `COMBO ×${state.combo}!`, `Bonus +${bonus} XP!`, '');
+  } else {
+    state.combo = 0; state.hp--; sfxWrong();
+    updateHpHud();
+    const hpEls = document.querySelectorAll('.hud-hp .heart');
+    if (hpEls[state.hp]) hpEls[state.hp].classList.add('losing');
+    const card = document.getElementById('qCard');
+    card.classList.add('shake'); setTimeout(() => card.classList.remove('shake'), 550);
+    if (state.hp <= 0) showToast('💔', 'Nyawa Habis!', 'Kamu kehilangan semua nyawa.', 'violet');
+  }
+  document.getElementById('hudScore').textContent = state.score;
+  updateXpHud(); updateComboHud();
+  showFeedback(correct, q, selected);
+  document.getElementById('btnNext').disabled = false;
+}
+
+function showFeedback(correct, q, selected){
+  const panel = document.getElementById('feedback');
+  const icon = document.getElementById('fbIcon');
+  const title = document.getElementById('fbTitle');
+  const body = document.getElementById('fbBody');
+  panel.classList.add('show');
+  if (correct){
+    icon.className = 'fb-icon correct'; icon.innerHTML = '<i class="fas fa-check"></i>';
+    title.className = 'fb-title correct'; title.textContent = 'BENAR!';
+  } else {
+    icon.className = 'fb-icon wrong'; icon.innerHTML = '<i class="fas fa-times"></i>';
+    title.className = 'fb-title wrong'; title.textContent = 'BELUM TEPAT';
+  }
+  const correctOpt = q.options.find(o => o.correct);
+  let html = `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
+  html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
+  if (!correct && selected) html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
+  html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
+  body.innerHTML = html;
+}
+
+function nextQuestion(){
+  if (state.currentIndex < TOTAL_Q - 1){
+    state.currentIndex++;
+    renderQuestion();
+    document.getElementById('qCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+function usePower(type){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  if (type === '50'){
+    if (state.powers.p50 <= 0) return;
+    const wrongs = q.options.filter(o => !o.correct);
+    const remove = shuffle(wrongs).slice(0, 2);
+    document.querySelectorAll('#options .opt').forEach(b => {
+      if (remove.some(o => o.letter === b.dataset.letter)) b.classList.add('disabled-50');
+    });
+    state.powers.p50 = 0; updatePowers(); sfxPower();
+    showToast('✂️', '50:50 Aktif!', 'Dua jawaban salah dihilangkan.', 'cyan');
+  } else if (type === 'hint'){
+    if (state.powers.hint <= 0) return;
+    const panel = document.getElementById('feedback');
+    const icon = document.getElementById('fbIcon');
+    const title = document.getElementById('fbTitle');
+    const body = document.getElementById('fbBody');
+    panel.classList.add('show');
+    icon.className = 'fb-icon info'; icon.innerHTML = '<i class="fas fa-lightbulb"></i>';
+    title.className = 'fb-title info'; title.textContent = 'PETUNJUK';
+    body.innerHTML = `<p>${q.hint || 'Tidak ada petunjuk.'}</p>`;
+    state.powers.hint = 0; updatePowers(); sfxPower();
+    showToast('💡', 'Petunjuk Digunakan!', 'Perhatikan dengan saksama.', '');
+  } else if (type === 'skip'){
+    if (state.powers.skip <= 0) return;
+    state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+      questionText: q.question, topic: q.topic,
+      correctLetter: q.options.find(o => o.correct).letter,
+      explanation: q.options.find(o => o.correct).explanation });
+    document.querySelectorAll('#options .opt').forEach(b => {
+      b.classList.add('locked');
+      const o = q.options.find(x => x.letter === b.dataset.letter);
+      if (o.correct) b.classList.add('correct');
+    });
+    showFeedback(false, q, null);
+    document.getElementById('btnNext').disabled = false;
+    state.powers.skip = 0; updatePowers(); sfxPower();
+    showToast('⏭️', 'Soal Dilewati', 'Jawaban benar ditampilkan.', 'violet');
+    if (state.currentIndex === TOTAL_Q - 1){
+      document.getElementById('btnNext').style.display = 'none';
+      document.getElementById('btnFinish').style.display = '';
+    }
+  }
+}
+
+function finishGame(timeout){
+  if (state.finished) return;
+  state.finished = true;
+  clearInterval(state.timer); state.timer = null;
+  const answered = state.answers.map(a => a.qid);
+  state.questions.forEach(q => {
+    if (!answered.includes(q.id)){
+      state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+        questionText: q.question, topic: q.topic,
+        correctLetter: q.options.find(o => o.correct).letter,
+        explanation: q.options.find(o => o.correct).explanation });
+    }
+  });
+  let benar = 0, salah = 0;
+  state.answers.forEach(a => { if (a.skipped) return; if (a.correct) benar++; else salah++; });
+  const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
+  const finalScore = Math.round((state.score / maxScore) * 100);
+  const grade = finalScore >= 90 ? 'A' : finalScore >= 80 ? 'B' : finalScore >= 70 ? 'C' : finalScore >= 60 ? 'D' : 'E';
+  const gradeLabel = finalScore >= 90 ? 'Sangat Baik' : finalScore >= 80 ? 'Baik' : finalScore >= 70 ? 'Cukup' : finalScore >= 60 ? 'Perlu Bimbingan' : 'Remedial';
+  const rank = finalScore >= 90 ? 'WALI SANTRI' : finalScore >= 80 ? 'PENELITI SEJARAH' : finalScore >= 70 ? 'PELAJAR SEJARAH' : 'PEMULA';
+  const trophy = finalScore >= 90 ? '🏆' : finalScore >= 80 ? '🥇' : finalScore >= 70 ? '🥈' : finalScore >= 60 ? '🥉' : '📚';
+  const title = finalScore >= 90 ? 'Luar Biasa!' : finalScore >= 80 ? 'Kerja Bagus!' : finalScore >= 70 ? 'Terus Belajar!' : 'Jangan Menyerah!';
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('resultScreen').classList.add('active');
+  document.getElementById('rTrophy').textContent = trophy;
+  document.getElementById('rTitle').textContent = title;
+  document.getElementById('rSub').textContent = 'Kuis 23 · Walisongo, Pesantren & Jaringan Haramain';
+  document.getElementById('gradeLetter').textContent = grade;
+  document.getElementById('gradeLabel').textContent = gradeLabel;
+  document.getElementById('rRank').textContent = rank;
+  document.getElementById('rXp').textContent = state.xp;
+  document.getElementById('rBestCombo').textContent = state.bestCombo;
+  document.getElementById('rBenar').textContent = benar;
+  document.getElementById('rSalah').textContent = salah;
+  document.getElementById('rSkor').textContent = finalScore;
+  document.getElementById('rXpTotal').textContent = state.xp;
+  document.getElementById('gradeRing').style.setProperty('--grade-deg', (finalScore/100*360) + 'deg');
+  document.getElementById('rMsg').textContent = finalScore >= 70
+    ? '🎯 Pertahankan semangat belajarmu! Lanjutkan ke Kuis 24 untuk materi Kerajaan Islam di Jawa (Demak, Cirebon, Banten, Mataram).'
+    : '📚 Pelajari kembali materi Walisongo, Pesantren & Jaringan Haramain, lalu coba lagi!';
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  state.answers.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
+                   a.correct ? '<span class="ri-status correct">Benar</span>' :
+                   '<span class="ri-status wrong">Salah</span>';
+    const q = a.questionText.length > 80 ? a.questionText.substring(0, 80) + '...' : a.questionText;
+    div.innerHTML = `<span class="ri-num">${i+1}.</span><span class="ri-text">${q}</span>${status}`;
+    reviewList.appendChild(div);
+  });
+  sfxFinish();
+  if (finalScore >= 70){
+    fireConfetti(180);
+    setTimeout(() => fireConfetti(120), 400);
+    setTimeout(() => showToast('🏆', 'Achievement Unlocked!', rank, ''), 500);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetGame(){
+  clearInterval(state.timer); state.timer = null;
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('startScreen').style.display = 'flex';
+  state.answers = []; state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.currentIndex = 0; state.finished = false; state.started = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('keydown', e => {
+  if (!state.started || state.finished) return;
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea') return;
+  if (['a','A','1'].includes(e.key)) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
+  else if (['b','B','2'].includes(e.key)) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
+  else if (['c','C','3'].includes(e.key)) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
+  else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
+  else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
+  else if (e.key === 'ArrowRight' || e.key === 'Enter'){
+    if (!document.getElementById('btnNext').disabled) nextQuestion();
+  }
+});
+</script>
+
+</body>
+</html>
