@@ -9,22 +9,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
+/* ============================================================
+   ROOT & RESET
+   ============================================================ */
 :root{
   --font-display:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
   --font-mono:'Space Grotesk',ui-monospace,monospace;
   --primary:#F59E0B;--primary-light:#FCD34D;--primary-dark:#B45309;
-  --accent:#06B6D4;--accent-rgb:6,182,212;
-  --emerald:#10B981;--violet:#8B5CF6;--rose:#F43F5E;--sky:#38BDF8;
+  --violet:#8B5CF6;--violet-light:#C4B5FD;--violet-dark:#7c3aed;
+  --accent:#06B6D4;--emerald:#10B981;--rose:#F43F5E;--sky:#38BDF8;
   --bg:#05060f;--bg-2:#0b0d1c;
   --glass:rgba(255,255,255,0.045);
   --glass-strong:rgba(255,255,255,0.08);
   --glass-border:rgba(255,255,255,0.10);
   --text:#f7f5ff;--text-dim:#a8a8c0;--text-mute:#6b6b85;
   --radius:24px;--radius-md:18px;--radius-sm:14px;--radius-xs:10px;
-  --shadow-glow:0 0 40px rgba(245,158,11,.25);
+  --shadow-glow:0 0 40px rgba(139,92,246,.25);
   --shadow-card:0 24px 60px rgba(0,0,0,.55);
-  --shadow-btn:0 12px 32px rgba(245,158,11,.35);
+  --shadow-btn:0 12px 32px rgba(139,92,246,.35);
   --ease-out:cubic-bezier(.16,1,.3,1);
   --ease-spring:cubic-bezier(.34,1.56,.64,1);
 }
@@ -34,9 +38,13 @@ body{
   font-family:var(--font-display);background:var(--bg);color:var(--text);
   line-height:1.65;overflow-x:hidden;min-height:100vh;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  position:relative;
 }
-::selection{background:var(--primary);color:#0b0d1c}
+::selection{background:var(--violet);color:#fff}
 
+/* ============================================================
+   BACKGROUND
+   ============================================================ */
 .bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
     radial-gradient(ellipse 80% 60% at 20% 0%,rgba(139,92,246,.15),transparent 60%),
@@ -54,6 +62,9 @@ body{
 #particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
 #confettiCanvas{position:fixed;inset:0;z-index:9998;pointer-events:none}
 
+/* ============================================================
+   LOADER
+   ============================================================ */
 #loader{position:fixed;inset:0;z-index:99999;
   background:radial-gradient(ellipse at center,#0b0d1c 0%,#05060f 100%);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -82,6 +93,9 @@ body{
   box-shadow:0 0 20px rgba(139,92,246,.6);transition:width .3s ease}
 .loader-pct{font-family:var(--font-mono);font-size:.72rem;font-weight:700;color:var(--text-mute);letter-spacing:2px}
 
+/* ============================================================
+   HEADER
+   ============================================================ */
 .game-header{position:fixed;top:0;left:0;right:0;height:60px;z-index:1000;
   display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:10px;
   background:rgba(5,6,15,.72);backdrop-filter:blur(22px) saturate(160%);
@@ -101,24 +115,30 @@ body{
   font-size:.85rem;transition:all .3s var(--ease-out)}
 .icon-btn:hover{background:var(--violet);color:#fff;border-color:var(--violet);box-shadow:0 0 22px rgba(139,92,246,.6);transform:translateY(-2px)}
 
+/* ============================================================
+   CONTAINER
+   ============================================================ */
 .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;
   padding:calc(60px + 20px) 16px 60px;min-height:100vh}
 
+/* ============================================================
+   START SCREEN
+   ============================================================ */
 .start-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;
-  min-height:calc(100vh - 100px);text-align:center;gap:18px;padding:20px 0}
+  min-height:calc(100vh - 100px);text-align:center;gap:16px;padding:20px 0}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:40px;
   background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(6,182,212,.10));
   border:1px solid rgba(139,92,246,.30);font-size:.7rem;font-weight:800;letter-spacing:1.5px;
-  text-transform:uppercase;color:#C4B5FD;box-shadow:0 0 30px rgba(139,92,246,.20);
+  text-transform:uppercase;color:var(--violet-light);box-shadow:0 0 30px rgba(139,92,246,.20);
   animation:badgeFloat 3s ease-in-out infinite}
 @keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .hero-title{font-family:var(--font-display);font-size:clamp(2rem,7vw,3.6rem);
   font-weight:900;line-height:1.05;letter-spacing:-1.5px;
-  background:linear-gradient(135deg,#fff 0%,#C4B5FD 40%,var(--violet) 70%,var(--accent) 100%);
+  background:linear-gradient(135deg,#fff 0%,var(--violet-light) 40%,var(--violet) 70%,var(--accent) 100%);
   background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
   animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 8px 30px rgba(139,92,246,.3))}
-.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text-dim);max-width:560px;line-height:1.75}
-.hero-sub strong{color:#C4B5FD;font-weight:700}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text-dim);max-width:600px;line-height:1.75}
+.hero-sub strong{color:var(--violet-light);font-weight:700}
 
 .stats-showcase{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
 .stat-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;
@@ -127,16 +147,43 @@ body{
 .stat-pill:hover{transform:translateY(-3px);border-color:rgba(139,92,246,.4);box-shadow:0 8px 24px rgba(139,92,246,.15)}
 .stat-pill i{font-size:.95rem}
 
+/* Player Name Input */
+.name-input-wrap{display:flex;flex-direction:column;gap:8px;
+  width:100%;max-width:440px;margin-top:10px;text-align:left}
+.name-input-wrap label{font-size:.72rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--violet-light);display:flex;align-items:center;gap:8px}
+.name-input-wrap label i{color:var(--violet)}
+.name-input-wrap input{width:100%;padding:15px 22px;border-radius:16px;
+  border:1.5px solid var(--glass-border);background:rgba(255,255,255,.04);
+  color:var(--text);font-family:var(--font-display);font-size:.98rem;font-weight:600;
+  outline:none;transition:all .3s var(--ease-out)}
+.name-input-wrap input:focus{border-color:var(--violet);background:rgba(139,92,246,.08);
+  box-shadow:0 0 0 4px rgba(139,92,246,.15)}
+.name-input-wrap input::placeholder{color:var(--text-mute);font-weight:400}
+.name-input-hint{font-size:.7rem;color:var(--text-mute);padding-left:4px;
+  display:flex;align-items:center;gap:6px}
+
+/* Rules card */
 .rules-card{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
-  border:1px solid var(--glass-border);border-radius:var(--radius);padding:22px 24px;
-  max-width:520px;width:100%;text-align:left;margin-top:6px;backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
-.rules-card h4{font-size:.85rem;font-weight:800;color:#C4B5FD;margin-bottom:12px;
-  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
-.rules-card ul{list-style:none;display:grid;gap:10px}
-.rules-card li{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-dim);line-height:1.6}
-.rule-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
-  border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--violet),var(--primary));
-  color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 4px 14px rgba(139,92,246,.4)}
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:24px 26px;
+  max-width:600px;width:100%;text-align:left;margin-top:10px;
+  backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.rules-card h4{font-size:.88rem;font-weight:900;color:var(--violet-light);
+  margin-bottom:16px;display:flex;align-items:center;gap:10px;letter-spacing:.8px;
+  text-transform:uppercase;padding-bottom:12px;border-bottom:1px dashed rgba(255,255,255,.10)}
+.rules-card h4 i{color:var(--violet)}
+.rules-card ul{list-style:none;display:grid;gap:14px}
+.rules-card li{display:flex;align-items:flex-start;gap:14px;
+  font-size:.88rem;color:var(--text-dim);line-height:1.65}
+.rule-num{display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--violet),var(--primary));
+  color:#fff;font-size:.8rem;font-weight:900;box-shadow:0 4px 14px rgba(139,92,246,.4)}
+.rule-content{flex:1;min-width:0}
+.rule-content strong{display:block;color:var(--text);font-weight:800;
+  font-size:.92rem;margin-bottom:3px;letter-spacing:.2px}
+.rule-content p{font-size:.82rem;color:var(--text-dim);line-height:1.6}
+.rule-content b{color:var(--violet-light);font-weight:800}
 
 .btn-play{position:relative;display:inline-flex;align-items:center;gap:14px;
   padding:18px 54px;border-radius:60px;border:none;
@@ -152,6 +199,9 @@ body{
 .btn-play:hover::before{transform:translateX(100%)}
 .btn-play:active{transform:translateY(-1px) scale(.98)}
 
+/* ============================================================
+   GAME HUD
+   ============================================================ */
 .game-hud{display:none;flex-direction:column;gap:14px;animation:fadeSlideIn .5s var(--ease-out)}
 .game-hud.active{display:flex}
 @keyframes fadeSlideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -168,7 +218,7 @@ body{
 @keyframes heartBreak{0%{transform:scale(1)}30%{transform:scale(1.4);color:#fff}100%{transform:scale(.85);opacity:.3}}
 .hud-xp{display:flex;flex-direction:column;gap:4px;min-width:0}
 .hud-xp-head{display:flex;justify-content:space-between;align-items:center;font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
-.hud-xp-head .lvl{color:#C4B5FD}
+.hud-xp-head .lvl{color:var(--violet-light)}
 .hud-xp-head .val{color:var(--text-mute);font-family:var(--font-mono)}
 .xp-track{height:8px;border-radius:10px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
 .xp-fill{height:100%;width:0;border-radius:10px;
@@ -180,14 +230,15 @@ body{
 @keyframes xpShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 .hud-timer{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:40px;
   background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.30);
-  font-family:var(--font-mono);font-weight:800;font-size:.85rem;color:#C4B5FD;letter-spacing:1px;transition:all .3s ease}
+  font-family:var(--font-mono);font-weight:800;font-size:.85rem;color:var(--violet-light);
+  letter-spacing:1px;transition:all .3s ease}
 .hud-timer.warning{background:rgba(244,63,94,.15);border-color:rgba(244,63,94,.5);color:#FCA5A5;animation:pulseWarn 1s ease-in-out infinite}
 @keyframes pulseWarn{0%,100%{box-shadow:0 0 0 0 rgba(244,63,94,.4)}50%{box-shadow:0 0 0 8px rgba(244,63,94,0)}}
 
 .hud-middle{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  font-size:.75rem;color:var(--text-mute);font-weight:700;padding:0 4px}
+  font-size:.75rem;color:var(--text-mute);font-weight:700;padding:0 4px;flex-wrap:wrap}
 .hud-middle .combo-tag{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:800;transition:all .3s var(--ease-spring)}
-.hud-middle .combo-tag.hot{color:#C4B5FD;animation:comboPulse .5s var(--ease-spring)}
+.hud-middle .combo-tag.hot{color:var(--violet-light);animation:comboPulse .5s var(--ease-spring)}
 @keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
 
 .q-card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
@@ -204,15 +255,18 @@ body{
 .q-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
 .q-num{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:30px;
   background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(139,92,246,.06));
-  border:1px solid rgba(139,92,246,.30);font-size:.72rem;font-weight:800;letter-spacing:1px;color:#C4B5FD}
+  border:1px solid rgba(139,92,246,.30);font-size:.72rem;font-weight:800;letter-spacing:1px;color:var(--violet-light)}
 .q-topic{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;
   background:rgba(6,182,212,.10);border:1px solid rgba(6,182,212,.28);font-size:.68rem;
   font-weight:800;letter-spacing:.8px;color:var(--accent);text-transform:uppercase}
 
 .q-text{font-size:clamp(1rem,2.2vw,1.12rem);font-weight:600;line-height:1.75;color:var(--text);
   margin-bottom:20px;white-space:pre-line}
-.q-text strong{color:#C4B5FD;font-weight:800}
+.q-text strong{color:var(--violet-light);font-weight:800}
 
+/* ============================================================
+   OPTIONS
+   ============================================================ */
 .options{display:grid;gap:10px}
 .opt{position:relative;display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;
   padding:15px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--glass-border);
@@ -239,9 +293,12 @@ body{
 .opt.wrong{border-color:var(--rose);background:linear-gradient(135deg,rgba(244,63,94,.15),rgba(244,63,94,.05));
   color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(244,63,94,.15),0 12px 32px rgba(244,63,94,.25)}
 .opt.wrong .opt-letter{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(244,63,94,.7)}
-.opt.locked{pointer-events:none}
+.opt.locked{pointer-events:none;cursor:default}
 .opt.disabled-50{opacity:.2;pointer-events:none;filter:grayscale(1) blur(.5px)}
 
+/* ============================================================
+   FEEDBACK PANEL
+   ============================================================ */
 .feedback{display:none;padding:22px 24px;border-radius:var(--radius);
   background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
   border:1px solid var(--glass-border);backdrop-filter:blur(16px);box-shadow:var(--shadow-card);
@@ -261,12 +318,15 @@ body{
 .fb-body strong{color:var(--text);font-weight:700}
 .fb-sec{margin-top:12px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.10)}
 .fb-label{font-size:.68rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;
-  color:#C4B5FD;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+  color:var(--violet-light);margin-bottom:6px;display:flex;align-items:center;gap:6px}
 .fb-points{margin-top:12px;padding:14px 16px;border-radius:12px;
   background:linear-gradient(135deg,rgba(139,92,246,.10),rgba(139,92,246,.03));border-left:3px solid var(--violet)}
-.fb-points .fb-label{color:#C4B5FD}
+.fb-points .fb-label{color:var(--violet-light)}
 .fb-points p{font-size:.87rem;color:var(--text-dim);line-height:1.7}
 
+/* ============================================================
+   HUD BOTTOM
+   ============================================================ */
 .hud-bottom{display:flex;flex-direction:column;gap:12px}
 .power-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .power-btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;
@@ -281,7 +341,7 @@ body{
 .power-btn.used{opacity:.3;cursor:not-allowed;text-decoration:line-through}
 .power-btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;box-shadow:none!important}
 .power-btn.p50{color:var(--accent)}
-.power-btn.phint{color:#C4B5FD}
+.power-btn.phint{color:var(--violet-light)}
 .power-btn.pskip{color:var(--rose)}
 
 .action-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
@@ -294,8 +354,15 @@ body{
 .btn-primary:active:not(:disabled){transform:scale(.96)}
 .btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
 .btn-ghost{background:rgba(255,255,255,.04);color:var(--text-dim);border:1px solid var(--glass-border)}
-.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(139,92,246,.4);transform:translateY(-2px)}
+.btn-ghost:hover:not(:disabled){background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(139,92,246,.4);transform:translateY(-2px)}
+.btn-ghost:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.btn-cyan{background:linear-gradient(135deg,var(--accent),#0891b2);color:#fff;
+  box-shadow:0 10px 32px rgba(6,182,212,.4)}
+.btn-cyan:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 44px rgba(6,182,212,.6)}
 
+/* ============================================================
+   RESULT SCREEN
+   ============================================================ */
 .result-screen{display:none;flex-direction:column;gap:16px;text-align:center;animation:fadeSlideIn .6s var(--ease-out)}
 .result-screen.active{display:flex}
 .result-hero{position:relative;padding:38px 26px;border-radius:var(--radius);
@@ -310,6 +377,18 @@ body{
   letter-spacing:-.5px;background:linear-gradient(135deg,#fff,#C4B5FD,var(--accent));
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
 .result-sub{font-size:.9rem;color:var(--text-dim);margin-bottom:6px}
+
+/* Player badge on result */
+.player-badge{display:inline-flex;align-items:center;gap:10px;
+  padding:9px 20px;border-radius:40px;
+  background:linear-gradient(135deg,rgba(6,182,212,.14),rgba(139,92,246,.10));
+  border:1px solid rgba(6,182,212,.35);font-size:.88rem;font-weight:700;color:var(--text);
+  margin:6px 0 4px;box-shadow:0 4px 20px rgba(6,182,212,.15)}
+.player-badge i{color:var(--accent);font-size:1.4rem}
+.player-badge > div{text-align:left}
+.player-badge .pb-label{font-size:.62rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--text-mute)}
+
 .grade-ring{position:relative;width:130px;height:130px;margin:16px auto;border-radius:50%;
   background:conic-gradient(var(--violet) var(--grade-deg,0deg),rgba(255,255,255,.08) 0deg);
   padding:8px;box-shadow:0 0 40px rgba(139,92,246,.4);animation:ringPop .8s var(--ease-spring)}
@@ -318,10 +397,10 @@ body{
   background:radial-gradient(circle at center,#0b0d1c,#05060f);display:grid;place-items:center;
   box-shadow:inset 0 0 30px rgba(0,0,0,.6)}
 .grade-letter{font-size:2.6rem;font-weight:900;line-height:1;
-  background:linear-gradient(135deg,#C4B5FD,var(--violet));-webkit-background-clip:text;
+  background:linear-gradient(135deg,var(--violet-light),var(--violet));-webkit-background-clip:text;
   background-clip:text;-webkit-text-fill-color:transparent}
 .grade-label{font-size:.62rem;font-weight:800;letter-spacing:2px;color:var(--text-mute);text-transform:uppercase;margin-top:2px}
-.result-title-text{font-size:1.1rem;font-weight:900;color:#C4B5FD;letter-spacing:.5px;margin-top:8px;text-transform:uppercase}
+.result-title-text{font-size:1.1rem;font-weight:900;color:var(--violet-light);letter-spacing:.5px;margin-top:8px;text-transform:uppercase}
 .result-xp-line{font-size:.88rem;color:var(--text-dim);margin-top:6px}
 .result-xp-line strong{color:var(--accent);font-family:var(--font-mono);font-weight:800}
 .result-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:20px 0 8px}
@@ -332,30 +411,66 @@ body{
 .rs-val.green{color:var(--emerald);text-shadow:0 0 20px rgba(16,185,129,.5)}
 .rs-val.red{color:#FCA5A5;text-shadow:0 0 20px rgba(244,63,94,.5)}
 .rs-val.cyan{color:var(--accent);text-shadow:0 0 20px rgba(6,182,212,.5)}
-.rs-val.violet{color:#C4B5FD;text-shadow:0 0 20px rgba(139,92,246,.5)}
+.rs-val.violet{color:var(--violet-light);text-shadow:0 0 20px rgba(139,92,246,.5)}
 .rs-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.5px;color:var(--text-mute);text-transform:uppercase;margin-top:6px}
-.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:14px 18px;border-radius:12px;
-  background:rgba(139,92,246,.06);border-left:3px solid var(--violet);margin-top:6px;text-align:left}
-.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 
+/* Achievements */
+.achievements-section{margin-top:16px;text-align:left;
+  padding:18px 20px;border-radius:var(--radius-sm);
+  background:linear-gradient(145deg,rgba(139,92,246,.06),rgba(139,92,246,.02));
+  border:1px solid rgba(139,92,246,.20)}
+.achievements-section h4{font-size:.78rem;font-weight:900;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--violet-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:8px}
+.achievements-section h4 i{color:var(--violet)}
+.achievements-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.achievement-card{display:flex;align-items:center;gap:10px;
+  padding:11px 13px;border-radius:12px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);animation:fadeSlideIn .5s var(--ease-out);
+  transition:all .3s var(--ease-out)}
+.achievement-card:hover{transform:translateY(-2px);border-color:rgba(139,92,246,.4)}
+.achievement-card .ac-icon{width:36px;height:36px;border-radius:10px;
+  display:grid;place-items:center;flex-shrink:0;
+  background:linear-gradient(135deg,var(--violet),var(--primary));
+  color:#fff;font-size:1.05rem;box-shadow:0 4px 14px rgba(139,92,246,.4)}
+.achievement-card .ac-text{min-width:0;flex:1}
+.achievement-card .ac-title{font-size:.78rem;font-weight:900;color:var(--text);
+  letter-spacing:.3px;line-height:1.2}
+.achievement-card .ac-desc{font-size:.68rem;color:var(--text-dim);line-height:1.4;margin-top:2px}
+.no-achievement{font-size:.8rem;color:var(--text-dim);text-align:center;padding:10px;
+  background:rgba(255,255,255,.02);border-radius:10px}
+
+.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:16px 20px;border-radius:12px;
+  background:rgba(139,92,246,.06);border-left:3px solid var(--violet);margin-top:16px;text-align:left}
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+
+/* Review */
 .review-panel{padding:22px 24px;border-radius:var(--radius);
   background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
   border:1px solid var(--glass-border);backdrop-filter:blur(14px);text-align:left}
-.review-panel h4{font-size:.9rem;font-weight:900;color:#C4B5FD;margin-bottom:12px;
+.review-panel h4{font-size:.9rem;font-weight:900;color:var(--violet-light);margin-bottom:12px;
   display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
 .review-list{display:grid;gap:8px}
 .review-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-radius:12px;
   background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:.84rem;
   line-height:1.6;transition:all .3s var(--ease-out)}
 .review-item:hover{background:rgba(255,255,255,.06);transform:translateX(3px)}
-.review-item .ri-num{font-weight:900;color:var(--text-mute);flex-shrink:0;font-family:var(--font-mono);font-size:.78rem;min-width:26px}
+.review-item .ri-num{font-weight:900;color:var(--text-mute);flex-shrink:0;
+  font-family:var(--font-mono);font-size:.78rem;min-width:26px}
 .review-item .ri-text{flex:1;color:var(--text-dim)}
+.review-item .ri-q{margin-bottom:3px}
+.review-item .ri-meta{font-size:.7rem;color:var(--text-mute);margin-top:3px;
+  display:flex;flex-wrap:wrap;gap:8px}
+.review-item .ri-meta b{color:var(--violet-light);font-weight:800}
 .review-item .ri-status{font-size:.68rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
   padding:3px 10px;border-radius:20px;flex-shrink:0}
 .ri-status.correct{background:rgba(16,185,129,.15);color:#34D399}
 .ri-status.wrong{background:rgba(244,63,94,.15);color:#FCA5A5}
 .ri-status.skipped{background:rgba(255,255,255,.06);color:var(--text-mute)}
 
+/* ============================================================
+   TOAST
+   ============================================================ */
 .toast-wrap{position:fixed;top:74px;right:16px;z-index:9999;display:flex;flex-direction:column;
   gap:10px;pointer-events:none;max-width:calc(100vw - 32px)}
 .toast{display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:16px;
@@ -377,12 +492,15 @@ body{
 .toast-desc{font-size:.75rem;color:var(--text-dim);line-height:1.5;margin-top:2px}
 
 .score-pop{position:fixed;z-index:9997;pointer-events:none;font-family:var(--font-display);
-  font-weight:900;font-size:1.6rem;color:#C4B5FD;text-shadow:0 0 20px rgba(139,92,246,.8);
+  font-weight:900;font-size:1.6rem;color:var(--violet-light);text-shadow:0 0 20px rgba(139,92,246,.8);
   animation:scorePop 1s var(--ease-out) forwards}
 @keyframes scorePop{0%{transform:translate(-50%,0) scale(.5);opacity:0}
   20%{transform:translate(-50%,-20px) scale(1.2);opacity:1}
   100%{transform:translate(-50%,-80px) scale(1);opacity:0}}
 
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width:600px){
   .wrap{padding:calc(60px + 14px) 12px 50px}
   .q-card{padding:20px 18px}
@@ -392,17 +510,29 @@ body{
   .hud-timer{padding:6px 11px;font-size:.78rem}
   .hud-hp .heart{font-size:1rem}
   .power-btn{padding:9px 14px;font-size:.72rem}
-  .btn{padding:12px 22px;font-size:.82rem;width:100%;justify-content:center}
-  .action-bar{flex-direction:column}
+  .btn{padding:12px 22px;font-size:.82rem;flex:1;justify-content:center;min-width:0}
+  .action-bar{flex-direction:column;width:100%}
+  .action-bar .btn{width:100%}
   .result-hero{padding:28px 18px}
   .grade-ring{width:110px;height:110px}
   .grade-letter{font-size:2.2rem}
   .rs-val{font-size:1.4rem}
   .toast{max-width:calc(100vw - 24px);padding:12px 14px}
   .toast-icon{width:36px;height:36px;font-size:1rem}
+  .rules-card{padding:20px 18px}
+  .rule-content strong{font-size:.86rem}
+  .rule-content p{font-size:.78rem}
+  .result-actions .btn{flex:1;min-width:0}
+  .achievements-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:380px){
+  .opt-letter{width:28px;height:28px;font-size:.72rem}
+  .hud-timer{font-size:.72rem}
+  .brand-text .t1{display:none}
 }
 @media print{
-  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap{display:none!important}
+  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap,
+  .result-actions,.icon-btn{display:none!important}
   body{background:#fff;color:#000}
 }
 </style>
@@ -433,6 +563,7 @@ body{
     </div>
   </div>
   <div class="header-actions">
+    <button class="icon-btn" onclick="goHome()" title="Halaman Awal"><i class="fas fa-home"></i></button>
     <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="Suara"><i class="fas fa-volume-up"></i></button>
     <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema"><i class="fas fa-sun"></i></button>
   </div>
@@ -442,6 +573,7 @@ body{
 
 <main class="wrap">
 
+  <!-- ================= START SCREEN ================= -->
   <section class="start-screen" id="startScreen">
     <span class="hero-badge"><i class="fas fa-crown"></i> PREMIUM GAME MODE · LEVEL 2</span>
     <h1 class="hero-title">Berpikir Sejarah<br>&amp; Definisi Ahli (1)</h1>
@@ -456,13 +588,45 @@ body{
       <span class="stat-pill" style="color:#FBBF24"><i class="fas fa-bolt"></i> Combo &amp; XP</span>
     </div>
 
+    <!-- PLAYER NAME -->
+    <div class="name-input-wrap">
+      <label for="playerNameInput"><i class="fas fa-user"></i> Nama Pemain</label>
+      <input type="text" id="playerNameInput" maxlength="30" placeholder="Masukkan nama kamu di sini..." autocomplete="off" />
+      <div class="name-input-hint"><i class="fas fa-info-circle"></i> Nama akan ditampilkan pada hasil akhir dan sertifikat PDF.</div>
+    </div>
+
+    <!-- RULES -->
     <div class="rules-card">
       <h4><i class="fas fa-list-check"></i> Cara Bermain</h4>
       <ul>
-        <li><span class="rule-num">1</span> Jawab 15 soal HOTS dari bank 30 soal — dipilih acak setiap sesi.</li>
-        <li><span class="rule-num">2</span> Jawaban benar memberi <strong>XP</strong> + memicu <strong>combo</strong>. Salah mengurangi <strong>1 nyawa</strong>.</li>
-        <li><span class="rule-num">3</span> Gunakan power-up: <strong>50:50</strong>, <strong>Petunjuk</strong>, <strong>Lewati</strong> (masing-masing 1×).</li>
-        <li><span class="rule-num">4</span> Raih <strong>Achievement</strong> dan taklukkan peringkat <strong>Sejarawan Muda</strong>!</li>
+        <li>
+          <span class="rule-num">1</span>
+          <div class="rule-content">
+            <strong>Jawab 15 Soal Pilihan Ganda</strong>
+            <p>Soal dipilih secara acak dari bank 30 soal HOTS tentang Berpikir Sejarah (Diakronik–Sinkronik) dan Definisi Sejarah menurut Para Ahli.</p>
+          </div>
+        </li>
+        <li>
+          <span class="rule-num">2</span>
+          <div class="rule-content">
+            <strong>Sistem Nyawa &amp; Combo</strong>
+            <p>Kamu memiliki 3 nyawa. Jawaban benar menambah <b>XP</b> dan membangun <b>combo</b>; jawaban salah mengurangi <b>1 nyawa</b>.</p>
+          </div>
+        </li>
+        <li>
+          <span class="rule-num">3</span>
+          <div class="rule-content">
+            <strong>Power-Up Spesial (Masing-masing 1×)</strong>
+            <p><b>50:50</b> menghapus 2 jawaban salah · <b>Petunjuk</b> menampilkan klu · <b>Lewati</b> melihat jawaban benar.</p>
+          </div>
+        </li>
+        <li>
+          <span class="rule-num">4</span>
+          <div class="rule-content">
+            <strong>Navigasi Bebas &amp; Raih Predikat</strong>
+            <p>Gunakan tombol <b>Sebelumnya</b> dan <b>Selanjutnya</b> untuk meninjau jawaban. Kumpulkan skor setinggi mungkin untuk membuka pencapaian eksklusif!</p>
+          </div>
+        </li>
       </ul>
     </div>
 
@@ -471,6 +635,7 @@ body{
     </button>
   </section>
 
+  <!-- ================= GAME HUD ================= -->
   <section class="game-hud" id="gameHud">
     <div class="hud-top">
       <div class="hud-hp" id="hudHp"></div>
@@ -522,6 +687,9 @@ body{
         </button>
       </div>
       <div class="action-bar">
+        <button class="btn btn-ghost" id="btnPrev" onclick="prevQuestion()" disabled>
+          <i class="fas fa-arrow-left"></i> Sebelumnya
+        </button>
         <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>
           Selanjutnya <i class="fas fa-arrow-right"></i>
         </button>
@@ -532,11 +700,21 @@ body{
     </div>
   </section>
 
+  <!-- ================= RESULT SCREEN ================= -->
   <section class="result-screen" id="resultScreen">
     <div class="result-hero">
       <div class="result-trophy" id="rTrophy">🏆</div>
       <h2 class="result-title" id="rTitle">Luar Biasa!</h2>
       <p class="result-sub" id="rSub">Kuis 2 · Pertemuan 2</p>
+
+      <div class="player-badge" id="rPlayerBadge">
+        <i class="fas fa-user-circle"></i>
+        <div>
+          <div class="pb-label">Pemain</div>
+          <div id="rPlayerNameText">Pemain</div>
+        </div>
+      </div>
+
       <div class="grade-ring" id="gradeRing">
         <div class="grade-inner">
           <div class="grade-letter" id="gradeLetter">A</div>
@@ -551,10 +729,18 @@ body{
         <div class="rs-box"><div class="rs-val cyan" id="rSkor">0</div><div class="rs-lbl">Skor</div></div>
         <div class="rs-box"><div class="rs-val violet" id="rXpTotal">0</div><div class="rs-lbl">XP Total</div></div>
       </div>
+
+      <div class="achievements-section" id="achievementsSection">
+        <h4><i class="fas fa-medal"></i> Pencapaian</h4>
+        <div class="achievements-grid" id="achievementsList"></div>
+      </div>
+
       <div class="result-msg" id="rMsg"></div>
+
       <div class="result-actions">
         <button class="btn btn-primary" onclick="resetGame()"><i class="fas fa-redo"></i> Main Lagi</button>
-        <button class="btn btn-ghost" onclick="window.location.reload()"><i class="fas fa-home"></i> Menu Awal</button>
+        <button class="btn btn-cyan" onclick="savePDF()"><i class="fas fa-file-pdf"></i> Simpan PDF</button>
+        <button class="btn btn-ghost" onclick="goHome()"><i class="fas fa-home"></i> Menu Awal</button>
       </div>
     </div>
     <div class="review-panel">
@@ -568,11 +754,8 @@ body{
 <script>
 /* ============================================================
    BANK SOAL — 30 SOAL HOTS · PERTEMUAN 2
-   Materi: Diakronik, Sinkronik, Poerwodarminta, R. Moh. Ali,
-           Herodotus, Ibnu Khaldun
    ============================================================ */
 const BANK_SOAL = [
-  /* ===== DIAKRONIK (5 soal) ===== */
   { id:101, topic:"Diakronik",
     question:"Perhatikan ciri-ciri berikut!\n(1) Memanjang dalam waktu.\n(2) Meluas dalam waktu.\n(3) Menekankan struktur dan keterkaitan aspek.\n(4) Menekankan proses perubahan dan perkembangan.\n\nCiri-ciri berpikir diakronik ditunjukkan oleh nomor...",
     options:[
@@ -623,7 +806,6 @@ const BANK_SOAL = [
       {letter:"E",text:"Tidak memerlukan sumber sejarah.",correct:false,explanation:"Semua pendekatan butuh sumber."}
     ], difficulty:"hard", hint:"Diakronik kurang fokus pada struktur/keterkaitan aspek pada satu masa.", points:70 },
 
-  /* ===== SINKRONIK (5 soal) ===== */
   { id:106, topic:"Sinkronik",
     question:"Seorang sejarawan menganalisis kondisi sosial, ekonomi, dan politik Indonesia pada tahun 1965 tanpa membahas sebelum atau sesudahnya. Pendekatan berpikir yang digunakan adalah...",
     options:[
@@ -674,7 +856,6 @@ const BANK_SOAL = [
       {letter:"E",text:"Pendapat tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai berdasarkan konsep."}
     ], difficulty:"medium", hint:"Diakronik = vertikal (memanjang); Sinkronik = horizontal (meluas).", points:60 },
 
-  /* ===== DIAKRONIK vs SINKRONIK (2 soal) ===== */
   { id:111, topic:"Diakronik vs Sinkronik",
     question:"Perbedaan paling mendasar antara cara berpikir diakronik dan sinkronik terletak pada...",
     options:[
@@ -695,7 +876,6 @@ const BANK_SOAL = [
       {letter:"E",text:"Kausalitas saja",correct:false,explanation:"Bukan hanya kausalitas."}
     ], difficulty:"hard", hint:"Kombinasi konteks waktu dan analisis struktur.", points:70 },
 
-  /* ===== POERWODARMINTA (4 soal) ===== */
   { id:113, topic:"Poerwodarminta",
     question:"Menurut W.J.S. Poerwodarminta dalam Kamus Umum Bahasa Indonesia, kata 'sejarah' mengandung tiga arti berikut, KECUALI...",
     options:[
@@ -736,7 +916,6 @@ const BANK_SOAL = [
       {letter:"E",text:"Keduanya tidak relevan dengan kajian sejarah",correct:false,explanation:"Justru sangat relevan."}
     ], difficulty:"hard", hint:"Bandingkan tiga arti KBBI dengan tiga arti Poerwodarminta.", points:70 },
 
-  /* ===== R. MOH. ALI (5 soal) ===== */
   { id:117, topic:"R. Moh. Ali",
     question:"Menurut R. Moh. Ali dalam 'Pengantar Ilmu Sejarah', sejarah adalah...",
     options:[
@@ -787,7 +966,6 @@ const BANK_SOAL = [
       {letter:"E",text:"Definisinya menolak aspek ilmu pengetahuan.",correct:false,explanation:"Justru mencakup aspek ilmu."}
     ], difficulty:"hard", hint:"R. Moh. Ali = sejarah dinamis, selalu berubah.", points:70 },
 
-  /* ===== HERODOTUS (5 soal) ===== */
   { id:122, topic:"Herodotus",
     question:"Herodotus dijuluki sebagai 'The Father of History' karena...",
     options:[
@@ -838,7 +1016,6 @@ const BANK_SOAL = [
       {letter:"E",text:"Ia mengabaikan konteks sejarah.",correct:false,explanation:"Justru ia memperhatikan konteks."}
     ], difficulty:"hard", hint:"Herodotus = penyelidikan berbasis bukti dan kesaksian.", points:70 },
 
-  /* ===== IBNU KHALDUN (5 soal) ===== */
   { id:127, topic:"Ibnu Khaldun",
     question:"Menurut Ibnu Khaldun dalam kitab Muqaddimah, sejarah adalah...",
     options:[
@@ -889,7 +1066,6 @@ const BANK_SOAL = [
       {letter:"E",text:"Ia mengabaikan aspek sosial.",correct:false,explanation:"Justru ia menekankan aspek sosial."}
     ], difficulty:"hard", hint:"Ibnu Khaldun memperluas kajian sejarah ke peradaban & masyarakat.", points:70 },
 
-  /* ===== SINTESIS (2 soal) ===== */
   { id:132, topic:"Sintesis Tokoh",
     question:"Perbedaan utama antara Herodotus dan Ibnu Khaldun dalam memandang sejarah adalah...",
     options:[
@@ -910,7 +1086,6 @@ const BANK_SOAL = [
       {letter:"E",text:"Keduanya hanya berlaku untuk sejarah lokal.",correct:false,explanation:"Berlaku universal."}
     ], difficulty:"hard", hint:"Keduanya menekankan perubahan, dengan fokus berbeda.", points:70 },
 
-  /* ===== SINTESIS 3 (untuk melengkapi 30 soal) ===== */
   { id:134, topic:"Sintesis Tokoh",
     question:"Jika seorang siswa ingin memahami sejarah secara utuh, maka ia harus mengombinasikan definisi dari berbagai tokoh karena...",
     options:[
@@ -931,7 +1106,6 @@ const BANK_SOAL = [
       {letter:"E",text:"Pernyataan hanya berlaku untuk sejarah Yunani.",correct:false,explanation:"Berlaku universal."}
     ], difficulty:"hard", hint:"Keempat definisi saling melengkapi membentuk pemahaman komprehensif.", points:70 },
 
-  /* ===== SOAL TAMBAHAN DIAKRONIK-SINKRONIK (melengkapi) ===== */
   { id:136, topic:"Diakronik",
     question:"Pendekatan diakronik dalam sejarah paling erat kaitannya dengan konsep...",
     options:[
@@ -984,6 +1158,32 @@ const BANK_SOAL = [
 ];
 
 /* ============================================================
+   SEBAR MERATA JAWABAN BENAR (A–E)
+   Soal ke-1 → A, ke-2 → B, ke-3 → C, ke-4 → D, ke-5 → E, dst.
+   ============================================================ */
+(function spreadCorrectAnswers(){
+  const LETTERS = ['A','B','C','D','E'];
+  BANK_SOAL.forEach(function(q, i){
+    const targetLetter = LETTERS[i % 5];
+    const targetIdx = LETTERS.indexOf(targetLetter);
+    const correctOpt = q.options.find(function(o){ return o.correct; });
+    const wrongOpts = q.options.filter(function(o){ return !o.correct; });
+    for (let k = wrongOpts.length - 1; k > 0; k--){
+      const j = Math.floor(Math.random() * (k + 1));
+      const tmp = wrongOpts[k]; wrongOpts[k] = wrongOpts[j]; wrongOpts[j] = tmp;
+    }
+    const newOpts = [];
+    let wi = 0;
+    for (let j = 0; j < 5; j++){
+      if (j === targetIdx) newOpts.push(correctOpt);
+      else newOpts.push(wrongOpts[wi++]);
+    }
+    newOpts.forEach(function(o, idx){ o.letter = LETTERS[idx]; });
+    q.options = newOpts;
+  });
+})();
+
+/* ============================================================
    CONSTANTS & STATE
    ============================================================ */
 const TOTAL_Q = 15;
@@ -993,7 +1193,8 @@ const state = {
   questions: [], currentIndex: 0, answers: [], score: 0,
   xp: 0, level: 1, hp: 3, maxHp: 3, combo: 0, bestCombo: 0,
   timer: null, timeLeft: TIME_LIMIT, started: false, finished: false,
-  powers: { p50:1, hint:1, skip:1 }, soundOn: true
+  powers: { p50:1, hint:1, skip:1 }, soundOn: true,
+  playerName: 'Pemain', result: null
 };
 
 /* ============================================================
@@ -1022,16 +1223,16 @@ function playTone(freq, dur, type, vol){
 function sfxClick(){ playTone(520, .08, 'triangle', .06); }
 function sfxCorrect(){
   playTone(660, .12, 'sine', .10);
-  setTimeout(()=>playTone(880, .15, 'sine', .10), 80);
-  setTimeout(()=>playTone(1100, .20, 'sine', .08), 160);
+  setTimeout(function(){playTone(880, .15, 'sine', .10);}, 80);
+  setTimeout(function(){playTone(1100, .20, 'sine', .08);}, 160);
 }
 function sfxWrong(){
   playTone(200, .18, 'sawtooth', .10);
-  setTimeout(()=>playTone(150, .25, 'sawtooth', .08), 120);
+  setTimeout(function(){playTone(150, .25, 'sawtooth', .08);}, 120);
 }
-function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(()=>playTone(1200, .12, 'triangle', .07), 60); }
-function sfxLevelUp(){ [523, 659, 784, 1046].forEach((f, i) => setTimeout(()=>playTone(f, .16, 'sine', .10), i*90)); }
-function sfxFinish(){ [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(()=>playTone(f, .22, 'sine', .10), i*120)); }
+function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(function(){playTone(1200, .12, 'triangle', .07);}, 60); }
+function sfxLevelUp(){ [523, 659, 784, 1046].forEach(function(f, i){ setTimeout(function(){playTone(f, .16, 'sine', .10);}, i*90); }); }
+function sfxFinish(){ [523, 659, 784, 1046, 1318].forEach(function(f, i){ setTimeout(function(){playTone(f, .22, 'sine', .10);}, i*120); }); }
 
 function toggleSound(){
   state.soundOn = !state.soundOn;
@@ -1063,7 +1264,7 @@ function toggleTheme(){
     bar.style.width = p + '%';
     pct.textContent = Math.round(p) + '%';
     if (p < 100) requestAnimationFrame(tick);
-    else setTimeout(()=>{ loader.classList.add('hidden'); setTimeout(()=>loader.style.display='none', 700); }, 300);
+    else setTimeout(function(){ loader.classList.add('hidden'); setTimeout(function(){loader.style.display='none';}, 700); }, 300);
   })();
 })();
 
@@ -1079,15 +1280,15 @@ function toggleTheme(){
   function init(){ resize(); particles = Array.from({length: Math.min(60, Math.floor(W*H/25000))}, makeP); }
   function draw(){
     ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => {
+    particles.forEach(function(p){
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0 || p.x > W) p.vx *= -1;
       if (p.y < 0 || p.y > H) p.vy *= -1;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.fillStyle = 'hsla(' + p.hue + ', 90%, 65%, ' + p.a + ')';
       ctx.shadowBlur = 8;
-      ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.shadowColor = 'hsla(' + p.hue + ', 90%, 65%, ' + p.a + ')';
       ctx.fill();
     });
     ctx.shadowBlur = 0;
@@ -1106,20 +1307,22 @@ function fireConfetti(count){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   const colors = ['#F59E0B','#FCD34D','#06B6D4','#10B981','#8B5CF6','#F43F5E','#38BDF8','#C4B5FD'];
-  const pieces = Array.from({length: count || 60}, () => ({
-    x: window.innerWidth/2 + (Math.random()-0.5)*200,
-    y: window.innerHeight/2,
-    vx: (Math.random()-0.5)*14,
-    vy: Math.random()*-16 - 4,
-    g: 0.5, r: Math.random()*8 + 4,
-    color: colors[Math.floor(Math.random()*colors.length)],
-    rot: Math.random()*Math.PI, vr: (Math.random()-0.5)*0.3, life: 1
-  }));
+  const pieces = Array.from({length: count || 60}, function(){
+    return {
+      x: window.innerWidth/2 + (Math.random()-0.5)*200,
+      y: window.innerHeight/2,
+      vx: (Math.random()-0.5)*14,
+      vy: Math.random()*-16 - 4,
+      g: 0.5, r: Math.random()*8 + 4,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      rot: Math.random()*Math.PI, vr: (Math.random()-0.5)*0.3, life: 1
+    };
+  });
   let frame = 0;
   function animate(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let alive = false;
-    pieces.forEach(p => {
+    pieces.forEach(function(p){
       if (p.life <= 0) return;
       alive = true;
       p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.012;
@@ -1138,16 +1341,23 @@ function fireConfetti(count){
 }
 
 /* ============================================================
-   TOAST & SCORE POPUP
+   TOAST & POPUP
    ============================================================ */
 function showToast(icon, title, desc, variant){
   const wrap = document.getElementById('toastWrap');
   const el = document.createElement('div');
   el.className = 'toast';
-  el.innerHTML = `<div class="toast-icon ${variant||''}">${icon}</div>
-    <div class="toast-content"><div class="toast-title">${title}</div><div class="toast-desc">${desc}</div></div>`;
+  el.innerHTML = ''
+    + '<div class="toast-icon ' + (variant||'') + '">' + icon + '</div>'
+    + '<div class="toast-content">'
+    +   '<div class="toast-title">' + title + '</div>'
+    +   '<div class="toast-desc">' + desc + '</div>'
+    + '</div>';
   wrap.appendChild(el);
-  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 450); }, 3200);
+  setTimeout(function(){
+    el.classList.add('out');
+    setTimeout(function(){ el.remove(); }, 450);
+  }, 3200);
 }
 function scorePopup(text, x, y, color){
   const el = document.createElement('div');
@@ -1157,13 +1367,13 @@ function scorePopup(text, x, y, color){
   el.style.top = (y || window.innerHeight/2) + 'px';
   if (color) el.style.color = color;
   document.body.appendChild(el);
-  setTimeout(() => el.remove(), 1100);
+  setTimeout(function(){ el.remove(); }, 1100);
 }
 
 /* ============================================================
    UTILS
    ============================================================ */
-function shuffle(a){ const arr = a.slice(); for (let i = arr.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function shuffle(a){ const arr = a.slice(); for (let i = arr.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); const t = arr[i]; arr[i] = arr[j]; arr[j] = t; } return arr; }
 
 function updateHpHud(){
   const hp = document.getElementById('hudHp');
@@ -1185,15 +1395,32 @@ function updateXpHud(){
 function updateComboHud(){
   document.getElementById('comboVal').textContent = state.combo;
   const tag = document.getElementById('comboTag');
-  if (state.combo >= 3){ tag.classList.add('hot'); setTimeout(()=>tag.classList.remove('hot'), 500); }
+  if (state.combo >= 3){ tag.classList.add('hot'); setTimeout(function(){tag.classList.remove('hot');}, 500); }
 }
 function updatePowers(){
+  const q = state.questions[state.currentIndex];
+  const answered = q && state.answers.find(function(a){ return a.qid === q.id; });
   document.getElementById('c50').textContent = state.powers.p50;
   document.getElementById('chint').textContent = state.powers.hint;
   document.getElementById('cskip').textContent = state.powers.skip;
-  document.getElementById('p50').disabled = state.powers.p50 <= 0;
-  document.getElementById('phint').disabled = state.powers.hint <= 0;
-  document.getElementById('pskip').disabled = state.powers.skip <= 0;
+  document.getElementById('p50').disabled = state.powers.p50 <= 0 || !!answered;
+  document.getElementById('phint').disabled = state.powers.hint <= 0 || !!answered;
+  document.getElementById('pskip').disabled = state.powers.skip <= 0 || !!answered;
+}
+
+/* ============================================================
+   HOME
+   ============================================================ */
+function goHome(){
+  if (state.started && !state.finished) {
+    if (!confirm('Kembali ke halaman awal? Progres kuis akan hilang.')) return;
+  }
+  clearInterval(state.timer); state.timer = null;
+  state.started = false; state.finished = false;
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('startScreen').style.display = 'flex';
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 /* ============================================================
@@ -1201,6 +1428,11 @@ function updatePowers(){
    ============================================================ */
 function startGame(){
   ensureAudio();
+
+  const nameInput = document.getElementById('playerNameInput');
+  const name = (nameInput && nameInput.value.trim()) || 'Pemain';
+  state.playerName = name;
+
   document.getElementById('startScreen').style.display = 'none';
   document.getElementById('gameHud').classList.add('active');
 
@@ -1209,11 +1441,12 @@ function startGame(){
   state.score = 0; state.xp = 0; state.level = 1;
   state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
   state.timeLeft = TIME_LIMIT; state.started = true; state.finished = false;
+  state.result = null;
   state.powers = { p50:1, hint:1, skip:1 };
 
   updateHpHud(); updateXpHud(); updateComboHud(); updatePowers();
 
-  showToast('🚀', 'Arena Level 2 Dimulai!', 'Kuasai diakronik, sinkronik & para ahli!', '');
+  showToast('🚀', 'Selamat datang, ' + name + '!', 'Semoga beruntung, pejuang sejarah!', '');
   sfxClick();
   startTimer();
   renderQuestion();
@@ -1221,7 +1454,7 @@ function startGame(){
 
 function startTimer(){
   if (state.timer) clearInterval(state.timer);
-  state.timer = setInterval(() => {
+  state.timer = setInterval(function(){
     state.timeLeft--;
     updateTimerHud();
     if (state.timeLeft <= 0){ clearInterval(state.timer); finishGame(true); }
@@ -1243,52 +1476,79 @@ function renderQuestion(){
   document.getElementById('qText').textContent = q.question;
   document.getElementById('hudQNum').textContent = state.currentIndex+1;
 
+  const existingAnswer = state.answers.find(function(a){ return a.qid === q.id; });
+
   const opts = document.getElementById('options');
   opts.innerHTML = '';
-  q.options.forEach(o => {
+  q.options.forEach(function(o){
     const btn = document.createElement('button');
     btn.className = 'opt';
     btn.dataset.letter = o.letter;
-    btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
-    btn.addEventListener('click', () => selectOption(o.letter, btn));
+    btn.innerHTML = '<span class="opt-letter">' + o.letter + '</span><span class="opt-text">' + o.text + '</span>';
+    if (!existingAnswer) {
+      btn.addEventListener('click', function(){ selectOption(o.letter, btn); });
+    }
     opts.appendChild(btn);
   });
 
   document.getElementById('feedback').classList.remove('show');
-  document.getElementById('btnNext').disabled = true;
-  document.getElementById('btnNext').style.display = '';
-  document.getElementById('btnFinish').style.display = 'none';
-  document.getElementById('qCard').classList.remove('shake');
+
+  if (existingAnswer) {
+    document.querySelectorAll('#options .opt').forEach(function(b){
+      b.classList.add('locked');
+      const l = b.dataset.letter;
+      const o = q.options.find(function(x){ return x.letter === l; });
+      if (o.correct) b.classList.add('correct');
+      else if (existingAnswer.selected === l && !existingAnswer.correct) b.classList.add('wrong');
+    });
+    if (existingAnswer.skipped) showFeedback(false, q, null, true);
+    else {
+      const selOpt = q.options.find(function(o){ return o.letter === existingAnswer.selected; });
+      showFeedback(existingAnswer.correct, q, selOpt);
+    }
+  }
+
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+  const btnFinish = document.getElementById('btnFinish');
+
+  btnPrev.disabled = state.currentIndex === 0;
+
+  if (state.currentIndex === TOTAL_Q - 1) {
+    btnNext.style.display = 'none';
+    btnFinish.style.display = existingAnswer ? '' : 'none';
+  } else {
+    btnNext.style.display = '';
+    btnFinish.style.display = 'none';
+    btnNext.disabled = !existingAnswer;
+  }
+
+  updatePowers();
 
   const card = document.getElementById('qCard');
   card.style.animation = 'none'; void card.offsetWidth;
   card.style.animation = 'qEnter .55s cubic-bezier(.16,1,.3,1)';
-
-  if (state.currentIndex === TOTAL_Q - 1){
-    document.getElementById('btnNext').style.display = 'none';
-    document.getElementById('btnFinish').style.display = '';
-  }
 }
 
 function selectOption(letter, btnEl){
   const q = state.questions[state.currentIndex];
   if (!q) return;
-  if (state.answers.find(a => a.qid === q.id)) return;
-  const selected = q.options.find(o => o.letter === letter);
+  if (state.answers.find(function(a){ return a.qid === q.id; })) return;
+  const selected = q.options.find(function(o){ return o.letter === letter; });
   if (!selected) return;
   const correct = selected.correct;
 
-  document.querySelectorAll('#options .opt').forEach(b => {
+  document.querySelectorAll('#options .opt').forEach(function(b){
     b.classList.add('locked');
     const l = b.dataset.letter;
-    const o = q.options.find(x => x.letter === l);
+    const o = q.options.find(function(x){ return x.letter === l; });
     if (o.correct) b.classList.add('correct');
     else if (l === letter && !correct) b.classList.add('wrong');
   });
 
-  state.answers.push({ qid: q.id, selected: letter, correct, skipped: false,
+  state.answers.push({ qid: q.id, selected: letter, correct: correct, skipped: false,
     questionText: q.question, topic: q.topic,
-    correctLetter: q.options.find(o => o.correct).letter,
+    correctLetter: q.options.find(function(o){ return o.correct; }).letter,
     explanation: selected.explanation });
 
   if (correct){
@@ -1302,38 +1562,43 @@ function selectOption(letter, btnEl){
     state.level = Math.floor(state.xp / 100) + 1;
     if (state.level > prevLevel){
       sfxLevelUp();
-      showToast('⭐', 'LEVEL UP!', `Kamu naik ke Level ${state.level}!`, 'cyan');
+      showToast('⭐', 'LEVEL UP!', 'Kamu naik ke Level ' + state.level + '!', 'cyan');
       fireConfetti(40);
     }
     sfxCorrect();
     fireConfetti(state.combo >= 3 ? 80 : 45);
     const rect = btnEl ? btnEl.getBoundingClientRect() : null;
     scorePopup('+' + gained + ' XP', rect ? rect.left + rect.width/2 : window.innerWidth/2, rect ? rect.top : window.innerHeight/2, '#C4B5FD');
-    if (state.combo >= 3) showToast('🔥', `COMBO ×${state.combo}!`, `Bonus +${bonus} XP!`, '');
+    if (state.combo >= 3) showToast('🔥', 'COMBO ×' + state.combo + '!', 'Bonus +' + bonus + ' XP!', '');
   } else {
     state.combo = 0; state.hp--; sfxWrong();
     updateHpHud();
     const hpEls = document.querySelectorAll('.hud-hp .heart');
     if (hpEls[state.hp]) hpEls[state.hp].classList.add('losing');
     const card = document.getElementById('qCard');
-    card.classList.add('shake'); setTimeout(() => card.classList.remove('shake'), 550);
-    if (state.hp <= 0) showToast('💔', 'Nyawa Habis!', 'Kamu kehilangan semua nyawa.', 'violet');
+    card.classList.add('shake'); setTimeout(function(){ card.classList.remove('shake'); }, 550);
+    if (state.hp <= 0) showToast('💫', 'Tetap Semangat!', 'Nyawa habis, tapi skormu tetap dihitung. Kamu sudah berusaha!', 'violet');
   }
 
   document.getElementById('hudScore').textContent = state.score;
   updateXpHud(); updateComboHud();
   showFeedback(correct, q, selected);
   document.getElementById('btnNext').disabled = false;
+  if (state.currentIndex === TOTAL_Q - 1) document.getElementById('btnFinish').style.display = '';
+  updatePowers();
 }
 
-function showFeedback(correct, q, selected){
+function showFeedback(correct, q, selected, isSkipped){
   const panel = document.getElementById('feedback');
   const icon = document.getElementById('fbIcon');
   const title = document.getElementById('fbTitle');
   const body = document.getElementById('fbBody');
   panel.classList.add('show');
 
-  if (correct){
+  if (isSkipped) {
+    icon.className = 'fb-icon info'; icon.innerHTML = '<i class="fas fa-forward"></i>';
+    title.className = 'fb-title info'; title.textContent = 'SOAL DILEWATI';
+  } else if (correct){
     icon.className = 'fb-icon correct'; icon.innerHTML = '<i class="fas fa-check"></i>';
     title.className = 'fb-title correct'; title.textContent = 'BENAR!';
   } else {
@@ -1341,14 +1606,21 @@ function showFeedback(correct, q, selected){
     title.className = 'fb-title wrong'; title.textContent = 'BELUM TEPAT';
   }
 
-  const correctOpt = q.options.find(o => o.correct);
-  let html = `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
-  html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
-  if (!correct && selected) html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
-  html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
+  const correctOpt = q.options.find(function(o){ return o.correct; });
+  let html = '<p><strong>Jawaban benar: ' + correctOpt.letter + '.</strong> ' + correctOpt.text + '</p>';
+  html += '<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>' + (correctOpt.explanation || '') + '</p></div>';
+  if (!correct && !isSkipped && selected) html += '<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ' + selected.letter + ' kurang tepat: ' + (selected.explanation || '') + '</p></div>';
+  html += '<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>' + (q.hint || '') + '</p></div>';
   body.innerHTML = html;
 }
 
+function prevQuestion(){
+  if (state.currentIndex > 0){
+    state.currentIndex--;
+    renderQuestion();
+    document.getElementById('qCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
 function nextQuestion(){
   if (state.currentIndex < TOTAL_Q - 1){
     state.currentIndex++;
@@ -1360,14 +1632,14 @@ function nextQuestion(){
 function usePower(type){
   const q = state.questions[state.currentIndex];
   if (!q) return;
-  if (state.answers.find(a => a.qid === q.id)) return;
+  if (state.answers.find(function(a){ return a.qid === q.id; })) return;
 
   if (type === '50'){
     if (state.powers.p50 <= 0) return;
-    const wrongs = q.options.filter(o => !o.correct);
+    const wrongs = q.options.filter(function(o){ return !o.correct; });
     const remove = shuffle(wrongs).slice(0, 2);
-    document.querySelectorAll('#options .opt').forEach(b => {
-      if (remove.some(o => o.letter === b.dataset.letter)) b.classList.add('disabled-50');
+    document.querySelectorAll('#options .opt').forEach(function(b){
+      if (remove.some(function(o){ return o.letter === b.dataset.letter; })) b.classList.add('disabled-50');
     });
     state.powers.p50 = 0; updatePowers(); sfxPower();
     showToast('✂️', '50:50 Aktif!', 'Dua jawaban salah dihilangkan.', 'cyan');
@@ -1380,21 +1652,21 @@ function usePower(type){
     panel.classList.add('show');
     icon.className = 'fb-icon info'; icon.innerHTML = '<i class="fas fa-lightbulb"></i>';
     title.className = 'fb-title info'; title.textContent = 'PETUNJUK';
-    body.innerHTML = `<p>${q.hint || 'Tidak ada petunjuk.'}</p>`;
+    body.innerHTML = '<p>' + (q.hint || 'Tidak ada petunjuk.') + '</p>';
     state.powers.hint = 0; updatePowers(); sfxPower();
     showToast('💡', 'Petunjuk Digunakan!', 'Perhatikan dengan saksama.', '');
   } else if (type === 'skip'){
     if (state.powers.skip <= 0) return;
     state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
       questionText: q.question, topic: q.topic,
-      correctLetter: q.options.find(o => o.correct).letter,
-      explanation: q.options.find(o => o.correct).explanation });
-    document.querySelectorAll('#options .opt').forEach(b => {
+      correctLetter: q.options.find(function(o){ return o.correct; }).letter,
+      explanation: q.options.find(function(o){ return o.correct; }).explanation });
+    document.querySelectorAll('#options .opt').forEach(function(b){
       b.classList.add('locked');
-      const o = q.options.find(x => x.letter === b.dataset.letter);
+      const o = q.options.find(function(x){ return x.letter === b.dataset.letter; });
       if (o.correct) b.classList.add('correct');
     });
-    showFeedback(false, q, null);
+    showFeedback(false, q, null, true);
     document.getElementById('btnNext').disabled = false;
     state.powers.skip = 0; updatePowers(); sfxPower();
     showToast('⏭️', 'Soal Dilewati', 'Jawaban benar ditampilkan.', 'violet');
@@ -1405,31 +1677,77 @@ function usePower(type){
   }
 }
 
+/* ============================================================
+   FINISH — Kategori Akhir yang Positif
+   ============================================================ */
 function finishGame(timeout){
   if (state.finished) return;
   state.finished = true;
   clearInterval(state.timer); state.timer = null;
 
-  const answered = state.answers.map(a => a.qid);
-  state.questions.forEach(q => {
+  const answered = state.answers.map(function(a){ return a.qid; });
+  state.questions.forEach(function(q){
     if (!answered.includes(q.id)){
       state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
         questionText: q.question, topic: q.topic,
-        correctLetter: q.options.find(o => o.correct).letter,
-        explanation: q.options.find(o => o.correct).explanation });
+        correctLetter: q.options.find(function(o){ return o.correct; }).letter,
+        explanation: q.options.find(function(o){ return o.correct; }).explanation });
     }
   });
 
-  let benar = 0, salah = 0;
-  state.answers.forEach(a => { if (a.skipped) return; if (a.correct) benar++; else salah++; });
+  let benar = 0, salah = 0, dilewati = 0;
+  state.answers.forEach(function(a){
+    if (a.skipped) { dilewati++; return; }
+    if (a.correct) benar++; else salah++;
+  });
 
-  const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
-  const finalScore = Math.round((state.score / maxScore) * 100);
-  const grade = finalScore >= 90 ? 'A' : finalScore >= 80 ? 'B' : finalScore >= 70 ? 'C' : finalScore >= 60 ? 'D' : 'E';
-  const gradeLabel = finalScore >= 90 ? 'Sangat Baik' : finalScore >= 80 ? 'Baik' : finalScore >= 70 ? 'Cukup' : finalScore >= 60 ? 'Perlu Bimbingan' : 'Remedial';
-  const rank = finalScore >= 90 ? 'SEJARAWAN MUDA' : finalScore >= 80 ? 'PENELITI SEJARAH' : finalScore >= 70 ? 'PELAJAR SEJARAH' : 'PEMULA SEJARAH';
-  const trophy = finalScore >= 90 ? '🏆' : finalScore >= 80 ? '🥇' : finalScore >= 70 ? '🥈' : finalScore >= 60 ? '🥉' : '📚';
-  const title = finalScore >= 90 ? 'Luar Biasa!' : finalScore >= 80 ? 'Kerja Bagus!' : finalScore >= 70 ? 'Terus Belajar!' : 'Jangan Menyerah!';
+  const maxScore = state.questions.reduce(function(s, q){ return s + (q.points || 50); }, 0);
+  const finalScore = Math.min(100, Math.round((state.score / maxScore) * 100));
+
+  // ==================== KATEGORI POSITIF ====================
+  let grade, gradeLabel, rank, trophy, title, msg;
+  if (finalScore >= 90) {
+    grade = 'A'; gradeLabel = 'Istimewa'; rank = 'SEJARAWAN MUDA';
+    trophy = '🏆'; title = 'Luar Biasa!';
+    msg = '🌟 Sempurna! Kamu benar-benar menguasai materi Berpikir Sejarah & Definisi Ahli. Pertahankan pencapaian luar biasa ini dan bagikan semangat belajarmu kepada teman-teman!';
+  } else if (finalScore >= 80) {
+    grade = 'B'; gradeLabel = 'Sangat Baik'; rank = 'PENELITI SEJARAH';
+    trophy = '🥇'; title = 'Hebat!';
+    msg = '✨ Pemahamanmu sangat baik! Kamu sudah menguasai sebagian besar materi. Sedikit lagi latihan akan membawa kamu ke tingkat istimewa!';
+  } else if (finalScore >= 70) {
+    grade = 'C'; gradeLabel = 'Baik'; rank = 'PELAJAR SEJARAH';
+    trophy = '🥈'; title = 'Bagus!';
+    msg = '👏 Kamu sudah memahami sebagian besar materi dengan baik. Terus asah kemampuanmu, kamu pasti bisa mencapai level yang lebih tinggi!';
+  } else if (finalScore >= 60) {
+    grade = 'D'; gradeLabel = 'Cukup Baik'; rank = 'PENJELAJAH SEJARAH';
+    trophy = '🥉'; title = 'Kerja Bagus!';
+    msg = '💪 Usahamu sudah menunjukkan hasil yang positif! Kamu sedang membangun dasar yang kuat untuk pemahaman sejarah yang lebih dalam.';
+  } else if (finalScore >= 50) {
+    grade = 'D'; gradeLabel = 'Mulai Berkembang'; rank = 'PEMUDA SEJARAH';
+    trophy = '📚'; title = 'Langkah Awal yang Baik!';
+    msg = '🌱 Kamu sudah mulai memahami materinya! Setiap langkah belajar membawa kamu lebih dekat ke penguasaan. Terus semangat, ya!';
+  } else {
+    grade = 'E'; gradeLabel = 'Awal yang Baik'; rank = 'CALON SEJARAWAN';
+    trophy = '🌱'; title = 'Tetap Semangat!';
+    msg = '🌈 Setiap usaha adalah langkah maju yang berharga! Kamu sudah menunjukkan keberanian untuk mencoba. Ayo lanjutkan belajar, kamu pasti bisa!';
+  }
+
+  // ==================== ACHIEVEMENTS ====================
+  const achievements = [];
+  if (benar === TOTAL_Q) achievements.push({icon:'🌟', title:'Sempurna', desc:'Semua 15 soal terjawab benar'});
+  if (state.bestCombo >= 5) achievements.push({icon:'🔥', title:'Combo Master', desc:'Combo terbaik ' + state.bestCombo + '× berturut-turut'});
+  if (state.bestCombo >= 3 && state.bestCombo < 5) achievements.push({icon:'⚡', title:'Combo Builder', desc:'Combo ' + state.bestCombo + '× berturut-turut'});
+  if (state.powers.p50 === 1 && state.powers.hint === 1 && state.powers.skip === 1) achievements.push({icon:'🎯', title:'Mandiri', desc:'Tanpa menggunakan power-up'});
+  if (finalScore >= 90) achievements.push({icon:'👑', title:'Sejarawan Muda', desc:'Skor di atas 90'});
+  if (state.hp === state.maxHp && benar > 0) achievements.push({icon:'💚', title:'Tak Tercela', desc:'Nyawa tetap utuh hingga akhir'});
+  if (state.timeLeft > TIME_LIMIT * 0.5 && finalScore >= 70) achievements.push({icon:'⏱️', title:'Cepat & Tepat', desc:'Selesai dengan sisa waktu banyak'});
+  if (finalScore >= 80 && state.bestCombo >= 3) achievements.push({icon:'🏅', title:'High Achiever', desc:'Skor tinggi dengan combo'});
+
+  state.result = {
+    benar: benar, salah: salah, dilewati: dilewati, finalScore: finalScore,
+    grade: grade, gradeLabel: gradeLabel, rank: rank, trophy: trophy, title: title, msg: msg,
+    achievements: achievements, playerName: state.playerName
+  };
 
   document.getElementById('gameHud').classList.remove('active');
   document.getElementById('resultScreen').classList.add('active');
@@ -1437,6 +1755,7 @@ function finishGame(timeout){
   document.getElementById('rTrophy').textContent = trophy;
   document.getElementById('rTitle').textContent = title;
   document.getElementById('rSub').textContent = 'Kuis 2 · Pertemuan 2 · Berpikir Sejarah & Definisi Ahli (1)';
+  document.getElementById('rPlayerNameText').textContent = state.playerName;
   document.getElementById('gradeLetter').textContent = grade;
   document.getElementById('gradeLabel').textContent = gradeLabel;
   document.getElementById('rRank').textContent = rank;
@@ -1446,31 +1765,57 @@ function finishGame(timeout){
   document.getElementById('rSalah').textContent = salah;
   document.getElementById('rSkor').textContent = finalScore;
   document.getElementById('rXpTotal').textContent = state.xp;
-
   document.getElementById('gradeRing').style.setProperty('--grade-deg', (finalScore/100*360) + 'deg');
+  document.getElementById('rMsg').textContent = msg;
 
-  document.getElementById('rMsg').textContent = finalScore >= 70
-    ? '🎯 Pertahankan semangat belajarmu! Lanjutkan ke Kuis 3 untuk materi Definisi Ahli (2), Hakikat & Sumber Sejarah.'
-    : '📚 Pelajari kembali materi Pertemuan 2, lalu coba lagi! Kamu pasti bisa!';
+  const achList = document.getElementById('achievementsList');
+  achList.innerHTML = '';
+  if (achievements.length === 0) {
+    achList.innerHTML = '<div class="no-achievement">Terus belajar untuk membuka pencapaian eksklusif! 🌟</div>';
+  } else {
+    achievements.forEach(function(a){
+      const card = document.createElement('div');
+      card.className = 'achievement-card';
+      card.innerHTML = ''
+        + '<div class="ac-icon">' + a.icon + '</div>'
+        + '<div class="ac-text">'
+        +   '<div class="ac-title">' + a.title + '</div>'
+        +   '<div class="ac-desc">' + a.desc + '</div>'
+        + '</div>';
+      achList.appendChild(card);
+    });
+  }
 
   const reviewList = document.getElementById('reviewList');
   reviewList.innerHTML = '';
-  state.answers.forEach((a, i) => {
+  state.answers.forEach(function(a, i){
     const div = document.createElement('div');
     div.className = 'review-item';
     const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
                    a.correct ? '<span class="ri-status correct">Benar</span>' :
                    '<span class="ri-status wrong">Salah</span>';
-    const q = a.questionText.length > 80 ? a.questionText.substring(0, 80) + '...' : a.questionText;
-    div.innerHTML = `<span class="ri-num">${i+1}.</span><span class="ri-text">${q}</span>${status}`;
+    const qShort = a.questionText.length > 100 ? a.questionText.substring(0, 100) + '...' : a.questionText;
+    div.innerHTML = ''
+      + '<span class="ri-num">' + (i+1) + '.</span>'
+      + '<div class="ri-text">'
+      +   '<div class="ri-q">' + qShort + '</div>'
+      +   '<div class="ri-meta">'
+      +     '<span><i class="fas fa-tag"></i> ' + (a.topic || '-') + '</span>'
+      +     '<span>Jawaban benar: <b>' + a.correctLetter + '</b></span>'
+      +   '</div>'
+      + '</div>'
+      + status;
     reviewList.appendChild(div);
   });
 
   sfxFinish();
   if (finalScore >= 70){
     fireConfetti(180);
-    setTimeout(() => fireConfetti(120), 400);
-    setTimeout(() => showToast('🏆', 'Achievement Unlocked!', rank, ''), 500);
+    setTimeout(function(){ fireConfetti(120); }, 400);
+    setTimeout(function(){ showToast('🏆', 'Pencapaian Terbuka!', rank, ''); }, 500);
+  } else {
+    fireConfetti(60);
+    setTimeout(function(){ showToast('🌟', 'Kerja Bagus!', 'Terus semangat belajar, ya!', 'cyan'); }, 500);
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1483,20 +1828,225 @@ function resetGame(){
   state.answers = []; state.score = 0; state.xp = 0; state.level = 1;
   state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
   state.currentIndex = 0; state.finished = false; state.started = false;
+  state.result = null;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-document.addEventListener('keydown', e => {
+/* ============================================================
+   SIMPAN PDF
+   ============================================================ */
+function savePDF(){
+  if (!state.result) {
+    showToast('⚠️', 'Belum Ada Hasil', 'Selesaikan kuis terlebih dahulu.', '');
+    return;
+  }
+  const r = state.result;
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('id-ID', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  const timeStr = now.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+  const safeName = (r.playerName || 'Pemain').replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_') || 'Pemain';
+
+  let reviewRows = '';
+  state.answers.forEach(function(a, i){
+    const status = a.skipped ? 'Dilewati' : (a.correct ? 'Benar' : 'Salah');
+    const statusColor = a.skipped ? '#6b7280' : (a.correct ? '#059669' : '#dc2626');
+    const qShortRaw = a.questionText.length > 90 ? a.questionText.substring(0, 90) + '...' : a.questionText;
+    const safeQ = String(qShortRaw).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    reviewRows += ''
+      + '<tr>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;font-weight:bold;">' + (i+1) + '</td>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;font-size:10px;color:#555;">' + (a.topic || '-') + '</td>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;font-size:10px;">' + safeQ + '</td>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;font-weight:bold;">' + a.correctLetter + '</td>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;color:' + statusColor + ';font-weight:bold;">' + status + '</td>'
+      + '</tr>';
+  });
+
+  let achHtml = '';
+  if (r.achievements && r.achievements.length > 0) {
+    achHtml = r.achievements.map(function(a){
+      return '<span style="display:inline-block;padding:6px 12px;margin:4px;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:20px;font-size:11px;color:#5b21b6;line-height:1.4;">'
+        + '<b>' + a.icon + ' ' + a.title + '</b> &middot; ' + a.desc
+        + '</span>';
+    }).join('');
+  } else {
+    achHtml = '<span style="font-size:11px;color:#666;">Terus belajar untuk membuka pencapaian eksklusif.</span>';
+  }
+
+  const htmlContent = ''
+    + '<div style="font-family:Helvetica,Arial,sans-serif;color:#111;background:#ffffff;padding:30px;width:100%;box-sizing:border-box;">'
+    +   '<div style="text-align:center;border-bottom:3px solid #8B5CF6;padding-bottom:16px;margin-bottom:20px;">'
+    +     '<div style="font-size:11px;letter-spacing:4px;color:#7c3aed;font-weight:bold;">HISTOEXPLORER &middot; PREMIUM GAME</div>'
+    +     '<h1 style="font-size:24px;margin:8px 0 4px;color:#111;">Laporan Hasil Kuis Sejarah</h1>'
+    +     '<div style="font-size:12px;color:#666;">Kuis 2 &middot; Pertemuan 2 &middot; Berpikir Sejarah &amp; Definisi Ahli (1)</div>'
+    +   '</div>'
+    +   '<table style="width:100%;font-size:12px;margin-bottom:16px;">'
+    +     '<tr>'
+    +       '<td style="padding:6px 0;width:25%;"><b>Nama Pemain</b></td>'
+    +       '<td style="padding:6px 0;width:25%;color:#111;">' + r.playerName + '</td>'
+    +       '<td style="padding:6px 0;width:25%;"><b>Tanggal</b></td>'
+    +       '<td style="padding:6px 0;width:25%;color:#111;">' + dateStr + '</td>'
+    +     '</tr>'
+    +     '<tr>'
+    +       '<td style="padding:6px 0;"><b>Pencapaian</b></td>'
+    +       '<td style="padding:6px 0;color:#7c3aed;font-weight:bold;">' + r.rank + '</td>'
+    +       '<td style="padding:6px 0;"><b>Waktu</b></td>'
+    +       '<td style="padding:6px 0;color:#111;">' + timeStr + '</td>'
+    +     '</tr>'
+    +     '<tr>'
+    +       '<td style="padding:6px 0;"><b>Predikat</b></td>'
+    +       '<td style="padding:6px 0;">Grade ' + r.grade + ' &mdash; ' + r.gradeLabel + '</td>'
+    +       '<td style="padding:6px 0;"><b>Skor Akhir</b></td>'
+    +       '<td style="padding:6px 0;color:#0891b2;font-weight:bold;">' + r.finalScore + ' / 100</td>'
+    +     '</tr>'
+    +   '</table>'
+    +   '<div style="background:#f5f3ff;padding:16px;border-radius:10px;border-left:5px solid #8B5CF6;margin-bottom:16px;">'
+    +     '<div style="font-size:11px;font-weight:bold;color:#7c3aed;letter-spacing:2px;margin-bottom:10px;">STATISTIK KUIS</div>'
+    +     '<table style="width:100%;text-align:center;font-size:11px;">'
+    +       '<tr>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#059669;">' + r.benar + '</div><div style="color:#666;">BENAR</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#dc2626;">' + r.salah + '</div><div style="color:#666;">SALAH</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#6b7280;">' + r.dilewati + '</div><div style="color:#666;">DILEWATI</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#0891b2;">' + r.finalScore + '</div><div style="color:#666;">SKOR</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#7c3aed;">' + state.xp + '</div><div style="color:#666;">XP</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#B45309;">' + state.bestCombo + 'x</div><div style="color:#666;">COMBO</div></td>'
+    +       '</tr>'
+    +     '</table>'
+    +   '</div>'
+    +   '<div style="margin-bottom:16px;">'
+    +     '<div style="font-size:11px;font-weight:bold;color:#7c3aed;letter-spacing:2px;margin-bottom:8px;">PENCAPAIAN</div>'
+    +     '<div style="padding:10px;background:#fafafa;border-radius:8px;">' + achHtml + '</div>'
+    +   '</div>'
+    +   '<div style="background:#f0f9ff;padding:12px;border-radius:8px;border-left:4px solid #0891b2;font-size:11px;color:#0c4a6e;margin-bottom:16px;">'
+    +     '<b>Catatan:</b> ' + r.msg
+    +   '</div>'
+    +   '<div style="font-size:11px;font-weight:bold;color:#7c3aed;letter-spacing:2px;margin-bottom:8px;">RINCIAN JAWABAN</div>'
+    +   '<table style="width:100%;font-size:10px;border-collapse:collapse;">'
+    +     '<thead>'
+    +       '<tr style="background:#f3f4f6;">'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">No</th>'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">Topik</th>'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">Pertanyaan</th>'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">Kunci</th>'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">Status</th>'
+    +       '</tr>'
+    +     '</thead>'
+    +     '<tbody>' + reviewRows + '</tbody>'
+    +   '</table>'
+    +   '<div style="text-align:center;font-size:10px;color:#999;margin-top:24px;padding-top:12px;border-top:1px solid #e5e7eb;">'
+    +     'Dokumen ini digenerate otomatis oleh <b>HistoExplorer Premium Game</b> &middot; ' + dateStr + ' ' + timeStr
+    +     '<br>Dikirim sebagai bukti pengerjaan Kuis 2 &middot; Pertemuan 2 &mdash; Berpikir Sejarah &amp; Definisi Ahli (1)'
+    +   '</div>'
+    + '</div>';
+
+  if (typeof html2pdf !== 'undefined') {
+    const wrapper = document.createElement('div');
+    wrapper.id = 'pdfRenderArea';
+    wrapper.style.position = 'absolute';
+    wrapper.style.left = '-10000px';
+    wrapper.style.top = '0';
+    wrapper.style.width = '794px';
+    wrapper.style.minHeight = '200px';
+    wrapper.style.background = '#ffffff';
+    wrapper.style.color = '#111';
+    wrapper.style.visibility = 'visible';
+    wrapper.style.opacity = '1';
+    wrapper.style.pointerEvents = 'none';
+    wrapper.style.zIndex = '1';
+    wrapper.innerHTML = htmlContent;
+    document.body.appendChild(wrapper);
+
+    showToast('📄', 'Menyiapkan PDF...', 'Mohon tunggu sebentar...', 'cyan');
+
+    setTimeout(function(){
+      const opt = {
+        margin:       [10, 8, 10, 8],
+        filename:     'Hasil-Kuis-2-Sejarah_' + safeName + '.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  {
+          scale: 2, useCORS: true, backgroundColor: '#ffffff',
+          logging: false, allowTaint: true,
+          scrollX: 0, scrollY: 0, windowWidth: 794, width: 794
+        },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['css', 'legacy'] }
+      };
+      html2pdf().set(opt).from(wrapper).save()
+        .then(function(){
+          wrapper.remove();
+          showToast('✅', 'PDF Tersimpan!', 'File: Hasil-Kuis-2-Sejarah_' + safeName + '.pdf', 'green');
+        })
+        .catch(function(err){
+          console.error('html2pdf error:', err);
+          wrapper.remove();
+          openPrintFallback(htmlContent, safeName);
+        });
+    }, 350);
+    return;
+  }
+  openPrintFallback(htmlContent, safeName);
+}
+
+function openPrintFallback(htmlContent, safeName) {
+  const win = window.open('', '_blank', 'width=900,height=700');
+  if (!win) {
+    alert('Popup diblokir browser. Izinkan popup untuk menyimpan PDF, atau gunakan Ctrl+P untuk mencetak halaman ini.');
+    return;
+  }
+  const fullHtml = ''
+    + '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Hasil Kuis 2 - ' + safeName + '</title>'
+    + '<style>'
+    +   '*{box-sizing:border-box}'
+    +   'body{margin:0;background:#f3f4f6;font-family:Helvetica,Arial,sans-serif}'
+    +   '.toolbar{position:sticky;top:0;z-index:99;background:#111827;color:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,.15)}'
+    +   '.toolbar .title{font-size:14px;font-weight:bold;letter-spacing:1px}'
+    +   '.toolbar .actions{display:flex;gap:8px}'
+    +   '.toolbar button{border:none;padding:9px 18px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:13px}'
+    +   '.btn-print{background:#8B5CF6;color:#fff}'
+    +   '.btn-close{background:#374151;color:#fff}'
+    +   '.page{max-width:820px;margin:20px auto;background:#fff;padding:30px;box-shadow:0 4px 24px rgba(0,0,0,.08)}'
+    +   '@media print{.toolbar{display:none!important}.page{box-shadow:none;margin:0;max-width:none;padding:0}body{background:#fff}}'
+    +   '@page{size:A4;margin:12mm}'
+    + '</style></head><body>'
+    +   '<div class="toolbar">'
+    +     '<div class="title">📄 HASIL KUIS 2 — ' + safeName + '</div>'
+    +     '<div class="actions">'
+    +       '<button class="btn-print" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>'
+    +       '<button class="btn-close" onclick="window.close()">✕ Tutup</button>'
+    +     '</div>'
+    +   '</div>'
+    +   '<div class="page">' + htmlContent + '</div>'
+    +   '<script>window.addEventListener("load",function(){setTimeout(function(){try{window.print();}catch(e){}},600);});<\/script>'
+    + '</body></html>';
+  win.document.open();
+  win.document.write(fullHtml);
+  win.document.close();
+  showToast('🖨️', 'Pilih "Save as PDF"', 'Pada dialog cetak, pilih tujuan "Save as PDF".', 'cyan');
+}
+
+/* ============================================================
+   KEYBOARD
+   ============================================================ */
+document.addEventListener('keydown', function(e){
   if (!state.started || state.finished) return;
   const tag = (e.target.tagName || '').toLowerCase();
   if (tag === 'input' || tag === 'textarea') return;
-  if (['a','A','1'].includes(e.key)) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
-  else if (['b','B','2'].includes(e.key)) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
-  else if (['c','C','3'].includes(e.key)) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
-  else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
-  else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
+  if (['a','A','1'].indexOf(e.key) !== -1) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
+  else if (['b','B','2'].indexOf(e.key) !== -1) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
+  else if (['c','C','3'].indexOf(e.key) !== -1) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
+  else if (['d','D','4'].indexOf(e.key) !== -1) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
+  else if (['e','E','5'].indexOf(e.key) !== -1) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
   else if (e.key === 'ArrowRight' || e.key === 'Enter'){
-    if (!document.getElementById('btnNext').disabled) nextQuestion();
+    const btn = document.getElementById('btnNext');
+    if (!btn.disabled && btn.style.display !== 'none') nextQuestion();
+    else {
+      const btnF = document.getElementById('btnFinish');
+      if (btnF.style.display !== 'none') finishGame();
+    }
+  }
+  else if (e.key === 'ArrowLeft'){
+    const btn = document.getElementById('btnPrev');
+    if (!btn.disabled) prevQuestion();
   }
 });
 </script>
