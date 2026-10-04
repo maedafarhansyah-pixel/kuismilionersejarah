@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+<meta name="theme-color" content="#05060f" />
+<title>🎮 Kuis 14 · Bacson-Hoabinh &amp; Dong Son — Premium Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+:root{
+  --font-display:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'Space Grotesk',ui-monospace,monospace;
+  --primary:#F43F5E;--primary-light:#FB7185;--primary-dark:#BE123C;
+  --accent:#F59E0B;--accent-light:#FCD34D;--accent-dark:#B45309;
+  --emerald:#34D399;--violet:#A78BFA;--rose:#FB7185;--sky:#38BDF8;--gold:#FBBF24;
+  --bg:#05060f;--bg-2:#0b0d1c;
+  --glass:rgba(255,255,255,0.045);
+  --glass-strong:rgba(255,255,255,0.08);
+  --glass-border:rgba(255,255,255,0.10);
+  --text:#f7f5ff;--text-dim:#a8a8c0;--text-mute:#6b6b85;
+  --radius:24px;--radius-md:18px;--radius-sm:14px;--radius-xs:10px;
+  --shadow-card:0 24px 60px rgba(0,0,0,.55);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-display);background:var(--bg);color:var(--text);line-height:1.65;
+  overflow-x:hidden;min-height:100vh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+::selection{background:var(--primary);color:#05060f}
+
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%,rgba(244,63,94,.18),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 100%,rgba(245,158,11,.14),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 50%,rgba(251,113,133,.08),transparent 65%);
+  animation:bgShift 20s ease-in-out infinite alternate}
+@keyframes bgShift{0%{transform:scale(1) rotate(0deg);filter:hue-rotate(0deg)}100%{transform:scale(1.1) rotate(3deg);filter:hue-rotate(-10deg)}}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25;
+  background-image:
+    linear-gradient(rgba(244,63,94,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(244,63,94,.06) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%)}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
+#confettiCanvas{position:fixed;inset:0;z-index:9998;pointer-events:none}
+
+#loader{position:fixed;inset:0;z-index:99999;
+  background:radial-gradient(ellipse at center,#0b0d1c 0%,#05060f 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:20px;text-align:center;transition:opacity .8s ease,visibility .8s ease}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-orb{width:120px;height:120px;position:relative;display:grid;place-items:center}
+.loader-orb::before,.loader-orb::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent}
+.loader-orb::before{border-top-color:var(--primary);border-right-color:var(--primary-light);animation:spin 2s linear infinite;filter:drop-shadow(0 0 20px rgba(244,63,94,.6))}
+.loader-orb::after{inset:14px;border-bottom-color:var(--accent);border-left-color:var(--gold);animation:spin 1.6s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-core{width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 40px rgba(244,63,94,.7),inset 0 0 20px rgba(255,255,255,.25);
+  display:grid;place-items:center;font-size:1.5rem;color:#fff;
+  animation:pulseCore 2s ease-in-out infinite}
+@keyframes pulseCore{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.loader-title{font-family:var(--font-display);font-weight:900;font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:3px;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary),var(--accent));
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.loader-sub{font-size:.85rem;color:var(--text-dim);font-weight:500;letter-spacing:1px}
+.loader-bar{width:min(300px,70vw);height:4px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+.loader-bar span{display:block;height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 20px rgba(244,63,94,.6);transition:width .3s ease}
+.loader-pct{font-family:var(--font-mono);font-size:.72rem;font-weight:700;color:var(--text-mute);letter-spacing:2px}
+
+.game-header{position:fixed;top:0;left:0;right:0;height:60px;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:10px;
+  background:rgba(5,6,15,.72);backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border-bottom:1px solid var(--glass-border)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:.9rem;color:var(--text)}
+.brand-logo{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:.9rem;
+  box-shadow:0 0 22px rgba(244,63,94,.5);animation:logoPulse 3s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 22px rgba(244,63,94,.5)}50%{box-shadow:0 0 32px rgba(244,63,94,.8)}}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .t1{font-size:.62rem;color:var(--text-mute);letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+.brand-text .t2{font-size:.92rem;font-weight:800;color:var(--text)}
+.header-actions{display:flex;gap:6px}
+.icon-btn{width:36px;height:36px;border-radius:11px;border:1px solid var(--glass-border);
+  background:var(--glass);color:var(--text-dim);display:grid;place-items:center;cursor:pointer;
+  font-size:.85rem;transition:all .3s var(--ease-out)}
+.icon-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 0 22px rgba(244,63,94,.6);transform:translateY(-2px)}
+
+.wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;
+  padding:calc(60px + 20px) 16px 60px;min-height:100vh}
+
+.start-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:calc(100vh - 100px);text-align:center;gap:18px;padding:20px 0}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:40px;
+  background:linear-gradient(135deg,rgba(244,63,94,.18),rgba(245,158,11,.10));
+  border:1px solid rgba(244,63,94,.30);font-size:.7rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary-light);box-shadow:0 0 30px rgba(244,63,94,.20);
+  animation:badgeFloat 3s ease-in-out infinite}
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-title{font-family:var(--font-display);font-size:clamp(2rem,7vw,3.4rem);
+  font-weight:900;line-height:1.05;letter-spacing:-1.5px;
+  background:linear-gradient(135deg,#fff 0%,var(--primary-light) 40%,var(--primary) 70%,var(--accent) 100%);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 8px 30px rgba(244,63,94,.3))}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text-dim);max-width:580px;line-height:1.75}
+.hero-sub strong{color:var(--primary-light);font-weight:700}
+
+.stats-showcase{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+.stat-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;
+  background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(10px);
+  font-size:.8rem;color:var(--text-dim);font-weight:600;transition:all .3s var(--ease-out)}
+.stat-pill:hover{transform:translateY(-3px);border-color:rgba(244,63,94,.4);box-shadow:0 8px 24px rgba(244,63,94,.15)}
+.stat-pill i{font-size:.95rem}
+
+.rules-card{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:22px 24px;
+  max-width:520px;width:100%;text-align:left;margin-top:6px;backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.rules-card h4{font-size:.85rem;font-weight:800;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.rules-card ul{list-style:none;display:grid;gap:10px}
+.rules-card li{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-dim);line-height:1.6}
+.rule-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+  border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 4px 14px rgba(244,63,94,.4)}
+
+.btn-play{position:relative;display:inline-flex;align-items:center;gap:14px;
+  padding:18px 54px;border-radius:60px;border:none;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;font-family:var(--font-display);font-weight:900;font-size:1.05rem;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;overflow:hidden;
+  box-shadow:0 12px 40px rgba(244,63,94,.45),inset 0 -3px 0 rgba(0,0,0,.2);
+  transition:all .4s var(--ease-spring);margin-top:14px}
+.btn-play::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.35),transparent 70%);
+  transform:translateX(-100%);transition:transform .8s ease}
+.btn-play:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 20px 60px rgba(244,63,94,.65)}
+.btn-play:hover::before{transform:translateX(100%)}
+.btn-play:active{transform:translateY(-1px) scale(.98)}
+
+.game-hud{display:none;flex-direction:column;gap:14px;animation:fadeSlideIn .5s var(--ease-out)}
+.game-hud.active{display:flex}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.hud-top{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+  padding:14px 18px;border-radius:var(--radius-md);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.hud-hp{display:flex;align-items:center;gap:4px}
+.hud-hp .heart{font-size:1.15rem;color:var(--rose);
+  filter:drop-shadow(0 0 8px rgba(251,113,133,.6));transition:all .4s var(--ease-out)}
+.hud-hp .heart.empty{color:rgba(255,255,255,.10);filter:none;transform:scale(.85)}
+.hud-hp .heart.losing{animation:heartBreak .6s ease}
+@keyframes heartBreak{0%{transform:scale(1)}30%{transform:scale(1.4);color:#fff}100%{transform:scale(.85);opacity:.3}}
+.hud-xp{display:flex;flex-direction:column;gap:4px;min-width:0}
+.hud-xp-head{display:flex;justify-content:space-between;align-items:center;font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.hud-xp-head .lvl{color:var(--primary-light)}
+.hud-xp-head .val{color:var(--text-mute);font-family:var(--font-mono)}
+.xp-track{height:8px;border-radius:10px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+.xp-fill{height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 16px rgba(244,63,94,.7);transition:width .8s var(--ease-spring);position:relative}
+.xp-fill::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  animation:xpShine 2s linear infinite}
+@keyframes xpShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.hud-timer{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:40px;
+  background:rgba(244,63,94,.12);border:1px solid rgba(244,63,94,.30);
+  font-family:var(--font-mono);font-weight:800;font-size:.85rem;color:var(--primary-light);
+  letter-spacing:1px;transition:all .3s ease}
+.hud-timer.warning{background:rgba(251,113,133,.15);border-color:rgba(251,113,133,.5);color:#fecdd3;animation:pulseWarn 1s ease-in-out infinite}
+@keyframes pulseWarn{0%,100%{box-shadow:0 0 0 0 rgba(251,113,133,.4)}50%{box-shadow:0 0 0 8px rgba(251,113,133,0)}}
+
+.hud-middle{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:.75rem;color:var(--text-mute);font-weight:700;padding:0 4px}
+.hud-middle .combo-tag{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:800;transition:all .3s var(--ease-spring)}
+.hud-middle .combo-tag.hot{color:var(--primary-light);animation:comboPulse .5s var(--ease-spring)}
+@keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+.q-card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:26px 26px 22px;
+  backdrop-filter:blur(20px);box-shadow:var(--shadow-card);animation:qEnter .55s var(--ease-out);overflow:hidden}
+.q-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(135deg,rgba(244,63,94,.4),transparent 40%,transparent 60%,rgba(245,158,11,.3));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+@keyframes qEnter{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.q-card.shake{animation:shake .5s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+
+.q-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:30px;
+  background:linear-gradient(135deg,rgba(244,63,94,.18),rgba(244,63,94,.06));
+  border:1px solid rgba(244,63,94,.30);font-size:.72rem;font-weight:800;letter-spacing:1px;color:var(--primary-light)}
+.q-topic{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;
+  background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.28);font-size:.68rem;
+  font-weight:800;letter-spacing:.8px;color:var(--accent);text-transform:uppercase}
+
+.q-text{font-size:clamp(1rem,2.2vw,1.12rem);font-weight:600;line-height:1.75;color:var(--text);
+  margin-bottom:20px;white-space:pre-line}
+.q-text strong{color:var(--primary-light);font-weight:800}
+
+.options{display:grid;gap:10px}
+.opt{position:relative;display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;
+  padding:15px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--glass-border);
+  background:rgba(255,255,255,.03);color:var(--text-dim);font-family:inherit;font-size:.92rem;
+  line-height:1.6;cursor:pointer;transition:all .3s var(--ease-out);overflow:hidden}
+.opt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(90deg,rgba(244,63,94,.15),transparent);
+  transition:width .4s var(--ease-out);z-index:0}
+.opt:hover:not(.locked){border-color:rgba(244,63,94,.55);transform:translateX(5px);
+  color:var(--text);box-shadow:0 8px 24px rgba(244,63,94,.15)}
+.opt:hover:not(.locked)::before{width:100%}
+.opt-letter{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;flex-shrink:0;background:rgba(255,255,255,.06);
+  color:var(--text-mute);font-weight:800;font-size:.85rem;transition:all .3s var(--ease-out);
+  border:1px solid rgba(255,255,255,.06)}
+.opt-text{position:relative;z-index:1;flex:1}
+.opt:hover:not(.locked) .opt-letter{background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;border-color:transparent;box-shadow:0 0 20px rgba(244,63,94,.6)}
+.opt.correct{border-color:var(--emerald);background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(52,211,153,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(52,211,153,.15),0 12px 32px rgba(52,211,153,.25);
+  animation:correctPop .5s var(--ease-spring)}
+@keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.02)}100%{transform:scale(1)}}
+.opt.correct .opt-letter{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(52,211,153,.7)}
+.opt.wrong{border-color:var(--rose);background:linear-gradient(135deg,rgba(251,113,133,.15),rgba(251,113,133,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(251,113,133,.15),0 12px 32px rgba(251,113,133,.25)}
+.opt.wrong .opt-letter{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(251,113,133,.7)}
+.opt.locked{pointer-events:none}
+.opt.disabled-50{opacity:.2;pointer-events:none;filter:grayscale(1) blur(.5px)}
+
+.feedback{display:none;padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(16px);box-shadow:var(--shadow-card);
+  animation:qEnter .5s var(--ease-out)}
+.feedback.show{display:block}
+.fb-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.fb-icon{width:48px;height:48px;border-radius:15px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;transition:all .4s var(--ease-spring)}
+.fb-icon.correct{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;box-shadow:0 0 32px rgba(52,211,153,.6)}
+.fb-icon.wrong{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;box-shadow:0 0 32px rgba(251,113,133,.6)}
+.fb-icon.info{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 0 32px rgba(244,63,94,.6)}
+.fb-title{font-size:1.05rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
+.fb-title.correct{color:var(--emerald)}
+.fb-title.wrong{color:#fecdd3}
+.fb-title.info{color:var(--primary-light)}
+.fb-body{font-size:.9rem;color:var(--text-dim);line-height:1.75}
+.fb-body strong{color:var(--text);font-weight:700}
+.fb-sec{margin-top:12px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.10)}
+.fb-label{font-size:.68rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--primary-light);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.fb-points{margin-top:12px;padding:14px 16px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(245,158,11,.10),rgba(245,158,11,.03));border-left:3px solid var(--accent)}
+.fb-points .fb-label{color:var(--accent)}
+.fb-points p{font-size:.87rem;color:var(--text-dim);line-height:1.7}
+
+.hud-bottom{display:flex;flex-direction:column;gap:12px}
+.power-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.power-btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;
+  border-radius:50px;border:1px solid var(--glass-border);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  color:var(--text-dim);font-family:inherit;font-weight:800;font-size:.78rem;letter-spacing:.5px;
+  cursor:pointer;transition:all .3s var(--ease-spring);overflow:hidden}
+.power-btn i{font-size:.9rem}
+.power-btn:hover:not(:disabled):not(.used){transform:translateY(-3px);border-color:rgba(244,63,94,.5);color:var(--text);box-shadow:0 8px 24px rgba(244,63,94,.25)}
+.power-btn:active:not(:disabled):not(.used){transform:scale(.96)}
+.power-btn .cnt{font-size:.62rem;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.10);font-weight:900;font-family:var(--font-mono)}
+.power-btn.used{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.power-btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.power-btn.p50{color:var(--accent)}
+.power-btn.phint{color:var(--primary-light)}
+.power-btn.pskip{color:var(--rose)}
+
+.action-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 30px;border-radius:50px;border:none;
+  font-family:inherit;font-weight:900;font-size:.88rem;letter-spacing:.5px;cursor:pointer;
+  transition:all .35s var(--ease-spring)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;
+  box-shadow:0 10px 32px rgba(244,63,94,.4),inset 0 -2px 0 rgba(0,0,0,.15)}
+.btn-primary:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 44px rgba(244,63,94,.6)}
+.btn-primary:active:not(:disabled){transform:scale(.96)}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--text-dim);border:1px solid var(--glass-border)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(244,63,94,.4);transform:translateY(-2px)}
+
+.result-screen{display:none;flex-direction:column;gap:16px;text-align:center;animation:fadeSlideIn .6s var(--ease-out)}
+.result-screen.active{display:flex}
+.result-hero{position:relative;padding:38px 26px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);box-shadow:var(--shadow-card);overflow:hidden}
+.result-hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center top,rgba(244,63,94,.20),transparent 60%);pointer-events:none}
+.result-trophy{font-size:4rem;line-height:1;margin-bottom:8px;
+  filter:drop-shadow(0 8px 30px rgba(244,63,94,.6));animation:trophyFloat 3s ease-in-out infinite}
+@keyframes trophyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.result-title{font-family:var(--font-display);font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:900;
+  letter-spacing:-.5px;background:linear-gradient(135deg,#fff,var(--primary-light),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.result-sub{font-size:.9rem;color:var(--text-dim);margin-bottom:6px}
+.grade-ring{position:relative;width:130px;height:130px;margin:16px auto;border-radius:50%;
+  background:conic-gradient(var(--primary) var(--grade-deg,0deg),rgba(255,255,255,.08) 0deg);
+  padding:8px;box-shadow:0 0 40px rgba(244,63,94,.4);animation:ringPop .8s var(--ease-spring)}
+@keyframes ringPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.grade-inner{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at center,#0b0d1c,#05060f);display:grid;place-items:center;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.6)}
+.grade-letter{font-size:2.6rem;font-weight:900;line-height:1;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent}
+.grade-label{font-size:.62rem;font-weight:800;letter-spacing:2px;color:var(--text-mute);text-transform:uppercase;margin-top:2px}
+.result-title-text{font-size:1.1rem;font-weight:900;color:var(--primary-light);letter-spacing:.5px;margin-top:8px;text-transform:uppercase}
+.result-xp-line{font-size:.88rem;color:var(--text-dim);margin-top:6px}
+.result-xp-line strong{color:var(--accent);font-family:var(--font-mono);font-weight:800}
+.result-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:20px 0 8px}
+.rs-box{padding:16px 10px;border-radius:var(--radius-sm);background:rgba(255,255,255,.04);
+  border:1px solid var(--glass-border);transition:all .3s var(--ease-out)}
+.rs-box:hover{transform:translateY(-3px);border-color:rgba(244,63,94,.3)}
+.rs-val{font-size:1.7rem;font-weight:900;line-height:1.1;font-family:var(--font-mono)}
+.rs-val.green{color:var(--emerald);text-shadow:0 0 20px rgba(52,211,153,.5)}
+.rs-val.red{color:#fecdd3;text-shadow:0 0 20px rgba(251,113,133,.5)}
+.rs-val.cyan{color:var(--accent);text-shadow:0 0 20px rgba(245,158,11,.5)}
+.rs-val.violet{color:var(--primary-light);text-shadow:0 0 20px rgba(251,113,133,.5)}
+.rs-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.5px;color:var(--text-mute);text-transform:uppercase;margin-top:6px}
+.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:14px 18px;border-radius:12px;
+  background:rgba(244,63,94,.06);border-left:3px solid var(--primary);margin-top:6px;text-align:left}
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+
+.review-panel{padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);text-align:left}
+.review-panel h4{font-size:.9rem;font-weight:900;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.review-list{display:grid;gap:8px}
+.review-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-radius:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:.84rem;
+  line-height:1.6;transition:all .3s var(--ease-out)}
+.review-item:hover{background:rgba(255,255,255,.06);transform:translateX(3px)}
+.review-item .ri-num{font-weight:900;color:var(--text-mute);flex-shrink:0;font-family:var(--font-mono);font-size:.78rem;min-width:26px}
+.review-item .ri-text{flex:1;color:var(--text-dim)}
+.review-item .ri-status{font-size:.68rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:20px;flex-shrink:0}
+.ri-status.correct{background:rgba(52,211,153,.15);color:#6ee7b7}
+.ri-status.wrong{background:rgba(251,113,133,.15);color:#fecdd3}
+.ri-status.skipped{background:rgba(255,255,255,.06);color:var(--text-mute)}
+
+.toast-wrap{position:fixed;top:74px;right:16px;z-index:9999;display:flex;flex-direction:column;
+  gap:10px;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast{display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(11,13,28,.95),rgba(5,6,15,.95));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);
+  box-shadow:0 16px 40px rgba(0,0,0,.6),0 0 0 1px rgba(244,63,94,.15);
+  pointer-events:auto;animation:toastIn .5s var(--ease-spring);max-width:340px}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast.out{animation:toastOut .4s ease forwards}
+@keyframes toastOut{to{transform:translateX(120%);opacity:0}}
+.toast-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 24px rgba(244,63,94,.6)}
+.toast-icon.green{background:linear-gradient(135deg,var(--emerald),#059669);box-shadow:0 0 24px rgba(52,211,153,.6)}
+.toast-icon.cyan{background:linear-gradient(135deg,var(--accent),var(--accent-dark));box-shadow:0 0 24px rgba(245,158,11,.6)}
+.toast-icon.violet{background:linear-gradient(135deg,var(--violet),#6C63FF);box-shadow:0 0 24px rgba(167,139,250,.6)}
+.toast-content{flex:1;min-width:0}
+.toast-title{font-size:.85rem;font-weight:900;color:var(--text);letter-spacing:.3px}
+.toast-desc{font-size:.75rem;color:var(--text-dim);line-height:1.5;margin-top:2px}
+
+.score-pop{position:fixed;z-index:9997;pointer-events:none;font-family:var(--font-display);
+  font-weight:900;font-size:1.6rem;color:var(--primary-light);text-shadow:0 0 20px rgba(244,63,94,.8);
+  animation:scorePop 1s var(--ease-out) forwards}
+@keyframes scorePop{0%{transform:translate(-50%,0) scale(.5);opacity:0}
+  20%{transform:translate(-50%,-20px) scale(1.2);opacity:1}
+  100%{transform:translate(-50%,-80px) scale(1);opacity:0}}
+
+@media (max-width:600px){
+  .wrap{padding:calc(60px + 14px) 12px 50px}
+  .q-card{padding:20px 18px}
+  .opt{padding:13px 14px;font-size:.87rem;gap:11px}
+  .opt-letter{width:30px;height:30px;font-size:.78rem}
+  .hud-top{padding:12px 14px;gap:8px}
+  .hud-timer{padding:6px 11px;font-size:.78rem}
+  .hud-hp .heart{font-size:1rem}
+  .power-btn{padding:9px 14px;font-size:.72rem}
+  .btn{padding:12px 22px;font-size:.82rem;width:100%;justify-content:center}
+  .action-bar{flex-direction:column}
+  .result-hero{padding:28px 18px}
+  .grade-ring{width:110px;height:110px}
+  .grade-letter{font-size:2.2rem}
+  .rs-val{font-size:1.4rem}
+  .toast{max-width:calc(100vw - 24px);padding:12px 14px}
+  .toast-icon{width:36px;height:36px;font-size:1rem}
+}
+@media print{
+  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap{display:none!important}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+<canvas id="particles"></canvas>
+<canvas id="confettiCanvas"></canvas>
+
+<div id="loader">
+  <div class="loader-orb">
+    <div class="loader-core"><i class="fas fa-drum"></i></div>
+  </div>
+  <div class="loader-title">HISTOEXPLORER</div>
+  <div class="loader-sub">Kuis 14 · Kebudayaan Bacson-Hoabinh &amp; Dong Son</div>
+  <div class="loader-bar"><span id="loaderBar"></span></div>
+  <div class="loader-pct" id="loaderPct">0%</div>
+</div>
+
+<header class="game-header">
+  <div class="brand">
+    <div class="brand-logo"><i class="fas fa-drum"></i></div>
+    <div class="brand-text">
+      <span class="t1">KUIS 14 · PRAKSARA</span>
+      <span class="t2">Bacson-Hoabinh &amp; Dong Son</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="Suara"><i class="fas fa-volume-up"></i></button>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema"><i class="fas fa-sun"></i></button>
+  </div>
+</header>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<main class="wrap">
+
+  <section class="start-screen" id="startScreen">
+    <span class="hero-badge"><i class="fas fa-crown"></i> PREMIUM GAME MODE · LEVEL 14</span>
+    <h1 class="hero-title">Bacson-Hoabinh<br>&amp; Dong Son</h1>
+    <p class="hero-sub">
+      Kuasai <strong>dua kebudayaan besar Asia Tenggara</strong> yang memengaruhi Nusantara: <strong>Bacson-Hoabinh</strong> (batu dipangkas) dan <strong>Dong Son</strong> (perunggu). Pelajari asal-usul, ciri, persebaran, dan jaringan perdagangan kuno!
+    </p>
+
+    <div class="stats-showcase">
+      <span class="stat-pill" style="color:#FB7185"><i class="fas fa-question-circle"></i> 15 Soal Acak</span>
+      <span class="stat-pill" style="color:#FCD34D"><i class="fas fa-stopwatch"></i> 20 Menit</span>
+      <span class="stat-pill" style="color:#FB7185"><i class="fas fa-heart"></i> 3 Nyawa</span>
+      <span class="stat-pill" style="color:#34D399"><i class="fas fa-bolt"></i> Combo &amp; XP</span>
+    </div>
+
+    <div class="rules-card">
+      <h4><i class="fas fa-list-check"></i> Cara Bermain</h4>
+      <ul>
+        <li><span class="rule-num">1</span> Jawab 15 soal HOTS dari bank 40 soal — dipilih acak setiap sesi.</li>
+        <li><span class="rule-num">2</span> Jawaban benar memberi <strong>XP</strong> + memicu <strong>combo</strong>. Salah mengurangi <strong>1 nyawa</strong>.</li>
+        <li><span class="rule-num">3</span> Power-up: <strong>50:50</strong>, <strong>Petunjuk</strong>, <strong>Lewati</strong> (masing-masing 1×).</li>
+        <li><span class="rule-num">4</span> Raih <strong>Achievement</strong> dan taklukkan peringkat <strong>Ahli Kebudayaan Asia Tenggara</strong>!</li>
+      </ul>
+    </div>
+
+    <button class="btn-play" onclick="startGame()">
+      <i class="fas fa-play"></i> Mulai Bermain
+    </button>
+  </section>
+
+  <section class="game-hud" id="gameHud">
+    <div class="hud-top">
+      <div class="hud-hp" id="hudHp"></div>
+      <div class="hud-xp">
+        <div class="hud-xp-head">
+          <span class="lvl">LV <span id="hudLevel">1</span></span>
+          <span class="val"><span id="hudXp">0</span> / <span id="hudXpMax">100</span> XP</span>
+        </div>
+        <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
+      </div>
+      <div class="hud-timer" id="hudTimer">
+        <i class="fas fa-stopwatch"></i> <span id="hudTimerVal">20:00</span>
+      </div>
+    </div>
+
+    <div class="hud-middle">
+      <span><i class="fas fa-question-circle" style="color:var(--primary)"></i> Soal <strong id="hudQNum">1</strong>/<strong>15</strong></span>
+      <span class="combo-tag" id="comboTag"><i class="fas fa-fire"></i> Combo ×<span id="comboVal">0</span></span>
+      <span><i class="fas fa-star" style="color:var(--accent)"></i> Skor <strong id="hudScore" style="font-family:var(--font-mono)">0</strong></span>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-meta">
+        <span class="q-num"><i class="fas fa-bookmark"></i> <span id="qNumLabel">Soal 1</span></span>
+        <span class="q-topic" id="qTopic"><i class="fas fa-tag"></i> <span id="qTopicText">Bacson-Hoabinh</span></span>
+      </div>
+      <div class="q-text" id="qText">Memuat soal...</div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <div class="feedback" id="feedback">
+      <div class="fb-head">
+        <div class="fb-icon" id="fbIcon"><i class="fas fa-check"></i></div>
+        <div class="fb-title" id="fbTitle">BENAR!</div>
+      </div>
+      <div class="fb-body" id="fbBody"></div>
+    </div>
+
+    <div class="hud-bottom">
+      <div class="power-bar">
+        <button class="power-btn p50" id="p50" onclick="usePower('50')">
+          <i class="fas fa-compress-alt"></i> 50:50 <span class="cnt" id="c50">1</span>
+        </button>
+        <button class="power-btn phint" id="phint" onclick="usePower('hint')">
+          <i class="fas fa-lightbulb"></i> Petunjuk <span class="cnt" id="chint">1</span>
+        </button>
+        <button class="power-btn pskip" id="pskip" onclick="usePower('skip')">
+          <i class="fas fa-forward"></i> Lewati <span class="cnt" id="cskip">1</span>
+        </button>
+      </div>
+      <div class="action-bar">
+        <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>
+          Selanjutnya <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="btn btn-primary" id="btnFinish" onclick="finishGame()" style="display:none">
+          Lihat Hasil <i class="fas fa-flag-checkered"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="result-screen" id="resultScreen">
+    <div class="result-hero">
+      <div class="result-trophy" id="rTrophy">🏆</div>
+      <h2 class="result-title" id="rTitle">Luar Biasa!</h2>
+      <p class="result-sub" id="rSub">Kuis 14 · Kebudayaan Bacson-Hoabinh &amp; Dong Son</p>
+      <div class="grade-ring" id="gradeRing">
+        <div class="grade-inner">
+          <div class="grade-letter" id="gradeLetter">A</div>
+          <div class="grade-label" id="gradeLabel">Sangat Baik</div>
+        </div>
+      </div>
+      <div class="result-title-text" id="rRank">AHLI KEBUDAYAAN ASIA TENGGARA</div>
+      <div class="result-xp-line">Total XP: <strong id="rXp">0</strong> · Best Combo: <strong id="rBestCombo">0</strong></div>
+      <div class="result-stats">
+        <div class="rs-box"><div class="rs-val green" id="rBenar">0</div><div class="rs-lbl">Benar</div></div>
+        <div class="rs-box"><div class="rs-val red" id="rSalah">0</div><div class="rs-lbl">Salah</div></div>
+        <div class="rs-box"><div class="rs-val cyan" id="rSkor">0</div><div class="rs-lbl">Skor</div></div>
+        <div class="rs-box"><div class="rs-val violet" id="rXpTotal">0</div><div class="rs-lbl">XP Total</div></div>
+      </div>
+      <div class="result-msg" id="rMsg"></div>
+      <div class="result-actions">
+        <button class="btn btn-primary" onclick="resetGame()"><i class="fas fa-redo"></i> Main Lagi</button>
+        <button class="btn btn-ghost" onclick="window.location.reload()"><i class="fas fa-home"></i> Menu Awal</button>
+      </div>
+    </div>
+    <div class="review-panel">
+      <h4><i class="fas fa-list-check"></i> Rincian Jawaban</h4>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ============================================================
+   BANK SOAL — 40 SOAL HOTS · KUIS 14
+   Fokus: Bacson-Hoabinh, Dong Son, Kapak Sumatera, Nekara,
+          Kapak Corong, Bejana Perunggu, Arca Perunggu, Sa Huynh
+   ============================================================ */
+const BANK_SOAL = [
+  /* ===== BACSON-HOABINH (8 soal) ===== */
+  { id:1401, topic:"Bacson-Hoabinh",
+    question:"Kebudayaan Bacson-Hoabinh berasal dari daerah pegunungan Bacson & Hoabinh yang terletak di...",
+    options:[
+      {letter:"A",text:"Vietnam Utara",correct:true,explanation:"Tepat! Bacson-Hoabinh = Vietnam Utara."},
+      {letter:"B",text:"Thailand Selatan",correct:false,explanation:"Bukan Thailand."},
+      {letter:"C",text:"Kamboja",correct:false,explanation:"Bukan Kamboja."},
+      {letter:"D",text:"Filipina",correct:false,explanation:"Bukan Filipina."},
+      {letter:"E",text:"Malaysia",correct:false,explanation:"Bukan Malaysia."}
+    ], difficulty:"easy", hint:"Bacson-Hoabinh = Vietnam Utara.", points:50 },
+
+  { id:1402, topic:"Bacson-Hoabinh",
+    question:"Ciri khas alat batu dari kebudayaan Bacson-Hoabinh adalah...",
+    options:[
+      {letter:"A",text:"Dipangkas pada satu atau kedua sisinya (perkusi)",correct:true,explanation:"Tepat! Bacson-Hoabinh = batu dipangkas (perkusi)."},
+      {letter:"B",text:"Diasah halus & dipoles",correct:false,explanation:"Itu Neolitikum."},
+      {letter:"C",text:"Dibuat dari perunggu",correct:false,explanation:"Itu Dong Son."},
+      {letter:"D",text:"Dibuat dari tembikar",correct:false,explanation:"Tembikar = Neolitikum."},
+      {letter:"E",text:"Berbentuk perhiasan",correct:false,"explanation":"Bukan ciri khas Bacson-Hoabinh."}
+    ], difficulty:"easy", hint:"Bacson-Hoabinh = batu dipangkas (perkusi).", points:50 },
+
+  { id:1403, topic:"Bacson-Hoabinh",
+    question:"Kebudayaan Bacson-Hoabinh termasuk dalam periode...",
+    options:[
+      {letter:"A",text:"Mesolitikum",correct:true,explanation:"Tepat! Bacson-Hoabinh = Mesolitikum."},
+      {letter:"B",text:"Paleolitikum",correct:false,explanation:"Paleolitikum lebih tua."},
+      {letter:"C",text:"Neolitikum",correct:false,explanation:"Neolitikum lebih muda."},
+      {letter:"D",text:"Megalitikum",correct:false,explanation:"Megalitikum = batu besar."},
+      {letter:"E",text:"Perundagian",correct:false,"explanation":"Perundagian = logam."}
+    ], difficulty:"easy", hint:"Bacson-Hoabinh = Mesolitikum.", points:50 },
+
+  { id:1404, topic:"Bacson-Hoabinh",
+    question:"Nama 'kapak Sumatera' diberikan pada alat batu dari kebudayaan Bacson-Hoabinh karena...",
+    options:[
+      {letter:"A",text:"Banyak ditemukan di wilayah Sumatera (Lhokseumawe, Medan, Palembang) & menjadi ciri khas persebarannya di Nusantara bagian barat.",correct:true,explanation:"Tepat! Kapak Sumatera = banyak ditemukan di Sumatera."},
+      {letter:"B",text:"Hanya ditemukan di Sumatera.",correct:false,explanation:"Juga ditemukan di Jawa & Kalimantan."},
+      {letter:"C",text:"Dibuat dari batu Sumatera.",correct:false,explanation:"Nama bukan dari bahan, tapi lokasi temuan."},
+      {letter:"D",text:"Berasal dari Sumatera.",correct:false,explanation:"Berasal dari Vietnam Utara."},
+      {letter:"E",text:"Hanya dibawa oleh orang Sumatera.",correct:false,"explanation":"Bukan soal etnis."}
+    ], difficulty:"medium", hint:"Kapak Sumatera = banyak ditemukan di Sumatera.", points:60 },
+
+  { id:1405, topic:"Bacson-Hoabinh",
+    question:"Analisis yang paling tepat tentang pentingnya kebudayaan Bacson-Hoabinh bagi kajian praaksara Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Menunjukkan bahwa masyarakat praaksara Nusantara sudah terhubung dengan jaringan budaya Asia Tenggara daratan sejak masa Mesolitikum.",correct:true,explanation:"Tepat! Bacson-Hoabinh = bukti jaringan budaya Asia Tenggara."},
+      {letter:"B",text:"Menunjukkan Nusantara terisolasi dari budaya lain.",correct:false,explanation:"Justru terhubung."},
+      {letter:"C",text:"Menunjukkan Nusantara tidak memiliki budaya sendiri.",correct:false,explanation:"Nusantara tetap punya budaya khas."},
+      {letter:"D",text:"Menunjukkan orang Nusantara berasal dari Vietnam.",correct:false,explanation:"Tidak demikian."},
+      {letter:"E",text:"Tidak memiliki makna penting.",correct:false,"explanation":"Justru sangat penting."}
+    ], difficulty:"hard", hint:"Bacson-Hoabinh = bukti jaringan budaya Asia Tenggara.", points:70 },
+
+  { id:1406, topic:"Bacson-Hoabinh",
+    question:"Persebaran alat Bacson-Hoabinh di Nusantara meliputi...",
+    options:[
+      {letter:"A",text:"Sumatera, Jawa, Kalimantan, Sulawesi, & Nusa Tenggara",correct:true,explanation:"Tepat! Bacson-Hoabinh tersebar luas di Nusantara."},
+      {letter:"B",text:"Hanya di Jawa",correct:false,explanation:"Tersebar lebih luas."},
+      {letter:"C",text:"Hanya di Sumatera",correct:false,explanation:"Tersebar lebih luas."},
+      {letter:"D",text:"Hanya di Kalimantan",correct:false,explanation:"Tersebar lebih luas."},
+      {letter:"E",text:"Hanya di Papua",correct:false,"explanation":"Bukan wilayah utama Bacson-Hoabinh."}
+    ], difficulty:"medium", hint:"Bacson-Hoabinh = Sumatera, Jawa, Kalimantan, Sulawesi, NTT.", points:60 },
+
+  { id:1407, topic:"Bacson-Hoabinh",
+    question:"Perhatikan pernyataan berikut!\n'Bacson-Hoabinh bukan sekadar kebudayaan alat batu, tetapi juga cerminan adaptasi manusia pada lingkungan hutan tropis.'\n\nAnalisis yang paling tepat adalah...",
+    options:[
+      {letter:"A",text:"Tepat: alat Bacson-Hoabinh cocok untuk aktivitas di hutan (menebang, memangkas, menggali umbi) — menunjukkan adaptasi terhadap lingkungan tropis.",correct:true,explanation:"Tepat! Bacson-Hoabinh = cerminan adaptasi hutan tropis."},
+      {letter:"B",text:"Salah: Bacson-Hoabinh tidak terkait lingkungan.",correct:false,explanation:"Justru sangat terkait."},
+      {letter:"C",text:"Salah: Bacson-Hoabinh tidak memiliki fungsi.",correct:false,explanation:"Justru banyak fungsi."},
+      {letter:"D",text:"Tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."},
+      {letter:"E",text:"Hanya berlaku untuk Vietnam.",correct:false,"explanation":"Berlaku juga untuk Nusantara."}
+    ], difficulty:"hard", hint:"Bacson-Hoabinh = adaptasi pada hutan tropis.", points:70 },
+
+  { id:1408, topic:"Bacson-Hoabinh",
+    question:"Analisis yang paling tepat tentang mengapa Bacson-Hoabinh disebut 'kebudayaan' (bukan hanya 'alat') adalah...",
+    options:[
+      {letter:"A",text:"Karena mencakup bukan hanya alat, tapi juga pola hidup, cara beradaptasi, & sistem kepercayaan manusianya.",correct:true,explanation:"Tepat! Kebudayaan = cara hidup menyeluruh."},
+      {letter:"B",text:"Karena hanya soal alat.",correct:false,explanation:"Justru lebih dari alat."},
+      {letter:"C",text:"Karena hanya di Vietnam.",correct:false,explanation:"Tidak hanya di Vietnam."},
+      {letter:"D",text:"Karena tidak ilmiah.",correct:false,explanation:"Justru ilmiah."},
+      {letter:"E",text:"Karena hanya mitos.",correct:false,"explanation":"Justru bukti arkeologis."}
+    ], difficulty:"hard", hint:"Kebudayaan = cara hidup menyeluruh.", points:70 },
+
+  /* ===== DONG SON (8 soal) ===== */
+  { id:1409, topic:"Dong Son",
+    question:"Kebudayaan Dong Son berasal dari daerah Thanh Hoa yang terletak di...",
+    options:[
+      {letter:"A",text:"Vietnam Utara",correct:true,explanation:"Tepat! Dong Son = Thanh Hoa, Vietnam Utara."},
+      {letter:"B",text:"Thailand",correct:false,explanation:"Bukan Thailand."},
+      {letter:"C",text:"Kamboja",correct:false,explanation:"Bukan Kamboja."},
+      {letter:"D",text:"Filipina",correct:false,explanation:"Bukan Filipina."},
+      {letter:"E",text:"Indonesia",correct:false,"explanation":"Bukan Indonesia."}
+    ], difficulty:"easy", hint:"Dong Son = Thanh Hoa, Vietnam Utara.", points:50 },
+
+  { id:1410, topic:"Dong Son",
+    question:"Ciri khas kebudayaan Dong Son adalah...",
+    options:[
+      {letter:"A",text:"Teknologi perunggu tingkat tinggi",correct:true,explanation:"Tepat! Dong Son = perunggu tingkat tinggi."},
+      {letter:"B",text:"Alat batu dipangkas",correct:false,explanation:"Itu Bacson-Hoabinh."},
+      {letter:"C",text:"Bangunan megalitik",correct:false,explanation:"Itu Megalitikum."},
+      {letter:"D",text:"Lukisan gua",correct:false,explanation:"Itu Mesolitikum."},
+      {letter:"E",text:"Tembikar halus",correct:false,"explanation":"Tembikar = Neolitikum."}
+    ], difficulty:"easy", hint:"Dong Son = perunggu tingkat tinggi.", points:50 },
+
+  { id:1411, topic:"Dong Son",
+    question:"Kebudayaan Dong Son diperkirakan berkembang pada kisaran waktu...",
+    options:[
+      {letter:"A",text:"± 800 SM – 200 M",correct:true,explanation:"Tepat! Dong Son = ± 800 SM – 200 M."},
+      {letter:"B",text:"± 10.000 SM",correct:false,explanation:"Itu masa Bacson-Hoabinh."},
+      {letter:"C",text:"± 2 juta tahun lalu",correct:false,explanation:"Itu masa manusia purba awal."},
+      {letter:"D",text:"± 500 tahun lalu",correct:false,explanation:"Itu masa Islam."},
+      {letter:"E",text:"± 1.000 tahun lalu",correct:false,"explanation":"Terlalu muda."}
+    ], difficulty:"medium", hint:"Dong Son = ± 800 SM – 200 M.", points:60 },
+
+  { id:1412, topic:"Dong Son",
+    question:"Salah satu ciri khas Dong Son yang paling terkenal adalah kemampuan membuat...",
+    options:[
+      {letter:"A",text:"Nekara perunggu sebagai drum upacara",correct:true,explanation:"Tepat! Dong Son = terkenal dengan nekara."},
+      {letter:"B",text:"Kapak genggam dari batu",correct:false,explanation:"Itu Paleolitikum."},
+      {letter:"C",text:"Lukisan gua",correct:false,explanation:"Itu Mesolitikum."},
+      {letter:"D",text:"Bangunan megalitik",correct:false,explanation:"Itu Megalitikum."},
+      {letter:"E",text:"Kapak persegi dari batu",correct:false,"explanation":"Itu Neolitikum."}
+    ], difficulty:"easy", hint:"Dong Son = terkenal dengan nekara perunggu.", points:50 },
+
+  { id:1413, topic:"Dong Son",
+    question:"Analisis yang paling tepat tentang pentingnya kebudayaan Dong Son bagi praaksara Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Dong Son menunjukkan bahwa masyarakat Nusantara sudah terhubung dengan jaringan perdagangan & budaya Asia Tenggara pada masa perundagian.",correct:true,explanation:"Tepat! Dong Son = bukti jaringan perdagangan Asia Tenggara."},
+      {letter:"B",text:"Dong Son tidak berpengaruh pada Nusantara.",correct:false,explanation:"Justru sangat berpengaruh."},
+      {letter:"C",text:"Dong Son hanya untuk Vietnam.",correct:false,explanation:"Menyebar ke Nusantara juga."},
+      {letter:"D",text:"Dong Son tidak ilmiah.",correct:false,explanation:"Justru ilmiah."},
+      {letter:"E",text:"Dong Son hanya mitos.",correct:false,"explanation":"Justru bukti arkeologis."}
+    ], difficulty:"hard", hint:"Dong Son = bukti jaringan perdagangan Asia Tenggara.", points:70 },
+
+  { id:1414, topic:"Dong Son",
+    question:"Persebaran peninggalan Dong Son di Nusantara meliputi wilayah...",
+    options:[
+      {letter:"A",text:"Sumatera, Jawa, Bali, Nusa Tenggara, Maluku, & Papua",correct:true,explanation:"Tepat! Dong Son tersebar luas hingga Maluku & Papua."},
+      {letter:"B",text:"Hanya di Jawa",correct:false,explanation:"Tersebar lebih luas."},
+      {letter:"C",text:"Hanya di Bali",correct:false,explanation:"Tersebar lebih luas."},
+      {letter:"D",text:"Hanya di Sumatera",correct:false,explanation:"Tersebar lebih luas."},
+      {letter:"E",text:"Hanya di Papua",correct:false,"explanation":"Meskipun ada di Papua, juga di wilayah lain."}
+    ], difficulty:"medium", hint:"Dong Son = Sumatera, Jawa, Bali, NTT, Maluku, Papua.", points:60 },
+
+  { id:1415, topic:"Dong Son",
+    question:"Analisis yang paling tepat tentang perbedaan pokok Bacson-Hoabinh & Dong Son adalah...",
+    options:[
+      {letter:"A",text:"Bacson-Hoabinh = budaya batu (Mesolitikum) dari pegunungan; Dong Son = budaya perunggu (perundagian) dari pesisir Vietnam.",correct:true,explanation:"Tepat! Bacson-Hoabinh = batu (pegunungan); Dong Son = perunggu (pesisir)."},
+      {letter:"B",text:"Keduanya sama-sama perunggu.",correct:false,explanation:"Berbeda teknologi."},
+      {letter:"C",text:"Keduanya sama-sama batu.",correct:false,explanation:"Berbeda teknologi."},
+      {letter:"D",text:"Keduanya dari Eropa.",correct:false,explanation:"Justru dari Asia Tenggara."},
+      {letter:"E",text:"Tidak dapat dibandingkan.",correct:false,"explanation":"Dapat dibandingkan."}
+    ], difficulty:"hard", hint:"Bacson-Hoabinh = batu; Dong Son = perunggu.", points:70 },
+
+  { id:1416, topic:"Dong Son",
+    question:"Perhatikan pernyataan berikut!\n'Dong Son & Bacson-Hoabinh sama-sama berasal dari Vietnam Utara, tetapi berbeda periode & teknologi.'\n\nAnalisis yang paling tepat adalah...",
+    options:[
+      {letter:"A",text:"Tepat: keduanya dari Vietnam Utara, tetapi Bacson-Hoabinh (Mesolitikum) lebih tua dari Dong Son (Perundagian).",correct:true,explanation:"Tepat! Keduanya dari Vietnam Utara, tapi beda periode."},
+      {letter:"B",text:"Salah: Bacson-Hoabinh dari Kamboja.",correct:false,explanation:"Justru dari Vietnam Utara."},
+      {letter:"C",text:"Salah: Dong Son dari Thailand.",correct:false,explanation:"Justru dari Vietnam Utara."},
+      {letter:"D",text:"Tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."},
+      {letter:"E",text:"Keduanya dari Indonesia.",correct:false,"explanation":"Justru dari Vietnam."}
+    ], difficulty:"hard", hint:"Keduanya dari Vietnam Utara, tapi beda periode.", points:70 },
+
+  /* ===== NEKARA (5 soal) ===== */
+  { id:1417, topic:"Nekara",
+    question:"Fungsi utama nekara perunggu dalam masyarakat praaksara adalah...",
+    options:[
+      {letter:"A",text:"Sebagai drum upacara keagamaan & simbol status sosial",correct:true,explanation:"Tepat! Nekara = drum upacara & simbol status."},
+      {letter:"B",text:"Sebagai alat memasak",correct:false,explanation:"Bukan alat masak."},
+      {letter:"C",text:"Sebagai senjata perang",correct:false,explanation:"Bukan senjata utama."},
+      {letter:"D",text:"Sebagai alat pertanian",correct:false,explanation:"Bukan alat pertanian."},
+      {letter:"E",text:"Sebagai mata uang",correct:false,"explanation":"Bukan mata uang."}
+    ], difficulty:"medium", hint:"Nekara = drum upacara & simbol status.", points:60 },
+
+  { id:1418, topic:"Nekara",
+    question:"Analisis yang paling tepat tentang mengapa nekara dianggap sebagai simbol status sosial adalah...",
+    options:[
+      {letter:"A",text:"Karena pembuatannya memerlukan teknologi tinggi & bahan mahal, sehingga hanya kelompok elite yang bisa memilikinya.",correct:true,explanation:"Tepat! Nekara = bukti teknologi tinggi & mahal → simbol elite."},
+      {letter:"B",text:"Karena nekara mudah dibuat.",correct:false,explanation:"Justru sulit dibuat."},
+      {letter:"C",text:"Karena nekara murah.",correct:false,explanation:"Justru mahal."},
+      {letter:"D",text:"Karena nekara dari kayu.",correct:false,explanation:"Dari perunggu."},
+      {letter:"E",text:"Karena nekara tidak berguna.",correct:false,"explanation":"Justru sangat berguna."}
+    ], difficulty:"hard", hint:"Pembuatan sulit + bahan mahal → simbol elite.", points:70 },
+
+  { id:1419, topic:"Nekara",
+    question:"Nekara terbesar di dunia ditemukan di Pejeng, Bali, dan dikenal dengan nama...",
+    options:[
+      {letter:"A",text:"Nekara Pejeng (Bulan Pejeng)",correct:true,explanation:"Tepat! Nekara Pejeng = terbesar di dunia."},
+      {letter:"B",text:"Nekara Dong Son",correct:false,explanation:"Nama tempat asal, bukan nama nekara."},
+      {letter:"C",text:"Nekara Sangiran",correct:false,explanation:"Sangiran = situs fosil."},
+      {letter:"D",text:"Nekara Liang Bua",correct:false,explanation:"Liang Bua = Homo floresiensis."},
+      {letter:"E",text:"Nekara Bacson",correct:false,"explanation":"Bacson = kebudayaan batu."}
+    ], difficulty:"easy", hint:"Nekara Pejeng = terbesar di dunia.", points:50 },
+
+  { id:1420, topic:"Nekara",
+    question:"Perhatikan pernyataan berikut!\n'Persebaran nekara Dong Son di Nusantara menunjukkan bahwa wilayah Indonesia pernah menjadi bagian dari jaringan perdagangan perunggu Asia Tenggara.'\n\nAnalisis yang paling tepat adalah...",
+  options:[
+      {letter:"A",text:"Tepat: nekara ditemukan di Sumatera, Jawa, Bali, NTT, Maluku, & Papua — menunjukkan jaringan perdagangan yang luas.",correct:true,explanation:"Tepat! Persebaran nekara = bukti jaringan perdagangan."},
+      {letter:"B",text:"Salah: nekara hanya ada di Vietnam.",correct:false,explanation:"Justru tersebar di Nusantara."},
+      {letter:"C",text:"Salah: nekara tidak pernah sampai Nusantara.",correct:false,explanation:"Justru sampai & banyak ditemukan."},
+      {letter:"D",text:"Tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."},
+      {letter:"E",text:"Hanya berlaku untuk Bali.",correct:false,"explanation":"Berlaku untuk banyak wilayah Nusantara."}
+    ], difficulty:"hard", hint:"Persebaran nekara = bukti jaringan perdagangan.", points:70 },
+
+  { id:1421, topic:"Nekara",
+    question:"Analisis kritis yang paling tepat tentang makna persebaran nekara di Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Persebaran ini menunjukkan adanya hubungan budaya & perdagangan yang erat antara Nusantara & Asia Tenggara daratan pada masa perundagian.",correct:true,explanation:"Tepat! Hubungan budaya & perdagangan Nusantara - Asia Tenggara daratan."},
+      {letter:"B",text:"Persebaran ini hanya kebetulan.",correct:false,explanation:"Bukan kebetulan."},
+      {letter:"C",text:"Persebaran ini menunjukkan penjajahan.",correct:false,explanation:"Belum ada konsep penjajahan."},
+      {letter:"D",text:"Persebaran ini menunjukkan perdamaian.",correct:false,explanation:"Belum tentu."},
+      {letter:"E",text:"Persebaran ini tidak bermakna.",correct:false,"explanation":"Sangat bermakna."}
+    ], difficulty:"hard", hint:"Hubungan budaya & perdagangan Nusantara - Asia Tenggara daratan.", points:70 },
+
+  /* ===== KAPAK CORONG, BEJANA, ARCA PERUNGGU (5 soal) ===== */
+  { id:1422, topic:"Kapak Corong",
+    question:"Kapak corong adalah kapak perunggu dengan ciri khas...",
+    options:[
+      {letter:"A",text:"Berbentuk corong berongga di bagian pangkal untuk gagang kayu",correct:true,explanation:"Tepat! Kapak corong = berongga di pangkal untuk gagang."},
+      {letter:"B",text:"Terbuat dari batu",correct:false,explanation:"Dari perunggu."},
+      {letter:"C",text:"Tidak berlubang",correct:false,explanation:"Justru berlubang untuk gagang."},
+      {letter:"D",text:"Berbentuk bulat",correct:false,explanation:"Berbentuk kapak, bukan bulat."},
+      {letter:"E",text:"Berbentuk drum",correct:false,"explanation":"Bentuk drum = nekara."}
+    ], difficulty:"medium", hint:"Kapak corong = berongga di pangkal untuk gagang.", points:60 },
+
+  { id:1423, topic:"Kapak Corong",
+    question:"Fungsi kapak corong pada masa perundagian adalah...",
+    options:[
+      {letter:"A",text:"Sebagai alat upacara & simbol status (bukan hanya alat kerja)",correct:true,explanation:"Tepat! Kapak corong = alat upacara & simbol status."},
+      {letter:"B",text:"Sebagai alat pertanian utama",correct:false,explanation:"Bukan alat pertanian utama."},
+      {letter:"C",text:"Sebagai mata uang",correct:false,explanation:"Bukan mata uang."},
+      {letter:"D",text:"Sebagai perhiasan saja",correct:false,explanation:"Bukan sekadar perhiasan."},
+      {letter:"E",text:"Sebagai senjata utama",correct:false,"explanation":"Bukan senjata utama."}
+    ], difficulty:"medium", hint:"Kapak corong = alat upacara & simbol status.", points:60 },
+
+  { id:1424, topic:"Bejana Perunggu",
+    question:"Bejana perunggu dari masa perundagian biasanya dihiasi dengan...",
+    options:[
+      {letter:"A",text:"Motif geometris, spiral, & kadang figur hewan/matahari",correct:true,explanation:"Tepat! Bejana perunggu = hiasan geometris & figur."},
+      {letter:"B",text:"Tidak ada hiasan sama sekali",correct:false,explanation:"Justru banyak hiasan."},
+      {letter:"C",text:"Tulisan latin",correct:false,explanation:"Belum ada tulisan latin."},
+      {letter:"D",text:"Simbol agama Islam",correct:false,explanation:"Islam belum datang."},
+      {letter:"E",text:"Karakter kartun modern",correct:false,"explanation":"Tidak ada."}
+    ], difficulty:"medium", hint:"Bejana perunggu = hiasan geometris & figur hewan.", points:60 },
+
+  { id:1425, topic:"Arca Perunggu",
+    question:"Arca perunggu dari masa perundagian di Nusantara umumnya berbentuk...",
+    options:[
+      {letter:"A",text:"Figur manusia atau hewan dalam ukuran kecil",correct:true,explanation:"Tepat! Arca perunggu = figur manusia/hewan kecil."},
+      {letter:"B",text:"Bangunan besar",correct:false,explanation:"Bukan bangunan."},
+      {letter:"C",text:"Kendaraan",correct:false,explanation:"Bukan kendaraan."},
+      {letter:"D",text:"Tanaman",correct:false,explanation:"Umumnya bukan tanaman."},
+      {letter:"E",text:"Alat musik",correct:false,"explanation":"Bukan alat musik."}
+    ], difficulty:"easy", hint:"Arca perunggu = figur manusia/hewan kecil.", points:50 },
+
+  { id:1426, topic:"Peninggalan Perunggu",
+    question:"Analisis yang paling tepat tentang keberadaan beragam artefak perunggu di Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Menunjukkan kemampuan masyarakat Nusantara menyerap & mengembangkan teknologi perunggu dari Asia Tenggara daratan.",correct:true,explanation:"Tepat! Nusantara menyerap & mengembangkan teknologi perunggu."},
+      {letter:"B",text:"Menunjukkan Nusantara tidak memiliki teknologi.",correct:false,explanation:"Justru memiliki teknologi."},
+      {letter:"C",text:"Menunjukkan semua perunggu diimpor.",correct:false,explanation:"Tidak semua diimpor; banyak dibuat lokal."},
+      {letter:"D",text:"Menunjukkan Nusantara terisolasi.",correct:false,explanation:"Justru terhubung."},
+      {letter:"E",text:"Menunjukkan Nusantara menguasai dunia.",correct:false,"explanation":"Terlalu berlebihan."}
+    ], difficulty:"hard", hint:"Nusantara menyerap & mengembangkan teknologi perunggu.", points:70 },
+
+  /* ===== SA HUYNH & LAPITA (4 soal) ===== */
+  { id:1427, topic:"Sa Huynh",
+    question:"Kebudayaan Sa Huynh adalah kebudayaan zaman logam yang berasal dari...",
+    options:[
+      {letter:"A",text:"Vietnam Tengah",correct:true,explanation:"Tepat! Sa Huynh = Vietnam Tengah."},
+      {letter:"B",text:"Vietnam Utara",correct:false,explanation:"Vietnam Utara = Dong Son."},
+      {letter:"C",text:"Thailand",correct:false,explanation:"Bukan Thailand."},
+      {letter:"D",text:"Kamboja",correct:false,explanation:"Bukan Kamboja."},
+      {letter:"E",text:"Filipina",correct:false,"explanation":"Bukan Filipina."}
+    ], difficulty:"medium", hint:"Sa Huynh = Vietnam Tengah.", points:60 },
+
+  { id:1428, topic:"Sa Huynh",
+    question:"Perbedaan pokok antara Dong Son & Sa Huynh adalah...",
+    options:[
+      {letter:"A",text:"Dong Son di Vietnam Utara (perunggu); Sa Huynh di Vietnam Tengah (besi & perunggu, dengan tradisi penguburan khas).",correct:true,explanation:"Tepat! Dong Son = perunggu; Sa Huynh = besi & perunggu."},
+      {letter:"B",text:"Keduanya sama saja.",correct:false,explanation:"Berbeda lokasi & karakter."},
+      {letter:"C",text:"Dong Son di Vietnam Tengah; Sa Huynh di Vietnam Utara.",correct:false,explanation:"Terbalik."},
+      {letter:"D",text:"Keduanya di Thailand.",correct:false,explanation:"Keduanya di Vietnam."},
+      {letter:"E",text:"Keduanya di Nusantara.",correct:false,"explanation":"Keduanya di Vietnam."}
+    ], difficulty:"hard", hint:"Dong Son = Utara; Sa Huynh = Tengah.", points:70 },
+
+  { id:1429, topic:"Lapita",
+    question:"Kebudayaan Lapita adalah kebudayaan zaman logam yang berasal dari...",
+    options:[
+      {letter:"A",text:"Pasifik (Melanesia)",correct:true,explanation:"Tepat! Lapita = Pasifik/Melanesia."},
+      {letter:"B",text:"Vietnam",correct:false,explanation:"Vietnam = Dong Son/Sa Huynh."},
+      {letter:"C",text:"India",correct:false,explanation:"Bukan India."},
+      {letter:"D",text:"China",correct:false,explanation:"Bukan China."},
+      {letter:"E",text:"Eropa",correct:false,"explanation":"Bukan Eropa."}
+    ], difficulty:"medium", hint:"Lapita = Pasifik/Melanesia.", points:60 },
+
+  { id:1430, topic:"Lapita",
+    question:"Pengaruh kebudayaan Lapita terhadap Nusantara terutama terlihat di wilayah...",
+    options:[
+      {letter:"A",text:"Indonesia bagian timur (Papua, Maluku)",correct:true,explanation:"Tepat! Lapita = pengaruh kuat di Indonesia timur."},
+      {letter:"B",text:"Sumatera",correct:false,explanation:"Bukan wilayah utama Lapita."},
+      {letter:"C",text:"Jawa",correct:false,explanation:"Bukan wilayah utama Lapita."},
+      {letter:"D",text:"Kalimantan",correct:false,explanation:"Bukan wilayah utama Lapita."},
+      {letter:"E",text:"Bali",correct:false,"explanation":"Bukan wilayah utama Lapita."}
+    ], difficulty:"medium", hint:"Lapita = pengaruh di Indonesia timur.", points:60 },
+
+  /* ===== JALUR PERDAGANGAN KUNO (4 soal) ===== */
+  { id:1431, topic:"Jalur Perdagangan Kuno",
+    question:"Pada masa perundagian, jaringan perdagangan laut di Asia Tenggara menghubungkan...",
+    options:[
+      {letter:"A",text:"Vietnam, Nusantara, & daratan Asia Tenggara melalui jalur pelayaran",correct:true,explanation:"Tepat! Jaringan pelayaran Asia Tenggara kuno."},
+      {letter:"B",text:"Hanya Nusantara bagian barat.",correct:false,explanation:"Jaringan lebih luas."},
+      {letter:"C",text:"Hanya Vietnam.",correct:false,explanation:"Jaringan lebih luas."},
+      {letter:"D",text:"Eropa & Afrika.",correct:false,explanation:"Terlalu jauh."},
+      {letter:"E",text:"Amerika.",correct:false,"explanation":"Belum ada jaringan ke Amerika."}
+    ], difficulty:"medium", hint:"Jaringan pelayaran Asia Tenggara kuno.", points:60 },
+
+  { id:1432, topic:"Jalur Perdagangan Kuno",
+    question:"Bukti bahwa Nusantara menjadi bagian dari jaringan perdagangan perunggu Asia Tenggara adalah...",
+    options:[
+      {letter:"A",text:"Temuan nekara, kapak corong, & bejana perunggu Dong Son di berbagai wilayah Nusantara",correct:true,explanation:"Tepat! Temuan artefak Dong Son = bukti jaringan perdagangan."},
+      {letter:"B",text:"Tidak ada bukti.",correct:false,explanation:"Justru banyak bukti."},
+      {letter:"C",text:"Hanya temuan batu.",correct:false,explanation:"Bukan hanya batu."},
+      {letter:"D",text:"Hanya temuan lukisan gua.",correct:false,explanation:"Bukan lukisan gua."},
+      {letter:"E",text:"Hanya temuan fosil.",correct:false,"explanation":"Bukan fosil."}
+    ], difficulty:"medium", hint:"Temuan artefak Dong Son = bukti jaringan perdagangan.", points:60 },
+
+  { id:1433, topic:"Jalur Perdagangan Kuno",
+    question:"Analisis yang paling tepat tentang pentingnya jaringan perdagangan Asia Tenggara kuno bagi Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Jaringan tersebut memungkinkan pertukaran teknologi, budaya, & ide-ide baru yang memperkaya kebudayaan Nusantara.",correct:true,explanation:"Tepat! Jaringan = pertukaran teknologi & budaya."},
+      {letter:"B",text:"Jaringan tersebut tidak berpengaruh.",correct:false,explanation:"Justru sangat berpengaruh."},
+      {letter:"C",text:"Jaringan tersebut merugikan Nusantara.",correct:false,explanation:"Justru menguntungkan."},
+      {letter:"D",text:"Jaringan tersebut hanya untuk perang.",correct:false,explanation:"Bukan hanya perang."},
+      {letter:"E",text:"Jaringan tersebut hanya mitos.",correct:false,"explanation":"Justru bukti nyata."}
+    ], difficulty:"hard", hint:"Jaringan = pertukaran teknologi & budaya.", points:70 },
+
+  { id:1434, topic:"Jalur Perdagangan Kuno",
+    question:"Mengapa jalur laut lebih dominan daripada jalur darat dalam jaringan perdagangan Asia Tenggara kuno?",
+    options:[
+      {letter:"A",text:"Karena wilayah Asia Tenggara didominasi laut & selat, sehingga pelayaran lebih efisien daripada menembus hutan lebat.",correct:true,explanation:"Tepat! Jalur laut lebih efisien di Asia Tenggara."},
+      {letter:"B",text:"Karena jalur darat dilarang.",correct:false,explanation:"Tidak ada larangan."},
+      {letter:"C",text:"Karena jalur darat terlalu murah.",correct:false,explanation:"Justru jalur darat lebih mahal & sulit."},
+      {letter:"D",text:"Karena tidak ada jalur darat.",correct:false,explanation:"Ada jalur darat."},
+      {letter:"E",text:"Karena jalur laut lebih tua.",correct:false,"explanation":"Bukan soal usia."}
+    ], difficulty:"hard", hint:"Jalur laut lebih efisien di Asia Tenggara yang didominasi laut.", points:70 },
+
+  /* ===== KONSEP & SINTESIS (6 soal) ===== */
+  { id:1435, topic:"Sintesis",
+    question:"Analisis yang paling tepat tentang peran Nusantara dalam jaringan budaya Asia Tenggara kuno adalah...",
+    options:[
+      {letter:"A",text:"Nusantara bukan hanya penerima pasif, tetapi juga pengembang & penyebar budaya perunggu ke wilayah timur (Maluku, Papua).",correct:true,explanation:"Tepat! Nusantara = pengembang & penyebar budaya perunggu."},
+      {letter:"B",text:"Nusantara hanya penerima pasif.",correct:false,explanation:"Justru juga pengembang."},
+      {letter:"C",text:"Nusantara tidak terlibat.",correct:false,explanation:"Justru terlibat aktif."},
+      {letter:"D",text:"Nusantara hanya sumber bahan mentah.",correct:false,explanation:"Lebih dari itu."},
+      {letter:"E",text:"Nusantara tidak relevan.",correct:false,"explanation":"Sangat relevan."}
+    ], difficulty:"hard", hint:"Nusantara = pengembang & penyebar budaya perunggu.", points:70 },
+
+  { id:1436, topic:"Sintesis",
+    question:"Perhatikan urutan kronologis berikut!\n(1) Bacson-Hoabinh, (2) Dong Son, (3) Sa Huynh, (4) Lapita\n\nUrutan dari yang paling tua ke yang paling muda adalah...",
+    options:[
+      {letter:"A",text:"(1) Bacson-Hoabinh → (2) Dong Son → (3) Sa Huynh → (4) Lapita",correct:true,explanation:"Tepat! Bacson-Hoabinh (Mesolitikum) → Dong Son (perundagian) → Sa Huynh → Lapita."},
+      {letter:"B",text:"(4) → (3) → (2) → (1)",correct:false,explanation:"Terbalik."},
+      {letter:"C",text:"(2) → (1) → (4) → (3)",correct:false,explanation:"Urutan tidak tepat."},
+      {letter:"D",text:"(3) → (4) → (1) → (2)",correct:false,explanation:"Urutan tidak tepat."},
+      {letter:"E",text:"Semua sama tua.",correct:false,"explanation":"Berbeda periode."}
+    ], difficulty:"hard", hint:"Bacson-Hoabinh (Mesolitikum) paling tua.", points:70 },
+
+  { id:1437, topic:"Sintesis",
+    question:"Analisis yang paling tepat tentang kesamaan pokok Bacson-Hoabinh & Dong Son adalah...",
+    options:[
+      {letter:"A",text:"Keduanya berasal dari Vietnam Utara & memengaruhi kebudayaan Nusantara melalui jaringan budaya Asia Tenggara.",correct:true,explanation:"Tepat! Keduanya dari Vietnam Utara & memengaruhi Nusantara."},
+      {letter:"B",text:"Keduanya dari Eropa.",correct:false,explanation:"Justru dari Vietnam."},
+      {letter:"C",text:"Keduanya dari Indonesia.",correct:false,explanation:"Justru dari Vietnam."},
+      {letter:"D",text:"Keduanya tidak memengaruhi Nusantara.",correct:false,explanation:"Justru sangat memengaruhi."},
+      {letter:"E",text:"Keduanya sama-sama batu.",correct:false,"explanation":"Bacson-Hoabinh batu, Dong Son perunggu."}
+    ], difficulty:"hard", hint:"Keduanya dari Vietnam Utara & memengaruhi Nusantara.", points:70 },
+
+  { id:1438, topic:"Sintesis",
+    question:"Mengapa nekara & kapak corong sering dianggap bukti adanya pelapisan sosial pada masa perundagian?",
+    options:[
+      {letter:"A",text:"Karena hanya kelompok elite (kaum kaya, pemimpin, atau tokoh agama) yang mampu memiliki benda perunggu mahal & berteknologi tinggi tersebut.",correct:true,explanation:"Tepat! Benda perunggu = mahal → hanya elite pemiliknya."},
+      {letter:"B",text:"Karena benda tersebut murah.",correct:false,explanation:"Justru mahal."},
+      {letter:"C",text:"Karena benda tersebut dari batu.",correct:false,explanation:"Justru dari perunggu."},
+      {letter:"D",text:"Karena benda tersebut umum.",correct:false,explanation:"Justru langka."},
+      {letter:"E",text:"Karena benda tersebut tidak berguna.",correct:false,"explanation":"Justru sangat berguna."}
+    ], difficulty:"hard", hint:"Benda perunggu = mahal → hanya elite pemiliknya.", points:70 },
+
+  { id:1439, topic:"Sintesis",
+    question:"Kesimpulan yang paling tepat tentang peran kebudayaan Bacson-Hoabinh & Dong Son bagi sejarah Indonesia adalah...",
+    options:[
+      {letter:"A",text:"Keduanya menunjukkan bahwa Nusantara telah menjadi bagian dari jaringan budaya & perdagangan Asia Tenggara sejak ribuan tahun lalu.",correct:true,explanation:"Tepat! Nusantara = bagian jaringan Asia Tenggara sejak lama."},
+      {letter:"B",text:"Keduanya tidak relevan dengan Indonesia.",correct:false,explanation:"Justru sangat relevan."},
+      {letter:"C",text:"Keduanya hanya milik Vietnam.",correct:false,explanation:"Justru memengaruhi Nusantara."},
+      {letter:"D",text:"Keduanya hanya mitos.",correct:false,explanation:"Justru bukti arkeologis."},
+      {letter:"E",text:"Keduanya tidak berkontribusi.",correct:false,"explanation":"Justru sangat berkontribusi."}
+    ], difficulty:"hard", hint:"Nusantara = bagian jaringan Asia Tenggara sejak ribuan tahun lalu.", points:70 },
+
+  { id:1440, topic:"Sintesis",
+    question:"Refleksi kritis yang paling tepat tentang pelajaran dari kajian Bacson-Hoabinh & Dong Son bagi pelajar Indonesia adalah...",
+    options:[
+      {letter:"A",text:"Bahwa bangsa Indonesia sejak awal bukan bangsa yang tertutup, tetapi bangsa yang terbuka pada interaksi budaya & perdagangan lintas wilayah.",correct:true,explanation:"Tepat! Bangsa Indonesia = bangsa terbuka & terhubung."},
+      {letter:"B",text:"Bahwa bangsa Indonesia sejak awal tertutup.",correct:false,explanation:"Justru terbuka."},
+      {letter:"C",text:"Bahwa bangsa Indonesia tidak punya budaya.",correct:false,explanation:"Justru punya budaya kaya."},
+      {letter:"D",text:"Bahwa bangsa Indonesia tidak penting.",correct:false,explanation:"Justru sangat penting."},
+      {letter:"E",text:"Bahwa bangsa Indonesia hanya penerima pasif.",correct:false,"explanation":"Justru aktif mengembangkan."}
+    ], difficulty:"hard", hint:"Bangsa Indonesia = bangsa terbuka & terhubung.", points:70 }
+];
+
+/* ============================================================
+   CONSTANTS & STATE
+   ============================================================ */
+const TOTAL_Q = 15;
+const TIME_LIMIT = 20 * 60;
+
+const state = {
+  questions: [], currentIndex: 0, answers: [], score: 0,
+  xp: 0, level: 1, hp: 3, maxHp: 3, combo: 0, bestCombo: 0,
+  timer: null, timeLeft: TIME_LIMIT, started: false, finished: false,
+  powers: { p50:1, hint:1, skip:1 }, soundOn: true
+};
+
+/* ============================================================
+   AUDIO
+   ============================================================ */
+let audioCtx = null;
+function ensureAudio(){
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}
+function playTone(freq, dur, type, vol){
+  if (!state.soundOn) return;
+  ensureAudio(); if (!audioCtx) return;
+  try {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = type || 'sine'; o.frequency.value = freq;
+    g.gain.setValueAtTime(vol || 0.08, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + dur);
+  } catch(e){}
+}
+function sfxClick(){ playTone(520, .08, 'triangle', .06); }
+function sfxCorrect(){ playTone(660, .12, 'sine', .10); setTimeout(()=>playTone(880, .15, 'sine', .10), 80); setTimeout(()=>playTone(1100, .20, 'sine', .08), 160); }
+function sfxWrong(){ playTone(200, .18, 'sawtooth', .10); setTimeout(()=>playTone(150, .25, 'sawtooth', .08), 120); }
+function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(()=>playTone(1200, .12, 'triangle', .07), 60); }
+function sfxLevelUp(){ [523, 659, 784, 1046].forEach((f, i) => setTimeout(()=>playTone(f, .16, 'sine', .10), i*90)); }
+function sfxFinish(){ [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(()=>playTone(f, .22, 'sine', .10), i*120)); }
+function toggleSound(){
+  state.soundOn = !state.soundOn;
+  document.getElementById('soundBtn').innerHTML = state.soundOn ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+  if (state.soundOn) sfxClick();
+}
+function toggleTheme(){
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').innerHTML = next === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  sfxClick();
+}
+
+(function(){
+  const bar = document.getElementById('loaderBar');
+  const pct = document.getElementById('loaderPct');
+  const loader = document.getElementById('loader');
+  const t0 = Date.now();
+  (function tick(){
+    const p = Math.min((Date.now() - t0) / 1800 * 100, 100);
+    bar.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+    if (p < 100) requestAnimationFrame(tick);
+    else setTimeout(()=>{ loader.classList.add('hidden'); setTimeout(()=>loader.style.display='none', 700); }, 300);
+  })();
+})();
+
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  function makeP(){ return { x: Math.random()*W, y: Math.random()*H, r: Math.random()*2 + 0.4, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3 - 0.15, a: Math.random()*0.5 + 0.15, hue: Math.random() < 0.5 ? 345 : 40 }; }
+  function init(){ resize(); particles = Array.from({length: Math.min(60, Math.floor(W*H/25000))}, makeP); }
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.shadowBlur = 8; ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.fill();
+    });
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+function fireConfetti(count){
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const colors = ['#F43F5E','#FB7185','#F59E0B','#FCD34D','#34D399','#38BDF8'];
+  const pieces = Array.from({length: count || 60}, () => ({
+    x: window.innerWidth/2 + (Math.random()-0.5)*200,
+    y: window.innerHeight/2,
+    vx: (Math.random()-0.5)*14, vy: Math.random()*-16 - 4,
+    g: 0.5, r: Math.random()*8 + 4,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    rot: Math.random()*Math.PI, vr: (Math.random()-0.5)*0.3, life: 1
+  }));
+  let frame = 0;
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    pieces.forEach(p => {
+      if (p.life <= 0) return;
+      alive = true;
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.012;
+      ctx.save(); ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      ctx.restore();
+    });
+    if (alive && frame < 200) { frame++; requestAnimationFrame(animate); }
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  animate();
+}
+
+function showToast(icon, title, desc, variant){
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<div class="toast-icon ${variant||''}">${icon}</div>
+    <div class="toast-content"><div class="toast-title">${title}</div><div class="toast-desc">${desc}</div></div>`;
+  wrap.appendChild(el);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 450); }, 3200);
+}
+function scorePopup(text, x, y, color){
+  const el = document.createElement('div');
+  el.className = 'score-pop';
+  el.textContent = text;
+  el.style.left = (x || window.innerWidth/2) + 'px';
+  el.style.top = (y || window.innerHeight/2) + 'px';
+  if (color) el.style.color = color;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1100);
+}
+function shuffle(a){ const arr = a.slice(); for (let i = arr.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+function updateHpHud(){
+  const hp = document.getElementById('hudHp'); hp.innerHTML = '';
+  for (let i = 0; i < state.maxHp; i++){
+    const heart = document.createElement('i');
+    heart.className = 'fas fa-heart heart' + (i < state.hp ? '' : ' empty');
+    hp.appendChild(heart);
+  }
+}
+function updateXpHud(){
+  const xpForLevel = state.level * 100;
+  const pct = Math.min((state.xp % xpForLevel) / xpForLevel * 100, 100);
+  document.getElementById('hudLevel').textContent = state.level;
+  document.getElementById('hudXp').textContent = state.xp % xpForLevel;
+  document.getElementById('hudXpMax').textContent = xpForLevel;
+  document.getElementById('xpFill').style.width = pct + '%';
+}
+function updateComboHud(){
+  document.getElementById('comboVal').textContent = state.combo;
+  const tag = document.getElementById('comboTag');
+  if (state.combo >= 3){ tag.classList.add('hot'); setTimeout(()=>tag.classList.remove('hot'), 500); }
+}
+function updatePowers(){
+  document.getElementById('c50').textContent = state.powers.p50;
+  document.getElementById('chint').textContent = state.powers.hint;
+  document.getElementById('cskip').textContent = state.powers.skip;
+  document.getElementById('p50').disabled = state.powers.p50 <= 0;
+  document.getElementById('phint').disabled = state.powers.hint <= 0;
+  document.getElementById('pskip').disabled = state.powers.skip <= 0;
+}
+
+function startGame(){
+  ensureAudio();
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('gameHud').classList.add('active');
+  state.questions = shuffle(BANK_SOAL).slice(0, TOTAL_Q);
+  state.currentIndex = 0; state.answers = [];
+  state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.timeLeft = TIME_LIMIT; state.started = true; state.finished = false;
+  state.powers = { p50:1, hint:1, skip:1 };
+  updateHpHud(); updateXpHud(); updateComboHud(); updatePowers();
+  showToast('🥁', 'Arena Level 14 Dimulai!', 'Kuasai Bacson-Hoabinh & Dong Son!', '');
+  sfxClick();
+  startTimer();
+  renderQuestion();
+}
+
+function startTimer(){
+  if (state.timer) clearInterval(state.timer);
+  state.timer = setInterval(() => {
+    state.timeLeft--;
+    updateTimerHud();
+    if (state.timeLeft <= 0){ clearInterval(state.timer); finishGame(true); }
+  }, 1000);
+  updateTimerHud();
+}
+function updateTimerHud(){
+  const m = Math.floor(state.timeLeft / 60), s = state.timeLeft % 60;
+  document.getElementById('hudTimerVal').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  const el = document.getElementById('hudTimer');
+  if (state.timeLeft <= 120) el.classList.add('warning'); else el.classList.remove('warning');
+}
+
+function renderQuestion(){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  document.getElementById('qNumLabel').textContent = 'Soal ' + (state.currentIndex+1);
+  document.getElementById('qTopicText').textContent = q.topic || 'Praaksara';
+  document.getElementById('qText').innerHTML = q.question;
+  document.getElementById('hudQNum').textContent = state.currentIndex+1;
+  const opts = document.getElementById('options'); opts.innerHTML = '';
+  q.options.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.dataset.letter = o.letter;
+    btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
+    btn.addEventListener('click', () => selectOption(o.letter, btn));
+    opts.appendChild(btn);
+  });
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('btnNext').disabled = true;
+  document.getElementById('btnNext').style.display = '';
+  document.getElementById('btnFinish').style.display = 'none';
+  document.getElementById('qCard').classList.remove('shake');
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'qEnter .55s cubic-bezier(.16,1,.3,1)';
+  if (state.currentIndex === TOTAL_Q - 1){
+    document.getElementById('btnNext').style.display = 'none';
+    document.getElementById('btnFinish').style.display = '';
+  }
+}
+
+function selectOption(letter, btnEl){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  const selected = q.options.find(o => o.letter === letter);
+  if (!selected) return;
+  const correct = selected.correct;
+  document.querySelectorAll('#options .opt').forEach(b => {
+    b.classList.add('locked');
+    const o = q.options.find(x => x.letter === b.dataset.letter);
+    if (o.correct) b.classList.add('correct');
+    else if (b.dataset.letter === letter && !correct) b.classList.add('wrong');
+  });
+  state.answers.push({ qid: q.id, selected: letter, correct, skipped: false,
+    questionText: q.question, topic: q.topic,
+    correctLetter: q.options.find(o => o.correct).letter,
+    explanation: selected.explanation });
+  if (correct){
+    state.combo++;
+    if (state.combo > state.bestCombo) state.bestCombo = state.combo;
+    const bonus = Math.max(0, state.combo - 1) * 5;
+    const gained = (q.points || 50) + bonus;
+    state.score += gained; state.xp += gained;
+    const prevLevel = state.level;
+    state.level = Math.floor(state.xp / 100) + 1;
+    if (state.level > prevLevel){
+      sfxLevelUp();
+      showToast('⭐', 'LEVEL UP!', `Kamu naik ke Level ${state.level}!`, 'cyan');
+      fireConfetti(40);
+    }
+    sfxCorrect();
+    fireConfetti(state.combo >= 3 ? 80 : 45);
+    const rect = btnEl ? btnEl.getBoundingClientRect() : null;
+    scorePopup('+' + gained + ' XP', rect ? rect.left + rect.width/2 : window.innerWidth/2, rect ? rect.top : window.innerHeight/2, '#FB7185');
+    if (state.combo >= 3) showToast('🔥', `COMBO ×${state.combo}!`, `Bonus +${bonus} XP!`, '');
+  } else {
+    state.combo = 0; state.hp--; sfxWrong();
+    updateHpHud();
+    const hpEls = document.querySelectorAll('.hud-hp .heart');
+    if (hpEls[state.hp]) hpEls[state.hp].classList.add('losing');
+    const card = document.getElementById('qCard');
+    card.classList.add('shake'); setTimeout(() => card.classList.remove('shake'), 550);
+    if (state.hp <= 0) showToast('💔', 'Nyawa Habis!', 'Kamu kehilangan semua nyawa.', 'violet');
+  }
+  document.getElementById('hudScore').textContent = state.score;
+  updateXpHud(); updateComboHud();
+  showFeedback(correct, q, selected);
+  document.getElementById('btnNext').disabled = false;
+}
+
+function showFeedback(correct, q, selected){
+  const panel = document.getElementById('feedback');
+  const icon = document.getElementById('fbIcon');
+  const title = document.getElementById('fbTitle');
+  const body = document.getElementById('fbBody');
+  panel.classList.add('show');
+  if (correct){
+    icon.className = 'fb-icon correct'; icon.innerHTML = '<i class="fas fa-check"></i>';
+    title.className = 'fb-title correct'; title.textContent = 'BENAR!';
+  } else {
+    icon.className = 'fb-icon wrong'; icon.innerHTML = '<i class="fas fa-times"></i>';
+    title.className = 'fb-title wrong'; title.textContent = 'BELUM TEPAT';
+  }
+  const correctOpt = q.options.find(o => o.correct);
+  let html = `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
+  html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
+  if (!correct && selected) html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
+  html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
+  body.innerHTML = html;
+}
+
+function nextQuestion(){
+  if (state.currentIndex < TOTAL_Q - 1){
+    state.currentIndex++;
+    renderQuestion();
+    document.getElementById('qCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+function usePower(type){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  if (type === '50'){
+    if (state.powers.p50 <= 0) return;
+    const wrongs = q.options.filter(o => !o.correct);
+    const remove = shuffle(wrongs).slice(0, 2);
+    document.querySelectorAll('#options .opt').forEach(b => {
+      if (remove.some(o => o.letter === b.dataset.letter)) b.classList.add('disabled-50');
+    });
+    state.powers.p50 = 0; updatePowers(); sfxPower();
+    showToast('✂️', '50:50 Aktif!', 'Dua jawaban salah dihilangkan.', 'cyan');
+  } else if (type === 'hint'){
+    if (state.powers.hint <= 0) return;
+    const panel = document.getElementById('feedback');
+    const icon = document.getElementById('fbIcon');
+    const title = document.getElementById('fbTitle');
+    const body = document.getElementById('fbBody');
+    panel.classList.add('show');
+    icon.className = 'fb-icon info'; icon.innerHTML = '<i class="fas fa-lightbulb"></i>';
+    title.className = 'fb-title info'; title.textContent = 'PETUNJUK';
+    body.innerHTML = `<p>${q.hint || 'Tidak ada petunjuk.'}</p>`;
+    state.powers.hint = 0; updatePowers(); sfxPower();
+    showToast('💡', 'Petunjuk Digunakan!', 'Perhatikan dengan saksama.', '');
+  } else if (type === 'skip'){
+    if (state.powers.skip <= 0) return;
+    state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+      questionText: q.question, topic: q.topic,
+      correctLetter: q.options.find(o => o.correct).letter,
+      explanation: q.options.find(o => o.correct).explanation });
+    document.querySelectorAll('#options .opt').forEach(b => {
+      b.classList.add('locked');
+      const o = q.options.find(x => x.letter === b.dataset.letter);
+      if (o.correct) b.classList.add('correct');
+    });
+    showFeedback(false, q, null);
+    document.getElementById('btnNext').disabled = false;
+    state.powers.skip = 0; updatePowers(); sfxPower();
+    showToast('⏭️', 'Soal Dilewati', 'Jawaban benar ditampilkan.', 'violet');
+    if (state.currentIndex === TOTAL_Q - 1){
+      document.getElementById('btnNext').style.display = 'none';
+      document.getElementById('btnFinish').style.display = '';
+    }
+  }
+}
+
+function finishGame(timeout){
+  if (state.finished) return;
+  state.finished = true;
+  clearInterval(state.timer); state.timer = null;
+  const answered = state.answers.map(a => a.qid);
+  state.questions.forEach(q => {
+    if (!answered.includes(q.id)){
+      state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+        questionText: q.question, topic: q.topic,
+        correctLetter: q.options.find(o => o.correct).letter,
+        explanation: q.options.find(o => o.correct).explanation });
+    }
+  });
+  let benar = 0, salah = 0;
+  state.answers.forEach(a => { if (a.skipped) return; if (a.correct) benar++; else salah++; });
+  const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
+  const finalScore = Math.round((state.score / maxScore) * 100);
+  const grade = finalScore >= 90 ? 'A' : finalScore >= 80 ? 'B' : finalScore >= 70 ? 'C' : finalScore >= 60 ? 'D' : 'E';
+  const gradeLabel = finalScore >= 90 ? 'Sangat Baik' : finalScore >= 80 ? 'Baik' : finalScore >= 70 ? 'Cukup' : finalScore >= 60 ? 'Perlu Bimbingan' : 'Remedial';
+  const rank = finalScore >= 90 ? 'AHLI KEBUDAYAAN ASIA TENGGARA' : finalScore >= 80 ? 'PENELITI PERUNGGU' : finalScore >= 70 ? 'PELAJAR SEJARAH' : 'PEMULA';
+  const trophy = finalScore >= 90 ? '🏆' : finalScore >= 80 ? '🥇' : finalScore >= 70 ? '🥈' : finalScore >= 60 ? '🥉' : '📚';
+  const title = finalScore >= 90 ? 'Luar Biasa!' : finalScore >= 80 ? 'Kerja Bagus!' : finalScore >= 70 ? 'Terus Belajar!' : 'Jangan Menyerah!';
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('resultScreen').classList.add('active');
+  document.getElementById('rTrophy').textContent = trophy;
+  document.getElementById('rTitle').textContent = title;
+  document.getElementById('rSub').textContent = 'Kuis 14 · Kebudayaan Bacson-Hoabinh & Dong Son';
+  document.getElementById('gradeLetter').textContent = grade;
+  document.getElementById('gradeLabel').textContent = gradeLabel;
+  document.getElementById('rRank').textContent = rank;
+  document.getElementById('rXp').textContent = state.xp;
+  document.getElementById('rBestCombo').textContent = state.bestCombo;
+  document.getElementById('rBenar').textContent = benar;
+  document.getElementById('rSalah').textContent = salah;
+  document.getElementById('rSkor').textContent = finalScore;
+  document.getElementById('rXpTotal').textContent = state.xp;
+  document.getElementById('gradeRing').style.setProperty('--grade-deg', (finalScore/100*360) + 'deg');
+  document.getElementById('rMsg').textContent = finalScore >= 70
+    ? '🎯 Pertahankan semangat belajarmu! Lanjutkan ke Kuis 15 (FINAL) untuk materi Wawasan Praaksara Terpadu.'
+    : '📚 Pelajari kembali materi Bacson-Hoabinh & Dong Son, lalu coba lagi!';
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  state.answers.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
+                   a.correct ? '<span class="ri-status correct">Benar</span>' :
+                   '<span class="ri-status wrong">Salah</span>';
+    const q = a.questionText.length > 80 ? a.questionText.substring(0, 80) + '...' : a.questionText;
+    div.innerHTML = `<span class="ri-num">${i+1}.</span><span class="ri-text">${q}</span>${status}`;
+    reviewList.appendChild(div);
+  });
+  sfxFinish();
+  if (finalScore >= 70){
+    fireConfetti(180);
+    setTimeout(() => fireConfetti(120), 400);
+    setTimeout(() => showToast('🏆', 'Achievement Unlocked!', rank, ''), 500);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetGame(){
+  clearInterval(state.timer); state.timer = null;
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('startScreen').style.display = 'flex';
+  state.answers = []; state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.currentIndex = 0; state.finished = false; state.started = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('keydown', e => {
+  if (!state.started || state.finished) return;
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea') return;
+  if (['a','A','1'].includes(e.key)) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
+  else if (['b','B','2'].includes(e.key)) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
+  else if (['c','C','3'].includes(e.key)) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
+  else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
+  else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
+  else if (e.key === 'ArrowRight' || e.key === 'Enter'){
+    if (!document.getElementById('btnNext').disabled) nextQuestion();
+  }
+});
+</script>
+
+</body>
+</html>
