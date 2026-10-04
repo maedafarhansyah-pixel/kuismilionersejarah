@@ -880,6 +880,110 @@ body::before{
 .modal .step .txt{font-size:13.5px; line-height:1.7; color:rgba(199,216,240,.95);}
 .modal .step .txt b{color:#fde68a; font-weight:700;}
 
+/* ============ PENYEMANGAT ============ */
+.motivation{
+  margin:80px auto 20px;
+  padding:48px 36px;
+  border-radius:28px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(34,211,238,.18), transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(251,191,36,.16), transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(236,72,153,.10), transparent 65%),
+    linear-gradient(155deg, rgba(10,26,61,.90), rgba(4,11,28,.96));
+  border:1px solid rgba(96,165,250,.35);
+  box-shadow:
+    0 40px 100px -40px rgba(0,0,0,.98),
+    0 0 80px -30px rgba(34,211,238,.65),
+    inset 0 1px 0 rgba(255,255,255,.12);
+}
+.motivation::before{
+  content:""; position:absolute; left:5%; right:5%; top:0; height:2px;
+  background:linear-gradient(90deg,transparent,#22d3ee,#fbbf24,#ec4899,#a78bfa,#22d3ee,transparent);
+  background-size:300% 100%;
+  animation:shimmerLine 6s linear infinite;
+  box-shadow:0 0 24px rgba(34,211,238,.85);
+}
+.motivation::after{
+  content:""; position:absolute; inset:-40%; pointer-events:none;
+  background:radial-gradient(circle at 50% 50%, rgba(34,211,238,.10), transparent 60%);
+  animation:motivationPulse 8s ease-in-out infinite;
+}
+@keyframes motivationPulse{0%,100%{opacity:.5;transform:scale(1);}50%{opacity:1;transform:scale(1.08);}}
+.motivation > *{position:relative; z-index:1;}
+.motivation .emoji{
+  font-size:44px; display:block; margin-bottom:18px;
+  filter:drop-shadow(0 0 26px rgba(251,191,36,.85));
+  animation:emojiBounce 3s ease-in-out infinite;
+}
+@keyframes emojiBounce{0%,100%{transform:translateY(0) rotate(-4deg);}50%{transform:translateY(-10px) rotate(4deg);}}
+.motivation h2{
+  font-family:'Cinzel',serif;
+  font-size:clamp(24px,3.6vw,38px);
+  font-weight:800; letter-spacing:.02em; text-transform:uppercase;
+  margin-bottom:18px;
+  background:linear-gradient(100deg,#eaf3ff,#a5f3fc,#60a5fa,#a78bfa,#f472b6,#fde68a,#fbbf24,#eaf3ff);
+  background-size:300% 100%;
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent;
+  animation:liquidText 8s linear infinite;
+  filter:drop-shadow(0 4px 20px rgba(96,165,250,.55));
+}
+.motivation p{
+  max-width:720px; margin:0 auto;
+  font-size:15.5px; line-height:1.9;
+  color:rgba(199,216,240,.95);
+}
+.motivation p b{color:#fde68a; font-weight:700; text-shadow:0 0 20px rgba(251,191,36,.55);}
+.motivation p .cyan{color:#67e8f9; font-weight:700; text-shadow:0 0 20px rgba(34,211,238,.55);}
+.motivation .quote{
+  display:block; margin-top:26px;
+  font-family:'Cinzel',serif; font-style:italic;
+  font-size:16px; letter-spacing:.04em;
+  color:#a5f3fc;
+  text-shadow:0 0 28px rgba(34,211,238,.65);
+}
+.motivation .quote::before,
+.motivation .quote::after{
+  content:""; display:inline-block; width:36px; height:1px;
+  background:linear-gradient(90deg,transparent,#22d3ee);
+  vertical-align:middle; margin:0 14px;
+}
+.motivation .quote::after{background:linear-gradient(90deg,#22d3ee,transparent);}
+.motivation .cta-motiv{
+  display:inline-flex; align-items:center; gap:10px;
+  margin-top:30px; padding:14px 26px;
+  border-radius:14px; border:none; cursor:pointer;
+  font-family:inherit; font-size:12.5px; font-weight:800;
+  letter-spacing:.10em; text-transform:uppercase;
+  color:#03132b;
+  background:linear-gradient(135deg,#a5f3fc,#60a5fa,#a78bfa);
+  box-shadow:
+    0 20px 44px -18px rgba(96,165,250,1),
+    0 0 50px -12px rgba(34,211,238,.85),
+    inset 0 1px 0 rgba(255,255,255,.6);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+}
+.motivation .cta-motiv:hover{
+  transform:translateY(-4px) scale(1.03);
+  box-shadow:
+    0 30px 60px -22px rgba(96,165,250,1),
+    0 0 80px -12px rgba(167,139,250,.95),
+    inset 0 1px 0 rgba(255,255,255,.75);
+}
+.motivation .reset-link{
+  display:block; margin:22px auto 0;
+  background:none; border:none; cursor:pointer;
+  font-family:inherit; font-size:11.5px; font-weight:700;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:rgba(143,164,196,.72);
+  text-decoration:underline; text-underline-offset:4px;
+  transition:color .3s ease;
+}
+.motivation .reset-link:hover{color:#fb7185;}
+
 /* ============ FOOTER ============ */
 .footer{
   text-align:center; padding:70px 22px 60px;
@@ -933,6 +1037,7 @@ body::before{
   .search-box{flex:1 1 auto;}
   .filter-group{justify-content:center;}
   .fase-tab{padding:13px 16px; font-size:11.5px; flex:1 1 100%;}
+  .motivation{padding:38px 24px; margin-top:60px;}
 }
 @media (max-width:520px){
   .hero h1{font-size:34px;}
@@ -1054,6 +1159,35 @@ body::before{
     <div class="ico">🔎</div>
     <p>Tidak ada kuis yang cocok dengan pencarian / filter Anda.</p>
   </div>
+
+  <!-- ============ SECTION PENYEMANGAT ============ -->
+  <section class="motivation" aria-label="Pesan penyemangat">
+    <span class="emoji">🔥</span>
+    <h2>Jangan Berhenti di Tengah Jalan</h2>
+    <p>
+      Setiap kuis yang kamu selesaikan adalah <b>satu langkah kecil</b> menuju pemahaman yang lebih dalam
+      tentang perjalanan panjang bangsa ini. Mungkin ada kuis yang terasa sulit, ada soal yang bikin
+      bingung — tapi justru <span class="cyan">di situlah kamu belajar</span>.
+      <br><br>
+      Ingatlah: para pejuang kemerdekaan tidak pernah menyerah di tengah medan.
+      Mereka melangkah, jatuh, bangkit, dan terus maju — sampai titik terakhir.
+      Begitu juga kamu. <b>Selesaikan satu per satu</b>, nikmati setiap prosesnya,
+      dan biarkan rasa penasaranmu menuntunmu sampai garis akhir.
+      <br><br>
+      Ketika ke-75 kuis ini tertuntaskan, kamu bukan hanya mendapat gelar
+      <b>Maestro Nusantara</b> — kamu telah menjadi bagian dari generasi yang
+      <span class="cyan">menghargai masa lalu, memahami masa kini, dan siap membangun masa depan</span>.
+    </p>
+    <span class="quote">Terus melangkah, calon Maestro Nusantara</span>
+    <br>
+    <button class="cta-motiv" id="btn-lanjut-motiv">
+      🚀 Lanjutkan Perjuanganmu
+    </button>
+    <button class="reset-link" id="btn-reset-progress">
+      ↺ Reset progres &amp; mulai dari awal
+    </button>
+  </section>
+
 </main>
 
 <div class="modal-backdrop" id="modal-panduan">
@@ -1122,9 +1256,11 @@ const BAB_UTAMA = [
     desc:"Pembabakan zaman batu, manusia purba, dan kehidupan praaksara.",
     urls:[`${BASE}/praaksara_11.html`,`${BASE}/praaksara_12.html`,`${BASE}/praaksara_13.html`,`${BASE}/praaksara_14.html`,`${BASE}/praaksara_15.html`] },
   { bab: 4, fase: "E", nama:"Masa Hindu-Buddha", slug:"masahindubudha",
-    desc:"Masuknya Hindu-Buddha hingga Kutai, Sriwijaya, Majapahit." },
+    desc:"Masuknya Hindu-Buddha hingga Kutai, Sriwijaya, Majapahit.",
+    urls:[`${BASE}/hindubudha_16.html`,`${BASE}/hindubudha_17.html`,`${BASE}/hindubudha_18.html`,`${BASE}/hindubudha_19.html`,`${BASE}/hindubudha_20.html`] },
   { bab: 5, fase: "E", nama:"Masa Islam", slug:"masaislamdiindonesia",
-    desc:"Masuk & penyebaran Islam, Walisongo, hingga Demak & Mataram." },
+    desc:"Masuk & penyebaran Islam, Walisongo, hingga Demak & Mataram.",
+    urls:[`${BASE}/sejarahislam_21.html`,`${BASE}/sejarahislam_22.html`,`${BASE}/sejarahislam_23.html`,`${BASE}/sejarahislam_24.html`,`${BASE}/sejarahislam_25.html`] },
 
   { bab: 6, fase: "F", nama:"Kolonialisme & Imperialisme", slug:"kolonialismeimperialisme",
     desc:"Kedatangan Eropa, VOC, kebijakan kolonial, dan tanam paksa." },
@@ -1384,6 +1520,30 @@ document.addEventListener("keydown", (e) => {
     e.preventDefault();
     document.getElementById("search-input").focus();
   }
+});
+
+/* =====================================================
+   TOMBOL PENYEMANGAT
+   ===================================================== */
+document.getElementById("btn-lanjut-motiv").addEventListener("click", () => {
+  const el = document.getElementById("kuis-section");
+  if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+  showToast("Semangat! Pilih kuis berikutnya 🚀");
+});
+
+document.getElementById("btn-reset-progress").addEventListener("click", () => {
+  if(Object.keys(progress).length === 0){
+    showToast("Belum ada progres untuk direset", "undo");
+    return;
+  }
+  const yakin = confirm("Yakin ingin mereset SEMUA progres kuis? Tindakan ini tidak bisa dibatalkan.");
+  if(!yakin) return;
+  progress = {};
+  saveProgress();
+  updateGlobalProgress();
+  updateTabProgress();
+  renderAll();
+  showToast("Progres berhasil direset. Ayo mulai lagi! 💪", "undo");
 });
 
 /* =====================================================
