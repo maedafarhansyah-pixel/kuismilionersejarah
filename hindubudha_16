@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+<meta name="theme-color" content="#05060f" />
+<title>🎮 Kuis 16 · Teori Masuk &amp; Kerajaan Awal Hindu-Buddha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+:root{
+  --font-display:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'Space Grotesk',ui-monospace,monospace;
+  --primary:#F59E0B;--primary-light:#FCD34D;--primary-dark:#B45309;
+  --accent:#3B82F6;--accent-light:#93C5FD;--accent-dark:#1E40AF;
+  --emerald:#34D399;--violet:#A78BFA;--rose:#FB7185;--sky:#38BDF8;--gold:#FBBF24;
+  --bg:#05060f;--bg-2:#0b0d1c;
+  --glass:rgba(255,255,255,0.045);
+  --glass-strong:rgba(255,255,255,0.08);
+  --glass-border:rgba(255,255,255,0.10);
+  --text:#f7f5ff;--text-dim:#a8a8c0;--text-mute:#6b6b85;
+  --radius:24px;--radius-md:18px;--radius-sm:14px;--radius-xs:10px;
+  --shadow-card:0 24px 60px rgba(0,0,0,.55);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-display);background:var(--bg);color:var(--text);line-height:1.65;
+  overflow-x:hidden;min-height:100vh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+::selection{background:var(--primary);color:#05060f}
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%,rgba(245,158,11,.18),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 100%,rgba(59,130,246,.14),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 50%,rgba(252,211,77,.08),transparent 65%);
+  animation:bgShift 20s ease-in-out infinite alternate}
+@keyframes bgShift{0%{transform:scale(1) rotate(0deg);filter:hue-rotate(0deg)}100%{transform:scale(1.1) rotate(3deg);filter:hue-rotate(-10deg)}}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25;
+  background-image:
+    linear-gradient(rgba(245,158,11,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(245,158,11,.06) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%)}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
+#confettiCanvas{position:fixed;inset:0;z-index:9998;pointer-events:none}
+#loader{position:fixed;inset:0;z-index:99999;
+  background:radial-gradient(ellipse at center,#0b0d1c 0%,#05060f 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:20px;text-align:center;transition:opacity .8s ease,visibility .8s ease}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-orb{width:120px;height:120px;position:relative;display:grid;place-items:center}
+.loader-orb::before,.loader-orb::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent}
+.loader-orb::before{border-top-color:var(--primary);border-right-color:var(--primary-light);animation:spin 2s linear infinite;filter:drop-shadow(0 0 20px rgba(245,158,11,.6))}
+.loader-orb::after{inset:14px;border-bottom-color:var(--accent);border-left-color:var(--sky);animation:spin 1.6s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-core{width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 40px rgba(245,158,11,.7),inset 0 0 20px rgba(255,255,255,.25);
+  display:grid;place-items:center;font-size:1.5rem;color:#fff;
+  animation:pulseCore 2s ease-in-out infinite}
+@keyframes pulseCore{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.loader-title{font-family:var(--font-display);font-weight:900;font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:3px;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary),var(--accent));
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.loader-sub{font-size:.85rem;color:var(--text-dim);font-weight:500;letter-spacing:1px}
+.loader-bar{width:min(300px,70vw);height:4px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+.loader-bar span{display:block;height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 20px rgba(245,158,11,.6);transition:width .3s ease}
+.loader-pct{font-family:var(--font-mono);font-size:.72rem;font-weight:700;color:var(--text-mute);letter-spacing:2px}
+.game-header{position:fixed;top:0;left:0;right:0;height:60px;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:10px;
+  background:rgba(5,6,15,.72);backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border-bottom:1px solid var(--glass-border)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:.9rem;color:var(--text)}
+.brand-logo{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:.9rem;
+  box-shadow:0 0 22px rgba(245,158,11,.5);animation:logoPulse 3s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 22px rgba(245,158,11,.5)}50%{box-shadow:0 0 32px rgba(245,158,11,.8)}}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .t1{font-size:.62rem;color:var(--text-mute);letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+.brand-text .t2{font-size:.92rem;font-weight:800;color:var(--text)}
+.header-actions{display:flex;gap:6px}
+.icon-btn{width:36px;height:36px;border-radius:11px;border:1px solid var(--glass-border);
+  background:var(--glass);color:var(--text-dim);display:grid;place-items:center;cursor:pointer;
+  font-size:.85rem;transition:all .3s var(--ease-out)}
+.icon-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 0 22px rgba(245,158,11,.6);transform:translateY(-2px)}
+.wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;
+  padding:calc(60px + 20px) 16px 60px;min-height:100vh}
+.start-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:calc(100vh - 100px);text-align:center;gap:18px;padding:20px 0}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:40px;
+  background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(59,130,246,.10));
+  border:1px solid rgba(245,158,11,.30);font-size:.7rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary-light);box-shadow:0 0 30px rgba(245,158,11,.20);
+  animation:badgeFloat 3s ease-in-out infinite}
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-title{font-family:var(--font-display);font-size:clamp(2rem,7vw,3.4rem);
+  font-weight:900;line-height:1.05;letter-spacing:-1.5px;
+  background:linear-gradient(135deg,#fff 0%,var(--primary-light) 40%,var(--primary) 70%,var(--accent) 100%);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 8px 30px rgba(245,158,11,.3))}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text-dim);max-width:580px;line-height:1.75}
+.hero-sub strong{color:var(--primary-light);font-weight:700}
+.stats-showcase{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+.stat-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;
+  background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(10px);
+  font-size:.8rem;color:var(--text-dim);font-weight:600;transition:all .3s var(--ease-out)}
+.stat-pill:hover{transform:translateY(-3px);border-color:rgba(245,158,11,.4);box-shadow:0 8px 24px rgba(245,158,11,.15)}
+.stat-pill i{font-size:.95rem}
+.rules-card{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:22px 24px;
+  max-width:520px;width:100%;text-align:left;margin-top:6px;backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.rules-card h4{font-size:.85rem;font-weight:800;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.rules-card ul{list-style:none;display:grid;gap:10px}
+.rules-card li{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-dim);line-height:1.6}
+.rule-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+  border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 4px 14px rgba(245,158,11,.4)}
+.btn-play{position:relative;display:inline-flex;align-items:center;gap:14px;
+  padding:18px 54px;border-radius:60px;border:none;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;font-family:var(--font-display);font-weight:900;font-size:1.05rem;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;overflow:hidden;
+  box-shadow:0 12px 40px rgba(245,158,11,.45),inset 0 -3px 0 rgba(0,0,0,.2);
+  transition:all .4s var(--ease-spring);margin-top:14px}
+.btn-play::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.35),transparent 70%);
+  transform:translateX(-100%);transition:transform .8s ease}
+.btn-play:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 20px 60px rgba(245,158,11,.65)}
+.btn-play:hover::before{transform:translateX(100%)}
+.btn-play:active{transform:translateY(-1px) scale(.98)}
+.game-hud{display:none;flex-direction:column;gap:14px;animation:fadeSlideIn .5s var(--ease-out)}
+.game-hud.active{display:flex}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hud-top{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+  padding:14px 18px;border-radius:var(--radius-md);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.hud-hp{display:flex;align-items:center;gap:4px}
+.hud-hp .heart{font-size:1.15rem;color:var(--rose);
+  filter:drop-shadow(0 0 8px rgba(251,113,133,.6));transition:all .4s var(--ease-out)}
+.hud-hp .heart.empty{color:rgba(255,255,255,.10);filter:none;transform:scale(.85)}
+.hud-hp .heart.losing{animation:heartBreak .6s ease}
+@keyframes heartBreak{0%{transform:scale(1)}30%{transform:scale(1.4);color:#fff}100%{transform:scale(.85);opacity:.3}}
+.hud-xp{display:flex;flex-direction:column;gap:4px;min-width:0}
+.hud-xp-head{display:flex;justify-content:space-between;align-items:center;font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.hud-xp-head .lvl{color:var(--primary-light)}
+.hud-xp-head .val{color:var(--text-mute);font-family:var(--font-mono)}
+.xp-track{height:8px;border-radius:10px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+.xp-fill{height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 16px rgba(245,158,11,.7);transition:width .8s var(--ease-spring);position:relative}
+.xp-fill::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  animation:xpShine 2s linear infinite}
+@keyframes xpShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.hud-timer{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:40px;
+  background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.30);
+  font-family:var(--font-mono);font-weight:800;font-size:.85rem;color:var(--primary-light);
+  letter-spacing:1px;transition:all .3s ease}
+.hud-timer.warning{background:rgba(251,113,133,.15);border-color:rgba(251,113,133,.5);color:#fecdd3;animation:pulseWarn 1s ease-in-out infinite}
+@keyframes pulseWarn{0%,100%{box-shadow:0 0 0 0 rgba(251,113,133,.4)}50%{box-shadow:0 0 0 8px rgba(251,113,133,0)}}
+.hud-middle{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:.75rem;color:var(--text-mute);font-weight:700;padding:0 4px}
+.hud-middle .combo-tag{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:800;transition:all .3s var(--ease-spring)}
+.hud-middle .combo-tag.hot{color:var(--primary-light);animation:comboPulse .5s var(--ease-spring)}
+@keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+.q-card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:26px 26px 22px;
+  backdrop-filter:blur(20px);box-shadow:var(--shadow-card);animation:qEnter .55s var(--ease-out);overflow:hidden}
+.q-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(135deg,rgba(245,158,11,.4),transparent 40%,transparent 60%,rgba(59,130,246,.3));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+@keyframes qEnter{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.q-card.shake{animation:shake .5s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+.q-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:30px;
+  background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(245,158,11,.06));
+  border:1px solid rgba(245,158,11,.30);font-size:.72rem;font-weight:800;letter-spacing:1px;color:var(--primary-light)}
+.q-topic{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;
+  background:rgba(59,130,246,.10);border:1px solid rgba(59,130,246,.28);font-size:.68rem;
+  font-weight:800;letter-spacing:.8px;color:var(--accent);text-transform:uppercase}
+.q-text{font-size:clamp(1rem,2.2vw,1.12rem);font-weight:600;line-height:1.75;color:var(--text);
+  margin-bottom:20px;white-space:pre-line}
+.q-text strong{color:var(--primary-light);font-weight:800}
+.options{display:grid;gap:10px}
+.opt{position:relative;display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;
+  padding:15px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--glass-border);
+  background:rgba(255,255,255,.03);color:var(--text-dim);font-family:inherit;font-size:.92rem;
+  line-height:1.6;cursor:pointer;transition:all .3s var(--ease-out);overflow:hidden}
+.opt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(90deg,rgba(245,158,11,.15),transparent);
+  transition:width .4s var(--ease-out);z-index:0}
+.opt:hover:not(.locked){border-color:rgba(245,158,11,.55);transform:translateX(5px);
+  color:var(--text);box-shadow:0 8px 24px rgba(245,158,11,.15)}
+.opt:hover:not(.locked)::before{width:100%}
+.opt-letter{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;flex-shrink:0;background:rgba(255,255,255,.06);
+  color:var(--text-mute);font-weight:800;font-size:.85rem;transition:all .3s var(--ease-out);
+  border:1px solid rgba(255,255,255,.06)}
+.opt-text{position:relative;z-index:1;flex:1}
+.opt:hover:not(.locked) .opt-letter{background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;border-color:transparent;box-shadow:0 0 20px rgba(245,158,11,.6)}
+.opt.correct{border-color:var(--emerald);background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(52,211,153,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(52,211,153,.15),0 12px 32px rgba(52,211,153,.25);
+  animation:correctPop .5s var(--ease-spring)}
+@keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.02)}100%{transform:scale(1)}}
+.opt.correct .opt-letter{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(52,211,153,.7)}
+.opt.wrong{border-color:var(--rose);background:linear-gradient(135deg,rgba(251,113,133,.15),rgba(251,113,133,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(251,113,133,.15),0 12px 32px rgba(251,113,133,.25)}
+.opt.wrong .opt-letter{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(251,113,133,.7)}
+.opt.locked{pointer-events:none}
+.opt.disabled-50{opacity:.2;pointer-events:none;filter:grayscale(1) blur(.5px)}
+.feedback{display:none;padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(16px);box-shadow:var(--shadow-card);
+  animation:qEnter .5s var(--ease-out)}
+.feedback.show{display:block}
+.fb-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.fb-icon{width:48px;height:48px;border-radius:15px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;transition:all .4s var(--ease-spring)}
+.fb-icon.correct{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;box-shadow:0 0 32px rgba(52,211,153,.6)}
+.fb-icon.wrong{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;box-shadow:0 0 32px rgba(251,113,133,.6)}
+.fb-icon.info{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 0 32px rgba(245,158,11,.6)}
+.fb-title{font-size:1.05rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
+.fb-title.correct{color:var(--emerald)}
+.fb-title.wrong{color:#fecdd3}
+.fb-title.info{color:var(--primary-light)}
+.fb-body{font-size:.9rem;color:var(--text-dim);line-height:1.75}
+.fb-body strong{color:var(--text);font-weight:700}
+.fb-sec{margin-top:12px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.10)}
+.fb-label{font-size:.68rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--primary-light);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.fb-points{margin-top:12px;padding:14px 16px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(59,130,246,.10),rgba(59,130,246,.03));border-left:3px solid var(--accent)}
+.fb-points .fb-label{color:var(--accent)}
+.fb-points p{font-size:.87rem;color:var(--text-dim);line-height:1.7}
+.hud-bottom{display:flex;flex-direction:column;gap:12px}
+.power-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.power-btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;
+  border-radius:50px;border:1px solid var(--glass-border);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  color:var(--text-dim);font-family:inherit;font-weight:800;font-size:.78rem;letter-spacing:.5px;
+  cursor:pointer;transition:all .3s var(--ease-spring);overflow:hidden}
+.power-btn i{font-size:.9rem}
+.power-btn:hover:not(:disabled):not(.used){transform:translateY(-3px);border-color:rgba(245,158,11,.5);color:var(--text);box-shadow:0 8px 24px rgba(245,158,11,.25)}
+.power-btn:active:not(:disabled):not(.used){transform:scale(.96)}
+.power-btn .cnt{font-size:.62rem;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.10);font-weight:900;font-family:var(--font-mono)}
+.power-btn.used{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.power-btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.power-btn.p50{color:var(--accent)}
+.power-btn.phint{color:var(--primary-light)}
+.power-btn.pskip{color:var(--rose)}
+.action-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 30px;border-radius:50px;border:none;
+  font-family:inherit;font-weight:900;font-size:.88rem;letter-spacing:.5px;cursor:pointer;
+  transition:all .35s var(--ease-spring)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;
+  box-shadow:0 10px 32px rgba(245,158,11,.4),inset 0 -2px 0 rgba(0,0,0,.15)}
+.btn-primary:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 44px rgba(245,158,11,.6)}
+.btn-primary:active:not(:disabled){transform:scale(.96)}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--text-dim);border:1px solid var(--glass-border)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(245,158,11,.4);transform:translateY(-2px)}
+.result-screen{display:none;flex-direction:column;gap:16px;text-align:center;animation:fadeSlideIn .6s var(--ease-out)}
+.result-screen.active{display:flex}
+.result-hero{position:relative;padding:38px 26px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);box-shadow:var(--shadow-card);overflow:hidden}
+.result-hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center top,rgba(245,158,11,.20),transparent 60%);pointer-events:none}
+.result-trophy{font-size:4rem;line-height:1;margin-bottom:8px;
+  filter:drop-shadow(0 8px 30px rgba(245,158,11,.6));animation:trophyFloat 3s ease-in-out infinite}
+@keyframes trophyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.result-title{font-family:var(--font-display);font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:900;
+  letter-spacing:-.5px;background:linear-gradient(135deg,#fff,var(--primary-light),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.result-sub{font-size:.9rem;color:var(--text-dim);margin-bottom:6px}
+.grade-ring{position:relative;width:130px;height:130px;margin:16px auto;border-radius:50%;
+  background:conic-gradient(var(--primary) var(--grade-deg,0deg),rgba(255,255,255,.08) 0deg);
+  padding:8px;box-shadow:0 0 40px rgba(245,158,11,.4);animation:ringPop .8s var(--ease-spring)}
+@keyframes ringPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.grade-inner{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at center,#0b0d1c,#05060f);display:grid;place-items:center;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.6)}
+.grade-letter{font-size:2.6rem;font-weight:900;line-height:1;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent}
+.grade-label{font-size:.62rem;font-weight:800;letter-spacing:2px;color:var(--text-mute);text-transform:uppercase;margin-top:2px}
+.result-title-text{font-size:1.1rem;font-weight:900;color:var(--primary-light);letter-spacing:.5px;margin-top:8px;text-transform:uppercase}
+.result-xp-line{font-size:.88rem;color:var(--text-dim);margin-top:6px}
+.result-xp-line strong{color:var(--accent);font-family:var(--font-mono);font-weight:800}
+.result-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:20px 0 8px}
+.rs-box{padding:16px 10px;border-radius:var(--radius-sm);background:rgba(255,255,255,.04);
+  border:1px solid var(--glass-border);transition:all .3s var(--ease-out)}
+.rs-box:hover{transform:translateY(-3px);border-color:rgba(245,158,11,.3)}
+.rs-val{font-size:1.7rem;font-weight:900;line-height:1.1;font-family:var(--font-mono)}
+.rs-val.green{color:var(--emerald);text-shadow:0 0 20px rgba(52,211,153,.5)}
+.rs-val.red{color:#fecdd3;text-shadow:0 0 20px rgba(251,113,133,.5)}
+.rs-val.cyan{color:var(--accent);text-shadow:0 0 20px rgba(59,130,246,.5)}
+.rs-val.violet{color:var(--primary-light);text-shadow:0 0 20px rgba(252,211,77,.5)}
+.rs-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.5px;color:var(--text-mute);text-transform:uppercase;margin-top:6px}
+.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:14px 18px;border-radius:12px;
+  background:rgba(245,158,11,.06);border-left:3px solid var(--primary);margin-top:6px;text-align:left}
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.review-panel{padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);text-align:left}
+.review-panel h4{font-size:.9rem;font-weight:900;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.review-list{display:grid;gap:8px}
+.review-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-radius:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:.84rem;
+  line-height:1.6;transition:all .3s var(--ease-out)}
+.review-item:hover{background:rgba(255,255,255,.06);transform:translateX(3px)}
+.review-item .ri-num{font-weight:900;color:var(--text-mute);flex-shrink:0;font-family:var(--font-mono);font-size:.78rem;min-width:26px}
+.review-item .ri-text{flex:1;color:var(--text-dim)}
+.review-item .ri-status{font-size:.68rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:20px;flex-shrink:0}
+.ri-status.correct{background:rgba(52,211,153,.15);color:#6ee7b7}
+.ri-status.wrong{background:rgba(251,113,133,.15);color:#fecdd3}
+.ri-status.skipped{background:rgba(255,255,255,.06);color:var(--text-mute)}
+.toast-wrap{position:fixed;top:74px;right:16px;z-index:9999;display:flex;flex-direction:column;
+  gap:10px;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast{display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(11,13,28,.95),rgba(5,6,15,.95));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);
+  box-shadow:0 16px 40px rgba(0,0,0,.6),0 0 0 1px rgba(245,158,11,.15);
+  pointer-events:auto;animation:toastIn .5s var(--ease-spring);max-width:340px}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast.out{animation:toastOut .4s ease forwards}
+@keyframes toastOut{to{transform:translateX(120%);opacity:0}}
+.toast-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 24px rgba(245,158,11,.6)}
+.toast-icon.green{background:linear-gradient(135deg,var(--emerald),#059669);box-shadow:0 0 24px rgba(52,211,153,.6)}
+.toast-icon.cyan{background:linear-gradient(135deg,var(--accent),var(--accent-dark));box-shadow:0 0 24px rgba(59,130,246,.6)}
+.toast-icon.violet{background:linear-gradient(135deg,var(--violet),#6C63FF);box-shadow:0 0 24px rgba(167,139,250,.6)}
+.toast-content{flex:1;min-width:0}
+.toast-title{font-size:.85rem;font-weight:900;color:var(--text);letter-spacing:.3px}
+.toast-desc{font-size:.75rem;color:var(--text-dim);line-height:1.5;margin-top:2px}
+.score-pop{position:fixed;z-index:9997;pointer-events:none;font-family:var(--font-display);
+  font-weight:900;font-size:1.6rem;color:var(--primary-light);text-shadow:0 0 20px rgba(245,158,11,.8);
+  animation:scorePop 1s var(--ease-out) forwards}
+@keyframes scorePop{0%{transform:translate(-50%,0) scale(.5);opacity:0}
+  20%{transform:translate(-50%,-20px) scale(1.2);opacity:1}
+  100%{transform:translate(-50%,-80px) scale(1);opacity:0}}
+@media (max-width:600px){
+  .wrap{padding:calc(60px + 14px) 12px 50px}
+  .q-card{padding:20px 18px}
+  .opt{padding:13px 14px;font-size:.87rem;gap:11px}
+  .opt-letter{width:30px;height:30px;font-size:.78rem}
+  .hud-top{padding:12px 14px;gap:8px}
+  .hud-timer{padding:6px 11px;font-size:.78rem}
+  .hud-hp .heart{font-size:1rem}
+  .power-btn{padding:9px 14px;font-size:.72rem}
+  .btn{padding:12px 22px;font-size:.82rem;width:100%;justify-content:center}
+  .action-bar{flex-direction:column}
+  .result-hero{padding:28px 18px}
+  .grade-ring{width:110px;height:110px}
+  .grade-letter{font-size:2.2rem}
+  .rs-val{font-size:1.4rem}
+  .toast{max-width:calc(100vw - 24px);padding:12px 14px}
+  .toast-icon{width:36px;height:36px;font-size:1rem}
+}
+@media print{
+  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap{display:none!important}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+<canvas id="particles"></canvas>
+<canvas id="confettiCanvas"></canvas>
+
+<div id="loader">
+  <div class="loader-orb">
+    <div class="loader-core"><i class="fas fa-landmark"></i></div>
+  </div>
+  <div class="loader-title">HISTOEXPLORER</div>
+  <div class="loader-sub">Kuis 16 · Teori Masuk &amp; Kerajaan Awal</div>
+  <div class="loader-bar"><span id="loaderBar"></span></div>
+  <div class="loader-pct" id="loaderPct">0%</div>
+</div>
+
+<header class="game-header">
+  <div class="brand">
+    <div class="brand-logo"><i class="fas fa-landmark"></i></div>
+    <div class="brand-text">
+      <span class="t1">KUIS 16 · HINDU-BUDDHA</span>
+      <span class="t2">Teori Masuk &amp; Kerajaan Awal</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="Suara"><i class="fas fa-volume-up"></i></button>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema"><i class="fas fa-sun"></i></button>
+  </div>
+</header>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<main class="wrap">
+
+  <section class="start-screen" id="startScreen">
+    <span class="hero-badge"><i class="fas fa-crown"></i> PREMIUM GAME MODE · LEVEL 16</span>
+    <h1 class="hero-title">Teori Masuk<br>&amp; Kerajaan Awal</h1>
+    <p class="hero-sub">
+      Kuasai <strong>4 teori masuknya Hindu-Buddha</strong> (Ksatria, Brahmana, Waisya, Arus Balik) dan <strong>kerajaan Hindu awal</strong> — Kutai &amp; Tarumanegara — beserta bukti prasastinya!
+    </p>
+
+    <div class="stats-showcase">
+      <span class="stat-pill" style="color:#FCD34D"><i class="fas fa-question-circle"></i> 15 Soal Acak</span>
+      <span class="stat-pill" style="color:#93C5FD"><i class="fas fa-stopwatch"></i> 20 Menit</span>
+      <span class="stat-pill" style="color:#FB7185"><i class="fas fa-heart"></i> 3 Nyawa</span>
+      <span class="stat-pill" style="color:#34D399"><i class="fas fa-bolt"></i> Combo &amp; XP</span>
+    </div>
+
+    <div class="rules-card">
+      <h4><i class="fas fa-list-check"></i> Cara Bermain</h4>
+      <ul>
+        <li><span class="rule-num">1</span> Jawab 15 soal HOTS dari bank 40 soal — dipilih acak setiap sesi.</li>
+        <li><span class="rule-num">2</span> Jawaban benar memberi <strong>XP</strong> + memicu <strong>combo</strong>. Salah mengurangi <strong>1 nyawa</strong>.</li>
+        <li><span class="rule-num">3</span> Power-up: <strong>50:50</strong>, <strong>Petunjuk</strong>, <strong>Lewati</strong> (masing-masing 1×).</li>
+        <li><span class="rule-num">4</span> Raih <strong>Achievement</strong> dan taklukkan peringkat <strong>Arkeolog Muda</strong>!</li>
+      </ul>
+    </div>
+
+    <button class="btn-play" onclick="startGame()">
+      <i class="fas fa-play"></i> Mulai Bermain
+    </button>
+  </section>
+
+  <section class="game-hud" id="gameHud">
+    <div class="hud-top">
+      <div class="hud-hp" id="hudHp"></div>
+      <div class="hud-xp">
+        <div class="hud-xp-head">
+          <span class="lvl">LV <span id="hudLevel">1</span></span>
+          <span class="val"><span id="hudXp">0</span> / <span id="hudXpMax">100</span> XP</span>
+        </div>
+        <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
+      </div>
+      <div class="hud-timer" id="hudTimer">
+        <i class="fas fa-stopwatch"></i> <span id="hudTimerVal">20:00</span>
+      </div>
+    </div>
+
+    <div class="hud-middle">
+      <span><i class="fas fa-question-circle" style="color:var(--primary)"></i> Soal <strong id="hudQNum">1</strong>/<strong>15</strong></span>
+      <span class="combo-tag" id="comboTag"><i class="fas fa-fire"></i> Combo ×<span id="comboVal">0</span></span>
+      <span><i class="fas fa-star" style="color:var(--accent)"></i> Skor <strong id="hudScore" style="font-family:var(--font-mono)">0</strong></span>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-meta">
+        <span class="q-num"><i class="fas fa-bookmark"></i> <span id="qNumLabel">Soal 1</span></span>
+        <span class="q-topic" id="qTopic"><i class="fas fa-tag"></i> <span id="qTopicText">Teori Ksatria</span></span>
+      </div>
+      <div class="q-text" id="qText">Memuat soal...</div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <div class="feedback" id="feedback">
+      <div class="fb-head">
+        <div class="fb-icon" id="fbIcon"><i class="fas fa-check"></i></div>
+        <div class="fb-title" id="fbTitle">BENAR!</div>
+      </div>
+      <div class="fb-body" id="fbBody"></div>
+    </div>
+
+    <div class="hud-bottom">
+      <div class="power-bar">
+        <button class="power-btn p50" id="p50" onclick="usePower('50')">
+          <i class="fas fa-compress-alt"></i> 50:50 <span class="cnt" id="c50">1</span>
+        </button>
+        <button class="power-btn phint" id="phint" onclick="usePower('hint')">
+          <i class="fas fa-lightbulb"></i> Petunjuk <span class="cnt" id="chint">1</span>
+        </button>
+        <button class="power-btn pskip" id="pskip" onclick="usePower('skip')">
+          <i class="fas fa-forward"></i> Lewati <span class="cnt" id="cskip">1</span>
+        </button>
+      </div>
+      <div class="action-bar">
+        <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>
+          Selanjutnya <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="btn btn-primary" id="btnFinish" onclick="finishGame()" style="display:none">
+          Lihat Hasil <i class="fas fa-flag-checkered"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="result-screen" id="resultScreen">
+    <div class="result-hero">
+      <div class="result-trophy" id="rTrophy">🏆</div>
+      <h2 class="result-title" id="rTitle">Luar Biasa!</h2>
+      <p class="result-sub" id="rSub">Kuis 16 · Teori Masuk &amp; Kerajaan Awal</p>
+      <div class="grade-ring" id="gradeRing">
+        <div class="grade-inner">
+          <div class="grade-letter" id="gradeLetter">A</div>
+          <div class="grade-label" id="gradeLabel">Sangat Baik</div>
+        </div>
+      </div>
+      <div class="result-title-text" id="rRank">ARKEOLOG MUDA</div>
+      <div class="result-xp-line">Total XP: <strong id="rXp">0</strong> · Best Combo: <strong id="rBestCombo">0</strong></div>
+      <div class="result-stats">
+        <div class="rs-box"><div class="rs-val green" id="rBenar">0</div><div class="rs-lbl">Benar</div></div>
+        <div class="rs-box"><div class="rs-val red" id="rSalah">0</div><div class="rs-lbl">Salah</div></div>
+        <div class="rs-box"><div class="rs-val cyan" id="rSkor">0</div><div class="rs-lbl">Skor</div></div>
+        <div class="rs-box"><div class="rs-val violet" id="rXpTotal">0</div><div class="rs-lbl">XP Total</div></div>
+      </div>
+      <div class="result-msg" id="rMsg"></div>
+      <div class="result-actions">
+        <button class="btn btn-primary" onclick="resetGame()"><i class="fas fa-redo"></i> Main Lagi</button>
+        <button class="btn btn-ghost" onclick="window.location.reload()"><i class="fas fa-home"></i> Menu Awal</button>
+      </div>
+    </div>
+    <div class="review-panel">
+      <h4><i class="fas fa-list-check"></i> Rincian Jawaban</h4>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ============================================================
+   BANK SOAL — 40 SOAL HOTS · KUIS 16 (REVISI BALANCED)
+   Distribusi jawaban: A=8, B=8, C=8, D=8, E=8
+   ============================================================ */
+const BANK_SOAL = [
+  /* ===== TEORI KSATRIA (5 soal) ===== */
+  { id:1601, topic:"Teori Ksatria",
+    question:"Teori Ksatria menyatakan bahwa Hindu-Buddha masuk ke Nusantara dibawa oleh kaum bangsawan India. Alasan utama teori ini didukung adalah...",
+    options:[
+      {letter:"A",text:"Banyak raja Nusantara yang mengaku keturunan ksatria India, seperti dalam silsilah raja Kutai.",correct:true,explanation:"Tepat! Silsilah raja Kutai menunjukkan pengaruh ksatria."},
+      {letter:"B",text:"Hanya ksatria yang mampu membaca kitab suci.",correct:false,explanation:"Kemampuan membaca bukan monopoli ksatria."},
+      {letter:"C",text:"Ksatria India adalah satu-satunya pelaut ulung.",correct:false,explanation:"Bukan alasan utama."},
+      {letter:"D",text:"Ksatria menikah dengan putri Nusantara.",correct:false,explanation:"Bukan bukti utama teori ini."},
+      {letter:"E",text:"Ksatria India adalah yang pertama menemukan Selat Malaka.",correct:false,explanation:"Bukan alasan teori ini."}
+    ], difficulty:"medium", hint:"Bukti: silsilah raja Kutai, kasta ksatria yang mendirikan kerajaan.", points:60 },
+
+  { id:1602, topic:"Teori Ksatria",
+    question:"Kelemahan teori Ksatria menurut para kritikus adalah...",
+    options:[
+      {letter:"A",text:"Tidak semua kerajaan di Nusantara didirikan oleh ksatria India.",correct:true,explanation:"Tepat! Tidak semua kerajaan didirikan ksatria India."},
+      {letter:"B",text:"Ksatria tidak memiliki kekuatan politik untuk mendirikan kerajaan.",correct:false,explanation:"Justru ksatria punya kekuatan politik."},
+      {letter:"C",text:"Ksatria tidak mengenal agama Hindu.",correct:false,explanation:"Justru ksatria pemeluk Hindu."},
+      {letter:"D",text:"Ksatria tidak dapat berlayar ke Nusantara.",correct:false,explanation:"Tidak relevan."},
+      {letter:"E",text:"Ksatria tidak mendukung pembangunan candi.",correct:false,explanation:"Bukan kelemahan teori."}
+    ], difficulty:"medium", hint:"Kelemahan: tidak semua kerajaan didirikan ksatria India.", points:60 },
+
+  { id:1603, topic:"Teori Ksatria",
+    question:"Seorang siswa berpendapat: 'Kalau teori Ksatria benar, seharusnya semua kerajaan Hindu-Buddha di Nusantara didirikan orang India.' Bagaimana kritik yang tepat terhadap pendapat tersebut?",
+    options:[
+      {letter:"A",text:"Pendapat benar — semua kerajaan didirikan orang India.",correct:false,explanation:"Salah, banyak juga didirikan pribumi."},
+      {letter:"B",text:"Pendapat salah karena ksatria tidak ada.",correct:false,explanation:"Ksatria itu ada."},
+      {letter:"C",text:"Pendapat terlalu menyederhanakan: ksatria India mungkin memengaruhi, tetapi banyak kerajaan tetap didirikan pribumi Nusantara.",correct:true,explanation:"Tepat! Banyak kerajaan didirikan pribumi Nusantara."},
+      {letter:"D",text:"Pendapat salah karena Hindu-Buddha tidak masuk ke Nusantara.",correct:false,explanation:"Justru masuk."},
+      {letter:"E",text:"Pendapat tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."}
+    ], difficulty:"hard", hint:"Banyak kerajaan juga didirikan pribumi.", points:70 },
+
+  { id:1604, topic:"Teori Ksatria",
+    question:"Analisis kritis yang paling tepat tentang teori Ksatria adalah...",
+    options:[
+      {letter:"A",text:"Teori Ksatria adalah teori paling benar.",correct:false,explanation:"Tidak ada teori yang paling benar."},
+      {letter:"B",text:"Teori Ksatria adalah mitos.",correct:false,explanation:"Bukan mitos."},
+      {letter:"C",text:"Teori Ksatria tidak ilmiah.",correct:false,explanation:"Tetap ilmiah sebagai hipotesis."},
+      {letter:"D",text:"Teori Ksatria mengabaikan peran pedagang.",correct:false,explanation:"Memang fokus ksatria, tapi bukan berarti mengabaikan."},
+      {letter:"E",text:"Teori Ksatria menjelaskan proses masuk Hindu-Buddha melalui penaklukan, tetapi tidak semua bukti mendukung ekspansi militer.",correct:true,explanation:"Tepat! Ksatria via penaklukan, tapi bukti tidak selalu ekspansi militer."}
+    ], difficulty:"hard", hint:"Ksatria via penaklukan, tapi bukti tidak selalu ekspansi militer.", points:70 },
+
+  { id:1605, topic:"Teori Ksatria",
+    question:"Nama pendukung utama teori Ksatria adalah...",
+    options:[
+      {letter:"A",text:"J.C. van Leur",correct:false,explanation:"Van Leur mendukung teori Brahmana."},
+      {letter:"B",text:"N.J. Krom",correct:false,explanation:"Krom mendukung teori Waisya."},
+      {letter:"C",text:"F.D.K. Bosch",correct:false,explanation:"Bosch mendukung teori Arus Balik."},
+      {letter:"D",text:"C.C. Berg",correct:true,explanation:"Tepat! C.C. Berg pendukung teori Ksatria."},
+      {letter:"E",text:"Soekmono",correct:false,explanation:"Bukan pendukung utama."}
+    ], difficulty:"easy", hint:"C.C. Berg pendukung teori Ksatria.", points:50 },
+
+  /* ===== TEORI BRAHMANA (5 soal) ===== */
+  { id:1606, topic:"Teori Brahmana",
+    question:"Menurut teori Brahmana, Hindu-Buddha masuk ke Nusantara dibawa oleh...",
+    options:[
+      {letter:"A",text:"Kaum pedagang India yang menetap.",correct:false,explanation:"Itu teori Waisya."},
+      {letter:"B",text:"Kaum ksatria yang menaklukkan Nusantara.",correct:false,explanation:"Itu teori Ksatria."},
+      {letter:"C",text:"Kaum Brahmana yang diundang penguasa lokal.",correct:true,explanation:"Tepat! Brahmana diundang penguasa lokal."},
+      {letter:"D",text:"Orang Nusantara yang belajar ke India.",correct:false,explanation:"Itu teori Arus Balik."},
+      {letter:"E",text:"Biksu Tiongkok yang singgah.",correct:false,explanation:"Bukan teori utama."}
+    ], difficulty:"easy", hint:"Brahmana diundang penguasa lokal.", points:50 },
+
+  { id:1607, topic:"Teori Brahmana",
+    question:"Bukti utama yang mendukung teori Brahmana adalah...",
+    options:[
+      {letter:"A",text:"Adanya pedagang India di pesisir.",correct:false,explanation:"Bukti teori Waisya."},
+      {letter:"B",text:"Adanya penaklukan militer.",correct:false,explanation:"Bukti teori Ksatria."},
+      {letter:"C",text:"Adanya biksu Tiongkok.",correct:false,explanation:"Bukan bukti utama."},
+      {letter:"D",text:"Penggunaan bahasa Sanskerta dan huruf Pallawa dalam prasasti-prasasti awal Nusantara.",correct:true,explanation:"Tepat! Sanskerta & Pallawa adalah bahasa & huruf Brahmana."},
+      {letter:"E",text:"Adanya hubungan diplomatik dengan India.",correct:false,explanation:"Bukan bukti utama."}
+    ], difficulty:"medium", hint:"Sanskerta & Pallawa adalah bahasa & huruf Brahmana.", points:60 },
+
+  { id:1608, topic:"Teori Brahmana",
+    question:"Analisis yang paling tepat tentang mengapa teori Brahmana dianggap lebih kuat dari teori Waisya adalah...",
+    options:[
+      {letter:"A",text:"Karena Brahmana lebih kaya dari pedagang.",correct:false,explanation:"Bukan soal kekayaan."},
+      {letter:"B",text:"Karena Brahmana berasal dari India Selatan.",correct:false,explanation:"Tidak relevan."},
+      {letter:"C",text:"Karena Brahmana adalah pelaut ulung.",correct:false,explanation:"Bukan pelaut."},
+      {letter:"D",text:"Karena Brahmana mendirikan candi.",correct:false,explanation:"Bukan bukti utama."},
+      {letter:"E",text:"Karena Brahmana adalah kasta tertinggi dan berperan besar dalam menyebarkan agama melalui pendidikan & ritual, sedangkan pedagang umumnya tidak menyebarkan agama.",correct:true,explanation:"Tepat! Brahmana = penyebar agama via pendidikan & ritual."}
+    ], difficulty:"hard", hint:"Brahmana = penyebar agama via pendidikan & ritual.", points:70 },
+
+  { id:1609, topic:"Teori Brahmana",
+    question:"Perhatikan pernyataan berikut!\n'Brahmana tidak memiliki kekuatan politik untuk mendirikan kerajaan.'\n\nAnalisis yang paling tepat tentang pernyataan tersebut adalah...",
+    options:[
+      {letter:"A",text:"Pernyataan salah: Brahmana kasta penguasa.",correct:false,explanation:"Brahmana kasta agama, bukan penguasa."},
+      {letter:"B",text:"Pernyataan tepat: Brahmana bukan kasta penguasa, sehingga teori Brahmana lemah dalam menjelaskan pendirian kerajaan.",correct:true,explanation:"Tepat! Brahmana bukan kasta penguasa."},
+      {letter:"C",text:"Pernyataan salah: Brahmana punya kekuatan militer.",correct:false,explanation:"Brahmana tidak punya militer."},
+      {letter:"D",text:"Pernyataan tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."},
+      {letter:"E",text:"Pernyataan hanya berlaku untuk Sriwijaya.",correct:false,explanation:"Berlaku umum."}
+    ], difficulty:"hard", hint:"Brahmana = kasta agama, bukan penguasa.", points:70 },
+
+  { id:1610, topic:"Teori Brahmana",
+    question:"Nama pendukung teori Brahmana adalah...",
+    options:[
+      {letter:"A",text:"C.C. Berg",correct:false,explanation:"Berg = Ksatria."},
+      {letter:"B",text:"N.J. Krom",correct:false,explanation:"Krom = Waisya."},
+      {letter:"C",text:"F.D.K. Bosch",correct:false,explanation:"Bosch = Arus Balik."},
+      {letter:"D",text:"J.C. van Leur",correct:true,explanation:"Tepat! Van Leur pendukung teori Brahmana."},
+      {letter:"E",text:"G. Coedès",correct:false,explanation:"Bukan pendukung utama."}
+    ], difficulty:"easy", hint:"Van Leur pendukung teori Brahmana.", points:50 },
+
+  /* ===== TEORI WAISYA (5 soal) ===== */
+  { id:1611, topic:"Teori Waisya",
+    question:"Menurut teori Waisya, Hindu-Buddha masuk ke Nusantara melalui peran...",
+    options:[
+      {letter:"A",text:"Brahmana yang diundang penguasa lokal.",correct:false,explanation:"Itu teori Brahmana."},
+      {letter:"B",text:"Pedagang India yang singgah dan menetap di Nusantara.",correct:true,explanation:"Tepat! Waisya = pedagang."},
+      {letter:"C",text:"Ksatria yang menaklukkan Nusantara.",correct:false,explanation:"Itu teori Ksatria."},
+      {letter:"D",text:"Orang Nusantara yang belajar ke India.",correct:false,explanation:"Itu teori Arus Balik."},
+      {letter:"E",text:"Biksu Buddha dari Sri Lanka.",correct:false,explanation:"Bukan teori utama."}
+    ], difficulty:"easy", hint:"Waisya = pedagang.", points:50 },
+
+  { id:1612, topic:"Teori Waisya",
+    question:"Nama pendukung teori Waisya adalah...",
+    options:[
+      {letter:"A",text:"C.C. Berg",correct:false,explanation:"Berg = Ksatria."},
+      {letter:"B",text:"J.C. van Leur",correct:false,explanation:"Van Leur = Brahmana."},
+      {letter:"C",text:"F.D.K. Bosch",correct:false,explanation:"Bosch = Arus Balik."},
+      {letter:"D",text:"R.C. Majumdar",correct:false,explanation:"Bukan pendukung utama."},
+      {letter:"E",text:"N.J. Krom",correct:true,explanation:"Tepat! Krom pendukung teori Waisya."}
+    ], difficulty:"easy", hint:"Krom = Waisya.", points:50 },
+
+  { id:1613, topic:"Teori Waisya",
+    question:"Analisis yang paling tepat tentang bukti pendukung teori Waisya adalah...",
+    options:[
+      {letter:"A",text:"Adanya penggalian Sungai Gomati oleh Purnawarman.",correct:false,explanation:"Bukan bukti teori Waisya."},
+      {letter:"B",text:"Adanya Sumpah Palapa Gajah Mada.",correct:false,explanation:"Bukan bukti teori Waisya."},
+      {letter:"C",text:"Jalur perdagangan laut India-Nusantara-Tiongkok sudah ramai sejak awal Masehi, memungkinkan pedagang India menyebarkan budaya sambil berdagang.",correct:true,explanation:"Tepat! Jalur perdagangan sudah ramai sejak awal Masehi."},
+      {letter:"D",text:"Adanya Candi Borobudur.",correct:false,explanation:"Bukan bukti teori Waisya."},
+      {letter:"E",text:"Adanya perang antar kerajaan.",correct:false,explanation:"Bukan bukti teori Waisya."}
+    ], difficulty:"medium", hint:"Jalur perdagangan sudah ramai sejak awal Masehi.", points:60 },
+
+  { id:1614, topic:"Teori Waisya",
+    question:"Kelemahan utama teori Waisya adalah...",
+    options:[
+      {letter:"A",text:"Pedagang tidak mengenal Hindu-Buddha.",correct:false,explanation:"Pedagang India justru pemeluk Hindu-Buddha."},
+      {letter:"B",text:"Pedagang tidak pernah ke Nusantara.",correct:false,explanation:"Justru sering datang."},
+      {letter:"C",text:"Pedagang tidak berdagang rempah.",correct:false,explanation:"Justru memperdagangkan rempah."},
+      {letter:"D",text:"Pedagang umumnya tidak memiliki pengaruh politik dan tidak menyebarkan agama secara sistematis.",correct:true,explanation:"Tepat! Pedagang tidak menyebarkan agama secara sistematis."},
+      {letter:"E",text:"Pedagang tidak punya kapal.",correct:false,explanation:"Justru punya kapal."}
+    ], difficulty:"medium", hint:"Pedagang tidak menyebarkan agama secara sistematis.", points:60 },
+
+  { id:1615, topic:"Teori Waisya",
+    question:"Seorang siswa berpendapat: 'Teori Waisya paling tepat karena pedagang adalah satu-satunya orang yang bisa berlayar.' Bagaimana kritik yang tepat?",
+    options:[
+      {letter:"A",text:"Pendapat salah: banyak kasta lain juga bisa berlayar, dan teori Waisya memiliki kelemahan karena pedagang tidak menyebarkan agama secara sistematis.",correct:true,explanation:"Tepat! Banyak kasta lain berlayar; pedagang tidak menyebarkan agama."},
+      {letter:"B",text:"Pendapat benar sepenuhnya.",correct:false,explanation:"Terlalu menyederhanakan."},
+      {letter:"C",text:"Pendapat salah karena Waisya tidak ada.",correct:false,explanation:"Waisya ada."},
+      {letter:"D",text:"Pendapat tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."},
+      {letter:"E",text:"Pendapat benar karena pedagang India menguasai laut.",correct:false,explanation:"Tidak demikian."}
+    ], difficulty:"hard", hint:"Banyak kasta lain berlayar; pedagang tidak menyebarkan agama.", points:70 },
+
+  /* ===== TEORI ARUS BALIK (5 soal) ===== */
+  { id:1616, topic:"Teori Arus Balik",
+    question:"Menurut teori Arus Balik, Hindu-Buddha masuk ke Nusantara karena...",
+    options:[
+      {letter:"A",text:"Orang India yang datang ke Nusantara.",correct:false,explanation:"Justru sebaliknya."},
+      {letter:"B",text:"Biksu Tiongkok membawa ajaran Hindu.",correct:false,explanation:"Tidak demikian."},
+      {letter:"C",text:"Ksatria India menaklukkan Nusantara.",correct:false,explanation:"Itu teori Ksatria."},
+      {letter:"D",text:"Orang Nusantara sendiri yang belajar ke India lalu menyebarkan ajarannya di Nusantara.",correct:true,explanation:"Tepat! Arus Balik = orang Nusantara belajar ke India."},
+      {letter:"E",text:"Pedagang Arab membawa Hindu.",correct:false,explanation:"Tidak relevan."}
+    ], difficulty:"easy", hint:"Arus Balik = orang Nusantara belajar ke India.", points:50 },
+
+  { id:1617, topic:"Teori Arus Balik",
+    question:"Nama pendukung teori Arus Balik adalah...",
+    options:[
+      {letter:"A",text:"C.C. Berg",correct:false,explanation:"Berg = Ksatria."},
+      {letter:"B",text:"J.C. van Leur",correct:false,explanation:"Van Leur = Brahmana."},
+      {letter:"C",text:"F.D.K. Bosch",correct:true,explanation:"Tepat! Bosch pendukung teori Arus Balik."},
+      {letter:"D",text:"N.J. Krom",correct:false,explanation:"Krom = Waisya."},
+      {letter:"E",text:"R.C. Majumdar",correct:false,explanation:"Bukan pendukung utama."}
+    ], difficulty:"easy", hint:"Bosch = Arus Balik.", points:50 },
+
+  { id:1618, topic:"Teori Arus Balik",
+    question:"Keunggulan teori Arus Balik dibandingkan teori lainnya adalah...",
+    options:[
+      {letter:"A",text:"Teori ini paling sederhana.",correct:false,explanation:"Bukan soal kesederhanaan."},
+      {letter:"B",text:"Teori ini didukung prasasti tertua.",correct:false,explanation:"Bukan alasan utama."},
+      {letter:"C",text:"Teori ini dari India.",correct:false,explanation:"Bukan alasan."},
+      {letter:"D",text:"Teori ini berdasarkan mitos.",correct:false,explanation:"Bukan mitos."},
+      {letter:"E",text:"Menjelaskan proses akulturasi yang kuat karena orang Nusantara yang secara aktif belajar dan menyebarkan ajaran Hindu-Buddha di tanah sendiri.",correct:true,explanation:"Tepat! Menjelaskan akulturasi yang kuat."}
+    ], difficulty:"hard", hint:"Menjelaskan akulturasi yang kuat.", points:70 },
+
+  { id:1619, topic:"Teori Arus Balik",
+    question:"Analisis kritis yang paling tepat tentang kelemahan teori Arus Balik adalah...",
+    options:[
+      {letter:"A",text:"Tidak masuk akal.",correct:false,explanation:"Justru masuk akal."},
+      {letter:"B",text:"Sulit dibuktikan secara arkeologis — tidak ada catatan pasti tentang orang Nusantara yang belajar ke India dan kembali menyebarkan ajaran.",correct:true,explanation:"Tepat! Sulit dibuktikan secara arkeologis."},
+      {letter:"C",text:"Tidak ada kelemahan.",correct:false,explanation:"Setiap teori punya kelemahan."},
+      {letter:"D",text:"Bertentangan dengan semua bukti.",correct:false,explanation:"Tidak bertentangan."},
+      {letter:"E",text:"Hanya berlaku untuk Sriwijaya.",correct:false,explanation:"Berlaku umum."}
+    ], difficulty:"hard", hint:"Sulit dibuktikan secara arkeologis.", points:70 },
+
+  { id:1620, topic:"Teori Arus Balik",
+    question:"Perhatikan pernyataan berikut!\n'Keempat teori masuknya Hindu-Buddha bersifat saling melengkapi, bukan saling bertentangan.'\n\nAnalisis yang paling tepat adalah...",
+    options:[
+      {letter:"A",text:"Tepat! Masing-masing teori menjelaskan aspek berbeda dari proses masuknya Hindu-Buddha yang berlangsung bertahap & kompleks.",correct:true,explanation:"Tepat! Setiap teori menjelaskan aspek berbeda."},
+      {letter:"B",text:"Salah! Hanya satu teori yang benar.",correct:false,explanation:"Tidak ada yang paling benar."},
+      {letter:"C",text:"Salah! Semua teori salah.",correct:false,explanation:"Semua teori punya dasar bukti."},
+      {letter:"D",text:"Tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."},
+      {letter:"E",text:"Hanya berlaku untuk Jawa.",correct:false,explanation:"Berlaku untuk seluruh Nusantara."}
+    ], difficulty:"hard", hint:"Setiap teori menjelaskan aspek berbeda.", points:70 },
+
+  /* ===== KERAJAAN KUTAI (8 soal) ===== */
+  { id:1621, topic:"Kutai: Bukti",
+    question:"Bukti utama keberadaan Kerajaan Kutai adalah...",
+    options:[
+      {letter:"A",text:"Prasasti Ciaruteun.",correct:false,explanation:"Itu Tarumanegara."},
+      {letter:"B",text:"Prasasti Kedukan Bukit.",correct:false,explanation:"Itu Sriwijaya."},
+      {letter:"C",text:"7 prasasti Yupa berbahasa Sanskerta & huruf Pallawa.",correct:true,explanation:"Tepat! Kutai = 7 Yupa berbahasa Sanskerta & Pallawa."},
+      {letter:"D",text:"Prasasti Tugu.",correct:false,explanation:"Itu Tarumanegara."},
+      {letter:"E",text:"Kitab Negarakertagama.",correct:false,explanation:"Itu Majapahit."}
+    ], difficulty:"easy", hint:"Kutai = 7 Yupa berbahasa Sanskerta & Pallawa.", points:50 },
+
+  { id:1622, topic:"Kutai: Lokasi",
+    question:"Kerajaan Kutai terletak di daerah...",
+    options:[
+      {letter:"A",text:"Bogor, Jawa Barat.",correct:false,explanation:"Bogor = Tarumanegara."},
+      {letter:"B",text:"Muara Kaman, Kalimantan Timur.",correct:true,explanation:"Tepat! Kutai = Muara Kaman, Kaltim."},
+      {letter:"C",text:"Palembang, Sumatera Selatan.",correct:false,explanation:"Palembang = Sriwijaya."},
+      {letter:"D",text:"Jambi, Sumatera.",correct:false,explanation:"Jambi = Melayu Kuno."},
+      {letter:"E",text:"Trowulan, Jawa Timur.",correct:false,explanation:"Trowulan = Majapahit."}
+    ], difficulty:"easy", hint:"Kutai = Muara Kaman, Kaltim.", points:50 },
+
+  { id:1623, topic:"Kutai: Tokoh",
+    question:"Raja terkenal dari Kerajaan Kutai yang tercatat dalam Prasasti Yupa adalah...",
+    options:[
+      {letter:"A",text:"Raja Kudungga",correct:false,explanation:"Kudungga = pendiri (nama asli Nusantara)."},
+      {letter:"B",text:"Raja Aswawarman",correct:false,explanation:"Aswawarman = putra Kudungga."},
+      {letter:"C",text:"Raja Purnawarman",correct:false,explanation:"Purnawarman = Tarumanegara."},
+      {letter:"D",text:"Raja Balaputradewa",correct:false,explanation:"Balaputradewa = Sriwijaya."},
+      {letter:"E",text:"Raja Mulawarman",correct:true,explanation:"Tepat! Mulawarman = raja terkenal Kutai."}
+    ], difficulty:"easy", hint:"Mulawarman = raja terkenal Kutai.", points:50 },
+
+  { id:1624, topic:"Kutai: Silsilah",
+    question:"Silsilah raja Kutai menurut Prasasti Yupa adalah...",
+    options:[
+      {letter:"A",text:"Kudungga → Aswawarman → Mulawarman",correct:true,explanation:"Tepat! Kudungga → Aswawarman → Mulawarman."},
+      {letter:"B",text:"Aswawarman → Kudungga → Mulawarman",correct:false,explanation:"Terbalik."},
+      {letter:"C",text:"Mulawarman → Aswawarman → Kudungga",correct:false,explanation:"Terbalik."},
+      {letter:"D",text:"Kudungga → Mulawarman → Aswawarman",correct:false,explanation:"Terbalik."},
+      {letter:"E",text:"Mulawarman → Kudungga → Aswawarman",correct:false,explanation:"Terbalik."}
+    ], difficulty:"medium", hint:"Kudungga → Aswawarman → Mulawarman.", points:60 },
+
+  { id:1625, topic:"Kutai: Analisis Nama",
+    question:"Analisis yang paling tepat tentang nama 'Kudungga' dalam silsilah Kutai adalah...",
+    options:[
+      {letter:"A",text:"Kudungga adalah nama dewa Hindu.",correct:false,explanation:"Bukan nama dewa."},
+      {letter:"B",text:"Kudungga adalah nama dari India Selatan.",correct:false,explanation:"Justru nama Nusantara."},
+      {letter:"C",text:"Kudungga adalah nama Buddha.",correct:false,explanation:"Bukan nama Buddha."},
+      {letter:"D",text:"Nama Kudungga bukan nama Sanskerta, menunjukkan bahwa raja pertama Kutai adalah pribumi Nusantara yang belum terpengaruh Hindu.",correct:true,explanation:"Tepat! Kudungga bukan nama Sanskerta → pribumi."},
+      {letter:"E",text:"Kudungga adalah nama raja asing.",correct:false,explanation:"Justru pribumi."}
+    ], difficulty:"hard", hint:"Kudungga bukan nama Sanskerta → pribumi.", points:70 },
+
+  { id:1626, topic:"Kutai: Isi Yupa",
+    question:"Isi penting Prasasti Yupa dari Kutai adalah...",
+    options:[
+      {letter:"A",text:"Penggalian Sungai Gomati.",correct:false,explanation:"Itu Tarumanegara."},
+      {letter:"B",text:"Ekspedisi ke Sumatera.",correct:false,explanation:"Bukan isi Yupa."},
+      {letter:"C",text:"Raja Mulawarman menyumbang 20.000 ekor sapi kepada kaum Brahmana.",correct:true,explanation:"Tepat! 20.000 ekor sapi untuk Brahmana."},
+      {letter:"D",text:"Pendirian Candi Borobudur.",correct:false,explanation:"Bukan isi Yupa."},
+      {letter:"E",text:"Sumpah Palapa.",correct:false,explanation:"Bukan isi Yupa."}
+    ], difficulty:"medium", hint:"20.000 ekor sapi untuk Brahmana.", points:60 },
+
+  { id:1627, topic:"Kutai: Agama",
+    question:"Kerajaan Kutai menganut agama Hindu aliran...",
+    options:[
+      {letter:"A",text:"Wisnu",correct:false,explanation:"Tarumanegara = Wisnu."},
+      {letter:"B",text:"Brahma",correct:false,explanation:"Bukan aliran utama Kutai."},
+      {letter:"C",text:"Buddha Mahayana",correct:false,explanation:"Bukan Buddha."},
+      {letter:"D",text:"Buddha Hinayana",correct:false,explanation:"Bukan Buddha."},
+      {letter:"E",text:"Siwa",correct:true,explanation:"Tepat! Kutai = Hindu Siwa."}
+    ], difficulty:"easy", hint:"Kutai = Hindu Siwa.", points:50 },
+
+  { id:1628, topic:"Kutai: Analisis",
+    question:"Analisis yang paling tepat tentang mengapa Kutai dianggap sebagai kerajaan Hindu tertua di Indonesia adalah...",
+    options:[
+      {letter:"A",text:"Karena Kutai paling besar.",correct:false,explanation:"Bukan soal ukuran."},
+      {letter:"B",text:"Karena Prasasti Yupa dari Kutai (abad ke-4/5 M) adalah bukti tertulis tertua tentang kerajaan Hindu di Nusantara.",correct:true,explanation:"Tepat! Yupa = bukti tertulis tertua."},
+      {letter:"C",text:"Karena Kutai paling kaya.",correct:false,explanation:"Bukan soal kekayaan."},
+      {letter:"D",text:"Karena Kutai paling lama berdiri.",correct:false,explanation:"Bukan soal lamanya."},
+      {letter:"E",text:"Karena Kutai paling dekat India.",correct:false,explanation:"Bukan soal jarak."}
+    ], difficulty:"hard", hint:"Yupa = bukti tertulis tertua.", points:70 },
+
+  /* ===== KERAJAAN TARUMANEGARA (7 soal) ===== */
+  { id:1629, topic:"Tarumanegara: Bukti",
+    question:"Bukti utama keberadaan Kerajaan Tarumanegara adalah...",
+    options:[
+      {letter:"A",text:"7 Prasasti Yupa.",correct:false,explanation:"Itu Kutai."},
+      {letter:"B",text:"Prasasti Kedukan Bukit.",correct:false,explanation:"Itu Sriwijaya."},
+      {letter:"C",text:"Kitab Negarakertagama.",correct:false,explanation:"Itu Majapahit."},
+      {letter:"D",text:"Prasasti Ciaruteun, Kebon Kopi, Jambu, Tugu, & Muara Cianten.",correct:true,explanation:"Tepat! Tarumanegara = Ciaruteun, Tugu, dll."},
+      {letter:"E",text:"Prasasti Padang Roco.",correct:false,explanation:"Itu Dharmasraya."}
+    ], difficulty:"easy", hint:"Tarumanegara = Ciaruteun, Tugu, dll.", points:50 },
+
+  { id:1630, topic:"Tarumanegara: Lokasi",
+    question:"Pusat Kerajaan Tarumanegara berada di daerah...",
+    options:[
+      {letter:"A",text:"Bogor, Jawa Barat.",correct:true,explanation:"Tepat! Tarumanegara = Bogor, Jawa Barat."},
+      {letter:"B",text:"Palembang.",correct:false,explanation:"Itu Sriwijaya."},
+      {letter:"C",text:"Muara Kaman.",correct:false,explanation:"Itu Kutai."},
+      {letter:"D",text:"Trowulan.",correct:false,explanation:"Itu Majapahit."},
+      {letter:"E",text:"Jambi.",correct:false,explanation:"Itu Melayu Kuno."}
+    ], difficulty:"easy", hint:"Tarumanegara = Bogor.", points:50 },
+
+  { id:1631, topic:"Tarumanegara: Tokoh",
+    question:"Raja terkenal dari Kerajaan Tarumanegara adalah...",
+    options:[
+      {letter:"A",text:"Raja Mulawarman",correct:false,explanation:"Itu Kutai."},
+      {letter:"B",text:"Raja Kudungga",correct:false,explanation:"Itu Kutai."},
+      {letter:"C",text:"Raja Balaputradewa",correct:false,explanation:"Itu Sriwijaya."},
+      {letter:"D",text:"Raja Hayam Wuruk",correct:false,explanation:"Itu Majapahit."},
+      {letter:"E",text:"Raja Purnawarman",correct:true,explanation:"Tepat! Purnawarman = Tarumanegara."}
+    ], difficulty:"easy", hint:"Purnawarman = Tarumanegara.", points:50 },
+
+  { id:1632, topic:"Tarumanegara: Ciaruteun",
+    question:"Isi Prasasti Ciaruteun dari Tarumanegara adalah...",
+    options:[
+      {letter:"A",text:"Penggalian Sungai Gomati.",correct:false,explanation:"Itu Prasasti Tugu."},
+      {letter:"B",text:"Silsilah raja Kudungga.",correct:false,explanation:"Itu Yupa."},
+      {letter:"C",text:"Jejak kaki Raja Purnawarman disamakan dengan jejak kaki Dewa Wisnu.",correct:true,explanation:"Tepat! Jejak kaki Purnawarman = jejak kaki Wisnu."},
+      {letter:"D",text:"Pendirian Candi Borobudur.",correct:false,explanation:"Bukan isi prasasti."},
+      {letter:"E",text:"Pemberian 20.000 sapi.",correct:false,explanation:"Itu Yupa."}
+    ], difficulty:"medium", hint:"Jejak kaki Purnawarman = jejak kaki Wisnu.", points:60 },
+
+  { id:1633, topic:"Tarumanegara: Tugu",
+    question:"Isi Prasasti Tugu dari Tarumanegara adalah...",
+    options:[
+      {letter:"A",text:"Pendirian Candi Prambanan.",correct:false,explanation:"Bukan isi prasasti."},
+      {letter:"B",text:"Jejak kaki raja disamakan dengan Wisnu.",correct:false,explanation:"Itu Prasasti Ciaruteun."},
+      {letter:"C",text:"Silsilah raja Mulawarman.",correct:false,explanation:"Itu Yupa."},
+      {letter:"D",text:"Penggalian Sungai Candrabhaga & Gomati untuk irigasi; rakyat diberi hadiah 1.000 ekor sapi.",correct:true,explanation:"Tepat! Penggalian sungai + hadiah 1.000 sapi."},
+      {letter:"E",text:"Pendirian kerajaan Sriwijaya.",correct:false,explanation:"Bukan isi prasasti."}
+    ], difficulty:"medium", hint:"Penggalian sungai + hadiah 1.000 sapi.", points:60 },
+
+  { id:1634, topic:"Tarumanegara: Analisis Sosial",
+    question:"Analisis yang paling tepat tentang isi Prasasti Tugu bagi pemahaman kehidupan masyarakat Tarumanegara adalah...",
+    options:[
+      {letter:"A",text:"Menunjukkan bahwa masyarakat masih nomaden.",correct:false,explanation:"Justru sudah menetap."},
+      {letter:"B",text:"Menunjukkan bahwa masyarakat Tarumanegara sudah mengenal sistem irigasi maju & raja memperhatikan kesejahteraan rakyat.",correct:true,explanation:"Tepat! Sistem irigasi maju + raja peduli rakyat."},
+      {letter:"C",text:"Menunjukkan bahwa masyarakat tidak mengenal pertanian.",correct:false,explanation:"Justru sudah bertani."},
+      {letter:"D",text:"Menunjukkan bahwa raja tidak peduli rakyat.",correct:false,explanation:"Justru peduli."},
+      {letter:"E",text:"Menunjukkan bahwa masyarakat tidak mengenal Hindu.",correct:false,explanation:"Justru sudah mengenal."}
+    ], difficulty:"hard", hint:"Sistem irigasi maju + raja peduli rakyat.", points:70 },
+
+  { id:1635, topic:"Tarumanegara: Agama",
+    question:"Kerajaan Tarumanegara menganut agama Hindu aliran...",
+    options:[
+      {letter:"A",text:"Wisnu",correct:true,explanation:"Tepat! Tarumanegara = Wisnu."},
+      {letter:"B",text:"Siwa",correct:false,explanation:"Kutai = Siwa."},
+      {letter:"C",text:"Brahma",correct:false,explanation:"Bukan aliran utama."},
+      {letter:"D",text:"Buddha Mahayana",correct:false,explanation:"Bukan Buddha."},
+      {letter:"E",text:"Buddha Hinayana",correct:false,explanation:"Bukan Buddha."}
+    ], difficulty:"easy", hint:"Tarumanegara = Hindu Wisnu.", points:50 },
+
+  /* ===== SINTESIS & PERBANDINGAN (5 soal) ===== */
+  { id:1636, topic:"Sintesis Kutai vs Tarumanegara",
+    question:"Perbedaan pokok antara Kerajaan Kutai & Tarumanegara adalah...",
+    options:[
+      {letter:"A",text:"Kutai = Buddha; Tarumanegara = Hindu.",correct:false,explanation:"Keduanya Hindu."},
+      {letter:"B",text:"Kutai = Hindu Siwa & di Kalimantan Timur; Tarumanegara = Hindu Wisnu & di Jawa Barat.",correct:true,explanation:"Tepat! Beda aliran & lokasi."},
+      {letter:"C",text:"Kutai = di Jawa; Tarumanegara = di Sumatera.",correct:false,explanation:"Terbalik."},
+      {letter:"D",text:"Keduanya sama saja.",correct:false,explanation:"Berbeda."},
+      {letter:"E",text:"Keduanya bukan kerajaan Hindu.",correct:false,explanation:"Keduanya Hindu."}
+    ], difficulty:"medium", hint:"Beda aliran & lokasi.", points:60 },
+
+  { id:1637, topic:"Sintesis Kutai vs Tarumanegara",
+    question:"Raja Kutai & Tarumanegara sama-sama dikenal sebagai raja yang...",
+    options:[
+      {letter:"A",text:"Memperhatikan kesejahteraan rakyat (Mulawarman menyumbang sapi; Purnawarman menggali sungai & beri hadiah sapi).",correct:true,explanation:"Tepat! Keduanya peduli kesejahteraan rakyat."},
+      {letter:"B",text:"Menaklukkan banyak kerajaan.",correct:false,explanation:"Bukan fokus utama."},
+      {letter:"C",text:"Membangun candi besar.",correct:false,explanation:"Bukan fokus utama."},
+      {letter:"D",text:"Menjalin hubungan dengan Tiongkok.",correct:false,explanation:"Bukan fokus utama."},
+      {letter:"E",text:"Bersifat kejam terhadap rakyat.",correct:false,explanation:"Justru sebaliknya."}
+    ], difficulty:"hard", hint:"Keduanya peduli kesejahteraan rakyat.", points:70 },
+
+  { id:1638, topic:"Sintesis Sumber Sejarah",
+    question:"Prasasti-prasasti dari Kutai & Tarumanegara merupakan sumber sejarah...",
+    options:[
+      {letter:"A",text:"Sekunder — dibuat setelah peristiwa.",correct:false,explanation:"Prasasti = primer."},
+      {letter:"B",text:"Primer — dibuat pada masa peristiwa terjadi & oleh pelaku sezaman.",correct:true,explanation:"Tepat! Prasasti = sumber primer."},
+      {letter:"C",text:"Tersier — disusun dari sumber lain.",correct:false,explanation:"Bukan tersier."},
+      {letter:"D",text:"Fiktif — tidak dapat dipercaya.",correct:false,explanation:"Justru paling dapat dipercaya."},
+      {letter:"E",text:"Imajiner — hanya legenda.",correct:false,explanation:"Bukan legenda."}
+    ], difficulty:"medium", hint:"Prasasti = sumber primer.", points:60 },
+
+  { id:1639, topic:"Sintesis Sumber Sejarah",
+    question:"Analisis yang paling tepat tentang pentingnya Prasasti Yupa bagi kajian sejarah Indonesia adalah...",
+    options:[
+      {letter:"A",text:"Menjadi bukti bahwa Kutai pusat perdagangan.",correct:false,explanation:"Bukan fokus Yupa."},
+      {letter:"B",text:"Menjadi bukti bahwa Kutai pusat Buddha.",correct:false,explanation:"Kutai Hindu."},
+      {letter:"C",text:"Menjadi bukti bahwa Kutai pusat pendidikan.",correct:false,explanation:"Bukan fokus Yupa."},
+      {letter:"D",text:"Menjadi bukti bahwa Kutai pernah dijajah.",correct:false,explanation:"Belum ada penjajahan."},
+      {letter:"E",text:"Menjadi bukti tertulis tertua yang merekam keberadaan kerajaan Hindu di Nusantara & sistem sosialnya pada abad ke-4/5 M.",correct:true,explanation:"Tepat! Bukti tertulis tertua tentang kerajaan Hindu."}
+    ], difficulty:"hard", hint:"Bukti tertulis tertua tentang kerajaan Hindu.", points:70 },
+
+  { id:1640, topic:"Sintesis",
+    question:"Kesimpulan yang paling tepat tentang proses masuknya Hindu-Buddha ke Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Proses tunggal & cepat.",correct:false,explanation:"Justru bertahap."},
+      {letter:"B",text:"Proses melalui penaklukan militer.",correct:false,explanation:"Tidak selalu militer."},
+      {letter:"C",text:"Proses kompleks & bertahap, melibatkan berbagai aktor (ksatria, Brahmana, pedagang, & orang Nusantara sendiri) melalui jalur damai.",correct:true,explanation:"Tepat! Kompleks & bertahap, jalur damai."},
+      {letter:"D",text:"Proses tanpa bukti.",correct:false,explanation:"Justru banyak bukti."},
+      {letter:"E",text:"Proses yang tidak dapat dijelaskan.",correct:false,explanation:"Dapat dijelaskan."}
+    ], difficulty:"hard", hint:"Kompleks & bertahap, jalur damai.", points:70 }
+];
+
+/* ============================================================
+   CONSTANTS & STATE
+   ============================================================ */
+const TOTAL_Q = 15;
+const TIME_LIMIT = 20 * 60;
+
+const state = {
+  questions: [], currentIndex: 0, answers: [], score: 0,
+  xp: 0, level: 1, hp: 3, maxHp: 3, combo: 0, bestCombo: 0,
+  timer: null, timeLeft: TIME_LIMIT, started: false, finished: false,
+  powers: { p50:1, hint:1, skip:1 }, soundOn: true
+};
+
+/* ============================================================
+   AUDIO
+   ============================================================ */
+let audioCtx = null;
+function ensureAudio(){
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}
+function playTone(freq, dur, type, vol){
+  if (!state.soundOn) return;
+  ensureAudio(); if (!audioCtx) return;
+  try {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = type || 'sine'; o.frequency.value = freq;
+    g.gain.setValueAtTime(vol || 0.08, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + dur);
+  } catch(e){}
+}
+function sfxClick(){ playTone(520, .08, 'triangle', .06); }
+function sfxCorrect(){ playTone(660, .12, 'sine', .10); setTimeout(()=>playTone(880, .15, 'sine', .10), 80); setTimeout(()=>playTone(1100, .20, 'sine', .08), 160); }
+function sfxWrong(){ playTone(200, .18, 'sawtooth', .10); setTimeout(()=>playTone(150, .25, 'sawtooth', .08), 120); }
+function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(()=>playTone(1200, .12, 'triangle', .07), 60); }
+function sfxLevelUp(){ [523, 659, 784, 1046].forEach((f, i) => setTimeout(()=>playTone(f, .16, 'sine', .10), i*90)); }
+function sfxFinish(){ [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(()=>playTone(f, .22, 'sine', .10), i*120)); }
+function toggleSound(){
+  state.soundOn = !state.soundOn;
+  document.getElementById('soundBtn').innerHTML = state.soundOn ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+  if (state.soundOn) sfxClick();
+}
+function toggleTheme(){
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').innerHTML = next === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  sfxClick();
+}
+
+(function(){
+  const bar = document.getElementById('loaderBar');
+  const pct = document.getElementById('loaderPct');
+  const loader = document.getElementById('loader');
+  const t0 = Date.now();
+  (function tick(){
+    const p = Math.min((Date.now() - t0) / 1800 * 100, 100);
+    bar.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+    if (p < 100) requestAnimationFrame(tick);
+    else setTimeout(()=>{ loader.classList.add('hidden'); setTimeout(()=>loader.style.display='none', 700); }, 300);
+  })();
+})();
+
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  function makeP(){ return { x: Math.random()*W, y: Math.random()*H, r: Math.random()*2 + 0.4, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3 - 0.15, a: Math.random()*0.5 + 0.15, hue: Math.random() < 0.5 ? 40 : 220 }; }
+  function init(){ resize(); particles = Array.from({length: Math.min(60, Math.floor(W*H/25000))}, makeP); }
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.shadowBlur = 8; ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.fill();
+    });
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+function fireConfetti(count){
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const colors = ['#F59E0B','#FCD34D','#3B82F6','#93C5FD','#34D399','#38BDF8'];
+  const pieces = Array.from({length: count || 60}, () => ({
+    x: window.innerWidth/2 + (Math.random()-0.5)*200,
+    y: window.innerHeight/2,
+    vx: (Math.random()-0.5)*14, vy: Math.random()*-16 - 4,
+    g: 0.5, r: Math.random()*8 + 4,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    rot: Math.random()*Math.PI, vr: (Math.random()-0.5)*0.3, life: 1
+  }));
+  let frame = 0;
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    pieces.forEach(p => {
+      if (p.life <= 0) return;
+      alive = true;
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.012;
+      ctx.save(); ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      ctx.restore();
+    });
+    if (alive && frame < 200) { frame++; requestAnimationFrame(animate); }
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  animate();
+}
+
+function showToast(icon, title, desc, variant){
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<div class="toast-icon ${variant||''}">${icon}</div>
+    <div class="toast-content"><div class="toast-title">${title}</div><div class="toast-desc">${desc}</div></div>`;
+  wrap.appendChild(el);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 450); }, 3200);
+}
+function scorePopup(text, x, y, color){
+  const el = document.createElement('div');
+  el.className = 'score-pop';
+  el.textContent = text;
+  el.style.left = (x || window.innerWidth/2) + 'px';
+  el.style.top = (y || window.innerHeight/2) + 'px';
+  if (color) el.style.color = color;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1100);
+}
+function shuffle(a){ const arr = a.slice(); for (let i = arr.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+function updateHpHud(){
+  const hp = document.getElementById('hudHp'); hp.innerHTML = '';
+  for (let i = 0; i < state.maxHp; i++){
+    const heart = document.createElement('i');
+    heart.className = 'fas fa-heart heart' + (i < state.hp ? '' : ' empty');
+    hp.appendChild(heart);
+  }
+}
+function updateXpHud(){
+  const xpForLevel = state.level * 100;
+  const pct = Math.min((state.xp % xpForLevel) / xpForLevel * 100, 100);
+  document.getElementById('hudLevel').textContent = state.level;
+  document.getElementById('hudXp').textContent = state.xp % xpForLevel;
+  document.getElementById('hudXpMax').textContent = xpForLevel;
+  document.getElementById('xpFill').style.width = pct + '%';
+}
+function updateComboHud(){
+  document.getElementById('comboVal').textContent = state.combo;
+  const tag = document.getElementById('comboTag');
+  if (state.combo >= 3){ tag.classList.add('hot'); setTimeout(()=>tag.classList.remove('hot'), 500); }
+}
+function updatePowers(){
+  document.getElementById('c50').textContent = state.powers.p50;
+  document.getElementById('chint').textContent = state.powers.hint;
+  document.getElementById('cskip').textContent = state.powers.skip;
+  document.getElementById('p50').disabled = state.powers.p50 <= 0;
+  document.getElementById('phint').disabled = state.powers.hint <= 0;
+  document.getElementById('pskip').disabled = state.powers.skip <= 0;
+}
+
+function startGame(){
+  ensureAudio();
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('gameHud').classList.add('active');
+  state.questions = shuffle(BANK_SOAL).slice(0, TOTAL_Q);
+  state.currentIndex = 0; state.answers = [];
+  state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.timeLeft = TIME_LIMIT; state.started = true; state.finished = false;
+  state.powers = { p50:1, hint:1, skip:1 };
+  updateHpHud(); updateXpHud(); updateComboHud(); updatePowers();
+  showToast('🏛️', 'Arena Level 16 Dimulai!', 'Kuasai teori & kerajaan awal Hindu-Buddha!', '');
+  sfxClick();
+  startTimer();
+  renderQuestion();
+}
+
+function startTimer(){
+  if (state.timer) clearInterval(state.timer);
+  state.timer = setInterval(() => {
+    state.timeLeft--;
+    updateTimerHud();
+    if (state.timeLeft <= 0){ clearInterval(state.timer); finishGame(true); }
+  }, 1000);
+  updateTimerHud();
+}
+function updateTimerHud(){
+  const m = Math.floor(state.timeLeft / 60), s = state.timeLeft % 60;
+  document.getElementById('hudTimerVal').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  const el = document.getElementById('hudTimer');
+  if (state.timeLeft <= 120) el.classList.add('warning'); else el.classList.remove('warning');
+}
+
+function renderQuestion(){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  document.getElementById('qNumLabel').textContent = 'Soal ' + (state.currentIndex+1);
+  document.getElementById('qTopicText').textContent = q.topic || 'Hindu-Buddha';
+  document.getElementById('qText').innerHTML = q.question;
+  document.getElementById('hudQNum').textContent = state.currentIndex+1;
+  const opts = document.getElementById('options'); opts.innerHTML = '';
+  q.options.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.dataset.letter = o.letter;
+    btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
+    btn.addEventListener('click', () => selectOption(o.letter, btn));
+    opts.appendChild(btn);
+  });
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('btnNext').disabled = true;
+  document.getElementById('btnNext').style.display = '';
+  document.getElementById('btnFinish').style.display = 'none';
+  document.getElementById('qCard').classList.remove('shake');
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'qEnter .55s cubic-bezier(.16,1,.3,1)';
+  if (state.currentIndex === TOTAL_Q - 1){
+    document.getElementById('btnNext').style.display = 'none';
+    document.getElementById('btnFinish').style.display = '';
+  }
+}
+
+function selectOption(letter, btnEl){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  const selected = q.options.find(o => o.letter === letter);
+  if (!selected) return;
+  const correct = selected.correct;
+  document.querySelectorAll('#options .opt').forEach(b => {
+    b.classList.add('locked');
+    const o = q.options.find(x => x.letter === b.dataset.letter);
+    if (o.correct) b.classList.add('correct');
+    else if (b.dataset.letter === letter && !correct) b.classList.add('wrong');
+  });
+  state.answers.push({ qid: q.id, selected: letter, correct, skipped: false,
+    questionText: q.question, topic: q.topic,
+    correctLetter: q.options.find(o => o.correct).letter,
+    explanation: selected.explanation });
+  if (correct){
+    state.combo++;
+    if (state.combo > state.bestCombo) state.bestCombo = state.combo;
+    const bonus = Math.max(0, state.combo - 1) * 5;
+    const gained = (q.points || 50) + bonus;
+    state.score += gained; state.xp += gained;
+    const prevLevel = state.level;
+    state.level = Math.floor(state.xp / 100) + 1;
+    if (state.level > prevLevel){
+      sfxLevelUp();
+      showToast('⭐', 'LEVEL UP!', `Kamu naik ke Level ${state.level}!`, 'cyan');
+      fireConfetti(40);
+    }
+    sfxCorrect();
+    fireConfetti(state.combo >= 3 ? 80 : 45);
+    const rect = btnEl ? btnEl.getBoundingClientRect() : null;
+    scorePopup('+' + gained + ' XP', rect ? rect.left + rect.width/2 : window.innerWidth/2, rect ? rect.top : window.innerHeight/2, '#FCD34D');
+    if (state.combo >= 3) showToast('🔥', `COMBO ×${state.combo}!`, `Bonus +${bonus} XP!`, '');
+  } else {
+    state.combo = 0; state.hp--; sfxWrong();
+    updateHpHud();
+    const hpEls = document.querySelectorAll('.hud-hp .heart');
+    if (hpEls[state.hp]) hpEls[state.hp].classList.add('losing');
+    const card = document.getElementById('qCard');
+    card.classList.add('shake'); setTimeout(() => card.classList.remove('shake'), 550);
+    if (state.hp <= 0) showToast('💔', 'Nyawa Habis!', 'Kamu kehilangan semua nyawa.', 'violet');
+  }
+  document.getElementById('hudScore').textContent = state.score;
+  updateXpHud(); updateComboHud();
+  showFeedback(correct, q, selected);
+  document.getElementById('btnNext').disabled = false;
+}
+
+function showFeedback(correct, q, selected){
+  const panel = document.getElementById('feedback');
+  const icon = document.getElementById('fbIcon');
+  const title = document.getElementById('fbTitle');
+  const body = document.getElementById('fbBody');
+  panel.classList.add('show');
+  if (correct){
+    icon.className = 'fb-icon correct'; icon.innerHTML = '<i class="fas fa-check"></i>';
+    title.className = 'fb-title correct'; title.textContent = 'BENAR!';
+  } else {
+    icon.className = 'fb-icon wrong'; icon.innerHTML = '<i class="fas fa-times"></i>';
+    title.className = 'fb-title wrong'; title.textContent = 'BELUM TEPAT';
+  }
+  const correctOpt = q.options.find(o => o.correct);
+  let html = `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
+  html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
+  if (!correct && selected) html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
+  html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
+  body.innerHTML = html;
+}
+
+function nextQuestion(){
+  if (state.currentIndex < TOTAL_Q - 1){
+    state.currentIndex++;
+    renderQuestion();
+    document.getElementById('qCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+function usePower(type){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  if (type === '50'){
+    if (state.powers.p50 <= 0) return;
+    const wrongs = q.options.filter(o => !o.correct);
+    const remove = shuffle(wrongs).slice(0, 2);
+    document.querySelectorAll('#options .opt').forEach(b => {
+      if (remove.some(o => o.letter === b.dataset.letter)) b.classList.add('disabled-50');
+    });
+    state.powers.p50 = 0; updatePowers(); sfxPower();
+    showToast('✂️', '50:50 Aktif!', 'Dua jawaban salah dihilangkan.', 'cyan');
+  } else if (type === 'hint'){
+    if (state.powers.hint <= 0) return;
+    const panel = document.getElementById('feedback');
+    const icon = document.getElementById('fbIcon');
+    const title = document.getElementById('fbTitle');
+    const body = document.getElementById('fbBody');
+    panel.classList.add('show');
+    icon.className = 'fb-icon info'; icon.innerHTML = '<i class="fas fa-lightbulb"></i>';
+    title.className = 'fb-title info'; title.textContent = 'PETUNJUK';
+    body.innerHTML = `<p>${q.hint || 'Tidak ada petunjuk.'}</p>`;
+    state.powers.hint = 0; updatePowers(); sfxPower();
+    showToast('💡', 'Petunjuk Digunakan!', 'Perhatikan dengan saksama.', '');
+  } else if (type === 'skip'){
+    if (state.powers.skip <= 0) return;
+    state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+      questionText: q.question, topic: q.topic,
+      correctLetter: q.options.find(o => o.correct).letter,
+      explanation: q.options.find(o => o.correct).explanation });
+    document.querySelectorAll('#options .opt').forEach(b => {
+      b.classList.add('locked');
+      const o = q.options.find(x => x.letter === b.dataset.letter);
+      if (o.correct) b.classList.add('correct');
+    });
+    showFeedback(false, q, null);
+    document.getElementById('btnNext').disabled = false;
+    state.powers.skip = 0; updatePowers(); sfxPower();
+    showToast('⏭️', 'Soal Dilewati', 'Jawaban benar ditampilkan.', 'violet');
+    if (state.currentIndex === TOTAL_Q - 1){
+      document.getElementById('btnNext').style.display = 'none';
+      document.getElementById('btnFinish').style.display = '';
+    }
+  }
+}
+
+function finishGame(timeout){
+  if (state.finished) return;
+  state.finished = true;
+  clearInterval(state.timer); state.timer = null;
+  const answered = state.answers.map(a => a.qid);
+  state.questions.forEach(q => {
+    if (!answered.includes(q.id)){
+      state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+        questionText: q.question, topic: q.topic,
+        correctLetter: q.options.find(o => o.correct).letter,
+        explanation: q.options.find(o => o.correct).explanation });
+    }
+  });
+  let benar = 0, salah = 0;
+  state.answers.forEach(a => { if (a.skipped) return; if (a.correct) benar++; else salah++; });
+  const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
+  const finalScore = Math.round((state.score / maxScore) * 100);
+  const grade = finalScore >= 90 ? 'A' : finalScore >= 80 ? 'B' : finalScore >= 70 ? 'C' : finalScore >= 60 ? 'D' : 'E';
+  const gradeLabel = finalScore >= 90 ? 'Sangat Baik' : finalScore >= 80 ? 'Baik' : finalScore >= 70 ? 'Cukup' : finalScore >= 60 ? 'Perlu Bimbingan' : 'Remedial';
+  const rank = finalScore >= 90 ? 'ARKEOLOG MUDA' : finalScore >= 80 ? 'PENELITI SEJARAH' : finalScore >= 70 ? 'PELAJAR SEJARAH' : 'PEMULA';
+  const trophy = finalScore >= 90 ? '🏆' : finalScore >= 80 ? '🥇' : finalScore >= 70 ? '🥈' : finalScore >= 60 ? '🥉' : '📚';
+  const title = finalScore >= 90 ? 'Luar Biasa!' : finalScore >= 80 ? 'Kerja Bagus!' : finalScore >= 70 ? 'Terus Belajar!' : 'Jangan Menyerah!';
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('resultScreen').classList.add('active');
+  document.getElementById('rTrophy').textContent = trophy;
+  document.getElementById('rTitle').textContent = title;
+  document.getElementById('rSub').textContent = 'Kuis 16 · Teori Masuk & Kerajaan Awal Hindu-Buddha';
+  document.getElementById('gradeLetter').textContent = grade;
+  document.getElementById('gradeLabel').textContent = gradeLabel;
+  document.getElementById('rRank').textContent = rank;
+  document.getElementById('rXp').textContent = state.xp;
+  document.getElementById('rBestCombo').textContent = state.bestCombo;
+  document.getElementById('rBenar').textContent = benar;
+  document.getElementById('rSalah').textContent = salah;
+  document.getElementById('rSkor').textContent = finalScore;
+  document.getElementById('rXpTotal').textContent = state.xp;
+  document.getElementById('gradeRing').style.setProperty('--grade-deg', (finalScore/100*360) + 'deg');
+  document.getElementById('rMsg').textContent = finalScore >= 70
+    ? '🎯 Pertahankan semangat belajarmu! Lanjutkan ke Kuis 17 untuk materi Sriwijaya, Melayu Kuno & Sistem Pemerintahan.'
+    : '📚 Pelajari kembali materi Teori Masuk & Kerajaan Awal, lalu coba lagi!';
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  state.answers.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
+                   a.correct ? '<span class="ri-status correct">Benar</span>' :
+                   '<span class="ri-status wrong">Salah</span>';
+    const q = a.questionText.length > 80 ? a.questionText.substring(0, 80) + '...' : a.questionText;
+    div.innerHTML = `<span class="ri-num">${i+1}.</span><span class="ri-text">${q}</span>${status}`;
+    reviewList.appendChild(div);
+  });
+  sfxFinish();
+  if (finalScore >= 70){
+    fireConfetti(180);
+    setTimeout(() => fireConfetti(120), 400);
+    setTimeout(() => showToast('🏆', 'Achievement Unlocked!', rank, ''), 500);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetGame(){
+  clearInterval(state.timer); state.timer = null;
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('startScreen').style.display = 'flex';
+  state.answers = []; state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.currentIndex = 0; state.finished = false; state.started = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('keydown', e => {
+  if (!state.started || state.finished) return;
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea') return;
+  if (['a','A','1'].includes(e.key)) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
+  else if (['b','B','2'].includes(e.key)) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
+  else if (['c','C','3'].includes(e.key)) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
+  else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
+  else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
+  else if (e.key === 'ArrowRight' || e.key === 'Enter'){
+    if (!document.getElementById('btnNext').disabled) nextQuestion();
+  }
+});
+</script>
+
+</body>
+</html>
