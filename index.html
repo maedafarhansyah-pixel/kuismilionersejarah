@@ -20,22 +20,22 @@
   --ink-soft:#c7d8f0;
   --muted:#8fa4c4;
 
-  /* ===== TEMA UTAMA: BIRU PREMIUM ===== */
   --blue-deep:#040b1c;
   --blue-base:#0a1a3d;
   --blue-mid:#102a5c;
   --blue-light:#3b6bb8;
   --blue-glow:#60a5fa;
 
-  /* ===== AKSEN: CYAN (dingin) ===== */
   --cyan:#22d3ee;
   --cyan-soft:#67e8f9;
   --cyan-glow:#a5f3fc;
 
-  /* ===== AKSEN: GOLD (hangat) ===== */
   --gold:#fbbf24;
   --gold-soft:#fde68a;
   --gold-deep:#b45309;
+
+  --emerald:#10b981;
+  --emerald-soft:#6ee7b7;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -65,7 +65,7 @@ body::before{
 }
 ::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#3b6bb8,#22d3ee,#67e8f9);}
 
-/* ============== AURORA ============== */
+/* AURORA */
 .aurora{
   position:fixed; inset:-20%; pointer-events:none; z-index:0; overflow:hidden;
   filter:blur(100px); opacity:.35;
@@ -81,7 +81,6 @@ body::before{
   66%{transform:translate3d(-30px,40px,0) scale(.92);}
 }
 
-/* Sparkles */
 .sparkles{position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.55;}
 .sparkles span{
   position:absolute; width:3px; height:3px; border-radius:50%;
@@ -102,7 +101,7 @@ body::before{
   50%{opacity:1;transform:scale(1.6);}
 }
 
-/* ============== HERO ============== */
+/* HERO */
 .hero{
   position:relative;
   padding:80px 24px 100px;
@@ -322,7 +321,7 @@ body::before{
   color:rgba(143,164,196,.9);
 }
 
-/* ============== CONTAINER ============== */
+/* CONTAINER */
 .container{max-width:1240px; margin:0 auto; padding:60px 22px 60px; position:relative; z-index:2;}
 
 .progress-global{
@@ -517,7 +516,7 @@ body::before{
   gap:20px;
 }
 
-/* ============== CARD BASE ============== */
+/* CARD BASE */
 .card{
   position:relative;
   display:flex; flex-direction:column;
@@ -670,11 +669,9 @@ body::before{
 }
 .btn-buka .arrow{font-size:12px; opacity:.85;}
 
-/* ============================================================
-   7 TEMA WARNA KARTU
-   ============================================================ */
+/* ============ 7 TEMA WARNA KARTU ============ */
 
-/* 1. ROYAL — Biru premium (default, Fase E) */
+/* 1. ROYAL */
 .card.t-royal{
   background:linear-gradient(155deg, rgba(10,26,61,.94) 0%, rgba(4,11,28,.96) 55%, rgba(12,30,68,.92) 100%);
   color:#60a5fa;
@@ -693,9 +690,8 @@ body::before{
 }
 .card.t-royal .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(165,243,252,.20), transparent 40%), radial-gradient(circle at 85% 70%, rgba(253,230,138,.14), transparent 40%);}
 .card.t-royal .btn-buka{background:linear-gradient(120deg,#102a5c,#3b6bb8 50%,#60a5fa); color:#eaf3ff;}
-.card.t-royal .badge.rarity-basic{color:#a5f3fc;background:linear-gradient(135deg,rgba(34,211,238,.16),rgba(59,107,184,.10));border-color:rgba(96,165,250,.55);}
 
-/* 2. CYAN — Aqua (Fase E variant) */
+/* 2. CYAN */
 .card.t-cyan{
   background:linear-gradient(155deg, rgba(4,32,42,.94) 0%, rgba(2,18,26,.96) 55%, rgba(6,42,54,.92) 100%);
   color:#22d3ee;
@@ -714,9 +710,8 @@ body::before{
 }
 .card.t-cyan .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(165,243,252,.28), transparent 40%), radial-gradient(circle at 85% 70%, rgba(34,211,238,.20), transparent 40%);}
 .card.t-cyan .btn-buka{background:linear-gradient(120deg,#0e7490,#22d3ee 50%,#67e8f9); color:#031519;}
-.card.t-cyan .badge.rarity-basic{color:#a5f3fc;background:linear-gradient(135deg,rgba(34,211,238,.22),rgba(6,182,212,.14));border-color:rgba(103,232,249,.65);}
 
-/* 3. GOLD — Emas (Fase E variant) */
+/* 3. GOLD */
 .card.t-gold{
   background:linear-gradient(155deg, rgba(28,18,4,.94) 0%, rgba(12,8,2,.96) 55%, rgba(38,26,8,.92) 100%);
   color:#fbbf24;
@@ -735,9 +730,8 @@ body::before{
 }
 .card.t-gold .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(253,230,138,.28), transparent 40%), radial-gradient(circle at 85% 70%, rgba(251,191,36,.20), transparent 40%);}
 .card.t-gold .btn-buka{background:linear-gradient(120deg,#78350f,#d97706 50%,#fbbf24); color:#1a1004;}
-.card.t-gold .badge.rarity-basic{color:#fde68a;background:linear-gradient(135deg,rgba(251,191,36,.22),rgba(180,83,9,.14));border-color:rgba(253,230,138,.65);}
 
-/* 4. VIOLET — Ungu (Fase F) */
+/* 4. VIOLET */
 .card.t-violet{
   background:linear-gradient(155deg, rgba(28,16,56,.94) 0%, rgba(14,8,32,.96) 55%, rgba(36,22,68,.92) 100%);
   color:#a78bfa;
@@ -756,9 +750,8 @@ body::before{
 }
 .card.t-violet .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(221,214,254,.28), transparent 40%), radial-gradient(circle at 85% 70%, rgba(167,139,250,.20), transparent 40%);}
 .card.t-violet .btn-buka{background:linear-gradient(120deg,#4c1d95,#7c3aed 50%,#a78bfa); color:#f4f0ff;}
-.card.t-violet .badge.rarity-basic{color:#ddd6fe;background:linear-gradient(135deg,rgba(167,139,250,.22),rgba(109,40,217,.14));border-color:rgba(196,181,253,.65);}
 
-/* 5. EMERALD — Hijau (Fase F) */
+/* 5. EMERALD */
 .card.t-emerald{
   background:linear-gradient(155deg, rgba(4,36,28,.94) 0%, rgba(2,18,14,.96) 55%, rgba(6,48,36,.92) 100%);
   color:#34d399;
@@ -777,9 +770,8 @@ body::before{
 }
 .card.t-emerald .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(167,243,208,.28), transparent 40%), radial-gradient(circle at 85% 70%, rgba(52,211,153,.20), transparent 40%);}
 .card.t-emerald .btn-buka{background:linear-gradient(120deg,#064e3b,#059669 50%,#34d399); color:#041a12;}
-.card.t-emerald .badge.rarity-basic{color:#a7f3d0;background:linear-gradient(135deg,rgba(52,211,153,.22),rgba(5,150,105,.14));border-color:rgba(110,231,183,.65);}
 
-/* 6. ROSE — Pink/Merah muda (Fase F) */
+/* 6. ROSE */
 .card.t-rose{
   background:linear-gradient(155deg, rgba(46,10,24,.94) 0%, rgba(24,5,12,.96) 55%, rgba(58,14,32,.92) 100%);
   color:#fb7185;
@@ -798,9 +790,8 @@ body::before{
 }
 .card.t-rose .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(254,205,211,.28), transparent 40%), radial-gradient(circle at 85% 70%, rgba(251,113,133,.20), transparent 40%);}
 .card.t-rose .btn-buka{background:linear-gradient(120deg,#881337,#e11d48 50%,#fb7185); color:#fff1f2;}
-.card.t-rose .badge.rarity-basic{color:#fecdd3;background:linear-gradient(135deg,rgba(251,113,133,.22),rgba(190,18,60,.14));border-color:rgba(253,164,175,.65);}
 
-/* 7. ORANGE — Oranye (Fase F variant) */
+/* 7. ORANGE */
 .card.t-orange{
   background:linear-gradient(155deg, rgba(46,18,4,.94) 0%, rgba(24,10,2,.96) 55%, rgba(58,24,6,.92) 100%);
   color:#fb923c;
@@ -819,18 +810,14 @@ body::before{
 }
 .card.t-orange .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(254,215,170,.28), transparent 40%), radial-gradient(circle at 85% 70%, rgba(251,146,60,.20), transparent 40%);}
 .card.t-orange .btn-buka{background:linear-gradient(120deg,#7c2d12,#ea580c 50%,#fb923c); color:#1a0d04;}
-.card.t-orange .badge.rarity-basic{color:#fed7aa;background:linear-gradient(135deg,rgba(251,146,60,.22),rgba(154,52,18,.14));border-color:rgba(253,186,116,.65);}
 
-/* 8. MYTHIC — Cyan + Gold (Kuis 25, legendaris) */
-.card.t-mythic::after{
-  background:linear-gradient(90deg,transparent,#22d3ee,#fbbf24,#67e8f9,#fde68a,#22d3ee,transparent);
-  background-size:300% 100%;
-}
+/* 8. MYTHIC (Kuis 25) */
 .card.t-mythic{
   background:linear-gradient(155deg, rgba(4,42,52,.94) 0%, rgba(4,11,28,.96) 55%, rgba(8,32,52,.92) 100%);
   color:#22d3ee;
 }
 .card.t-mythic::before{background:radial-gradient(circle,rgba(34,211,238,.35),transparent 65%);}
+.card.t-mythic::after{background:linear-gradient(90deg,transparent,#22d3ee,#fbbf24,#67e8f9,#fde68a,#22d3ee,transparent);}
 .card.t-mythic:hover{
   border-color:rgba(251,191,36,.65);
   box-shadow:0 1px 0 rgba(255,255,255,.10) inset,0 50px 100px -35px rgba(0,0,0,.95),0 30px 60px -22px rgba(34,211,238,.65),0 0 60px -18px rgba(251,191,36,.60);
@@ -843,19 +830,34 @@ body::before{
 }
 .card.t-mythic .kuis-box::before{background:radial-gradient(circle at 15% 30%, rgba(253,230,138,.30), transparent 40%), radial-gradient(circle at 85% 70%, rgba(103,232,249,.26), transparent 40%);}
 .card.t-mythic .btn-buka{background:linear-gradient(120deg,#0e7490,#22d3ee 45%,#fbbf24); color:#03132b;}
-.card.t-mythic .badge.rarity-legend{color:#03132b;background:linear-gradient(135deg,#fde68a,#22d3ee,#67e8f9);border-color:rgba(253,230,138,.85);box-shadow:0 0 22px -4px rgba(251,191,36,.85),0 0 30px -4px rgba(34,211,238,.65),inset 0 1px 0 rgba(255,255,255,.55);}
 
-/* Badge default (jika bukan legend/boss) */
+/* ============ BADGE FASE (hijau) ============ */
 .badge{
   position:absolute; top:14px; right:14px;
   display:inline-flex; align-items:center; gap:5px;
-  padding:5px 11px;
+  padding:5px 12px;
   border-radius:999px;
   font-size:10px; font-weight:800;
   letter-spacing:.10em; text-transform:uppercase;
   z-index:3;
   backdrop-filter:blur(8px);
 }
+
+.badge.rarity-fase{
+  color:#d1fae5;
+  background:linear-gradient(135deg,rgba(16,185,129,.30),rgba(5,150,105,.18));
+  border:1px solid rgba(110,231,183,.65);
+  box-shadow:
+    0 0 18px -4px rgba(16,185,129,.75),
+    inset 0 1px 0 rgba(255,255,255,.20);
+}
+.badge.rarity-fase::before{
+  content:"";
+  width:6px; height:6px; border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,#a7f3d0,#10b981);
+  box-shadow:0 0 8px #34d399, 0 0 16px rgba(52,211,153,.7);
+}
+
 .badge.rarity-boss{
   color:#fff;
   background:linear-gradient(135deg,rgba(251,191,36,.35),rgba(180,83,9,.28));
@@ -892,7 +894,7 @@ body::before{
   z-index:3;
 }
 
-/* Modal */
+/* MODAL */
 .modal-backdrop{
   position:fixed; inset:0;
   background:rgba(3,9,22,.85);
@@ -967,6 +969,7 @@ body::before{
 .modal .step .txt{font-size:13.5px; line-height:1.65; color:rgba(199,216,240,.92);}
 .modal .step .txt b{color:var(--gold-soft); font-weight:700;}
 
+/* FOOTER */
 .footer{
   text-align:center;
   padding:60px 22px 50px;
@@ -1240,7 +1243,6 @@ const KUIS_BY_BAB = BAB_UTAMA.map(bab => {
     const url = bab.urls
       ? bab.urls[i - 1]
       : `${BASE}/${bab.slug}${i}.html`;
-    /* Tema berputar: t-royal, t-cyan, t-gold, ... */
     const theme = isLegend ? "t-mythic" : THEMES[(kuisNumber - 1) % THEMES.length];
     list.push({
       id: `b${bab.bab}-k${i}`,
@@ -1328,7 +1330,8 @@ function buildCard(bab, k, idx){
   card.setAttribute("data-id", k.id);
   card.setAttribute("aria-label", `Buka ${bab.nama} ${k.label}`);
 
-  let badge = `<span class="badge rarity-basic">📘 Kuis ${k.kuisNumber}</span>`;
+  /* Badge: default Fase E (hijau), kecuali legendaris/boss */
+  let badge = `<span class="badge rarity-fase">Fase E</span>`;
   if(k.isLegend){
     badge = `<span class="badge rarity-legend">👑 Legendaris</span>`;
   }else if(k.isBoss){
