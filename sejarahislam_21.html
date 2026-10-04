@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+<meta name="theme-color" content="#05060f" />
+<title>🕌 Kuis 21 · Teori Masuk &amp; Jalur Rempah Islam Nusantara</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+:root{
+  --font-display:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'Space Grotesk',ui-monospace,monospace;
+  --primary:#10B981;--primary-light:#6EE7B7;--primary-dark:#047857;
+  --accent:#F59E0B;--accent-light:#FCD34D;--accent-dark:#B45309;
+  --emerald:#34D399;--violet:#A78BFA;--rose:#FB7185;--sky:#38BDF8;--gold:#FBBF24;
+  --bg:#05060f;--bg-2:#0b0d1c;
+  --glass:rgba(255,255,255,0.045);
+  --glass-strong:rgba(255,255,255,0.08);
+  --glass-border:rgba(255,255,255,0.10);
+  --text:#f7f5ff;--text-dim:#a8a8c0;--text-mute:#6b6b85;
+  --radius:24px;--radius-md:18px;--radius-sm:14px;--radius-xs:10px;
+  --shadow-card:0 24px 60px rgba(0,0,0,.55);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-display);background:var(--bg);color:var(--text);line-height:1.65;
+  overflow-x:hidden;min-height:100vh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+::selection{background:var(--primary);color:#05060f}
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%,rgba(16,185,129,.18),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 100%,rgba(245,158,11,.14),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 50%,rgba(110,231,183,.08),transparent 65%);
+  animation:bgShift 20s ease-in-out infinite alternate}
+@keyframes bgShift{0%{transform:scale(1) rotate(0deg);filter:hue-rotate(0deg)}100%{transform:scale(1.1) rotate(3deg);filter:hue-rotate(-10deg)}}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25;
+  background-image:
+    linear-gradient(rgba(16,185,129,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(16,185,129,.06) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%)}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
+#confettiCanvas{position:fixed;inset:0;z-index:9998;pointer-events:none}
+#loader{position:fixed;inset:0;z-index:99999;
+  background:radial-gradient(ellipse at center,#0b0d1c 0%,#05060f 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:20px;text-align:center;transition:opacity .8s ease,visibility .8s ease}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-orb{width:120px;height:120px;position:relative;display:grid;place-items:center}
+.loader-orb::before,.loader-orb::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent}
+.loader-orb::before{border-top-color:var(--primary);border-right-color:var(--primary-light);animation:spin 2s linear infinite;filter:drop-shadow(0 0 20px rgba(16,185,129,.6))}
+.loader-orb::after{inset:14px;border-bottom-color:var(--accent);border-left-color:var(--sky);animation:spin 1.6s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-core{width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 40px rgba(16,185,129,.7),inset 0 0 20px rgba(255,255,255,.25);
+  display:grid;place-items:center;font-size:1.5rem;color:#fff;
+  animation:pulseCore 2s ease-in-out infinite}
+@keyframes pulseCore{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.loader-title{font-family:var(--font-display);font-weight:900;font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:3px;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary),var(--accent));
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.loader-sub{font-size:.85rem;color:var(--text-dim);font-weight:500;letter-spacing:1px}
+.loader-bar{width:min(300px,70vw);height:4px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+.loader-bar span{display:block;height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 20px rgba(16,185,129,.6);transition:width .3s ease}
+.loader-pct{font-family:var(--font-mono);font-size:.72rem;font-weight:700;color:var(--text-mute);letter-spacing:2px}
+.game-header{position:fixed;top:0;left:0;right:0;height:60px;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:10px;
+  background:rgba(5,6,15,.72);backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border-bottom:1px solid var(--glass-border)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:.9rem;color:var(--text)}
+.brand-logo{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:.9rem;
+  box-shadow:0 0 22px rgba(16,185,129,.5);animation:logoPulse 3s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 22px rgba(16,185,129,.5)}50%{box-shadow:0 0 32px rgba(16,185,129,.8)}}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .t1{font-size:.62rem;color:var(--text-mute);letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+.brand-text .t2{font-size:.92rem;font-weight:800;color:var(--text)}
+.header-actions{display:flex;gap:6px}
+.icon-btn{width:36px;height:36px;border-radius:11px;border:1px solid var(--glass-border);
+  background:var(--glass);color:var(--text-dim);display:grid;place-items:center;cursor:pointer;
+  font-size:.85rem;transition:all .3s var(--ease-out)}
+.icon-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 0 22px rgba(16,185,129,.6);transform:translateY(-2px)}
+.wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;
+  padding:calc(60px + 20px) 16px 60px;min-height:100vh}
+.start-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:calc(100vh - 100px);text-align:center;gap:18px;padding:20px 0}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:40px;
+  background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(245,158,11,.10));
+  border:1px solid rgba(16,185,129,.30);font-size:.7rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary-light);box-shadow:0 0 30px rgba(16,185,129,.20);
+  animation:badgeFloat 3s ease-in-out infinite}
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-title{font-family:var(--font-display);font-size:clamp(2rem,7vw,3.4rem);
+  font-weight:900;line-height:1.05;letter-spacing:-1.5px;
+  background:linear-gradient(135deg,#fff 0%,var(--primary-light) 40%,var(--primary) 70%,var(--accent) 100%);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 8px 30px rgba(16,185,129,.3))}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text-dim);max-width:580px;line-height:1.75}
+.hero-sub strong{color:var(--primary-light);font-weight:700}
+.stats-showcase{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+.stat-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;
+  background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(10px);
+  font-size:.8rem;color:var(--text-dim);font-weight:600;transition:all .3s var(--ease-out)}
+.stat-pill:hover{transform:translateY(-3px);border-color:rgba(16,185,129,.4);box-shadow:0 8px 24px rgba(16,185,129,.15)}
+.stat-pill i{font-size:.95rem}
+.rules-card{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:22px 24px;
+  max-width:520px;width:100%;text-align:left;margin-top:6px;backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.rules-card h4{font-size:.85rem;font-weight:800;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.rules-card ul{list-style:none;display:grid;gap:10px}
+.rules-card li{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-dim);line-height:1.6}
+.rule-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+  border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 4px 14px rgba(16,185,129,.4)}
+.btn-play{position:relative;display:inline-flex;align-items:center;gap:14px;
+  padding:18px 54px;border-radius:60px;border:none;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;font-family:var(--font-display);font-weight:900;font-size:1.05rem;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;overflow:hidden;
+  box-shadow:0 12px 40px rgba(16,185,129,.45),inset 0 -3px 0 rgba(0,0,0,.2);
+  transition:all .4s var(--ease-spring);margin-top:14px}
+.btn-play::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.35),transparent 70%);
+  transform:translateX(-100%);transition:transform .8s ease}
+.btn-play:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 20px 60px rgba(16,185,129,.65)}
+.btn-play:hover::before{transform:translateX(100%)}
+.btn-play:active{transform:translateY(-1px) scale(.98)}
+.game-hud{display:none;flex-direction:column;gap:14px;animation:fadeSlideIn .5s var(--ease-out)}
+.game-hud.active{display:flex}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hud-top{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+  padding:14px 18px;border-radius:var(--radius-md);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.hud-hp{display:flex;align-items:center;gap:4px}
+.hud-hp .heart{font-size:1.15rem;color:var(--rose);
+  filter:drop-shadow(0 0 8px rgba(251,113,133,.6));transition:all .4s var(--ease-out)}
+.hud-hp .heart.empty{color:rgba(255,255,255,.10);filter:none;transform:scale(.85)}
+.hud-hp .heart.losing{animation:heartBreak .6s ease}
+@keyframes heartBreak{0%{transform:scale(1)}30%{transform:scale(1.4);color:#fff}100%{transform:scale(.85);opacity:.3}}
+.hud-xp{display:flex;flex-direction:column;gap:4px;min-width:0}
+.hud-xp-head{display:flex;justify-content:space-between;align-items:center;font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.hud-xp-head .lvl{color:var(--primary-light)}
+.hud-xp-head .val{color:var(--text-mute);font-family:var(--font-mono)}
+.xp-track{height:8px;border-radius:10px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+.xp-fill{height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 16px rgba(16,185,129,.7);transition:width .8s var(--ease-spring);position:relative}
+.xp-fill::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  animation:xpShine 2s linear infinite}
+@keyframes xpShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.hud-timer{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:40px;
+  background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.30);
+  font-family:var(--font-mono);font-weight:800;font-size:.85rem;color:var(--primary-light);
+  letter-spacing:1px;transition:all .3s ease}
+.hud-timer.warning{background:rgba(251,113,133,.15);border-color:rgba(251,113,133,.5);color:#fecdd3;animation:pulseWarn 1s ease-in-out infinite}
+@keyframes pulseWarn{0%,100%{box-shadow:0 0 0 0 rgba(251,113,133,.4)}50%{box-shadow:0 0 0 8px rgba(251,113,133,0)}}
+.hud-middle{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:.75rem;color:var(--text-mute);font-weight:700;padding:0 4px}
+.hud-middle .combo-tag{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:800;transition:all .3s var(--ease-spring)}
+.hud-middle .combo-tag.hot{color:var(--primary-light);animation:comboPulse .5s var(--ease-spring)}
+@keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+.q-card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:26px 26px 22px;
+  backdrop-filter:blur(20px);box-shadow:var(--shadow-card);animation:qEnter .55s var(--ease-out);overflow:hidden}
+.q-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(135deg,rgba(16,185,129,.4),transparent 40%,transparent 60%,rgba(245,158,11,.3));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+@keyframes qEnter{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.q-card.shake{animation:shake .5s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+.q-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:30px;
+  background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(16,185,129,.06));
+  border:1px solid rgba(16,185,129,.30);font-size:.72rem;font-weight:800;letter-spacing:1px;color:var(--primary-light)}
+.q-topic{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;
+  background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.28);font-size:.68rem;
+  font-weight:800;letter-spacing:.8px;color:var(--accent);text-transform:uppercase}
+.q-text{font-size:clamp(1rem,2.2vw,1.12rem);font-weight:600;line-height:1.75;color:var(--text);
+  margin-bottom:20px;white-space:pre-line}
+.q-text strong{color:var(--primary-light);font-weight:800}
+.options{display:grid;gap:10px}
+.opt{position:relative;display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;
+  padding:15px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--glass-border);
+  background:rgba(255,255,255,.03);color:var(--text-dim);font-family:inherit;font-size:.92rem;
+  line-height:1.6;cursor:pointer;transition:all .3s var(--ease-out);overflow:hidden}
+.opt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(90deg,rgba(16,185,129,.15),transparent);
+  transition:width .4s var(--ease-out);z-index:0}
+.opt:hover:not(.locked){border-color:rgba(16,185,129,.55);transform:translateX(5px);
+  color:var(--text);box-shadow:0 8px 24px rgba(16,185,129,.15)}
+.opt:hover:not(.locked)::before{width:100%}
+.opt-letter{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;flex-shrink:0;background:rgba(255,255,255,.06);
+  color:var(--text-mute);font-weight:800;font-size:.85rem;transition:all .3s var(--ease-out);
+  border:1px solid rgba(255,255,255,.06)}
+.opt-text{position:relative;z-index:1;flex:1}
+.opt:hover:not(.locked) .opt-letter{background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;border-color:transparent;box-shadow:0 0 20px rgba(16,185,129,.6)}
+.opt.correct{border-color:var(--emerald);background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(52,211,153,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(52,211,153,.15),0 12px 32px rgba(52,211,153,.25);
+  animation:correctPop .5s var(--ease-spring)}
+@keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.02)}100%{transform:scale(1)}}
+.opt.correct .opt-letter{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(52,211,153,.7)}
+.opt.wrong{border-color:var(--rose);background:linear-gradient(135deg,rgba(251,113,133,.15),rgba(251,113,133,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(251,113,133,.15),0 12px 32px rgba(251,113,133,.25)}
+.opt.wrong .opt-letter{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(251,113,133,.7)}
+.opt.locked{pointer-events:none}
+.opt.disabled-50{opacity:.2;pointer-events:none;filter:grayscale(1) blur(.5px)}
+.feedback{display:none;padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(16px);box-shadow:var(--shadow-card);
+  animation:qEnter .5s var(--ease-out)}
+.feedback.show{display:block}
+.fb-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.fb-icon{width:48px;height:48px;border-radius:15px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;transition:all .4s var(--ease-spring)}
+.fb-icon.correct{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;box-shadow:0 0 32px rgba(52,211,153,.6)}
+.fb-icon.wrong{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;box-shadow:0 0 32px rgba(251,113,133,.6)}
+.fb-icon.info{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 0 32px rgba(16,185,129,.6)}
+.fb-title{font-size:1.05rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
+.fb-title.correct{color:var(--emerald)}
+.fb-title.wrong{color:#fecdd3}
+.fb-title.info{color:var(--primary-light)}
+.fb-body{font-size:.9rem;color:var(--text-dim);line-height:1.75}
+.fb-body strong{color:var(--text);font-weight:700}
+.fb-sec{margin-top:12px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.10)}
+.fb-label{font-size:.68rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--primary-light);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.fb-points{margin-top:12px;padding:14px 16px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(245,158,11,.10),rgba(245,158,11,.03));border-left:3px solid var(--accent)}
+.fb-points .fb-label{color:var(--accent)}
+.fb-points p{font-size:.87rem;color:var(--text-dim);line-height:1.7}
+.hud-bottom{display:flex;flex-direction:column;gap:12px}
+.power-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.power-btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;
+  border-radius:50px;border:1px solid var(--glass-border);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  color:var(--text-dim);font-family:inherit;font-weight:800;font-size:.78rem;letter-spacing:.5px;
+  cursor:pointer;transition:all .3s var(--ease-spring);overflow:hidden}
+.power-btn i{font-size:.9rem}
+.power-btn:hover:not(:disabled):not(.used){transform:translateY(-3px);border-color:rgba(16,185,129,.5);color:var(--text);box-shadow:0 8px 24px rgba(16,185,129,.25)}
+.power-btn:active:not(:disabled):not(.used){transform:scale(.96)}
+.power-btn .cnt{font-size:.62rem;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.10);font-weight:900;font-family:var(--font-mono)}
+.power-btn.used{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.power-btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.power-btn.p50{color:var(--accent)}
+.power-btn.phint{color:var(--primary-light)}
+.power-btn.pskip{color:var(--rose)}
+.action-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 30px;border-radius:50px;border:none;
+  font-family:inherit;font-weight:900;font-size:.88rem;letter-spacing:.5px;cursor:pointer;
+  transition:all .35s var(--ease-spring)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;
+  box-shadow:0 10px 32px rgba(16,185,129,.4),inset 0 -2px 0 rgba(0,0,0,.15)}
+.btn-primary:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 44px rgba(16,185,129,.6)}
+.btn-primary:active:not(:disabled){transform:scale(.96)}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--text-dim);border:1px solid var(--glass-border)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(16,185,129,.4);transform:translateY(-2px)}
+.result-screen{display:none;flex-direction:column;gap:16px;text-align:center;animation:fadeSlideIn .6s var(--ease-out)}
+.result-screen.active{display:flex}
+.result-hero{position:relative;padding:38px 26px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);box-shadow:var(--shadow-card);overflow:hidden}
+.result-hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center top,rgba(16,185,129,.20),transparent 60%);pointer-events:none}
+.result-trophy{font-size:4rem;line-height:1;margin-bottom:8px;
+  filter:drop-shadow(0 8px 30px rgba(16,185,129,.6));animation:trophyFloat 3s ease-in-out infinite}
+@keyframes trophyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.result-title{font-family:var(--font-display);font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:900;
+  letter-spacing:-.5px;background:linear-gradient(135deg,#fff,var(--primary-light),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.result-sub{font-size:.9rem;color:var(--text-dim);margin-bottom:6px}
+.grade-ring{position:relative;width:130px;height:130px;margin:16px auto;border-radius:50%;
+  background:conic-gradient(var(--primary) var(--grade-deg,0deg),rgba(255,255,255,.08) 0deg);
+  padding:8px;box-shadow:0 0 40px rgba(16,185,129,.4);animation:ringPop .8s var(--ease-spring)}
+@keyframes ringPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.grade-inner{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at center,#0b0d1c,#05060f);display:grid;place-items:center;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.6)}
+.grade-letter{font-size:2.6rem;font-weight:900;line-height:1;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent}
+.grade-label{font-size:.62rem;font-weight:800;letter-spacing:2px;color:var(--text-mute);text-transform:uppercase;margin-top:2px}
+.result-title-text{font-size:1.1rem;font-weight:900;color:var(--primary-light);letter-spacing:.5px;margin-top:8px;text-transform:uppercase}
+.result-xp-line{font-size:.88rem;color:var(--text-dim);margin-top:6px}
+.result-xp-line strong{color:var(--accent);font-family:var(--font-mono);font-weight:800}
+.result-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:20px 0 8px}
+.rs-box{padding:16px 10px;border-radius:var(--radius-sm);background:rgba(255,255,255,.04);
+  border:1px solid var(--glass-border);transition:all .3s var(--ease-out)}
+.rs-box:hover{transform:translateY(-3px);border-color:rgba(16,185,129,.3)}
+.rs-val{font-size:1.7rem;font-weight:900;line-height:1.1;font-family:var(--font-mono)}
+.rs-val.green{color:var(--emerald);text-shadow:0 0 20px rgba(52,211,153,.5)}
+.rs-val.red{color:#fecdd3;text-shadow:0 0 20px rgba(251,113,133,.5)}
+.rs-val.cyan{color:var(--accent);text-shadow:0 0 20px rgba(245,158,11,.5)}
+.rs-val.violet{color:var(--primary-light);text-shadow:0 0 20px rgba(110,231,183,.5)}
+.rs-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.5px;color:var(--text-mute);text-transform:uppercase;margin-top:6px}
+.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:14px 18px;border-radius:12px;
+  background:rgba(16,185,129,.06);border-left:3px solid var(--primary);margin-top:6px;text-align:left}
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.review-panel{padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);text-align:left}
+.review-panel h4{font-size:.9rem;font-weight:900;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.review-list{display:grid;gap:8px}
+.review-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-radius:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:.84rem;
+  line-height:1.6;transition:all .3s var(--ease-out)}
+.review-item:hover{background:rgba(255,255,255,.06);transform:translateX(3px)}
+.review-item .ri-num{font-weight:900;color:var(--text-mute);flex-shrink:0;font-family:var(--font-mono);font-size:.78rem;min-width:26px}
+.review-item .ri-text{flex:1;color:var(--text-dim)}
+.review-item .ri-status{font-size:.68rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:20px;flex-shrink:0}
+.ri-status.correct{background:rgba(52,211,153,.15);color:#6ee7b7}
+.ri-status.wrong{background:rgba(251,113,133,.15);color:#fecdd3}
+.ri-status.skipped{background:rgba(255,255,255,.06);color:var(--text-mute)}
+.toast-wrap{position:fixed;top:74px;right:16px;z-index:9999;display:flex;flex-direction:column;
+  gap:10px;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast{display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(11,13,28,.95),rgba(5,6,15,.95));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);
+  box-shadow:0 16px 40px rgba(0,0,0,.6),0 0 0 1px rgba(16,185,129,.15);
+  pointer-events:auto;animation:toastIn .5s var(--ease-spring);max-width:340px}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast.out{animation:toastOut .4s ease forwards}
+@keyframes toastOut{to{transform:translateX(120%);opacity:0}}
+.toast-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 24px rgba(16,185,129,.6)}
+.toast-icon.green{background:linear-gradient(135deg,var(--emerald),#059669);box-shadow:0 0 24px rgba(52,211,153,.6)}
+.toast-icon.cyan{background:linear-gradient(135deg,var(--accent),var(--accent-dark));box-shadow:0 0 24px rgba(245,158,11,.6)}
+.toast-icon.violet{background:linear-gradient(135deg,var(--violet),#6C63FF);box-shadow:0 0 24px rgba(167,139,250,.6)}
+.toast-content{flex:1;min-width:0}
+.toast-title{font-size:.85rem;font-weight:900;color:var(--text);letter-spacing:.3px}
+.toast-desc{font-size:.75rem;color:var(--text-dim);line-height:1.5;margin-top:2px}
+.score-pop{position:fixed;z-index:9997;pointer-events:none;font-family:var(--font-display);
+  font-weight:900;font-size:1.6rem;color:var(--primary-light);text-shadow:0 0 20px rgba(16,185,129,.8);
+  animation:scorePop 1s var(--ease-out) forwards}
+@keyframes scorePop{0%{transform:translate(-50%,0) scale(.5);opacity:0}
+  20%{transform:translate(-50%,-20px) scale(1.2);opacity:1}
+  100%{transform:translate(-50%,-80px) scale(1);opacity:0}}
+@media (max-width:600px){
+  .wrap{padding:calc(60px + 14px) 12px 50px}
+  .q-card{padding:20px 18px}
+  .opt{padding:13px 14px;font-size:.87rem;gap:11px}
+  .opt-letter{width:30px;height:30px;font-size:.78rem}
+  .hud-top{padding:12px 14px;gap:8px}
+  .hud-timer{padding:6px 11px;font-size:.78rem}
+  .hud-hp .heart{font-size:1rem}
+  .power-btn{padding:9px 14px;font-size:.72rem}
+  .btn{padding:12px 22px;font-size:.82rem;width:100%;justify-content:center}
+  .action-bar{flex-direction:column}
+  .result-hero{padding:28px 18px}
+  .grade-ring{width:110px;height:110px}
+  .grade-letter{font-size:2.2rem}
+  .rs-val{font-size:1.4rem}
+  .toast{max-width:calc(100vw - 24px);padding:12px 14px}
+  .toast-icon{width:36px;height:36px;font-size:1rem}
+}
+@media print{
+  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap{display:none!important}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+<canvas id="particles"></canvas>
+<canvas id="confettiCanvas"></canvas>
+
+<div id="loader">
+  <div class="loader-orb">
+    <div class="loader-core"><i class="fas fa-mosque"></i></div>
+  </div>
+  <div class="loader-title">HISTOEXPLORER</div>
+  <div class="loader-sub">Kuis 21 · Teori Masuk &amp; Jalur Rempah Islam Nusantara</div>
+  <div class="loader-bar"><span id="loaderBar"></span></div>
+  <div class="loader-pct" id="loaderPct">0%</div>
+</div>
+
+<header class="game-header">
+  <div class="brand">
+    <div class="brand-logo"><i class="fas fa-mosque"></i></div>
+    <div class="brand-text">
+      <span class="t1">KUIS 21 · KERAJAAN ISLAM</span>
+      <span class="t2">Teori Masuk &amp; Jalur Rempah</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="Suara"><i class="fas fa-volume-up"></i></button>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema"><i class="fas fa-sun"></i></button>
+  </div>
+</header>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<main class="wrap">
+
+  <section class="start-screen" id="startScreen">
+    <span class="hero-badge"><i class="fas fa-star-and-crescent"></i> PREMIUM GAME MODE · LEVEL 21</span>
+    <h1 class="hero-title">Teori Masuk<br>&amp; Jalur Rempah</h1>
+    <p class="hero-sub">
+      Kuasai <strong>4 teori masuknya Islam</strong> (Gujarat, Mekkah, Persia, Tiongkok), peran <strong>Jalur Rempah</strong>, dan <strong>4 proses Islamisasi damai</strong> yang mengubah Nusantara!
+    </p>
+
+    <div class="stats-showcase">
+      <span class="stat-pill" style="color:#6EE7B7"><i class="fas fa-question-circle"></i> 15 Soal Acak</span>
+      <span class="stat-pill" style="color:#FCD34D"><i class="fas fa-stopwatch"></i> 20 Menit</span>
+      <span class="stat-pill" style="color:#FB7185"><i class="fas fa-heart"></i> 3 Nyawa</span>
+      <span class="stat-pill" style="color:#34D399"><i class="fas fa-bolt"></i> Combo &amp; XP</span>
+    </div>
+
+    <div class="rules-card">
+      <h4><i class="fas fa-list-check"></i> Cara Bermain</h4>
+      <ul>
+        <li><span class="rule-num">1</span> Jawab 15 soal HOTS dari bank 40 soal — dipilih acak setiap sesi.</li>
+        <li><span class="rule-num">2</span> Jawaban benar memberi <strong>XP</strong> + memicu <strong>combo</strong>. Salah mengurangi <strong>1 nyawa</strong>.</li>
+        <li><span class="rule-num">3</span> Power-up: <strong>50:50</strong>, <strong>Petunjuk</strong>, <strong>Lewati</strong> (masing-masing 1×).</li>
+        <li><span class="rule-num">4</span> Raih <strong>Achievement</strong> dan taklukkan peringkat <strong>PENELUSUR JALUR REMPAH</strong>!</li>
+      </ul>
+    </div>
+
+    <button class="btn-play" onclick="startGame()">
+      <i class="fas fa-play"></i> Mulai Bermain
+    </button>
+  </section>
+
+  <section class="game-hud" id="gameHud">
+    <div class="hud-top">
+      <div class="hud-hp" id="hudHp"></div>
+      <div class="hud-xp">
+        <div class="hud-xp-head">
+          <span class="lvl">LV <span id="hudLevel">1</span></span>
+          <span class="val"><span id="hudXp">0</span> / <span id="hudXpMax">100</span> XP</span>
+        </div>
+        <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
+      </div>
+      <div class="hud-timer" id="hudTimer">
+        <i class="fas fa-stopwatch"></i> <span id="hudTimerVal">20:00</span>
+      </div>
+    </div>
+
+    <div class="hud-middle">
+      <span><i class="fas fa-question-circle" style="color:var(--primary)"></i> Soal <strong id="hudQNum">1</strong>/<strong>15</strong></span>
+      <span class="combo-tag" id="comboTag"><i class="fas fa-fire"></i> Combo ×<span id="comboVal">0</span></span>
+      <span><i class="fas fa-star" style="color:var(--accent)"></i> Skor <strong id="hudScore" style="font-family:var(--font-mono)">0</strong></span>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-meta">
+        <span class="q-num"><i class="fas fa-bookmark"></i> <span id="qNumLabel">Soal 1</span></span>
+        <span class="q-topic" id="qTopic"><i class="fas fa-tag"></i> <span id="qTopicText">Teori Gujarat</span></span>
+      </div>
+      <div class="q-text" id="qText">Memuat soal...</div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <div class="feedback" id="feedback">
+      <div class="fb-head">
+        <div class="fb-icon" id="fbIcon"><i class="fas fa-check"></i></div>
+        <div class="fb-title" id="fbTitle">BENAR!</div>
+      </div>
+      <div class="fb-body" id="fbBody"></div>
+    </div>
+
+    <div class="hud-bottom">
+      <div class="power-bar">
+        <button class="power-btn p50" id="p50" onclick="usePower('50')">
+          <i class="fas fa-compress-alt"></i> 50:50 <span class="cnt" id="c50">1</span>
+        </button>
+        <button class="power-btn phint" id="phint" onclick="usePower('hint')">
+          <i class="fas fa-lightbulb"></i> Petunjuk <span class="cnt" id="chint">1</span>
+        </button>
+        <button class="power-btn pskip" id="pskip" onclick="usePower('skip')">
+          <i class="fas fa-forward"></i> Lewati <span class="cnt" id="cskip">1</span>
+        </button>
+      </div>
+      <div class="action-bar">
+        <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>
+          Selanjutnya <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="btn btn-primary" id="btnFinish" onclick="finishGame()" style="display:none">
+          Lihat Hasil <i class="fas fa-flag-checkered"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="result-screen" id="resultScreen">
+    <div class="result-hero">
+      <div class="result-trophy" id="rTrophy">🏆</div>
+      <h2 class="result-title" id="rTitle">Luar Biasa!</h2>
+      <p class="result-sub" id="rSub">Kuis 21 · Teori Masuk &amp; Jalur Rempah Islam Nusantara</p>
+      <div class="grade-ring" id="gradeRing">
+        <div class="grade-inner">
+          <div class="grade-letter" id="gradeLetter">A</div>
+          <div class="grade-label" id="gradeLabel">Sangat Baik</div>
+        </div>
+      </div>
+      <div class="result-title-text" id="rRank">PENELUSUR JALUR REMPAH</div>
+      <div class="result-xp-line">Total XP: <strong id="rXp">0</strong> · Best Combo: <strong id="rBestCombo">0</strong></div>
+      <div class="result-stats">
+        <div class="rs-box"><div class="rs-val green" id="rBenar">0</div><div class="rs-lbl">Benar</div></div>
+        <div class="rs-box"><div class="rs-val red" id="rSalah">0</div><div class="rs-lbl">Salah</div></div>
+        <div class="rs-box"><div class="rs-val cyan" id="rSkor">0</div><div class="rs-lbl">Skor</div></div>
+        <div class="rs-box"><div class="rs-val violet" id="rXpTotal">0</div><div class="rs-lbl">XP Total</div></div>
+      </div>
+      <div class="result-msg" id="rMsg"></div>
+      <div class="result-actions">
+        <button class="btn btn-primary" onclick="resetGame()"><i class="fas fa-redo"></i> Main Lagi</button>
+        <button class="btn btn-ghost" onclick="window.location.reload()"><i class="fas fa-home"></i> Menu Awal</button>
+      </div>
+    </div>
+    <div class="review-panel">
+      <h4><i class="fas fa-list-check"></i> Rincian Jawaban</h4>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ============================================================
+   BANK SOAL — 40 SOAL HOTS · KUIS 21
+   Fokus: 4 Teori Masuk Islam + Jalur Rempah + Islamisasi Damai
+   Distribusi jawaban: A=8, B=8, C=8, D=8, E=8 (SEIMBANG)
+   ============================================================ */
+const BANK_SOAL = [
+  /* ============ TEORI GUJARAT (6 soal) ============ */
+  { id:2101, topic:"Teori Gujarat",
+    question:"Teori yang menyatakan Islam masuk Nusantara dari India (Gujarat) pada abad ke-13 M didukung oleh bukti utama berupa...",
+    options:[
+      {letter:"A",text:"Berita Cina Dinasti Tang tahun 674 M",correct:false,explanation:"Itu bukti Teori Mekkah."},
+      {letter:"B",text:"Batu nisan Sultan Malik as-Saleh (1297 M) bercorak Gujarat",correct:true,explanation:"Tepat! Batu nisan Malik as-Saleh = bukti utama Teori Gujarat."},
+      {letter:"C",text:"Tradisi Tabot di Bengkulu",correct:false,explanation:"Itu bukti Teori Persia."},
+      {letter:"D",text:"Peran Laksamana Cheng Ho",correct:false,explanation:"Itu bukti Teori Tiongkok."},
+      {letter:"E",text:"Pemukiman Arab Muslim di Barus",correct:false,explanation:"Itu bukti Teori Mekkah."}
+    ], difficulty:"medium", hint:"Batu nisan Malik as-Saleh = bukti utama Teori Gujarat.", points:60 },
+
+  { id:2102, topic:"Teori Gujarat",
+    question:"Orientalis Belanda yang menjadi pendukung utama Teori Gujarat adalah...",
+    options:[
+      {letter:"A",text:"Snouck Hurgronje",correct:true,explanation:"Tepat! Snouck Hurgronje = pendukung Teori Gujarat."},
+      {letter:"B",text:"Buya Hamka",correct:false,explanation:"Hamka = pendukung Teori Mekkah."},
+      {letter:"C",text:"Hoesein Djajadiningrat",correct:false,explanation:"Hoesein = pendukung Teori Persia."},
+      {letter:"D",text:"Sumanto Al Qurtuby",correct:false,explanation:"Sumanto = pendukung Teori Tiongkok."},
+      {letter:"E",text:"Van Leur",correct:false,explanation:"Van Leur = pendukung Teori Mekkah."}
+    ], difficulty:"easy", hint:"Snouck Hurgronje = pendukung Teori Gujarat.", points:50 },
+
+  { id:2103, topic:"Teori Gujarat",
+    question:"Kritik utama yang diajukan terhadap Teori Gujarat adalah...",
+    options:[
+      {letter:"A",text:"Tidak ada bukti arkeologis sama sekali",correct:false,explanation:"Justru ada batu nisan."},
+      {letter:"B",text:"Gujarat bukan pusat perdagangan internasional",correct:false,explanation:"Justru Gujarat pusat dagang."},
+      {letter:"C",text:"Madzhab di Nusantara (Syafi'i) berbeda dengan madzhab Gujarat (Hanafi)",correct:true,explanation:"Tepat! Madzhab Syafi'i vs Hanafi = kritik utama."},
+      {letter:"D",text:"Gujarat belum mengenal Islam pada abad ke-13",correct:false,explanation:"Gujarat sudah Islam."},
+      {letter:"E",text:"Batu nisan Malik as-Saleh tidak pernah ditemukan",correct:false,explanation:"Justru ditemukan."}
+    ], difficulty:"hard", hint:"Madzhab Syafi'i vs Hanafi = kritik utama.", points:70 },
+
+  { id:2104, topic:"Teori Gujarat",
+    question:"Analisis yang paling tepat tentang Teori Gujarat adalah...",
+    options:[
+      {letter:"A",text:"Teori paling kuat karena tidak memiliki kelemahan",correct:false,explanation:"Setiap teori punya kelemahan."},
+      {letter:"B",text:"Teori paling lemah karena tidak ada buktinya",correct:false,explanation:"Justru ada bukti."},
+      {letter:"C",text:"Teori yang hanya berdasarkan mitos rakyat",correct:false,explanation:"Bukan mitos."},
+      {letter:"D",text:"Teori yang didukung bukti arkeologis batu nisan, namun memiliki kelemahan karena perbedaan madzhab",correct:true,explanation:"Tepat! Ada bukti, tapi madzhab berbeda."},
+      {letter:"E",text:"Teori yang sudah tidak diakui sejarawan modern",correct:false,explanation:"Masih diperdebatkan."}
+    ], difficulty:"hard", hint:"Ada bukti, tapi madzhab berbeda.", points:70 },
+
+  { id:2105, topic:"Teori Gujarat",
+    question:"Kelemahan Teori Gujarat jika dibandingkan dengan Teori Mekkah terletak pada...",
+    options:[
+      {letter:"A",text:"Bukti arkeologisnya lebih sedikit",correct:false,explanation:"Justru banyak."},
+      {letter:"B",text:"Tokoh pendukungnya kurang terkenal",correct:false,explanation:"Justru terkenal."},
+      {letter:"C",text:"Tidak menjelaskan peran pedagang",correct:false,explanation:"Justru menjelaskan."},
+      {letter:"D",text:"Tidak didukung oleh catatan asing",correct:false,explanation:"Justru didukung Marco Polo."},
+      {letter:"E",text:"Perbedaan madzhab Syafi'i-Hanafi yang tidak dapat dijelaskan",correct:true,explanation:"Tepat! Madzhab berbeda = kelemahan."}
+    ], difficulty:"hard", hint:"Madzhab berbeda = kelemahan Teori Gujarat.", points:70 },
+
+  { id:2106, topic:"Teori Gujarat",
+    question:"Corak batu nisan Sultan Malik as-Saleh yang mendukung Teori Gujarat memiliki kemiripan dengan batu nisan dari...",
+    options:[
+      {letter:"A",text:"Arab Saudi",correct:false,explanation:"Bukan Arab."},
+      {letter:"B",text:"Gujarat, India",correct:true,explanation:"Tepat! Mirip batu nisan Gujarat."},
+      {letter:"C",text:"Persia, Iran",correct:false,explanation:"Bukan Persia."},
+      {letter:"D",text:"Tiongkok",correct:false,explanation:"Bukan Tiongkok."},
+      {letter:"E",text:"Turki Utsmani",correct:false,explanation:"Bukan Turki."}
+    ], difficulty:"medium", hint:"Mirip batu nisan Gujarat.", points:60 },
+
+  /* ============ TEORI MEKKAH (4 soal) ============ */
+  { id:2107, topic:"Teori Mekkah",
+    question:"Teori yang menyatakan Islam masuk Nusantara langsung dari Arab (Mekkah) pada abad ke-7 M adalah...",
+    options:[
+      {letter:"A",text:"Teori Mekkah",correct:true,explanation:"Tepat! Teori Mekkah = langsung dari Arab."},
+      {letter:"B",text:"Teori Gujarat",correct:false,explanation:"Gujarat = dari India."},
+      {letter:"C",text:"Teori Persia",correct:false,explanation:"Persia = dari Iran."},
+      {letter:"D",text:"Teori Tiongkok",correct:false,explanation:"Tiongkok = dari Tiongkok."},
+      {letter:"E",text:"Teori Arus Balik",correct:false,explanation:"Arus Balik = orang Nusantara belajar ke India."}
+    ], difficulty:"easy", hint:"Teori Mekkah = langsung dari Arab.", points:50 },
+
+  { id:2108, topic:"Teori Mekkah",
+    question:"Tokoh Indonesia yang menjadi pendukung utama Teori Mekkah adalah...",
+    options:[
+      {letter:"A",text:"Snouck Hurgronje",correct:false,explanation:"Snouck = Gujarat."},
+      {letter:"B",text:"Hoesein Djajadiningrat",correct:false,explanation:"Hoesein = Persia."},
+      {letter:"C",text:"Buya Hamka",correct:true,explanation:"Tepat! Buya Hamka = pendukung Teori Mekkah."},
+      {letter:"D",text:"Sumanto Al Qurtuby",correct:false,explanation:"Sumanto = Tiongkok."},
+      {letter:"E",text:"Slamet Muljana",correct:false,explanation:"Slamet = Tiongkok."}
+    ], difficulty:"easy", hint:"Buya Hamka = pendukung Teori Mekkah.", points:50 },
+
+  { id:2109, topic:"Teori Mekkah",
+    question:"Bukti utama yang mendukung Teori Mekkah adalah...",
+    options:[
+      {letter:"A",text:"Batu nisan Malik as-Saleh",correct:false,explanation:"Itu bukti Gujarat."},
+      {letter:"B",text:"Tradisi Tabot Bengkulu",correct:false,explanation:"Itu bukti Persia."},
+      {letter:"C",text:"Peran Cheng Ho",correct:false,explanation:"Itu bukti Tiongkok."},
+      {letter:"D",text:"Berita Cina Dinasti Tang (674 M) tentang pemukiman Arab Muslim di Barus",correct:true,explanation:"Tepat! Berita Cina 674 M = bukti Teori Mekkah."},
+      {letter:"E",text:"Arsitektur masjid bergaya Tionghoa",correct:false,explanation:"Itu bukti Tiongkok."}
+    ], difficulty:"medium", hint:"Berita Cina 674 M = bukti Teori Mekkah.", points:60 },
+
+  { id:2110, topic:"Teori Mekkah",
+    question:"Analisis yang paling tepat tentang Teori Mekkah adalah...",
+    options:[
+      {letter:"A",text:"Teori yang tidak memiliki bukti sama sekali",correct:false,explanation:"Justru ada bukti."},
+      {letter:"B",text:"Teori yang hanya berdasarkan legenda",correct:false,explanation:"Bukan legenda."},
+      {letter:"C",text:"Teori yang ditolak semua sejarawan",correct:false,explanation:"Justru diperdebatkan."},
+      {letter:"D",text:"Teori yang hanya berlaku di Jawa",correct:false,explanation:"Berlaku di seluruh Nusantara."},
+      {letter:"E",text:"Teori yang didukung berita Cina & kesamaan madzhab Syafi'i, namun masih diperdebatkan bukti arkeologisnya",correct:true,explanation:"Tepat! Bukti kuat, tapi arkeologis masih diperdebatkan."}
+    ], difficulty:"hard", hint:"Bukti kuat, tapi arkeologis masih diperdebatkan.", points:70 },
+
+  /* ============ TEORI PERSIA (3 soal) ============ */
+  { id:2111, topic:"Teori Persia",
+    question:"Teori yang menyatakan Islam masuk Nusantara dari Persia (Iran) pada abad ke-13 M didukung oleh bukti...",
+    options:[
+      {letter:"A",text:"Batu nisan Gujarat",correct:false,explanation:"Itu Gujarat."},
+      {letter:"B",text:"Tradisi peringatan 10 Muharram (Asyura) di beberapa daerah",correct:true,explanation:"Tepat! Tradisi Asyura = bukti Teori Persia."},
+      {letter:"C",text:"Berita Cina Dinasti Tang",correct:false,explanation:"Itu Mekkah."},
+      {letter:"D",text:"Peran Cheng Ho",correct:false,explanation:"Itu Tiongkok."},
+      {letter:"E",text:"Pemukiman Arab di Barus",correct:false,explanation:"Itu Mekkah."}
+    ], difficulty:"medium", hint:"Tradisi Asyura = bukti Teori Persia.", points:60 },
+
+  { id:2112, topic:"Teori Persia",
+    question:"Tokoh pendukung Teori Persia adalah...",
+    options:[
+      {letter:"A",text:"Hoesein Djajadiningrat",correct:true,explanation:"Tepat! Hoesein = pendukung Teori Persia."},
+      {letter:"B",text:"Snouck Hurgronje",correct:false,explanation:"Snouck = Gujarat."},
+      {letter:"C",text:"Buya Hamka",correct:false,explanation:"Hamka = Mekkah."},
+      {letter:"D",text:"Sumanto Al Qurtuby",correct:false,explanation:"Sumanto = Tiongkok."},
+      {letter:"E",text:"Van Leur",correct:false,explanation:"Van Leur = Mekkah."}
+    ], difficulty:"easy", hint:"Hoesein = pendukung Teori Persia.", points:50 },
+
+  { id:2113, topic:"Teori Persia",
+    question:"Tradisi Tabot di Bengkulu yang dianggap sebagai bukti Teori Persia memiliki kemiripan dengan tradisi...",
+    options:[
+      {letter:"A",text:"Sekaten di Yogyakarta",correct:false,explanation:"Sekaten = tradisi Jawa."},
+      {letter:"B",text:"Grebeg Maulud di Demak",correct:false,explanation:"Grebeg = tradisi Jawa."},
+      {letter:"C",text:"Peringatan Asyura di Persia (Iran)",correct:true,explanation:"Tepat! Tabot mirip Asyura Persia."},
+      {letter:"D",text:"Ruwahan di Jawa",correct:false,explanation:"Ruwahan = Jawa."},
+      {letter:"E",text:"Dugderan di Semarang",correct:false,explanation:"Dugderan = Jawa."}
+    ], difficulty:"medium", hint:"Tabot mirip Asyura Persia.", points:60 },
+
+  /* ============ TEORI TIONGKOK (3 soal) ============ */
+  { id:2114, topic:"Teori Tiongkok",
+    question:"Teori yang menyatakan Islam masuk Nusantara dari Tiongkok melalui perantau Muslim Tionghoa didukung oleh bukti...",
+    options:[
+      {letter:"A",text:"Batu nisan Malik as-Saleh",correct:false,explanation:"Itu Gujarat."},
+      {letter:"B",text:"Tradisi Tabot",correct:false,explanation:"Itu Persia."},
+      {letter:"C",text:"Berita Cina Dinasti Tang",correct:false,explanation:"Itu Mekkah."},
+      {letter:"D",text:"Peran Laksamana Cheng Ho & arsitektur masjid bergaya Tionghoa",correct:true,explanation:"Tepat! Cheng Ho & arsitektur Tionghoa."},
+      {letter:"E",text:"Pemukiman Arab di Barus",correct:false,explanation:"Itu Mekkah."}
+    ], difficulty:"medium", hint:"Cheng Ho & arsitektur Tionghoa.", points:60 },
+
+  { id:2115, topic:"Teori Tiongkok",
+    question:"Laksamana Muslim Tionghoa yang berperan dalam penyebaran Islam di Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Marco Polo",correct:false,explanation:"Marco Polo = pedagang Italia."},
+      {letter:"B",text:"Ibnu Battutah",correct:false,explanation:"Ibnu Battutah = penjelajah Maroko."},
+      {letter:"C",text:"Sunan Kalijaga",correct:false,explanation:"Sunan Kalijaga = wali Jawa."},
+      {letter:"D",text:"Ma Huan",correct:false,explanation:"Ma Huan = penerjemah Cheng Ho."},
+      {letter:"E",text:"Cheng Ho",correct:true,explanation:"Tepat! Cheng Ho = Laksamana Muslim Tionghoa."}
+    ], difficulty:"easy", hint:"Cheng Ho = Laksamana Muslim Tionghoa.", points:50 },
+
+  { id:2116, topic:"Teori Tiongkok",
+    question:"Masjid kuno di Banten dan Cirebon yang memiliki corak arsitektur Tionghoa menjadi bukti pendukung...",
+    options:[
+      {letter:"A",text:"Teori Tiongkok",correct:true,explanation:"Tepat! Arsitektur Tionghoa = bukti Teori Tiongkok."},
+      {letter:"B",text:"Teori Gujarat",correct:false,explanation:"Gujarat = India."},
+      {letter:"C",text:"Teori Persia",correct:false,explanation:"Persia = Iran."},
+      {letter:"D",text:"Teori Mekkah",correct:false,explanation:"Mekkah = Arab."},
+      {letter:"E",text:"Teori Arus Balik",correct:false,explanation:"Arus Balik = orang Nusantara."}
+    ], difficulty:"medium", hint:"Arsitektur Tionghoa = bukti Teori Tiongkok.", points:60 },
+
+  /* ============ JALUR REMPAH (8 soal) ============ */
+  { id:2117, topic:"Jalur Rempah",
+    question:"Jalur Rempah (Spice Route) berperan penting dalam Islamisasi Nusantara karena...",
+    options:[
+      {letter:"A",text:"Hanya sebagai jalur ekonomi tanpa dampak agama",correct:false,explanation:"Justru berdampak agama."},
+      {letter:"B",text:"Menjadi jaringan perdagangan yang sekaligus menjadi jalur penyebaran Islam",correct:true,explanation:"Tepat! Ekonomi + agama."},
+      {letter:"C",text:"Hanya dilalui pedagang Hindu-Buddha",correct:false,explanation:"Justru banyak Muslim."},
+      {letter:"D",text:"Tidak melewati pelabuhan Nusantara",correct:false,explanation:"Justru melewati."},
+      {letter:"E",text:"Hanya dikuasai oleh kerajaan Hindu",correct:false,explanation:"Justru banyak kerajaan Islam."}
+    ], difficulty:"medium", hint:"Ekonomi + agama = Jalur Rempah.", points:60 },
+
+  { id:2118, topic:"Jalur Rempah",
+    question:"Pelabuhan strategis yang menjadi pusat Jalur Rempah & Islamisasi awal di Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Sunda Kelapa",correct:false,explanation:"Sunda Kelapa = Pajajaran (Hindu)."},
+      {letter:"B",text:"Tuban",correct:false,explanation:"Tuban = pelabuhan Majapahit."},
+      {letter:"C",text:"Samudera Pasai (Perlak)",correct:true,explanation:"Tepat! Samudera Pasai = pusat awal."},
+      {letter:"D",text:"Banten",correct:false,explanation:"Banten = setelah Pasai."},
+      {letter:"E",text:"Makassar",correct:false,explanation:"Makassar = setelah Pasai."}
+    ], difficulty:"medium", hint:"Samudera Pasai = pusat awal.", points:60 },
+
+  { id:2119, topic:"Jalur Rempah",
+    question:"Komoditas utama yang diperdagangkan melalui Jalur Rempah Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Gandum dan anggur",correct:false,explanation:"Bukan dari Nusantara."},
+      {letter:"B",text:"Sutra dan porselen",correct:false,explanation:"Itu dari Tiongkok."},
+      {letter:"C",text:"Kain wol dan kaca",correct:false,explanation:"Itu dari Eropa."},
+      {letter:"D",text:"Cengkih, pala, dan lada",correct:true,explanation:"Tepat! Cengkih, pala, lada = rempah Nusantara."},
+      {letter:"E",text:"Minyak bumi dan batu bara",correct:false,explanation:"Itu modern."}
+    ], difficulty:"easy", hint:"Cengkih, pala, lada = rempah Nusantara.", points:50 },
+
+  { id:2120, topic:"Jalur Rempah",
+    question:"Selat Malaka menjadi jalur strategis Jalur Rempah karena...",
+    options:[
+      {letter:"A",text:"Merupakan satu-satunya jalur pelayaran di Asia",correct:false,explanation:"Bukan satu-satunya."},
+      {letter:"B",text:"Dikuasai oleh kerajaan Hindu",correct:false,explanation:"Justru kerajaan Islam."},
+      {letter:"C",text:"Tidak pernah dilalui pedagang Muslim",correct:false,explanation:"Justru ramai Muslim."},
+      {letter:"D",text:"Terlalu sempit untuk kapal besar",correct:false,explanation:"Justru strategis."},
+      {letter:"E",text:"Menjadi pintu masuk utama perdagangan antara India, Tiongkok, dan Nusantara",correct:true,explanation:"Tepat! Pintu masuk utama Asia."}
+    ], difficulty:"medium", hint:"Pintu masuk utama Asia.", points:60 },
+
+  { id:2121, topic:"Jalur Rempah",
+    question:"Jatuhnya Malaka ke tangan Portugis (1511) menyebabkan...",
+    options:[
+      {letter:"A",text:"Pusat perdagangan & Islam berpindah ke Aceh, Demak, Banten, & Gowa-Tallo",correct:true,explanation:"Tepat! Pusat berpindah ke kerajaan Islam lain."},
+      {letter:"B",text:"Islam hilang dari Nusantara",correct:false,explanation:"Justru makin menyebar."},
+      {letter:"C",text:"Jalur Rempah dikuasai oleh kerajaan Hindu",correct:false,explanation:"Justru dikuasai Portugis."},
+      {letter:"D",text:"Nusantara terisolasi dari dunia internasional",correct:false,explanation:"Justru tetap terhubung."},
+      {letter:"E",text:"Portugis menyebarkan Islam",correct:false,explanation:"Portugis = Kristen."}
+    ], difficulty:"hard", hint:"Pusat berpindah ke kerajaan Islam lain.", points:70 },
+
+  { id:2122, topic:"Jalur Rempah",
+    question:"Analisis yang paling tepat tentang dampak jatuhnya Malaka terhadap Islamisasi adalah...",
+    options:[
+      {letter:"A",text:"Islamisasi terhenti total",correct:false,explanation:"Justru makin menyebar."},
+      {letter:"B",text:"Islamisasi justru menyebar ke berbagai wilayah karena pusat perdagangan & Islam berpindah",correct:true,explanation:"Tepat! Justru menyebar."},
+      {letter:"C",text:"Islamisasi hanya berlangsung di Jawa",correct:false,explanation:"Justru di banyak wilayah."},
+      {letter:"D",text:"Islamisasi mundur ke pedalaman",correct:false,explanation:"Justru makin luas."},
+      {letter:"E",text:"Islamisasi berpindah ke Eropa",correct:false,explanation:"Bukan Eropa."}
+    ], difficulty:"hard", hint:"Justru menyebar ke berbagai wilayah.", points:70 },
+
+  { id:2123, topic:"Jalur Rempah",
+    question:"Analisis yang paling tepat tentang hubungan Jalur Rempah dengan Islamisasi Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Jalur Rempah tidak memiliki hubungan dengan Islamisasi",correct:false,explanation:"Justru sangat berhubungan."},
+      {letter:"B",text:"Islamisasi hanya terjadi di jalur darat",correct:false,explanation:"Justru jalur laut."},
+      {letter:"C",text:"Jalur Rempah menjadi sarana interaksi antara pedagang Muslim & penduduk lokal, sehingga Islam tersebar secara bertahap",correct:true,explanation:"Tepat! Interaksi bertahap."},
+      {letter:"D",text:"Jalur Rempah hanya untuk ekonomi, bukan agama",correct:false,explanation:"Justru keduanya."},
+      {letter:"E",text:"Jalur Rempah hanya dikuasai pedagang Hindu",correct:false,explanation:"Justru banyak Muslim."}
+    ], difficulty:"hard", hint:"Interaksi bertahap pedagang-penduduk.", points:70 },
+
+  { id:2124, topic:"Jalur Rempah",
+    question:"Berikut ini yang BUKAN termasuk cara Islamisasi damai di Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Perdagangan",correct:false,explanation:"Termasuk cara damai."},
+      {letter:"B",text:"Perkawinan",correct:false,explanation:"Termasuk cara damai."},
+      {letter:"C",text:"Tasawuf",correct:false,explanation:"Termasuk cara damai."},
+      {letter:"D",text:"Penaklukan militer",correct:true,explanation:"Tepat! Penaklukan militer BUKAN cara damai."},
+      {letter:"E",text:"Pendidikan pesantren",correct:false,explanation:"Termasuk cara damai."}
+    ], difficulty:"medium", hint:"Penaklukan militer = BUKAN cara damai.", points:60 },
+
+  /* ============ ISLAMISASI DAMAI (8 soal) ============ */
+  { id:2125, topic:"Islamisasi Damai",
+    question:"Peran pedagang Muslim dalam proses Islamisasi Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Hanya mencari keuntungan ekonomi",correct:false,explanation:"Bukan hanya ekonomi."},
+      {letter:"B",text:"Memaksa penduduk lokal untuk masuk Islam",correct:false,explanation:"Tidak memaksa."},
+      {letter:"C",text:"Menghancurkan kerajaan Hindu-Buddha",correct:false,explanation:"Tidak menghancurkan."},
+      {letter:"D",text:"Mendirikan kerajaan Islam dengan kekerasan",correct:false,explanation:"Tidak dengan kekerasan."},
+      {letter:"E",text:"Menunjukkan keteladanan akhlak (jujur, adil, menghormati) sehingga penduduk tertarik pada Islam",correct:true,explanation:"Tepat! Keteladanan akhlak = kunci."}
+    ], difficulty:"medium", hint:"Keteladanan akhlak = kunci Islamisasi.", points:60 },
+
+  { id:2126, topic:"Islamisasi Damai",
+    question:"Proses Islamisasi melalui perkawinan biasanya terjadi antara...",
+    options:[
+      {letter:"A",text:"Pedagang Muslim dengan putri bangsawan lokal (dengan syarat masuk Islam)",correct:true,explanation:"Tepat! Pedagang Muslim + putri bangsawan."},
+      {letter:"B",text:"Raja Hindu dengan pendeta Buddha",correct:false,explanation:"Bukan itu."},
+      {letter:"C",text:"Pedagang Hindu dengan putri Muslim",correct:false,explanation:"Bukan itu."},
+      {letter:"D",text:"Pendeta Buddha dengan putri Hindu",correct:false,explanation:"Bukan itu."},
+      {letter:"E",text:"Raja Buddha dengan putri Kristen",correct:false,explanation:"Bukan itu."}
+    ], difficulty:"medium", hint:"Pedagang Muslim + putri bangsawan lokal.", points:60 },
+
+  { id:2127, topic:"Islamisasi Damai",
+    question:"Islamisasi melalui tasawuf lebih mudah diterima masyarakat Nusantara karena...",
+    options:[
+      {letter:"A",text:"Tasawuf menghapus semua tradisi lokal",correct:false,explanation:"Justru toleran."},
+      {letter:"B",text:"Tasawuf menggunakan pendekatan spiritual yang lembut & menyesuaikan diri dengan budaya lokal",correct:true,explanation:"Tepat! Spiritual lembut + akomodatif."},
+      {letter:"C",text:"Tasawuf melarang semua seni",correct:false,explanation:"Justru mendukung."},
+      {letter:"D",text:"Tasawuf hanya untuk kalangan bangsawan",correct:false,explanation:"Untuk semua."},
+      {letter:"E",text:"Tasawuf tidak membutuhkan guru",correct:false,explanation:"Justru butuh guru."}
+    ], difficulty:"hard", hint:"Spiritual lembut + akomodatif budaya.", points:70 },
+
+  { id:2128, topic:"Islamisasi Damai",
+    question:"Lembaga pendidikan Islam yang berperan besar dalam Islamisasi Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Universitas",correct:false,explanation:"Universitas = modern."},
+      {letter:"B",text:"Sekolah kolonial",correct:false,explanation:"Sekolah kolonial = Belanda."},
+      {letter:"C",text:"Pesantren",correct:true,explanation:"Tepat! Pesantren = pusat pendidikan Islam."},
+      {letter:"D",text:"Madrasah Tionghoa",correct:false,explanation:"Bukan itu."},
+      {letter:"E",text:"Sekolah Hindu",correct:false,explanation:"Bukan itu."}
+    ], difficulty:"easy", hint:"Pesantren = pusat pendidikan Islam.", points:50 },
+
+  { id:2129, topic:"Islamisasi Damai",
+    question:"Analisis yang paling tepat tentang mengapa pedagang Muslim mudah diterima masyarakat Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Karena mereka membawa senjata",correct:false,explanation:"Justru damai."},
+      {letter:"B",text:"Karena mereka kaya raya",correct:false,explanation:"Bukan soal kekayaan."},
+      {letter:"C",text:"Karena mereka memaksa penduduk",correct:false,explanation:"Tidak memaksa."},
+      {letter:"D",text:"Karena mereka menunjukkan akhlak yang baik: jujur, adil, dan menghormati tradisi lokal",correct:true,explanation:"Tepat! Akhlak baik = kunci."},
+      {letter:"E",text:"Karena mereka didukung raja Hindu",correct:false,explanation:"Tidak selalu."}
+    ], difficulty:"hard", hint:"Akhlak baik = kunci penerimaan.", points:70 },
+
+  { id:2130, topic:"Islamisasi Damai",
+    question:"Faktor keteladanan akhlak pedagang Muslim menjadi kunci keberhasilan Islamisasi karena...",
+    options:[
+      {letter:"A",text:"Rakyat Nusantara mudah dipengaruhi kekayaan",correct:false,explanation:"Bukan kekayaan."},
+      {letter:"B",text:"Rakyat Nusantara takut kepada pedagang asing",correct:false,explanation:"Tidak takut."},
+      {letter:"C",text:"Rakyat Nusantara dipaksa oleh raja",correct:false,explanation:"Tidak dipaksa."},
+      {letter:"D",text:"Rakyat Nusantara tidak mengenal agama lain",correct:false,explanation:"Sudah kenal Hindu-Buddha."},
+      {letter:"E",text:"Rakyat Nusantara melihat Islam sebagai agama yang membawa kebaikan melalui perilaku nyata para pedagang",correct:true,explanation:"Tepat! Islam = agama kebaikan."}
+    ], difficulty:"hard", hint:"Islam = agama kebaikan.", points:70 },
+
+  { id:2131, topic:"Islamisasi Damai",
+    question:"Analisis yang paling tepat tentang peran perkawinan dalam Islamisasi adalah...",
+    options:[
+      {letter:"A",text:"Perkawinan menciptakan keturunan Muslim yang menjadi penerus dakwah di wilayah setempat",correct:true,explanation:"Tepat! Keturunan = penerus dakwah."},
+      {letter:"B",text:"Perkawinan tidak berdampak apapun",correct:false,explanation:"Justru berdampak besar."},
+      {letter:"C",text:"Perkawinan hanya menguntungkan pedagang",correct:false,explanation:"Untuk semua."},
+      {letter:"D",text:"Perkawinan menghambat Islamisasi",correct:false,explanation:"Justru mempercepat."},
+      {letter:"E",text:"Perkawinan hanya terjadi di kalangan bangsawan",correct:false,explanation:"Untuk semua."}
+    ], difficulty:"hard", hint:"Keturunan = penerus dakwah.", points:70 },
+
+  { id:2132, topic:"Islamisasi Damai",
+    question:"Analisis yang paling tepat tentang mengapa tasawuf menjadi strategi dakwah yang efektif di Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Tasawuf menolak semua budaya lokal",correct:false,explanation:"Justru akomodatif."},
+      {letter:"B",text:"Tasawuf bersifat spiritual, toleran, & mudah beradaptasi dengan tradisi lokal, sehingga diterima tanpa konflik",correct:true,explanation:"Tepat! Spiritual + toleran = diterima."},
+      {letter:"C",text:"Tasawuf hanya untuk raja",correct:false,explanation:"Untuk semua."},
+      {letter:"D",text:"Tasawuf melarang musik & seni",correct:false,explanation:"Justru mendukung."},
+      {letter:"E",text:"Tasawuf hanya ada di Arab",correct:false,explanation:"Justru menyebar."}
+    ], difficulty:"hard", hint:"Spiritual + toleran = diterima.", points:70 },
+
+  /* ============ SINTESIS (8 soal) ============ */
+  { id:2133, topic:"Sintesis",
+    question:"Analisis yang paling tepat tentang keempat teori masuknya Islam (Gujarat, Mekkah, Persia, Tiongkok) adalah...",
+    options:[
+      {letter:"A",text:"Hanya satu teori yang benar, lainnya salah",correct:false,explanation:"Semua punya bukti."},
+      {letter:"B",text:"Semua teori salah",correct:false,explanation:"Semua punya bukti."},
+      {letter:"C",text:"Keempat teori saling melengkapi & menggambarkan proses Islamisasi yang bertahap & kompleks",correct:true,explanation:"Tepat! Saling melengkapi."},
+      {letter:"D",text:"Keempat teori tidak berkaitan satu sama lain",correct:false,explanation:"Justru berkaitan."},
+      {letter:"E",text:"Keempat teori bertentangan secara mutlak",correct:false,explanation:"Justru melengkapi."}
+    ], difficulty:"hard", hint:"Saling melengkapi = proses bertahap.", points:70 },
+
+  { id:2134, topic:"Sintesis",
+    question:"Perbandingan yang paling tepat antara Teori Gujarat & Teori Mekkah adalah...",
+    options:[
+      {letter:"A",text:"Keduanya identik",correct:false,explanation:"Berbeda."},
+      {letter:"B",text:"Teori Mekkah tidak memiliki bukti",correct:false,explanation:"Justru ada bukti."},
+      {letter:"C",text:"Teori Gujarat paling kuat & tidak memiliki kelemahan",correct:false,explanation:"Justru ada kelemahan."},
+      {letter:"D",text:"Teori Gujarat didukung bukti arkeologis batu nisan (abad ke-13); Teori Mekkah didukung berita Cina (abad ke-7) & kesamaan madzhab Syafi'i",correct:true,explanation:"Tepat! Perbandingan bukti."},
+      {letter:"E",text:"Keduanya tidak didukung bukti",correct:false,explanation:"Keduanya punya bukti."}
+    ], difficulty:"hard", hint:"Bukti arkeologis vs berita Cina & madzhab.", points:70 },
+
+  { id:2135, topic:"Sintesis",
+    question:"Kesimpulan yang paling tepat tentang proses Islamisasi Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Islamisasi dilakukan dengan penaklukan militer besar-besaran",correct:false,explanation:"Justru damai."},
+      {letter:"B",text:"Islamisasi hanya dilakukan oleh pedagang",correct:false,explanation:"Banyak aktor."},
+      {letter:"C",text:"Islamisasi hanya berlangsung di Jawa",correct:false,explanation:"Seluruh Nusantara."},
+      {letter:"D",text:"Islamisasi tidak berdampak pada budaya",correct:false,explanation:"Justru berdampak."},
+      {letter:"E",text:"Islamisasi berlangsung damai, bertahap, & akomodatif terhadap budaya lokal",correct:true,explanation:"Tepat! Damai, bertahap, akomodatif."}
+    ], difficulty:"hard", hint:"Damai, bertahap, akomodatif.", points:70 },
+
+  { id:2136, topic:"Sintesis",
+    question:"Analisis holistik yang paling tepat tentang keberhasilan Islamisasi Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Kombinasi strategi dakwah damai (perdagangan, perkawinan, tasawuf, pendidikan) + pendekatan budaya + keteladanan akhlak",correct:true,explanation:"Tepat! Kombinasi banyak strategi."},
+      {letter:"B",text:"Hanya kekuatan militer",correct:false,explanation:"Justru damai."},
+      {letter:"C",text:"Hanya kekayaan pedagang",correct:false,explanation:"Bukan itu."},
+      {letter:"D",text:"Hanya dukungan raja",correct:false,explanation:"Bukan itu."},
+      {letter:"E",text:"Hanya keberuntungan",correct:false,explanation:"Bukan keberuntungan."}
+    ], difficulty:"hard", hint:"Kombinasi banyak strategi.", points:70 },
+
+  { id:2137, topic:"Sintesis",
+    question:"Relevansi nilai Islamisasi damai bagi Indonesia masa kini adalah...",
+    options:[
+      {letter:"A",text:"Tidak ada relevansi",correct:false,explanation:"Justru relevan."},
+      {letter:"B",text:"Menjadi teladan untuk menyebarkan nilai-nilai kebaikan dengan damai & menghargai keberagaman",correct:true,explanation:"Tepat! Teladan damai & keberagaman."},
+      {letter:"C",text:"Hanya sejarah tanpa makna",correct:false,explanation:"Justru bermakna."},
+      {letter:"D",text:"Bukti bahwa kekerasan itu efektif",correct:false,explanation:"Justru damai."},
+      {letter:"E",text:"Tidak perlu dipelajari",correct:false,explanation:"Perlu."}
+    ], difficulty:"hard", hint:"Teladan damai & keberagaman.", points:70 },
+
+  { id:2138, topic:"Sintesis",
+    question:"Kesimpulan yang paling tepat tentang peran Jalur Rempah dalam sejarah Islam Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Jalur Rempah hanya berdampak ekonomi",correct:false,explanation:"Juga agama."},
+      {letter:"B",text:"Jalur Rempah tidak berkaitan dengan Islam",correct:false,explanation:"Justru berkaitan."},
+      {letter:"C",text:"Jalur Rempah menjadi pintu masuk Islam & sarana interaksi budaya antara Nusantara dengan dunia Islam global",correct:true,explanation:"Tepat! Pintu masuk Islam."},
+      {letter:"D",text:"Jalur Rempah hanya dikuasai Hindu",correct:false,explanation:"Justru Muslim."},
+      {letter:"E",text:"Jalur Rempah tidak pernah ramai",correct:false,explanation:"Justru ramai."}
+    ], difficulty:"hard", hint:"Pintu masuk Islam & interaksi global.", points:70 },
+
+  { id:2139, topic:"Sintesis",
+    question:"Pelajaran yang paling berharga dari proses Islamisasi damai Nusantara adalah...",
+    options:[
+      {letter:"A",text:"Kekerasan selalu efektif",correct:false,explanation:"Justru damai."},
+      {letter:"B",text:"Agama harus disebarkan dengan paksaan",correct:false,explanation:"Justru damai."},
+      {letter:"C",text:"Perdagangan tidak berdampak pada agama",correct:false,explanation:"Justru berdampak."},
+      {letter:"D",text:"Islam dapat disebarkan dengan damai, tanpa paksaan, dan tetap menghargai budaya lokal",correct:true,explanation:"Tepat! Damai + hormati budaya."},
+      {letter:"E",text:"Tradisi lokal harus dihilangkan",correct:false,explanation:"Justru dihormati."}
+    ], difficulty:"hard", hint:"Damai + hormati budaya lokal.", points:70 },
+
+  { id:2140, topic:"Sintesis",
+    question:"Pesan utama dari proses Islamisasi Nusantara bagi generasi muda adalah...",
+    options:[
+      {letter:"A",text:"Belajar agama tidak perlu",correct:false,explanation:"Justru perlu."},
+      {letter:"B",text:"Agama hanya untuk orang tua",correct:false,explanation:"Untuk semua."},
+      {letter:"C",text:"Islam Nusantara tidak penting",correct:false,explanation:"Justru penting."},
+      {letter:"D",text:"Penyebaran agama harus dengan kekerasan",correct:false,explanation:"Justru damai."},
+      {letter:"E",text:"Dakwah yang damai & menghargai budaya adalah cara yang paling berhasil, seperti dicontohkan para ulama Nusantara",correct:true,explanation:"Tepat! Dakwah damai = paling berhasil."}
+    ], difficulty:"hard", hint:"Dakwah damai = paling berhasil.", points:70 }
+];
+
+/* ============================================================
+   CONSTANTS & STATE
+   ============================================================ */
+const TOTAL_Q = 15;
+const TIME_LIMIT = 20 * 60;
+
+const state = {
+  questions: [], currentIndex: 0, answers: [], score: 0,
+  xp: 0, level: 1, hp: 3, maxHp: 3, combo: 0, bestCombo: 0,
+  timer: null, timeLeft: TIME_LIMIT, started: false, finished: false,
+  powers: { p50:1, hint:1, skip:1 }, soundOn: true
+};
+
+/* ============================================================
+   AUDIO
+   ============================================================ */
+let audioCtx = null;
+function ensureAudio(){
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}
+function playTone(freq, dur, type, vol){
+  if (!state.soundOn) return;
+  ensureAudio(); if (!audioCtx) return;
+  try {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = type || 'sine'; o.frequency.value = freq;
+    g.gain.setValueAtTime(vol || 0.08, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + dur);
+  } catch(e){}
+}
+function sfxClick(){ playTone(520, .08, 'triangle', .06); }
+function sfxCorrect(){ playTone(660, .12, 'sine', .10); setTimeout(()=>playTone(880, .15, 'sine', .10), 80); setTimeout(()=>playTone(1100, .20, 'sine', .08), 160); }
+function sfxWrong(){ playTone(200, .18, 'sawtooth', .10); setTimeout(()=>playTone(150, .25, 'sawtooth', .08), 120); }
+function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(()=>playTone(1200, .12, 'triangle', .07), 60); }
+function sfxLevelUp(){ [523, 659, 784, 1046].forEach((f, i) => setTimeout(()=>playTone(f, .16, 'sine', .10), i*90)); }
+function sfxFinish(){ [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(()=>playTone(f, .22, 'sine', .10), i*120)); }
+function toggleSound(){
+  state.soundOn = !state.soundOn;
+  document.getElementById('soundBtn').innerHTML = state.soundOn ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+  if (state.soundOn) sfxClick();
+}
+function toggleTheme(){
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').innerHTML = next === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  sfxClick();
+}
+
+(function(){
+  const bar = document.getElementById('loaderBar');
+  const pct = document.getElementById('loaderPct');
+  const loader = document.getElementById('loader');
+  const t0 = Date.now();
+  (function tick(){
+    const p = Math.min((Date.now() - t0) / 1800 * 100, 100);
+    bar.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+    if (p < 100) requestAnimationFrame(tick);
+    else setTimeout(()=>{ loader.classList.add('hidden'); setTimeout(()=>loader.style.display='none', 700); }, 300);
+  })();
+})();
+
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  function makeP(){ return { x: Math.random()*W, y: Math.random()*H, r: Math.random()*2 + 0.4, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3 - 0.15, a: Math.random()*0.5 + 0.15, hue: Math.random() < 0.5 ? 160 : 45 }; }
+  function init(){ resize(); particles = Array.from({length: Math.min(60, Math.floor(W*H/25000))}, makeP); }
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.shadowBlur = 8; ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.fill();
+    });
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+function fireConfetti(count){
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const colors = ['#10B981','#6EE7B7','#F59E0B','#FCD34D','#34D399','#38BDF8'];
+  const pieces = Array.from({length: count || 60}, () => ({
+    x: window.innerWidth/2 + (Math.random()-0.5)*200,
+    y: window.innerHeight/2,
+    vx: (Math.random()-0.5)*14, vy: Math.random()*-16 - 4,
+    g: 0.5, r: Math.random()*8 + 4,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    rot: Math.random()*Math.PI, vr: (Math.random()-0.5)*0.3, life: 1
+  }));
+  let frame = 0;
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    pieces.forEach(p => {
+      if (p.life <= 0) return;
+      alive = true;
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.012;
+      ctx.save(); ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      ctx.restore();
+    });
+    if (alive && frame < 200) { frame++; requestAnimationFrame(animate); }
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  animate();
+}
+
+function showToast(icon, title, desc, variant){
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<div class="toast-icon ${variant||''}">${icon}</div>
+    <div class="toast-content"><div class="toast-title">${title}</div><div class="toast-desc">${desc}</div></div>`;
+  wrap.appendChild(el);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 450); }, 3200);
+}
+function scorePopup(text, x, y, color){
+  const el = document.createElement('div');
+  el.className = 'score-pop';
+  el.textContent = text;
+  el.style.left = (x || window.innerWidth/2) + 'px';
+  el.style.top = (y || window.innerHeight/2) + 'px';
+  if (color) el.style.color = color;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1100);
+}
+function shuffle(a){ const arr = a.slice(); for (let i = arr.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+function updateHpHud(){
+  const hp = document.getElementById('hudHp'); hp.innerHTML = '';
+  for (let i = 0; i < state.maxHp; i++){
+    const heart = document.createElement('i');
+    heart.className = 'fas fa-heart heart' + (i < state.hp ? '' : ' empty');
+    hp.appendChild(heart);
+  }
+}
+function updateXpHud(){
+  const xpForLevel = state.level * 100;
+  const pct = Math.min((state.xp % xpForLevel) / xpForLevel * 100, 100);
+  document.getElementById('hudLevel').textContent = state.level;
+  document.getElementById('hudXp').textContent = state.xp % xpForLevel;
+  document.getElementById('hudXpMax').textContent = xpForLevel;
+  document.getElementById('xpFill').style.width = pct + '%';
+}
+function updateComboHud(){
+  document.getElementById('comboVal').textContent = state.combo;
+  const tag = document.getElementById('comboTag');
+  if (state.combo >= 3){ tag.classList.add('hot'); setTimeout(()=>tag.classList.remove('hot'), 500); }
+}
+function updatePowers(){
+  document.getElementById('c50').textContent = state.powers.p50;
+  document.getElementById('chint').textContent = state.powers.hint;
+  document.getElementById('cskip').textContent = state.powers.skip;
+  document.getElementById('p50').disabled = state.powers.p50 <= 0;
+  document.getElementById('phint').disabled = state.powers.hint <= 0;
+  document.getElementById('pskip').disabled = state.powers.skip <= 0;
+}
+
+function startGame(){
+  ensureAudio();
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('gameHud').classList.add('active');
+  state.questions = shuffle(BANK_SOAL).slice(0, TOTAL_Q);
+  state.currentIndex = 0; state.answers = [];
+  state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.timeLeft = TIME_LIMIT; state.started = true; state.finished = false;
+  state.powers = { p50:1, hint:1, skip:1 };
+  updateHpHud(); updateXpHud(); updateComboHud(); updatePowers();
+  showToast('🕌', 'Arena Level 21 Dimulai!', 'Kuasai Teori Masuk & Jalur Rempah Islam!', '');
+  sfxClick();
+  startTimer();
+  renderQuestion();
+}
+
+function startTimer(){
+  if (state.timer) clearInterval(state.timer);
+  state.timer = setInterval(() => {
+    state.timeLeft--;
+    updateTimerHud();
+    if (state.timeLeft <= 0){ clearInterval(state.timer); finishGame(true); }
+  }, 1000);
+  updateTimerHud();
+}
+function updateTimerHud(){
+  const m = Math.floor(state.timeLeft / 60), s = state.timeLeft % 60;
+  document.getElementById('hudTimerVal').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  const el = document.getElementById('hudTimer');
+  if (state.timeLeft <= 120) el.classList.add('warning'); else el.classList.remove('warning');
+}
+
+function renderQuestion(){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  document.getElementById('qNumLabel').textContent = 'Soal ' + (state.currentIndex+1);
+  document.getElementById('qTopicText').textContent = q.topic || 'Islam Nusantara';
+  document.getElementById('qText').innerHTML = q.question;
+  document.getElementById('hudQNum').textContent = state.currentIndex+1;
+  const opts = document.getElementById('options'); opts.innerHTML = '';
+  q.options.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.dataset.letter = o.letter;
+    btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
+    btn.addEventListener('click', () => selectOption(o.letter, btn));
+    opts.appendChild(btn);
+  });
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('btnNext').disabled = true;
+  document.getElementById('btnNext').style.display = '';
+  document.getElementById('btnFinish').style.display = 'none';
+  document.getElementById('qCard').classList.remove('shake');
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'qEnter .55s cubic-bezier(.16,1,.3,1)';
+  if (state.currentIndex === TOTAL_Q - 1){
+    document.getElementById('btnNext').style.display = 'none';
+    document.getElementById('btnFinish').style.display = '';
+  }
+}
+
+function selectOption(letter, btnEl){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  const selected = q.options.find(o => o.letter === letter);
+  if (!selected) return;
+  const correct = selected.correct;
+  document.querySelectorAll('#options .opt').forEach(b => {
+    b.classList.add('locked');
+    const o = q.options.find(x => x.letter === b.dataset.letter);
+    if (o.correct) b.classList.add('correct');
+    else if (b.dataset.letter === letter && !correct) b.classList.add('wrong');
+  });
+  state.answers.push({ qid: q.id, selected: letter, correct, skipped: false,
+    questionText: q.question, topic: q.topic,
+    correctLetter: q.options.find(o => o.correct).letter,
+    explanation: selected.explanation });
+  if (correct){
+    state.combo++;
+    if (state.combo > state.bestCombo) state.bestCombo = state.combo;
+    const bonus = Math.max(0, state.combo - 1) * 5;
+    const gained = (q.points || 50) + bonus;
+    state.score += gained; state.xp += gained;
+    const prevLevel = state.level;
+    state.level = Math.floor(state.xp / 100) + 1;
+    if (state.level > prevLevel){
+      sfxLevelUp();
+      showToast('⭐', 'LEVEL UP!', `Kamu naik ke Level ${state.level}!`, 'cyan');
+      fireConfetti(40);
+    }
+    sfxCorrect();
+    fireConfetti(state.combo >= 3 ? 80 : 45);
+    const rect = btnEl ? btnEl.getBoundingClientRect() : null;
+    scorePopup('+' + gained + ' XP', rect ? rect.left + rect.width/2 : window.innerWidth/2, rect ? rect.top : window.innerHeight/2, '#6EE7B7');
+    if (state.combo >= 3) showToast('🔥', `COMBO ×${state.combo}!`, `Bonus +${bonus} XP!`, '');
+  } else {
+    state.combo = 0; state.hp--; sfxWrong();
+    updateHpHud();
+    const hpEls = document.querySelectorAll('.hud-hp .heart');
+    if (hpEls[state.hp]) hpEls[state.hp].classList.add('losing');
+    const card = document.getElementById('qCard');
+    card.classList.add('shake'); setTimeout(() => card.classList.remove('shake'), 550);
+    if (state.hp <= 0) showToast('💔', 'Nyawa Habis!', 'Kamu kehilangan semua nyawa.', 'violet');
+  }
+  document.getElementById('hudScore').textContent = state.score;
+  updateXpHud(); updateComboHud();
+  showFeedback(correct, q, selected);
+  document.getElementById('btnNext').disabled = false;
+}
+
+function showFeedback(correct, q, selected){
+  const panel = document.getElementById('feedback');
+  const icon = document.getElementById('fbIcon');
+  const title = document.getElementById('fbTitle');
+  const body = document.getElementById('fbBody');
+  panel.classList.add('show');
+  if (correct){
+    icon.className = 'fb-icon correct'; icon.innerHTML = '<i class="fas fa-check"></i>';
+    title.className = 'fb-title correct'; title.textContent = 'BENAR!';
+  } else {
+    icon.className = 'fb-icon wrong'; icon.innerHTML = '<i class="fas fa-times"></i>';
+    title.className = 'fb-title wrong'; title.textContent = 'BELUM TEPAT';
+  }
+  const correctOpt = q.options.find(o => o.correct);
+  let html = `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
+  html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
+  if (!correct && selected) html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
+  html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
+  body.innerHTML = html;
+}
+
+function nextQuestion(){
+  if (state.currentIndex < TOTAL_Q - 1){
+    state.currentIndex++;
+    renderQuestion();
+    document.getElementById('qCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+function usePower(type){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  if (type === '50'){
+    if (state.powers.p50 <= 0) return;
+    const wrongs = q.options.filter(o => !o.correct);
+    const remove = shuffle(wrongs).slice(0, 2);
+    document.querySelectorAll('#options .opt').forEach(b => {
+      if (remove.some(o => o.letter === b.dataset.letter)) b.classList.add('disabled-50');
+    });
+    state.powers.p50 = 0; updatePowers(); sfxPower();
+    showToast('✂️', '50:50 Aktif!', 'Dua jawaban salah dihilangkan.', 'cyan');
+  } else if (type === 'hint'){
+    if (state.powers.hint <= 0) return;
+    const panel = document.getElementById('feedback');
+    const icon = document.getElementById('fbIcon');
+    const title = document.getElementById('fbTitle');
+    const body = document.getElementById('fbBody');
+    panel.classList.add('show');
+    icon.className = 'fb-icon info'; icon.innerHTML = '<i class="fas fa-lightbulb"></i>';
+    title.className = 'fb-title info'; title.textContent = 'PETUNJUK';
+    body.innerHTML = `<p>${q.hint || 'Tidak ada petunjuk.'}</p>`;
+    state.powers.hint = 0; updatePowers(); sfxPower();
+    showToast('💡', 'Petunjuk Digunakan!', 'Perhatikan dengan saksama.', '');
+  } else if (type === 'skip'){
+    if (state.powers.skip <= 0) return;
+    state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+      questionText: q.question, topic: q.topic,
+      correctLetter: q.options.find(o => o.correct).letter,
+      explanation: q.options.find(o => o.correct).explanation });
+    document.querySelectorAll('#options .opt').forEach(b => {
+      b.classList.add('locked');
+      const o = q.options.find(x => x.letter === b.dataset.letter);
+      if (o.correct) b.classList.add('correct');
+    });
+    showFeedback(false, q, null);
+    document.getElementById('btnNext').disabled = false;
+    state.powers.skip = 0; updatePowers(); sfxPower();
+    showToast('⏭️', 'Soal Dilewati', 'Jawaban benar ditampilkan.', 'violet');
+    if (state.currentIndex === TOTAL_Q - 1){
+      document.getElementById('btnNext').style.display = 'none';
+      document.getElementById('btnFinish').style.display = '';
+    }
+  }
+}
+
+function finishGame(timeout){
+  if (state.finished) return;
+  state.finished = true;
+  clearInterval(state.timer); state.timer = null;
+  const answered = state.answers.map(a => a.qid);
+  state.questions.forEach(q => {
+    if (!answered.includes(q.id)){
+      state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+        questionText: q.question, topic: q.topic,
+        correctLetter: q.options.find(o => o.correct).letter,
+        explanation: q.options.find(o => o.correct).explanation });
+    }
+  });
+  let benar = 0, salah = 0;
+  state.answers.forEach(a => { if (a.skipped) return; if (a.correct) benar++; else salah++; });
+  const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
+  const finalScore = Math.round((state.score / maxScore) * 100);
+  const grade = finalScore >= 90 ? 'A' : finalScore >= 80 ? 'B' : finalScore >= 70 ? 'C' : finalScore >= 60 ? 'D' : 'E';
+  const gradeLabel = finalScore >= 90 ? 'Sangat Baik' : finalScore >= 80 ? 'Baik' : finalScore >= 70 ? 'Cukup' : finalScore >= 60 ? 'Perlu Bimbingan' : 'Remedial';
+  const rank = finalScore >= 90 ? 'PENELUSUR JALUR REMPAH' : finalScore >= 80 ? 'PENELITI SEJARAH' : finalScore >= 70 ? 'PELAJAR SEJARAH' : 'PEMULA';
+  const trophy = finalScore >= 90 ? '🏆' : finalScore >= 80 ? '🥇' : finalScore >= 70 ? '🥈' : finalScore >= 60 ? '🥉' : '📚';
+  const title = finalScore >= 90 ? 'Luar Biasa!' : finalScore >= 80 ? 'Kerja Bagus!' : finalScore >= 70 ? 'Terus Belajar!' : 'Jangan Menyerah!';
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('resultScreen').classList.add('active');
+  document.getElementById('rTrophy').textContent = trophy;
+  document.getElementById('rTitle').textContent = title;
+  document.getElementById('rSub').textContent = 'Kuis 21 · Teori Masuk & Jalur Rempah Islam Nusantara';
+  document.getElementById('gradeLetter').textContent = grade;
+  document.getElementById('gradeLabel').textContent = gradeLabel;
+  document.getElementById('rRank').textContent = rank;
+  document.getElementById('rXp').textContent = state.xp;
+  document.getElementById('rBestCombo').textContent = state.bestCombo;
+  document.getElementById('rBenar').textContent = benar;
+  document.getElementById('rSalah').textContent = salah;
+  document.getElementById('rSkor').textContent = finalScore;
+  document.getElementById('rXpTotal').textContent = state.xp;
+  document.getElementById('gradeRing').style.setProperty('--grade-deg', (finalScore/100*360) + 'deg');
+  document.getElementById('rMsg').textContent = finalScore >= 70
+    ? '🎯 Pertahankan semangat belajarmu! Lanjutkan ke Kuis 22 untuk materi Samudera Pasai, Aceh & Ulama Besar.'
+    : '📚 Pelajari kembali materi Teori Masuk & Jalur Rempah, lalu coba lagi!';
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  state.answers.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
+                   a.correct ? '<span class="ri-status correct">Benar</span>' :
+                   '<span class="ri-status wrong">Salah</span>';
+    const q = a.questionText.length > 80 ? a.questionText.substring(0, 80) + '...' : a.questionText;
+    div.innerHTML = `<span class="ri-num">${i+1}.</span><span class="ri-text">${q}</span>${status}`;
+    reviewList.appendChild(div);
+  });
+  sfxFinish();
+  if (finalScore >= 70){
+    fireConfetti(180);
+    setTimeout(() => fireConfetti(120), 400);
+    setTimeout(() => showToast('🏆', 'Achievement Unlocked!', rank, ''), 500);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetGame(){
+  clearInterval(state.timer); state.timer = null;
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('startScreen').style.display = 'flex';
+  state.answers = []; state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.currentIndex = 0; state.finished = false; state.started = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('keydown', e => {
+  if (!state.started || state.finished) return;
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea') return;
+  if (['a','A','1'].includes(e.key)) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
+  else if (['b','B','2'].includes(e.key)) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
+  else if (['c','C','3'].includes(e.key)) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
+  else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
+  else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
+  else if (e.key === 'ArrowRight' || e.key === 'Enter'){
+    if (!document.getElementById('btnNext').disabled) nextQuestion();
+  }
+});
+</script>
+
+</body>
+</html>
