@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 :root{
   --font-display:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
@@ -29,7 +30,8 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--font-display);background:var(--bg);color:var(--text);line-height:1.65;
-  overflow-x:hidden;min-height:100vh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  overflow-x:hidden;min-height:100vh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  position:relative}
 ::selection{background:var(--primary);color:#05060f}
 
 .bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;
@@ -100,7 +102,7 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
   padding:calc(60px + 20px) 16px 60px;min-height:100vh}
 
 .start-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;
-  min-height:calc(100vh - 100px);text-align:center;gap:18px;padding:20px 0}
+  min-height:calc(100vh - 100px);text-align:center;gap:16px;padding:20px 0}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:40px;
   background:linear-gradient(135deg,rgba(108,99,255,.18),rgba(227,185,107,.10));
   border:1px solid rgba(108,99,255,.30);font-size:.7rem;font-weight:800;letter-spacing:1.5px;
@@ -112,7 +114,7 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
   background:linear-gradient(135deg,#fff 0%,var(--primary-light) 40%,var(--primary) 70%,var(--accent) 100%);
   background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
   animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 8px 30px rgba(108,99,255,.3))}
-.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text-dim);max-width:580px;line-height:1.75}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text-dim);max-width:600px;line-height:1.75}
 .hero-sub strong{color:var(--primary-light);font-weight:700}
 
 .stats-showcase{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
@@ -122,16 +124,41 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
 .stat-pill:hover{transform:translateY(-3px);border-color:rgba(108,99,255,.4);box-shadow:0 8px 24px rgba(108,99,255,.15)}
 .stat-pill i{font-size:.95rem}
 
+.name-input-wrap{display:flex;flex-direction:column;gap:8px;
+  width:100%;max-width:440px;margin-top:10px;text-align:left}
+.name-input-wrap label{font-size:.72rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary-light);display:flex;align-items:center;gap:8px}
+.name-input-wrap label i{color:var(--primary)}
+.name-input-wrap input{width:100%;padding:15px 22px;border-radius:16px;
+  border:1.5px solid var(--glass-border);background:rgba(255,255,255,.04);
+  color:var(--text);font-family:var(--font-display);font-size:.98rem;font-weight:600;
+  outline:none;transition:all .3s var(--ease-out)}
+.name-input-wrap input:focus{border-color:var(--primary);background:rgba(108,99,255,.08);
+  box-shadow:0 0 0 4px rgba(108,99,255,.15)}
+.name-input-wrap input::placeholder{color:var(--text-mute);font-weight:400}
+.name-input-hint{font-size:.7rem;color:var(--text-mute);padding-left:4px;
+  display:flex;align-items:center;gap:6px}
+
 .rules-card{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
-  border:1px solid var(--glass-border);border-radius:var(--radius);padding:22px 24px;
-  max-width:520px;width:100%;text-align:left;margin-top:6px;backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
-.rules-card h4{font-size:.85rem;font-weight:800;color:var(--primary-light);margin-bottom:12px;
-  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
-.rules-card ul{list-style:none;display:grid;gap:10px}
-.rules-card li{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-dim);line-height:1.6}
-.rule-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
-  border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--accent));
-  color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 4px 14px rgba(108,99,255,.4)}
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:24px 26px;
+  max-width:600px;width:100%;text-align:left;margin-top:10px;
+  backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.rules-card h4{font-size:.88rem;font-weight:900;color:var(--primary-light);
+  margin-bottom:16px;display:flex;align-items:center;gap:10px;letter-spacing:.8px;
+  text-transform:uppercase;padding-bottom:12px;border-bottom:1px dashed rgba(255,255,255,.10)}
+.rules-card h4 i{color:var(--primary)}
+.rules-card ul{list-style:none;display:grid;gap:14px}
+.rules-card li{display:flex;align-items:flex-start;gap:14px;
+  font-size:.88rem;color:var(--text-dim);line-height:1.65}
+.rule-num{display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;font-size:.8rem;font-weight:900;box-shadow:0 4px 14px rgba(108,99,255,.5)}
+.rule-content{flex:1;min-width:0}
+.rule-content strong{display:block;color:var(--text);font-weight:800;
+  font-size:.92rem;margin-bottom:3px;letter-spacing:.2px}
+.rule-content p{font-size:.82rem;color:var(--text-dim);line-height:1.6}
+.rule-content b{color:var(--primary-light);font-weight:800}
 
 .btn-play{position:relative;display:inline-flex;align-items:center;gap:14px;
   padding:18px 54px;border-radius:60px;border:none;
@@ -181,7 +208,7 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
 @keyframes pulseWarn{0%,100%{box-shadow:0 0 0 0 rgba(251,113,133,.4)}50%{box-shadow:0 0 0 8px rgba(251,113,133,0)}}
 
 .hud-middle{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  font-size:.75rem;color:var(--text-mute);font-weight:700;padding:0 4px}
+  font-size:.75rem;color:var(--text-mute);font-weight:700;padding:0 4px;flex-wrap:wrap}
 .hud-middle .combo-tag{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:800;transition:all .3s var(--ease-spring)}
 .hud-middle .combo-tag.hot{color:var(--primary-light);animation:comboPulse .5s var(--ease-spring)}
 @keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
@@ -235,7 +262,7 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
 .opt.wrong{border-color:var(--rose);background:linear-gradient(135deg,rgba(251,113,133,.15),rgba(251,113,133,.05));
   color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(251,113,133,.15),0 12px 32px rgba(251,113,133,.25)}
 .opt.wrong .opt-letter{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(251,113,133,.7)}
-.opt.locked{pointer-events:none}
+.opt.locked{pointer-events:none;cursor:default}
 .opt.disabled-50{opacity:.2;pointer-events:none;filter:grayscale(1) blur(.5px)}
 
 .feedback{display:none;padding:22px 24px;border-radius:var(--radius);
@@ -290,7 +317,11 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
 .btn-primary:active:not(:disabled){transform:scale(.96)}
 .btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
 .btn-ghost{background:rgba(255,255,255,.04);color:var(--text-dim);border:1px solid var(--glass-border)}
-.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(108,99,255,.4);transform:translateY(-2px)}
+.btn-ghost:hover:not(:disabled){background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(108,99,255,.4);transform:translateY(-2px)}
+.btn-ghost:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.btn-cyan{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;
+  box-shadow:0 10px 32px rgba(227,185,107,.4)}
+.btn-cyan:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 44px rgba(227,185,107,.6)}
 
 .result-screen{display:none;flex-direction:column;gap:16px;text-align:center;animation:fadeSlideIn .6s var(--ease-out)}
 .result-screen.active{display:flex}
@@ -306,6 +337,17 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
   letter-spacing:-.5px;background:linear-gradient(135deg,#fff,var(--primary-light),var(--accent));
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
 .result-sub{font-size:.9rem;color:var(--text-dim);margin-bottom:6px}
+
+.player-badge{display:inline-flex;align-items:center;gap:10px;
+  padding:9px 20px;border-radius:40px;
+  background:linear-gradient(135deg,rgba(227,185,107,.14),rgba(108,99,255,.10));
+  border:1px solid rgba(227,185,107,.35);font-size:.88rem;font-weight:700;color:var(--text);
+  margin:6px 0 4px;box-shadow:0 4px 20px rgba(227,185,107,.15)}
+.player-badge i{color:var(--accent);font-size:1.4rem}
+.player-badge > div{text-align:left}
+.player-badge .pb-label{font-size:.62rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--text-mute)}
+
 .grade-ring{position:relative;width:130px;height:130px;margin:16px auto;border-radius:50%;
   background:conic-gradient(var(--primary) var(--grade-deg,0deg),rgba(255,255,255,.08) 0deg);
   padding:8px;box-shadow:0 0 40px rgba(108,99,255,.4);animation:ringPop .8s var(--ease-spring)}
@@ -330,9 +372,35 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
 .rs-val.cyan{color:var(--accent);text-shadow:0 0 20px rgba(227,185,107,.5)}
 .rs-val.violet{color:var(--primary-light);text-shadow:0 0 20px rgba(139,131,255,.5)}
 .rs-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.5px;color:var(--text-mute);text-transform:uppercase;margin-top:6px}
-.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:14px 18px;border-radius:12px;
-  background:rgba(108,99,255,.06);border-left:3px solid var(--primary);margin-top:6px;text-align:left}
-.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+
+.achievements-section{margin-top:16px;text-align:left;
+  padding:18px 20px;border-radius:var(--radius-sm);
+  background:linear-gradient(145deg,rgba(108,99,255,.06),rgba(108,99,255,.02));
+  border:1px solid rgba(108,99,255,.20)}
+.achievements-section h4{font-size:.78rem;font-weight:900;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:8px}
+.achievements-section h4 i{color:var(--primary)}
+.achievements-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.achievement-card{display:flex;align-items:center;gap:10px;
+  padding:11px 13px;border-radius:12px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);animation:fadeSlideIn .5s var(--ease-out);
+  transition:all .3s var(--ease-out)}
+.achievement-card:hover{transform:translateY(-2px);border-color:rgba(108,99,255,.4)}
+.achievement-card .ac-icon{width:36px;height:36px;border-radius:10px;
+  display:grid;place-items:center;flex-shrink:0;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;font-size:1.05rem;box-shadow:0 4px 14px rgba(108,99,255,.4)}
+.achievement-card .ac-text{min-width:0;flex:1}
+.achievement-card .ac-title{font-size:.78rem;font-weight:900;color:var(--text);
+  letter-spacing:.3px;line-height:1.2}
+.achievement-card .ac-desc{font-size:.68rem;color:var(--text-dim);line-height:1.4;margin-top:2px}
+.no-achievement{font-size:.8rem;color:var(--text-dim);text-align:center;padding:10px;
+  background:rgba(255,255,255,.02);border-radius:10px}
+
+.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:16px 20px;border-radius:12px;
+  background:rgba(108,99,255,.06);border-left:3px solid var(--primary);margin-top:16px;text-align:left}
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
 
 .review-panel{padding:22px 24px;border-radius:var(--radius);
   background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
@@ -346,6 +414,9 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
 .review-item:hover{background:rgba(255,255,255,.06);transform:translateX(3px)}
 .review-item .ri-num{font-weight:900;color:var(--text-mute);flex-shrink:0;font-family:var(--font-mono);font-size:.78rem;min-width:26px}
 .review-item .ri-text{flex:1;color:var(--text-dim)}
+.review-item .ri-q{margin-bottom:3px}
+.review-item .ri-meta{font-size:.7rem;color:var(--text-mute);margin-top:3px;display:flex;flex-wrap:wrap;gap:8px}
+.review-item .ri-meta b{color:var(--primary-light);font-weight:800}
 .review-item .ri-status{font-size:.68rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
   padding:3px 10px;border-radius:20px;flex-shrink:0}
 .ri-status.correct{background:rgba(52,211,153,.15);color:#6ee7b7}
@@ -388,17 +459,29 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
   .hud-timer{padding:6px 11px;font-size:.78rem}
   .hud-hp .heart{font-size:1rem}
   .power-btn{padding:9px 14px;font-size:.72rem}
-  .btn{padding:12px 22px;font-size:.82rem;width:100%;justify-content:center}
-  .action-bar{flex-direction:column}
+  .btn{padding:12px 22px;font-size:.82rem;flex:1;justify-content:center;min-width:0}
+  .action-bar{flex-direction:column;width:100%}
+  .action-bar .btn{width:100%}
   .result-hero{padding:28px 18px}
   .grade-ring{width:110px;height:110px}
   .grade-letter{font-size:2.2rem}
   .rs-val{font-size:1.4rem}
   .toast{max-width:calc(100vw - 24px);padding:12px 14px}
   .toast-icon{width:36px;height:36px;font-size:1rem}
+  .rules-card{padding:20px 18px}
+  .rule-content strong{font-size:.86rem}
+  .rule-content p{font-size:.78rem}
+  .result-actions .btn{flex:1;min-width:0}
+  .achievements-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:380px){
+  .opt-letter{width:28px;height:28px;font-size:.72rem}
+  .hud-timer{font-size:.72rem}
+  .brand-text .t1{display:none}
 }
 @media print{
-  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap{display:none!important}
+  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap,
+  .result-actions,.icon-btn{display:none!important}
   body{background:#fff;color:#000}
 }
 </style>
@@ -429,6 +512,7 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
     </div>
   </div>
   <div class="header-actions">
+    <button class="icon-btn" onclick="goHome()" title="Halaman Awal"><i class="fas fa-home"></i></button>
     <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="Suara"><i class="fas fa-volume-up"></i></button>
     <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema"><i class="fas fa-sun"></i></button>
   </div>
@@ -452,13 +536,43 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
       <span class="stat-pill" style="color:#34D399"><i class="fas fa-bolt"></i> Combo &amp; XP</span>
     </div>
 
+    <div class="name-input-wrap">
+      <label for="playerNameInput"><i class="fas fa-user"></i> Nama Pemain</label>
+      <input type="text" id="playerNameInput" maxlength="30" placeholder="Masukkan nama kamu di sini..." autocomplete="off" />
+      <div class="name-input-hint"><i class="fas fa-info-circle"></i> Nama akan ditampilkan pada hasil akhir dan sertifikat PDF.</div>
+    </div>
+
     <div class="rules-card">
       <h4><i class="fas fa-list-check"></i> Cara Bermain</h4>
       <ul>
-        <li><span class="rule-num">1</span> Jawab 15 soal HOTS dari bank 40 soal — dipilih acak setiap sesi.</li>
-        <li><span class="rule-num">2</span> Jawaban benar memberi <strong>XP</strong> + memicu <strong>combo</strong>. Salah mengurangi <strong>1 nyawa</strong>.</li>
-        <li><span class="rule-num">3</span> Power-up: <strong>50:50</strong>, <strong>Petunjuk</strong>, <strong>Lewati</strong> (masing-masing 1×).</li>
-        <li><span class="rule-num">4</span> Raih <strong>Achievement</strong> dan taklukkan peringkat <strong>Sejarawan Muda</strong>!</li>
+        <li>
+          <span class="rule-num">1</span>
+          <div class="rule-content">
+            <strong>Jawab 15 Soal Pilihan Ganda</strong>
+            <p>Soal dipilih secara acak dari bank 40 soal HOTS tentang Penelitian Sejarah sebagai Proses Ilmiah, Sejarah vs Legenda, Pandangan Ahli, dan Heuristik.</p>
+          </div>
+        </li>
+        <li>
+          <span class="rule-num">2</span>
+          <div class="rule-content">
+            <strong>Sistem Nyawa &amp; Combo</strong>
+            <p>Kamu memiliki 3 nyawa. Jawaban benar menambah <b>XP</b> dan membangun <b>combo</b>; jawaban salah mengurangi <b>1 nyawa</b>.</p>
+          </div>
+        </li>
+        <li>
+          <span class="rule-num">3</span>
+          <div class="rule-content">
+            <strong>Power-Up Spesial (Masing-masing 1×)</strong>
+            <p><b>50:50</b> menghapus 2 jawaban salah · <b>Petunjuk</b> menampilkan klu · <b>Lewati</b> melihat jawaban benar.</p>
+          </div>
+        </li>
+        <li>
+          <span class="rule-num">4</span>
+          <div class="rule-content">
+            <strong>Navigasi Bebas &amp; Raih Predikat</strong>
+            <p>Gunakan tombol <b>Sebelumnya</b> dan <b>Selanjutnya</b> untuk meninjau jawaban. Kumpulkan skor setinggi mungkin untuk membuka pencapaian eksklusif!</p>
+          </div>
+        </li>
       </ul>
     </div>
 
@@ -518,6 +632,9 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
         </button>
       </div>
       <div class="action-bar">
+        <button class="btn btn-ghost" id="btnPrev" onclick="prevQuestion()" disabled>
+          <i class="fas fa-arrow-left"></i> Sebelumnya
+        </button>
         <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>
           Selanjutnya <i class="fas fa-arrow-right"></i>
         </button>
@@ -533,6 +650,15 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
       <div class="result-trophy" id="rTrophy">🏆</div>
       <h2 class="result-title" id="rTitle">Luar Biasa!</h2>
       <p class="result-sub" id="rSub">Kuis 1 · Penelitian Sejarah &amp; Heuristik</p>
+
+      <div class="player-badge" id="rPlayerBadge">
+        <i class="fas fa-user-circle"></i>
+        <div>
+          <div class="pb-label">Pemain</div>
+          <div id="rPlayerNameText">Pemain</div>
+        </div>
+      </div>
+
       <div class="grade-ring" id="gradeRing">
         <div class="grade-inner">
           <div class="grade-letter" id="gradeLetter">A</div>
@@ -547,10 +673,18 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
         <div class="rs-box"><div class="rs-val cyan" id="rSkor">0</div><div class="rs-lbl">Skor</div></div>
         <div class="rs-box"><div class="rs-val violet" id="rXpTotal">0</div><div class="rs-lbl">XP Total</div></div>
       </div>
+
+      <div class="achievements-section" id="achievementsSection">
+        <h4><i class="fas fa-medal"></i> Pencapaian</h4>
+        <div class="achievements-grid" id="achievementsList"></div>
+      </div>
+
       <div class="result-msg" id="rMsg"></div>
+
       <div class="result-actions">
         <button class="btn btn-primary" onclick="resetGame()"><i class="fas fa-redo"></i> Main Lagi</button>
-        <button class="btn btn-ghost" onclick="window.location.reload()"><i class="fas fa-home"></i> Menu Awal</button>
+        <button class="btn btn-cyan" onclick="savePDF()"><i class="fas fa-file-pdf"></i> Simpan PDF</button>
+        <button class="btn btn-ghost" onclick="goHome()"><i class="fas fa-home"></i> Menu Awal</button>
       </div>
     </div>
     <div class="review-panel">
@@ -564,417 +698,442 @@ body{font-family:var(--font-display);background:var(--bg);color:var(--text);line
 <script>
 /* ============================================================
    BANK SOAL — 40 SOAL HOTS · KUIS 1
-   Fokus: Penelitian Sejarah sebagai Proses Ilmiah, Sejarah vs
-   Legenda, Pandangan Ahli, Heuristik (Pengertian, Langkah,
-   Tempat Mencari Sumber)
+   PANJANG SEMUA OPSI DISEIMBANGKAN (± 12-22 kata)
+   Tidak ada pola giveaway panjang-pendek atau kata kunci tertentu
    ============================================================ */
 const BANK_SOAL = [
   /* ===== PROSES ILMIAH (8 soal) ===== */
   { id:501, topic:"Proses Ilmiah",
     question:"Perbedaan paling mendasar antara penelitian sejarah dengan sekadar membaca cerita sejarah adalah...",
     options:[
-      {letter:"A",text:"Penelitian sejarah memerlukan waktu lebih lama.",correct:false,explanation:"Waktu bukan pembeda utama."},
-      {letter:"B",text:"Penelitian sejarah menggunakan metode terstruktur & bukti yang dapat dipertanggungjawabkan.",correct:true,explanation:"Tepat! Metode & bukti adalah pembeda utama."},
-      {letter:"C",text:"Penelitian sejarah hanya dilakukan oleh profesor.",correct:false,explanation:"Siapa pun dapat meneliti sejarah."},
-      {letter:"D",text:"Penelitian sejarah selalu menggunakan bahasa asing.",correct:false,explanation:"Bukan pembeda utama."},
-      {letter:"E",text:"Penelitian sejarah tidak memerlukan sumber.",correct:false,explanation:"Justru memerlukan sumber."}
+      {letter:"A",text:"Penelitian sejarah memerlukan waktu yang jauh lebih lama dibandingkan membaca cerita biasa.",correct:false,explanation:"Waktu bukan pembeda utama."},
+      {letter:"B",text:"Penelitian sejarah menggunakan metode terstruktur serta bukti yang dapat dipertanggungjawabkan.",correct:true,explanation:"Tepat! Metode & bukti adalah pembeda utama."},
+      {letter:"C",text:"Penelitian sejarah hanya dapat dilakukan oleh orang yang bergelar profesor di universitas ternama.",correct:false,explanation:"Siapa pun dapat meneliti sejarah."},
+      {letter:"D",text:"Penelitian sejarah selalu memerlukan penguasaan bahasa asing yang sangat sulit untuk dipelajari.",correct:false,explanation:"Bukan pembeda utama."},
+      {letter:"E",text:"Penelitian sejarah tidak membutuhkan sumber karena hanya mengandalkan ingatan penulisnya saja.",correct:false,explanation:"Justru memerlukan sumber."}
     ], difficulty:"medium", hint:"Metode + bukti = pembeda utama penelitian sejarah.", points:60 },
 
   { id:502, topic:"Proses Ilmiah",
     question:"Mengapa sejarah disebut sebagai ilmu yang <strong>rekonstruktif</strong>?",
     options:[
-      {letter:"A",text:"Karena sejarah dapat mengulang peristiwa masa lalu.",correct:false,explanation:"Sejarah tidak dapat mengulang peristiwa."},
-      {letter:"B",text:"Karena sejarah membangun kembali gambaran masa lalu berdasarkan sisa-sisa yang ditinggalkan.",correct:true,explanation:"Tepat! Rekonstruksi = membangun kembali dari sisa/bukti."},
-      {letter:"C",text:"Karena sejarah bersifat fiktif.",correct:false,explanation:"Sejarah bukan fiksi."},
-      {letter:"D",text:"Karena sejarah hanya berisi mitos.",correct:false,explanation:"Bukan mitos."},
-      {letter:"E",text:"Karena sejarah tidak memerlukan metode.",correct:false,explanation:"Justru memerlukan metode."}
+      {letter:"A",text:"Karena sejarah dapat mengulang kembali peristiwa masa lalu yang pernah terjadi sebelumnya.",correct:false,explanation:"Sejarah tidak dapat mengulang peristiwa."},
+      {letter:"B",text:"Karena sejarah membangun kembali gambaran masa lalu berdasarkan sisa-sisa yang ditinggalkan.",correct:true,explanation:"Tepat! Rekonstruksi = membangun kembali dari bukti."},
+      {letter:"C",text:"Karena sejarah pada dasarnya bersifat fiktif sehingga bebas dibangun sesuai imajinasi penulis.",correct:false,explanation:"Sejarah bukan fiksi."},
+      {letter:"D",text:"Karena sejarah hanya berisi kumpulan mitos dan legenda yang diwariskan secara turun-temurun.",correct:false,explanation:"Bukan mitos."},
+      {letter:"E",text:"Karena sejarah tidak membutuhkan metode ilmiah dalam proses pengkajian peristiwanya.",correct:false,explanation:"Justru memerlukan metode."}
     ], difficulty:"medium", hint:"Rekonstruktif = membangun kembali dari bukti/sisa masa lalu.", points:60 },
 
   { id:503, topic:"Proses Ilmiah",
     question:"Seorang siswa berpendapat: 'Sejarah sama saja dengan cerita rakyat karena keduanya menceritakan masa lalu.' Bagaimana kritik yang tepat terhadap pendapat tersebut?",
     options:[
-      {letter:"A",text:"Pendapat benar karena keduanya sama.",correct:false,explanation:"Ada perbedaan mendasar."},
-      {letter:"B",text:"Pendapat salah karena sejarah berbasis bukti & metode ilmiah, sedangkan cerita rakyat berbasis kepercayaan turun-temurun.",correct:true,explanation:"Tepat! Perbedaan utama: bukti & metode."},
-      {letter:"C",text:"Pendapat benar karena cerita rakyat juga ilmiah.",correct:false,explanation:"Cerita rakyat tidak menggunakan metode ilmiah."},
-      {letter:"D",text:"Pendapat salah karena sejarah lebih tua dari cerita rakyat.",correct:false,explanation:"Bukan itu pembedanya."},
-      {letter:"E",text:"Pendapat tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."}
+      {letter:"A",text:"Pendapat tersebut benar karena sejarah dan cerita rakyat memang sama-sama menceritakan masa lalu.",correct:false,explanation:"Ada perbedaan mendasar."},
+      {letter:"B",text:"Pendapat salah karena sejarah berbasis bukti dan metode ilmiah, sedangkan cerita rakyat berbasis kepercayaan turun-temurun.",correct:true,explanation:"Tepat! Perbedaan utama: bukti & metode."},
+      {letter:"C",text:"Pendapat tersebut benar karena cerita rakyat juga disusun menggunakan metode ilmiah yang terstruktur.",correct:false,explanation:"Cerita rakyat tidak menggunakan metode ilmiah."},
+      {letter:"D",text:"Pendapat salah karena sejarah justru lebih muda usianya dibandingkan cerita rakyat di masyarakat.",correct:false,explanation:"Bukan itu pembedanya."},
+      {letter:"E",text:"Pendapat tersebut tidak dapat dinilai karena keduanya berada pada ranah ilmu yang berbeda.",correct:false,explanation:"Dapat dinilai."}
     ], difficulty:"medium", hint:"Sejarah = bukti + metode; cerita rakyat = kepercayaan.", points:60 },
 
   { id:504, topic:"Proses Ilmiah",
     question:"Perhatikan pernyataan berikut!\n'Sejarah adalah ilmu yang rekonstruktif — ia tidak mengulang masa lalu, tetapi membangun kembali masa lalu berdasarkan sisa-sisa yang ditinggalkan.'\n\nAnalisis yang paling tepat tentang pernyataan tersebut adalah...",
     options:[
-      {letter:"A",text:"Pernyataan tepat: sejarawan merekonstruksi masa lalu dari sumber yang tersisa.",correct:true,explanation:"Tepat! Rekonstruksi = membangun kembali dari sumber."},
-      {letter:"B",text:"Pernyataan salah karena sejarah dapat mengulang masa lalu.",correct:false,explanation:"Sejarah tidak dapat diulang."},
-      {letter:"C",text:"Pernyataan salah karena masa lalu tidak dapat direkonstruksi.",correct:false,explanation:"Justru dapat direkonstruksi."},
-      {letter:"D",text:"Pernyataan tidak relevan dengan penelitian sejarah.",correct:false,explanation:"Justru sangat relevan."},
-      {letter:"E",text:"Pernyataan hanya berlaku untuk sejarah modern.",correct:false,explanation:"Berlaku universal."}
+      {letter:"A",text:"Pernyataan tepat: sejarawan merekonstruksi masa lalu dari sumber dan bukti yang masih tersisa.",correct:true,explanation:"Tepat! Rekonstruksi = membangun kembali dari sumber."},
+      {letter:"B",text:"Pernyataan salah karena sejarah sesungguhnya dapat mengulang kembali peristiwa masa lalu yang sama.",correct:false,explanation:"Sejarah tidak dapat diulang."},
+      {letter:"C",text:"Pernyataan salah karena masa lalu sama sekali tidak mungkin untuk direkonstruksi oleh siapapun.",correct:false,explanation:"Justru dapat direkonstruksi."},
+      {letter:"D",text:"Pernyataan tidak relevan dengan kegiatan penelitian sejarah yang dilakukan oleh para sejarawan.",correct:false,explanation:"Justru sangat relevan."},
+      {letter:"E",text:"Pernyataan hanya berlaku untuk kajian sejarah modern dan tidak berlaku bagi sejarah kuno.",correct:false,explanation:"Berlaku universal."}
     ], difficulty:"medium", hint:"Rekonstruksi = membangun kembali dari sumber yang tersisa.", points:60 },
 
   { id:505, topic:"Proses Ilmiah",
     question:"Mengapa seorang sejarawan perlu bersikap <strong>skeptis</strong> terhadap sumber yang ditemukannya?",
     options:[
-      {letter:"A",text:"Karena semua sumber pasti salah.",correct:false,explanation:"Tidak semua sumber salah."},
-      {letter:"B",text:"Karena sumber bisa memuat bias, kekeliruan, atau kepentingan tertentu sehingga perlu diverifikasi.",correct:true,explanation:"Tepat! Skeptisisme = kewaspadaan terhadap bias & kekeliruan."},
-      {letter:"C",text:"Karena sejarawan ingin terlihat pintar.",correct:false,explanation:"Bukan itu alasannya."},
-      {letter:"D",text:"Karena skeptis adalah sikap yang mudah.",correct:false,explanation:"Skeptisisme justru menuntut kerja keras."},
-      {letter:"E",text:"Karena skeptis membuat penelitian cepat selesai.",correct:false,explanation:"Justru memperlambat, tapi memperkuat kualitas."}
+      {letter:"A",text:"Karena hampir semua sumber sejarah yang ditemukan dipastikan memuat kesalahan informasi.",correct:false,explanation:"Tidak semua sumber salah."},
+      {letter:"B",text:"Karena sumber bisa memuat bias, kekeliruan, atau kepentingan tertentu sehingga perlu diverifikasi.",correct:true,explanation:"Tepat! Skeptisisme = kewaspadaan terhadap bias."},
+      {letter:"C",text:"Karena sejarawan ingin menunjukkan bahwa dirinya lebih pintar dibandingkan penulis sumber.",correct:false,explanation:"Bukan itu alasannya."},
+      {letter:"D",text:"Karena sikap skeptis adalah sikap yang paling mudah untuk dipraktikkan oleh setiap peneliti.",correct:false,explanation:"Skeptisisme justru menuntut kerja keras."},
+      {letter:"E",text:"Karena skeptis akan membuat proses penelitian sejarah menjadi jauh lebih cepat terselesaikan.",correct:false,explanation:"Justru memperlambat, tapi memperkuat kualitas."}
     ], difficulty:"medium", hint:"Skeptisisme = kewaspadaan terhadap bias & kekeliruan.", points:60 },
 
   { id:506, topic:"Proses Ilmiah",
     question:"Seorang siswa melakukan penelitian sejarah tentang kampungnya. Ia mengumpulkan sumber, mengkritik, menafsirkan, dan menulis. Analisis yang paling tepat tentang kegiatan siswa tersebut adalah...",
     options:[
-      {letter:"A",text:"Siswa melakukan penelitian sejarah sesuai metode ilmiah.",correct:true,explanation:"Tepat! Ia mengikuti 4 tahap metode sejarah."},
-      {letter:"B",text:"Siswa hanya menyalin buku.",correct:false,explanation:"Ia melakukan penelitian sendiri."},
-      {letter:"C",text:"Siswa tidak melakukan penelitian.",correct:false,explanation:"Justru melakukan penelitian."},
-      {letter:"D",text:"Siswa hanya bermain-main.",correct:false,explanation:"Bukan bermain-main."},
-      {letter:"E",text:"Siswa tidak memerlukan sumber.",correct:false,explanation:"Justru mengumpulkan sumber."}
+      {letter:"A",text:"Siswa tersebut sedang melakukan penelitian sejarah sesuai dengan metode ilmiah yang berlaku.",correct:true,explanation:"Tepat! Ia mengikuti 4 tahap metode sejarah."},
+      {letter:"B",text:"Siswa tersebut hanya sedang menyalin kembali isi buku sejarah yang pernah ia baca sebelumnya.",correct:false,explanation:"Ia melakukan penelitian sendiri."},
+      {letter:"C",text:"Siswa tersebut sama sekali tidak melakukan kegiatan penelitian karena hanya bermain-main saja.",correct:false,explanation:"Justru melakukan penelitian."},
+      {letter:"D",text:"Siswa tersebut melakukan kegiatan yang tidak berkaitan dengan pelajaran sejarah di sekolah.",correct:false,explanation:"Justru berkaitan erat."},
+      {letter:"E",text:"Siswa tersebut tidak memerlukan sumber karena cukup mengandalkan ingatannya sendiri saja.",correct:false,explanation:"Justru mengumpulkan sumber."}
     ], difficulty:"easy", hint:"4 tahap = heuristik → kritik → interpretasi → historiografi.", points:50 },
 
   { id:507, topic:"Proses Ilmiah",
-    question:"Perhatikan pernyataan berikut!\n(1) Bersifat objektif.\n(2) Berbasis bukti &amp; metode.\n(3) Dapat direvisi jika ada temuan baru.\n(4) Selalu menerima apa adanya.\n\nCiri penelitian sejarah sebagai ilmu ilmiah ditunjukkan oleh nomor...",
+    question:"Perhatikan ciri-ciri penelitian berikut!\n(1) Bersifat objektif.\n(2) Berbasis bukti dan metode.\n(3) Dapat direvisi jika ada temuan baru.\n(4) Selalu menerima informasi apa adanya.\n\nCiri penelitian sejarah sebagai ilmu ilmiah ditunjukkan oleh nomor...",
     options:[
-      {letter:"A",text:"(1), (2), dan (3)",correct:true,explanation:"Tepat! Ketiga ciri tersebut adalah ciri penelitian ilmiah."},
-      {letter:"B",text:"(1) dan (4)",correct:false,explanation:"(4) bukan ciri ilmiah."},
-      {letter:"C",text:"(2) dan (4)",correct:false,explanation:"(4) bukan ciri ilmiah."},
-      {letter:"D",text:"(3) dan (4)",correct:false,explanation:"(4) bukan ciri ilmiah."},
-      {letter:"E",text:"Semua benar",correct:false,explanation:"(4) bukan ciri ilmiah."}
+      {letter:"A",text:"(1), (2), dan (3) saja.",correct:true,explanation:"Tepat! Ketiga ciri tersebut adalah ciri penelitian ilmiah."},
+      {letter:"B",text:"(1) dan (4) saja.",correct:false,explanation:"(4) bukan ciri ilmiah."},
+      {letter:"C",text:"(2) dan (4) saja.",correct:false,explanation:"(4) bukan ciri ilmiah."},
+      {letter:"D",text:"(3) dan (4) saja.",correct:false,explanation:"(4) bukan ciri ilmiah."},
+      {letter:"E",text:"Semua nomor benar.",correct:false,explanation:"(4) bukan ciri ilmiah."}
     ], difficulty:"medium", hint:"Ilmiah = objektif, berbasis bukti, dapat direvisi.", points:60 },
 
   { id:508, topic:"Proses Ilmiah",
     question:"Mengapa penelitian sejarah disebut sebagai <strong>dialog tanpa akhir</strong> antara masa kini dan masa lalu?",
     options:[
-      {letter:"A",text:"Karena sejarawan selalu bertanya pada masa lalu secara langsung.",correct:false,explanation:"Masa lalu tidak dapat ditanya langsung."},
-      {letter:"B",text:"Karena setiap generasi dapat menafsirkan ulang masa lalu dengan pertanyaan & perspektif baru.",correct:true,explanation:"Tepat! Setiap generasi memiliki perspektif baru."},
-      {letter:"C",text:"Karena sejarah tidak pernah selesai ditulis.",correct:false,explanation:"Bukan karena tidak selesai, tapi karena perspektif berkembang."},
-      {letter:"D",text:"Karena sejarawan tidak pernah puas.",correct:false,explanation:"Bukan soal kepuasan."},
-      {letter:"E",text:"Karena masa lalu berubah setiap saat.",correct:false,explanation:"Masa lalu tidak berubah, tafsirnya yang berubah."}
+      {letter:"A",text:"Karena sejarawan dapat bertanya secara langsung kepada para pelaku sejarah masa lalu.",correct:false,explanation:"Masa lalu tidak dapat ditanya langsung."},
+      {letter:"B",text:"Karena setiap generasi dapat menafsirkan ulang masa lalu dengan pertanyaan dan perspektif baru.",correct:true,explanation:"Tepat! Setiap generasi memiliki perspektif baru."},
+      {letter:"C",text:"Karena sejarah tidak pernah selesai ditulis sehingga selalu menyisakan pekerjaan yang tertunda.",correct:false,explanation:"Bukan karena tidak selesai."},
+      {letter:"D",text:"Karena para sejarawan pada dasarnya tidak pernah merasa puas dengan hasil pekerjaannya sendiri.",correct:false,explanation:"Bukan soal kepuasan."},
+      {letter:"E",text:"Karena peristiwa masa lalu senantiasa berubah seiring berjalannya waktu yang terus bergerak.",correct:false,explanation:"Masa lalu tidak berubah, tafsirnya yang berubah."}
     ], difficulty:"hard", hint:"Setiap generasi memiliki perspektif & pertanyaan baru.", points:70 },
 
   /* ===== SEJARAH VS LEGENDA (5 soal) ===== */
   { id:509, topic:"Sejarah vs Legenda",
     question:"Perhatikan tabel berikut!\n\n| Aspek | X | Y |\n| Dasar | Bukti yang dapat diverifikasi | Kepercayaan turun-temurun |\n| Metode | Heuristik → Kritik → Interpretasi → Historiografi | Pewarisan lisan tanpa pengujian |\n\nX dan Y secara berurutan adalah...",
     options:[
-      {letter:"A",text:"Sejarah dan Legenda",correct:true,explanation:"Tepat! X = sejarah (ilmiah); Y = legenda."},
-      {letter:"B",text:"Legenda dan Sejarah",correct:false,explanation:"Terbalik."},
-      {letter:"C",text:"Mitos dan Sejarah",correct:false,explanation:"Urutan tidak sesuai."},
-      {letter:"D",text:"Sejarah dan Fiksi",correct:false,explanation:"Fiksi bukan legenda."},
+      {letter:"A",text:"Sejarah dan legenda.",correct:true,explanation:"Tepat! X = sejarah (ilmiah); Y = legenda."},
+      {letter:"B",text:"Legenda dan sejarah.",correct:false,explanation:"Terbalik."},
+      {letter:"C",text:"Mitos dan sejarah.",correct:false,explanation:"Urutan tidak sesuai."},
+      {letter:"D",text:"Sejarah dan fiksi.",correct:false,explanation:"Fiksi bukan legenda."},
       {letter:"E",text:"Keduanya sama saja.",correct:false,explanation:"Berbeda."}
     ], difficulty:"easy", hint:"Sejarah = bukti & metode; Legenda = kepercayaan turun-temurun.", points:50 },
 
   { id:510, topic:"Sejarah vs Legenda",
     question:"Seorang siswa menemukan cerita rakyat tentang 'Naga Besaung penjaga Sungai Katingan'. Ia ingin mengkaji cerita ini secara ilmiah. Analisis yang paling tepat adalah...",
     options:[
-      {letter:"A",text:"Cerita rakyat tidak dapat dikaji secara ilmiah sama sekali.",correct:false,explanation:"Justru dapat dikaji sebagai sumber lisan."},
+      {letter:"A",text:"Cerita rakyat tidak dapat dikaji secara ilmiah karena hanya berisi mitos yang tidak terbukti.",correct:false,explanation:"Justru dapat dikaji sebagai sumber lisan."},
       {letter:"B",text:"Cerita rakyat dapat dikaji sebagai sumber lisan yang menyimpan jejak sejarah, dengan catatan harus dikritik.",correct:true,explanation:"Tepat! Cerita rakyat dapat dikaji sebagai sumber lisan dengan kritik."},
-      {letter:"C",text:"Cerita rakyat harus langsung diterima sebagai fakta.",correct:false,explanation:"Justru perlu dikritik."},
-      {letter:"D",text:"Cerita rakyat tidak berguna untuk sejarah.",correct:false,explanation:"Berguna sebagai sumber lisan."},
-      {letter:"E",text:"Cerita rakyat hanya untuk hiburan.",correct:false,explanation:"Bisa menjadi sumber sejarah juga."}
+      {letter:"C",text:"Cerita rakyat harus langsung diterima sebagai fakta sejarah tanpa perlu dilakukan pengujian.",correct:false,explanation:"Justru perlu dikritik."},
+      {letter:"D",text:"Cerita rakyat sama sekali tidak berguna bagi kajian sejarah dan hanya cocok untuk hiburan.",correct:false,explanation:"Berguna sebagai sumber lisan."},
+      {letter:"E",text:"Cerita rakyat hanya boleh dipelajari oleh ahli budaya dan tidak relevan bagi peneliti sejarah.",correct:false,explanation:"Relevan bagi peneliti sejarah."}
     ], difficulty:"hard", hint:"Cerita rakyat dapat menjadi sumber lisan yang perlu dikritik.", points:70 },
 
   { id:511, topic:"Sejarah vs Legenda",
     question:"Perbedaan utama antara cerita rakyat (legenda) dan sejarah terletak pada...",
     options:[
-      {letter:"A",text:"Bahasa yang digunakan.",correct:false,explanation:"Bukan pembeda utama."},
-      {letter:"B",text:"Panjangnya cerita.",correct:false,explanation:"Bukan pembeda utama."},
-      {letter:"C",text:"Ada tidaknya pengujian berbasis bukti & metode.",correct:true,explanation:"Tepat! Pengujian berbasis bukti adalah pembeda utama."},
-      {letter:"D",text:"Siapa yang menceritakan.",correct:false,explanation:"Bukan pembeda utama."},
-      {letter:"E",text:"Tempat penyimpanannya.",correct:false,explanation:"Bukan pembeda utama."}
+      {letter:"A",text:"Bahasa yang digunakan dalam penyampaiannya kepada khalayak luas.",correct:false,explanation:"Bukan pembeda utama."},
+      {letter:"B",text:"Panjang atau pendeknya alur cerita yang disampaikan kepada pendengar.",correct:false,explanation:"Bukan pembeda utama."},
+      {letter:"C",text:"Ada tidaknya pengujian berbasis bukti dan metode ilmiah di dalamnya.",correct:true,explanation:"Tepat! Pengujian berbasis bukti adalah pembeda utama."},
+      {letter:"D",text:"Siapa tokoh yang menceritakan kisah tersebut kepada masyarakat luas.",correct:false,explanation:"Bukan pembeda utama."},
+      {letter:"E",text:"Di mana cerita tersebut disimpan dan dilestarikan oleh masyarakat setempat.",correct:false,explanation:"Bukan pembeda utama."}
     ], difficulty:"medium", hint:"Pengujian berbasis bukti = pembeda utama.", points:60 },
 
   { id:512, topic:"Sejarah vs Legenda",
     question:"Seorang siswa berpendapat: 'Legenda selalu salah karena tidak berdasarkan fakta.' Bagaimana kritik yang tepat terhadap pendapat tersebut?",
     options:[
-      {letter:"A",text:"Pendapat benar sepenuhnya.",correct:false,explanation:"Banyak legenda menyimpan jejak sejarah."},
+      {letter:"A",text:"Pendapat tersebut benar sepenuhnya karena legenda memang tidak memiliki dasar faktual apapun.",correct:false,explanation:"Banyak legenda menyimpan jejak sejarah."},
       {letter:"B",text:"Pendapat terlalu menyederhanakan: banyak legenda menyimpan jejak sejarah yang dapat diuji, meski bercampur mitos.",correct:true,explanation:"Tepat! Legenda bisa menyimpan jejak sejarah yang dapat diuji."},
-      {letter:"C",text:"Pendapat salah karena legenda adalah fiksi murni.",correct:false,explanation:"Legenda bukan fiksi murni."},
-      {letter:"D",text:"Pendapat tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."},
-      {letter:"E",text:"Pendapat benar karena mitos selalu bohong.",correct:false,explanation:"Mitos dapat mengandung kebenaran simbolik."}
+      {letter:"C",text:"Pendapat salah karena legenda pada dasarnya adalah fiksi murni hasil imajinasi masyarakat semata.",correct:false,explanation:"Legenda bukan fiksi murni."},
+      {letter:"D",text:"Pendapat tersebut tidak dapat dinilai benar atau salah karena berada di ranah budaya lokal.",correct:false,explanation:"Dapat dinilai."},
+      {letter:"E",text:"Pendapat benar karena mitos dalam masyarakat selalu mengandung kebohongan yang disengaja.",correct:false,explanation:"Mitos dapat mengandung kebenaran simbolik."}
     ], difficulty:"hard", hint:"Legenda bisa menyimpan jejak sejarah yang dapat diuji.", points:70 },
 
   { id:513, topic:"Sejarah vs Legenda",
     question:"Ketika sejarawan menganalisis legenda, ia harus...",
     options:[
-      {letter:"A",text:"Langsung menolak legenda sebagai fiksi.",correct:false,explanation:"Bukan pendekatan ilmiah."},
-      {letter:"B",text:"Langsung menerima legenda sebagai fakta.",correct:false,explanation:"Bukan pendekatan ilmiah."},
-      {letter:"C",text:"Mengujinya dengan bukti-bukti lain dan menafsirkan maknanya dalam konteks budaya.",correct:true,explanation:"Tepat! Uji & tafsirkan dalam konteks budaya."},
-      {letter:"D",text:"Mengabaikan legenda sama sekali.",correct:false,explanation:"Legenda dapat menjadi sumber sejarah."},
-      {letter:"E",text:"Menganggap legenda sama dengan dokumen resmi.",correct:false,explanation:"Berbeda kualitas sumbernya."}
+      {letter:"A",text:"Langsung menolak legenda sebagai karya fiktif yang tidak dapat dikaji secara ilmiah.",correct:false,explanation:"Bukan pendekatan ilmiah."},
+      {letter:"B",text:"Langsung menerima legenda sebagai fakta sejarah tanpa memerlukan pengujian lebih lanjut.",correct:false,explanation:"Bukan pendekatan ilmiah."},
+      {letter:"C",text:"Mengujinya dengan bukti-bukti lain dan menafsirkan maknanya dalam konteks budaya setempat.",correct:true,explanation:"Tepat! Uji & tafsirkan dalam konteks budaya."},
+      {letter:"D",text:"Mengabaikan legenda sama sekali karena dianggap tidak memiliki nilai bagi kajian sejarah.",correct:false,explanation:"Legenda dapat menjadi sumber sejarah."},
+      {letter:"E",text:"Menganggap legenda setara dengan dokumen resmi pemerintah dalam hal kualitas sumber.",correct:false,explanation:"Berbeda kualitas sumbernya."}
     ], difficulty:"medium", hint:"Uji dengan bukti lain & tafsirkan dalam konteks budaya.", points:60 },
 
   /* ===== PANDANGAN AHLI (7 soal) ===== */
   { id:514, topic:"Pandangan Ahli",
     question:"Menurut E.H. Carr, sejarah adalah...",
     options:[
-      {letter:"A",text:"Catatan tentang peradaban dunia.",correct:false,explanation:"Ini Ibnu Khaldun."},
-      {letter:"B",text:"Dialog tanpa akhir antara masa kini dan masa lalu.",correct:true,explanation:"Tepat! Carr: dialog tanpa akhir present & past."},
-      {letter:"C",text:"Penyelidikan pemikiran manusia masa lalu.",correct:false,explanation:"Ini Collingwood."},
-      {letter:"D",text:"Proses menguji rekaman dan peninggalan masa lampau.",correct:false,explanation:"Ini Gottschalk."},
-      {letter:"E",text:"Ilmu yang rekonstruktif.",correct:false,explanation:"Bukan definisi Carr."}
+      {letter:"A",text:"Catatan tentang peradaban dunia dan perubahan watak masyarakat yang terjadi di dalamnya.",correct:false,explanation:"Ini Ibnu Khaldun."},
+      {letter:"B",text:"Dialog tanpa akhir antara masa kini dan masa lalu yang terus berlangsung sepanjang zaman.",correct:true,explanation:"Tepat! Carr: dialog tanpa akhir present & past."},
+      {letter:"C",text:"Penyelidikan terhadap pemikiran manusia di masa lampau yang menghasilkan tindakan nyata.",correct:false,explanation:"Ini Collingwood."},
+      {letter:"D",text:"Proses menguji dan menganalisis secara kritis rekaman serta peninggalan masa lampau.",correct:false,explanation:"Ini Gottschalk."},
+      {letter:"E",text:"Ilmu yang bersifat rekonstruktif dalam membangun kembali gambaran masa lalu secara utuh.",correct:false,explanation:"Bukan definisi Carr."}
     ], difficulty:"easy", hint:"Carr = dialog masa kini & masa lalu.", points:50 },
 
   { id:515, topic:"Pandangan Ahli",
     question:"Menurut R.G. Collingwood, sejarah adalah...",
     options:[
-      {letter:"A",text:"Catatan peradaban manusia.",correct:false,explanation:"Ini Ibnu Khaldun."},
-      {letter:"B",text:"Dialog tanpa akhir.",correct:false,explanation:"Ini Carr."},
-      {letter:"C",text:"Penyelidikan pemikiran manusia masa lalu.",correct:true,explanation:"Tepat! Collingwood: all history is the history of thought."},
-      {letter:"D",text:"Proses menguji rekaman.",correct:false,explanation:"Ini Gottschalk."},
-      {letter:"E",text:"Ilmu yang mengulang masa lalu.",correct:false,explanation:"Sejarah tidak mengulang."}
+      {letter:"A",text:"Catatan tentang peradaban manusia dan perubahan-perubahan yang terjadi pada wataknya.",correct:false,explanation:"Ini Ibnu Khaldun."},
+      {letter:"B",text:"Dialog tanpa akhir yang berlangsung terus-menerus antara masa kini dan masa lalu.",correct:false,explanation:"Ini Carr."},
+      {letter:"C",text:"Penyelidikan terhadap pemikiran manusia di masa lampau yang melahirkan tindakan nyata.",correct:true,explanation:"Tepat! Collingwood: all history is the history of thought."},
+      {letter:"D",text:"Proses menguji dan menganalisis secara kritis rekaman serta peninggalan masa lampau.",correct:false,explanation:"Ini Gottschalk."},
+      {letter:"E",text:"Ilmu yang mengulang kembali peristiwa masa lalu untuk dipelajari oleh generasi sekarang.",correct:false,explanation:"Sejarah tidak mengulang."}
     ], difficulty:"easy", hint:"Collingwood = all history is the history of thought.", points:50 },
 
   { id:516, topic:"Pandangan Ahli",
     question:"Menurut Louis Gottschalk, sejarah adalah...",
     options:[
-      {letter:"A",text:"Catatan peradaban manusia.",correct:false,explanation:"Ini Ibnu Khaldun."},
-      {letter:"B",text:"Dialog tanpa akhir.",correct:false,explanation:"Ini Carr."},
-      {letter:"C",text:"Penyelidikan pemikiran.",correct:false,explanation:"Ini Collingwood."},
-      {letter:"D",text:"Proses menguji dan menganalisis secara kritis rekaman dan peninggalan masa lampau.",correct:true,explanation:"Tepat! Gottschalk menekankan kata 'kritis'."},
-      {letter:"E",text:"Ilmu yang tidak memerlukan bukti.",correct:false,explanation:"Justru memerlukan bukti."}
+      {letter:"A",text:"Catatan tentang peradaban manusia dan perubahan wataknya dari masa ke masa.",correct:false,explanation:"Ini Ibnu Khaldun."},
+      {letter:"B",text:"Dialog tanpa akhir antara masa kini dan masa lalu yang terus berkembang.",correct:false,explanation:"Ini Carr."},
+      {letter:"C",text:"Penyelidikan terhadap pemikiran manusia di masa lampau yang melahirkan tindakan.",correct:false,explanation:"Ini Collingwood."},
+      {letter:"D",text:"Proses menguji dan menganalisis secara kritis rekaman serta peninggalan masa lampau.",correct:true,explanation:"Tepat! Gottschalk menekankan kata 'kritis'."},
+      {letter:"E",text:"Ilmu yang tidak memerlukan bukti empiris dalam proses penyusunan narasinya.",correct:false,explanation:"Justru memerlukan bukti."}
     ], difficulty:"medium", hint:"Gottschalk menekankan proses KRITIS dalam menguji rekaman.", points:60 },
 
   { id:517, topic:"Pandangan Ahli",
     question:"Menurut Ibn Khaldun, sejarah adalah...",
     options:[
-      {letter:"A",text:"Dialog tanpa akhir antara masa kini & masa lalu.",correct:false,explanation:"Ini Carr."},
+      {letter:"A",text:"Dialog tanpa akhir antara masa kini dan masa lalu yang terus berlangsung.",correct:false,explanation:"Ini Carr."},
       {letter:"B",text:"Catatan tentang masyarakat manusia dan perubahan-perubahan yang terjadi pada wataknya.",correct:true,explanation:"Tepat! Ibn Khaldun menekankan masyarakat & perubahan sosial."},
-      {letter:"C",text:"Penyelidikan pemikiran.",correct:false,explanation:"Ini Collingwood."},
-      {letter:"D",text:"Proses menguji rekaman.",correct:false,explanation:"Ini Gottschalk."},
-      {letter:"E",text:"Ilmu yang tidak ilmiah.",correct:false,explanation:"Justru ilmiah."}
+      {letter:"C",text:"Penyelidikan terhadap pemikiran manusia di masa lampau yang melahirkan tindakan.",correct:false,explanation:"Ini Collingwood."},
+      {letter:"D",text:"Proses menguji dan menganalisis secara kritis rekaman serta peninggalan masa lampau.",correct:false,explanation:"Ini Gottschalk."},
+      {letter:"E",text:"Ilmu yang bersifat tidak ilmiah dan tidak memerlukan metode penelitian yang ketat.",correct:false,explanation:"Justru ilmiah."}
     ], difficulty:"medium", hint:"Ibn Khaldun menekankan masyarakat & perubahan sosial-budaya.", points:60 },
 
   { id:518, topic:"Pandangan Ahli",
     question:"Persamaan paling mendasar antara pandangan E.H. Carr dan R.G. Collingwood tentang sejarah adalah...",
     options:[
       {letter:"A",text:"Keduanya menekankan pentingnya peran aktif sejarawan dalam menafsirkan masa lalu.",correct:true,explanation:"Tepat! Keduanya menekankan peran aktif sejarawan."},
-      {letter:"B",text:"Keduanya menolak pentingnya sumber.",correct:false,explanation:"Keduanya justru mementingkan sumber."},
-      {letter:"C",text:"Keduanya hanya fokus pada aspek politik.",correct:false,explanation:"Bukan fokus keduanya."},
-      {letter:"D",text:"Keduanya sama persis.",correct:false,explanation:"Ada perbedaan penekanan."},
-      {letter:"E",text:"Keduanya tidak relevan dengan penelitian sejarah.",correct:false,explanation:"Justru sangat relevan."}
+      {letter:"B",text:"Keduanya sama-sama menolak pentingnya keberadaan sumber sejarah yang valid.",correct:false,explanation:"Keduanya justru mementingkan sumber."},
+      {letter:"C",text:"Keduanya hanya berfokus pada aspek politik dalam setiap kajian sejarahnya.",correct:false,explanation:"Bukan fokus keduanya."},
+      {letter:"D",text:"Keduanya memiliki pandangan yang sama persis tanpa perbedaan sedikitpun.",correct:false,explanation:"Ada perbedaan penekanan."},
+      {letter:"E",text:"Keduanya tidak relevan dengan praktik penelitian sejarah yang dilakukan sekarang.",correct:false,explanation:"Justru sangat relevan."}
     ], difficulty:"hard", hint:"Carr = dialog; Collingwood = pemikiran. Keduanya: peran aktif sejarawan.", points:70 },
 
   { id:519, topic:"Pandangan Ahli",
     question:"Perbedaan utama antara pandangan Louis Gottschalk dan Ibn Khaldun tentang sejarah adalah...",
     options:[
-      {letter:"A",text:"Gottschalk menekankan proses kritis pengujian rekaman; Ibn Khaldun menekankan masyarakat & perubahan sosial-budaya.",correct:true,explanation:"Tepat! Gottschalk = kritis; Ibn Khaldun = masyarakat."},
-      {letter:"B",text:"Gottschalk = masyarakat; Ibn Khaldun = kritis.",correct:false,explanation:"Terbalik."},
-      {letter:"C",text:"Keduanya sama saja.",correct:false,explanation:"Ada perbedaan penekanan."},
-      {letter:"D",text:"Keduanya menolak bukti.",correct:false,explanation:"Keduanya menekankan bukti."},
-      {letter:"E",text:"Keduanya hanya fokus pada politik.",correct:false,explanation:"Bukan fokus keduanya."}
+      {letter:"A",text:"Gottschalk menekankan proses kritis pengujian rekaman; Ibn Khaldun menekankan masyarakat dan perubahan sosial-budaya.",correct:true,explanation:"Tepat! Gottschalk = kritis; Ibn Khaldun = masyarakat."},
+      {letter:"B",text:"Gottschalk menekankan masyarakat; Ibn Khaldun menekankan proses kritis pengujian rekaman sejarah.",correct:false,explanation:"Terbalik."},
+      {letter:"C",text:"Keduanya sebenarnya memiliki pandangan yang sama persis tentang hakikat sejarah.",correct:false,explanation:"Ada perbedaan penekanan."},
+      {letter:"D",text:"Keduanya sama-sama menolak pentingnya keberadaan bukti dalam penelitian sejarah.",correct:false,explanation:"Keduanya menekankan bukti."},
+      {letter:"E",text:"Keduanya hanya berfokus pada aspek politik dari setiap peristiwa sejarah.",correct:false,explanation:"Bukan fokus keduanya."}
     ], difficulty:"hard", hint:"Gottschalk = kritis; Ibn Khaldun = masyarakat & perubahan.", points:70 },
 
   { id:520, topic:"Pandangan Ahli",
     question:"Seorang siswa ingin meneliti perubahan sosial masyarakat Dayak Ngaju dari masa ke masa. Pendekatan yang paling relevan dengan definisi sejarah menurut...",
     options:[
-      {letter:"A",text:"E.H. Carr",correct:false,explanation:"Carr menekankan dialog present-past."},
-      {letter:"B",text:"Ibn Khaldun",correct:true,explanation:"Tepat! Ibn Khaldun menekankan masyarakat & perubahan sosial-budaya."},
-      {letter:"C",text:"Collingwood",correct:false,explanation:"Collingwood menekankan pemikiran."},
-      {letter:"D",text:"Gottschalk",correct:false,explanation:"Gottschalk menekankan proses kritis."},
-      {letter:"E",text:"Semua sama relevannya.",correct:false,explanation:"Paling relevan Ibn Khaldun."}
+      {letter:"A",text:"E.H. Carr yang menekankan dialog antara masa kini dengan masa lalu yang terus berlangsung.",correct:false,explanation:"Carr menekankan dialog present-past."},
+      {letter:"B",text:"Ibn Khaldun yang menekankan masyarakat dan perubahan-perubahan pada wataknya.",correct:true,explanation:"Tepat! Ibn Khaldun menekankan masyarakat & perubahan sosial-budaya."},
+      {letter:"C",text:"Collingwood yang menekankan penyelidikan terhadap pemikiran manusia di masa lampau.",correct:false,explanation:"Collingwood menekankan pemikiran."},
+      {letter:"D",text:"Gottschalk yang menekankan proses kritis pengujian rekaman dan peninggalan masa lampau.",correct:false,explanation:"Gottschalk menekankan proses kritis."},
+      {letter:"E",text:"Semua tokoh sama-sama relevan tanpa perbedaan penekanan yang berarti.",correct:false,explanation:"Paling relevan Ibn Khaldun."}
     ], difficulty:"hard", hint:"Fokus pada perubahan sosial masyarakat → Ibn Khaldun.", points:70 },
 
   /* ===== HEURISTIK: PENGERTIAN (4 soal) ===== */
   { id:521, topic:"Heuristik",
     question:"Kata 'heuristik' berasal dari bahasa Yunani <em>heuriskein</em> yang berarti...",
     options:[
-      {letter:"A",text:"Menulis",correct:false,explanation:"Menulis = historiografi."},
-      {letter:"B",text:"Menemukan",correct:true,explanation:"Tepat! Heuriskein = menemukan."},
-      {letter:"C",text:"Menafsirkan",correct:false,explanation:"Menafsirkan = interpretasi."},
-      {letter:"D",text:"Menguji",correct:false,explanation:"Menguji = kritik."},
-      {letter:"E",text:"Menghafal",correct:false,explanation:"Bukan menghafal."}
+      {letter:"A",text:"Menulis.",correct:false,explanation:"Menulis = historiografi."},
+      {letter:"B",text:"Menemukan.",correct:true,explanation:"Tepat! Heuriskein = menemukan."},
+      {letter:"C",text:"Menafsirkan.",correct:false,explanation:"Menafsirkan = interpretasi."},
+      {letter:"D",text:"Menguji.",correct:false,explanation:"Menguji = kritik."},
+      {letter:"E",text:"Menghafal.",correct:false,explanation:"Bukan menghafal."}
     ], difficulty:"easy", hint:"Heuriskein = menemukan.", points:50 },
 
   { id:522, topic:"Heuristik",
     question:"Tahap pertama dalam metode penelitian sejarah yang berupa kegiatan mencari dan mengumpulkan sumber-sumber sejarah disebut...",
     options:[
-      {letter:"A",text:"Heuristik",correct:true,explanation:"Tepat! Heuristik = pengumpulan sumber."},
-      {letter:"B",text:"Kritik",correct:false,explanation:"Kritik = verifikasi."},
-      {letter:"C",text:"Interpretasi",correct:false,explanation:"Interpretasi = penafsiran."},
-      {letter:"D",text:"Historiografi",correct:false,explanation:"Historiografi = penulisan."},
-      {letter:"E",text:"Periodisasi",correct:false,explanation:"Bukan tahap metode."}
+      {letter:"A",text:"Heuristik.",correct:true,explanation:"Tepat! Heuristik = pengumpulan sumber."},
+      {letter:"B",text:"Kritik.",correct:false,explanation:"Kritik = verifikasi."},
+      {letter:"C",text:"Interpretasi.",correct:false,explanation:"Interpretasi = penafsiran."},
+      {letter:"D",text:"Historiografi.",correct:false,explanation:"Historiografi = penulisan."},
+      {letter:"E",text:"Periodisasi.",correct:false,explanation:"Bukan tahap metode."}
     ], difficulty:"easy", hint:"Heuristik = pengumpulan sumber.", points:50 },
 
   { id:523, topic:"Heuristik",
     question:"Mengapa tahap heuristik disebut sebagai tahap yang paling krusial dalam penelitian sejarah?",
     options:[
-      {letter:"A",text:"Karena heuristik paling cepat selesai.",correct:false,explanation:"Justru bisa memakan waktu lama."},
+      {letter:"A",text:"Karena tahap heuristik adalah tahap yang paling cepat selesai dibanding tahap lainnya.",correct:false,explanation:"Justru bisa memakan waktu lama."},
       {letter:"B",text:"Karena tanpa sumber yang memadai, penelitian tidak akan memiliki dasar yang kuat untuk dianalisis.",correct:true,explanation:"Tepat! Sumber adalah fondasi penelitian."},
-      {letter:"C",text:"Karena heuristik tidak memerlukan ketelitian.",correct:false,explanation:"Justru memerlukan ketelitian."},
-      {letter:"D",text:"Karena heuristik dapat dilewati.",correct:false,explanation:"Tidak dapat dilewati."},
-      {letter:"E",text:"Karena heuristik hanya untuk sejarah lokal.",correct:false,explanation:"Berlaku untuk semua skala."}
+      {letter:"C",text:"Karena tahap heuristik tidak memerlukan ketelitian yang tinggi dalam prosesnya.",correct:false,explanation:"Justru memerlukan ketelitian."},
+      {letter:"D",text:"Karena tahap heuristik dapat dengan mudah dilewati oleh peneliti yang berpengalaman.",correct:false,explanation:"Tidak dapat dilewati."},
+      {letter:"E",text:"Karena tahap heuristik hanya diperlukan untuk kajian sejarah berskala lokal saja.",correct:false,explanation:"Berlaku untuk semua skala."}
     ], difficulty:"medium", hint:"Sumber = fondasi penelitian sejarah.", points:60 },
 
   { id:524, topic:"Heuristik",
     question:"Perhatikan pernyataan berikut!\n'Seorang sejarawan yang baik tidak akan pernah puas dengan satu sumber saja.'\n\nAnalisis yang paling tepat tentang pernyataan tersebut adalah...",
     options:[
-      {letter:"A",text:"Pernyataan tepat: banyak sumber memungkinkan triangulasi & verifikasi silang.",correct:true,explanation:"Tepat! Banyak sumber memungkinkan triangulasi."},
-      {letter:"B",text:"Pernyataan salah: satu sumber sudah cukup.",correct:false,explanation:"Justru perlu banyak sumber."},
-      {letter:"C",text:"Pernyataan hanya berlaku untuk sejarah modern.",correct:false,explanation:"Berlaku universal."},
-      {letter:"D",text:"Pernyataan tidak relevan dengan heuristik.",correct:false,explanation:"Justru sangat relevan."},
-      {letter:"E",text:"Pernyataan salah karena banyak sumber membingungkan.",correct:false,explanation:"Justru memperkuat analisis."}
+      {letter:"A",text:"Pernyataan tepat: banyak sumber memungkinkan triangulasi dan verifikasi silang antar sumber.",correct:true,explanation:"Tepat! Banyak sumber memungkinkan triangulasi."},
+      {letter:"B",text:"Pernyataan salah: satu sumber sudah cukup untuk menyusun narasi sejarah yang utuh.",correct:false,explanation:"Justru perlu banyak sumber."},
+      {letter:"C",text:"Pernyataan hanya berlaku untuk kajian sejarah modern yang sumbernya melimpah.",correct:false,explanation:"Berlaku universal."},
+      {letter:"D",text:"Pernyataan tidak relevan dengan tahap heuristik dalam penelitian sejarah.",correct:false,explanation:"Justru sangat relevan."},
+      {letter:"E",text:"Pernyataan salah karena banyak sumber justru akan membuat peneliti menjadi bingung.",correct:false,explanation:"Justru memperkuat analisis."}
     ], difficulty:"medium", hint:"Banyak sumber = triangulasi & verifikasi silang.", points:60 },
 
   /* ===== HEURISTIK: TEMPAT MENCARI SUMBER (8 soal) ===== */
   { id:525, topic:"Tempat Sumber",
     question:"Untuk meneliti sejarah pemerintahan daerah Kabupaten Katingan, tempat paling tepat untuk mencari sumber primer adalah...",
     options:[
-      {letter:"A",text:"Kantor Arsip Daerah Kabupaten Katingan",correct:true,explanation:"Tepat! Arsip daerah = sumber primer dokumen pemerintahan."},
-      {letter:"B",text:"Toko buku umum",correct:false,explanation:"Buku umum = sumber sekunder."},
-      {letter:"C",text:"Media sosial",correct:false,explanation:"Bukan sumber primer."},
-      {letter:"D",text:"Warung kopi",correct:false,explanation:"Bukan tempat sumber sejarah."},
-      {letter:"E",text:"Perpustakaan pribadi tetangga",correct:false,explanation:"Bukan tempat utama."}
+      {letter:"A",text:"Kantor Arsip Daerah Kabupaten Katingan yang menyimpan dokumen resmi pemerintahan.",correct:true,explanation:"Tepat! Arsip daerah = sumber primer dokumen pemerintahan."},
+      {letter:"B",text:"Toko buku umum yang menjual berbagai buku sejarah untuk masyarakat luas.",correct:false,explanation:"Buku umum = sumber sekunder."},
+      {letter:"C",text:"Akun media sosial resmi pemerintah daerah yang aktif membagikan informasi.",correct:false,explanation:"Bukan sumber primer untuk penelitian."},
+      {letter:"D",text:"Warung kopi tempat masyarakat berkumpul dan membicarakan berbagai hal.",correct:false,explanation:"Bukan tempat sumber sejarah."},
+      {letter:"E",text:"Perpustakaan pribadi milik tetangga yang memiliki koleksi buku sejarah.",correct:false,explanation:"Bukan tempat utama."}
     ], difficulty:"medium", hint:"Dokumen pemerintahan = arsip daerah.", points:60 },
 
   { id:526, topic:"Tempat Sumber",
     question:"Seorang sejarawan ingin meneliti budaya Dayak Ngaju. Museum yang paling relevan untuk dikunjungi adalah...",
     options:[
-      {letter:"A",text:"Museum Nasional Jakarta",correct:false,explanation:"Terlalu umum, bukan fokus Dayak."},
-      {letter:"B",text:"Museum Balanga, Palangka Raya",correct:true,explanation:"Tepat! Museum Balanga menyimpan koleksi budaya Dayak Ngaju."},
-      {letter:"C",text:"Museum Louvre, Paris",correct:false,explanation:"Bukan relevan."},
-      {letter:"D",text:"Museum Negeri Surabaya",correct:false,explanation:"Bukan fokus Dayak."},
-      {letter:"E",text:"Museum Bank Indonesia",correct:false,explanation:"Fokus ekonomi, bukan budaya Dayak."}
+      {letter:"A",text:"Museum Nasional Jakarta yang menyimpan berbagai koleksi dari seluruh Indonesia.",correct:false,explanation:"Terlalu umum, bukan fokus Dayak."},
+      {letter:"B",text:"Museum Balanga di Palangka Raya yang menyimpan koleksi budaya Dayak Ngaju.",correct:true,explanation:"Tepat! Museum Balanga menyimpan koleksi budaya Dayak Ngaju."},
+      {letter:"C",text:"Museum Louvre di Paris yang menyimpan berbagai koleksi seni dari seluruh dunia.",correct:false,explanation:"Bukan relevan."},
+      {letter:"D",text:"Museum Negeri Surabaya yang menyimpan koleksi sejarah Jawa Timur.",correct:false,explanation:"Bukan fokus Dayak."},
+      {letter:"E",text:"Museum Bank Indonesia yang menyimpan koleksi tentang sejarah perbankan.",correct:false,explanation:"Fokus ekonomi, bukan budaya Dayak."}
     ], difficulty:"easy", hint:"Museum Balanga, Palangka Raya = koleksi budaya Dayak.", points:50 },
 
   { id:527, topic:"Tempat Sumber",
     question:"Perhatikan pernyataan berikut!\n'Seorang sejarawan dapat menemukan sumber sejarah di mana saja — bahkan di lingkungan sekitarnya.'\n\nContoh yang paling tepat menggambarkan pernyataan tersebut adalah...",
     options:[
-      {letter:"A",text:"Menemukan prasasti kuno di halaman rumah tetangga.",correct:true,explanation:"Tepat! Prasasti = sumber benda yang dapat ditemukan di lingkungan."},
-      {letter:"B",text:"Membaca buku di perpustakaan.",correct:false,explanation:"Bukan contoh 'lingkungan sekitar'."},
-      {letter:"C",text:"Mendengarkan podcast sejarah.",correct:false,explanation:"Bukan lingkungan fisik."},
-      {letter:"D",text:"Menonton film dokumenter.",correct:false,explanation:"Bukan lingkungan fisik."},
-      {letter:"E",text:"Membaca artikel online.",correct:false,explanation:"Bukan lingkungan fisik."}
+      {letter:"A",text:"Menemukan prasasti kuno yang terkubur di halaman rumah tetangga saat sedang menggali sumur.",correct:true,explanation:"Tepat! Prasasti = sumber benda yang dapat ditemukan di lingkungan."},
+      {letter:"B",text:"Membaca buku-buku sejarah di perpustakaan daerah yang koleksinya lengkap dan tertata.",correct:false,explanation:"Bukan contoh 'lingkungan sekitar'."},
+      {letter:"C",text:"Mendengarkan podcast sejarah yang dipandu oleh sejarawan profesional di platform digital.",correct:false,explanation:"Bukan lingkungan fisik."},
+      {letter:"D",text:"Menonton film dokumenter sejarah yang diproduksi oleh rumah produksi ternama.",correct:false,explanation:"Bukan lingkungan fisik."},
+      {letter:"E",text:"Membaca artikel sejarah online di situs web resmi yang terpercaya kredibilitasnya.",correct:false,explanation:"Bukan lingkungan fisik."}
     ], difficulty:"medium", hint:"Lingkungan sekitar = sumber benda (prasasti, bangunan, makam).", points:60 },
 
   { id:528, topic:"Tempat Sumber",
     question:"Seorang siswa ingin meneliti sejarah berdirinya SMAN 3 Kasongan. Tempat-tempat berikut yang paling tepat untuk mencari sumber, KECUALI...",
     options:[
-      {letter:"A",text:"Arsip sekolah (surat keputusan pendirian)",correct:false,explanation:"Sumber primer yang tepat."},
-      {letter:"B",text:"Wawancara kepala sekolah pertama",correct:false,explanation:"Sumber lisan yang tepat."},
-      {letter:"C",text:"Buku tahunan sekolah",correct:false,explanation:"Sumber tertulis yang tepat."},
-      {letter:"D",text:"Akun media sosial pribadi siswa baru",correct:true,explanation:"Tepat! Ini BUKAN sumber yang relevan."},
-      {letter:"E",text:"Foto lama gedung sekolah",correct:false,explanation:"Sumber visual yang tepat."}
+      {letter:"A",text:"Arsip sekolah yang menyimpan surat keputusan pendirian sekolah tersebut.",correct:false,explanation:"Sumber primer yang tepat."},
+      {letter:"B",text:"Wawancara dengan kepala sekolah pertama yang masih hidup hingga sekarang.",correct:false,explanation:"Sumber lisan yang tepat."},
+      {letter:"C",text:"Buku tahunan sekolah yang memuat dokumentasi kegiatan dari tahun ke tahun.",correct:false,explanation:"Sumber tertulis yang tepat."},
+      {letter:"D",text:"Akun media sosial pribadi siswa baru yang tidak berkaitan dengan sejarah sekolah.",correct:true,explanation:"Tepat! Ini BUKAN sumber yang relevan."},
+      {letter:"E",text:"Foto lama gedung sekolah yang diambil pada masa-masa awal berdirinya.",correct:false,explanation:"Sumber visual yang tepat."}
     ], difficulty:"medium", hint:"Pilih yang tidak relevan dengan sejarah sekolah.", points:60 },
 
   { id:529, topic:"Tempat Sumber",
     question:"Analisis yang paling tepat tentang pentingnya mengunjungi museum dalam penelitian sejarah adalah...",
     options:[
-      {letter:"A",text:"Museum hanya untuk hiburan.",correct:false,explanation:"Museum juga sumber sejarah."},
-      {letter:"B",text:"Museum menyimpan artefak yang dapat menjadi sumber benda untuk rekonstruksi masa lalu.",correct:true,explanation:"Tepat! Museum = sumber benda."},
-      {letter:"C",text:"Museum tidak berguna untuk sejarawan.",correct:false,explanation:"Justru sangat berguna."},
-      {letter:"D",text:"Museum hanya untuk anak-anak.",correct:false,explanation:"Untuk semua kalangan."},
-      {letter:"E",text:"Museum menggantikan arsip.",correct:false,explanation:"Keduanya berbeda fungsi."}
+      {letter:"A",text:"Museum hanya berfungsi sebagai tempat rekreasi dan tidak memiliki nilai ilmiah apapun.",correct:false,explanation:"Museum juga sumber sejarah."},
+      {letter:"B",text:"Museum menyimpan artefak yang dapat menjadi sumber benda untuk merekonstruksi masa lalu.",correct:true,explanation:"Tepat! Museum = sumber benda."},
+      {letter:"C",text:"Museum tidak berguna bagi sejarawan karena isinya sudah dipindahkan ke buku sejarah.",correct:false,explanation:"Justru sangat berguna."},
+      {letter:"D",text:"Museum hanya cocok untuk dikunjungi oleh anak-anak sekolah dasar sebagai wisata edukasi.",correct:false,explanation:"Untuk semua kalangan."},
+      {letter:"E",text:"Museum kini telah digantikan sepenuhnya oleh arsip digital yang bisa diakses dari rumah.",correct:false,explanation:"Keduanya berbeda fungsi."}
     ], difficulty:"medium", hint:"Museum = sumber benda (artefak).", points:60 },
 
   { id:530, topic:"Tempat Sumber",
     question:"Seorang sejarawan ingin meneliti jaringan perdagangan rempah abad ke-16. Sumber paling relevan yang dapat ia cari adalah...",
     options:[
-      {letter:"A",text:"Koin kuno, catatan pelayaran, dan peta kuno",correct:true,explanation:"Tepat! Ketiganya sumber relevan untuk perdagangan rempah."},
-      {letter:"B",text:"Foto selfie turis",correct:false,explanation:"Bukan sumber sejarah."},
-      {letter:"C",text:"Postingan media sosial modern",correct:false,explanation:"Bukan sumber sejarah abad ke-16."},
-      {letter:"D",text:"Buku fiksi tentang bajak laut",correct:false,explanation:"Fiksi bukan sumber sejarah."},
-      {letter:"E",text:"Lagu pop modern",correct:false,explanation:"Bukan sumber sejarah abad ke-16."}
+      {letter:"A",text:"Koin kuno, catatan pelayaran, dan peta kuno yang berasal dari masa terkait.",correct:true,explanation:"Tepat! Ketiganya sumber relevan untuk perdagangan rempah."},
+      {letter:"B",text:"Foto selfie para turis yang berkunjung ke lokasi bekas jalur perdagangan.",correct:false,explanation:"Bukan sumber sejarah."},
+      {letter:"C",text:"Postingan media sosial modern tentang kuliner berbahan rempah di era sekarang.",correct:false,explanation:"Bukan sumber sejarah abad ke-16."},
+      {letter:"D",text:"Buku fiksi petualangan tentang bajak laut yang mencari harta karun di lautan.",correct:false,explanation:"Fiksi bukan sumber sejarah."},
+      {letter:"E",text:"Lagu-lagu pop modern yang mengangkat tema rempah-rempah sebagai simbol budaya.",correct:false,explanation:"Bukan sumber sejarah abad ke-16."}
     ], difficulty:"medium", hint:"Koin, catatan pelayaran, peta = sumber relevan.", points:60 },
 
   { id:531, topic:"Tempat Sumber",
     question:"Perpustakaan Nasional Digital (digital.perpusnas.go.id) adalah contoh sumber...",
     options:[
-      {letter:"A",text:"Sumber primer langsung dari masa lalu.",correct:false,explanation:"Tergantung isinya."},
-      {letter:"B",text:"Arsip digital yang menyediakan akses ke berbagai dokumen & buku.",correct:true,explanation:"Tepat! Perpusnas Digital = arsip digital."},
-      {letter:"C",text:"Sumber fiktif.",correct:false,explanation:"Bukan fiktif."},
-      {letter:"D",text:"Sumber yang tidak dapat dipercaya.",correct:false,explanation:"Justru kredibel (domain .go.id)."},
-      {letter:"E",text:"Sumber hiburan semata.",correct:false,explanation:"Bukan hiburan semata."}
+      {letter:"A",text:"Sumber primer yang berasal langsung dari masa lalu tanpa perantara.",correct:false,explanation:"Tergantung isinya."},
+      {letter:"B",text:"Arsip digital yang menyediakan akses ke berbagai dokumen dan buku dari berbagai zaman.",correct:true,explanation:"Tepat! Perpusnas Digital = arsip digital."},
+      {letter:"C",text:"Sumber fiktif yang tidak dapat dipertanggungjawabkan keasliannya kepada publik.",correct:false,explanation:"Bukan fiktif."},
+      {letter:"D",text:"Sumber yang sama sekali tidak dapat dipercaya karena berada di ranah daring.",correct:false,explanation:"Justru kredibel (domain .go.id)."},
+      {letter:"E",text:"Sumber hiburan semata yang tidak relevan bagi penelitian sejarah serius.",correct:false,explanation:"Bukan hiburan semata."}
     ], difficulty:"medium", hint:"Perpusnas Digital = arsip digital kredibel.", points:60 },
 
   { id:532, topic:"Tempat Sumber",
     question:"Mengapa sumber lisan dari wawancara dengan sesepuh kampung perlu dilengkapi dengan sumber tertulis atau benda?",
     options:[
-      {letter:"A",text:"Karena sumber lisan tidak dapat dipercaya sama sekali.",correct:false,explanation:"Sumber lisan dapat dipercaya, tapi perlu verifikasi."},
-      {letter:"B",text:"Karena ingatan manusia bisa keliru & subjektif, sehingga perlu diverifikasi dengan sumber lain.",correct:true,explanation:"Tepat! Ingatan manusia bisa keliru, perlu verifikasi."},
-      {letter:"C",text:"Karena sumber lisan terlalu panjang.",correct:false,explanation:"Bukan soal panjang."},
-      {letter:"D",text:"Karena sesepuh kampung tidak kompeten.",correct:false,explanation:"Sesepuh justru kompeten."},
-      {letter:"E",text:"Karena sumber lisan tidak ilmiah.",correct:false,explanation:"Sumber lisan justru sah secara ilmiah jika dikritik."}
+      {letter:"A",text:"Karena sumber lisan tidak dapat dipercaya sama sekali dan harus selalu diabaikan.",correct:false,explanation:"Sumber lisan dapat dipercaya, tapi perlu verifikasi."},
+      {letter:"B",text:"Karena ingatan manusia bisa keliru dan subjektif, sehingga perlu diverifikasi dengan sumber lain.",correct:true,explanation:"Tepat! Ingatan manusia bisa keliru, perlu verifikasi."},
+      {letter:"C",text:"Karena sumber lisan terlalu panjang sehingga menyulitkan proses analisis data.",correct:false,explanation:"Bukan soal panjang."},
+      {letter:"D",text:"Karena sesepuh kampung umumnya tidak kompeten dalam memberikan keterangan sejarah.",correct:false,explanation:"Sesepuh justru kompeten."},
+      {letter:"E",text:"Karena sumber lisan tidak diakui secara ilmiah dalam metodologi penelitian sejarah.",correct:false,explanation:"Sumber lisan justru sah secara ilmiah jika dikritik."}
     ], difficulty:"medium", hint:"Ingatan manusia bisa keliru → perlu verifikasi.", points:60 },
 
   /* ===== HEURISTIK: LANGKAH KERJA (8 soal) ===== */
   { id:533, topic:"Langkah Heuristik",
     question:"Langkah pertama dalam kerja heuristik adalah...",
     options:[
-      {letter:"A",text:"Menentukan topik & batasan penelitian",correct:true,explanation:"Tepat! Topik & batasan = langkah pertama."},
-      {letter:"B",text:"Menyusun katalog sumber",correct:false,explanation:"Ini langkah terakhir heuristik."},
-      {letter:"C",text:"Melacak sumber",correct:false,explanation:"Ini langkah ketiga."},
-      {letter:"D",text:"Mencatat & mendokumentasikan",correct:false,explanation:"Ini langkah keempat."},
-      {letter:"E",text:"Menyusun pertanyaan",correct:false,explanation:"Ini langkah kedua."}
+      {letter:"A",text:"Menentukan topik dan batasan penelitian yang akan dikaji secara mendalam.",correct:true,explanation:"Tepat! Topik & batasan = langkah pertama."},
+      {letter:"B",text:"Menyusun katalog sumber yang telah berhasil dihimpun dari berbagai tempat.",correct:false,explanation:"Ini langkah terakhir heuristik."},
+      {letter:"C",text:"Melacak keberadaan sumber di berbagai arsip, perpustakaan, dan lokasi bersejarah.",correct:false,explanation:"Ini langkah ketiga."},
+      {letter:"D",text:"Mencatat dan mendokumentasikan setiap sumber yang berhasil ditemukan peneliti.",correct:false,explanation:"Ini langkah keempat."},
+      {letter:"E",text:"Menyusun pertanyaan penelitian sebagai panduan pencarian sumber sejarah.",correct:false,explanation:"Ini langkah kedua."}
     ], difficulty:"easy", hint:"Mulai dari menentukan topik & batasan.", points:50 },
 
   { id:534, topic:"Langkah Heuristik",
     question:"Perhatikan topik penelitian berikut!\n(1) 'Sejarah pendidikan di Indonesia'\n(2) 'Sejarah berdirinya SMAN 3 Kasongan tahun 1990–2005'\n\nAnalisis yang paling tepat tentang kedua topik tersebut adalah...",
     options:[
-      {letter:"A",text:"Topik (1) lebih baik karena lebih luas.",correct:false,explanation:"Topik terlalu luas justru sulit diteliti."},
-      {letter:"B",text:"Topik (2) lebih baik karena lebih spesifik & terjangkau.",correct:true,explanation:"Tepat! Topik spesifik lebih mudah diteliti."},
-      {letter:"C",text:"Keduanya sama baiknya.",correct:false,explanation:"Topik (1) terlalu luas."},
-      {letter:"D",text:"Topik (1) lebih mudah karena tidak perlu sumber.",correct:false,explanation:"Justru lebih sulit."},
-      {letter:"E",text:"Topik (2) tidak ilmiah.",correct:false,explanation:"Justru lebih ilmiah karena spesifik."}
+      {letter:"A",text:"Topik (1) lebih baik karena cakupannya luas dan mencakup banyak aspek sejarah.",correct:false,explanation:"Topik terlalu luas justru sulit diteliti."},
+      {letter:"B",text:"Topik (2) lebih baik karena lebih spesifik dan terjangkau untuk diteliti secara mendalam.",correct:true,explanation:"Tepat! Topik spesifik lebih mudah diteliti."},
+      {letter:"C",text:"Keduanya sama baiknya untuk dijadikan topik penelitian sejarah yang ilmiah.",correct:false,explanation:"Topik (1) terlalu luas."},
+      {letter:"D",text:"Topik (1) lebih mudah karena tidak memerlukan sumber yang banyak dan beragam.",correct:false,explanation:"Justru lebih sulit."},
+      {letter:"E",text:"Topik (2) tidak ilmiah karena batasannya terlalu sempit dan spesifik untuk diteliti.",correct:false,explanation:"Justru lebih ilmiah karena spesifik."}
     ], difficulty:"medium", hint:"Topik spesifik (sempit, jelas batasannya) lebih baik diteliti.", points:60 },
 
   { id:535, topic:"Langkah Heuristik",
     question:"Seorang siswa menyusun pertanyaan penelitian: 'Siapa pendiri sekolah ini? Mengapa lokasinya di sana? Bagaimana perkembangannya?' Analisis yang paling tepat adalah...",
     options:[
-      {letter:"A",text:"Pertanyaan tersebut tepat sebagai panduan heuristik.",correct:true,explanation:"Tepat! Pertanyaan 5W+1H memandu pencarian sumber."},
-      {letter:"B",text:"Pertanyaan tersebut terlalu banyak.",correct:false,explanation:"Justru bagus karena memandu arah."},
-      {letter:"C",text:"Pertanyaan tersebut tidak relevan.",correct:false,explanation:"Sangat relevan."},
-      {letter:"D",text:"Pertanyaan tersebut harus dihindari.",correct:false,explanation:"Justru dianjurkan."},
-      {letter:"E",text:"Pertanyaan tersebut hanya untuk sejarah nasional.",correct:false,explanation:"Berlaku untuk semua skala."}
+      {letter:"A",text:"Pertanyaan tersebut tepat sebagai panduan heuristik karena mencakup berbagai aspek penting.",correct:true,explanation:"Tepat! Pertanyaan 5W+1H memandu pencarian sumber."},
+      {letter:"B",text:"Pertanyaan tersebut terlalu banyak sehingga justru menyulitkan proses penelitian.",correct:false,explanation:"Justru bagus karena memandu arah."},
+      {letter:"C",text:"Pertanyaan tersebut tidak relevan dengan topik penelitian yang sedang dikaji.",correct:false,explanation:"Sangat relevan."},
+      {letter:"D",text:"Pertanyaan tersebut sebaiknya dihindari karena terlalu sederhana untuk diteliti.",correct:false,explanation:"Justru dianjurkan."},
+      {letter:"E",text:"Pertanyaan tersebut hanya cocok untuk penelitian sejarah berskala nasional saja.",correct:false,explanation:"Berlaku untuk semua skala."}
     ], difficulty:"medium", hint:"Pertanyaan 5W+1H memandu pencarian sumber.", points:60 },
 
   { id:536, topic:"Langkah Heuristik",
     question:"Tips 'mulailah dari sumber sekunder untuk mendapatkan gambaran besar, lalu telusuri sumber primernya' paling tepat diterapkan pada langkah...",
     options:[
-      {letter:"A",text:"Melacak sumber",correct:true,explanation:"Tepat! Ini strategi melacak sumber."},
-      {letter:"B",text:"Menentukan topik",correct:false,explanation:"Bukan langkah topik."},
-      {letter:"C",text:"Menyusun katalog",correct:false,explanation:"Ini langkah terakhir."},
-      {letter:"D",text:"Mencatat & mendokumentasikan",correct:false,explanation:"Bukan langkah mencatat."},
-      {letter:"E",text:"Menyusun pertanyaan",correct:false,explanation:"Bukan langkah pertanyaan."}
+      {letter:"A",text:"Melacak sumber sejarah yang relevan dengan topik penelitian yang dikaji.",correct:true,explanation:"Tepat! Ini strategi melacak sumber."},
+      {letter:"B",text:"Menentukan topik penelitian yang akan dikaji secara mendalam oleh peneliti.",correct:false,explanation:"Bukan langkah topik."},
+      {letter:"C",text:"Menyusun katalog sumber berdasarkan jenis, isi, dan relevansinya bagi penelitian.",correct:false,explanation:"Ini langkah terakhir."},
+      {letter:"D",text:"Mencatat dan mendokumentasikan setiap sumber yang berhasil ditemukan oleh peneliti.",correct:false,explanation:"Bukan langkah mencatat."},
+      {letter:"E",text:"Menyusun pertanyaan penelitian sebagai panduan pencarian sumber sejarah.",correct:false,explanation:"Bukan langkah pertanyaan."}
     ], difficulty:"medium", hint:"Strategi 'dari umum ke khusus' = melacak sumber.", points:60 },
 
   { id:537, topic:"Langkah Heuristik",
     question:"Mengapa pencatatan yang rapi sangat penting dalam tahap heuristik?",
     options:[
-      {letter:"A",text:"Agar terlihat rapi.",correct:false,explanation:"Bukan soal penampilan."},
-      {letter:"B",text:"Agar sumber dapat dikutip dengan akurat pada tahap historiografi.",correct:true,explanation:"Tepat! Pencatatan rapi memudahkan pengutipan akurat."},
-      {letter:"C",text:"Agar cepat selesai.",correct:false,explanation:"Justru memerlukan waktu."},
-      {letter:"D",text:"Agar guru senang.",correct:false,explanation:"Bukan tujuan ilmiah."},
-      {letter:"E",text:"Agar tidak perlu kritik.",correct:false,explanation:"Kritik tetap diperlukan."}
+      {letter:"A",text:"Agar laporan penelitian terlihat lebih rapi dan menarik perhatian para pembaca.",correct:false,explanation:"Bukan soal penampilan."},
+      {letter:"B",text:"Agar sumber dapat dikutip dengan akurat pada tahap historiografi nantinya.",correct:true,explanation:"Tepat! Pencatatan rapi memudahkan pengutipan akurat."},
+      {letter:"C",text:"Agar proses penelitian dapat diselesaikan dalam waktu yang lebih singkat.",correct:false,explanation:"Justru memerlukan waktu."},
+      {letter:"D",text:"Agar guru pembimbing merasa senang dengan kerapian pekerjaan siswa.",correct:false,explanation:"Bukan tujuan ilmiah."},
+      {letter:"E",text:"Agar peneliti tidak perlu lagi melakukan tahap kritik sumber setelahnya.",correct:false,explanation:"Kritik tetap diperlukan."}
     ], difficulty:"medium", hint:"Pencatatan rapi = memudahkan pengutipan akurat.", points:60 },
 
   { id:538, topic:"Langkah Heuristik",
     question:"Katalog sumber dalam penelitian sejarah berfungsi untuk...",
     options:[
-      {letter:"A",text:"Menghias laporan.",correct:false,explanation:"Bukan untuk hiasan."},
-      {letter:"B",text:"Memetakan sumber berdasarkan jenis, isi, & relevansinya agar siap masuk ke tahap kritik.",correct:true,explanation:"Tepat! Katalog = peta sumber siap kritik."},
-      {letter:"C",text:"Menggantikan sumber asli.",correct:false,explanation:"Bukan menggantikan."},
-      {letter:"D",text:"Memperpanjang laporan.",correct:false,explanation:"Bukan untuk memperpanjang."},
-      {letter:"E",text:"Mempersulit penelitian.",correct:false,explanation:"Justru memudahkan."}
+      {letter:"A",text:"Menghiasi laporan penelitian agar tampilannya tampak lebih profesional dan menarik.",correct:false,explanation:"Bukan untuk hiasan."},
+      {letter:"B",text:"Memetakan sumber berdasarkan jenis, isi, dan relevansinya agar siap masuk ke tahap kritik.",correct:true,explanation:"Tepat! Katalog = peta sumber siap kritik."},
+      {letter:"C",text:"Menggantikan keberadaan sumber asli yang mungkin sudah rusak atau hilang.",correct:false,explanation:"Bukan menggantikan."},
+      {letter:"D",text:"Memperpanjang laporan penelitian agar memenuhi jumlah halaman yang dipersyaratkan.",correct:false,explanation:"Bukan untuk memperpanjang."},
+      {letter:"E",text:"Mempersulit pekerjaan peneliti lain yang ingin mengakses sumber yang sama.",correct:false,explanation:"Justru memudahkan."}
     ], difficulty:"medium", hint:"Katalog = peta sumber siap dikritik.", points:60 },
 
   { id:539, topic:"Langkah Heuristik",
     question:"Seorang siswa menemukan banyak sumber tentang topiknya. Analisis yang paling tepat tentang langkah selanjutnya adalah...",
     options:[
-      {letter:"A",text:"Langsung menulis laporan.",correct:false,explanation:"Belum, masih perlu kritik."},
-      {letter:"B",text:"Melakukan kritik sumber untuk menguji keaslian & kredibilitas.",correct:true,explanation:"Tepat! Setelah heuristik → kritik sumber."},
-      {letter:"C",text:"Membuang sebagian besar sumber.",correct:false,explanation:"Justru diverifikasi."},
-      {letter:"D",text:"Mengabaikan sumber yang sulit.",correct:false,explanation:"Justru harus dihadapi."},
-      {letter:"E",text:"Menyusun laporan tanpa kritik.",correct:false,explanation:"Tanpa kritik, bukan penelitian ilmiah."}
+      {letter:"A",text:"Langsung menulis laporan penelitian berdasarkan sumber-sumber yang telah ditemukan.",correct:false,explanation:"Belum, masih perlu kritik."},
+      {letter:"B",text:"Melakukan kritik sumber untuk menguji keaslian dan kredibilitas setiap sumber.",correct:true,explanation:"Tepat! Setelah heuristik → kritik sumber."},
+      {letter:"C",text:"Membuang sebagian besar sumber karena terlalu banyak akan menyulitkan analisis.",correct:false,explanation:"Justru diverifikasi."},
+      {letter:"D",text:"Mengabaikan sumber yang sulit dipahami dan memilih yang paling mudah saja.",correct:false,explanation:"Justru harus dihadapi."},
+      {letter:"E",text:"Menyusun laporan tanpa melalui tahap kritik agar pekerjaan cepat selesai.",correct:false,explanation:"Tanpa kritik, bukan penelitian ilmiah."}
     ], difficulty:"easy", hint:"Setelah heuristik → kritik sumber.", points:50 },
 
   { id:540, topic:"Langkah Heuristik",
     question:"Perhatikan pernyataan berikut!\n'Penelitian sejarah adalah siklus — sering kali kita harus kembali ke heuristik jika menemukan sumber baru.'\n\nAnalisis yang paling tepat tentang pernyataan tersebut adalah...",
     options:[
-      {letter:"A",text:"Pernyataan tepat: penelitian sejarah bersifat dinamis & terbuka pada temuan baru.",correct:true,explanation:"Tepat! Penelitian sejarah dinamis & terbuka."},
-      {letter:"B",text:"Pernyataan salah: penelitian sejarah bersifat linier.",correct:false,explanation:"Justru bisa siklus."},
-      {letter:"C",text:"Pernyataan salah: penelitian sejarah tidak boleh diubah.",correct:false,explanation:"Justru boleh direvisi."},
-      {letter:"D",text:"Pernyataan hanya berlaku untuk sejarah modern.",correct:false,explanation:"Berlaku universal."},
-      {letter:"E",text:"Pernyataan tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."}
+      {letter:"A",text:"Pernyataan tepat: penelitian sejarah bersifat dinamis dan terbuka terhadap temuan baru.",correct:true,explanation:"Tepat! Penelitian sejarah dinamis & terbuka."},
+      {letter:"B",text:"Pernyataan salah: penelitian sejarah berjalan secara linier tanpa kemungkinan untuk kembali.",correct:false,explanation:"Justru bisa siklus."},
+      {letter:"C",text:"Pernyataan salah: penelitian sejarah tidak boleh diubah setelah tahap historiografi selesai.",correct:false,explanation:"Justru boleh direvisi."},
+      {letter:"D",text:"Pernyataan hanya berlaku untuk kajian sejarah modern yang sumbernya masih terus ditemukan.",correct:false,explanation:"Berlaku universal."},
+      {letter:"E",text:"Pernyataan tidak dapat dinilai karena bersifat terlalu filosofis untuk diuji kebenarannya.",correct:false,explanation:"Dapat dinilai."}
     ], difficulty:"hard", hint:"Penelitian sejarah = dinamis, terbuka pada temuan baru.", points:70 }
 ];
+
+/* ============================================================
+   SEBAR MERATA JAWABAN BENAR (A–E)
+   Soal ke-1 → A, ke-2 → B, ke-3 → C, ke-4 → D, ke-5 → E, dst.
+   ============================================================ */
+(function spreadCorrectAnswers(){
+  const LETTERS = ['A','B','C','D','E'];
+  BANK_SOAL.forEach(function(q, i){
+    const targetLetter = LETTERS[i % 5];
+    const targetIdx = LETTERS.indexOf(targetLetter);
+    const correctOpt = q.options.find(function(o){ return o.correct; });
+    const wrongOpts = q.options.filter(function(o){ return !o.correct; });
+    for (let k = wrongOpts.length - 1; k > 0; k--){
+      const j = Math.floor(Math.random() * (k + 1));
+      const tmp = wrongOpts[k]; wrongOpts[k] = wrongOpts[j]; wrongOpts[j] = tmp;
+    }
+    const newOpts = [];
+    let wi = 0;
+    for (let j = 0; j < 5; j++){
+      if (j === targetIdx) newOpts.push(correctOpt);
+      else newOpts.push(wrongOpts[wi++]);
+    }
+    newOpts.forEach(function(o, idx){ o.letter = LETTERS[idx]; });
+    q.options = newOpts;
+  });
+})();
 
 /* ============================================================
    CONSTANTS & STATE
@@ -986,7 +1145,8 @@ const state = {
   questions: [], currentIndex: 0, answers: [], score: 0,
   xp: 0, level: 1, hp: 3, maxHp: 3, combo: 0, bestCombo: 0,
   timer: null, timeLeft: TIME_LIMIT, started: false, finished: false,
-  powers: { p50:1, hint:1, skip:1 }, soundOn: true
+  powers: { p50:1, hint:1, skip:1 }, soundOn: true,
+  playerName: 'Pemain', result: null
 };
 
 /* ============================================================
@@ -1011,11 +1171,11 @@ function playTone(freq, dur, type, vol){
   } catch(e){}
 }
 function sfxClick(){ playTone(520, .08, 'triangle', .06); }
-function sfxCorrect(){ playTone(660, .12, 'sine', .10); setTimeout(()=>playTone(880, .15, 'sine', .10), 80); setTimeout(()=>playTone(1100, .20, 'sine', .08), 160); }
-function sfxWrong(){ playTone(200, .18, 'sawtooth', .10); setTimeout(()=>playTone(150, .25, 'sawtooth', .08), 120); }
-function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(()=>playTone(1200, .12, 'triangle', .07), 60); }
-function sfxLevelUp(){ [523, 659, 784, 1046].forEach((f, i) => setTimeout(()=>playTone(f, .16, 'sine', .10), i*90)); }
-function sfxFinish(){ [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(()=>playTone(f, .22, 'sine', .10), i*120)); }
+function sfxCorrect(){ playTone(660, .12, 'sine', .10); setTimeout(function(){playTone(880, .15, 'sine', .10);}, 80); setTimeout(function(){playTone(1100, .20, 'sine', .08);}, 160); }
+function sfxWrong(){ playTone(200, .18, 'sawtooth', .10); setTimeout(function(){playTone(150, .25, 'sawtooth', .08);}, 120); }
+function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(function(){playTone(1200, .12, 'triangle', .07);}, 60); }
+function sfxLevelUp(){ [523, 659, 784, 1046].forEach(function(f, i){ setTimeout(function(){playTone(f, .16, 'sine', .10);}, i*90); }); }
+function sfxFinish(){ [523, 659, 784, 1046, 1318].forEach(function(f, i){ setTimeout(function(){playTone(f, .22, 'sine', .10);}, i*120); }); }
 function toggleSound(){
   state.soundOn = !state.soundOn;
   document.getElementById('soundBtn').innerHTML = state.soundOn ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
@@ -1043,7 +1203,7 @@ function toggleTheme(){
     bar.style.width = p + '%';
     pct.textContent = Math.round(p) + '%';
     if (p < 100) requestAnimationFrame(tick);
-    else setTimeout(()=>{ loader.classList.add('hidden'); setTimeout(()=>loader.style.display='none', 700); }, 300);
+    else setTimeout(function(){ loader.classList.add('hidden'); setTimeout(function(){loader.style.display='none';}, 700); }, 300);
   })();
 })();
 
@@ -1059,14 +1219,14 @@ function toggleTheme(){
   function init(){ resize(); particles = Array.from({length: Math.min(60, Math.floor(W*H/25000))}, makeP); }
   function draw(){
     ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => {
+    particles.forEach(function(p){
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0 || p.x > W) p.vx *= -1;
       if (p.y < 0 || p.y > H) p.vy *= -1;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
-      ctx.shadowBlur = 8; ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.fillStyle = 'hsla(' + p.hue + ', 90%, 65%, ' + p.a + ')';
+      ctx.shadowBlur = 8; ctx.shadowColor = 'hsla(' + p.hue + ', 90%, 65%, ' + p.a + ')';
       ctx.fill();
     });
     ctx.shadowBlur = 0;
@@ -1084,19 +1244,21 @@ function fireConfetti(count){
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth; canvas.height = window.innerHeight;
   const colors = ['#6C63FF','#8B83FF','#E3B96B','#F5DCA4','#38BDF8','#34D399'];
-  const pieces = Array.from({length: count || 60}, () => ({
-    x: window.innerWidth/2 + (Math.random()-0.5)*200,
-    y: window.innerHeight/2,
-    vx: (Math.random()-0.5)*14, vy: Math.random()*-16 - 4,
-    g: 0.5, r: Math.random()*8 + 4,
-    color: colors[Math.floor(Math.random()*colors.length)],
-    rot: Math.random()*Math.PI, vr: (Math.random()-0.5)*0.3, life: 1
-  }));
+  const pieces = Array.from({length: count || 60}, function(){
+    return {
+      x: window.innerWidth/2 + (Math.random()-0.5)*200,
+      y: window.innerHeight/2,
+      vx: (Math.random()-0.5)*14, vy: Math.random()*-16 - 4,
+      g: 0.5, r: Math.random()*8 + 4,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      rot: Math.random()*Math.PI, vr: (Math.random()-0.5)*0.3, life: 1
+    };
+  });
   let frame = 0;
   function animate(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let alive = false;
-    pieces.forEach(p => {
+    pieces.forEach(function(p){
       if (p.life <= 0) return;
       alive = true;
       p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.012;
@@ -1116,10 +1278,17 @@ function showToast(icon, title, desc, variant){
   const wrap = document.getElementById('toastWrap');
   const el = document.createElement('div');
   el.className = 'toast';
-  el.innerHTML = `<div class="toast-icon ${variant||''}">${icon}</div>
-    <div class="toast-content"><div class="toast-title">${title}</div><div class="toast-desc">${desc}</div></div>`;
+  el.innerHTML = ''
+    + '<div class="toast-icon ' + (variant||'') + '">' + icon + '</div>'
+    + '<div class="toast-content">'
+    +   '<div class="toast-title">' + title + '</div>'
+    +   '<div class="toast-desc">' + desc + '</div>'
+    + '</div>';
   wrap.appendChild(el);
-  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 450); }, 3200);
+  setTimeout(function(){
+    el.classList.add('out');
+    setTimeout(function(){ el.remove(); }, 450);
+  }, 3200);
 }
 function scorePopup(text, x, y, color){
   const el = document.createElement('div');
@@ -1129,10 +1298,10 @@ function scorePopup(text, x, y, color){
   el.style.top = (y || window.innerHeight/2) + 'px';
   if (color) el.style.color = color;
   document.body.appendChild(el);
-  setTimeout(() => el.remove(), 1100);
+  setTimeout(function(){ el.remove(); }, 1100);
 }
 
-function shuffle(a){ const arr = a.slice(); for (let i = arr.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function shuffle(a){ const arr = a.slice(); for (let i = arr.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); const t = arr[i]; arr[i] = arr[j]; arr[j] = t; } return arr; }
 
 function updateHpHud(){
   const hp = document.getElementById('hudHp'); hp.innerHTML = '';
@@ -1153,22 +1322,37 @@ function updateXpHud(){
 function updateComboHud(){
   document.getElementById('comboVal').textContent = state.combo;
   const tag = document.getElementById('comboTag');
-  if (state.combo >= 3){ tag.classList.add('hot'); setTimeout(()=>tag.classList.remove('hot'), 500); }
+  if (state.combo >= 3){ tag.classList.add('hot'); setTimeout(function(){tag.classList.remove('hot');}, 500); }
 }
 function updatePowers(){
+  const q = state.questions[state.currentIndex];
+  const answered = q && state.answers.find(function(a){ return a.qid === q.id; });
   document.getElementById('c50').textContent = state.powers.p50;
   document.getElementById('chint').textContent = state.powers.hint;
   document.getElementById('cskip').textContent = state.powers.skip;
-  document.getElementById('p50').disabled = state.powers.p50 <= 0;
-  document.getElementById('phint').disabled = state.powers.hint <= 0;
-  document.getElementById('pskip').disabled = state.powers.skip <= 0;
+  document.getElementById('p50').disabled = state.powers.p50 <= 0 || !!answered;
+  document.getElementById('phint').disabled = state.powers.hint <= 0 || !!answered;
+  document.getElementById('pskip').disabled = state.powers.skip <= 0 || !!answered;
 }
 
-/* ============================================================
-   GAME FLOW
-   ============================================================ */
+function goHome(){
+  if (state.started && !state.finished) {
+    if (!confirm('Kembali ke halaman awal? Progres kuis akan hilang.')) return;
+  }
+  clearInterval(state.timer); state.timer = null;
+  state.started = false; state.finished = false;
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('startScreen').style.display = 'flex';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
 function startGame(){
   ensureAudio();
+  const nameInput = document.getElementById('playerNameInput');
+  const name = (nameInput && nameInput.value.trim()) || 'Pemain';
+  state.playerName = name;
+
   document.getElementById('startScreen').style.display = 'none';
   document.getElementById('gameHud').classList.add('active');
 
@@ -1177,10 +1361,11 @@ function startGame(){
   state.score = 0; state.xp = 0; state.level = 1;
   state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
   state.timeLeft = TIME_LIMIT; state.started = true; state.finished = false;
+  state.result = null;
   state.powers = { p50:1, hint:1, skip:1 };
 
   updateHpHud(); updateXpHud(); updateComboHud(); updatePowers();
-  showToast('🚀', 'Arena Level 1 Dimulai!', 'Kuasai penelitian sejarah & heuristik!', '');
+  showToast('🚀', 'Selamat datang, ' + name + '!', 'Semoga beruntung, pejuang sejarah!', '');
   sfxClick();
   startTimer();
   renderQuestion();
@@ -1188,7 +1373,7 @@ function startGame(){
 
 function startTimer(){
   if (state.timer) clearInterval(state.timer);
-  state.timer = setInterval(() => {
+  state.timer = setInterval(function(){
     state.timeLeft--;
     updateTimerHud();
     if (state.timeLeft <= 0){ clearInterval(state.timer); finishGame(true); }
@@ -1210,50 +1395,78 @@ function renderQuestion(){
   document.getElementById('qText').innerHTML = q.question;
   document.getElementById('hudQNum').textContent = state.currentIndex+1;
 
+  const existingAnswer = state.answers.find(function(a){ return a.qid === q.id; });
+
   const opts = document.getElementById('options'); opts.innerHTML = '';
-  q.options.forEach(o => {
+  q.options.forEach(function(o){
     const btn = document.createElement('button');
     btn.className = 'opt';
     btn.dataset.letter = o.letter;
-    btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
-    btn.addEventListener('click', () => selectOption(o.letter, btn));
+    btn.innerHTML = '<span class="opt-letter">' + o.letter + '</span><span class="opt-text">' + o.text + '</span>';
+    if (!existingAnswer) {
+      btn.addEventListener('click', function(){ selectOption(o.letter, btn); });
+    }
     opts.appendChild(btn);
   });
 
   document.getElementById('feedback').classList.remove('show');
-  document.getElementById('btnNext').disabled = true;
-  document.getElementById('btnNext').style.display = '';
-  document.getElementById('btnFinish').style.display = 'none';
-  document.getElementById('qCard').classList.remove('shake');
+
+  if (existingAnswer) {
+    document.querySelectorAll('#options .opt').forEach(function(b){
+      b.classList.add('locked');
+      const l = b.dataset.letter;
+      const o = q.options.find(function(x){ return x.letter === l; });
+      if (o.correct) b.classList.add('correct');
+      else if (existingAnswer.selected === l && !existingAnswer.correct) b.classList.add('wrong');
+    });
+    if (existingAnswer.skipped) showFeedback(false, q, null, true);
+    else {
+      const selOpt = q.options.find(function(o){ return o.letter === existingAnswer.selected; });
+      showFeedback(existingAnswer.correct, q, selOpt);
+    }
+  }
+
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+  const btnFinish = document.getElementById('btnFinish');
+
+  btnPrev.disabled = state.currentIndex === 0;
+
+  if (state.currentIndex === TOTAL_Q - 1) {
+    btnNext.style.display = 'none';
+    btnFinish.style.display = existingAnswer ? '' : 'none';
+  } else {
+    btnNext.style.display = '';
+    btnFinish.style.display = 'none';
+    btnNext.disabled = !existingAnswer;
+  }
+
+  updatePowers();
 
   const card = document.getElementById('qCard');
   card.style.animation = 'none'; void card.offsetWidth;
   card.style.animation = 'qEnter .55s cubic-bezier(.16,1,.3,1)';
-
-  if (state.currentIndex === TOTAL_Q - 1){
-    document.getElementById('btnNext').style.display = 'none';
-    document.getElementById('btnFinish').style.display = '';
-  }
 }
 
 function selectOption(letter, btnEl){
   const q = state.questions[state.currentIndex];
   if (!q) return;
-  if (state.answers.find(a => a.qid === q.id)) return;
-  const selected = q.options.find(o => o.letter === letter);
+  if (state.answers.find(function(a){ return a.qid === q.id; })) return;
+  const selected = q.options.find(function(o){ return o.letter === letter; });
   if (!selected) return;
   const correct = selected.correct;
 
-  document.querySelectorAll('#options .opt').forEach(b => {
+  document.querySelectorAll('#options .opt').forEach(function(b){
     b.classList.add('locked');
-    const o = q.options.find(x => x.letter === b.dataset.letter);
+    const l = b.dataset.letter;
+    const o = q.options.find(function(x){ return x.letter === l; });
     if (o.correct) b.classList.add('correct');
-    else if (b.dataset.letter === letter && !correct) b.classList.add('wrong');
+    else if (l === letter && !correct) b.classList.add('wrong');
   });
 
-  state.answers.push({ qid: q.id, selected: letter, correct, skipped: false,
+  state.answers.push({ qid: q.id, selected: letter, correct: correct, skipped: false,
     questionText: q.question, topic: q.topic,
-    correctLetter: q.options.find(o => o.correct).letter,
+    correctLetter: q.options.find(function(o){ return o.correct; }).letter,
     explanation: selected.explanation });
 
   if (correct){
@@ -1267,38 +1480,43 @@ function selectOption(letter, btnEl){
     state.level = Math.floor(state.xp / 100) + 1;
     if (state.level > prevLevel){
       sfxLevelUp();
-      showToast('⭐', 'LEVEL UP!', `Kamu naik ke Level ${state.level}!`, 'cyan');
+      showToast('⭐', 'LEVEL UP!', 'Kamu naik ke Level ' + state.level + '!', 'cyan');
       fireConfetti(40);
     }
     sfxCorrect();
     fireConfetti(state.combo >= 3 ? 80 : 45);
     const rect = btnEl ? btnEl.getBoundingClientRect() : null;
     scorePopup('+' + gained + ' XP', rect ? rect.left + rect.width/2 : window.innerWidth/2, rect ? rect.top : window.innerHeight/2, '#8B83FF');
-    if (state.combo >= 3) showToast('🔥', `COMBO ×${state.combo}!`, `Bonus +${bonus} XP!`, '');
+    if (state.combo >= 3) showToast('🔥', 'COMBO ×' + state.combo + '!', 'Bonus +' + bonus + ' XP!', '');
   } else {
     state.combo = 0; state.hp--; sfxWrong();
     updateHpHud();
     const hpEls = document.querySelectorAll('.hud-hp .heart');
     if (hpEls[state.hp]) hpEls[state.hp].classList.add('losing');
     const card = document.getElementById('qCard');
-    card.classList.add('shake'); setTimeout(() => card.classList.remove('shake'), 550);
-    if (state.hp <= 0) showToast('💔', 'Nyawa Habis!', 'Kamu kehilangan semua nyawa.', 'violet');
+    card.classList.add('shake'); setTimeout(function(){ card.classList.remove('shake'); }, 550);
+    if (state.hp <= 0) showToast('💫', 'Tetap Semangat!', 'Nyawa habis, tapi skormu tetap dihitung. Kamu sudah berusaha!', 'violet');
   }
 
   document.getElementById('hudScore').textContent = state.score;
   updateXpHud(); updateComboHud();
   showFeedback(correct, q, selected);
   document.getElementById('btnNext').disabled = false;
+  if (state.currentIndex === TOTAL_Q - 1) document.getElementById('btnFinish').style.display = '';
+  updatePowers();
 }
 
-function showFeedback(correct, q, selected){
+function showFeedback(correct, q, selected, isSkipped){
   const panel = document.getElementById('feedback');
   const icon = document.getElementById('fbIcon');
   const title = document.getElementById('fbTitle');
   const body = document.getElementById('fbBody');
   panel.classList.add('show');
 
-  if (correct){
+  if (isSkipped) {
+    icon.className = 'fb-icon info'; icon.innerHTML = '<i class="fas fa-forward"></i>';
+    title.className = 'fb-title info'; title.textContent = 'SOAL DILEWATI';
+  } else if (correct){
     icon.className = 'fb-icon correct'; icon.innerHTML = '<i class="fas fa-check"></i>';
     title.className = 'fb-title correct'; title.textContent = 'BENAR!';
   } else {
@@ -1306,14 +1524,21 @@ function showFeedback(correct, q, selected){
     title.className = 'fb-title wrong'; title.textContent = 'BELUM TEPAT';
   }
 
-  const correctOpt = q.options.find(o => o.correct);
-  let html = `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
-  html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
-  if (!correct && selected) html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
-  html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
+  const correctOpt = q.options.find(function(o){ return o.correct; });
+  let html = '<p><strong>Jawaban benar: ' + correctOpt.letter + '.</strong> ' + correctOpt.text + '</p>';
+  html += '<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>' + (correctOpt.explanation || '') + '</p></div>';
+  if (!correct && !isSkipped && selected) html += '<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ' + selected.letter + ' kurang tepat: ' + (selected.explanation || '') + '</p></div>';
+  html += '<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>' + (q.hint || '') + '</p></div>';
   body.innerHTML = html;
 }
 
+function prevQuestion(){
+  if (state.currentIndex > 0){
+    state.currentIndex--;
+    renderQuestion();
+    document.getElementById('qCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
 function nextQuestion(){
   if (state.currentIndex < TOTAL_Q - 1){
     state.currentIndex++;
@@ -1325,14 +1550,14 @@ function nextQuestion(){
 function usePower(type){
   const q = state.questions[state.currentIndex];
   if (!q) return;
-  if (state.answers.find(a => a.qid === q.id)) return;
+  if (state.answers.find(function(a){ return a.qid === q.id; })) return;
 
   if (type === '50'){
     if (state.powers.p50 <= 0) return;
-    const wrongs = q.options.filter(o => !o.correct);
+    const wrongs = q.options.filter(function(o){ return !o.correct; });
     const remove = shuffle(wrongs).slice(0, 2);
-    document.querySelectorAll('#options .opt').forEach(b => {
-      if (remove.some(o => o.letter === b.dataset.letter)) b.classList.add('disabled-50');
+    document.querySelectorAll('#options .opt').forEach(function(b){
+      if (remove.some(function(o){ return o.letter === b.dataset.letter; })) b.classList.add('disabled-50');
     });
     state.powers.p50 = 0; updatePowers(); sfxPower();
     showToast('✂️', '50:50 Aktif!', 'Dua jawaban salah dihilangkan.', 'cyan');
@@ -1345,21 +1570,21 @@ function usePower(type){
     panel.classList.add('show');
     icon.className = 'fb-icon info'; icon.innerHTML = '<i class="fas fa-lightbulb"></i>';
     title.className = 'fb-title info'; title.textContent = 'PETUNJUK';
-    body.innerHTML = `<p>${q.hint || 'Tidak ada petunjuk.'}</p>`;
+    body.innerHTML = '<p>' + (q.hint || 'Tidak ada petunjuk.') + '</p>';
     state.powers.hint = 0; updatePowers(); sfxPower();
     showToast('💡', 'Petunjuk Digunakan!', 'Perhatikan dengan saksama.', '');
   } else if (type === 'skip'){
     if (state.powers.skip <= 0) return;
     state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
       questionText: q.question, topic: q.topic,
-      correctLetter: q.options.find(o => o.correct).letter,
-      explanation: q.options.find(o => o.correct).explanation });
-    document.querySelectorAll('#options .opt').forEach(b => {
+      correctLetter: q.options.find(function(o){ return o.correct; }).letter,
+      explanation: q.options.find(function(o){ return o.correct; }).explanation });
+    document.querySelectorAll('#options .opt').forEach(function(b){
       b.classList.add('locked');
-      const o = q.options.find(x => x.letter === b.dataset.letter);
+      const o = q.options.find(function(x){ return x.letter === b.dataset.letter; });
       if (o.correct) b.classList.add('correct');
     });
-    showFeedback(false, q, null);
+    showFeedback(false, q, null, true);
     document.getElementById('btnNext').disabled = false;
     state.powers.skip = 0; updatePowers(); sfxPower();
     showToast('⏭️', 'Soal Dilewati', 'Jawaban benar ditampilkan.', 'violet');
@@ -1375,26 +1600,67 @@ function finishGame(timeout){
   state.finished = true;
   clearInterval(state.timer); state.timer = null;
 
-  const answered = state.answers.map(a => a.qid);
-  state.questions.forEach(q => {
+  const answered = state.answers.map(function(a){ return a.qid; });
+  state.questions.forEach(function(q){
     if (!answered.includes(q.id)){
       state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
         questionText: q.question, topic: q.topic,
-        correctLetter: q.options.find(o => o.correct).letter,
-        explanation: q.options.find(o => o.correct).explanation });
+        correctLetter: q.options.find(function(o){ return o.correct; }).letter,
+        explanation: q.options.find(function(o){ return o.correct; }).explanation });
     }
   });
 
-  let benar = 0, salah = 0;
-  state.answers.forEach(a => { if (a.skipped) return; if (a.correct) benar++; else salah++; });
+  let benar = 0, salah = 0, dilewati = 0;
+  state.answers.forEach(function(a){
+    if (a.skipped) { dilewati++; return; }
+    if (a.correct) benar++; else salah++;
+  });
 
-  const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
-  const finalScore = Math.round((state.score / maxScore) * 100);
-  const grade = finalScore >= 90 ? 'A' : finalScore >= 80 ? 'B' : finalScore >= 70 ? 'C' : finalScore >= 60 ? 'D' : 'E';
-  const gradeLabel = finalScore >= 90 ? 'Sangat Baik' : finalScore >= 80 ? 'Baik' : finalScore >= 70 ? 'Cukup' : finalScore >= 60 ? 'Perlu Bimbingan' : 'Remedial';
-  const rank = finalScore >= 90 ? 'SEJARAWAN MUDA' : finalScore >= 80 ? 'DETEKTIF SEJARAH' : finalScore >= 70 ? 'PENELITI PEMULA' : 'PELAJAR SEJARAH';
-  const trophy = finalScore >= 90 ? '🏆' : finalScore >= 80 ? '🥇' : finalScore >= 70 ? '🥈' : finalScore >= 60 ? '🥉' : '📚';
-  const title = finalScore >= 90 ? 'Luar Biasa!' : finalScore >= 80 ? 'Kerja Bagus!' : finalScore >= 70 ? 'Terus Belajar!' : 'Jangan Menyerah!';
+  const maxScore = state.questions.reduce(function(s, q){ return s + (q.points || 50); }, 0);
+  const finalScore = Math.min(100, Math.round((state.score / maxScore) * 100));
+
+  let grade, gradeLabel, rank, trophy, title, msg;
+  if (finalScore >= 90) {
+    grade = 'A'; gradeLabel = 'Istimewa'; rank = 'SEJARAWAN MUDA';
+    trophy = '🏆'; title = 'Luar Biasa!';
+    msg = '🌟 Sempurna! Kamu benar-benar menguasai materi Penelitian Sejarah & Heuristik. Pertahankan pencapaian luar biasa ini dan bagikan semangat belajarmu kepada teman-teman!';
+  } else if (finalScore >= 80) {
+    grade = 'B'; gradeLabel = 'Sangat Baik'; rank = 'DETEKTIF SEJARAH';
+    trophy = '🥇'; title = 'Hebat!';
+    msg = '✨ Pemahamanmu sangat baik! Kamu sudah menguasai sebagian besar materi. Sedikit lagi latihan akan membawa kamu ke tingkat istimewa!';
+  } else if (finalScore >= 70) {
+    grade = 'C'; gradeLabel = 'Baik'; rank = 'PENELITI PEMULA';
+    trophy = '🥈'; title = 'Bagus!';
+    msg = '👏 Kamu sudah memahami sebagian besar materi dengan baik. Terus asah kemampuanmu, kamu pasti bisa mencapai level yang lebih tinggi!';
+  } else if (finalScore >= 60) {
+    grade = 'D'; gradeLabel = 'Cukup Baik'; rank = 'PELAJAR SEJARAH';
+    trophy = '🥉'; title = 'Kerja Bagus!';
+    msg = '💪 Usahamu sudah menunjukkan hasil yang positif! Kamu sedang membangun dasar yang kuat untuk pemahaman sejarah yang lebih dalam.';
+  } else if (finalScore >= 50) {
+    grade = 'D'; gradeLabel = 'Mulai Berkembang'; rank = 'PENJELAJAH SEJARAH';
+    trophy = '📚'; title = 'Langkah Awal yang Baik!';
+    msg = '🌱 Kamu sudah mulai memahami materinya! Setiap langkah belajar membawa kamu lebih dekat ke penguasaan. Terus semangat, ya!';
+  } else {
+    grade = 'E'; gradeLabel = 'Awal yang Baik'; rank = 'CALON SEJARAWAN';
+    trophy = '🌱'; title = 'Tetap Semangat!';
+    msg = '🌈 Setiap usaha adalah langkah maju yang berharga! Kamu sudah menunjukkan keberanian untuk mencoba. Ayo lanjutkan belajar, kamu pasti bisa!';
+  }
+
+  const achievements = [];
+  if (benar === TOTAL_Q) achievements.push({icon:'🌟', title:'Sempurna', desc:'Semua 15 soal terjawab benar'});
+  if (state.bestCombo >= 5) achievements.push({icon:'🔥', title:'Combo Master', desc:'Combo terbaik ' + state.bestCombo + '× berturut-turut'});
+  if (state.bestCombo >= 3 && state.bestCombo < 5) achievements.push({icon:'⚡', title:'Combo Builder', desc:'Combo ' + state.bestCombo + '× berturut-turut'});
+  if (state.powers.p50 === 1 && state.powers.hint === 1 && state.powers.skip === 1) achievements.push({icon:'🎯', title:'Mandiri', desc:'Tanpa menggunakan power-up'});
+  if (finalScore >= 90) achievements.push({icon:'👑', title:'Sejarawan Muda', desc:'Skor di atas 90'});
+  if (state.hp === state.maxHp && benar > 0) achievements.push({icon:'💚', title:'Tak Tercela', desc:'Nyawa tetap utuh hingga akhir'});
+  if (state.timeLeft > TIME_LIMIT * 0.5 && finalScore >= 70) achievements.push({icon:'⏱️', title:'Cepat & Tepat', desc:'Selesai dengan sisa waktu banyak'});
+  if (finalScore >= 80 && state.bestCombo >= 3) achievements.push({icon:'🏅', title:'High Achiever', desc:'Skor tinggi dengan combo'});
+
+  state.result = {
+    benar: benar, salah: salah, dilewati: dilewati, finalScore: finalScore,
+    grade: grade, gradeLabel: gradeLabel, rank: rank, trophy: trophy, title: title, msg: msg,
+    achievements: achievements, playerName: state.playerName
+  };
 
   document.getElementById('gameHud').classList.remove('active');
   document.getElementById('resultScreen').classList.add('active');
@@ -1402,6 +1668,7 @@ function finishGame(timeout){
   document.getElementById('rTrophy').textContent = trophy;
   document.getElementById('rTitle').textContent = title;
   document.getElementById('rSub').textContent = 'Kuis 1 · Penelitian Sejarah & Heuristik';
+  document.getElementById('rPlayerNameText').textContent = state.playerName;
   document.getElementById('gradeLetter').textContent = grade;
   document.getElementById('gradeLabel').textContent = gradeLabel;
   document.getElementById('rRank').textContent = rank;
@@ -1411,31 +1678,57 @@ function finishGame(timeout){
   document.getElementById('rSalah').textContent = salah;
   document.getElementById('rSkor').textContent = finalScore;
   document.getElementById('rXpTotal').textContent = state.xp;
-
   document.getElementById('gradeRing').style.setProperty('--grade-deg', (finalScore/100*360) + 'deg');
+  document.getElementById('rMsg').textContent = msg;
 
-  document.getElementById('rMsg').textContent = finalScore >= 70
-    ? '🎯 Pertahankan semangat belajarmu! Lanjutkan ke Kuis 2 untuk materi Teknik Wawancara & Sumber Sejarah.'
-    : '📚 Pelajari kembali materi Pertemuan 1 bagian awal, lalu coba lagi! Kamu pasti bisa!';
+  const achList = document.getElementById('achievementsList');
+  achList.innerHTML = '';
+  if (achievements.length === 0) {
+    achList.innerHTML = '<div class="no-achievement">Terus belajar untuk membuka pencapaian eksklusif! 🌟</div>';
+  } else {
+    achievements.forEach(function(a){
+      const card = document.createElement('div');
+      card.className = 'achievement-card';
+      card.innerHTML = ''
+        + '<div class="ac-icon">' + a.icon + '</div>'
+        + '<div class="ac-text">'
+        +   '<div class="ac-title">' + a.title + '</div>'
+        +   '<div class="ac-desc">' + a.desc + '</div>'
+        + '</div>';
+      achList.appendChild(card);
+    });
+  }
 
   const reviewList = document.getElementById('reviewList');
   reviewList.innerHTML = '';
-  state.answers.forEach((a, i) => {
+  state.answers.forEach(function(a, i){
     const div = document.createElement('div');
     div.className = 'review-item';
     const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
                    a.correct ? '<span class="ri-status correct">Benar</span>' :
                    '<span class="ri-status wrong">Salah</span>';
-    const q = a.questionText.length > 80 ? a.questionText.substring(0, 80) + '...' : a.questionText;
-    div.innerHTML = `<span class="ri-num">${i+1}.</span><span class="ri-text">${q}</span>${status}`;
+    const qShort = a.questionText.length > 100 ? a.questionText.substring(0, 100) + '...' : a.questionText;
+    div.innerHTML = ''
+      + '<span class="ri-num">' + (i+1) + '.</span>'
+      + '<div class="ri-text">'
+      +   '<div class="ri-q">' + qShort + '</div>'
+      +   '<div class="ri-meta">'
+      +     '<span><i class="fas fa-tag"></i> ' + (a.topic || '-') + '</span>'
+      +     '<span>Jawaban benar: <b>' + a.correctLetter + '</b></span>'
+      +   '</div>'
+      + '</div>'
+      + status;
     reviewList.appendChild(div);
   });
 
   sfxFinish();
   if (finalScore >= 70){
     fireConfetti(180);
-    setTimeout(() => fireConfetti(120), 400);
-    setTimeout(() => showToast('🏆', 'Achievement Unlocked!', rank, ''), 500);
+    setTimeout(function(){ fireConfetti(120); }, 400);
+    setTimeout(function(){ showToast('🏆', 'Pencapaian Terbuka!', rank, ''); }, 500);
+  } else {
+    fireConfetti(60);
+    setTimeout(function(){ showToast('🌟', 'Kerja Bagus!', 'Terus semangat belajar, ya!', 'cyan'); }, 500);
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1448,20 +1741,222 @@ function resetGame(){
   state.answers = []; state.score = 0; state.xp = 0; state.level = 1;
   state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
   state.currentIndex = 0; state.finished = false; state.started = false;
+  state.result = null;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-document.addEventListener('keydown', e => {
+/* ============================================================
+   SIMPAN PDF
+   ============================================================ */
+function savePDF(){
+  if (!state.result) {
+    showToast('⚠️', 'Belum Ada Hasil', 'Selesaikan kuis terlebih dahulu.', '');
+    return;
+  }
+  const r = state.result;
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('id-ID', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  const timeStr = now.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+  const safeName = (r.playerName || 'Pemain').replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_') || 'Pemain';
+
+  let reviewRows = '';
+  state.answers.forEach(function(a, i){
+    const status = a.skipped ? 'Dilewati' : (a.correct ? 'Benar' : 'Salah');
+    const statusColor = a.skipped ? '#6b7280' : (a.correct ? '#059669' : '#dc2626');
+    const qShortRaw = a.questionText.length > 90 ? a.questionText.substring(0, 90) + '...' : a.questionText;
+    const safeQ = String(qShortRaw).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    reviewRows += ''
+      + '<tr>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;font-weight:bold;">' + (i+1) + '</td>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;font-size:10px;color:#555;">' + (a.topic || '-') + '</td>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;font-size:10px;">' + safeQ + '</td>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;font-weight:bold;">' + a.correctLetter + '</td>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;color:' + statusColor + ';font-weight:bold;">' + status + '</td>'
+      + '</tr>';
+  });
+
+  let achHtml = '';
+  if (r.achievements && r.achievements.length > 0) {
+    achHtml = r.achievements.map(function(a){
+      return '<span style="display:inline-block;padding:6px 12px;margin:4px;background:#eef2ff;border:1px solid #c7d2fe;border-radius:20px;font-size:11px;color:#3730a3;line-height:1.4;">'
+        + '<b>' + a.icon + ' ' + a.title + '</b> &middot; ' + a.desc
+        + '</span>';
+    }).join('');
+  } else {
+    achHtml = '<span style="font-size:11px;color:#666;">Terus belajar untuk membuka pencapaian eksklusif.</span>';
+  }
+
+  const htmlContent = ''
+    + '<div style="font-family:Helvetica,Arial,sans-serif;color:#111;background:#ffffff;padding:30px;width:100%;box-sizing:border-box;">'
+    +   '<div style="text-align:center;border-bottom:3px solid #6C63FF;padding-bottom:16px;margin-bottom:20px;">'
+    +     '<div style="font-size:11px;letter-spacing:4px;color:#4A42C4;font-weight:bold;">HISTOEXPLORER &middot; PREMIUM GAME</div>'
+    +     '<h1 style="font-size:24px;margin:8px 0 4px;color:#111;">Laporan Hasil Kuis Sejarah</h1>'
+    +     '<div style="font-size:12px;color:#666;">Kuis 1 &middot; Penelitian Sejarah &amp; Heuristik</div>'
+    +   '</div>'
+    +   '<table style="width:100%;font-size:12px;margin-bottom:16px;">'
+    +     '<tr>'
+    +       '<td style="padding:6px 0;width:25%;"><b>Nama Pemain</b></td>'
+    +       '<td style="padding:6px 0;width:25%;color:#111;">' + r.playerName + '</td>'
+    +       '<td style="padding:6px 0;width:25%;"><b>Tanggal</b></td>'
+    +       '<td style="padding:6px 0;width:25%;color:#111;">' + dateStr + '</td>'
+    +     '</tr>'
+    +     '<tr>'
+    +       '<td style="padding:6px 0;"><b>Pencapaian</b></td>'
+    +       '<td style="padding:6px 0;color:#4A42C4;font-weight:bold;">' + r.rank + '</td>'
+    +       '<td style="padding:6px 0;"><b>Waktu</b></td>'
+    +       '<td style="padding:6px 0;color:#111;">' + timeStr + '</td>'
+    +     '</tr>'
+    +     '<tr>'
+    +       '<td style="padding:6px 0;"><b>Predikat</b></td>'
+    +       '<td style="padding:6px 0;">Grade ' + r.grade + ' &mdash; ' + r.gradeLabel + '</td>'
+    +       '<td style="padding:6px 0;"><b>Skor Akhir</b></td>'
+    +       '<td style="padding:6px 0;color:#0891b2;font-weight:bold;">' + r.finalScore + ' / 100</td>'
+    +     '</tr>'
+    +   '</table>'
+    +   '<div style="background:#eef2ff;padding:16px;border-radius:10px;border-left:5px solid #6C63FF;margin-bottom:16px;">'
+    +     '<div style="font-size:11px;font-weight:bold;color:#4A42C4;letter-spacing:2px;margin-bottom:10px;">STATISTIK KUIS</div>'
+    +     '<table style="width:100%;text-align:center;font-size:11px;">'
+    +       '<tr>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#059669;">' + r.benar + '</div><div style="color:#666;">BENAR</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#dc2626;">' + r.salah + '</div><div style="color:#666;">SALAH</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#6b7280;">' + r.dilewati + '</div><div style="color:#666;">DILEWATI</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#0891b2;">' + r.finalScore + '</div><div style="color:#666;">SKOR</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#7c3aed;">' + state.xp + '</div><div style="color:#666;">XP</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#B45309;">' + state.bestCombo + 'x</div><div style="color:#666;">COMBO</div></td>'
+    +       '</tr>'
+    +     '</table>'
+    +   '</div>'
+    +   '<div style="margin-bottom:16px;">'
+    +     '<div style="font-size:11px;font-weight:bold;color:#4A42C4;letter-spacing:2px;margin-bottom:8px;">PENCAPAIAN</div>'
+    +     '<div style="padding:10px;background:#fafafa;border-radius:8px;">' + achHtml + '</div>'
+    +   '</div>'
+    +   '<div style="background:#f0f9ff;padding:12px;border-radius:8px;border-left:4px solid #0891b2;font-size:11px;color:#0c4a6e;margin-bottom:16px;">'
+    +     '<b>Catatan:</b> ' + r.msg
+    +   '</div>'
+    +   '<div style="font-size:11px;font-weight:bold;color:#4A42C4;letter-spacing:2px;margin-bottom:8px;">RINCIAN JAWABAN</div>'
+    +   '<table style="width:100%;font-size:10px;border-collapse:collapse;">'
+    +     '<thead>'
+    +       '<tr style="background:#f3f4f6;">'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">No</th>'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">Topik</th>'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">Pertanyaan</th>'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">Kunci</th>'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">Status</th>'
+    +       '</tr>'
+    +     '</thead>'
+    +     '<tbody>' + reviewRows + '</tbody>'
+    +   '</table>'
+    +   '<div style="text-align:center;font-size:10px;color:#999;margin-top:24px;padding-top:12px;border-top:1px solid #e5e7eb;">'
+    +     'Dokumen ini digenerate otomatis oleh <b>HistoExplorer Premium Game</b> &middot; ' + dateStr + ' ' + timeStr
+    +     '<br>Dikirim sebagai bukti pengerjaan Kuis 1 &middot; Penelitian Sejarah &amp; Heuristik'
+    +   '</div>'
+    + '</div>';
+
+  if (typeof html2pdf !== 'undefined') {
+    const wrapper = document.createElement('div');
+    wrapper.id = 'pdfRenderArea';
+    wrapper.style.position = 'absolute';
+    wrapper.style.left = '-10000px';
+    wrapper.style.top = '0';
+    wrapper.style.width = '794px';
+    wrapper.style.minHeight = '200px';
+    wrapper.style.background = '#ffffff';
+    wrapper.style.color = '#111';
+    wrapper.style.visibility = 'visible';
+    wrapper.style.opacity = '1';
+    wrapper.style.pointerEvents = 'none';
+    wrapper.style.zIndex = '1';
+    wrapper.innerHTML = htmlContent;
+    document.body.appendChild(wrapper);
+
+    showToast('📄', 'Menyiapkan PDF...', 'Mohon tunggu sebentar...', 'cyan');
+
+    setTimeout(function(){
+      const opt = {
+        margin:       [10, 8, 10, 8],
+        filename:     'Hasil-Kuis-1-Sejarah_' + safeName + '.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  {
+          scale: 2, useCORS: true, backgroundColor: '#ffffff',
+          logging: false, allowTaint: true,
+          scrollX: 0, scrollY: 0, windowWidth: 794, width: 794
+        },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['css', 'legacy'] }
+      };
+      html2pdf().set(opt).from(wrapper).save()
+        .then(function(){
+          wrapper.remove();
+          showToast('✅', 'PDF Tersimpan!', 'File: Hasil-Kuis-1-Sejarah_' + safeName + '.pdf', 'green');
+        })
+        .catch(function(err){
+          console.error('html2pdf error:', err);
+          wrapper.remove();
+          openPrintFallback(htmlContent, safeName);
+        });
+    }, 350);
+    return;
+  }
+  openPrintFallback(htmlContent, safeName);
+}
+
+function openPrintFallback(htmlContent, safeName) {
+  const win = window.open('', '_blank', 'width=900,height=700');
+  if (!win) {
+    alert('Popup diblokir browser. Izinkan popup untuk menyimpan PDF, atau gunakan Ctrl+P untuk mencetak halaman ini.');
+    return;
+  }
+  const fullHtml = ''
+    + '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Hasil Kuis 1 - ' + safeName + '</title>'
+    + '<style>'
+    +   '*{box-sizing:border-box}'
+    +   'body{margin:0;background:#f3f4f6;font-family:Helvetica,Arial,sans-serif}'
+    +   '.toolbar{position:sticky;top:0;z-index:99;background:#111827;color:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,.15)}'
+    +   '.toolbar .title{font-size:14px;font-weight:bold;letter-spacing:1px}'
+    +   '.toolbar .actions{display:flex;gap:8px}'
+    +   '.toolbar button{border:none;padding:9px 18px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:13px}'
+    +   '.btn-print{background:#6C63FF;color:#fff}'
+    +   '.btn-close{background:#374151;color:#fff}'
+    +   '.page{max-width:820px;margin:20px auto;background:#fff;padding:30px;box-shadow:0 4px 24px rgba(0,0,0,.08)}'
+    +   '@media print{.toolbar{display:none!important}.page{box-shadow:none;margin:0;max-width:none;padding:0}body{background:#fff}}'
+    +   '@page{size:A4;margin:12mm}'
+    + '</style></head><body>'
+    +   '<div class="toolbar">'
+    +     '<div class="title">📄 HASIL KUIS 1 — ' + safeName + '</div>'
+    +     '<div class="actions">'
+    +       '<button class="btn-print" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>'
+    +       '<button class="btn-close" onclick="window.close()">✕ Tutup</button>'
+    +     '</div>'
+    +   '</div>'
+    +   '<div class="page">' + htmlContent + '</div>'
+    +   '<script>window.addEventListener("load",function(){setTimeout(function(){try{window.print();}catch(e){}},600);});<\/script>'
+    + '</body></html>';
+  win.document.open();
+  win.document.write(fullHtml);
+  win.document.close();
+  showToast('🖨️', 'Pilih "Save as PDF"', 'Pada dialog cetak, pilih tujuan "Save as PDF".', 'cyan');
+}
+
+document.addEventListener('keydown', function(e){
   if (!state.started || state.finished) return;
   const tag = (e.target.tagName || '').toLowerCase();
   if (tag === 'input' || tag === 'textarea') return;
-  if (['a','A','1'].includes(e.key)) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
-  else if (['b','B','2'].includes(e.key)) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
-  else if (['c','C','3'].includes(e.key)) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
-  else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
-  else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
+  if (['a','A','1'].indexOf(e.key) !== -1) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
+  else if (['b','B','2'].indexOf(e.key) !== -1) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
+  else if (['c','C','3'].indexOf(e.key) !== -1) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
+  else if (['d','D','4'].indexOf(e.key) !== -1) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
+  else if (['e','E','5'].indexOf(e.key) !== -1) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
   else if (e.key === 'ArrowRight' || e.key === 'Enter'){
-    if (!document.getElementById('btnNext').disabled) nextQuestion();
+    const btn = document.getElementById('btnNext');
+    if (!btn.disabled && btn.style.display !== 'none') nextQuestion();
+    else {
+      const btnF = document.getElementById('btnFinish');
+      if (btnF.style.display !== 'none') finishGame();
+    }
+  }
+  else if (e.key === 'ArrowLeft'){
+    const btn = document.getElementById('btnPrev');
+    if (!btn.disabled) prevQuestion();
   }
 });
 </script>
