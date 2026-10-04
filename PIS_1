@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+<meta name="theme-color" content="#05060f" />
+<title>🎮 Kuis 1 · Pengertian Sejarah — Premium Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<style>
+/* ============================================================
+   ROOT & RESET
+   ============================================================ */
+:root{
+  --font-display:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'Space Grotesk',ui-monospace,monospace;
+
+  --primary:#F59E0B;--primary-light:#FCD34D;--primary-dark:#B45309;
+  --primary-rgb:245,158,11;
+  --accent:#06B6D4;--accent-rgb:6,182,212;
+  --emerald:#10B981;--emerald-rgb:16,185,129;
+  --violet:#8B5CF6;--violet-rgb:139,92,246;
+  --rose:#F43F5E;--rose-rgb:244,63,94;
+  --sky:#38BDF8;
+
+  --bg:#05060f;--bg-2:#0b0d1c;
+  --glass:rgba(255,255,255,0.045);
+  --glass-strong:rgba(255,255,255,0.08);
+  --glass-border:rgba(255,255,255,0.10);
+  --text:#f7f5ff;--text-dim:#a8a8c0;--text-mute:#6b6b85;
+
+  --radius:24px;--radius-md:18px;--radius-sm:14px;--radius-xs:10px;
+  --shadow-glow:0 0 40px rgba(245,158,11,.25);
+  --shadow-card:0 24px 60px rgba(0,0,0,.55);
+  --shadow-btn:0 12px 32px rgba(245,158,11,.35);
+
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font-display);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  overflow-x:hidden;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  position:relative;
+}
+::selection{background:var(--primary);color:#0b0d1c}
+
+/* ============================================================
+   ANIMATED BACKGROUND
+   ============================================================ */
+.bg-layer{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%,rgba(245,158,11,.15),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 100%,rgba(6,182,212,.12),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 50%,rgba(139,92,246,.08),transparent 65%);
+  animation:bgShift 20s ease-in-out infinite alternate;
+}
+@keyframes bgShift{
+  0%{transform:scale(1) rotate(0deg);filter:hue-rotate(0deg)}
+  100%{transform:scale(1.1) rotate(3deg);filter:hue-rotate(15deg)}
+}
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25;
+  background-image:
+    linear-gradient(rgba(245,158,11,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(245,158,11,.06) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%);
+}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
+#confettiCanvas{position:fixed;inset:0;z-index:9998;pointer-events:none}
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+#loader{
+  position:fixed;inset:0;z-index:99999;
+  background:radial-gradient(ellipse at center,#0b0d1c 0%,#05060f 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:20px;text-align:center;
+  transition:opacity .8s ease,visibility .8s ease;
+}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-orb{
+  width:120px;height:120px;position:relative;
+  display:grid;place-items:center;
+}
+.loader-orb::before,.loader-orb::after{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  border:2px solid transparent;
+}
+.loader-orb::before{
+  border-top-color:var(--primary);border-right-color:var(--primary-light);
+  animation:spin 2s linear infinite;
+  filter:drop-shadow(0 0 20px rgba(245,158,11,.6));
+}
+.loader-orb::after{
+  inset:14px;border-bottom-color:var(--accent);border-left-color:var(--emerald);
+  animation:spin 1.6s linear infinite reverse;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-core{
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  box-shadow:0 0 40px rgba(245,158,11,.7),inset 0 0 20px rgba(255,255,255,.25);
+  display:grid;place-items:center;font-size:1.5rem;color:#0b0d1c;
+  animation:pulseCore 2s ease-in-out infinite;
+}
+@keyframes pulseCore{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.loader-title{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:3px;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary),var(--accent));
+  background-size:220% auto;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 3s ease-in-out infinite;
+}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.loader-sub{font-size:.85rem;color:var(--text-dim);font-weight:500;letter-spacing:1px}
+.loader-bar{width:min(300px,70vw);height:4px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+.loader-bar span{display:block;height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 20px rgba(245,158,11,.6);transition:width .3s ease}
+.loader-pct{font-family:var(--font-mono);font-size:.72rem;font-weight:700;color:var(--text-mute);letter-spacing:2px}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.game-header{
+  position:fixed;top:0;left:0;right:0;height:60px;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 16px;gap:10px;
+  background:rgba(5,6,15,.72);
+  backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border-bottom:1px solid var(--glass-border);
+}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:.9rem;letter-spacing:.5px;color:var(--text)}
+.brand-logo{
+  width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#0b0d1c;font-size:.9rem;
+  box-shadow:0 0 22px rgba(245,158,11,.5);
+  animation:logoPulse 3s ease-in-out infinite;
+}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 22px rgba(245,158,11,.5)}50%{box-shadow:0 0 32px rgba(245,158,11,.8)}}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .t1{font-size:.62rem;color:var(--text-mute);letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+.brand-text .t2{font-size:.92rem;font-weight:800;color:var(--text)}
+.header-actions{display:flex;gap:6px}
+.icon-btn{
+  width:36px;height:36px;border-radius:11px;
+  border:1px solid var(--glass-border);
+  background:var(--glass);color:var(--text-dim);
+  display:grid;place-items:center;cursor:pointer;font-size:.85rem;
+  transition:all .3s var(--ease-out);
+}
+.icon-btn:hover{background:var(--primary);color:#0b0d1c;border-color:var(--primary);box-shadow:0 0 22px rgba(245,158,11,.6);transform:translateY(-2px)}
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+.wrap{
+  position:relative;z-index:1;
+  max-width:820px;margin:0 auto;
+  padding:calc(60px + 20px) 16px 60px;
+  min-height:100vh;
+}
+
+/* ============================================================
+   START SCREEN
+   ============================================================ */
+.start-screen{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:calc(100vh - 100px);text-align:center;gap:18px;
+  padding:20px 0;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 18px;border-radius:40px;
+  background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(6,182,212,.10));
+  border:1px solid rgba(245,158,11,.30);
+  font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--primary-light);
+  box-shadow:0 0 30px rgba(245,158,11,.20);
+  animation:badgeFloat 3s ease-in-out infinite;
+}
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-title{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,7vw,3.6rem);
+  font-weight:900;line-height:1.05;letter-spacing:-1.5px;
+  background:linear-gradient(135deg,#fff 0%,var(--primary-light) 40%,var(--primary) 70%,var(--accent) 100%);
+  background-size:220% auto;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 5s ease-in-out infinite;
+  filter:drop-shadow(0 8px 30px rgba(245,158,11,.3));
+}
+.hero-sub{
+  font-size:clamp(.9rem,2vw,1.05rem);
+  color:var(--text-dim);max-width:560px;line-height:1.75;
+  font-weight:400;
+}
+.hero-sub strong{color:var(--primary-light);font-weight:700}
+
+.stats-showcase{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+  margin-top:8px;
+}
+.stat-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:50px;
+  background:var(--glass);border:1px solid var(--glass-border);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  font-size:.8rem;color:var(--text-dim);font-weight:600;
+  transition:all .3s var(--ease-out);
+}
+.stat-pill:hover{transform:translateY(-3px);border-color:rgba(245,158,11,.4);box-shadow:0 8px 24px rgba(245,158,11,.15)}
+.stat-pill i{font-size:.95rem}
+.stat-pill .pi-gold i{color:var(--primary)}
+.stat-pill .pi-cyan i{color:var(--accent)}
+.stat-pill .pi-emerald i{color:var(--emerald)}
+.stat-pill .pi-violet i{color:var(--violet)}
+
+.rules-card{
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius);
+  padding:22px 24px;max-width:520px;width:100%;
+  text-align:left;margin-top:6px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:var(--shadow-card);
+}
+.rules-card h4{
+  font-size:.85rem;font-weight:800;color:var(--primary-light);
+  margin-bottom:12px;display:flex;align-items:center;gap:9px;
+  letter-spacing:.5px;text-transform:uppercase;
+}
+.rules-card ul{list-style:none;display:grid;gap:10px}
+.rules-card li{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-dim);line-height:1.6}
+.rule-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:9px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#0b0d1c;font-size:.72rem;font-weight:900;
+  box-shadow:0 4px 14px rgba(245,158,11,.4);
+}
+
+.btn-play{
+  position:relative;
+  display:inline-flex;align-items:center;gap:14px;
+  padding:18px 54px;border-radius:60px;border:none;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#0b0d1c;font-family:var(--font-display);font-weight:900;
+  font-size:1.05rem;letter-spacing:1px;text-transform:uppercase;
+  cursor:pointer;overflow:hidden;
+  box-shadow:0 12px 40px rgba(245,158,11,.45),inset 0 -3px 0 rgba(0,0,0,.2);
+  transition:all .4s var(--ease-spring);
+  margin-top:14px;
+}
+.btn-play::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.35),transparent 70%);
+  transform:translateX(-100%);
+  transition:transform .8s ease;
+}
+.btn-play:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 20px 60px rgba(245,158,11,.65),inset 0 -3px 0 rgba(0,0,0,.2)}
+.btn-play:hover::before{transform:translateX(100%)}
+.btn-play:active{transform:translateY(-1px) scale(.98)}
+.btn-play i{font-size:1.15rem}
+
+/* ============================================================
+   GAME HUD
+   ============================================================ */
+.game-hud{
+  display:none;flex-direction:column;gap:14px;
+  animation:fadeSlideIn .5s var(--ease-out);
+}
+.game-hud.active{display:flex}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.hud-top{
+  display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+  padding:14px 18px;border-radius:var(--radius-md);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:var(--shadow-card);
+}
+.hud-hp{display:flex;align-items:center;gap:4px}
+.hud-hp .heart{
+  font-size:1.15rem;color:var(--rose);
+  filter:drop-shadow(0 0 8px rgba(244,63,94,.6));
+  transition:all .4s var(--ease-out);
+}
+.hud-hp .heart.empty{color:rgba(255,255,255,.10);filter:none;transform:scale(.85)}
+.hud-hp .heart.losing{animation:heartBreak .6s ease}
+@keyframes heartBreak{0%{transform:scale(1)}30%{transform:scale(1.4);color:#fff}100%{transform:scale(.85);opacity:.3}}
+
+.hud-xp{display:flex;flex-direction:column;gap:4px;min-width:0}
+.hud-xp-head{display:flex;justify-content:space-between;align-items:center;font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.hud-xp-head .lvl{color:var(--primary-light)}
+.hud-xp-head .val{color:var(--text-mute);font-family:var(--font-mono)}
+.xp-track{height:8px;border-radius:10px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+.xp-fill{height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 16px rgba(245,158,11,.7);
+  transition:width .8s var(--ease-spring);position:relative}
+.xp-fill::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  animation:xpShine 2s linear infinite;
+}
+@keyframes xpShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+
+.hud-timer{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 14px;border-radius:40px;
+  background:rgba(245,158,11,.12);
+  border:1px solid rgba(245,158,11,.30);
+  font-family:var(--font-mono);font-weight:800;font-size:.85rem;
+  color:var(--primary-light);letter-spacing:1px;
+  transition:all .3s ease;
+}
+.hud-timer.warning{
+  background:rgba(244,63,94,.15);border-color:rgba(244,63,94,.5);color:#FCA5A5;
+  animation:pulseWarn 1s ease-in-out infinite;
+}
+@keyframes pulseWarn{0%,100%{box-shadow:0 0 0 0 rgba(244,63,94,.4)}50%{box-shadow:0 0 0 8px rgba(244,63,94,0)}}
+
+.hud-middle{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:.75rem;color:var(--text-mute);font-weight:700;
+  padding:0 4px;
+}
+.hud-middle .combo-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--accent);font-weight:800;
+  transition:all .3s var(--ease-spring);
+}
+.hud-middle .combo-tag.hot{
+  color:var(--primary-light);
+  animation:comboPulse .5s var(--ease-spring);
+}
+@keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+/* ============================================================
+   QUESTION CARD
+   ============================================================ */
+.q-card{
+  position:relative;
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius);
+  padding:26px 26px 22px;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:var(--shadow-card);
+  animation:qEnter .55s var(--ease-out);
+  overflow:hidden;
+}
+.q-card::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(135deg,rgba(245,158,11,.4),transparent 40%,transparent 60%,rgba(6,182,212,.3));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  pointer-events:none;
+}
+@keyframes qEnter{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.q-card.shake{animation:shake .5s ease}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-10px)}
+  40%{transform:translateX(10px)}
+  60%{transform:translateX(-6px)}
+  80%{transform:translateX(6px)}
+}
+
+.q-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:6px 14px;border-radius:30px;
+  background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(245,158,11,.06));
+  border:1px solid rgba(245,158,11,.30);
+  font-size:.72rem;font-weight:800;letter-spacing:1px;
+  color:var(--primary-light);
+}
+.q-topic{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:30px;
+  background:rgba(6,182,212,.10);
+  border:1px solid rgba(6,182,212,.28);
+  font-size:.68rem;font-weight:800;letter-spacing:.8px;
+  color:var(--accent);text-transform:uppercase;
+}
+
+.q-text{
+  font-size:clamp(1rem,2.2vw,1.12rem);
+  font-weight:600;line-height:1.75;
+  color:var(--text);margin-bottom:20px;
+  white-space:pre-line;
+}
+.q-text strong{color:var(--primary-light);font-weight:800}
+
+/* ============================================================
+   OPTIONS
+   ============================================================ */
+.options{display:grid;gap:10px}
+.opt{
+  position:relative;
+  display:flex;align-items:flex-start;gap:14px;
+  width:100%;text-align:left;
+  padding:15px 18px;
+  border-radius:var(--radius-sm);
+  border:1.5px solid var(--glass-border);
+  background:rgba(255,255,255,.03);
+  color:var(--text-dim);
+  font-family:inherit;font-size:.92rem;line-height:1.6;
+  cursor:pointer;
+  transition:all .3s var(--ease-out);
+  overflow:hidden;
+}
+.opt::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(90deg,rgba(245,158,11,.15),transparent);
+  transition:width .4s var(--ease-out);z-index:0;
+}
+.opt:hover:not(.locked){
+  border-color:rgba(245,158,11,.55);
+  transform:translateX(5px);
+  color:var(--text);
+  box-shadow:0 8px 24px rgba(245,158,11,.15);
+}
+.opt:hover:not(.locked)::before{width:100%}
+.opt-letter{
+  position:relative;z-index:1;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;flex-shrink:0;
+  background:rgba(255,255,255,.06);
+  color:var(--text-mute);
+  font-weight:800;font-size:.85rem;
+  transition:all .3s var(--ease-out);
+  border:1px solid rgba(255,255,255,.06);
+}
+.opt-text{position:relative;z-index:1;flex:1}
+
+.opt:hover:not(.locked) .opt-letter{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#0b0d1c;border-color:transparent;
+  box-shadow:0 0 20px rgba(245,158,11,.6);
+}
+
+.opt.correct{
+  border-color:var(--emerald);
+  background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));
+  color:#fff;pointer-events:none;
+  box-shadow:0 0 0 3px rgba(16,185,129,.15),0 12px 32px rgba(16,185,129,.25);
+  animation:correctPop .5s var(--ease-spring);
+}
+@keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.02)}100%{transform:scale(1)}}
+.opt.correct .opt-letter{
+  background:linear-gradient(135deg,var(--emerald),#059669);
+  color:#fff;border-color:transparent;
+  box-shadow:0 0 24px rgba(16,185,129,.7);
+}
+
+.opt.wrong{
+  border-color:var(--rose);
+  background:linear-gradient(135deg,rgba(244,63,94,.15),rgba(244,63,94,.05));
+  color:#fff;pointer-events:none;
+  box-shadow:0 0 0 3px rgba(244,63,94,.15),0 12px 32px rgba(244,63,94,.25);
+}
+.opt.wrong .opt-letter{
+  background:linear-gradient(135deg,var(--rose),#be123c);
+  color:#fff;border-color:transparent;
+  box-shadow:0 0 24px rgba(244,63,94,.7);
+}
+
+.opt.locked{pointer-events:none}
+.opt.disabled-50{opacity:.2;pointer-events:none;filter:grayscale(1) blur(.5px)}
+
+/* ============================================================
+   FEEDBACK PANEL
+   ============================================================ */
+.feedback{
+  display:none;
+  padding:22px 24px;
+  border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow-card);
+  animation:qEnter .5s var(--ease-out);
+}
+.feedback.show{display:block}
+.fb-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.fb-icon{
+  width:48px;height:48px;border-radius:15px;flex-shrink:0;
+  display:grid;place-items:center;font-size:1.2rem;
+  transition:all .4s var(--ease-spring);
+}
+.fb-icon.correct{
+  background:linear-gradient(135deg,var(--emerald),#059669);
+  color:#fff;box-shadow:0 0 32px rgba(16,185,129,.6);
+}
+.fb-icon.wrong{
+  background:linear-gradient(135deg,var(--rose),#be123c);
+  color:#fff;box-shadow:0 0 32px rgba(244,63,94,.6);
+}
+.fb-icon.info{
+  background:linear-gradient(135deg,var(--accent),#0891b2);
+  color:#fff;box-shadow:0 0 32px rgba(6,182,212,.6);
+}
+.fb-title{font-size:1.05rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
+.fb-title.correct{color:var(--emerald)}
+.fb-title.wrong{color:#FCA5A5}
+.fb-title.info{color:var(--accent)}
+.fb-body{font-size:.9rem;color:var(--text-dim);line-height:1.75}
+.fb-body strong{color:var(--text);font-weight:700}
+.fb-sec{margin-top:12px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.10)}
+.fb-label{
+  font-size:.68rem;font-weight:900;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary-light);margin-bottom:6px;
+  display:flex;align-items:center;gap:6px;
+}
+.fb-points{
+  margin-top:12px;padding:14px 16px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(245,158,11,.10),rgba(245,158,11,.03));
+  border-left:3px solid var(--primary);
+}
+.fb-points .fb-label{color:var(--primary-light)}
+.fb-points p{font-size:.87rem;color:var(--text-dim);line-height:1.7}
+
+/* ============================================================
+   HUD BOTTOM — POWER-UPS & ACTIONS
+   ============================================================ */
+.hud-bottom{
+  display:flex;flex-direction:column;gap:12px;
+}
+.power-bar{
+  display:flex;gap:8px;justify-content:center;flex-wrap:wrap;
+}
+.power-btn{
+  position:relative;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 20px;border-radius:50px;
+  border:1px solid var(--glass-border);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  color:var(--text-dim);
+  font-family:inherit;font-weight:800;font-size:.78rem;
+  letter-spacing:.5px;cursor:pointer;
+  transition:all .3s var(--ease-spring);
+  overflow:hidden;
+}
+.power-btn i{font-size:.9rem}
+.power-btn:hover:not(:disabled):not(.used){
+  transform:translateY(-3px);
+  border-color:rgba(245,158,11,.5);
+  color:var(--text);
+  box-shadow:0 8px 24px rgba(245,158,11,.25);
+}
+.power-btn:active:not(:disabled):not(.used){transform:scale(.96)}
+.power-btn .cnt{
+  font-size:.62rem;padding:2px 8px;border-radius:20px;
+  background:rgba(255,255,255,.10);font-weight:900;
+  font-family:var(--font-mono);
+}
+.power-btn.used{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.power-btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.power-btn.p50{color:var(--accent)}
+.power-btn.p50:hover:not(:disabled):not(.used){background:linear-gradient(135deg,rgba(6,182,212,.15),transparent);border-color:rgba(6,182,212,.5)}
+.power-btn.phint{color:var(--primary-light)}
+.power-btn.phint:hover:not(:disabled):not(.used){background:linear-gradient(135deg,rgba(245,158,11,.15),transparent);border-color:rgba(245,158,11,.5)}
+.power-btn.pskip{color:var(--violet)}
+.power-btn.pskip:hover:not(:disabled):not(.used){background:linear-gradient(135deg,rgba(139,92,246,.15),transparent);border-color:rgba(139,92,246,.5)}
+
+.action-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:14px 30px;border-radius:50px;border:none;
+  font-family:inherit;font-weight:900;font-size:.88rem;
+  letter-spacing:.5px;cursor:pointer;
+  transition:all .35s var(--ease-spring);
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#0b0d1c;
+  box-shadow:0 10px 32px rgba(245,158,11,.4),inset 0 -2px 0 rgba(0,0,0,.15);
+}
+.btn-primary:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 44px rgba(245,158,11,.6)}
+.btn-primary:active:not(:disabled){transform:scale(.96)}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{
+  background:rgba(255,255,255,.04);color:var(--text-dim);
+  border:1px solid var(--glass-border);
+}
+.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(245,158,11,.4);transform:translateY(-2px)}
+
+/* ============================================================
+   RESULT SCREEN
+   ============================================================ */
+.result-screen{display:none;flex-direction:column;gap:16px;text-align:center;animation:fadeSlideIn .6s var(--ease-out)}
+.result-screen.active{display:flex}
+
+.result-hero{
+  position:relative;
+  padding:38px 26px;
+  border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:var(--shadow-card);
+  overflow:hidden;
+}
+.result-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center top,rgba(245,158,11,.20),transparent 60%);
+  pointer-events:none;
+}
+.result-trophy{
+  font-size:4rem;line-height:1;margin-bottom:8px;
+  filter:drop-shadow(0 8px 30px rgba(245,158,11,.6));
+  animation:trophyFloat 3s ease-in-out infinite;
+}
+@keyframes trophyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.result-title{
+  font-family:var(--font-display);
+  font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:900;letter-spacing:-.5px;
+  background:linear-gradient(135deg,#fff,var(--primary-light),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:6px;
+}
+.result-sub{font-size:.9rem;color:var(--text-dim);margin-bottom:6px}
+
+.grade-ring{
+  position:relative;width:130px;height:130px;margin:16px auto;
+  border-radius:50%;
+  background:conic-gradient(var(--primary) var(--grade-deg,0deg),rgba(255,255,255,.08) 0deg);
+  padding:8px;
+  box-shadow:0 0 40px rgba(245,158,11,.4);
+  animation:ringPop .8s var(--ease-spring);
+}
+@keyframes ringPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.grade-inner{
+  width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at center,#0b0d1c,#05060f);
+  display:grid;place-items:center;flex-direction:column;
+  font-family:var(--font-display);
+  box-shadow:inset 0 0 30px rgba(0,0,0,.6);
+}
+.grade-letter{
+  font-size:2.6rem;font-weight:900;line-height:1;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.grade-label{font-size:.62rem;font-weight:800;letter-spacing:2px;color:var(--text-mute);text-transform:uppercase;margin-top:2px}
+
+.result-title-text{font-size:1.1rem;font-weight:900;color:var(--primary-light);letter-spacing:.5px;margin-top:8px;text-transform:uppercase}
+.result-xp-line{font-size:.88rem;color:var(--text-dim);margin-top:6px}
+.result-xp-line strong{color:var(--accent);font-family:var(--font-mono);font-weight:800}
+
+.result-stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;
+  margin:20px 0 8px;
+}
+.rs-box{
+  padding:16px 10px;border-radius:var(--radius-sm);
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--glass-border);
+  transition:all .3s var(--ease-out);
+}
+.rs-box:hover{transform:translateY(-3px);border-color:rgba(245,158,11,.3)}
+.rs-val{font-size:1.7rem;font-weight:900;line-height:1.1;font-family:var(--font-mono)}
+.rs-val.green{color:var(--emerald);text-shadow:0 0 20px rgba(16,185,129,.5)}
+.rs-val.red{color:#FCA5A5;text-shadow:0 0 20px rgba(244,63,94,.5)}
+.rs-val.cyan{color:var(--accent);text-shadow:0 0 20px rgba(6,182,212,.5)}
+.rs-val.violet{color:#C4B5FD;text-shadow:0 0 20px rgba(139,92,246,.5)}
+.rs-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.5px;color:var(--text-mute);text-transform:uppercase;margin-top:6px}
+
+.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:14px 18px;border-radius:12px;
+  background:rgba(245,158,11,.06);border-left:3px solid var(--primary);margin-top:6px;text-align:left}
+
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+
+/* Review */
+.review-panel{
+  padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);
+  text-align:left;
+}
+.review-panel h4{
+  font-size:.9rem;font-weight:900;color:var(--primary-light);
+  margin-bottom:12px;display:flex;align-items:center;gap:9px;
+  letter-spacing:.5px;text-transform:uppercase;
+}
+.review-list{display:grid;gap:8px}
+.review-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:11px 14px;border-radius:12px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.05);
+  font-size:.84rem;line-height:1.6;
+  transition:all .3s var(--ease-out);
+}
+.review-item:hover{background:rgba(255,255,255,.06);transform:translateX(3px)}
+.review-item .ri-num{
+  font-weight:900;color:var(--text-mute);flex-shrink:0;
+  font-family:var(--font-mono);font-size:.78rem;min-width:26px;
+}
+.review-item .ri-text{flex:1;color:var(--text-dim)}
+.review-item .ri-status{
+  font-size:.68rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:20px;flex-shrink:0;
+}
+.ri-status.correct{background:rgba(16,185,129,.15);color:#34D399}
+.ri-status.wrong{background:rgba(244,63,94,.15);color:#FCA5A5}
+.ri-status.skipped{background:rgba(255,255,255,.06);color:var(--text-mute)}
+
+/* ============================================================
+   ACHIEVEMENT TOAST
+   ============================================================ */
+.toast-wrap{
+  position:fixed;top:74px;right:16px;z-index:9999;
+  display:flex;flex-direction:column;gap:10px;pointer-events:none;
+  max-width:calc(100vw - 32px);
+}
+.toast{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 20px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(11,13,28,.95),rgba(5,6,15,.95));
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:0 16px 40px rgba(0,0,0,.6),0 0 0 1px rgba(245,158,11,.15);
+  pointer-events:auto;
+  animation:toastIn .5s var(--ease-spring);
+  max-width:340px;
+}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast.out{animation:toastOut .4s ease forwards}
+@keyframes toastOut{to{transform:translateX(120%);opacity:0}}
+.toast-icon{
+  width:42px;height:42px;border-radius:12px;flex-shrink:0;
+  display:grid;place-items:center;font-size:1.2rem;color:#0b0d1c;
+  background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  box-shadow:0 0 24px rgba(245,158,11,.6);
+}
+.toast-icon.green{background:linear-gradient(135deg,var(--emerald),#059669);color:#fff;box-shadow:0 0 24px rgba(16,185,129,.6)}
+.toast-icon.cyan{background:linear-gradient(135deg,var(--accent),#0891b2);color:#fff;box-shadow:0 0 24px rgba(6,182,212,.6)}
+.toast-icon.violet{background:linear-gradient(135deg,var(--violet),#7c3aed);color:#fff;box-shadow:0 0 24px rgba(139,92,246,.6)}
+.toast-content{flex:1;min-width:0}
+.toast-title{font-size:.85rem;font-weight:900;color:var(--text);letter-spacing:.3px}
+.toast-desc{font-size:.75rem;color:var(--text-dim);line-height:1.5;margin-top:2px}
+
+/* Floating score popup */
+.score-pop{
+  position:fixed;z-index:9997;pointer-events:none;
+  font-family:var(--font-display);font-weight:900;font-size:1.6rem;
+  color:var(--primary-light);
+  text-shadow:0 0 20px rgba(245,158,11,.8);
+  animation:scorePop 1s var(--ease-out) forwards;
+}
+@keyframes scorePop{
+  0%{transform:translate(-50%,0) scale(.5);opacity:0}
+  20%{transform:translate(-50%,-20px) scale(1.2);opacity:1}
+  100%{transform:translate(-50%,-80px) scale(1);opacity:0}
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:600px){
+  .wrap{padding:calc(60px + 14px) 12px 50px}
+  .q-card{padding:20px 18px}
+  .opt{padding:13px 14px;font-size:.87rem;gap:11px}
+  .opt-letter{width:30px;height:30px;font-size:.78rem}
+  .hud-top{padding:12px 14px;gap:8px}
+  .hud-timer{padding:6px 11px;font-size:.78rem}
+  .hud-hp .heart{font-size:1rem}
+  .power-btn{padding:9px 14px;font-size:.72rem}
+  .btn{padding:12px 22px;font-size:.82rem;width:100%;justify-content:center}
+  .action-bar{flex-direction:column}
+  .result-hero{padding:28px 18px}
+  .grade-ring{width:110px;height:110px}
+  .grade-letter{font-size:2.2rem}
+  .rs-val{font-size:1.4rem}
+  .toast{max-width:calc(100vw - 24px);padding:12px 14px}
+  .toast-icon{width:36px;height:36px;font-size:1rem}
+}
+@media (max-width:380px){
+  .opt-letter{width:28px;height:28px;font-size:.72rem}
+  .hud-timer{font-size:.72rem}
+}
+
+@media print{
+  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap{display:none!important}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+<canvas id="particles"></canvas>
+<canvas id="confettiCanvas"></canvas>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-orb">
+    <div class="loader-core"><i class="fas fa-scroll"></i></div>
+  </div>
+  <div class="loader-title">HISTOEXPLORER</div>
+  <div class="loader-sub">Menyiapkan arena kuis premium...</div>
+  <div class="loader-bar"><span id="loaderBar"></span></div>
+  <div class="loader-pct" id="loaderPct">0%</div>
+</div>
+
+<!-- HEADER -->
+<header class="game-header">
+  <div class="brand">
+    <div class="brand-logo"><i class="fas fa-scroll"></i></div>
+    <div class="brand-text">
+      <span class="t1">KUIS 1 · PERTEMUAN 1</span>
+      <span class="t2">Pengertian Sejarah</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="Suara"><i class="fas fa-volume-up"></i></button>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema"><i class="fas fa-sun"></i></button>
+  </div>
+</header>
+
+<!-- TOAST WRAP -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- MAIN -->
+<main class="wrap">
+
+  <!-- ================= START SCREEN ================= -->
+  <section class="start-screen" id="startScreen">
+    <span class="hero-badge"><i class="fas fa-crown"></i> PREMIUM GAME MODE</span>
+    <h1 class="hero-title">Pengertian Sejarah<br>&amp; Konsep Dasar</h1>
+    <p class="hero-sub">
+      Kuasai <strong>etimologi sejarah</strong>, <strong>makna KBBI</strong>, dan <strong>konsep manusia–ruang–waktu</strong> melalui arena kuis bergaya premium. Kumpulkan XP, jaga nyawa, dan raih predikat <strong>Sejarawan Muda</strong>!
+    </p>
+
+    <div class="stats-showcase">
+      <span class="stat-pill pi-gold"><i class="fas fa-question-circle"></i> 15 Soal Acak</span>
+      <span class="stat-pill pi-cyan"><i class="fas fa-stopwatch"></i> 20 Menit</span>
+      <span class="stat-pill pi-emerald"><i class="fas fa-heart"></i> 3 Nyawa</span>
+      <span class="stat-pill pi-violet"><i class="fas fa-bolt"></i> Combo &amp; XP</span>
+    </div>
+
+    <div class="rules-card">
+      <h4><i class="fas fa-list-check"></i> Cara Bermain</h4>
+      <ul>
+        <li><span class="rule-num">1</span> Jawab 15 soal HOTS — soal dipilih acak dari bank 30 soal.</li>
+        <li><span class="rule-num">2</span> Jawaban benar memberi <strong>XP</strong> + memicu <strong>combo</strong>. Jawaban salah mengurangi <strong>1 nyawa</strong>.</li>
+        <li><span class="rule-num">3</span> Gunakan <strong>power-up</strong>: 50:50, Petunjuk, Lewati (masing-masing 1×).</li>
+        <li><span class="rule-num">4</span> Raih skor tertinggi untuk membuka <strong>achievement</strong> eksklusif!</li>
+      </ul>
+    </div>
+
+    <button class="btn-play" onclick="startGame()">
+      <i class="fas fa-play"></i> Mulai Bermain
+    </button>
+  </section>
+
+  <!-- ================= GAME HUD ================= -->
+  <section class="game-hud" id="gameHud">
+
+    <!-- TOP HUD -->
+    <div class="hud-top">
+      <div class="hud-hp" id="hudHp"></div>
+      <div class="hud-xp">
+        <div class="hud-xp-head">
+          <span class="lvl">LV <span id="hudLevel">1</span></span>
+          <span class="val"><span id="hudXp">0</span> / <span id="hudXpMax">100</span> XP</span>
+        </div>
+        <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
+      </div>
+      <div class="hud-timer" id="hudTimer">
+        <i class="fas fa-stopwatch"></i> <span id="hudTimerVal">20:00</span>
+      </div>
+    </div>
+
+    <!-- MIDDLE -->
+    <div class="hud-middle">
+      <span><i class="fas fa-question-circle" style="color:var(--primary)"></i> Soal <strong id="hudQNum">1</strong>/<strong>15</strong></span>
+      <span class="combo-tag" id="comboTag"><i class="fas fa-fire"></i> Combo ×<span id="comboVal">0</span></span>
+      <span><i class="fas fa-star" style="color:var(--primary-light)"></i> Skor <strong id="hudScore" style="font-family:var(--font-mono)">0</strong></span>
+    </div>
+
+    <!-- QUESTION CARD -->
+    <div class="q-card" id="qCard">
+      <div class="q-meta">
+        <span class="q-num"><i class="fas fa-bookmark"></i> <span id="qNumLabel">Soal 1</span></span>
+        <span class="q-topic" id="qTopic"><i class="fas fa-tag"></i> <span id="qTopicText">Etimologi Sejarah</span></span>
+      </div>
+      <div class="q-text" id="qText">Memuat soal...</div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <!-- FEEDBACK -->
+    <div class="feedback" id="feedback">
+      <div class="fb-head">
+        <div class="fb-icon" id="fbIcon"><i class="fas fa-check"></i></div>
+        <div class="fb-title" id="fbTitle">BENAR!</div>
+      </div>
+      <div class="fb-body" id="fbBody"></div>
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="hud-bottom">
+      <div class="power-bar">
+        <button class="power-btn p50" id="p50" onclick="usePower('50')">
+          <i class="fas fa-compress-alt"></i> 50:50 <span class="cnt" id="c50">1</span>
+        </button>
+        <button class="power-btn phint" id="phint" onclick="usePower('hint')">
+          <i class="fas fa-lightbulb"></i> Petunjuk <span class="cnt" id="chint">1</span>
+        </button>
+        <button class="power-btn pskip" id="pskip" onclick="usePower('skip')">
+          <i class="fas fa-forward"></i> Lewati <span class="cnt" id="cskip">1</span>
+        </button>
+      </div>
+      <div class="action-bar">
+        <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>
+          Selanjutnya <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="btn btn-primary" id="btnFinish" onclick="finishGame()" style="display:none">
+          Lihat Hasil <i class="fas fa-flag-checkered"></i>
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ================= RESULT SCREEN ================= -->
+  <section class="result-screen" id="resultScreen">
+    <div class="result-hero">
+      <div class="result-trophy" id="rTrophy">🏆</div>
+      <h2 class="result-title" id="rTitle">Luar Biasa!</h2>
+      <p class="result-sub" id="rSub">Kuis 1 · Pertemuan 1</p>
+
+      <div class="grade-ring" id="gradeRing">
+        <div class="grade-inner">
+          <div class="grade-letter" id="gradeLetter">A</div>
+          <div class="grade-label" id="gradeLabel">Sangat Baik</div>
+        </div>
+      </div>
+
+      <div class="result-title-text" id="rRank">SEJARAWAN MUDA</div>
+      <div class="result-xp-line">Total XP: <strong id="rXp">0</strong> · Best Combo: <strong id="rBestCombo">0</strong></div>
+
+      <div class="result-stats">
+        <div class="rs-box"><div class="rs-val green" id="rBenar">0</div><div class="rs-lbl">Benar</div></div>
+        <div class="rs-box"><div class="rs-val red" id="rSalah">0</div><div class="rs-lbl">Salah</div></div>
+        <div class="rs-box"><div class="rs-val cyan" id="rSkor">0</div><div class="rs-lbl">Skor</div></div>
+        <div class="rs-box"><div class="rs-val violet" id="rXpTotal">0</div><div class="rs-lbl">XP Total</div></div>
+      </div>
+
+      <div class="result-msg" id="rMsg"></div>
+
+      <div class="result-actions">
+        <button class="btn btn-primary" onclick="resetGame()"><i class="fas fa-redo"></i> Main Lagi</button>
+        <button class="btn btn-ghost" onclick="window.location.reload()"><i class="fas fa-home"></i> Menu Awal</button>
+      </div>
+    </div>
+
+    <div class="review-panel">
+      <h4><i class="fas fa-list-check"></i> Rincian Jawaban</h4>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ============================================================
+   BANK SOAL — 30 SOAL HOTS · PERTEMUAN 1
+   ============================================================ */
+const BANK_SOAL = [
+  { id:1, topic:"Etimologi Sejarah",
+    question:"Seorang siswa menemukan kata 'syajaratun' dalam bahasa Arab yang berarti pohon. Ia kemudian menyimpulkan bahwa sejarah adalah silsilah yang terus tumbuh. Analisis yang paling tepat terhadap kesimpulan siswa tersebut adalah...",
+    options:[
+      {letter:"A",text:"Kesimpulan salah karena syajaratun hanya merujuk pada pohon secara harfiah.",correct:false,explanation:"Syajaratun memiliki makna metaforis yang dalam, bukan sekadar pohon harfiah."},
+      {letter:"B",text:"Kesimpulan tepat karena sejarah memang identik dengan silsilah keluarga kerajaan.",correct:false,explanation:"Sejarah lebih luas dari silsilah kerajaan."},
+      {letter:"C",text:"Kesimpulan tepat karena konsep pohon menggambarkan keterhubungan antara akar, batang, dan ranting yang saling terkait.",correct:true,explanation:"Tepat! Metafora pohon menekankan keterhubungan dan pertumbuhan sejarah."},
+      {letter:"D",text:"Kesimpulan salah karena sejarah tidak dapat digambarkan sebagai pohon.",correct:false,explanation:"Metafora pohon justru cara kuat memahami keterhubungan sejarah."},
+      {letter:"E",text:"Kesimpulan hanya berlaku untuk sejarah keluarga, bukan sejarah nasional.",correct:false,explanation:"Konsep pohon berlaku universal."}
+    ], difficulty:"hard", hint:"Makna metaforis pohon: akar, batang, cabang, ranting yang saling terhubung.", points:70 },
+
+  { id:2, topic:"Etimologi Sejarah",
+    question:"Kata 'sejarah' dalam bahasa Arab (syajaratun) memiliki makna metaforis yang mendalam. Makna metaforis tersebut paling erat kaitannya dengan konsep...",
+    options:[
+      {letter:"A",text:"Kronologi waktu yang linier",correct:false,explanation:"Kronologi linier lebih dekat dengan Geschichte."},
+      {letter:"B",text:"Silsilah dan keterhubungan antar generasi",correct:true,explanation:"Tepat! Pohon = akar, batang, cabang, ranting yang saling terhubung."},
+      {letter:"C",text:"Penyelidikan ilmiah",correct:false,explanation:"Penyelidikan ilmiah adalah makna historia."},
+      {letter:"D",text:"Peristiwa yang sudah terjadi",correct:false,explanation:"Ini makna Geschichte."},
+      {letter:"E",text:"Cerita rakyat turun-temurun",correct:false,explanation:"Bukan makna utama syajaratun."}
+    ], difficulty:"medium", hint:"Pohon = akar, batang, cabang, ranting yang saling terhubung.", points:60 },
+
+  { id:3, topic:"Etimologi Sejarah",
+    question:"'History' berasal dari bahasa Yunani 'historia' yang berarti 'pengetahuan yang diperoleh melalui penyelidikan'. Implikasi paling penting dari makna etimologis tersebut bagi kajian sejarah adalah...",
+    options:[
+      {letter:"A",text:"Sejarah harus ditulis dengan gaya bahasa yang indah.",correct:false,explanation:"Gaya bahasa bukan implikasi utama."},
+      {letter:"B",text:"Sejarah menuntut metode kritis dan verifikasi data, bukan sekadar cerita.",correct:true,explanation:"Tepat! Penyelidikan = metode kritis, verifikasi."},
+      {letter:"C",text:"Sejarah hanya boleh ditulis oleh raja atau bangsawan.",correct:false,explanation:"Tidak ada kaitan dengan status sosial."},
+      {letter:"D",text:"Sejarah adalah mitos yang dipercaya masyarakat.",correct:false,explanation:"Historia justru menolak mitos tanpa verifikasi."},
+      {letter:"E",text:"Sejarah tidak memerlukan bukti karena sudah terjadi.",correct:false,explanation:"Justru historia menuntut bukti."}
+    ], difficulty:"hard", hint:"Kata kunci 'penyelidikan' → metode kritis dan verifikasi data.", points:70 },
+
+  { id:4, topic:"Etimologi Sejarah",
+    question:"Kata 'Geschichte' dalam bahasa Jerman berarti 'sesuatu yang telah terjadi' atau 'kejadian'. Perbedaan paling mendasar antara Geschichte dan Historie dalam tradisi Jerman adalah...",
+    options:[
+      {letter:"A",text:"Geschichte = realitas peristiwa; Historie = narasi/tafsir atas peristiwa.",correct:true,explanation:"Tepat! Geschichte = peristiwa nyata; Historie = narasi/tafsirnya."},
+      {letter:"B",text:"Geschichte = narasi; Historie = realitas.",correct:false,explanation:"Terbalik."},
+      {letter:"C",text:"Keduanya sama saja, hanya beda bahasa.",correct:false,explanation:"Ada perbedaan konseptual penting."},
+      {letter:"D",text:"Geschichte = mitos; Historie = fakta.",correct:false,explanation:"Geschichte justru realitas peristiwa."},
+      {letter:"E",text:"Geschichte = silsilah; Historie = kronologi.",correct:false,explanation:"Bukan itu perbedaannya."}
+    ], difficulty:"hard", hint:"Geschichte = apa yang sungguh berlangsung; Historie = tafsir atasnya.", points:70 },
+
+  { id:5, topic:"Etimologi Sejarah",
+    question:"Isi yang tepat untuk melengkapi tabel perbandingan tiga akar kata sejarah:\n\n| Bahasa | Kata | Arti |\n| Arab | Syajaratun | Pohon |\n| Yunani | Historia | ? |\n| Jerman | Geschichte | ? |",
+    options:[
+      {letter:"A",text:"Penyelidikan; Kejadian yang telah terjadi",correct:true,explanation:"Tepat! Historia = penyelidikan; Geschichte = kejadian yang telah terjadi."},
+      {letter:"B",text:"Kejadian; Penyelidikan",correct:false,explanation:"Terbalik."},
+      {letter:"C",text:"Pohon; Silsilah",correct:false,explanation:"Bukan makna historia dan Geschichte."},
+      {letter:"D",text:"Cerita; Mitos",correct:false,explanation:"Bukan makna historia dan Geschichte."},
+      {letter:"E",text:"Kronologi; Sinkronik",correct:false,explanation:"Bukan makna historia dan Geschichte."}
+    ], difficulty:"easy", hint:"Historia = penyelidikan (Yunani). Geschichte = kejadian yang telah terjadi (Jerman).", points:50 },
+
+  { id:6, topic:"Etimologi Sejarah",
+    question:"Analisis yang paling tepat tentang hubungan antara tiga akar kata sejarah (Syajaratun, Historia, Geschichte) adalah...",
+    options:[
+      {letter:"A",text:"Ketiganya saling bertentangan dan tidak dapat disatukan.",correct:false,explanation:"Justru ketiganya saling melengkapi."},
+      {letter:"B",text:"Ketiganya menekankan aspek berbeda: genealogis (Arab), ilmiah (Yunani), faktual (Jerman) — yang saling melengkapi.",correct:true,explanation:"Tepat! Ketiganya memberi dimensi berbeda namun saling melengkapi."},
+      {letter:"C",text:"Hanya Syajaratun yang relevan untuk kajian sejarah modern.",correct:false,explanation:"Ketiganya tetap relevan."},
+      {letter:"D",text:"Geschichte lebih penting dari dua lainnya.",correct:false,explanation:"Tidak ada yang lebih penting."},
+      {letter:"E",text:"Ketiganya tidak ada hubungannya dengan ilmu sejarah.",correct:false,explanation:"Justru ketiganya adalah akar etimologis sejarah."}
+    ], difficulty:"hard", hint:"Arab = silsilah; Yunani = ilmiah; Jerman = faktual.", points:70 },
+
+  { id:7, topic:"Etimologi Sejarah",
+    question:"Jika seorang sejarawan ingin menekankan bahwa sejarah harus berdasarkan bukti otentik dan bukan mitos, maka akar kata yang paling relevan untuk dijadikan rujukan adalah...",
+    options:[
+      {letter:"A",text:"Syajaratun (Arab)",correct:false,explanation:"Syajaratun menekankan silsilah."},
+      {letter:"B",text:"Geschichte (Jerman)",correct:true,explanation:"Tepat! Geschichte menekankan realitas peristiwa yang sungguh terjadi."},
+      {letter:"C",text:"Historia (Yunani)",correct:false,explanation:"Historia menekankan penyelidikan."},
+      {letter:"D",text:"History (Inggris)",correct:false,explanation:"Hanya turunan dari historia."},
+      {letter:"E",text:"Semua akar kata sama relevannya.",correct:false,explanation:"Ada nuansa berbeda."}
+    ], difficulty:"medium", hint:"Bukti otentik = berpijak pada realitas peristiwa = Geschichte.", points:60 },
+
+  { id:8, topic:"Makna KBBI",
+    question:"KBBI memberikan tiga arti untuk kata 'sejarah'. Arti yang menekankan dimensi genealogis atau garis keturunan adalah...",
+    options:[
+      {letter:"A",text:"Asal-usul (keturunan) silsilah",correct:true,explanation:"Tepat! Arti ke-1 KBBI = asal-usul, silsilah, genealogis."},
+      {letter:"B",text:"Kejadian dan peristiwa yang benar-benar terjadi pada masa lampau",correct:false,explanation:"Ini arti ke-2 KBBI."},
+      {letter:"C",text:"Pengetahuan atau uraian tentang peristiwa",correct:false,explanation:"Ini arti ke-3 KBBI."},
+      {letter:"D",text:"Ilmu yang mempelajari manusia purba",correct:false,explanation:"Bukan arti KBBI."},
+      {letter:"E",text:"Cerita rakyat turun-temurun",correct:false,explanation:"Bukan arti KBBI."}
+    ], difficulty:"easy", hint:"Genealogis = garis keturunan = silsilah.", points:50 },
+
+  { id:9, topic:"Makna KBBI",
+    question:"Perhatikan tiga arti sejarah menurut KBBI:\n(1) Asal-usul (keturunan) silsilah.\n(2) Kejadian dan peristiwa yang benar-benar terjadi pada masa lampau.\n(3) Pengetahuan atau uraian tentang peristiwa yang benar-benar terjadi.\n\nAnalisis yang paling tepat tentang ketiga arti tersebut adalah...",
+    options:[
+      {letter:"A",text:"Ketiganya saling bertentangan dan tidak dapat disatukan.",correct:false,explanation:"Justru ketiganya saling melengkapi."},
+      {letter:"B",text:"Ketiganya menggambarkan tiga dimensi: genealogis, faktual, dan ilmiah/naratif.",correct:true,explanation:"Tepat! Ketiganya melengkapi pemahaman tentang sejarah."},
+      {letter:"C",text:"Hanya arti ke-2 yang relevan untuk kajian sejarah modern.",correct:false,explanation:"Ketiganya tetap relevan."},
+      {letter:"D",text:"Ketiganya sama saja, hanya berbeda kata.",correct:false,explanation:"Ada perbedaan makna mendasar."},
+      {letter:"E",text:"Ketiganya hanya berlaku untuk sejarah lokal.",correct:false,explanation:"Berlaku universal."}
+    ], difficulty:"hard", hint:"Silsilah (genealogis), kejadian (faktual), pengetahuan (ilmiah/naratif).", points:70 },
+
+  { id:10, topic:"Makna KBBI",
+    question:"Seorang siswa menulis definisi: 'Sejarah adalah ilmu yang mempelajari masa lalu.' Bagaimana cara memperbaiki definisi tersebut agar lebih lengkap sesuai makna KBBI dan hakikat sejarah?",
+    options:[
+      {letter:"A",text:"Menambahkan 'yang hanya terjadi sekali'",correct:false,explanation:"Tidak semua peristiwa unik."},
+      {letter:"B",text:"Menambahkan 'beserta makna dan keterkaitannya dengan masa kini dan masa depan'",correct:true,explanation:"Tepat! Definisi lengkap mencakup makna dan keterkaitan."},
+      {letter:"C",text:"Menambahkan 'yang tidak dapat dibuktikan'",correct:false,explanation:"Sejarah justru berbasis bukti."},
+      {letter:"D",text:"Menambahkan 'yang bersifat fiktif'",correct:false,explanation:"Sejarah bukan fiksi."},
+      {letter:"E",text:"Tidak perlu diperbaiki",correct:false,explanation:"Definisi masih terlalu sempit."}
+    ], difficulty:"medium", hint:"Definisi lengkap mencakup makna dan keterkaitan dengan masa kini/depan.", points:60 },
+
+  { id:11, topic:"Makna KBBI",
+    question:"Ketika KBBI menyebut sejarah sebagai 'pengetahuan atau uraian tentang peristiwa yang benar-benar terjadi pada masa lampau', dimensi yang ditekankan adalah...",
+    options:[
+      {letter:"A",text:"Dimensi silsilah/genealogis",correct:false,explanation:"Itu arti ke-1."},
+      {letter:"B",text:"Dimensi ilmiah dan naratif",correct:true,explanation:"Tepat! 'Pengetahuan atau uraian' = dimensi ilmiah dan naratif."},
+      {letter:"C",text:"Dimensi mitologis",correct:false,explanation:"Bukan mitos."},
+      {letter:"D",text:"Dimensi fiktif",correct:false,explanation:"Sejarah bukan fiksi."},
+      {letter:"E",text:"Dimensi magis",correct:false,explanation:"Bukan dimensi magis."}
+    ], difficulty:"medium", hint:"'Pengetahuan atau uraian' = disusun secara ilmiah dan naratif.", points:60 },
+
+  { id:12, topic:"Makna KBBI",
+    question:"Perbedaan paling mendasar antara arti ke-1 (silsilah) dan arti ke-2 (kejadian nyata) sejarah menurut KBBI terletak pada...",
+    options:[
+      {letter:"A",text:"Objek kajiannya: arti ke-1 tentang garis keturunan; arti ke-2 tentang peristiwa.",correct:true,explanation:"Tepat! Arti ke-1 fokus pada silsilah; arti ke-2 fokus pada peristiwa faktual."},
+      {letter:"B",text:"Tidak ada perbedaan sama sekali.",correct:false,explanation:"Ada perbedaan objek kajian."},
+      {letter:"C",text:"Arti ke-1 lebih ilmiah dari arti ke-2.",correct:false,explanation:"Justru arti ke-2 lebih faktual."},
+      {letter:"D",text:"Arti ke-2 hanya berlaku untuk sejarah nasional.",correct:false,explanation:"Berlaku universal."},
+      {letter:"E",text:"Arti ke-1 adalah fiksi, arti ke-2 adalah fakta.",correct:false,explanation:"Keduanya fakta, hanya beda fokus."}
+    ], difficulty:"medium", hint:"Arti ke-1 = silsilah. Arti ke-2 = peristiwa.", points:60 },
+
+  { id:13, topic:"Konsep Manusia",
+    question:"Dalam kajian sejarah, manusia berperan sebagai subjek sekaligus objek. Analisis yang paling tepat tentang peran ganda tersebut adalah...",
+    options:[
+      {letter:"A",text:"Manusia sebagai subjek = pelaku sejarah; sebagai objek = yang dikaji dalam sejarah.",correct:true,explanation:"Tepat! Manusia adalah pelaku (subjek) sekaligus bahan kajian (objek)."},
+      {letter:"B",text:"Manusia hanya sebagai subjek, tidak pernah sebagai objek.",correct:false,explanation:"Manusia juga menjadi objek kajian."},
+      {letter:"C",text:"Manusia hanya sebagai objek, tidak pernah sebagai subjek.",correct:false,explanation:"Manusia juga pelaku sejarah."},
+      {letter:"D",text:"Manusia tidak berperan dalam sejarah.",correct:false,explanation:"Justru manusia inti sejarah."},
+      {letter:"E",text:"Peran ganda hanya berlaku untuk tokoh besar.",correct:false,explanation:"Berlaku untuk semua manusia."}
+    ], difficulty:"medium", hint:"Subjek = pelaku; objek = yang dikaji.", points:60 },
+
+  { id:14, topic:"Konsep Manusia",
+    question:"Seorang siswa berpendapat: 'Tanpa manusia, sejarah tidak akan ada.' Analisis yang paling tepat terhadap pernyataan tersebut adalah...",
+    options:[
+      {letter:"A",text:"Pernyataan tepat karena sejarah adalah peristiwa yang melibatkan manusia sebagai pelaku dan penciptanya.",correct:true,explanation:"Tepat! Manusia adalah pelaku dan pencipta sejarah."},
+      {letter:"B",text:"Pernyataan salah karena sejarah tetap ada meski tanpa manusia.",correct:false,explanation:"Tanpa manusia, tidak ada peristiwa sejarah."},
+      {letter:"C",text:"Pernyataan hanya berlaku untuk sejarah modern.",correct:false,explanation:"Berlaku untuk semua periode."},
+      {letter:"D",text:"Pernyataan tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai berdasarkan konsep dasar."},
+      {letter:"E",text:"Pernyataan salah karena sejarah adalah peristiwa alam.",correct:false,explanation:"Sejarah adalah peristiwa manusia."}
+    ], difficulty:"easy", hint:"Manusia adalah pelaku dan pencipta sejarah.", points:50 },
+
+  { id:15, topic:"Konsep Manusia",
+    question:"Peran manusia dalam sejarah dapat berupa aktor, pengamat, dan penerima dampak. Contoh peran 'penerima dampak' adalah...",
+    options:[
+      {letter:"A",text:"Soekarno membacakan teks Proklamasi",correct:false,explanation:"Ini peran aktor."},
+      {letter:"B",text:"Sejarawan mencatat peristiwa Proklamasi",correct:false,explanation:"Ini peran pengamat."},
+      {letter:"C",text:"Rakyat Indonesia yang merasakan kebebasan setelah Proklamasi",correct:true,explanation:"Tepat! Rakyat sebagai penerima dampak merasakan hasil peristiwa."},
+      {letter:"D",text:"Fotografer mengabadikan momen Proklamasi",correct:false,explanation:"Ini peran pengamat."},
+      {letter:"E",text:"Pemuda mendesak Soekarno segera memproklamasikan kemerdekaan",correct:false,explanation:"Ini peran aktor."}
+    ], difficulty:"medium", hint:"Penerima dampak = pihak yang merasakan akibat peristiwa.", points:60 },
+
+  { id:16, topic:"Konsep Manusia",
+    question:"Jika seorang siswa ingin meneliti 'peran pemuda dalam Sumpah Pemuda 1928', maka manusia dalam penelitian tersebut berperan sebagai...",
+    options:[
+      {letter:"A",text:"Subjek sejarah (pelaku)",correct:true,explanation:"Tepat! Pemuda sebagai pelaku/subjek sejarah."},
+      {letter:"B",text:"Objek alam",correct:false,explanation:"Bukan objek alam."},
+      {letter:"C",text:"Hanya sebagai penerima dampak",correct:false,explanation:"Pemuda adalah pelaku."},
+      {letter:"D",text:"Bukan bagian dari sejarah",correct:false,explanation:"Justru bagian utama."},
+      {letter:"E",text:"Hanya sebagai pengamat",correct:false,explanation:"Pemuda adalah pelaku."}
+    ], difficulty:"medium", hint:"Pemuda 1928 = pelaku/subjek sejarah.", points:60 },
+
+  { id:17, topic:"Konsep Manusia",
+    question:"Pernyataan yang paling tepat tentang hubungan manusia dan sejarah adalah...",
+    options:[
+      {letter:"A",text:"Manusia menciptakan sejarah, dan sejarah membentuk manusia.",correct:true,explanation:"Tepat! Ada hubungan timbal balik antara manusia dan sejarah."},
+      {letter:"B",text:"Hanya manusia besar yang menciptakan sejarah.",correct:false,explanation:"Semua manusia berperan."},
+      {letter:"C",text:"Manusia tidak dapat mempengaruhi sejarah.",correct:false,explanation:"Manusia justru pelaku sejarah."},
+      {letter:"D",text:"Sejarah tidak mempengaruhi manusia.",correct:false,explanation:"Sejarah membentuk identitas manusia."},
+      {letter:"E",text:"Manusia dan sejarah tidak saling terkait.",correct:false,explanation:"Justru saling terkait."}
+    ], difficulty:"medium", hint:"Hubungan timbal balik: manusia menciptakan sejarah, sejarah membentuk manusia.", points:60 },
+
+  { id:18, topic:"Konsep Ruang",
+    question:"Letak Indonesia di jalur perdagangan internasional menjadi salah satu faktor berkembangnya kerajaan maritim seperti Sriwijaya dan Majapahit. Analisis ini menunjukkan bahwa ruang dalam sejarah berfungsi sebagai...",
+    options:[
+      {letter:"A",text:"Faktor yang mempengaruhi jalannya sejarah",correct:true,explanation:"Tepat! Ruang (letak geografis) mempengaruhi jalannya sejarah."},
+      {letter:"B",text:"Sekadar latar belakang tanpa pengaruh",correct:false,explanation:"Ruang justru berpengaruh signifikan."},
+      {letter:"C",text:"Hiasan narasi semata",correct:false,explanation:"Ruang bukan sekadar hiasan."},
+      {letter:"D",text:"Hal yang tidak perlu dikaji",correct:false,explanation:"Ruang elemen fundamental."},
+      {letter:"E",text:"Faktor yang hanya berlaku untuk sejarah maritim",correct:false,explanation:"Berlaku untuk semua jenis sejarah."}
+    ], difficulty:"medium", hint:"Ruang mempengaruhi jalannya sejarah, dan sejarah membentuk ruang.", points:60 },
+
+  { id:19, topic:"Konsep Ruang",
+    question:"Aspek ruang dalam sejarah mencakup geografis, sosial-budaya, dan politik. Contoh aspek sosial-budaya dari ruang adalah...",
+    options:[
+      {letter:"A",text:"Letak astronomis Indonesia",correct:false,explanation:"Ini aspek geografis."},
+      {letter:"B",text:"Batas wilayah kekuasaan Majapahit",correct:false,explanation:"Ini aspek politik."},
+      {letter:"C",text:"Ruang interaksi antarmanusia dan kebudayaan di pasar tradisional",correct:true,explanation:"Tepat! Interaksi sosial-budaya = aspek sosial-budaya."},
+      {letter:"D",text:"Iklim tropis Indonesia",correct:false,explanation:"Ini aspek geografis."},
+      {letter:"E",text:"Jumlah penduduk suatu daerah",correct:false,explanation:"Lebih dekat ke demografis."}
+    ], difficulty:"medium", hint:"Sosial-budaya = interaksi antarmanusia dan kebudayaan.", points:60 },
+
+  { id:20, topic:"Konsep Ruang",
+    question:"Seorang sejarawan ingin meneliti pengaruh letak geografis terhadap pola perdagangan Kerajaan Sriwijaya. Aspek ruang yang paling dominan dikaji adalah...",
+    options:[
+      {letter:"A",text:"Aspek geografis",correct:true,explanation:"Tepat! Letak geografis = aspek geografis."},
+      {letter:"B",text:"Aspek sosial-budaya",correct:false,explanation:"Sosial-budaya lebih ke interaksi manusia."},
+      {letter:"C",text:"Aspek politik",correct:false,explanation:"Politik lebih ke kekuasaan."},
+      {letter:"D",text:"Aspek ekonomi murni",correct:false,explanation:"Letak geografis adalah aspek geografis."},
+      {letter:"E",text:"Aspek religius",correct:false,explanation:"Bukan fokus utama."}
+    ], difficulty:"easy", hint:"Letak geografis = aspek geografis.", points:50 },
+
+  { id:21, topic:"Konsep Ruang",
+    question:"Analisis yang paling tepat tentang hubungan antara ruang dan sejarah adalah...",
+    options:[
+      {letter:"A",text:"Ruang mempengaruhi sejarah, dan sejarah juga membentuk ruang.",correct:true,explanation:"Tepat! Ada hubungan timbal balik."},
+      {letter:"B",text:"Ruang tidak mempengaruhi sejarah.",correct:false,explanation:"Ruang justru berpengaruh."},
+      {letter:"C",text:"Sejarah tidak membentuk ruang.",correct:false,explanation:"Sejarah membentuk ruang."},
+      {letter:"D",text:"Ruang dan sejarah tidak saling terkait.",correct:false,explanation:"Justru saling terkait."},
+      {letter:"E",text:"Ruang hanya penting untuk sejarah lokal.",correct:false,explanation:"Berlaku untuk semua skala."}
+    ], difficulty:"medium", hint:"Hubungan timbal balik antara ruang dan sejarah.", points:60 },
+
+  { id:22, topic:"Konsep Ruang",
+    question:"Contoh sejarah yang menunjukkan bahwa sejarah membentuk ruang adalah...",
+    options:[
+      {letter:"A",text:"Pembangunan Kota Jakarta dari Sunda Kelapa hingga menjadi ibu kota modern",correct:true,explanation:"Tepat! Sejarah perkembangan kota membentuk ruangnya."},
+      {letter:"B",text:"Letak astronomis Indonesia",correct:false,explanation:"Ini fakta geografis."},
+      {letter:"C",text:"Iklim tropis Indonesia",correct:false,explanation:"Ini fakta geografis."},
+      {letter:"D",text:"Jumlah pulau di Indonesia",correct:false,explanation:"Ini fakta geografis."},
+      {letter:"E",text:"Garis pantai Indonesia",correct:false,explanation:"Ini fakta geografis."}
+    ], difficulty:"hard", hint:"Sejarah membentuk ruang = perubahan ruang akibat peristiwa sejarah.", points:70 },
+
+  { id:23, topic:"Konsep Waktu",
+    question:"Konsep 'periodisasi' dalam sejarah berfungsi untuk...",
+    options:[
+      {letter:"A",text:"Membagi waktu menjadi periode-periode tertentu agar kajian lebih terstruktur",correct:true,explanation:"Tepat! Periodisasi = pembagian waktu untuk memudahkan kajian."},
+      {letter:"B",text:"Menghafal tahun-tahun penting",correct:false,explanation:"Bukan sekadar menghafal."},
+      {letter:"C",text:"Menentukan siapa yang benar dan salah",correct:false,explanation:"Periodisasi bukan penilaian."},
+      {letter:"D",text:"Mengubah urutan waktu",correct:false,explanation:"Justru menyusun urutan waktu."},
+      {letter:"E",text:"Membuat ramalan masa depan",correct:false,explanation:"Bukan ramalan."}
+    ], difficulty:"easy", hint:"Periodisasi = pembagian waktu menjadi periode-periode.", points:50 },
+
+  { id:24, topic:"Konsep Waktu",
+    question:"'Waktu dalam sejarah bukan hanya urutan kronologis, tetapi juga menunjukkan perubahan dan kesinambungan.' Contoh yang paling tepat menggambarkan 'kesinambungan' adalah...",
+    options:[
+      {letter:"A",text:"Perubahan sistem pemerintahan dari Orde Baru ke Reformasi",correct:false,explanation:"Ini contoh perubahan."},
+      {letter:"B",text:"Tradisi batik yang tetap dipertahankan dari generasi ke generasi",correct:true,explanation:"Tepat! Kesinambungan = tradisi yang bertahan."},
+      {letter:"C",text:"Peristiwa Sumpah Pemuda 1928",correct:false,explanation:"Ini peristiwa tunggal."},
+      {letter:"D",text:"Penemuan teknologi baru",correct:false,explanation:"Ini contoh perubahan."},
+      {letter:"E",text:"Kemerdekaan Indonesia 1945",correct:false,explanation:"Ini peristiwa tunggal."}
+    ], difficulty:"medium", hint:"Kesinambungan = sesuatu yang bertahan/diwariskan.", points:60 },
+
+  { id:25, topic:"Konsep Waktu",
+    question:"Analisis yang paling tepat tentang peran waktu dalam kajian sejarah adalah...",
+    options:[
+      {letter:"A",text:"Waktu hanya berfungsi sebagai penanda kapan peristiwa terjadi.",correct:false,explanation:"Waktu lebih dari sekadar penanda."},
+      {letter:"B",text:"Waktu memberikan makna pada perubahan, kesinambungan, dan konteks peristiwa.",correct:true,explanation:"Tepat! Waktu memberi makna pada perubahan dan kesinambungan."},
+      {letter:"C",text:"Waktu tidak penting dalam sejarah.",correct:false,explanation:"Waktu elemen fundamental."},
+      {letter:"D",text:"Waktu hanya penting untuk sejarah modern.",correct:false,explanation:"Berlaku untuk semua periode."},
+      {letter:"E",text:"Waktu dapat diabaikan dalam penelitian sejarah.",correct:false,explanation:"Tidak bisa diabaikan."}
+    ], difficulty:"medium", hint:"Waktu memberi makna pada perubahan, kesinambungan, dan konteks.", points:60 },
+
+  { id:26, topic:"Konsep Waktu",
+    question:"Seorang siswa menganalisis peristiwa Sumpah Pemuda 1928 dengan melihat konteks pergerakan nasional pada masa itu. Analisis ini menunjukkan bahwa waktu dalam sejarah berfungsi sebagai...",
+    options:[
+      {letter:"A",text:"Konteks yang memberikan makna pada peristiwa",correct:true,explanation:"Tepat! Konteks waktu memberi makna pada peristiwa."},
+      {letter:"B",text:"Hiasan narasi semata",correct:false,explanation:"Bukan sekadar hiasan."},
+      {letter:"C",text:"Hal yang tidak perlu dikaji",correct:false,explanation:"Justru penting dikaji."},
+      {letter:"D",text:"Faktor yang hanya berlaku untuk peristiwa besar",correct:false,explanation:"Berlaku untuk semua peristiwa."},
+      {letter:"E",text:"Penghambat pemahaman sejarah",correct:false,explanation:"Justru membantu pemahaman."}
+    ], difficulty:"medium", hint:"Waktu sebagai konteks yang memberi makna pada peristiwa.", points:60 },
+
+  { id:27, topic:"Keterkaitan Tiga Elemen",
+    question:"'Peristiwa Proklamasi 17 Agustus 1945 di Jalan Pegangsaan Timur No. 56, Jakarta, tidak lepas dari peran Soekarno dan Hatta.'\n\nUnsur manusia, ruang, dan waktu dalam pernyataan tersebut secara berurutan adalah...",
+    options:[
+      {letter:"A",text:"Soekarno-Hatta; Jalan Pegangsaan Timur; 17 Agustus 1945",correct:true,explanation:"Tepat! Manusia = Soekarno-Hatta; Ruang = Jl. Pegangsaan Timur; Waktu = 17 Agustus 1945."},
+      {letter:"B",text:"17 Agustus 1945; Soekarno-Hatta; Jakarta",correct:false,explanation:"Urutan tidak sesuai."},
+      {letter:"C",text:"Jakarta; 17 Agustus 1945; Soekarno-Hatta",correct:false,explanation:"Urutan tidak sesuai."},
+      {letter:"D",text:"Soekarno-Hatta; 17 Agustus 1945; Jalan Pegangsaan",correct:false,explanation:"Ruang dan waktu tertukar."},
+      {letter:"E",text:"Jalan Pegangsaan; Soekarno-Hatta; 17 Agustus 1945",correct:false,explanation:"Urutan tidak sesuai."}
+    ], difficulty:"easy", hint:"Manusia = pelaku; Ruang = tempat; Waktu = kapan.", points:50 },
+
+  { id:28, topic:"Keterkaitan Tiga Elemen",
+    question:"Analisis yang paling tepat tentang keterkaitan tiga elemen (manusia, ruang, waktu) dalam sejarah adalah...",
+    options:[
+      {letter:"A",text:"Ketiganya berdiri sendiri dan tidak saling terkait.",correct:false,explanation:"Justru saling terkait."},
+      {letter:"B",text:"Manusia bertindak dalam ruang tertentu pada waktu tertentu — ketiganya membentuk peristiwa sejarah.",correct:true,explanation:"Tepat! Ketiganya membentuk peristiwa sejarah."},
+      {letter:"C",text:"Hanya manusia yang penting; ruang dan waktu tidak.",correct:false,explanation:"Ketiganya sama penting."},
+      {letter:"D",text:"Hanya waktu yang penting dalam sejarah.",correct:false,explanation:"Ketiganya sama penting."},
+      {letter:"E",text:"Ketiganya tidak dapat dikaji bersama-sama.",correct:false,explanation:"Justru harus dikaji bersama."}
+    ], difficulty:"medium", hint:"Manusia bertindak dalam ruang pada waktu tertentu = peristiwa sejarah.", points:60 },
+
+  { id:29, topic:"Keterkaitan Tiga Elemen",
+    question:"Jika seorang siswa ingin menganalisis peristiwa sejarah secara utuh, ia harus mempertimbangkan tiga elemen berikut...",
+    options:[
+      {letter:"A",text:"Manusia, ruang, waktu",correct:true,explanation:"Tepat! Tiga elemen fundamental sejarah."},
+      {letter:"B",text:"Politik, ekonomi, sosial",correct:false,explanation:"Ini aspek tema."},
+      {letter:"C",text:"Sebab, akibat, solusi",correct:false,explanation:"Ini analisis kausalitas."},
+      {letter:"D",text:"Primer, sekunder, tersier",correct:false,explanation:"Ini jenis sumber."},
+      {letter:"E",text:"Diakronik, sinkronik, kronologis",correct:false,explanation:"Ini pendekatan berpikir."}
+    ], difficulty:"easy", hint:"Tiga elemen fundamental: manusia, ruang, waktu.", points:50 },
+
+  { id:30, topic:"Keterkaitan Tiga Elemen",
+    question:"Seorang siswa berpendapat: 'Sejarah hanya tentang manusia, tidak perlu mempertimbangkan ruang dan waktu.' Bagaimana kritik yang tepat terhadap pendapat tersebut?",
+    options:[
+      {letter:"A",text:"Pendapat salah karena tanpa ruang dan waktu, peristiwa sejarah tidak dapat dipahami secara utuh.",correct:true,explanation:"Tepat! Ruang dan waktu memberi konteks pada peristiwa manusia."},
+      {letter:"B",text:"Pendapat benar karena sejarah hanya tentang manusia.",correct:false,explanation:"Ruang dan waktu juga penting."},
+      {letter:"C",text:"Pendapat benar karena ruang dan waktu tidak relevan.",correct:false,explanation:"Justru sangat relevan."},
+      {letter:"D",text:"Pendapat salah karena sejarah hanya tentang ruang.",correct:false,explanation:"Sejarah bukan hanya tentang ruang."},
+      {letter:"E",text:"Pendapat tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai dengan argumen."}
+    ], difficulty:"hard", hint:"Tanpa ruang dan waktu, peristiwa manusia tidak punya konteks.", points:70 }
+];
+
+/* ============================================================
+   CONSTANTS & STATE
+   ============================================================ */
+const TOTAL_Q = 15;
+const TIME_LIMIT = 20 * 60;
+
+const state = {
+  questions: [],
+  currentIndex: 0,
+  answers: [],
+  score: 0,
+  xp: 0,
+  level: 1,
+  hp: 3,
+  maxHp: 3,
+  combo: 0,
+  bestCombo: 0,
+  timer: null,
+  timeLeft: TIME_LIMIT,
+  started: false,
+  finished: false,
+  powers: { p50:1, hint:1, skip:1 },
+  soundOn: true
+};
+
+/* ============================================================
+   AUDIO — Web Audio API
+   ============================================================ */
+let audioCtx = null;
+function ensureAudio(){
+  if (!audioCtx) {
+    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){}
+  }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}
+function playTone(freq, dur, type, vol){
+  if (!state.soundOn) return;
+  ensureAudio();
+  if (!audioCtx) return;
+  try {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = type || 'sine';
+    o.frequency.value = freq;
+    g.gain.setValueAtTime(vol || 0.08, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + dur);
+  } catch(e){}
+}
+function sfxClick(){ playTone(520, .08, 'triangle', .06); }
+function sfxCorrect(){
+  playTone(660, .12, 'sine', .10);
+  setTimeout(()=>playTone(880, .15, 'sine', .10), 80);
+  setTimeout(()=>playTone(1100, .20, 'sine', .08), 160);
+}
+function sfxWrong(){
+  playTone(200, .18, 'sawtooth', .10);
+  setTimeout(()=>playTone(150, .25, 'sawtooth', .08), 120);
+}
+function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(()=>playTone(1200, .12, 'triangle', .07), 60); }
+function sfxLevelUp(){
+  [523, 659, 784, 1046].forEach((f, i) => setTimeout(()=>playTone(f, .16, 'sine', .10), i*90));
+}
+function sfxFinish(){
+  [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(()=>playTone(f, .22, 'sine', .10), i*120));
+}
+
+function toggleSound(){
+  state.soundOn = !state.soundOn;
+  const btn = document.getElementById('soundBtn');
+  btn.innerHTML = state.soundOn ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+  if (state.soundOn) sfxClick();
+}
+
+/* ============================================================
+   THEME
+   ============================================================ */
+function toggleTheme(){
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  const next = cur === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').innerHTML = next === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  sfxClick();
+}
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+(function loaderInit(){
+  const bar = document.getElementById('loaderBar');
+  const pct = document.getElementById('loaderPct');
+  const loader = document.getElementById('loader');
+  const t0 = Date.now();
+  const dur = 1800;
+  (function tick(){
+    const el = Date.now() - t0;
+    const p = Math.min(el / dur * 100, 100);
+    bar.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+    if (p < 100) requestAnimationFrame(tick);
+    else setTimeout(()=>{
+      loader.classList.add('hidden');
+      setTimeout(()=>loader.style.display='none', 700);
+    }, 300);
+  })();
+})();
+
+/* ============================================================
+   PARTICLE BACKGROUND
+   ============================================================ */
+(function particlesInit(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  function makeParticle(){
+    return {
+      x: Math.random()*W,
+      y: Math.random()*H,
+      r: Math.random()*2 + 0.4,
+      vx: (Math.random()-0.5)*0.3,
+      vy: (Math.random()-0.5)*0.3 - 0.15,
+      a: Math.random()*0.5 + 0.15,
+      hue: Math.random() < 0.5 ? 40 : 190
+    };
+  }
+  function init(){
+    resize();
+    particles = Array.from({length: Math.min(60, Math.floor(W*H/25000))}, makeParticle);
+  }
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.fill();
+    });
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+/* ============================================================
+   CONFETTI
+   ============================================================ */
+function fireConfetti(count){
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const colors = ['#F59E0B','#FCD34D','#06B6D4','#10B981','#8B5CF6','#F43F5E','#38BDF8'];
+  const pieces = Array.from({length: count || 60}, () => ({
+    x: window.innerWidth/2 + (Math.random()-0.5)*200,
+    y: window.innerHeight/2,
+    vx: (Math.random()-0.5)*14,
+    vy: Math.random()*-16 - 4,
+    g: 0.5,
+    r: Math.random()*8 + 4,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    rot: Math.random()*Math.PI,
+    vr: (Math.random()-0.5)*0.3,
+    life: 1
+  }));
+  let frame = 0;
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    pieces.forEach(p => {
+      if (p.life <= 0) return;
+      alive = true;
+      p.vy += p.g;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vr;
+      p.life -= 0.012;
+      ctx.save();
+      ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      ctx.restore();
+    });
+    if (alive && frame < 200) { frame++; requestAnimationFrame(animate); }
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  animate();
+}
+
+/* ============================================================
+   TOASTS
+   ============================================================ */
+function showToast(icon, title, desc, variant){
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `
+    <div class="toast-icon ${variant||''}">${icon}</div>
+    <div class="toast-content">
+      <div class="toast-title">${title}</div>
+      <div class="toast-desc">${desc}</div>
+    </div>`;
+  wrap.appendChild(el);
+  setTimeout(() => {
+    el.classList.add('out');
+    setTimeout(() => el.remove(), 450);
+  }, 3200);
+}
+
+/* Floating score popup */
+function scorePopup(text, x, y, color){
+  const el = document.createElement('div');
+  el.className = 'score-pop';
+  el.textContent = text;
+  el.style.left = (x || window.innerWidth/2) + 'px';
+  el.style.top = (y || window.innerHeight/2) + 'px';
+  if (color) el.style.color = color;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1100);
+}
+
+/* ============================================================
+   UTILS
+   ============================================================ */
+function shuffle(a){
+  const arr = a.slice();
+  for (let i = arr.length-1; i > 0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function updateHpHud(){
+  const hp = document.getElementById('hudHp');
+  hp.innerHTML = '';
+  for (let i = 0; i < state.maxHp; i++){
+    const heart = document.createElement('i');
+    heart.className = 'fas fa-heart heart' + (i < state.hp ? '' : ' empty');
+    hp.appendChild(heart);
+  }
+}
+
+function updateXpHud(){
+  const xpForLevel = state.level * 100;
+  const pct = Math.min((state.xp % xpForLevel) / xpForLevel * 100, 100);
+  document.getElementById('hudLevel').textContent = state.level;
+  document.getElementById('hudXp').textContent = state.xp % xpForLevel;
+  document.getElementById('hudXpMax').textContent = xpForLevel;
+  document.getElementById('xpFill').style.width = pct + '%';
+}
+
+function updateComboHud(){
+  document.getElementById('comboVal').textContent = state.combo;
+  const tag = document.getElementById('comboTag');
+  if (state.combo >= 3){
+    tag.classList.add('hot');
+    setTimeout(()=>tag.classList.remove('hot'), 500);
+  }
+}
+
+function updatePowers(){
+  document.getElementById('c50').textContent = state.powers.p50;
+  document.getElementById('chint').textContent = state.powers.hint;
+  document.getElementById('cskip').textContent = state.powers.skip;
+  document.getElementById('p50').disabled = state.powers.p50 <= 0;
+  document.getElementById('phint').disabled = state.powers.hint <= 0;
+  document.getElementById('pskip').disabled = state.powers.skip <= 0;
+}
+
+/* ============================================================
+   GAME FLOW
+   ============================================================ */
+function startGame(){
+  ensureAudio();
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('gameHud').classList.add('active');
+
+  state.questions = shuffle(BANK_SOAL).slice(0, TOTAL_Q);
+  state.currentIndex = 0;
+  state.answers = [];
+  state.score = 0;
+  state.xp = 0;
+  state.level = 1;
+  state.hp = state.maxHp;
+  state.combo = 0;
+  state.bestCombo = 0;
+  state.timeLeft = TIME_LIMIT;
+  state.started = true;
+  state.finished = false;
+  state.powers = { p50:1, hint:1, skip:1 };
+
+  updateHpHud();
+  updateXpHud();
+  updateComboHud();
+  updatePowers();
+
+  showToast('🚀', 'Arena Dimulai!', 'Semoga beruntung, pejuang sejarah!', '');
+  sfxClick();
+
+  startTimer();
+  renderQuestion();
+}
+
+function startTimer(){
+  if (state.timer) clearInterval(state.timer);
+  state.timer = setInterval(() => {
+    state.timeLeft--;
+    updateTimerHud();
+    if (state.timeLeft <= 0){
+      clearInterval(state.timer);
+      finishGame(true);
+    }
+  }, 1000);
+  updateTimerHud();
+}
+
+function updateTimerHud(){
+  const m = Math.floor(state.timeLeft / 60);
+  const s = state.timeLeft % 60;
+  const v = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  document.getElementById('hudTimerVal').textContent = v;
+  const el = document.getElementById('hudTimer');
+  if (state.timeLeft <= 120) el.classList.add('warning');
+  else el.classList.remove('warning');
+}
+
+function renderQuestion(){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+
+  document.getElementById('qNumLabel').textContent = 'Soal ' + (state.currentIndex+1);
+  document.getElementById('qTopicText').textContent = q.topic || 'Materi Pertemuan 1';
+  document.getElementById('qText').textContent = q.question;
+  document.getElementById('hudQNum').textContent = state.currentIndex+1;
+
+  const opts = document.getElementById('options');
+  opts.innerHTML = '';
+  q.options.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.dataset.letter = o.letter;
+    btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
+    btn.addEventListener('click', () => selectOption(o.letter, btn));
+    opts.appendChild(btn);
+  });
+
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('btnNext').disabled = true;
+  document.getElementById('btnNext').style.display = '';
+  document.getElementById('btnFinish').style.display = 'none';
+  document.getElementById('qCard').classList.remove('shake');
+
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none';
+  void card.offsetWidth;
+  card.style.animation = 'qEnter .55s cubic-bezier(.16,1,.3,1)';
+
+  if (state.currentIndex === TOTAL_Q - 1){
+    document.getElementById('btnNext').style.display = 'none';
+    document.getElementById('btnFinish').style.display = '';
+  }
+}
+
+function selectOption(letter, btnEl){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+
+  const selected = q.options.find(o => o.letter === letter);
+  if (!selected) return;
+
+  const correct = selected.correct;
+  const allBtns = document.querySelectorAll('#options .opt');
+
+  allBtns.forEach(b => {
+    b.classList.add('locked');
+    const l = b.dataset.letter;
+    const o = q.options.find(x => x.letter === l);
+    if (o.correct) b.classList.add('correct');
+    else if (l === letter && !correct) b.classList.add('wrong');
+  });
+
+  state.answers.push({
+    qid: q.id,
+    selected: letter,
+    correct: correct,
+    skipped: false,
+    questionText: q.question,
+    topic: q.topic,
+    correctLetter: q.options.find(o => o.correct).letter,
+    explanation: selected.explanation
+  });
+
+  if (correct){
+    state.combo++;
+    if (state.combo > state.bestCombo) state.bestCombo = state.combo;
+    const comboBonus = Math.max(0, (state.combo - 1)) * 5;
+    const gained = (q.points || 50) + comboBonus;
+    state.score += gained;
+    state.xp += gained;
+
+    const prevLevel = state.level;
+    state.level = Math.floor(state.xp / 100) + 1;
+    if (state.level > prevLevel){
+      sfxLevelUp();
+      showToast('⭐', 'LEVEL UP!', `Kamu naik ke Level ${state.level}!`, 'cyan');
+      fireConfetti(40);
+    }
+
+    sfxCorrect();
+    fireConfetti(state.combo >= 3 ? 80 : 45);
+
+    const rect = btnEl ? btnEl.getBoundingClientRect() : null;
+    scorePopup('+' + gained + ' XP', rect ? rect.left + rect.width/2 : window.innerWidth/2, rect ? rect.top : window.innerHeight/2, '#FCD34D');
+
+    if (state.combo >= 3){
+      showToast('🔥', `COMBO ×${state.combo}!`, `Bonus +${comboBonus} XP! Pertahankan!`, '');
+    }
+  } else {
+    state.combo = 0;
+    state.hp--;
+    sfxWrong();
+    updateHpHud();
+
+    const hpEls = document.querySelectorAll('.hud-hp .heart');
+    if (hpEls[state.hp]){
+      hpEls[state.hp].classList.add('losing');
+    }
+
+    const card = document.getElementById('qCard');
+    card.classList.add('shake');
+    setTimeout(() => card.classList.remove('shake'), 550);
+
+    if (state.hp <= 0){
+      showToast('💔', 'Nyawa Habis!', 'Kamu kehilangan semua nyawa. Skor tetap dihitung.', 'violet');
+    }
+  }
+
+  document.getElementById('hudScore').textContent = state.score;
+  updateXpHud();
+  updateComboHud();
+  showFeedback(correct, q, selected);
+  document.getElementById('btnNext').disabled = false;
+}
+
+function showFeedback(correct, q, selected){
+  const panel = document.getElementById('feedback');
+  const icon = document.getElementById('fbIcon');
+  const title = document.getElementById('fbTitle');
+  const body = document.getElementById('fbBody');
+
+  panel.classList.add('show');
+  if (correct){
+    icon.className = 'fb-icon correct';
+    icon.innerHTML = '<i class="fas fa-check"></i>';
+    title.className = 'fb-title correct';
+    title.textContent = 'BENAR!';
+  } else {
+    icon.className = 'fb-icon wrong';
+    icon.innerHTML = '<i class="fas fa-times"></i>';
+    title.className = 'fb-title wrong';
+    title.textContent = 'BELUM TEPAT';
+  }
+
+  const correctOpt = q.options.find(o => o.correct);
+  let html = '';
+  html += `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
+  html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
+
+  if (!correct && selected){
+    html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
+  }
+
+  html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
+
+  body.innerHTML = html;
+}
+
+function nextQuestion(){
+  if (state.currentIndex < TOTAL_Q - 1){
+    state.currentIndex++;
+    renderQuestion();
+    document.getElementById('qCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+/* ============================================================
+   POWER-UPS
+   ============================================================ */
+function usePower(type){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+
+  if (type === '50'){
+    if (state.powers.p50 <= 0) return;
+    const wrongs = q.options.filter(o => !o.correct);
+    const remove = shuffle(wrongs).slice(0, 2);
+    document.querySelectorAll('#options .opt').forEach(b => {
+      const l = b.dataset.letter;
+      if (remove.some(o => o.letter === l)) b.classList.add('disabled-50');
+    });
+    state.powers.p50 = 0;
+    updatePowers();
+    sfxPower();
+    showToast('✂️', '50:50 Aktif!', 'Dua jawaban salah telah dihilangkan.', 'cyan');
+  }
+  else if (type === 'hint'){
+    if (state.powers.hint <= 0) return;
+    const panel = document.getElementById('feedback');
+    const icon = document.getElementById('fbIcon');
+    const title = document.getElementById('fbTitle');
+    const body = document.getElementById('fbBody');
+    panel.classList.add('show');
+    icon.className = 'fb-icon info';
+    icon.innerHTML = '<i class="fas fa-lightbulb"></i>';
+    title.className = 'fb-title info';
+    title.textContent = 'PETUNJUK';
+    body.innerHTML = `<p>${q.hint || 'Tidak ada petunjuk.'}</p>`;
+    state.powers.hint = 0;
+    updatePowers();
+    sfxPower();
+    showToast('💡', 'Petunjuk Digunakan!', 'Perhatikan petunjuk dengan saksama.', '');
+  }
+  else if (type === 'skip'){
+    if (state.powers.skip <= 0) return;
+    state.answers.push({
+      qid: q.id,
+      selected: null,
+      correct: false,
+      skipped: true,
+      questionText: q.question,
+      topic: q.topic,
+      correctLetter: q.options.find(o => o.correct).letter,
+      explanation: q.options.find(o => o.correct).explanation
+    });
+    document.querySelectorAll('#options .opt').forEach(b => {
+      b.classList.add('locked');
+      const l = b.dataset.letter;
+      const o = q.options.find(x => x.letter === l);
+      if (o.correct) b.classList.add('correct');
+    });
+    showFeedback(false, q, null);
+    document.getElementById('btnNext').disabled = false;
+    state.powers.skip = 0;
+    updatePowers();
+    sfxPower();
+    showToast('⏭️', 'Soal Dilewati', 'Jawaban benar telah ditampilkan.', 'violet');
+
+    if (state.currentIndex === TOTAL_Q - 1){
+      document.getElementById('btnNext').style.display = 'none';
+      document.getElementById('btnFinish').style.display = '';
+    }
+  }
+}
+
+/* ============================================================
+   FINISH
+   ============================================================ */
+function finishGame(timeout){
+  if (state.finished) return;
+  state.finished = true;
+  clearInterval(state.timer);
+  state.timer = null;
+
+  const answered = state.answers.map(a => a.qid);
+  state.questions.forEach(q => {
+    if (!answered.includes(q.id)){
+      state.answers.push({
+        qid: q.id,
+        selected: null,
+        correct: false,
+        skipped: true,
+        questionText: q.question,
+        topic: q.topic,
+        correctLetter: q.options.find(o => o.correct).letter,
+        explanation: q.options.find(o => o.correct).explanation
+      });
+    }
+  });
+
+  let benar = 0, salah = 0;
+  state.answers.forEach(a => {
+    if (a.skipped) return;
+    if (a.correct) benar++;
+    else salah++;
+  });
+
+  const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
+  const finalScore = Math.round((state.score / maxScore) * 100);
+  const grade = finalScore >= 90 ? 'A' : finalScore >= 80 ? 'B' : finalScore >= 70 ? 'C' : finalScore >= 60 ? 'D' : 'E';
+  const gradeLabel = finalScore >= 90 ? 'Sangat Baik' : finalScore >= 80 ? 'Baik' : finalScore >= 70 ? 'Cukup' : finalScore >= 60 ? 'Perlu Bimbingan' : 'Remedial';
+  const rank = finalScore >= 90 ? 'SEJARAWAN MUDA' : finalScore >= 80 ? 'PENELITI SEJARAH' : finalScore >= 70 ? 'PELAJAR SEJARAH' : 'PEMULA SEJARAH';
+  const trophy = finalScore >= 90 ? '🏆' : finalScore >= 80 ? '🥇' : finalScore >= 70 ? '🥈' : finalScore >= 60 ? '🥉' : '📚';
+  const title = finalScore >= 90 ? 'Luar Biasa!' : finalScore >= 80 ? 'Kerja Bagus!' : finalScore >= 70 ? 'Terus Belajar!' : 'Jangan Menyerah!';
+
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('resultScreen').classList.add('active');
+
+  document.getElementById('rTrophy').textContent = trophy;
+  document.getElementById('rTitle').textContent = title;
+  document.getElementById('rSub').textContent = 'Kuis 1 · Pertemuan 1 · Pengertian Sejarah & Konsep Dasar';
+  document.getElementById('gradeLetter').textContent = grade;
+  document.getElementById('gradeLabel').textContent = gradeLabel;
+  document.getElementById('rRank').textContent = rank;
+  document.getElementById('rXp').textContent = state.xp;
+  document.getElementById('rBestCombo').textContent = state.bestCombo;
+  document.getElementById('rBenar').textContent = benar;
+  document.getElementById('rSalah').textContent = salah;
+  document.getElementById('rSkor').textContent = finalScore;
+  document.getElementById('rXpTotal').textContent = state.xp;
+
+  const ring = document.getElementById('gradeRing');
+  const deg = (finalScore / 100) * 360;
+  ring.style.setProperty('--grade-deg', deg + 'deg');
+
+  const msg = finalScore >= 70
+    ? '🎯 Pertahankan semangat belajarmu! Lanjutkan ke Kuis 2 untuk materi Berpikir Sejarah & Definisi Ahli (1).'
+    : '📚 Pelajari kembali materi Pertemuan 1, lalu coba lagi! Kamu pasti bisa!';
+  document.getElementById('rMsg').textContent = msg;
+
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  state.answers.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
+                   a.correct ? '<span class="ri-status correct">Benar</span>' :
+                   '<span class="ri-status wrong">Salah</span>';
+    const q = a.questionText.length > 80 ? a.questionText.substring(0, 80) + '...' : a.questionText;
+    div.innerHTML = `<span class="ri-num">${i+1}.</span><span class="ri-text">${q}</span>${status}`;
+    reviewList.appendChild(div);
+  });
+
+  sfxFinish();
+  if (finalScore >= 70){
+    fireConfetti(180);
+    setTimeout(() => fireConfetti(120), 400);
+    setTimeout(() => showToast('🏆', 'Achievement Unlocked!', rank, ''), 500);
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetGame(){
+  clearInterval(state.timer);
+  state.timer = null;
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('startScreen').style.display = 'flex';
+  state.answers = [];
+  state.score = 0;
+  state.xp = 0;
+  state.level = 1;
+  state.hp = state.maxHp;
+  state.combo = 0;
+  state.bestCombo = 0;
+  state.currentIndex = 0;
+  state.finished = false;
+  state.started = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============================================================
+   KEYBOARD
+   ============================================================ */
+document.addEventListener('keydown', e => {
+  if (!state.started || state.finished) return;
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea') return;
+  if (['a','A','1'].includes(e.key)) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
+  else if (['b','B','2'].includes(e.key)) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
+  else if (['c','C','3'].includes(e.key)) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
+  else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
+  else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
+  else if (e.key === 'ArrowRight' || e.key === 'Enter'){
+    if (!document.getElementById('btnNext').disabled) nextQuestion();
+  }
+});
+</script>
+
+</body>
+</html>
