@@ -704,7 +704,8 @@ body{
   margin:6px 0 4px;
   box-shadow:0 4px 20px rgba(6,182,212,.15);
 }
-.player-badge i{color:var(--accent);font-size:.95rem}
+.player-badge i{color:var(--accent);font-size:1.4rem}
+.player-badge > div{text-align:left}
 .player-badge .pb-label{
   font-size:.62rem;font-weight:800;letter-spacing:1.5px;
   text-transform:uppercase;color:var(--text-mute);
@@ -1485,7 +1486,7 @@ const BANK_SOAL = [
 
 /* ============================================================
    SEBAR MERATA JAWABAN BENAR (A–E)
-   Setiap soal digilirkan: soal ke-1 → A, ke-2 → B, dst.
+   Soal ke-1 → A, ke-2 → B, ke-3 → C, ke-4 → D, ke-5 → E, dst.
    ============================================================ */
 (function spreadCorrectAnswers(){
   const LETTERS = ['A','B','C','D','E'];
@@ -1497,7 +1498,7 @@ const BANK_SOAL = [
     // Fisher-Yates shuffle untuk variasi urutan pilihan salah
     for (let k = wrongOpts.length - 1; k > 0; k--) {
       const j = Math.floor(Math.random() * (k + 1));
-      [wrongOpts[k], wrongOpts[j]] = [wrongOpts[j], wrongOpts[k]];
+      const tmp = wrongOpts[k]; wrongOpts[k] = wrongOpts[j]; wrongOpts[j] = tmp;
     }
     const newOpts = [];
     let wi = 0;
@@ -1565,19 +1566,19 @@ function playTone(freq, dur, type, vol){
 function sfxClick(){ playTone(520, .08, 'triangle', .06); }
 function sfxCorrect(){
   playTone(660, .12, 'sine', .10);
-  setTimeout(()=>playTone(880, .15, 'sine', .10), 80);
-  setTimeout(()=>playTone(1100, .20, 'sine', .08), 160);
+  setTimeout(function(){playTone(880, .15, 'sine', .10);}, 80);
+  setTimeout(function(){playTone(1100, .20, 'sine', .08);}, 160);
 }
 function sfxWrong(){
   playTone(200, .18, 'sawtooth', .10);
-  setTimeout(()=>playTone(150, .25, 'sawtooth', .08), 120);
+  setTimeout(function(){playTone(150, .25, 'sawtooth', .08);}, 120);
 }
-function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(()=>playTone(1200, .12, 'triangle', .07), 60); }
+function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(function(){playTone(1200, .12, 'triangle', .07);}, 60); }
 function sfxLevelUp(){
-  [523, 659, 784, 1046].forEach((f, i) => setTimeout(()=>playTone(f, .16, 'sine', .10), i*90));
+  [523, 659, 784, 1046].forEach(function(f, i){ setTimeout(function(){playTone(f, .16, 'sine', .10);}, i*90); });
 }
 function sfxFinish(){
-  [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(()=>playTone(f, .22, 'sine', .10), i*120));
+  [523, 659, 784, 1046, 1318].forEach(function(f, i){ setTimeout(function(){playTone(f, .22, 'sine', .10);}, i*120); });
 }
 
 function toggleSound(){
@@ -1614,9 +1615,9 @@ function toggleTheme(){
     bar.style.width = p + '%';
     pct.textContent = Math.round(p) + '%';
     if (p < 100) requestAnimationFrame(tick);
-    else setTimeout(()=>{
+    else setTimeout(function(){
       loader.classList.add('hidden');
-      setTimeout(()=>loader.style.display='none', 700);
+      setTimeout(function(){loader.style.display='none';}, 700);
     }, 300);
   })();
 })();
@@ -1649,15 +1650,15 @@ function toggleTheme(){
   }
   function draw(){
     ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => {
+    particles.forEach(function(p){
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0 || p.x > W) p.vx *= -1;
       if (p.y < 0 || p.y > H) p.vy *= -1;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.fillStyle = 'hsla(' + p.hue + ', 90%, 65%, ' + p.a + ')';
       ctx.shadowBlur = 8;
-      ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.shadowColor = 'hsla(' + p.hue + ', 90%, 65%, ' + p.a + ')';
       ctx.fill();
     });
     ctx.shadowBlur = 0;
@@ -1676,23 +1677,25 @@ function fireConfetti(count){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   const colors = ['#F59E0B','#FCD34D','#06B6D4','#10B981','#8B5CF6','#F43F5E','#38BDF8'];
-  const pieces = Array.from({length: count || 60}, () => ({
-    x: window.innerWidth/2 + (Math.random()-0.5)*200,
-    y: window.innerHeight/2,
-    vx: (Math.random()-0.5)*14,
-    vy: Math.random()*-16 - 4,
-    g: 0.5,
-    r: Math.random()*8 + 4,
-    color: colors[Math.floor(Math.random()*colors.length)],
-    rot: Math.random()*Math.PI,
-    vr: (Math.random()-0.5)*0.3,
-    life: 1
-  }));
+  const pieces = Array.from({length: count || 60}, function(){
+    return {
+      x: window.innerWidth/2 + (Math.random()-0.5)*200,
+      y: window.innerHeight/2,
+      vx: (Math.random()-0.5)*14,
+      vy: Math.random()*-16 - 4,
+      g: 0.5,
+      r: Math.random()*8 + 4,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      rot: Math.random()*Math.PI,
+      vr: (Math.random()-0.5)*0.3,
+      life: 1
+    };
+  });
   let frame = 0;
   function animate(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let alive = false;
-    pieces.forEach(p => {
+    pieces.forEach(function(p){
       if (p.life <= 0) return;
       alive = true;
       p.vy += p.g;
@@ -1721,16 +1724,16 @@ function showToast(icon, title, desc, variant){
   const wrap = document.getElementById('toastWrap');
   const el = document.createElement('div');
   el.className = 'toast';
-  el.innerHTML = `
-    <div class="toast-icon ${variant||''}">${icon}</div>
-    <div class="toast-content">
-      <div class="toast-title">${title}</div>
-      <div class="toast-desc">${desc}</div>
-    </div>`;
+  el.innerHTML = ''
+    + '<div class="toast-icon ' + (variant||'') + '">' + icon + '</div>'
+    + '<div class="toast-content">'
+    +   '<div class="toast-title">' + title + '</div>'
+    +   '<div class="toast-desc">' + desc + '</div>'
+    + '</div>';
   wrap.appendChild(el);
-  setTimeout(() => {
+  setTimeout(function(){
     el.classList.add('out');
-    setTimeout(() => el.remove(), 450);
+    setTimeout(function(){ el.remove(); }, 450);
   }, 3200);
 }
 
@@ -1742,7 +1745,7 @@ function scorePopup(text, x, y, color){
   el.style.top = (y || window.innerHeight/2) + 'px';
   if (color) el.style.color = color;
   document.body.appendChild(el);
-  setTimeout(() => el.remove(), 1100);
+  setTimeout(function(){ el.remove(); }, 1100);
 }
 
 /* ============================================================
@@ -1752,7 +1755,7 @@ function shuffle(a){
   const arr = a.slice();
   for (let i = arr.length-1; i > 0; i--){
     const j = Math.floor(Math.random()*(i+1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+    const tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
   }
   return arr;
 }
@@ -1781,13 +1784,13 @@ function updateComboHud(){
   const tag = document.getElementById('comboTag');
   if (state.combo >= 3){
     tag.classList.add('hot');
-    setTimeout(()=>tag.classList.remove('hot'), 500);
+    setTimeout(function(){tag.classList.remove('hot');}, 500);
   }
 }
 
 function updatePowers(){
   const q = state.questions[state.currentIndex];
-  const answered = q && state.answers.find(a => a.qid === q.id);
+  const answered = q && state.answers.find(function(a){ return a.qid === q.id; });
   document.getElementById('c50').textContent = state.powers.p50;
   document.getElementById('chint').textContent = state.powers.hint;
   document.getElementById('cskip').textContent = state.powers.skip;
@@ -1819,7 +1822,6 @@ function goHome(){
 function startGame(){
   ensureAudio();
 
-  // Ambil nama pemain
   const nameInput = document.getElementById('playerNameInput');
   const name = (nameInput && nameInput.value.trim()) || 'Pemain';
   state.playerName = name;
@@ -1847,7 +1849,7 @@ function startGame(){
   updateComboHud();
   updatePowers();
 
-  showToast('🚀', `Selamat datang, ${name}!`, 'Semoga beruntung, pejuang sejarah!', '');
+  showToast('🚀', 'Selamat datang, ' + name + '!', 'Semoga beruntung, pejuang sejarah!', '');
   sfxClick();
 
   startTimer();
@@ -1856,7 +1858,7 @@ function startGame(){
 
 function startTimer(){
   if (state.timer) clearInterval(state.timer);
-  state.timer = setInterval(() => {
+  state.timer = setInterval(function(){
     state.timeLeft--;
     updateTimerHud();
     if (state.timeLeft <= 0){
@@ -1886,17 +1888,17 @@ function renderQuestion(){
   document.getElementById('qText').textContent = q.question;
   document.getElementById('hudQNum').textContent = state.currentIndex+1;
 
-  const existingAnswer = state.answers.find(a => a.qid === q.id);
+  const existingAnswer = state.answers.find(function(a){ return a.qid === q.id; });
 
   const opts = document.getElementById('options');
   opts.innerHTML = '';
-  q.options.forEach(o => {
+  q.options.forEach(function(o){
     const btn = document.createElement('button');
     btn.className = 'opt';
     btn.dataset.letter = o.letter;
-    btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
+    btn.innerHTML = '<span class="opt-letter">' + o.letter + '</span><span class="opt-text">' + o.text + '</span>';
     if (!existingAnswer) {
-      btn.addEventListener('click', () => selectOption(o.letter, btn));
+      btn.addEventListener('click', function(){ selectOption(o.letter, btn); });
     }
     opts.appendChild(btn);
   });
@@ -1905,23 +1907,21 @@ function renderQuestion(){
   feedback.classList.remove('show');
 
   if (existingAnswer) {
-    // Lock & tandai jawaban
-    document.querySelectorAll('#options .opt').forEach(b => {
+    document.querySelectorAll('#options .opt').forEach(function(b){
       b.classList.add('locked');
       const l = b.dataset.letter;
-      const o = q.options.find(x => x.letter === l);
+      const o = q.options.find(function(x){ return x.letter === l; });
       if (o.correct) b.classList.add('correct');
       else if (existingAnswer.selected === l && !existingAnswer.correct) b.classList.add('wrong');
     });
     if (existingAnswer.skipped) {
       showFeedback(false, q, null, true);
     } else {
-      const selectedOpt = q.options.find(o => o.letter === existingAnswer.selected);
+      const selectedOpt = q.options.find(function(o){ return o.letter === existingAnswer.selected; });
       showFeedback(existingAnswer.correct, q, selectedOpt);
     }
   }
 
-  // Tombol navigasi
   const btnPrev = document.getElementById('btnPrev');
   const btnNext = document.getElementById('btnNext');
   const btnFinish = document.getElementById('btnFinish');
@@ -1948,18 +1948,18 @@ function renderQuestion(){
 function selectOption(letter, btnEl){
   const q = state.questions[state.currentIndex];
   if (!q) return;
-  if (state.answers.find(a => a.qid === q.id)) return;
+  if (state.answers.find(function(a){ return a.qid === q.id; })) return;
 
-  const selected = q.options.find(o => o.letter === letter);
+  const selected = q.options.find(function(o){ return o.letter === letter; });
   if (!selected) return;
 
   const correct = selected.correct;
   const allBtns = document.querySelectorAll('#options .opt');
 
-  allBtns.forEach(b => {
+  allBtns.forEach(function(b){
     b.classList.add('locked');
     const l = b.dataset.letter;
-    const o = q.options.find(x => x.letter === l);
+    const o = q.options.find(function(x){ return x.letter === l; });
     if (o.correct) b.classList.add('correct');
     else if (l === letter && !correct) b.classList.add('wrong');
   });
@@ -1971,7 +1971,7 @@ function selectOption(letter, btnEl){
     skipped: false,
     questionText: q.question,
     topic: q.topic,
-    correctLetter: q.options.find(o => o.correct).letter,
+    correctLetter: q.options.find(function(o){ return o.correct; }).letter,
     explanation: selected.explanation
   });
 
@@ -1987,7 +1987,7 @@ function selectOption(letter, btnEl){
     state.level = Math.floor(state.xp / 100) + 1;
     if (state.level > prevLevel){
       sfxLevelUp();
-      showToast('⭐', 'LEVEL UP!', `Kamu naik ke Level ${state.level}!`, 'cyan');
+      showToast('⭐', 'LEVEL UP!', 'Kamu naik ke Level ' + state.level + '!', 'cyan');
       fireConfetti(40);
     }
 
@@ -1998,7 +1998,7 @@ function selectOption(letter, btnEl){
     scorePopup('+' + gained + ' XP', rect ? rect.left + rect.width/2 : window.innerWidth/2, rect ? rect.top : window.innerHeight/2, '#FCD34D');
 
     if (state.combo >= 3){
-      showToast('🔥', `COMBO ×${state.combo}!`, `Bonus +${comboBonus} XP! Pertahankan!`, '');
+      showToast('🔥', 'COMBO ×' + state.combo + '!', 'Bonus +' + comboBonus + ' XP! Pertahankan!', '');
     }
   } else {
     state.combo = 0;
@@ -2013,7 +2013,7 @@ function selectOption(letter, btnEl){
 
     const card = document.getElementById('qCard');
     card.classList.add('shake');
-    setTimeout(() => card.classList.remove('shake'), 550);
+    setTimeout(function(){ card.classList.remove('shake'); }, 550);
 
     if (state.hp <= 0){
       showToast('💫', 'Tetap Semangat!', 'Nyawa habis, tapi skormu tetap dihitung. Kamu sudah berusaha!', 'violet');
@@ -2056,16 +2056,16 @@ function showFeedback(correct, q, selected, isSkipped){
     title.textContent = 'BELUM TEPAT';
   }
 
-  const correctOpt = q.options.find(o => o.correct);
+  const correctOpt = q.options.find(function(o){ return o.correct; });
   let html = '';
-  html += `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
-  html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
+  html += '<p><strong>Jawaban benar: ' + correctOpt.letter + '.</strong> ' + correctOpt.text + '</p>';
+  html += '<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>' + (correctOpt.explanation || '') + '</p></div>';
 
   if (!correct && !isSkipped && selected){
-    html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
+    html += '<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ' + selected.letter + ' kurang tepat: ' + (selected.explanation || '') + '</p></div>';
   }
 
-  html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
+  html += '<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>' + (q.hint || '') + '</p></div>';
 
   body.innerHTML = html;
 }
@@ -2092,15 +2092,15 @@ function nextQuestion(){
 function usePower(type){
   const q = state.questions[state.currentIndex];
   if (!q) return;
-  if (state.answers.find(a => a.qid === q.id)) return;
+  if (state.answers.find(function(a){ return a.qid === q.id; })) return;
 
   if (type === '50'){
     if (state.powers.p50 <= 0) return;
-    const wrongs = q.options.filter(o => !o.correct);
+    const wrongs = q.options.filter(function(o){ return !o.correct; });
     const remove = shuffle(wrongs).slice(0, 2);
-    document.querySelectorAll('#options .opt').forEach(b => {
+    document.querySelectorAll('#options .opt').forEach(function(b){
       const l = b.dataset.letter;
-      if (remove.some(o => o.letter === l)) b.classList.add('disabled-50');
+      if (remove.some(function(o){ return o.letter === l; })) b.classList.add('disabled-50');
     });
     state.powers.p50 = 0;
     updatePowers();
@@ -2118,7 +2118,7 @@ function usePower(type){
     icon.innerHTML = '<i class="fas fa-lightbulb"></i>';
     title.className = 'fb-title info';
     title.textContent = 'PETUNJUK';
-    body.innerHTML = `<p>${q.hint || 'Tidak ada petunjuk.'}</p>`;
+    body.innerHTML = '<p>' + (q.hint || 'Tidak ada petunjuk.') + '</p>';
     state.powers.hint = 0;
     updatePowers();
     sfxPower();
@@ -2133,13 +2133,13 @@ function usePower(type){
       skipped: true,
       questionText: q.question,
       topic: q.topic,
-      correctLetter: q.options.find(o => o.correct).letter,
-      explanation: q.options.find(o => o.correct).explanation
+      correctLetter: q.options.find(function(o){ return o.correct; }).letter,
+      explanation: q.options.find(function(o){ return o.correct; }).explanation
     });
-    document.querySelectorAll('#options .opt').forEach(b => {
+    document.querySelectorAll('#options .opt').forEach(function(b){
       b.classList.add('locked');
       const l = b.dataset.letter;
-      const o = q.options.find(x => x.letter === l);
+      const o = q.options.find(function(x){ return x.letter === l; });
       if (o.correct) b.classList.add('correct');
     });
     showFeedback(false, q, null, true);
@@ -2165,8 +2165,8 @@ function finishGame(timeout){
   clearInterval(state.timer);
   state.timer = null;
 
-  const answered = state.answers.map(a => a.qid);
-  state.questions.forEach(q => {
+  const answered = state.answers.map(function(a){ return a.qid; });
+  state.questions.forEach(function(q){
     if (!answered.includes(q.id)){
       state.answers.push({
         qid: q.id,
@@ -2175,24 +2175,23 @@ function finishGame(timeout){
         skipped: true,
         questionText: q.question,
         topic: q.topic,
-        correctLetter: q.options.find(o => o.correct).letter,
-        explanation: q.options.find(o => o.correct).explanation
+        correctLetter: q.options.find(function(o){ return o.correct; }).letter,
+        explanation: q.options.find(function(o){ return o.correct; }).explanation
       });
     }
   });
 
   let benar = 0, salah = 0, dilewati = 0;
-  state.answers.forEach(a => {
+  state.answers.forEach(function(a){
     if (a.skipped) { dilewati++; return; }
     if (a.correct) benar++;
     else salah++;
   });
 
-  const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
+  const maxScore = state.questions.reduce(function(s, q){ return s + (q.points || 50); }, 0);
   const finalScore = Math.min(100, Math.round((state.score / maxScore) * 100));
 
   // ==================== KATEGORI POSITIF ====================
-  // Berdasarkan tingkatan, semua kalimat bernada positif & membangun
   let grade, gradeLabel, rank, trophy, title, msg;
   if (finalScore >= 90) {
     grade = 'A'; gradeLabel = 'Istimewa'; rank = 'SEJARAWAN MUDA';
@@ -2223,8 +2222,8 @@ function finishGame(timeout){
   // ==================== ACHIEVEMENTS ====================
   const achievements = [];
   if (benar === TOTAL_Q) achievements.push({icon:'🌟', title:'Sempurna', desc:'Semua 15 soal terjawab benar'});
-  if (state.bestCombo >= 5) achievements.push({icon:'🔥', title:'Combo Master', desc:`Combo terbaik ${state.bestCombo}× berturut-turut`});
-  if (state.bestCombo >= 3 && state.bestCombo < 5) achievements.push({icon:'⚡', title:'Combo Builder', desc:`Combo ${state.bestCombo}× berturut-turut`});
+  if (state.bestCombo >= 5) achievements.push({icon:'🔥', title:'Combo Master', desc:'Combo terbaik ' + state.bestCombo + '× berturut-turut'});
+  if (state.bestCombo >= 3 && state.bestCombo < 5) achievements.push({icon:'⚡', title:'Combo Builder', desc:'Combo ' + state.bestCombo + '× berturut-turut'});
   if (state.powers.p50 === 1 && state.powers.hint === 1 && state.powers.skip === 1) achievements.push({icon:'🎯', title:'Mandiri', desc:'Tanpa menggunakan power-up'});
   if (finalScore >= 90) achievements.push({icon:'👑', title:'Sejarawan Muda', desc:'Skor di atas 90'});
   if (state.hp === state.maxHp && benar > 0) achievements.push({icon:'💚', title:'Tak Tercela', desc:'Nyawa tetap utuh hingga akhir'});
@@ -2232,8 +2231,9 @@ function finishGame(timeout){
   if (finalScore >= 80 && state.bestCombo >= 3) achievements.push({icon:'🏅', title:'High Achiever', desc:'Skor tinggi dengan combo'});
 
   state.result = {
-    benar, salah, dilewati, finalScore, grade, gradeLabel, rank, trophy, title, msg,
-    achievements, playerName: state.playerName
+    benar: benar, salah: salah, dilewati: dilewati, finalScore: finalScore,
+    grade: grade, gradeLabel: gradeLabel, rank: rank, trophy: trophy, title: title, msg: msg,
+    achievements: achievements, playerName: state.playerName
   };
 
   // Update UI
@@ -2266,15 +2266,15 @@ function finishGame(timeout){
   if (achievements.length === 0) {
     achList.innerHTML = '<div class="no-achievement">Terus belajar untuk membuka pencapaian eksklusif! 🌟</div>';
   } else {
-    achievements.forEach(a => {
+    achievements.forEach(function(a){
       const card = document.createElement('div');
       card.className = 'achievement-card';
-      card.innerHTML = `
-        <div class="ac-icon">${a.icon}</div>
-        <div class="ac-text">
-          <div class="ac-title">${a.title}</div>
-          <div class="ac-desc">${a.desc}</div>
-        </div>`;
+      card.innerHTML = ''
+        + '<div class="ac-icon">' + a.icon + '</div>'
+        + '<div class="ac-text">'
+        +   '<div class="ac-title">' + a.title + '</div>'
+        +   '<div class="ac-desc">' + a.desc + '</div>'
+        + '</div>';
       achList.appendChild(card);
     });
   }
@@ -2282,34 +2282,34 @@ function finishGame(timeout){
   // Review list
   const reviewList = document.getElementById('reviewList');
   reviewList.innerHTML = '';
-  state.answers.forEach((a, i) => {
+  state.answers.forEach(function(a, i){
     const div = document.createElement('div');
     div.className = 'review-item';
     const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
                    a.correct ? '<span class="ri-status correct">Benar</span>' :
                    '<span class="ri-status wrong">Salah</span>';
-    const q = a.questionText.length > 100 ? a.questionText.substring(0, 100) + '...' : a.questionText;
-    div.innerHTML = `
-      <span class="ri-num">${i+1}.</span>
-      <div class="ri-text">
-        <div class="ri-q">${q}</div>
-        <div class="ri-meta">
-          <span><i class="fas fa-tag"></i> ${a.topic || '-'}</span>
-          <span>Jawaban benar: <b>${a.correctLetter}</b></span>
-        </div>
-      </div>
-      ${status}`;
+    const qShort = a.questionText.length > 100 ? a.questionText.substring(0, 100) + '...' : a.questionText;
+    div.innerHTML = ''
+      + '<span class="ri-num">' + (i+1) + '.</span>'
+      + '<div class="ri-text">'
+      +   '<div class="ri-q">' + qShort + '</div>'
+      +   '<div class="ri-meta">'
+      +     '<span><i class="fas fa-tag"></i> ' + (a.topic || '-') + '</span>'
+      +     '<span>Jawaban benar: <b>' + a.correctLetter + '</b></span>'
+      +   '</div>'
+      + '</div>'
+      + status;
     reviewList.appendChild(div);
   });
 
   sfxFinish();
   if (finalScore >= 70){
     fireConfetti(180);
-    setTimeout(() => fireConfetti(120), 400);
-    setTimeout(() => showToast('🏆', 'Pencapaian Terbuka!', rank, ''), 500);
+    setTimeout(function(){ fireConfetti(120); }, 400);
+    setTimeout(function(){ showToast('🏆', 'Pencapaian Terbuka!', rank, ''); }, 500);
   } else {
     fireConfetti(60);
-    setTimeout(() => showToast('🌟', 'Kerja Bagus!', 'Terus semangat belajar, ya!', 'cyan'), 500);
+    setTimeout(function(){ showToast('🌟', 'Kerja Bagus!', 'Terus semangat belajar, ya!', 'cyan'); }, 500);
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2336,7 +2336,7 @@ function resetGame(){
 }
 
 /* ============================================================
-   SIMPAN PDF — Hasil untuk Dikirim ke Guru
+   SIMPAN PDF — Hasil untuk Dikirim ke Guru (FIXED)
    ============================================================ */
 function savePDF(){
   if (!state.result) {
@@ -2345,170 +2345,242 @@ function savePDF(){
   }
 
   const r = state.result;
-  const dateStr = new Date().toLocaleDateString('id-ID', {
-    weekday:'long', day:'numeric', month:'long', year:'numeric'
-  });
-  const timeStr = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
-  const safeName = (r.playerName || 'Pemain').replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('id-ID', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  const timeStr = now.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+  const safeName = (r.playerName || 'Pemain').replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_') || 'Pemain';
 
-  // Bangun rincian jawaban
+  // ==================== BUILD ROWS ====================
   let reviewRows = '';
-  state.answers.forEach((a, i) => {
+  state.answers.forEach(function(a, i){
     const status = a.skipped ? 'Dilewati' : (a.correct ? 'Benar' : 'Salah');
     const statusColor = a.skipped ? '#6b7280' : (a.correct ? '#059669' : '#dc2626');
-    const qShort = a.questionText.length > 90 ? a.questionText.substring(0, 90) + '...' : a.questionText;
-    reviewRows += `
-      <tr>
-        <td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;font-weight:bold;">${i+1}</td>
-        <td style="padding:6px 8px;border:1px solid #e5e7eb;font-size:10px;color:#555;">${a.topic || '-'}</td>
-        <td style="padding:6px 8px;border:1px solid #e5e7eb;">${qShort}</td>
-        <td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;font-weight:bold;">${a.correctLetter}</td>
-        <td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;color:${statusColor};font-weight:bold;">${status}</td>
-      </tr>`;
+    const qShortRaw = a.questionText.length > 90 ? a.questionText.substring(0, 90) + '...' : a.questionText;
+    const safeQ = String(qShortRaw).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    reviewRows += ''
+      + '<tr>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;font-weight:bold;">' + (i+1) + '</td>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;font-size:10px;color:#555;">' + (a.topic || '-') + '</td>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;font-size:10px;">' + safeQ + '</td>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;font-weight:bold;">' + a.correctLetter + '</td>'
+      +   '<td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;color:' + statusColor + ';font-weight:bold;">' + status + '</td>'
+      + '</tr>';
   });
 
-  // Bangun achievements
+  // ==================== BUILD ACHIEVEMENTS ====================
   let achHtml = '';
   if (r.achievements && r.achievements.length > 0) {
-    achHtml = r.achievements.map(a =>
-      `<span style="display:inline-block;padding:6px 12px;margin:4px;background:#fff7ed;border:1px solid #fed7aa;border-radius:20px;font-size:11px;color:#9a3412;">
-        <b>${a.icon} ${a.title}</b> · ${a.desc}
-      </span>`
-    ).join('');
+    achHtml = r.achievements.map(function(a){
+      return '<span style="display:inline-block;padding:6px 12px;margin:4px;background:#fff7ed;border:1px solid #fed7aa;border-radius:20px;font-size:11px;color:#9a3412;line-height:1.4;">'
+        + '<b>' + a.icon + ' ' + a.title + '</b> &middot; ' + a.desc
+        + '</span>';
+    }).join('');
   } else {
     achHtml = '<span style="font-size:11px;color:#666;">Terus belajar untuk membuka pencapaian eksklusif.</span>';
   }
 
-  const html = `
-    <div style="font-family: 'Helvetica', 'Arial', sans-serif; color:#111; background:#fff; padding:30px;">
-      <!-- Header -->
-      <div style="text-align:center;border-bottom:3px solid #F59E0B;padding-bottom:16px;margin-bottom:20px;">
-        <div style="font-size:11px;letter-spacing:4px;color:#B45309;font-weight:bold;">🎮 HISTOEXPLORER · PREMIUM GAME</div>
-        <h1 style="font-size:24px;margin:8px 0 4px;color:#111;">Laporan Hasil Kuis Sejarah</h1>
-        <div style="font-size:12px;color:#666;">Kuis 1 · Pertemuan 1 · Pengertian Sejarah &amp; Konsep Dasar</div>
-      </div>
+  // ==================== FULL HTML ====================
+  const htmlContent = ''
+    + '<div style="font-family:Helvetica,Arial,sans-serif;color:#111;background:#ffffff;padding:30px;width:100%;box-sizing:border-box;">'
 
-      <!-- Info Pemain -->
-      <table style="width:100%;font-size:12px;margin-bottom:16px;">
-        <tr>
-          <td style="padding:6px 0;width:25%;"><b>Nama Pemain</b></td>
-          <td style="padding:6px 0;width:25%;color:#111;">${r.playerName}</td>
-          <td style="padding:6px 0;width:25%;"><b>Tanggal</b></td>
-          <td style="padding:6px 0;width:25%;color:#111;">${dateStr}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 0;"><b>Pencapaian</b></td>
-          <td style="padding:6px 0;color:#B45309;font-weight:bold;">${r.rank}</td>
-          <td style="padding:6px 0;"><b>Waktu</b></td>
-          <td style="padding:6px 0;color:#111;">${timeStr}</td>
-        </tr>
-        <tr>
-          <td style="padding:6px 0;"><b>Predikat</b></td>
-          <td style="padding:6px 0;">Grade ${r.grade} — ${r.gradeLabel}</td>
-          <td style="padding:6px 0;"><b>Skor Akhir</b></td>
-          <td style="padding:6px 0;color:#0891b2;font-weight:bold;">${r.finalScore} / 100</td>
-        </tr>
-      </table>
+    +   '<div style="text-align:center;border-bottom:3px solid #F59E0B;padding-bottom:16px;margin-bottom:20px;">'
+    +     '<div style="font-size:11px;letter-spacing:4px;color:#B45309;font-weight:bold;">HISTOEXPLORER &middot; PREMIUM GAME</div>'
+    +     '<h1 style="font-size:24px;margin:8px 0 4px;color:#111;">Laporan Hasil Kuis Sejarah</h1>'
+    +     '<div style="font-size:12px;color:#666;">Kuis 1 &middot; Pertemuan 1 &middot; Pengertian Sejarah &amp; Konsep Dasar</div>'
+    +   '</div>'
 
-      <!-- Statistik -->
-      <div style="background:#FFF7ED;padding:16px;border-radius:10px;border-left:5px solid #F59E0B;margin-bottom:16px;">
-        <div style="font-size:11px;font-weight:bold;color:#B45309;letter-spacing:2px;margin-bottom:10px;">📊 STATISTIK KUIS</div>
-        <table style="width:100%;text-align:center;font-size:11px;">
-          <tr>
-            <td><div style="font-size:22px;font-weight:bold;color:#059669;">${r.benar}</div><div style="color:#666;">BENAR</div></td>
-            <td><div style="font-size:22px;font-weight:bold;color:#dc2626;">${r.salah}</div><div style="color:#666;">SALAH</div></td>
-            <td><div style="font-size:22px;font-weight:bold;color:#6b7280;">${r.dilewati}</div><div style="color:#666;">DILEWATI</div></td>
-            <td><div style="font-size:22px;font-weight:bold;color:#0891b2;">${r.finalScore}</div><div style="color:#666;">SKOR</div></td>
-            <td><div style="font-size:22px;font-weight:bold;color:#7c3aed;">${state.xp}</div><div style="color:#666;">XP</div></td>
-            <td><div style="font-size:22px;font-weight:bold;color:#B45309;">${state.bestCombo}×</div><div style="color:#666;">COMBO</div></td>
-          </tr>
-        </table>
-      </div>
+    +   '<table style="width:100%;font-size:12px;margin-bottom:16px;">'
+    +     '<tr>'
+    +       '<td style="padding:6px 0;width:25%;"><b>Nama Pemain</b></td>'
+    +       '<td style="padding:6px 0;width:25%;color:#111;">' + r.playerName + '</td>'
+    +       '<td style="padding:6px 0;width:25%;"><b>Tanggal</b></td>'
+    +       '<td style="padding:6px 0;width:25%;color:#111;">' + dateStr + '</td>'
+    +     '</tr>'
+    +     '<tr>'
+    +       '<td style="padding:6px 0;"><b>Pencapaian</b></td>'
+    +       '<td style="padding:6px 0;color:#B45309;font-weight:bold;">' + r.rank + '</td>'
+    +       '<td style="padding:6px 0;"><b>Waktu</b></td>'
+    +       '<td style="padding:6px 0;color:#111;">' + timeStr + '</td>'
+    +     '</tr>'
+    +     '<tr>'
+    +       '<td style="padding:6px 0;"><b>Predikat</b></td>'
+    +       '<td style="padding:6px 0;">Grade ' + r.grade + ' &mdash; ' + r.gradeLabel + '</td>'
+    +       '<td style="padding:6px 0;"><b>Skor Akhir</b></td>'
+    +       '<td style="padding:6px 0;color:#0891b2;font-weight:bold;">' + r.finalScore + ' / 100</td>'
+    +     '</tr>'
+    +   '</table>'
 
-      <!-- Pencapaian -->
-      <div style="margin-bottom:16px;">
-        <div style="font-size:11px;font-weight:bold;color:#B45309;letter-spacing:2px;margin-bottom:8px;">🏅 PENCAPAIAN</div>
-        <div style="padding:10px;background:#fafafa;border-radius:8px;">
-          ${achHtml}
-        </div>
-      </div>
+    +   '<div style="background:#FFF7ED;padding:16px;border-radius:10px;border-left:5px solid #F59E0B;margin-bottom:16px;">'
+    +     '<div style="font-size:11px;font-weight:bold;color:#B45309;letter-spacing:2px;margin-bottom:10px;">STATISTIK KUIS</div>'
+    +     '<table style="width:100%;text-align:center;font-size:11px;">'
+    +       '<tr>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#059669;">' + r.benar + '</div><div style="color:#666;">BENAR</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#dc2626;">' + r.salah + '</div><div style="color:#666;">SALAH</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#6b7280;">' + r.dilewati + '</div><div style="color:#666;">DILEWATI</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#0891b2;">' + r.finalScore + '</div><div style="color:#666;">SKOR</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#7c3aed;">' + state.xp + '</div><div style="color:#666;">XP</div></td>'
+    +         '<td><div style="font-size:22px;font-weight:bold;color:#B45309;">' + state.bestCombo + 'x</div><div style="color:#666;">COMBO</div></td>'
+    +       '</tr>'
+    +     '</table>'
+    +   '</div>'
 
-      <!-- Catatan -->
-      <div style="background:#f0f9ff;padding:12px;border-radius:8px;border-left:4px solid #0891b2;font-size:11px;color:#0c4a6e;margin-bottom:16px;">
-        <b>Catatan:</b> ${r.msg}
-      </div>
+    +   '<div style="margin-bottom:16px;">'
+    +     '<div style="font-size:11px;font-weight:bold;color:#B45309;letter-spacing:2px;margin-bottom:8px;">PENCAPAIAN</div>'
+    +     '<div style="padding:10px;background:#fafafa;border-radius:8px;">' + achHtml + '</div>'
+    +   '</div>'
 
-      <!-- Rincian Jawaban -->
-      <div style="font-size:11px;font-weight:bold;color:#B45309;letter-spacing:2px;margin-bottom:8px;">📝 RINCIAN JAWABAN</div>
-      <table style="width:100%;font-size:10px;border-collapse:collapse;">
-        <thead>
-          <tr style="background:#f3f4f6;">
-            <th style="padding:6px;border:1px solid #e5e7eb;">No</th>
-            <th style="padding:6px;border:1px solid #e5e7eb;">Topik</th>
-            <th style="padding:6px;border:1px solid #e5e7eb;">Pertanyaan</th>
-            <th style="padding:6px;border:1px solid #e5e7eb;">Kunci</th>
-            <th style="padding:6px;border:1px solid #e5e7eb;">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${reviewRows}
-        </tbody>
-      </table>
+    +   '<div style="background:#f0f9ff;padding:12px;border-radius:8px;border-left:4px solid #0891b2;font-size:11px;color:#0c4a6e;margin-bottom:16px;">'
+    +     '<b>Catatan:</b> ' + r.msg
+    +   '</div>'
 
-      <!-- Footer -->
-      <div style="text-align:center;font-size:10px;color:#999;margin-top:24px;padding-top:12px;border-top:1px solid #e5e7eb;">
-        Dokumen ini digenerate otomatis oleh <b>HistoExplorer Premium Game</b> · ${dateStr} ${timeStr}
-        <br>Dikirim sebagai bukti pengerjaan Kuis 1 · Pertemuan 1 — Pengertian Sejarah &amp; Konsep Dasar
-      </div>
-    </div>
-  `;
+    +   '<div style="font-size:11px;font-weight:bold;color:#B45309;letter-spacing:2px;margin-bottom:8px;">RINCIAN JAWABAN</div>'
+    +   '<table style="width:100%;font-size:10px;border-collapse:collapse;">'
+    +     '<thead>'
+    +       '<tr style="background:#f3f4f6;">'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">No</th>'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">Topik</th>'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">Pertanyaan</th>'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">Kunci</th>'
+    +         '<th style="padding:6px;border:1px solid #e5e7eb;">Status</th>'
+    +       '</tr>'
+    +     '</thead>'
+    +     '<tbody>' + reviewRows + '</tbody>'
+    +   '</table>'
 
-  // Wrapper untuk html2pdf
-  const wrap = document.createElement('div');
-  wrap.style.cssText = 'position:fixed;top:0;left:0;width:794px;background:#ffffff;color:#111;z-index:-9999;';
-  wrap.innerHTML = html;
-  document.body.appendChild(wrap);
+    +   '<div style="text-align:center;font-size:10px;color:#999;margin-top:24px;padding-top:12px;border-top:1px solid #e5e7eb;">'
+    +     'Dokumen ini digenerate otomatis oleh <b>HistoExplorer Premium Game</b> &middot; ' + dateStr + ' ' + timeStr
+    +     '<br>Dikirim sebagai bukti pengerjaan Kuis 1 &middot; Pertemuan 1 &mdash; Pengertian Sejarah &amp; Konsep Dasar'
+    +   '</div>'
 
-  if (typeof html2pdf === 'undefined') {
-    // Fallback: print dialog
-    document.body.removeChild(wrap);
-    window.print();
-    showToast('🖨️', 'Dialog Cetak', 'Pilih "Simpan sebagai PDF" pada dialog.', 'cyan');
+    + '</div>';
+
+  // ==================== STRATEGI 1: html2pdf ====================
+  if (typeof html2pdf !== 'undefined') {
+    const wrapper = document.createElement('div');
+    wrapper.id = 'pdfRenderArea';
+    wrapper.style.position = 'absolute';
+    wrapper.style.left = '-10000px';
+    wrapper.style.top = '0';
+    wrapper.style.width = '794px';
+    wrapper.style.minHeight = '200px';
+    wrapper.style.background = '#ffffff';
+    wrapper.style.color = '#111';
+    wrapper.style.visibility = 'visible';
+    wrapper.style.opacity = '1';
+    wrapper.style.pointerEvents = 'none';
+    wrapper.style.zIndex = '1';
+    wrapper.innerHTML = htmlContent;
+    document.body.appendChild(wrapper);
+
+    showToast('📄', 'Menyiapkan PDF...', 'Mohon tunggu sebentar...', 'cyan');
+
+    setTimeout(function(){
+      const opt = {
+        margin:       [10, 8, 10, 8],
+        filename:     'Hasil-Kuis-Sejarah_' + safeName + '.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#ffffff',
+          logging: false,
+          allowTaint: true,
+          scrollX: 0,
+          scrollY: 0,
+          windowWidth: 794,
+          width: 794
+        },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['css', 'legacy'] }
+      };
+
+      html2pdf().set(opt).from(wrapper).save()
+        .then(function(){
+          wrapper.remove();
+          showToast('✅', 'PDF Tersimpan!', 'File: Hasil-Kuis-Sejarah_' + safeName + '.pdf', 'green');
+        })
+        .catch(function(err){
+          console.error('html2pdf error:', err);
+          wrapper.remove();
+          openPrintFallback(htmlContent, safeName);
+        });
+    }, 350);
+
     return;
   }
 
-  showToast('📄', 'Menyiapkan PDF...', 'Mohon tunggu sebentar.', 'cyan');
+  // ==================== STRATEGI 2: Fallback print ====================
+  openPrintFallback(htmlContent, safeName);
+}
 
-  html2pdf().set({
-    margin: [10, 8, 10, 8],
-    filename: `Hasil-Kuis-Sejarah_${safeName}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: false, windowWidth: 794 },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-  }).from(wrap).save().then(() => {
-    document.body.removeChild(wrap);
-    showToast('✅', 'PDF Tersimpan!', `File: Hasil-Kuis-Sejarah_${safeName}.pdf`, 'green');
-  }).catch(err => {
-    console.error(err);
-    document.body.removeChild(wrap);
-    window.print();
-    showToast('🖨️', 'Menggunakan Dialog Cetak', 'Pilih "Simpan sebagai PDF".', 'cyan');
-  });
+/* ============================================================
+   FALLBACK: Buka window baru lalu print (Save as PDF)
+   ============================================================ */
+function openPrintFallback(htmlContent, safeName) {
+  const win = window.open('', '_blank', 'width=900,height=700');
+  if (!win) {
+    alert('Popup diblokir browser. Izinkan popup untuk menyimpan PDF, atau gunakan Ctrl+P untuk mencetak halaman ini.');
+    return;
+  }
+
+  const fullHtml = ''
+    + '<!DOCTYPE html>'
+    + '<html>'
+    + '<head>'
+    + '<meta charset="UTF-8">'
+    + '<title>Hasil Kuis Sejarah - ' + safeName + '</title>'
+    + '<style>'
+    +   '*{box-sizing:border-box}'
+    +   'body{margin:0;background:#f3f4f6;font-family:Helvetica,Arial,sans-serif}'
+    +   '.toolbar{position:sticky;top:0;z-index:99;background:#111827;color:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,.15)}'
+    +   '.toolbar .title{font-size:14px;font-weight:bold;letter-spacing:1px}'
+    +   '.toolbar .actions{display:flex;gap:8px}'
+    +   '.toolbar button{border:none;padding:9px 18px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:13px}'
+    +   '.btn-print{background:#F59E0B;color:#111}'
+    +   '.btn-print:hover{background:#FCD34D}'
+    +   '.btn-close{background:#374151;color:#fff}'
+    +   '.btn-close:hover{background:#4B5563}'
+    +   '.page{max-width:820px;margin:20px auto;background:#fff;padding:30px;box-shadow:0 4px 24px rgba(0,0,0,.08)}'
+    +   '@media print{.toolbar{display:none!important}.page{box-shadow:none;margin:0;max-width:none;padding:0}body{background:#fff}}'
+    +   '@page{size:A4;margin:12mm}'
+    + '</style>'
+    + '</head>'
+    + '<body>'
+    +   '<div class="toolbar">'
+    +     '<div class="title">📄 HASIL KUIS — ' + safeName + '</div>'
+    +     '<div class="actions">'
+    +       '<button class="btn-print" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>'
+    +       '<button class="btn-close" onclick="window.close()">✕ Tutup</button>'
+    +     '</div>'
+    +   '</div>'
+    +   '<div class="page">' + htmlContent + '</div>'
+    +   '<script>'
+    +     'window.addEventListener("load", function(){'
+    +       'setTimeout(function(){ try{ window.print(); }catch(e){} }, 600);'
+    +     '});'
+    +   '<\/script>'
+    + '</body>'
+    + '</html>';
+
+  win.document.open();
+  win.document.write(fullHtml);
+  win.document.close();
+
+  showToast('🖨️', 'Pilih "Save as PDF"', 'Pada dialog cetak, pilih tujuan "Save as PDF".', 'cyan');
 }
 
 /* ============================================================
    KEYBOARD
    ============================================================ */
-document.addEventListener('keydown', e => {
+document.addEventListener('keydown', function(e){
   if (!state.started || state.finished) return;
   const tag = (e.target.tagName || '').toLowerCase();
   if (tag === 'input' || tag === 'textarea') return;
-  if (['a','A','1'].includes(e.key)) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
-  else if (['b','B','2'].includes(e.key)) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
-  else if (['c','C','3'].includes(e.key)) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
-  else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
-  else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
+  if (['a','A','1'].indexOf(e.key) !== -1) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
+  else if (['b','B','2'].indexOf(e.key) !== -1) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
+  else if (['c','C','3'].indexOf(e.key) !== -1) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
+  else if (['d','D','4'].indexOf(e.key) !== -1) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
+  else if (['e','E','5'].indexOf(e.key) !== -1) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
   else if (e.key === 'ArrowRight' || e.key === 'Enter'){
     const btn = document.getElementById('btnNext');
     if (!btn.disabled && btn.style.display !== 'none') nextQuestion();
