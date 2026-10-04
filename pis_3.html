@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+<meta name="theme-color" content="#05060f" />
+<title>🎮 Kuis 3 · Definisi Ahli (2), Hakikat &amp; Sumber Sejarah — Premium Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<style>
+:root{
+  --font-display:'Outfit',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'Space Grotesk',ui-monospace,monospace;
+  --primary:#10B981;--primary-light:#6EE7B7;--primary-dark:#047857;
+  --accent:#06B6D4;--accent-rgb:6,182,212;
+  --emerald:#10B981;--violet:#8B5CF6;--rose:#F43F5E;--sky:#38BDF8;
+  --gold:#F59E0B;--gold-light:#FCD34D;
+  --bg:#05060f;--bg-2:#0b0d1c;
+  --glass:rgba(255,255,255,0.045);
+  --glass-strong:rgba(255,255,255,0.08);
+  --glass-border:rgba(255,255,255,0.10);
+  --text:#f7f5ff;--text-dim:#a8a8c0;--text-mute:#6b6b85;
+  --radius:24px;--radius-md:18px;--radius-sm:14px;--radius-xs:10px;
+  --shadow-glow:0 0 40px rgba(16,185,129,.25);
+  --shadow-card:0 24px 60px rgba(0,0,0,.55);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font-display);background:var(--bg);color:var(--text);line-height:1.65;
+  overflow-x:hidden;min-height:100vh;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+::selection{background:var(--primary);color:#05060f}
+
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%,rgba(16,185,129,.15),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 85% 100%,rgba(6,182,212,.12),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 50%,rgba(56,189,248,.08),transparent 65%);
+  animation:bgShift 20s ease-in-out infinite alternate}
+@keyframes bgShift{0%{transform:scale(1) rotate(0deg);filter:hue-rotate(0deg)}100%{transform:scale(1.1) rotate(3deg);filter:hue-rotate(15deg)}}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.25;
+  background-image:
+    linear-gradient(rgba(16,185,129,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(16,185,129,.06) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000,transparent 90%)}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
+#confettiCanvas{position:fixed;inset:0;z-index:9998;pointer-events:none}
+
+#loader{position:fixed;inset:0;z-index:99999;
+  background:radial-gradient(ellipse at center,#0b0d1c 0%,#05060f 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;padding:20px;text-align:center;transition:opacity .8s ease,visibility .8s ease}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-orb{width:120px;height:120px;position:relative;display:grid;place-items:center}
+.loader-orb::before,.loader-orb::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent}
+.loader-orb::before{border-top-color:var(--primary);border-right-color:var(--primary-light);animation:spin 2s linear infinite;filter:drop-shadow(0 0 20px rgba(16,185,129,.6))}
+.loader-orb::after{inset:14px;border-bottom-color:var(--accent);border-left-color:var(--sky);animation:spin 1.6s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-core{width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 40px rgba(16,185,129,.7),inset 0 0 20px rgba(255,255,255,.25);
+  display:grid;place-items:center;font-size:1.5rem;color:#fff;
+  animation:pulseCore 2s ease-in-out infinite}
+@keyframes pulseCore{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.loader-title{font-family:var(--font-display);font-weight:900;font-size:clamp(1.6rem,6vw,2.6rem);letter-spacing:3px;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary),var(--accent));
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.loader-sub{font-size:.85rem;color:var(--text-dim);font-weight:500;letter-spacing:1px}
+.loader-bar{width:min(300px,70vw);height:4px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+.loader-bar span{display:block;height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 20px rgba(16,185,129,.6);transition:width .3s ease}
+.loader-pct{font-family:var(--font-mono);font-size:.72rem;font-weight:700;color:var(--text-mute);letter-spacing:2px}
+
+.game-header{position:fixed;top:0;left:0;right:0;height:60px;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:10px;
+  background:rgba(5,6,15,.72);backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border-bottom:1px solid var(--glass-border)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:.9rem;color:var(--text)}
+.brand-logo{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:.9rem;
+  box-shadow:0 0 22px rgba(16,185,129,.5);animation:logoPulse 3s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 22px rgba(16,185,129,.5)}50%{box-shadow:0 0 32px rgba(16,185,129,.8)}}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .t1{font-size:.62rem;color:var(--text-mute);letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+.brand-text .t2{font-size:.92rem;font-weight:800;color:var(--text)}
+.header-actions{display:flex;gap:6px}
+.icon-btn{width:36px;height:36px;border-radius:11px;border:1px solid var(--glass-border);
+  background:var(--glass);color:var(--text-dim);display:grid;place-items:center;cursor:pointer;
+  font-size:.85rem;transition:all .3s var(--ease-out)}
+.icon-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 0 22px rgba(16,185,129,.6);transform:translateY(-2px)}
+
+.wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;
+  padding:calc(60px + 20px) 16px 60px;min-height:100vh}
+
+.start-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:calc(100vh - 100px);text-align:center;gap:18px;padding:20px 0}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:40px;
+  background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(6,182,212,.10));
+  border:1px solid rgba(16,185,129,.30);font-size:.7rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary-light);box-shadow:0 0 30px rgba(16,185,129,.20);
+  animation:badgeFloat 3s ease-in-out infinite}
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hero-title{font-family:var(--font-display);font-size:clamp(2rem,7vw,3.4rem);
+  font-weight:900;line-height:1.05;letter-spacing:-1.5px;
+  background:linear-gradient(135deg,#fff 0%,var(--primary-light) 40%,var(--primary) 70%,var(--accent) 100%);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 8px 30px rgba(16,185,129,.3))}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text-dim);max-width:560px;line-height:1.75}
+.hero-sub strong{color:var(--primary-light);font-weight:700}
+
+.stats-showcase{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+.stat-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;
+  background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(10px);
+  font-size:.8rem;color:var(--text-dim);font-weight:600;transition:all .3s var(--ease-out)}
+.stat-pill:hover{transform:translateY(-3px);border-color:rgba(16,185,129,.4);box-shadow:0 8px 24px rgba(16,185,129,.15)}
+.stat-pill i{font-size:.95rem}
+
+.rules-card{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:22px 24px;
+  max-width:520px;width:100%;text-align:left;margin-top:6px;backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.rules-card h4{font-size:.85rem;font-weight:800;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.rules-card ul{list-style:none;display:grid;gap:10px}
+.rules-card li{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-dim);line-height:1.6}
+.rule-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+  border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;font-size:.72rem;font-weight:900;box-shadow:0 4px 14px rgba(16,185,129,.4)}
+
+.btn-play{position:relative;display:inline-flex;align-items:center;gap:14px;
+  padding:18px 54px;border-radius:60px;border:none;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;font-family:var(--font-display);font-weight:900;font-size:1.05rem;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;overflow:hidden;
+  box-shadow:0 12px 40px rgba(16,185,129,.45),inset 0 -3px 0 rgba(0,0,0,.2);
+  transition:all .4s var(--ease-spring);margin-top:14px}
+.btn-play::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.35),transparent 70%);
+  transform:translateX(-100%);transition:transform .8s ease}
+.btn-play:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 20px 60px rgba(16,185,129,.65)}
+.btn-play:hover::before{transform:translateX(100%)}
+.btn-play:active{transform:translateY(-1px) scale(.98)}
+
+.game-hud{display:none;flex-direction:column;gap:14px;animation:fadeSlideIn .5s var(--ease-out)}
+.game-hud.active{display:flex}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.hud-top{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+  padding:14px 18px;border-radius:var(--radius-md);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);box-shadow:var(--shadow-card)}
+.hud-hp{display:flex;align-items:center;gap:4px}
+.hud-hp .heart{font-size:1.15rem;color:var(--rose);
+  filter:drop-shadow(0 0 8px rgba(244,63,94,.6));transition:all .4s var(--ease-out)}
+.hud-hp .heart.empty{color:rgba(255,255,255,.10);filter:none;transform:scale(.85)}
+.hud-hp .heart.losing{animation:heartBreak .6s ease}
+@keyframes heartBreak{0%{transform:scale(1)}30%{transform:scale(1.4);color:#fff}100%{transform:scale(.85);opacity:.3}}
+.hud-xp{display:flex;flex-direction:column;gap:4px;min-width:0}
+.hud-xp-head{display:flex;justify-content:space-between;align-items:center;font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.hud-xp-head .lvl{color:var(--primary-light)}
+.hud-xp-head .val{color:var(--text-mute);font-family:var(--font-mono)}
+.xp-track{height:8px;border-radius:10px;background:rgba(255,255,255,.06);overflow:hidden;position:relative}
+.xp-fill{height:100%;width:0;border-radius:10px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light),var(--accent));
+  box-shadow:0 0 16px rgba(16,185,129,.7);transition:width .8s var(--ease-spring);position:relative}
+.xp-fill::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  animation:xpShine 2s linear infinite}
+@keyframes xpShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.hud-timer{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:40px;
+  background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.30);
+  font-family:var(--font-mono);font-weight:800;font-size:.85rem;color:var(--primary-light);
+  letter-spacing:1px;transition:all .3s ease}
+.hud-timer.warning{background:rgba(244,63,94,.15);border-color:rgba(244,63,94,.5);color:#FCA5A5;animation:pulseWarn 1s ease-in-out infinite}
+@keyframes pulseWarn{0%,100%{box-shadow:0 0 0 0 rgba(244,63,94,.4)}50%{box-shadow:0 0 0 8px rgba(244,63,94,0)}}
+
+.hud-middle{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:.75rem;color:var(--text-mute);font-weight:700;padding:0 4px}
+.hud-middle .combo-tag{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-weight:800;transition:all .3s var(--ease-spring)}
+.hud-middle .combo-tag.hot{color:var(--primary-light);animation:comboPulse .5s var(--ease-spring)}
+@keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+.q-card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);border-radius:var(--radius);padding:26px 26px 22px;
+  backdrop-filter:blur(20px);box-shadow:var(--shadow-card);animation:qEnter .55s var(--ease-out);overflow:hidden}
+.q-card::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(135deg,rgba(16,185,129,.4),transparent 40%,transparent 60%,rgba(6,182,212,.3));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+@keyframes qEnter{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.q-card.shake{animation:shake .5s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+
+.q-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.q-num{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:30px;
+  background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(16,185,129,.06));
+  border:1px solid rgba(16,185,129,.30);font-size:.72rem;font-weight:800;letter-spacing:1px;color:var(--primary-light)}
+.q-topic{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;
+  background:rgba(6,182,212,.10);border:1px solid rgba(6,182,212,.28);font-size:.68rem;
+  font-weight:800;letter-spacing:.8px;color:var(--accent);text-transform:uppercase}
+
+.q-text{font-size:clamp(1rem,2.2vw,1.12rem);font-weight:600;line-height:1.75;color:var(--text);
+  margin-bottom:20px;white-space:pre-line}
+.q-text strong{color:var(--primary-light);font-weight:800}
+
+.options{display:grid;gap:10px}
+.opt{position:relative;display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;
+  padding:15px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--glass-border);
+  background:rgba(255,255,255,.03);color:var(--text-dim);font-family:inherit;font-size:.92rem;
+  line-height:1.6;cursor:pointer;transition:all .3s var(--ease-out);overflow:hidden}
+.opt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;
+  background:linear-gradient(90deg,rgba(16,185,129,.15),transparent);
+  transition:width .4s var(--ease-out);z-index:0}
+.opt:hover:not(.locked){border-color:rgba(16,185,129,.55);transform:translateX(5px);
+  color:var(--text);box-shadow:0 8px 24px rgba(16,185,129,.15)}
+.opt:hover:not(.locked)::before{width:100%}
+.opt-letter{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:11px;flex-shrink:0;background:rgba(255,255,255,.06);
+  color:var(--text-mute);font-weight:800;font-size:.85rem;transition:all .3s var(--ease-out);
+  border:1px solid rgba(255,255,255,.06)}
+.opt-text{position:relative;z-index:1;flex:1}
+.opt:hover:not(.locked) .opt-letter{background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;border-color:transparent;box-shadow:0 0 20px rgba(16,185,129,.6)}
+.opt.correct{border-color:var(--primary);background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(16,185,129,.15),0 12px 32px rgba(16,185,129,.25);
+  animation:correctPop .5s var(--ease-spring)}
+@keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.02)}100%{transform:scale(1)}}
+.opt.correct .opt-letter{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(16,185,129,.7)}
+.opt.wrong{border-color:var(--rose);background:linear-gradient(135deg,rgba(244,63,94,.15),rgba(244,63,94,.05));
+  color:#fff;pointer-events:none;box-shadow:0 0 0 3px rgba(244,63,94,.15),0 12px 32px rgba(244,63,94,.25)}
+.opt.wrong .opt-letter{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;border-color:transparent;box-shadow:0 0 24px rgba(244,63,94,.7)}
+.opt.locked{pointer-events:none}
+.opt.disabled-50{opacity:.2;pointer-events:none;filter:grayscale(1) blur(.5px)}
+
+.feedback{display:none;padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(16px);box-shadow:var(--shadow-card);
+  animation:qEnter .5s var(--ease-out)}
+.feedback.show{display:block}
+.fb-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.fb-icon{width:48px;height:48px;border-radius:15px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;transition:all .4s var(--ease-spring)}
+.fb-icon.correct{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;box-shadow:0 0 32px rgba(16,185,129,.6)}
+.fb-icon.wrong{background:linear-gradient(135deg,var(--rose),#be123c);color:#fff;box-shadow:0 0 32px rgba(244,63,94,.6)}
+.fb-icon.info{background:linear-gradient(135deg,var(--accent),#0891b2);color:#fff;box-shadow:0 0 32px rgba(6,182,212,.6)}
+.fb-title{font-size:1.05rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase}
+.fb-title.correct{color:var(--primary)}
+.fb-title.wrong{color:#FCA5A5}
+.fb-title.info{color:var(--accent)}
+.fb-body{font-size:.9rem;color:var(--text-dim);line-height:1.75}
+.fb-body strong{color:var(--text);font-weight:700}
+.fb-sec{margin-top:12px;padding-top:12px;border-top:1px dashed rgba(255,255,255,.10)}
+.fb-label{font-size:.68rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--primary-light);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.fb-points{margin-top:12px;padding:14px 16px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(16,185,129,.10),rgba(16,185,129,.03));border-left:3px solid var(--primary)}
+.fb-points .fb-label{color:var(--primary-light)}
+.fb-points p{font-size:.87rem;color:var(--text-dim);line-height:1.7}
+
+.hud-bottom{display:flex;flex-direction:column;gap:12px}
+.power-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.power-btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;
+  border-radius:50px;border:1px solid var(--glass-border);
+  background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  color:var(--text-dim);font-family:inherit;font-weight:800;font-size:.78rem;letter-spacing:.5px;
+  cursor:pointer;transition:all .3s var(--ease-spring);overflow:hidden}
+.power-btn i{font-size:.9rem}
+.power-btn:hover:not(:disabled):not(.used){transform:translateY(-3px);border-color:rgba(16,185,129,.5);color:var(--text);box-shadow:0 8px 24px rgba(16,185,129,.25)}
+.power-btn:active:not(:disabled):not(.used){transform:scale(.96)}
+.power-btn .cnt{font-size:.62rem;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.10);font-weight:900;font-family:var(--font-mono)}
+.power-btn.used{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.power-btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.power-btn.p50{color:var(--accent)}
+.power-btn.phint{color:var(--primary-light)}
+.power-btn.pskip{color:var(--rose)}
+
+.action-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 30px;border-radius:50px;border:none;
+  font-family:inherit;font-weight:900;font-size:.88rem;letter-spacing:.5px;cursor:pointer;
+  transition:all .35s var(--ease-spring)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;
+  box-shadow:0 10px 32px rgba(16,185,129,.4),inset 0 -2px 0 rgba(0,0,0,.15)}
+.btn-primary:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 44px rgba(16,185,129,.6)}
+.btn-primary:active:not(:disabled){transform:scale(.96)}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--text-dim);border:1px solid var(--glass-border)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(16,185,129,.4);transform:translateY(-2px)}
+
+.result-screen{display:none;flex-direction:column;gap:16px;text-align:center;animation:fadeSlideIn .6s var(--ease-out)}
+.result-screen.active{display:flex}
+.result-hero{position:relative;padding:38px 26px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);box-shadow:var(--shadow-card);overflow:hidden}
+.result-hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center top,rgba(16,185,129,.20),transparent 60%);pointer-events:none}
+.result-trophy{font-size:4rem;line-height:1;margin-bottom:8px;
+  filter:drop-shadow(0 8px 30px rgba(16,185,129,.6));animation:trophyFloat 3s ease-in-out infinite}
+@keyframes trophyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.result-title{font-family:var(--font-display);font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:900;
+  letter-spacing:-.5px;background:linear-gradient(135deg,#fff,var(--primary-light),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.result-sub{font-size:.9rem;color:var(--text-dim);margin-bottom:6px}
+.grade-ring{position:relative;width:130px;height:130px;margin:16px auto;border-radius:50%;
+  background:conic-gradient(var(--primary) var(--grade-deg,0deg),rgba(255,255,255,.08) 0deg);
+  padding:8px;box-shadow:0 0 40px rgba(16,185,129,.4);animation:ringPop .8s var(--ease-spring)}
+@keyframes ringPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.grade-inner{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at center,#0b0d1c,#05060f);display:grid;place-items:center;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.6)}
+.grade-letter{font-size:2.6rem;font-weight:900;line-height:1;
+  background:linear-gradient(135deg,var(--primary-light),var(--primary));-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent}
+.grade-label{font-size:.62rem;font-weight:800;letter-spacing:2px;color:var(--text-mute);text-transform:uppercase;margin-top:2px}
+.result-title-text{font-size:1.1rem;font-weight:900;color:var(--primary-light);letter-spacing:.5px;margin-top:8px;text-transform:uppercase}
+.result-xp-line{font-size:.88rem;color:var(--text-dim);margin-top:6px}
+.result-xp-line strong{color:var(--accent);font-family:var(--font-mono);font-weight:800}
+.result-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:20px 0 8px}
+.rs-box{padding:16px 10px;border-radius:var(--radius-sm);background:rgba(255,255,255,.04);
+  border:1px solid var(--glass-border);transition:all .3s var(--ease-out)}
+.rs-box:hover{transform:translateY(-3px);border-color:rgba(16,185,129,.3)}
+.rs-val{font-size:1.7rem;font-weight:900;line-height:1.1;font-family:var(--font-mono)}
+.rs-val.green{color:var(--primary);text-shadow:0 0 20px rgba(16,185,129,.5)}
+.rs-val.red{color:#FCA5A5;text-shadow:0 0 20px rgba(244,63,94,.5)}
+.rs-val.cyan{color:var(--accent);text-shadow:0 0 20px rgba(6,182,212,.5)}
+.rs-val.violet{color:var(--sky);text-shadow:0 0 20px rgba(56,189,248,.5)}
+.rs-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.5px;color:var(--text-mute);text-transform:uppercase;margin-top:6px}
+.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:14px 18px;border-radius:12px;
+  background:rgba(16,185,129,.06);border-left:3px solid var(--primary);margin-top:6px;text-align:left}
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+
+.review-panel{padding:22px 24px;border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid var(--glass-border);backdrop-filter:blur(14px);text-align:left}
+.review-panel h4{font-size:.9rem;font-weight:900;color:var(--primary-light);margin-bottom:12px;
+  display:flex;align-items:center;gap:9px;letter-spacing:.5px;text-transform:uppercase}
+.review-list{display:grid;gap:8px}
+.review-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-radius:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:.84rem;
+  line-height:1.6;transition:all .3s var(--ease-out)}
+.review-item:hover{background:rgba(255,255,255,.06);transform:translateX(3px)}
+.review-item .ri-num{font-weight:900;color:var(--text-mute);flex-shrink:0;font-family:var(--font-mono);font-size:.78rem;min-width:26px}
+.review-item .ri-text{flex:1;color:var(--text-dim)}
+.review-item .ri-status{font-size:.68rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
+  padding:3px 10px;border-radius:20px;flex-shrink:0}
+.ri-status.correct{background:rgba(16,185,129,.15);color:#34D399}
+.ri-status.wrong{background:rgba(244,63,94,.15);color:#FCA5A5}
+.ri-status.skipped{background:rgba(255,255,255,.06);color:var(--text-mute)}
+
+.toast-wrap{position:fixed;top:74px;right:16px;z-index:9999;display:flex;flex-direction:column;
+  gap:10px;pointer-events:none;max-width:calc(100vw - 32px)}
+.toast{display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(11,13,28,.95),rgba(5,6,15,.95));
+  border:1px solid var(--glass-border);backdrop-filter:blur(20px);
+  box-shadow:0 16px 40px rgba(0,0,0,.6),0 0 0 1px rgba(16,185,129,.15);
+  pointer-events:auto;animation:toastIn .5s var(--ease-spring);max-width:340px}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast.out{animation:toastOut .4s ease forwards}
+@keyframes toastOut{to{transform:translateX(120%);opacity:0}}
+.toast-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:grid;place-items:center;
+  font-size:1.2rem;color:#fff;background:linear-gradient(135deg,var(--primary),var(--accent));
+  box-shadow:0 0 24px rgba(16,185,129,.6)}
+.toast-icon.green{background:linear-gradient(135deg,var(--primary),var(--primary-dark));box-shadow:0 0 24px rgba(16,185,129,.6)}
+.toast-icon.cyan{background:linear-gradient(135deg,var(--accent),#0891b2);box-shadow:0 0 24px rgba(6,182,212,.6)}
+.toast-icon.violet{background:linear-gradient(135deg,var(--violet),#7c3aed);box-shadow:0 0 24px rgba(139,92,246,.6)}
+.toast-content{flex:1;min-width:0}
+.toast-title{font-size:.85rem;font-weight:900;color:var(--text);letter-spacing:.3px}
+.toast-desc{font-size:.75rem;color:var(--text-dim);line-height:1.5;margin-top:2px}
+
+.score-pop{position:fixed;z-index:9997;pointer-events:none;font-family:var(--font-display);
+  font-weight:900;font-size:1.6rem;color:var(--primary-light);text-shadow:0 0 20px rgba(16,185,129,.8);
+  animation:scorePop 1s var(--ease-out) forwards}
+@keyframes scorePop{0%{transform:translate(-50%,0) scale(.5);opacity:0}
+  20%{transform:translate(-50%,-20px) scale(1.2);opacity:1}
+  100%{transform:translate(-50%,-80px) scale(1);opacity:0}}
+
+@media (max-width:600px){
+  .wrap{padding:calc(60px + 14px) 12px 50px}
+  .q-card{padding:20px 18px}
+  .opt{padding:13px 14px;font-size:.87rem;gap:11px}
+  .opt-letter{width:30px;height:30px;font-size:.78rem}
+  .hud-top{padding:12px 14px;gap:8px}
+  .hud-timer{padding:6px 11px;font-size:.78rem}
+  .hud-hp .heart{font-size:1rem}
+  .power-btn{padding:9px 14px;font-size:.72rem}
+  .btn{padding:12px 22px;font-size:.82rem;width:100%;justify-content:center}
+  .action-bar{flex-direction:column}
+  .result-hero{padding:28px 18px}
+  .grade-ring{width:110px;height:110px}
+  .grade-letter{font-size:2.2rem}
+  .rs-val{font-size:1.4rem}
+  .toast{max-width:calc(100vw - 24px);padding:12px 14px}
+  .toast-icon{width:36px;height:36px;font-size:1rem}
+}
+@media print{
+  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap{display:none!important}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+<canvas id="particles"></canvas>
+<canvas id="confettiCanvas"></canvas>
+
+<div id="loader">
+  <div class="loader-orb">
+    <div class="loader-core"><i class="fas fa-database"></i></div>
+  </div>
+  <div class="loader-title">HISTOEXPLORER</div>
+  <div class="loader-sub">Kuis 3 · Definisi Ahli (2), Hakikat &amp; Sumber Sejarah</div>
+  <div class="loader-bar"><span id="loaderBar"></span></div>
+  <div class="loader-pct" id="loaderPct">0%</div>
+</div>
+
+<header class="game-header">
+  <div class="brand">
+    <div class="brand-logo"><i class="fas fa-database"></i></div>
+    <div class="brand-text">
+      <span class="t1">KUIS 3 · PERTEMUAN 3</span>
+      <span class="t2">Hakikat &amp; Sumber Sejarah</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="Suara"><i class="fas fa-volume-up"></i></button>
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema"><i class="fas fa-sun"></i></button>
+  </div>
+</header>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<main class="wrap">
+
+  <section class="start-screen" id="startScreen">
+    <span class="hero-badge"><i class="fas fa-crown"></i> PREMIUM GAME MODE · LEVEL 3</span>
+    <h1 class="hero-title">Definisi Ahli (2)<br>Hakikat &amp; Sumber Sejarah</h1>
+    <p class="hero-sub">
+      Kuasai definisi sejarah menurut <strong>Aristoteles</strong>, <strong>M. Yamin</strong>, <strong>Collingwood</strong>, &amp; <strong>Kuntowijoyo</strong>. Dalami <strong>4 dimensi hakikat</strong> dan <strong>jenis sumber sejarah</strong> — termasuk kritik sumber di era digital!
+    </p>
+
+    <div class="stats-showcase">
+      <span class="stat-pill" style="color:var(--primary-light)"><i class="fas fa-question-circle"></i> 15 Soal Acak</span>
+      <span class="stat-pill" style="color:var(--accent)"><i class="fas fa-stopwatch"></i> 20 Menit</span>
+      <span class="stat-pill" style="color:var(--rose)"><i class="fas fa-heart"></i> 3 Nyawa</span>
+      <span class="stat-pill" style="color:var(--gold-light)"><i class="fas fa-bolt"></i> Combo &amp; XP</span>
+    </div>
+
+    <div class="rules-card">
+      <h4><i class="fas fa-list-check"></i> Cara Bermain</h4>
+      <ul>
+        <li><span class="rule-num">1</span> Jawab 15 soal HOTS dari bank 40 soal — dipilih acak setiap sesi.</li>
+        <li><span class="rule-num">2</span> Jawaban benar memberi <strong>XP</strong> + memicu <strong>combo</strong>. Salah mengurangi <strong>1 nyawa</strong>.</li>
+        <li><span class="rule-num">3</span> Power-up: <strong>50:50</strong>, <strong>Petunjuk</strong>, <strong>Lewati</strong> (masing-masing 1×).</li>
+        <li><span class="rule-num">4</span> Raih <strong>Achievement</strong> dan taklukkan peringkat <strong>Sejarawan Muda</strong>!</li>
+      </ul>
+    </div>
+
+    <button class="btn-play" onclick="startGame()">
+      <i class="fas fa-play"></i> Mulai Bermain
+    </button>
+  </section>
+
+  <section class="game-hud" id="gameHud">
+    <div class="hud-top">
+      <div class="hud-hp" id="hudHp"></div>
+      <div class="hud-xp">
+        <div class="hud-xp-head">
+          <span class="lvl">LV <span id="hudLevel">1</span></span>
+          <span class="val"><span id="hudXp">0</span> / <span id="hudXpMax">100</span> XP</span>
+        </div>
+        <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
+      </div>
+      <div class="hud-timer" id="hudTimer">
+        <i class="fas fa-stopwatch"></i> <span id="hudTimerVal">20:00</span>
+      </div>
+    </div>
+
+    <div class="hud-middle">
+      <span><i class="fas fa-question-circle" style="color:var(--primary)"></i> Soal <strong id="hudQNum">1</strong>/<strong>15</strong></span>
+      <span class="combo-tag" id="comboTag"><i class="fas fa-fire"></i> Combo ×<span id="comboVal">0</span></span>
+      <span><i class="fas fa-star" style="color:var(--primary-light)"></i> Skor <strong id="hudScore" style="font-family:var(--font-mono)">0</strong></span>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-meta">
+        <span class="q-num"><i class="fas fa-bookmark"></i> <span id="qNumLabel">Soal 1</span></span>
+        <span class="q-topic" id="qTopic"><i class="fas fa-tag"></i> <span id="qTopicText">Aristoteles</span></span>
+      </div>
+      <div class="q-text" id="qText">Memuat soal...</div>
+      <div class="options" id="options"></div>
+    </div>
+
+    <div class="feedback" id="feedback">
+      <div class="fb-head">
+        <div class="fb-icon" id="fbIcon"><i class="fas fa-check"></i></div>
+        <div class="fb-title" id="fbTitle">BENAR!</div>
+      </div>
+      <div class="fb-body" id="fbBody"></div>
+    </div>
+
+    <div class="hud-bottom">
+      <div class="power-bar">
+        <button class="power-btn p50" id="p50" onclick="usePower('50')">
+          <i class="fas fa-compress-alt"></i> 50:50 <span class="cnt" id="c50">1</span>
+        </button>
+        <button class="power-btn phint" id="phint" onclick="usePower('hint')">
+          <i class="fas fa-lightbulb"></i> Petunjuk <span class="cnt" id="chint">1</span>
+        </button>
+        <button class="power-btn pskip" id="pskip" onclick="usePower('skip')">
+          <i class="fas fa-forward"></i> Lewati <span class="cnt" id="cskip">1</span>
+        </button>
+      </div>
+      <div class="action-bar">
+        <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>
+          Selanjutnya <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="btn btn-primary" id="btnFinish" onclick="finishGame()" style="display:none">
+          Lihat Hasil <i class="fas fa-flag-checkered"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="result-screen" id="resultScreen">
+    <div class="result-hero">
+      <div class="result-trophy" id="rTrophy">🏆</div>
+      <h2 class="result-title" id="rTitle">Luar Biasa!</h2>
+      <p class="result-sub" id="rSub">Kuis 3 · Pertemuan 3</p>
+      <div class="grade-ring" id="gradeRing">
+        <div class="grade-inner">
+          <div class="grade-letter" id="gradeLetter">A</div>
+          <div class="grade-label" id="gradeLabel">Sangat Baik</div>
+        </div>
+      </div>
+      <div class="result-title-text" id="rRank">SEJARAWAN MUDA</div>
+      <div class="result-xp-line">Total XP: <strong id="rXp">0</strong> · Best Combo: <strong id="rBestCombo">0</strong></div>
+      <div class="result-stats">
+        <div class="rs-box"><div class="rs-val green" id="rBenar">0</div><div class="rs-lbl">Benar</div></div>
+        <div class="rs-box"><div class="rs-val red" id="rSalah">0</div><div class="rs-lbl">Salah</div></div>
+        <div class="rs-box"><div class="rs-val cyan" id="rSkor">0</div><div class="rs-lbl">Skor</div></div>
+        <div class="rs-box"><div class="rs-val violet" id="rXpTotal">0</div><div class="rs-lbl">XP Total</div></div>
+      </div>
+      <div class="result-msg" id="rMsg"></div>
+      <div class="result-actions">
+        <button class="btn btn-primary" onclick="resetGame()"><i class="fas fa-redo"></i> Main Lagi</button>
+        <button class="btn btn-ghost" onclick="window.location.reload()"><i class="fas fa-home"></i> Menu Awal</button>
+      </div>
+    </div>
+    <div class="review-panel">
+      <h4><i class="fas fa-list-check"></i> Rincian Jawaban</h4>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ============================================================
+   BANK SOAL — 40 SOAL HOTS · PERTEMUAN 3
+   Materi: Aristoteles, M. Yamin, Collingwood, Kuntowijoyo,
+           Hakikat Sejarah, Sumber Sejarah, Primer/Sekunder,
+           Kritik Sumber Digital
+   ============================================================ */
+const BANK_SOAL = [
+  /* ===== ARISTOTELES (5 soal) ===== */
+  { id:201, topic:"Aristoteles",
+    question:"Menurut Aristoteles, sejarah adalah sistem yang meneliti kejadian sejak awal dan tersusun dalam bentuk kronologi. Implikasi paling penting dari definisi tersebut bagi kajian sejarah adalah...",
+    options:[
+      {letter:"A",text:"Sejarah harus disusun berdasarkan urutan waktu dan bukti konkret.",correct:true,explanation:"Tepat! Aristoteles menekankan kronologi dan bukti konkret."},
+      {letter:"B",text:"Sejarah boleh disusun tanpa urutan waktu.",correct:false,explanation:"Justru kronologi adalah inti definisi Aristoteles."},
+      {letter:"C",text:"Sejarah hanya tentang mitos dan legenda.",correct:false,explanation:"Aristoteles menekankan kejadian nyata."},
+      {letter:"D",text:"Sejarah tidak memerlukan bukti.",correct:false,explanation:"Aristoteles menekankan bukti konkret."},
+      {letter:"E",text:"Sejarah hanya untuk kalangan bangsawan.",correct:false,explanation:"Tidak ada kaitan dengan status sosial."}
+    ], difficulty:"medium", hint:"Aristoteles = kronologi + bukti konkret.", points:60 },
+
+  { id:202, topic:"Aristoteles",
+    question:"Perhatikan pernyataan berikut!\n'Sejarah adalah sistem yang meneliti kejadian sejak awal dan tersusun dalam bentuk kronologi.'\nPernyataan tersebut dikemukakan oleh...",
+    options:[
+      {letter:"A",text:"Herodotus",correct:false,explanation:"Herodotus menekankan penyelidikan."},
+      {letter:"B",text:"Aristoteles",correct:true,explanation:"Tepat! Aristoteles menekankan kronologi."},
+      {letter:"C",text:"Ibnu Khaldun",correct:false,explanation:"Ibnu Khaldun menekankan masyarakat & peradaban."},
+      {letter:"D",text:"Kuntowijoyo",correct:false,explanation:"Kuntowijoyo menekankan rekonstruksi."},
+      {letter:"E",text:"Collingwood",correct:false,explanation:"Collingwood menekankan pemikiran manusia."}
+    ], difficulty:"easy", hint:"Aristoteles menekankan kronologi.", points:50 },
+
+  { id:203, topic:"Aristoteles",
+    question:"Aristoteles menekankan bahwa sejarah harus memiliki 'catatan, record, dan bukti-bukti yang konkrit'. Analisis yang paling tepat tentang penekanan tersebut adalah...",
+    options:[
+      {letter:"A",text:"Sejarah harus berbasis bukti empiris, bukan sekadar cerita atau mitos.",correct:true,explanation:"Tepat! Aristoteles menekankan bukti empiris."},
+      {letter:"B",text:"Sejarah boleh berdasarkan mitos.",correct:false,explanation:"Justru Aristoteles menolak mitos tanpa bukti."},
+      {letter:"C",text:"Sejarah tidak perlu bukti.",correct:false,explanation:"Justru Aristoteles menuntut bukti."},
+      {letter:"D",text:"Sejarah hanya untuk hiburan.",correct:false,explanation:"Bukan penekanan Aristoteles."},
+      {letter:"E",text:"Sejarah hanya tentang tokoh besar.",correct:false,explanation:"Bukan penekanan Aristoteles."}
+    ], difficulty:"medium", hint:"Aristoteles = bukti empiris, bukan mitos.", points:60 },
+
+  { id:204, topic:"Aristoteles",
+    question:"Perbedaan paling mendasar antara pandangan Aristoteles dan Herodotus tentang sejarah adalah...",
+    options:[
+      {letter:"A",text:"Aristoteles menekankan kronologi dan bukti; Herodotus menekankan penyelidikan dan kesaksian.",correct:true,explanation:"Tepat! Aristoteles = kronologi; Herodotus = penyelidikan."},
+      {letter:"B",text:"Aristoteles menekankan mitos; Herodotus menekankan fakta.",correct:false,explanation:"Keduanya menolak mitos tanpa bukti."},
+      {letter:"C",text:"Keduanya sama saja pandangannya.",correct:false,explanation:"Ada perbedaan penekanan."},
+      {letter:"D",text:"Aristoteles adalah sejarawan Yunani; Herodotus adalah filsuf.",correct:false,explanation:"Terbalik."},
+      {letter:"E",text:"Keduanya menolak bukti.",correct:false,explanation:"Keduanya justru menekankan bukti."}
+    ], difficulty:"hard", hint:"Aristoteles = kronologi; Herodotus = penyelidikan.", points:70 },
+
+  { id:205, topic:"Aristoteles",
+    question:"Seorang siswa meneliti sejarah Kerajaan Kutai dengan menyusun peristiwa berdasarkan urutan tahun prasasti yang ditemukan. Pendekatan ini paling relevan dengan definisi sejarah menurut...",
+    options:[
+      {letter:"A",text:"Herodotus",correct:false,explanation:"Herodotus menekankan penyelidikan."},
+      {letter:"B",text:"Aristoteles",correct:true,explanation:"Tepat! Aristoteles menekankan kronologi."},
+      {letter:"C",text:"Collingwood",correct:false,explanation:"Collingwood menekankan pemikiran manusia."},
+      {letter:"D",text:"Kuntowijoyo",correct:false,explanation:"Kuntowijoyo menekankan rekonstruksi."},
+      {letter:"E",text:"M. Yamin",correct:false,explanation:"Yamin menekankan penyelidikan & fakta."}
+    ], difficulty:"medium", hint:"Fokus pada urutan kronologis = Aristoteles.", points:60 },
+
+  /* ===== M. YAMIN (5 soal) ===== */
+  { id:206, topic:"M. Yamin",
+    question:"Menurut Mohammad Yamin, sejarah adalah ilmu pengetahuan yang disusun atas hasil penyelidikan dari beberapa peristiwa yang mampu dibuktikan dengan kenyataan (fakta). Analisis yang paling tepat tentang definisi tersebut adalah...",
+    options:[
+      {letter:"A",text:"Sejarah harus berbasis penyelidikan dan fakta yang dapat dibuktikan, bukan sekadar cerita.",correct:true,explanation:"Tepat! Yamin menekankan penyelidikan dan fakta."},
+      {letter:"B",text:"Sejarah boleh berdasarkan mitos.",correct:false,explanation:"Justru Yamin menuntut fakta."},
+      {letter:"C",text:"Sejarah tidak memerlukan penyelidikan.",correct:false,explanation:"Justru Yamin menekankan penyelidikan."},
+      {letter:"D",text:"Sejarah hanya untuk hiburan.",correct:false,explanation:"Bukan penekanan Yamin."},
+      {letter:"E",text:"Sejarah hanya tentang tokoh besar.",correct:false,explanation:"Bukan penekanan Yamin."}
+    ], difficulty:"medium", hint:"Yamin = penyelidikan + fakta terbukti.", points:60 },
+
+  { id:207, topic:"M. Yamin",
+    question:"Penekanan utama definisi sejarah menurut Mohammad Yamin terletak pada...",
+    options:[
+      {letter:"A",text:"Kronologi semata",correct:false,explanation:"Kronologi adalah Aristoteles."},
+      {letter:"B",text:"Penyelidikan dan fakta yang dapat dibuktikan",correct:true,explanation:"Tepat! Yamin menekankan penyelidikan & fakta."},
+      {letter:"C",text:"Silsilah keluarga",correct:false,explanation:"Ini lebih ke syajaratun."},
+      {letter:"D",text:"Pemikiran manusia",correct:false,explanation:"Ini Collingwood."},
+      {letter:"E",text:"Rekonstruksi",correct:false,explanation:"Ini Kuntowijoyo."}
+    ], difficulty:"easy", hint:"Yamin = penyelidikan + fakta.", points:50 },
+
+  { id:208, topic:"M. Yamin",
+    question:"Seorang siswa berpendapat: 'Sejarah sama dengan dongeng karena keduanya bercerita tentang masa lalu.' Bagaimana kritik yang tepat berdasarkan definisi M. Yamin?",
+    options:[
+      {letter:"A",text:"Pendapat salah karena sejarah berbasis penyelidikan dan fakta yang dapat dibuktikan, sedangkan dongeng tidak.",correct:true,explanation:"Tepat! Perbedaan utama terletak pada penyelidikan & fakta."},
+      {letter:"B",text:"Pendapat benar karena keduanya sama saja.",correct:false,explanation:"Ada perbedaan mendasar."},
+      {letter:"C",text:"Pendapat benar karena sejarah juga fiktif.",correct:false,explanation:"Sejarah bukan fiksi."},
+      {letter:"D",text:"Pendapat salah karena dongeng lebih ilmiah.",correct:false,explanation:"Justru sejarah yang ilmiah."},
+      {letter:"E",text:"Pendapat tidak dapat dinilai.",correct:false,explanation:"Dapat dinilai."}
+    ], difficulty:"medium", hint:"Sejarah = penyelidikan + fakta; dongeng = fiktif.", points:60 },
+
+  { id:209, topic:"M. Yamin",
+    question:"Perbedaan penekanan antara Aristoteles dan M. Yamin dalam mendefinisikan sejarah adalah...",
+    options:[
+      {letter:"A",text:"Aristoteles menekankan kronologi; M. Yamin menekankan penyelidikan dan fakta.",correct:true,explanation:"Tepat! Aristoteles = kronologi; Yamin = penyelidikan & fakta."},
+      {letter:"B",text:"Aristoteles menekankan fakta; M. Yamin menekankan kronologi.",correct:false,explanation:"Terbalik."},
+      {letter:"C",text:"Keduanya sama saja.",correct:false,explanation:"Ada perbedaan penekanan."},
+      {letter:"D",text:"Keduanya menolak bukti.",correct:false,explanation:"Keduanya justru menekankan bukti."},
+      {letter:"E",text:"Keduanya hanya fokus pada mitos.",correct:false,explanation:"Keduanya menolak mitos."}
+    ], difficulty:"hard", hint:"Aristoteles = kronologi; Yamin = penyelidikan & fakta.", points:70 },
+
+  { id:210, topic:"M. Yamin",
+    question:"Analisis kritis yang tepat tentang kontribusi M. Yamin bagi ilmu sejarah Indonesia adalah...",
+    options:[
+      {letter:"A",text:"Ia menekankan pentingnya metode penyelidikan dan pembuktian fakta dalam penulisan sejarah Indonesia.",correct:true,explanation:"Tepat! Yamin menekankan penyelidikan & fakta."},
+      {letter:"B",text:"Ia menolak penggunaan sumber tertulis.",correct:false,explanation:"Justru ia menekankan sumber dan fakta."},
+      {letter:"C",text:"Ia hanya menulis tentang mitologi.",correct:false,explanation:"Ia menulis tentang sejarah nyata."},
+      {letter:"D",text:"Ia mengabaikan aspek kebangsaan.",correct:false,explanation:"Justru ia tokoh kebangsaan."},
+      {letter:"E",text:"Ia tidak menggunakan metode ilmiah.",correct:false,explanation:"Justru ia menekankan metode ilmiah."}
+    ], difficulty:"hard", hint:"Yamin = metode penyelidikan + pembuktian fakta.", points:70 },
+
+  /* ===== COLLINGWOOD (5 soal) ===== */
+  { id:211, topic:"Collingwood",
+    question:"Menurut R.G. Collingwood, tugas sejarawan adalah...",
+    options:[
+      {letter:"A",text:"Menyelidiki kembali pemikiran manusia di masa lampau",correct:true,explanation:"Tepat! Collingwood menekankan penyelidikan pemikiran manusia masa lampau."},
+      {letter:"B",text:"Mencatat semua peristiwa tanpa analisis",correct:false,explanation:"Collingwood menekankan analisis pemikiran."},
+      {letter:"C",text:"Menghafal tahun-tahun penting",correct:false,explanation:"Bukan penekanan Collingwood."},
+      {letter:"D",text:"Menyusun silsilah keluarga",correct:false,explanation:"Bukan penekanan Collingwood."},
+      {letter:"E",text:"Menulis mitos dan legenda",correct:false,explanation:"Collingwood menekankan pemikiran, bukan mitos."}
+    ], difficulty:"easy", hint:"Collingwood = penyelidikan pemikiran manusia masa lampau.", points:50 },
+
+  { id:212, topic:"Collingwood",
+    question:"Karya monumental R.G. Collingwood yang memuat pandangannya tentang sejarah berjudul...",
+    options:[
+      {letter:"A",text:"Historia",correct:false,explanation:"Ini karya Herodotus."},
+      {letter:"B",text:"Muqaddimah",correct:false,explanation:"Ini karya Ibnu Khaldun."},
+      {letter:"C",text:"The Idea of History",correct:true,explanation:"Tepat! Karya Collingwood adalah The Idea of History (1946)."},
+      {letter:"D",text:"Pengantar Ilmu Sejarah",correct:false,explanation:"Ini karya R. Moh. Ali."},
+      {letter:"E",text:"Tatanegara Majapahit",correct:false,explanation:"Ini karya M. Yamin."}
+    ], difficulty:"easy", hint:"Karya Collingwood = The Idea of History.", points:50 },
+
+  { id:213, topic:"Collingwood",
+    question:"Menurut Collingwood, sejarah berguna untuk mempelajari tindakan manusia dan kemudian mempelajari...",
+    options:[
+      {letter:"A",text:"Hakikat manusia",correct:true,explanation:"Tepat! Collingwood: sejarah berguna untuk mempelajari hakikat manusia."},
+      {letter:"B",text:"Masa depan manusia",correct:false,explanation:"Bukan penekanan Collingwood."},
+      {letter:"C",text:"Alam semesta",correct:false,explanation:"Bukan fokus Collingwood."},
+      {letter:"D",text:"Silsilah raja",correct:false,explanation:"Bukan penekanan Collingwood."},
+      {letter:"E",text:"Ramalan nasib",correct:false,explanation:"Bukan penekanan Collingwood."}
+    ], difficulty:"medium", hint:"Collingwood: sejarah → hakikat manusia.", points:60 },
+
+  { id:214, topic:"Collingwood",
+    question:"Analisis kritis yang tepat tentang pandangan Collingwood adalah...",
+    options:[
+      {letter:"A",text:"Ia menekankan pendekatan filosofis dengan menyelidiki 'pikiran di balik tindakan' manusia masa lalu.",correct:true,explanation:"Tepat! Collingwood menekankan pendekatan filosofis."},
+      {letter:"B",text:"Ia menolak aspek filosofis dalam sejarah.",correct:false,explanation:"Justru ia menekankan filosofi."},
+      {letter:"C",text:"Ia hanya menekankan kronologi.",correct:false,explanation:"Kronologi adalah Aristoteles."},
+      {letter:"D",text:"Ia hanya fokus pada silsilah.",correct:false,explanation:"Bukan penekanan Collingwood."},
+      {letter:"E",text:"Ia mengabaikan pemikiran manusia.",correct:false,explanation:"Justru ia menekankan pemikiran manusia."}
+    ], difficulty:"hard", hint:"Collingwood = pendekatan filosofis + pemikiran manusia.", points:70 },
+
+  { id:215, topic:"Collingwood",
+    question:"Perbedaan utama antara pandangan Collingwood dan Aristoteles tentang sejarah terletak pada...",
+    options:[
+      {letter:"A",text:"Collingwood menekankan pemikiran manusia; Aristoteles menekankan kronologi.",correct:true,explanation:"Tepat! Collingwood = pemikiran; Aristoteles = kronologi."},
+      {letter:"B",text:"Collingwood menekankan kronologi; Aristoteles menekankan pemikiran.",correct:false,explanation:"Terbalik."},
+      {letter:"C",text:"Keduanya sama saja.",correct:false,explanation:"Ada perbedaan penekanan."},
+      {letter:"D",text:"Keduanya menolak bukti.",correct:false,explanation:"Keduanya menekankan bukti."},
+      {letter:"E",text:"Keduanya hanya fokus pada mitos.",correct:false,explanation:"Keduanya menolak mitos."}
+    ], difficulty:"hard", hint:"Collingwood = pemikiran; Aristoteles = kronologi.", points:70 },
+
+  /* ===== KUNTOWIJOYO (4 soal) ===== */
+  { id:216, topic:"Kuntowijoyo",
+    question:"Menurut Kuntowijoyo, sejarah adalah...",
+    options:[
+      {letter:"A",text:"Suatu hal peristiwa yang sudah terjadi di masa lalu yang direkonstruksi atau membangun kembali kejadian masa lampau",correct:true,explanation:"Tepat! Kuntowijoyo menekankan rekonstruksi."},
+      {letter:"B",text:"Catatan tentang peradaban dunia",correct:false,explanation:"Ini Ibnu Khaldun."},
+      {letter:"C",text:"Penyelidikan terhadap peristiwa masa lalu",correct:false,explanation:"Ini Herodotus."},
+      {letter:"D",text:"Sistem yang meneliti kejadian sejak awal",correct:false,explanation:"Ini Aristoteles."},
+      {letter:"E",text:"Jumlah perubahan dalam kenyataan sekitar",correct:false,explanation:"Ini R. Moh. Ali."}
+    ], difficulty:"easy", hint:"Kuntowijoyo = rekonstruksi.", points:50 },
+
+  { id:217, topic:"Kuntowijoyo",
+    question:"Kuntowijoyo dijuluki sebagai...",
+    options:[
+      {letter:"A",text:"The Father of History",correct:false,explanation:"Ini Herodotus."},
+      {letter:"B",text:"Bapak Sejarah Indonesia",correct:true,explanation:"Tepat! Kuntowijoyo dijuluki Bapak Sejarah Indonesia."},
+      {letter:"C",text:"Bapak Sosiologi",correct:false,explanation:"Ini Ibnu Khaldun."},
+      {letter:"D",text:"Bapak Filsafat",correct:false,explanation:"Ini Aristoteles."},
+      {letter:"E",text:"Bapak Historiografi",correct:false,explanation:"Ini juga Ibnu Khaldun."}
+    ], difficulty:"easy", hint:"Kuntowijoyo = Bapak Sejarah Indonesia.", points:50 },
+
+  { id:218, topic:"Kuntowijoyo",
+    question:"Penekanan utama definisi sejarah menurut Kuntowijoyo terletak pada...",
+    options:[
+      {letter:"A",text:"Kronologi",correct:false,explanation:"Ini Aristoteles."},
+      {letter:"B",text:"Rekonstruksi masa lalu berdasarkan bukti",correct:true,explanation:"Tepat! Kuntowijoyo menekankan rekonstruksi."},
+      {letter:"C",text:"Silsilah",correct:false,explanation:"Ini syajaratun."},
+      {letter:"D",text:"Pemikiran manusia",correct:false,explanation:"Ini Collingwood."},
+      {letter:"E",text:"Peradaban dunia",correct:false,explanation:"Ini Ibnu Khaldun."}
+    ], difficulty:"medium", hint:"Kuntowijoyo = rekonstruksi.", points:60 },
+
+  { id:219, topic:"Kuntowijoyo",
+    question:"Analisis yang paling tepat tentang hubungan antara definisi Kuntowijoyo dan metode penelitian sejarah adalah...",
+    options:[
+      {letter:"A",text:"Rekonstruksi menuntut metode penelitian yang ketat: heuristik, kritik, interpretasi, historiografi.",correct:true,explanation:"Tepat! Rekonstruksi memerlukan metode penelitian."},
+      {letter:"B",text:"Rekonstruksi tidak memerlukan metode.",correct:false,explanation:"Justru memerlukan."},
+      {letter:"C",text:"Rekonstruksi hanya berdasarkan imajinasi.",correct:false,explanation:"Berdasarkan bukti."},
+      {letter:"D",text:"Rekonstruksi tidak perlu bukti.",correct:false,explanation:"Justru perlu bukti."},
+      {letter:"E",text:"Rekonstruksi hanya untuk sejarah lokal.",correct:false,explanation:"Berlaku universal."}
+    ], difficulty:"hard", hint:"Rekonstruksi = heuristik + kritik + interpretasi + historiografi.", points:70 },
+
+  /* ===== HAKIKAT SEJARAH (10 soal) ===== */
+  { id:220, topic:"Hakikat: Peristiwa",
+    question:"Dimensi hakikat sejarah yang menekankan pada kejadian nyata yang unik, abadi, dan penting disebut...",
+    options:[
+      {letter:"A",text:"Peristiwa",correct:true,explanation:"Tepat! Peristiwa = kejadian nyata, unik, abadi, penting."},
+      {letter:"B",text:"Kisah",correct:false,explanation:"Kisah = narasi."},
+      {letter:"C",text:"Seni",correct:false,explanation:"Seni = kreativitas."},
+      {letter:"D",text:"Ilmu",correct:false,explanation:"Ilmu = metode."},
+      {letter:"E",text:"Rekonstruksi",correct:false,explanation:"Rekonstruksi = membangun kembali."}
+    ], difficulty:"easy", hint:"Unik, abadi, penting = peristiwa.", points:50 },
+
+  { id:221, topic:"Hakikat: Peristiwa",
+    question:"Analisis yang paling tepat tentang sifat 'unik' dalam dimensi peristiwa sejarah adalah...",
+    options:[
+      {letter:"A",text:"Peristiwa sejarah hanya terjadi sekali dan tidak dapat diulang secara identik.",correct:true,explanation:"Tepat! Unik = sekali terjadi, tidak terulang identik."},
+      {letter:"B",text:"Peristiwa sejarah selalu berulang setiap tahun.",correct:false,explanation:"Tidak berulang identik."},
+      {letter:"C",text:"Peristiwa sejarah hanya terjadi di satu tempat.",correct:false,explanation:"Unik bukan berarti hanya di satu tempat."},
+      {letter:"D",text:"Peristiwa sejarah tidak penting.",correct:false,explanation:"Justru penting."},
+      {letter:"E",text:"Peristiwa sejarah tidak dapat dikenang.",correct:false,explanation:"Justru abadi dikenang."}
+    ], difficulty:"medium", hint:"Unik = hanya sekali, tidak dapat diulang identik.", points:60 },
+
+  { id:222, topic:"Hakikat: Kisah",
+    question:"Dimensi hakikat sejarah yang menghidupkan pelaku dan pengalamannya melalui narasi disebut...",
+    options:[
+      {letter:"A",text:"Peristiwa",correct:false,explanation:"Peristiwa = kejadian nyata."},
+      {letter:"B",text:"Kisah",correct:true,explanation:"Tepat! Kisah = narasi yang menghidupkan pelaku."},
+      {letter:"C",text:"Seni",correct:false,explanation:"Seni = kreativitas."},
+      {letter:"D",text:"Ilmu",correct:false,explanation:"Ilmu = metode."},
+      {letter:"E",text:"Fakta",correct:false,explanation:"Fakta = kenyataan."}
+    ], difficulty:"easy", hint:"Kisah = narasi yang menghidupkan pelaku.", points:50 },
+
+  { id:223, topic:"Hakikat: Kisah",
+    question:"Contoh paling tepat yang menggambarkan sejarah sebagai 'kisah' adalah...",
+    options:[
+      {letter:"A",text:"Biografi Pangeran Diponegoro yang mengisahkan perjuangan dan pengorbanannya",correct:true,explanation:"Tepat! Biografi menghidupkan pelaku dan pengalamannya."},
+      {letter:"B",text:"Daftar tahun-tahun penting",correct:false,explanation:"Hanya kronologi."},
+      {letter:"C",text:"Rumus matematika",correct:false,explanation:"Bukan kisah."},
+      {letter:"D",text:"Peta geografis",correct:false,explanation:"Bukan kisah."},
+      {letter:"E",text:"Grafik statistik",correct:false,explanation:"Bukan kisah."}
+    ], difficulty:"medium", hint:"Kisah = narasi yang menghidupkan pelaku.", points:60 },
+
+  { id:224, topic:"Hakikat: Seni",
+    question:"Dimensi hakikat sejarah yang menekankan pada daya imajinasi, kreativitas, dan kepekaan rasa sejarawan dalam menyajikan narasi disebut...",
+    options:[
+      {letter:"A",text:"Peristiwa",correct:false,explanation:"Peristiwa = kejadian nyata."},
+      {letter:"B",text:"Kisah",correct:false,explanation:"Kisah = narasi pelaku."},
+      {letter:"C",text:"Seni",correct:true,explanation:"Tepat! Seni = imajinasi, kreativitas, kepekaan rasa."},
+      {letter:"D",text:"Ilmu",correct:false,explanation:"Ilmu = metode."},
+      {letter:"E",text:"Fakta",correct:false,explanation:"Fakta = kenyataan."}
+    ], difficulty:"easy", hint:"Seni = imajinasi & kreativitas.", points:50 },
+
+  { id:225, topic:"Hakikat: Seni",
+    question:"Contoh penerapan sejarah sebagai 'seni' adalah...",
+    options:[
+      {letter:"A",text:"Rekonstruksi kehidupan masyarakat Hindu-Buddha melalui relief Candi Borobudur",correct:true,explanation:"Tepat! Rekonstruksi memerlukan imajinasi dan kreativitas."},
+      {letter:"B",text:"Mencatat tanggal proklamasi",correct:false,explanation:"Hanya fakta."},
+      {letter:"C",text:"Menghafal nama pahlawan",correct:false,explanation:"Hanya hafalan."},
+      {letter:"D",text:"Mengurutkan peristiwa",correct:false,explanation:"Hanya kronologi."},
+      {letter:"E",text:"Menyalin dokumen",correct:false,explanation:"Hanya menyalin."}
+    ], difficulty:"medium", hint:"Seni = rekonstruksi dengan imajinasi & kreativitas.", points:60 },
+
+  { id:226, topic:"Hakikat: Ilmu",
+    question:"Dimensi hakikat sejarah yang menekankan pada metode penelitian yang sistematis (heuristik, kritik, interpretasi, historiografi) disebut...",
+    options:[
+      {letter:"A",text:"Peristiwa",correct:false,explanation:"Peristiwa = kejadian nyata."},
+      {letter:"B",text:"Kisah",correct:false,explanation:"Kisah = narasi."},
+      {letter:"C",text:"Seni",correct:false,explanation:"Seni = kreativitas."},
+      {letter:"D",text:"Ilmu",correct:true,explanation:"Tepat! Ilmu = metode penelitian sistematis."},
+      {letter:"E",text:"Rekonstruksi",correct:false,explanation:"Rekonstruksi = membangun kembali."}
+    ], difficulty:"easy", hint:"Ilmu = metode penelitian sistematis.", points:50 },
+
+  { id:227, topic:"Hakikat: Ilmu",
+    question:"Analisis yang paling tepat tentang hubungan antara sejarah sebagai 'ilmu' dan 'seni' adalah...",
+    options:[
+      {letter:"A",text:"Keduanya saling melengkapi: ilmu memberikan metode, seni memberikan penyajian yang hidup.",correct:true,explanation:"Tepat! Ilmu & seni saling melengkapi."},
+      {letter:"B",text:"Keduanya bertentangan.",correct:false,explanation:"Justru saling melengkapi."},
+      {letter:"C",text:"Hanya ilmu yang penting.",correct:false,explanation:"Keduanya sama penting."},
+      {letter:"D",text:"Hanya seni yang penting.",correct:false,explanation:"Keduanya sama penting."},
+      {letter:"E",text:"Keduanya tidak dapat disatukan.",correct:false,explanation:"Justru dapat disatukan."}
+    ], difficulty:"hard", hint:"Ilmu = metode; Seni = penyajian. Saling melengkapi.", points:70 },
+
+  { id:228, topic:"Hakikat",
+    question:"Seorang sejarawan meneliti Proklamasi 1945 dengan: (1) mengumpulkan dokumen asli, (2) mengkritik sumber, (3) menafsirkan, dan (4) menulis narasi yang hidup. Analisis ini menunjukkan bahwa sejarawan tersebut menggunakan dimensi hakikat sejarah...",
+    options:[
+      {letter:"A",text:"Hanya peristiwa",correct:false,explanation:"Ada juga aspek lain."},
+      {letter:"B",text:"Hanya kisah",correct:false,explanation:"Ada juga aspek lain."},
+      {letter:"C",text:"Kombinasi ilmu (metode) dan seni (narasi hidup)",correct:true,explanation:"Tepat! Metode = ilmu; narasi hidup = seni."},
+      {letter:"D",text:"Hanya seni",correct:false,explanation:"Ada juga aspek ilmu."},
+      {letter:"E",text:"Hanya fakta",correct:false,explanation:"Ada juga aspek lain."}
+    ], difficulty:"hard", hint:"Metode = ilmu; narasi hidup = seni.", points:70 },
+
+  { id:229, topic:"Hakikat",
+    question:"Kesimpulan yang paling tepat tentang empat dimensi hakikat sejarah (peristiwa, kisah, seni, ilmu) adalah...",
+    options:[
+      {letter:"A",text:"Keempatnya berdiri sendiri dan tidak saling terkait.",correct:false,explanation:"Justru saling terkait."},
+      {letter:"B",text:"Keempatnya saling melengkapi untuk membentuk pemahaman sejarah yang utuh.",correct:true,explanation:"Tepat! Keempatnya saling melengkapi."},
+      {letter:"C",text:"Hanya peristiwa yang penting.",correct:false,explanation:"Semua penting."},
+      {letter:"D",text:"Hanya ilmu yang penting.",correct:false,explanation:"Semua penting."},
+      {letter:"E",text:"Keempatnya tidak relevan dengan kajian sejarah.",correct:false,explanation:"Justru sangat relevan."}
+    ], difficulty:"hard", hint:"Keempatnya saling melengkapi.", points:70 },
+
+  /* ===== SUMBER SEJARAH BENTUK (6 soal) ===== */
+  { id:230, topic:"Sumber Tertulis",
+    question:"Sumber sejarah yang memberikan informasi dalam bentuk tulisan — seperti surat, arsip, prasasti, dan surat kabar — disebut...",
+    options:[
+      {letter:"A",text:"Sumber lisan",correct:false,explanation:"Sumber lisan melalui penuturan."},
+      {letter:"B",text:"Sumber tertulis",correct:true,explanation:"Tepat! Sumber tertulis = informasi dalam bentuk tulisan."},
+      {letter:"C",text:"Sumber benda",correct:false,explanation:"Sumber benda = artefak."},
+      {letter:"D",text:"Sumber audiovisual",correct:false,explanation:"Sumber audiovisual = suara/gambar."},
+      {letter:"E",text:"Sumber sekunder",correct:false,explanation:"Ini kategori berbeda."}
+    ], difficulty:"easy", hint:"Tertulis = informasi dalam bentuk tulisan.", points:50 },
+
+  { id:231, topic:"Sumber Lisan",
+    question:"Seorang siswa ingin mengetahui keadaan sekolahnya saat pertama berdiri. Ia mewawancarai kepala sekolah pertama yang masih hidup. Sumber yang diperoleh termasuk...",
+    options:[
+      {letter:"A",text:"Sumber tertulis",correct:false,explanation:"Wawancara bukan tertulis."},
+      {letter:"B",text:"Sumber lisan",correct:true,explanation:"Tepat! Wawancara = sumber lisan."},
+      {letter:"C",text:"Sumber benda",correct:false,explanation:"Wawancara bukan benda."},
+      {letter:"D",text:"Sumber audiovisual",correct:false,explanation:"Jika direkam, bisa audiovisual, tetapi esensinya lisan."},
+      {letter:"E",text:"Sumber sekunder",correct:false,explanation:"Ini kategori berbeda."}
+    ], difficulty:"easy", hint:"Wawancara = sumber lisan.", points:50 },
+
+  { id:232, topic:"Sumber Benda",
+    question:"Contoh sumber benda dalam kajian sejarah adalah...",
+    options:[
+      {letter:"A",text:"Surat kabar",correct:false,explanation:"Surat kabar = tertulis."},
+      {letter:"B",text:"Rekaman wawancara",correct:false,explanation:"Wawancara = lisan."},
+      {letter:"C",text:"Candi dan arca",correct:true,explanation:"Tepat! Candi & arca = sumber benda."},
+      {letter:"D",text:"Film dokumenter",correct:false,explanation:"Film = audiovisual."},
+      {letter:"E",text:"Buku pelajaran",correct:false,explanation:"Buku = tertulis."}
+    ], difficulty:"easy", hint:"Candi & arca = benda material.", points:50 },
+
+  { id:233, topic:"Sumber Audiovisual",
+    question:"Rekaman video kegiatan masyarakat masa lalu termasuk sumber...",
+    options:[
+      {letter:"A",text:"Tertulis",correct:false,explanation:"Bukan tulisan."},
+      {letter:"B",text:"Lisan",correct:false,explanation:"Bukan hanya lisan."},
+      {letter:"C",text:"Benda",correct:false,explanation:"Bukan benda material."},
+      {letter:"D",text:"Audiovisual",correct:true,explanation:"Tepat! Video = audiovisual (suara + gambar)."},
+      {letter:"E",text:"Tersier",correct:false,explanation:"Bukan kategori tersier."}
+    ], difficulty:"easy", hint:"Video = suara + gambar = audiovisual.", points:50 },
+
+  { id:234, topic:"Sumber Sejarah",
+    question:"Analisis yang paling tepat tentang keunggulan sumber audiovisual dibandingkan sumber tertulis adalah...",
+    options:[
+      {letter:"A",text:"Sumber audiovisual dapat menangkap suasana, ekspresi, dan konteks visual yang tidak selalu terekam dalam tulisan.",correct:true,explanation:"Tepat! Audiovisual menangkap suasana & konteks visual."},
+      {letter:"B",text:"Sumber audiovisual lebih akurat dari semua sumber.",correct:false,explanation:"Tidak selalu; tergantung konteks."},
+      {letter:"C",text:"Sumber audiovisual tidak dapat dimanipulasi.",correct:false,explanation:"Justru dapat dimanipulasi."},
+      {letter:"D",text:"Sumber audiovisual tidak memerlukan kritik.",correct:false,explanation:"Tetap memerlukan kritik."},
+      {letter:"E",text:"Sumber audiovisual lebih tua dari sumber tertulis.",correct:false,explanation:"Tidak selalu."}
+    ], difficulty:"medium", hint:"Audiovisual menangkap suasana & ekspresi visual.", points:60 },
+
+  { id:235, topic:"Sumber Sejarah",
+    question:"Seorang sejarawan ingin meneliti sejarah sebuah desa. Ia mengumpulkan: (1) arsip desa, (2) wawancara sesepuh, (3) foto lama, dan (4) rekaman video upacara adat. Keempat sumber tersebut secara berurutan termasuk...",
+    options:[
+      {letter:"A",text:"Tertulis, lisan, benda, audiovisual",correct:false,explanation:"Foto lama bukan benda dalam konteks ini; lebih ke audiovisual/visual."},
+      {letter:"B",text:"Tertulis, lisan, audiovisual, audiovisual",correct:true,explanation:"Tepat! Arsip = tertulis; wawancara = lisan; foto & video = audiovisual."},
+      {letter:"C",text:"Benda, lisan, tertulis, audiovisual",correct:false,explanation:"Urutan tidak sesuai."},
+      {letter:"D",text:"Tertulis, audiovisual, benda, lisan",correct:false,explanation:"Urutan tidak sesuai."},
+      {letter:"E",text:"Audiovisual, lisan, tertulis, benda",correct:false,explanation:"Urutan tidak sesuai."}
+    ], difficulty:"hard", hint:"Arsip = tertulis; wawancara = lisan; foto & video = audiovisual.", points:70 },
+
+  /* ===== SUMBER PRIMER vs SEKUNDER (5 soal) ===== */
+  { id:236, topic:"Sumber Primer",
+    question:"Sumber yang berasal dari masa, pelaku, atau saksi yang berkaitan langsung dengan suatu peristiwa disebut...",
+    options:[
+      {letter:"A",text:"Sumber primer",correct:true,explanation:"Tepat! Sumber primer = dari masa/pelaku/saksi langsung."},
+      {letter:"B",text:"Sumber sekunder",correct:false,explanation:"Sekunder = berdasarkan sumber lain."},
+      {letter:"C",text:"Sumber tersier",correct:false,explanation:"Bukan kategori ini."},
+      {letter:"D",text:"Sumber fiktif",correct:false,explanation:"Bukan fiktif."},
+      {letter:"E",text:"Sumber imajiner",correct:false,explanation:"Bukan imajiner."}
+    ], difficulty:"easy", hint:"Primer = langsung dari masa/pelaku/saksi.", points:50 },
+
+  { id:237, topic:"Sumber Sekunder",
+    question:"Sumber yang disusun berdasarkan pengolahan atau penafsiran terhadap sumber lain disebut...",
+    options:[
+      {letter:"A",text:"Sumber primer",correct:false,explanation:"Primer = langsung."},
+      {letter:"B",text:"Sumber sekunder",correct:true,explanation:"Tepat! Sekunder = berdasarkan sumber lain."},
+      {letter:"C",text:"Sumber asli",correct:false,explanation:"Bukan asli."},
+      {letter:"D",text:"Sumber utama",correct:false,explanation:"Bukan utama."},
+      {letter:"E",text:"Sumber benda",correct:false,explanation:"Ini kategori bentuk."}
+    ], difficulty:"easy", hint:"Sekunder = berdasarkan sumber lain.", points:50 },
+
+  { id:238, topic:"Sumber Primer/Sekunder",
+    question:"Seorang siswa ingin meneliti Proklamasi 1945. Ia mengumpulkan: (1) teks Proklamasi asli, (2) foto suasana pembacaan teks, (3) buku sejarah tentang Proklamasi, dan (4) wawancara dengan saksi mata. Berdasarkan kualitas sumbernya, yang termasuk sumber primer adalah...",
+    options:[
+      {letter:"A",text:"Hanya (1) dan (2)",correct:false,explanation:"Wawancara saksi (4) juga sumber primer."},
+      {letter:"B",text:"Hanya (1), (2), dan (4)",correct:true,explanation:"Tepat! Teks asli, foto sezaman, dan wawancara saksi = sumber primer. Buku (3) = sekunder."},
+      {letter:"C",text:"Hanya (1) dan (3)",correct:false,explanation:"Buku (3) = sekunder."},
+      {letter:"D",text:"Semua (1), (2), (3), dan (4)",correct:false,explanation:"Buku (3) bukan primer."},
+      {letter:"E",text:"Hanya (2) dan (4)",correct:false,explanation:"Teks asli (1) juga primer."}
+    ], difficulty:"medium", hint:"Primer = langsung dari masa/pelaku/saksi.", points:60 },
+
+  { id:239, topic:"Sumber Primer/Sekunder",
+    question:"Perbedaan paling mendasar antara sumber primer dan sekunder terletak pada...",
+    options:[
+      {letter:"A",text:"Bentuk fisiknya",correct:false,explanation:"Bentuk fisik bukan pembeda utama."},
+      {letter:"B",text:"Keterlibatan langsung dengan peristiwa yang dikaji",correct:true,explanation:"Tepat! Primer = langsung; sekunder = tidak langsung."},
+      {letter:"C",text:"Tempat penyimpanannya",correct:false,explanation:"Bukan pembeda utama."},
+      {letter:"D",text:"Bahasa yang digunakan",correct:false,explanation:"Bukan pembeda utama."},
+      {letter:"E",text:"Jumlah halamannya",correct:false,explanation:"Bukan pembeda utama."}
+    ], difficulty:"medium", hint:"Primer = langsung; sekunder = tidak langsung.", points:60 },
+
+  { id:240, topic:"Sumber Primer/Sekunder",
+    question:"Analisis yang paling tepat tentang pentingnya membedakan sumber primer dan sekunder bagi sejarawan adalah...",
+    options:[
+      {letter:"A",text:"Membantu menilai kredibilitas dan kedekatan sumber dengan peristiwa yang dikaji.",correct:true,explanation:"Tepat! Membedakan primer/sekunder membantu menilai kredibilitas."},
+      {letter:"B",text:"Tidak ada manfaatnya.",correct:false,explanation:"Justru sangat bermanfaat."},
+      {letter:"C",text:"Hanya untuk formalitas akademik.",correct:false,explanation:"Bukan formalitas."},
+      {letter:"D",text:"Hanya penting untuk sejarah modern.",correct:false,explanation:"Berlaku untuk semua periode."},
+      {letter:"E",text:"Hanya penting untuk sejarah lokal.",correct:false,explanation:"Berlaku universal."}
+    ], difficulty:"medium", hint:"Membedakan primer/sekunder membantu menilai kredibilitas.", points:60 },
+
+  /* ===== KRITIK SUMBER DIGITAL (5 soal) ===== */
+  { id:241, topic:"Kritik Sumber Digital",
+    question:"Di era digital, informasi sejarah dapat dengan mudah disebarkan — tetapi juga mudah dipalsukan. Cara paling tepat untuk memverifikasi keaslian foto sejarah yang beredar di internet adalah...",
+    options:[
+      {letter:"A",text:"Langsung membagikannya ke media sosial",correct:false,explanation:"Justru menyebarkan hoaks."},
+      {letter:"B",text:"Melakukan reverse image search untuk melacak asal gambar",correct:true,explanation:"Tepat! Reverse image search membantu melacak asal gambar."},
+      {letter:"C",text:"Mempercayainya begitu saja",correct:false,explanation:"Justru berisiko tertipu hoaks."},
+      {letter:"D",text:"Menanyakan ke AI tanpa verifikasi",correct:false,explanation:"AI bisa berhalusinasi."},
+      {letter:"E",text:"Mengabaikan semua foto di internet",correct:false,explanation:"Tidak semua foto palsu."}
+    ], difficulty:"medium", hint:"Reverse image search = melacak asal gambar.", points:60 },
+
+  { id:242, topic:"Kritik Sumber Digital",
+    question:"Analisis kritis yang tepat tentang bahaya AI-generated content dalam kajian sejarah adalah...",
+    options:[
+      {letter:"A",text:"AI dapat menghasilkan teks/gambar yang terlihat nyata tetapi palsu, sehingga dapat menyesatkan jika tidak diverifikasi.",correct:true,explanation:"Tepat! AI dapat menghasilkan konten palsu yang tampak nyata."},
+      {letter:"B",text:"AI selalu akurat dalam sejarah.",correct:false,explanation:"AI bisa berhalusinasi."},
+      {letter:"C",text:"AI tidak dapat menghasilkan gambar.",correct:false,explanation:"AI justru dapat menghasilkan gambar."},
+      {letter:"D",text:"AI tidak perlu diverifikasi.",correct:false,explanation:"Justru perlu diverifikasi."},
+      {letter:"E",text:"AI adalah sumber primer.",correct:false,explanation:"AI bukan sumber primer."}
+    ], difficulty:"medium", hint:"AI dapat berhalusinasi & menghasilkan konten palsu.", points:60 },
+
+  { id:243, topic:"Kritik Sumber Digital",
+    question:"Contoh sumber daring yang paling kredibel untuk penelitian sejarah Indonesia adalah...",
+    options:[
+      {letter:"A",text:"Blog pribadi tanpa sumber",correct:false,explanation:"Tidak kredibel."},
+      {letter:"B",text:"Akun media sosial anonim",correct:false,explanation:"Tidak kredibel."},
+      {letter:"C",text:"Situs resmi ANRI (Arsip Nasional Republik Indonesia) atau Perpusnas",correct:true,explanation:"Tepat! ANRI & Perpusnas adalah sumber resmi & kredibel."},
+      {letter:"D",text:"Forum diskusi tanpa moderator",correct:false,explanation:"Tidak kredibel."},
+      {letter:"E",text:"Situs judi online",correct:false,explanation:"Tidak kredibel."}
+    ], difficulty:"easy", hint:"Domain .go.id atau .ac.id lebih kredibel.", points:50 },
+
+  { id:244, topic:"Kritik Sumber Digital",
+    question:"Seorang siswa menemukan artikel sejarah di media sosial yang mengklaim 'fakta baru' tentang Proklamasi 1945, tetapi tidak mencantumkan sumber. Langkah paling tepat yang harus dilakukan siswa adalah...",
+    options:[
+      {letter:"A",text:"Langsung mempercayai dan membagikannya",correct:false,explanation:"Justru menyebarkan hoaks."},
+      {letter:"B",text:"Memverifikasi dengan sumber kredibel seperti ANRI, buku sejarah, atau jurnal ilmiah",correct:true,explanation:"Tepat! Verifikasi dengan sumber kredibel adalah langkah paling tepat."},
+      {letter:"C",text:"Mengabaikan artikel tersebut",correct:false,explanation:"Bisa jadi ada fakta, tetapi perlu verifikasi."},
+      {letter:"D",text:"Menyalin artikel tanpa verifikasi",correct:false,explanation:"Berisiko menyebarkan hoaks."},
+      {letter:"E",text:"Menganggapnya sebagai sumber primer",correct:false,explanation:"Bukan sumber primer."}
+    ], difficulty:"medium", hint:"Verifikasi dengan sumber kredibel (ANRI, jurnal, buku).", points:60 },
+
+  { id:245, topic:"Kritik Sumber Digital",
+    question:"Kesimpulan yang paling tepat tentang keterampilan kritik sumber digital bagi pelajar sejarah adalah...",
+    options:[
+      {letter:"A",text:"Keterampilan ini tidak diperlukan karena internet selalu akurat.",correct:false,explanation:"Internet tidak selalu akurat."},
+      {letter:"B",text:"Keterampilan ini wajib dimiliki untuk membedakan informasi kredibel dari hoaks dan konten menyesatkan.",correct:true,explanation:"Tepat! Kritik sumber digital wajib dimiliki pelajar sejarah."},
+      {letter:"C",text:"Keterampilan ini hanya untuk sejarawan profesional.",correct:false,explanation:"Semua pelajar sejarah perlu."},
+      {letter:"D",text:"Keterampilan ini hanya relevan untuk sejarah modern.",correct:false,explanation:"Berlaku untuk semua periode."},
+      {letter:"E",text:"Keterampilan ini tidak dapat dipelajari.",correct:false,explanation:"Dapat dipelajari."}
+    ], difficulty:"hard", hint:"Kritik sumber digital = keterampilan wajib pelajar sejarah.", points:70 },
+
+  /* ===== SINTESIS (5 soal tambahan) ===== */
+  { id:246, topic:"Sintesis Definisi",
+    question:"Perbedaan utama antara Aristoteles dan Kuntowijoyo dalam mendefinisikan sejarah terletak pada...",
+    options:[
+      {letter:"A",text:"Aristoteles menekankan kronologi; Kuntowijoyo menekankan rekonstruksi.",correct:true,explanation:"Tepat! Aristoteles = kronologi; Kuntowijoyo = rekonstruksi."},
+      {letter:"B",text:"Aristoteles menekankan rekonstruksi; Kuntowijoyo menekankan kronologi.",correct:false,explanation:"Terbalik."},
+      {letter:"C",text:"Keduanya sama saja.",correct:false,explanation:"Ada perbedaan penekanan."},
+      {letter:"D",text:"Keduanya menolak bukti.",correct:false,explanation:"Keduanya menekankan bukti."},
+      {letter:"E",text:"Keduanya hanya fokus pada mitos.",correct:false,explanation:"Keduanya menolak mitos."}
+    ], difficulty:"hard", hint:"Aristoteles = kronologi; Kuntowijoyo = rekonstruksi.", points:70 },
+
+  { id:247, topic:"Sintesis Definisi",
+    question:"Kesimpulan yang paling tepat tentang definisi sejarah dari para ahli (Aristoteles, Yamin, Collingwood, Kuntowijoyo) adalah...",
+    options:[
+      {letter:"A",text:"Setiap definisi menekankan aspek berbeda dan saling melengkapi.",correct:true,explanation:"Tepat! Setiap definisi menekankan aspek berbeda."},
+      {letter:"B",text:"Hanya satu definisi yang benar.",correct:false,explanation:"Semua definisi memiliki kontribusi."},
+      {letter:"C",text:"Definisi para ahli tidak relevan.",correct:false,explanation:"Justru sangat relevan."},
+      {letter:"D",text:"Semua definisi sama persis.",correct:false,explanation:"Ada perbedaan penekanan."},
+      {letter:"E",text:"Definisi hanya berlaku untuk sejarah Barat.",correct:false,explanation:"Berlaku universal."}
+    ], difficulty:"hard", hint:"Setiap definisi menekankan aspek berbeda & saling melengkapi.", points:70 },
+
+  { id:248, topic:"Sintesis Hakikat",
+    question:"Seorang siswa menganalisis Proklamasi 1945 dengan: (1) memverifikasi teks asli, (2) menganalisis biografi Soekarno, (3) menulis narasi yang hidup, dan (4) menggunakan metode penelitian. Analisis ini menunjukkan keempat dimensi hakikat sejarah, yaitu...",
+    options:[
+      {letter:"A",text:"Peristiwa, kisah, seni, ilmu",correct:true,explanation:"Tepat! Teks asli = peristiwa; biografi = kisah; narasi hidup = seni; metode = ilmu."},
+      {letter:"B",text:"Hanya peristiwa dan kisah",correct:false,explanation:"Ada juga seni & ilmu."},
+      {letter:"C",text:"Hanya ilmu dan seni",correct:false,explanation:"Ada juga peristiwa & kisah."},
+      {letter:"D",text:"Hanya peristiwa",correct:false,explanation:"Ada aspek lain."},
+      {letter:"E",text:"Hanya kisah",correct:false,explanation:"Ada aspek lain."}
+    ], difficulty:"hard", hint:"Teks asli=peristiwa; biografi=kisah; narasi hidup=seni; metode=ilmu.", points:70 },
+
+  { id:249, topic:"Sintesis Sumber",
+    question:"Analisis yang paling tepat tentang hubungan antara jenis sumber (bentuk) dan kualitas sumber (primer/sekunder) adalah...",
+    options:[
+      {letter:"A",text:"Jenis sumber (tertulis, lisan, benda, audiovisual) dan kualitas sumber (primer/sekunder) adalah dua klasifikasi berbeda yang saling melengkapi.",correct:true,explanation:"Tepat! Dua klasifikasi berbeda yang saling melengkapi."},
+      {letter:"B",text:"Keduanya sama saja.",correct:false,explanation:"Berbeda klasifikasi."},
+      {letter:"C",text:"Keduanya tidak dapat digunakan bersama.",correct:false,explanation:"Justru dapat digunakan bersama."},
+      {letter:"D",text:"Hanya satu klasifikasi yang penting.",correct:false,explanation:"Keduanya penting."},
+      {letter:"E",text:"Keduanya tidak relevan dengan sejarah.",correct:false,explanation:"Justru sangat relevan."}
+    ], difficulty:"hard", hint:"Jenis sumber = bentuk; kualitas = primer/sekunder. Dua klasifikasi berbeda.", points:70 },
+
+  { id:250, topic:"Sintesis Umum",
+    question:"Kesimpulan yang paling tepat tentang keterkaitan antara definisi para ahli, hakikat sejarah, dan sumber sejarah adalah...",
+    options:[
+      {letter:"A",text:"Ketiganya saling terkait: definisi memberi landasan konseptual, hakikat memberi dimensi, dan sumber memberi bahan kajian.",correct:true,explanation:"Tepat! Ketiganya saling terkait membentuk fondasi ilmu sejarah."},
+      {letter:"B",text:"Ketiganya tidak saling terkait.",correct:false,explanation:"Justru saling terkait."},
+      {letter:"C",text:"Hanya definisi yang penting.",correct:false,explanation:"Semua penting."},
+      {letter:"D",text:"Hanya sumber yang penting.",correct:false,explanation:"Semua penting."},
+      {letter:"E",text:"Ketiganya hanya berlaku untuk sejarah lokal.",correct:false,explanation:"Berlaku universal."}
+    ], difficulty:"hard", hint:"Definisi = landasan; hakikat = dimensi; sumber = bahan kajian.", points:70 },
+
+  /* ===== SOAL TAMBAHAN UNTUK MELENGKAPI (5 soal) ===== */
+  { id:251, topic:"Collingwood",
+    question:"Collingwood berpendapat bahwa sejarah adalah sesuatu yang bersifat ilmiah. Analisis yang paling tepat tentang pernyataan tersebut adalah...",
+    options:[
+      {letter:"A",text:"Sejarah dapat dikaji secara ilmiah melalui penyelidikan yang sistematis terhadap pemikiran manusia masa lalu.",correct:true,explanation:"Tepat! Sejarah ilmiah = penyelidikan sistematis."},
+      {letter:"B",text:"Sejarah tidak dapat dikaji secara ilmiah.",correct:false,explanation:"Justru dapat."},
+      {letter:"C",text:"Sejarah hanya seni.",correct:false,explanation:"Collingwood menekankan sifat ilmiah."},
+      {letter:"D",text:"Sejarah hanya mitos.",correct:false,explanation:"Bukan mitos."},
+      {letter:"E",text:"Sejarah tidak memerlukan metode.",correct:false,explanation:"Justru memerlukan metode."}
+    ], difficulty:"hard", hint:"Collingwood: sejarah ilmiah = penyelidikan sistematis.", points:70 },
+
+  { id:252, topic:"Kuntowijoyo",
+    question:"Rekonstruksi sejarah menurut Kuntowijoyo harus berpijak pada bukti-bukti yang tersisa. Analisis yang paling tepat tentang pernyataan tersebut adalah...",
+    options:[
+      {letter:"A",text:"Rekonstruksi bukan imajinasi bebas, melainkan upaya ilmiah berbasis bukti.",correct:true,explanation:"Tepat! Rekonstruksi = ilmiah berbasis bukti."},
+      {letter:"B",text:"Rekonstruksi boleh tanpa bukti.",correct:false,explanation:"Justru harus berbasis bukti."},
+      {letter:"C",text:"Rekonstruksi hanya imajinasi.",correct:false,explanation:"Bukan imajinasi bebas."},
+      {letter:"D",text:"Rekonstruksi tidak ilmiah.",correct:false,explanation:"Justru ilmiah."},
+      {letter:"E",text:"Rekonstruksi hanya fiksi.",correct:false,explanation:"Bukan fiksi."}
+    ], difficulty:"hard", hint:"Rekonstruksi = ilmiah, berbasis bukti, bukan imajinasi bebas.", points:70 },
+
+  { id:253, topic:"Hakikat: Peristiwa",
+    question:"Sifat 'abadi' dalam dimensi peristiwa sejarah berarti...",
+    options:[
+      {letter:"A",text:"Peristiwa sejarah tetap dikenang sepanjang masa meskipun sudah terjadi.",correct:true,explanation:"Tepat! Abadi = tetap dikenang sepanjang masa."},
+      {letter:"B",text:"Peristiwa sejarah tidak pernah terjadi.",correct:false,explanation:"Justru terjadi."},
+      {letter:"C",text:"Peristiwa sejarah dapat diulang.",correct:false,explanation:"Unik = tidak dapat diulang."},
+      {letter:"D",text:"Peristiwa sejarah tidak penting.",correct:false,explanation:"Justru penting."},
+      {letter:"E",text:"Peristiwa sejarah hanya untuk sejarawan.",correct:false,explanation:"Untuk semua orang."}
+    ], difficulty:"medium", hint:"Abadi = tetap dikenang sepanjang masa.", points:60 },
+
+  { id:254, topic:"Sumber Primer/Sekunder",
+    question:"Buku sejarah yang ditulis sejarawan berdasarkan penelitian terhadap dokumen asli termasuk sumber...",
+    options:[
+      {letter:"A",text:"Primer",correct:false,explanation:"Bukan primer."},
+      {letter:"B",text:"Sekunder",correct:true,explanation:"Tepat! Buku berdasarkan penelitian = sekunder."},
+      {letter:"C",text:"Tersier",correct:false,explanation:"Bukan tersier."},
+      {letter:"D",text:"Asli",correct:false,explanation:"Bukan asli."},
+      {letter:"E",text:"Utama",correct:false,explanation:"Bukan utama."}
+    ], difficulty:"easy", hint:"Buku berdasarkan penelitian = sekunder.", points:50 },
+
+  { id:255, topic:"Sumber Sejarah",
+    question:"Contoh sumber tertulis yang paling tepat untuk meneliti berdirinya sebuah sekolah adalah...",
+    options:[
+      {letter:"A",text:"Surat keputusan pendirian sekolah",correct:true,explanation:"Tepat! SK pendirian = sumber tertulis."},
+      {letter:"B",text:"Wawancara dengan guru",correct:false,explanation:"Wawancara = lisan."},
+      {letter:"C",text:"Foto bangunan sekolah",correct:false,explanation:"Foto = audiovisual/visual."},
+      {letter:"D",text:"Rekaman video upacara",correct:false,explanation:"Video = audiovisual."},
+      {letter:"E",text:"Benda peninggalan sekolah",correct:false,explanation:"Benda = sumber benda."}
+    ], difficulty:"easy", hint:"SK pendirian = tertulis.", points:50 }
+];
+
+/* ============================================================
+   CONSTANTS & STATE
+   ============================================================ */
+const TOTAL_Q = 15;
+const TIME_LIMIT = 20 * 60;
+
+const state = {
+  questions: [], currentIndex: 0, answers: [], score: 0,
+  xp: 0, level: 1, hp: 3, maxHp: 3, combo: 0, bestCombo: 0,
+  timer: null, timeLeft: TIME_LIMIT, started: false, finished: false,
+  powers: { p50:1, hint:1, skip:1 }, soundOn: true
+};
+
+/* ============================================================
+   AUDIO
+   ============================================================ */
+let audioCtx = null;
+function ensureAudio(){
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}
+function playTone(freq, dur, type, vol){
+  if (!state.soundOn) return;
+  ensureAudio(); if (!audioCtx) return;
+  try {
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = type || 'sine';
+    o.frequency.value = freq;
+    g.gain.setValueAtTime(vol || 0.08, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + dur);
+  } catch(e){}
+}
+function sfxClick(){ playTone(520, .08, 'triangle', .06); }
+function sfxCorrect(){ playTone(660, .12, 'sine', .10); setTimeout(()=>playTone(880, .15, 'sine', .10), 80); setTimeout(()=>playTone(1100, .20, 'sine', .08), 160); }
+function sfxWrong(){ playTone(200, .18, 'sawtooth', .10); setTimeout(()=>playTone(150, .25, 'sawtooth', .08), 120); }
+function sfxPower(){ playTone(900, .10, 'triangle', .08); setTimeout(()=>playTone(1200, .12, 'triangle', .07), 60); }
+function sfxLevelUp(){ [523, 659, 784, 1046].forEach((f, i) => setTimeout(()=>playTone(f, .16, 'sine', .10), i*90)); }
+function sfxFinish(){ [523, 659, 784, 1046, 1318].forEach((f, i) => setTimeout(()=>playTone(f, .22, 'sine', .10), i*120)); }
+function toggleSound(){
+  state.soundOn = !state.soundOn;
+  document.getElementById('soundBtn').innerHTML = state.soundOn ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+  if (state.soundOn) sfxClick();
+}
+
+/* ============================================================
+   THEME
+   ============================================================ */
+function toggleTheme(){
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').innerHTML = next === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  sfxClick();
+}
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+(function(){
+  const bar = document.getElementById('loaderBar');
+  const pct = document.getElementById('loaderPct');
+  const loader = document.getElementById('loader');
+  const t0 = Date.now();
+  (function tick(){
+    const p = Math.min((Date.now() - t0) / 1800 * 100, 100);
+    bar.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+    if (p < 100) requestAnimationFrame(tick);
+    else setTimeout(()=>{ loader.classList.add('hidden'); setTimeout(()=>loader.style.display='none', 700); }, 300);
+  })();
+})();
+
+/* ============================================================
+   PARTICLES
+   ============================================================ */
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  function makeP(){ return { x: Math.random()*W, y: Math.random()*H, r: Math.random()*2 + 0.4, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3 - 0.15, a: Math.random()*0.5 + 0.15, hue: Math.random() < 0.5 ? 160 : 190 }; }
+  function init(){ resize(); particles = Array.from({length: Math.min(60, Math.floor(W*H/25000))}, makeP); }
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, ${p.a})`;
+      ctx.fill();
+    });
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+/* ============================================================
+   CONFETTI
+   ============================================================ */
+function fireConfetti(count){
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const colors = ['#10B981','#6EE7B7','#06B6D4','#38BDF8','#FCD34D','#F59E0B','#C4B5FD'];
+  const pieces = Array.from({length: count || 60}, () => ({
+    x: window.innerWidth/2 + (Math.random()-0.5)*200,
+    y: window.innerHeight/2,
+    vx: (Math.random()-0.5)*14,
+    vy: Math.random()*-16 - 4,
+    g: 0.5, r: Math.random()*8 + 4,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    rot: Math.random()*Math.PI, vr: (Math.random()-0.5)*0.3, life: 1
+  }));
+  let frame = 0;
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    pieces.forEach(p => {
+      if (p.life <= 0) return;
+      alive = true;
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.012;
+      ctx.save();
+      ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      ctx.restore();
+    });
+    if (alive && frame < 200) { frame++; requestAnimationFrame(animate); }
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  animate();
+}
+
+/* ============================================================
+   TOAST & SCORE POPUP
+   ============================================================ */
+function showToast(icon, title, desc, variant){
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<div class="toast-icon ${variant||''}">${icon}</div>
+    <div class="toast-content"><div class="toast-title">${title}</div><div class="toast-desc">${desc}</div></div>`;
+  wrap.appendChild(el);
+  setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 450); }, 3200);
+}
+function scorePopup(text, x, y, color){
+  const el = document.createElement('div');
+  el.className = 'score-pop';
+  el.textContent = text;
+  el.style.left = (x || window.innerWidth/2) + 'px';
+  el.style.top = (y || window.innerHeight/2) + 'px';
+  if (color) el.style.color = color;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1100);
+}
+
+/* ============================================================
+   UTILS
+   ============================================================ */
+function shuffle(a){ const arr = a.slice(); for (let i = arr.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+function updateHpHud(){
+  const hp = document.getElementById('hudHp'); hp.innerHTML = '';
+  for (let i = 0; i < state.maxHp; i++){
+    const heart = document.createElement('i');
+    heart.className = 'fas fa-heart heart' + (i < state.hp ? '' : ' empty');
+    hp.appendChild(heart);
+  }
+}
+function updateXpHud(){
+  const xpForLevel = state.level * 100;
+  const pct = Math.min((state.xp % xpForLevel) / xpForLevel * 100, 100);
+  document.getElementById('hudLevel').textContent = state.level;
+  document.getElementById('hudXp').textContent = state.xp % xpForLevel;
+  document.getElementById('hudXpMax').textContent = xpForLevel;
+  document.getElementById('xpFill').style.width = pct + '%';
+}
+function updateComboHud(){
+  document.getElementById('comboVal').textContent = state.combo;
+  const tag = document.getElementById('comboTag');
+  if (state.combo >= 3){ tag.classList.add('hot'); setTimeout(()=>tag.classList.remove('hot'), 500); }
+}
+function updatePowers(){
+  document.getElementById('c50').textContent = state.powers.p50;
+  document.getElementById('chint').textContent = state.powers.hint;
+  document.getElementById('cskip').textContent = state.powers.skip;
+  document.getElementById('p50').disabled = state.powers.p50 <= 0;
+  document.getElementById('phint').disabled = state.powers.hint <= 0;
+  document.getElementById('pskip').disabled = state.powers.skip <= 0;
+}
+
+/* ============================================================
+   GAME FLOW
+   ============================================================ */
+function startGame(){
+  ensureAudio();
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('gameHud').classList.add('active');
+
+  state.questions = shuffle(BANK_SOAL).slice(0, TOTAL_Q);
+  state.currentIndex = 0; state.answers = [];
+  state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.timeLeft = TIME_LIMIT; state.started = true; state.finished = false;
+  state.powers = { p50:1, hint:1, skip:1 };
+
+  updateHpHud(); updateXpHud(); updateComboHud(); updatePowers();
+  showToast('🚀', 'Arena Level 3 Dimulai!', 'Kuasai hakikat & sumber sejarah!', '');
+  sfxClick();
+  startTimer();
+  renderQuestion();
+}
+
+function startTimer(){
+  if (state.timer) clearInterval(state.timer);
+  state.timer = setInterval(() => {
+    state.timeLeft--;
+    updateTimerHud();
+    if (state.timeLeft <= 0){ clearInterval(state.timer); finishGame(true); }
+  }, 1000);
+  updateTimerHud();
+}
+function updateTimerHud(){
+  const m = Math.floor(state.timeLeft / 60), s = state.timeLeft % 60;
+  document.getElementById('hudTimerVal').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  const el = document.getElementById('hudTimer');
+  if (state.timeLeft <= 120) el.classList.add('warning'); else el.classList.remove('warning');
+}
+
+function renderQuestion(){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  document.getElementById('qNumLabel').textContent = 'Soal ' + (state.currentIndex+1);
+  document.getElementById('qTopicText').textContent = q.topic || 'Pertemuan 3';
+  document.getElementById('qText').textContent = q.question;
+  document.getElementById('hudQNum').textContent = state.currentIndex+1;
+
+  const opts = document.getElementById('options'); opts.innerHTML = '';
+  q.options.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.dataset.letter = o.letter;
+    btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
+    btn.addEventListener('click', () => selectOption(o.letter, btn));
+    opts.appendChild(btn);
+  });
+
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('btnNext').disabled = true;
+  document.getElementById('btnNext').style.display = '';
+  document.getElementById('btnFinish').style.display = 'none';
+  document.getElementById('qCard').classList.remove('shake');
+
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none'; void card.offsetWidth;
+  card.style.animation = 'qEnter .55s cubic-bezier(.16,1,.3,1)';
+
+  if (state.currentIndex === TOTAL_Q - 1){
+    document.getElementById('btnNext').style.display = 'none';
+    document.getElementById('btnFinish').style.display = '';
+  }
+}
+
+function selectOption(letter, btnEl){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+  const selected = q.options.find(o => o.letter === letter);
+  if (!selected) return;
+  const correct = selected.correct;
+
+  document.querySelectorAll('#options .opt').forEach(b => {
+    b.classList.add('locked');
+    const o = q.options.find(x => x.letter === b.dataset.letter);
+    if (o.correct) b.classList.add('correct');
+    else if (b.dataset.letter === letter && !correct) b.classList.add('wrong');
+  });
+
+  state.answers.push({ qid: q.id, selected: letter, correct, skipped: false,
+    questionText: q.question, topic: q.topic,
+    correctLetter: q.options.find(o => o.correct).letter,
+    explanation: selected.explanation });
+
+  if (correct){
+    state.combo++;
+    if (state.combo > state.bestCombo) state.bestCombo = state.combo;
+    const bonus = Math.max(0, state.combo - 1) * 5;
+    const gained = (q.points || 50) + bonus;
+    state.score += gained; state.xp += gained;
+
+    const prevLevel = state.level;
+    state.level = Math.floor(state.xp / 100) + 1;
+    if (state.level > prevLevel){
+      sfxLevelUp();
+      showToast('⭐', 'LEVEL UP!', `Kamu naik ke Level ${state.level}!`, 'cyan');
+      fireConfetti(40);
+    }
+    sfxCorrect();
+    fireConfetti(state.combo >= 3 ? 80 : 45);
+    const rect = btnEl ? btnEl.getBoundingClientRect() : null;
+    scorePopup('+' + gained + ' XP', rect ? rect.left + rect.width/2 : window.innerWidth/2, rect ? rect.top : window.innerHeight/2, '#6EE7B7');
+    if (state.combo >= 3) showToast('🔥', `COMBO ×${state.combo}!`, `Bonus +${bonus} XP!`, '');
+  } else {
+    state.combo = 0; state.hp--; sfxWrong();
+    updateHpHud();
+    const hpEls = document.querySelectorAll('.hud-hp .heart');
+    if (hpEls[state.hp]) hpEls[state.hp].classList.add('losing');
+    const card = document.getElementById('qCard');
+    card.classList.add('shake'); setTimeout(() => card.classList.remove('shake'), 550);
+    if (state.hp <= 0) showToast('💔', 'Nyawa Habis!', 'Kamu kehilangan semua nyawa.', 'violet');
+  }
+
+  document.getElementById('hudScore').textContent = state.score;
+  updateXpHud(); updateComboHud();
+  showFeedback(correct, q, selected);
+  document.getElementById('btnNext').disabled = false;
+}
+
+function showFeedback(correct, q, selected){
+  const panel = document.getElementById('feedback');
+  const icon = document.getElementById('fbIcon');
+  const title = document.getElementById('fbTitle');
+  const body = document.getElementById('fbBody');
+  panel.classList.add('show');
+
+  if (correct){
+    icon.className = 'fb-icon correct'; icon.innerHTML = '<i class="fas fa-check"></i>';
+    title.className = 'fb-title correct'; title.textContent = 'BENAR!';
+  } else {
+    icon.className = 'fb-icon wrong'; icon.innerHTML = '<i class="fas fa-times"></i>';
+    title.className = 'fb-title wrong'; title.textContent = 'BELUM TEPAT';
+  }
+
+  const correctOpt = q.options.find(o => o.correct);
+  let html = `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
+  html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
+  if (!correct && selected) html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
+  html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
+  body.innerHTML = html;
+}
+
+function nextQuestion(){
+  if (state.currentIndex < TOTAL_Q - 1){
+    state.currentIndex++;
+    renderQuestion();
+    document.getElementById('qCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+function usePower(type){
+  const q = state.questions[state.currentIndex];
+  if (!q) return;
+  if (state.answers.find(a => a.qid === q.id)) return;
+
+  if (type === '50'){
+    if (state.powers.p50 <= 0) return;
+    const wrongs = q.options.filter(o => !o.correct);
+    const remove = shuffle(wrongs).slice(0, 2);
+    document.querySelectorAll('#options .opt').forEach(b => {
+      if (remove.some(o => o.letter === b.dataset.letter)) b.classList.add('disabled-50');
+    });
+    state.powers.p50 = 0; updatePowers(); sfxPower();
+    showToast('✂️', '50:50 Aktif!', 'Dua jawaban salah dihilangkan.', 'cyan');
+  } else if (type === 'hint'){
+    if (state.powers.hint <= 0) return;
+    const panel = document.getElementById('feedback');
+    const icon = document.getElementById('fbIcon');
+    const title = document.getElementById('fbTitle');
+    const body = document.getElementById('fbBody');
+    panel.classList.add('show');
+    icon.className = 'fb-icon info'; icon.innerHTML = '<i class="fas fa-lightbulb"></i>';
+    title.className = 'fb-title info'; title.textContent = 'PETUNJUK';
+    body.innerHTML = `<p>${q.hint || 'Tidak ada petunjuk.'}</p>`;
+    state.powers.hint = 0; updatePowers(); sfxPower();
+    showToast('💡', 'Petunjuk Digunakan!', 'Perhatikan dengan saksama.', '');
+  } else if (type === 'skip'){
+    if (state.powers.skip <= 0) return;
+    state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+      questionText: q.question, topic: q.topic,
+      correctLetter: q.options.find(o => o.correct).letter,
+      explanation: q.options.find(o => o.correct).explanation });
+    document.querySelectorAll('#options .opt').forEach(b => {
+      b.classList.add('locked');
+      const o = q.options.find(x => x.letter === b.dataset.letter);
+      if (o.correct) b.classList.add('correct');
+    });
+    showFeedback(false, q, null);
+    document.getElementById('btnNext').disabled = false;
+    state.powers.skip = 0; updatePowers(); sfxPower();
+    showToast('⏭️', 'Soal Dilewati', 'Jawaban benar ditampilkan.', 'violet');
+    if (state.currentIndex === TOTAL_Q - 1){
+      document.getElementById('btnNext').style.display = 'none';
+      document.getElementById('btnFinish').style.display = '';
+    }
+  }
+}
+
+function finishGame(timeout){
+  if (state.finished) return;
+  state.finished = true;
+  clearInterval(state.timer); state.timer = null;
+
+  const answered = state.answers.map(a => a.qid);
+  state.questions.forEach(q => {
+    if (!answered.includes(q.id)){
+      state.answers.push({ qid: q.id, selected: null, correct: false, skipped: true,
+        questionText: q.question, topic: q.topic,
+        correctLetter: q.options.find(o => o.correct).letter,
+        explanation: q.options.find(o => o.correct).explanation });
+    }
+  });
+
+  let benar = 0, salah = 0;
+  state.answers.forEach(a => { if (a.skipped) return; if (a.correct) benar++; else salah++; });
+
+  const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
+  const finalScore = Math.round((state.score / maxScore) * 100);
+  const grade = finalScore >= 90 ? 'A' : finalScore >= 80 ? 'B' : finalScore >= 70 ? 'C' : finalScore >= 60 ? 'D' : 'E';
+  const gradeLabel = finalScore >= 90 ? 'Sangat Baik' : finalScore >= 80 ? 'Baik' : finalScore >= 70 ? 'Cukup' : finalScore >= 60 ? 'Perlu Bimbingan' : 'Remedial';
+  const rank = finalScore >= 90 ? 'SEJARAWAN MUDA' : finalScore >= 80 ? 'PENELITI SEJARAH' : finalScore >= 70 ? 'PELAJAR SEJARAH' : 'PEMULA SEJARAH';
+  const trophy = finalScore >= 90 ? '🏆' : finalScore >= 80 ? '🥇' : finalScore >= 70 ? '🥈' : finalScore >= 60 ? '🥉' : '📚';
+  const title = finalScore >= 90 ? 'Luar Biasa!' : finalScore >= 80 ? 'Kerja Bagus!' : finalScore >= 70 ? 'Terus Belajar!' : 'Jangan Menyerah!';
+
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('resultScreen').classList.add('active');
+
+  document.getElementById('rTrophy').textContent = trophy;
+  document.getElementById('rTitle').textContent = title;
+  document.getElementById('rSub').textContent = 'Kuis 3 · Pertemuan 3 · Definisi Ahli (2), Hakikat & Sumber Sejarah';
+  document.getElementById('gradeLetter').textContent = grade;
+  document.getElementById('gradeLabel').textContent = gradeLabel;
+  document.getElementById('rRank').textContent = rank;
+  document.getElementById('rXp').textContent = state.xp;
+  document.getElementById('rBestCombo').textContent = state.bestCombo;
+  document.getElementById('rBenar').textContent = benar;
+  document.getElementById('rSalah').textContent = salah;
+  document.getElementById('rSkor').textContent = finalScore;
+  document.getElementById('rXpTotal').textContent = state.xp;
+
+  document.getElementById('gradeRing').style.setProperty('--grade-deg', (finalScore/100*360) + 'deg');
+
+  document.getElementById('rMsg').textContent = finalScore >= 70
+    ? '🎯 Pertahankan semangat belajarmu! Lanjutkan ke Kuis 4 untuk materi Ruang Lingkup & Guna Sejarah.'
+    : '📚 Pelajari kembali materi Pertemuan 3, lalu coba lagi! Kamu pasti bisa!';
+
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = '';
+  state.answers.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
+                   a.correct ? '<span class="ri-status correct">Benar</span>' :
+                   '<span class="ri-status wrong">Salah</span>';
+    const q = a.questionText.length > 80 ? a.questionText.substring(0, 80) + '...' : a.questionText;
+    div.innerHTML = `<span class="ri-num">${i+1}.</span><span class="ri-text">${q}</span>${status}`;
+    reviewList.appendChild(div);
+  });
+
+  sfxFinish();
+  if (finalScore >= 70){
+    fireConfetti(180);
+    setTimeout(() => fireConfetti(120), 400);
+    setTimeout(() => showToast('🏆', 'Achievement Unlocked!', rank, ''), 500);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetGame(){
+  clearInterval(state.timer); state.timer = null;
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('startScreen').style.display = 'flex';
+  state.answers = []; state.score = 0; state.xp = 0; state.level = 1;
+  state.hp = state.maxHp; state.combo = 0; state.bestCombo = 0;
+  state.currentIndex = 0; state.finished = false; state.started = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('keydown', e => {
+  if (!state.started || state.finished) return;
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea') return;
+  if (['a','A','1'].includes(e.key)) selectOption('A', document.querySelector('#options .opt[data-letter="A"]'));
+  else if (['b','B','2'].includes(e.key)) selectOption('B', document.querySelector('#options .opt[data-letter="B"]'));
+  else if (['c','C','3'].includes(e.key)) selectOption('C', document.querySelector('#options .opt[data-letter="C"]'));
+  else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
+  else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
+  else if (e.key === 'ArrowRight' || e.key === 'Enter'){
+    if (!document.getElementById('btnNext').disabled) nextQuestion();
+  }
+});
+</script>
+
+</body>
+</html>
