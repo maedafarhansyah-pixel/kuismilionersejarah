@@ -173,6 +173,30 @@ body{
   border-radius:50%; background:rgba(255,255,255,.24); border:1px solid rgba(255,255,255,.42);
 }
 
+/* ============== GAME LINKS ============== */
+.game-links{
+  display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;
+  position:relative; z-index:5;
+}
+.game-btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:6px;
+  flex:1 1 0; min-width:0; padding:10px 14px;
+  font-family:inherit; font-size:12.5px; font-weight:800; letter-spacing:.02em;
+  color:#fff; text-decoration:none; border-radius:10px; white-space:nowrap;
+  background:linear-gradient(120deg,#065f46,#10b981 55%,#6ee7b7);
+  background-size:200% 100%;
+  box-shadow:0 12px 26px -14px rgba(16,185,129,.95), inset 0 1px 0 rgba(255,255,255,.28);
+  transition:transform .25s, box-shadow .25s, background-position .5s;
+  cursor:pointer;
+  border:1px solid rgba(110,231,183,.35);
+}
+.game-btn:hover{
+  transform:translateY(-2px);
+  background-position:100% 0;
+  box-shadow:0 18px 34px -14px rgba(16,185,129,1);
+}
+.game-btn::before{content:"↗"; opacity:.85; font-size:11px;}
+
 /* ============== QUIZ PAGE ============== */
 #quizPage{display:none; max-width:960px; margin:0 auto; padding:24px 20px 60px; min-height:100vh;}
 .quiz-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; flex-wrap:wrap; gap:12px;}
@@ -329,6 +353,7 @@ body{
   .step{width:32px; height:32px; font-size:.78rem;}
   .result-card{padding:34px 22px;}
   .result-score{font-size:3rem;}
+  .game-btn{font-size:11.5px; padding:9px 10px;}
 }
 </style>
 </head>
@@ -415,7 +440,7 @@ body{
 <script>
 /* =====================================================
    DATA: 14 BAB × 5 KUIS × 5 SOAL = 350 SOAL UNIK
-   Struktur: kuis[i].soal[j] = {q, a[4], c, e}
+   Bab dengan properti `games` menampilkan tombol game eksternal
    ===================================================== */
 const BAB = [
 /* =========================================================
@@ -429,127 +454,134 @@ const BAB = [
   { title:"Hakikat & Ruang Lingkup Sejarah", soal:[
     {q:"Kata 'history' berasal dari bahasa Yunani 'historia' yang berarti...", a:["Ilmu pengetahuan","Penyelidikan/pengetahuan","Kisah masa lalu","Catatan raja"], c:1, e:"Historia berarti 'penyelidikan' atau 'pengetahuan yang diperoleh dari penyelidikan'."},
     {q:"Unsur utama yang menjadikan peristiwa sebagai sejarah adalah...", a:["Mitos dan legenda","Manusia, ruang, dan waktu","Khayalan dan ramalan","Benda purbakala saja"], c:1, e:"Sejarah selalu melibatkan manusia, ruang (tempat), dan waktu sebagai unsur utamanya."},
-    {q:"Sejarah bersifat 'einmalig' artinya...", a:"Berulang terus-menerus","Terjadi satu kali saja","Berlangsung lama","Tidak dapat dipelajari"], c:1, e:"Einmalig = terjadi sekali saja, tidak bisa diulang persis sama."},
+    {q:"Sejarah bersifat 'einmalig' artinya...", a:["Berulang terus-menerus","Terjadi satu kali saja","Berlangsung lama","Tidak dapat dipelajari"], c:1, e:"Einmalig = terjadi sekali saja, tidak bisa diulang persis sama."},
     {q:"Ilmu yang mempelajari kehidupan manusia di masa lalu disebut...", a:["Antropologi","Arkeologi","Sejarah","Sosiologi"], c:2, e:"Sejarah adalah ilmu yang mempelajari kehidupan manusia di masa lampau beserta perkembangannya."},
-    {q:"Berikut yang BUKAN ciri sejarah sebagai ilmu adalah...", a:"Empiris","Sistematis","Objektif","Berdasarkan ramalan"], c:3, e:"Sejarah bersifat empiris, sistematis, objektif — bukan berdasarkan ramalan."}
+    {q:"Berikut yang BUKAN ciri sejarah sebagai ilmu adalah...", a:["Empiris","Sistematis","Objektif","Berdasarkan ramalan"], c:3, e:"Sejarah bersifat empiris, sistematis, objektif — bukan berdasarkan ramalan."}
   ]},
   { title:"Berpikir Diakronik & Sinkronik", soal:[
-    {q:"Cara berpikir diakronik dalam sejarah berarti...", a:"Meluas dalam ruang","Memanjang dalam waktu","Menyempit dalam tempat","Statis dalam waktu"], c:1, e:"Diakronik = memanjang dalam waktu (kronologis)."},
-    {q:"Cara berpikir sinkronik berarti...", a:"Meluas dalam ruang pada satu waktu tertentu","Memandang satu titik waktu saja","Mundur ke masa lalu","Melompat-lompat"], c:0, e:"Sinkronik = meluas dalam ruang tetapi terbatas pada satu kurun waktu."},
-    {q:"Contoh kajian sinkronik adalah...", a:"Sejarah Indonesia 1945–1965","Perkembangan Islam dari abad 13–18","Keadaan ekonomi masa Demokrasi Liberal","Perang Diponegoro 1825–1830"], c:2, e:"Sinkronik fokus pada satu periode tertentu secara mendalam."},
-    {q:"Ciri khas berpikir diakronik adalah...", a:"Kronologis dan berurutan","Acak tanpa urutan","Hanya pada satu waktu","Mengabaikan waktu"], c:0, e:"Diakronik menekankan urutan waktu (kronologis)."},
-    {q:"Kajian tentang 'Sumpah Pemuda 28 Oktober 1928' secara mendalam di satu waktu termasuk berpikir...", a:"Diakronik","Sinkronik","Anakronik","Retrospektif"], c:1, e:"Fokus pada satu peristiwa tertentu = sinkronik."}
+    {q:"Cara berpikir diakronik dalam sejarah berarti...", a:["Meluas dalam ruang","Memanjang dalam waktu","Menyempit dalam tempat","Statis dalam waktu"], c:1, e:"Diakronik = memanjang dalam waktu (kronologis)."},
+    {q:"Cara berpikir sinkronik berarti...", a:["Meluas dalam ruang pada satu waktu tertentu","Memandang satu titik waktu saja","Mundur ke masa lalu","Melompat-lompat"], c:0, e:"Sinkronik = meluas dalam ruang tetapi terbatas pada satu kurun waktu."},
+    {q:"Contoh kajian sinkronik adalah...", a:["Sejarah Indonesia 1945–1965","Perkembangan Islam dari abad 13–18","Keadaan ekonomi masa Demokrasi Liberal","Perang Diponegoro 1825–1830"], c:2, e:"Sinkronik fokus pada satu periode tertentu secara mendalam."},
+    {q:"Ciri khas berpikir diakronik adalah...", a:["Kronologis dan berurutan","Acak tanpa urutan","Hanya pada satu waktu","Mengabaikan waktu"], c:0, e:"Diakronik menekankan urutan waktu (kronologis)."},
+    {q:"Kajian tentang 'Sumpah Pemuda 28 Oktober 1928' secara mendalam di satu waktu termasuk berpikir...", a:["Diakronik","Sinkronik","Anakronik","Retrospektif"], c:1, e:"Fokus pada satu peristiwa tertentu = sinkronik."}
   ]},
   { title:"Konsep Waktu & Periodisasi", soal:[
-    {q:"Periodisasi dalam sejarah bertujuan untuk...", a:"Menyulitkan pemahaman","Mempermudah pemahaman kronologis","Menghapus data lama","Memperpanjang cerita"], c:1, e:"Periodisasi mempermudah memahami peristiwa sejarah secara kronologis."},
-    {q:"Pembagian zaman berdasarkan geologi yang benar adalah...", a:"Arkaikum, Paleozoikum, Mesozoikum, Neozoikum","Kuno, madya, baru","Praaksara, Hindu-Buddha, Islam","Paleolitikum, Mesolitikum, Neolitikum"], c:0, e:"Zaman geologi: Arkaikum, Paleozoikum, Mesozoikum, Neozoikum."},
-    {q:"Zaman Neozoikum terbagi menjadi...", a:"Tersier dan Kuarter","Batu dan logam","Tua dan muda","Awal dan akhir"], c:0, e:"Neozoikum = Tersier (tersier) dan Kuarter (diluvium & alluvium)."},
-    {q:"Konsep 'kronologi' dalam sejarah berarti...", a:"Urutan waktu kejadian","Tempat kejadian","Sebab-akibat","Perubahan-perubahan"], c:0, e:"Kronologi = urutan peristiwa berdasarkan waktu terjadinya."},
-    {q:"Konsep 'periodisasi' dan 'kronologi' berfungsi untuk...", a:"Mengacak sejarah","Menyusun sejarah secara sistematis","Menghilangkan bukti","Membuat sejarah fiktif"], c:1, e:"Keduanya menyusun peristiwa sejarah secara sistematis dan logis."}
+    {q:"Periodisasi dalam sejarah bertujuan untuk...", a:["Menyulitkan pemahaman","Mempermudah pemahaman kronologis","Menghapus data lama","Memperpanjang cerita"], c:1, e:"Periodisasi mempermudah memahami peristiwa sejarah secara kronologis."},
+    {q:"Pembagian zaman berdasarkan geologi yang benar adalah...", a:["Arkaikum, Paleozoikum, Mesozoikum, Neozoikum","Kuno, madya, baru","Praaksara, Hindu-Buddha, Islam","Paleolitikum, Mesolitikum, Neolitikum"], c:0, e:"Zaman geologi: Arkaikum, Paleozoikum, Mesozoikum, Neozoikum."},
+    {q:"Zaman Neozoikum terbagi menjadi...", a:["Tersier dan Kuarter","Batu dan logam","Tua dan muda","Awal dan akhir"], c:0, e:"Neozoikum = Tersier dan Kuarter (diluvium & alluvium)."},
+    {q:"Konsep 'kronologi' dalam sejarah berarti...", a:["Urutan waktu kejadian","Tempat kejadian","Sebab-akibat","Perubahan-perubahan"], c:0, e:"Kronologi = urutan peristiwa berdasarkan waktu terjadinya."},
+    {q:"Konsep 'periodisasi' dan 'kronologi' berfungsi untuk...", a:["Mengacak sejarah","Menyusun sejarah secara sistematis","Menghilangkan bukti","Membuat sejarah fiktif"], c:1, e:"Keduanya menyusun peristiwa sejarah secara sistematis dan logis."}
   ]},
   { title:"Sumber & Bukti Sejarah", soal:[
-    {q:"Sumber sejarah primer adalah...", a:"Buku teks pelajaran","Kesaksian pelaku/artefak asli sezaman","Majalah sejarah","Cerita rakyat"], c:1, e:"Sumber primer = berasal dari zaman kejadian (saksi/artefak asli)."},
-    {q:"Berikut yang termasuk sumber sekunder adalah...", a:"Prasasti","Naskah asli","Buku sejarah karya sejarawan","Fosil"], c:2, e:"Buku yang ditulis sejarawan modern tentang masa lalu = sumber sekunder."},
-    {q:"Prasasti Yupa dari Kutai termasuk sumber...", a:"Tertulis primer","Lisan","Benda non-tertulis","Sekunder"], c:0, e:"Prasasti = sumber tertulis primer dari zaman tersebut."},
-    {q:"Sumber lisan contohnya adalah...", a:"Prasasti","Legenda dan mitos","Fosil","Arsip"], c:1, e:"Legenda, mitos, dongeng = sumber lisan."},
-    {q:"Sumber benda (artefak) yang dapat dijadikan bukti sejarah adalah...", a:"Cerita rakyat","Kapak batu, candi, dan fosil","Surat kabar","Buku novel"], c:1, e:"Artefak = peninggalan fisik yang menjadi bukti sejarah."}
+    {q:"Sumber sejarah primer adalah...", a:["Buku teks pelajaran","Kesaksian pelaku/artefak asli sezaman","Majalah sejarah","Cerita rakyat"], c:1, e:"Sumber primer = berasal dari zaman kejadian (saksi/artefak asli)."},
+    {q:"Berikut yang termasuk sumber sekunder adalah...", a:["Prasasti","Naskah asli","Buku sejarah karya sejarawan","Fosil"], c:2, e:"Buku yang ditulis sejarawan modern tentang masa lalu = sumber sekunder."},
+    {q:"Prasasti Yupa dari Kutai termasuk sumber...", a:["Tertulis primer","Lisan","Benda non-tertulis","Sekunder"], c:0, e:"Prasasti = sumber tertulis primer dari zaman tersebut."},
+    {q:"Sumber lisan contohnya adalah...", a:["Prasasti","Legenda dan mitos","Fosil","Arsip"], c:1, e:"Legenda, mitos, dongeng = sumber lisan."},
+    {q:"Sumber benda (artefak) yang dapat dijadikan bukti sejarah adalah...", a:["Cerita rakyat","Kapak batu, candi, dan fosil","Surat kabar","Buku novel"], c:1, e:"Artefak = peninggalan fisik yang menjadi bukti sejarah."}
   ]},
   { title:"Historiografi & Sejarah sebagai Kisah", soal:[
-    {q:"Historiografi adalah...", a:"Penulisan sejarah","Pembacaan sejarah","Pengulangan sejarah","Penghapusan sejarah"], c:0, e:"Historiografi = penulisan/karya tulis sejarah."},
-    {q:"Sejarah sebagai kisah berarti sejarah...", a:"Objektif tanpa tafsir","Diceritakan kembali oleh sejarawan","Selalu sama setiap zaman","Tidak bisa berubah"], c:1, e:"Sejarah sebagai kisah = rekonstruksi sejarawan terhadap peristiwa masa lalu."},
-    {q:"Perbedaan utama antara sejarah sebagai ilmu dan sejarah sebagai kisah adalah...", a:"Ilmu bersifat subjektif","Kisah bersifat objektif","Ilmu lebih menekankan metode & teori","Kisah tanpa sumber"], c:2, e:"Sebagai ilmu, sejarah memiliki metode, teori, dan sistematika."},
-    {q:"Fungsi utama historiografi bagi masyarakat adalah...", a:"Hiburan","Pendidikan & identitas bangsa","Alat politik praktis","Media promosi"], c:1, e:"Historiografi berfungsi mendidik dan memperkuat identitas bangsa."},
-    {q:"Sejarah disebut juga sebagai seni karena...", a:"Bebas dari fakta","Memerlukan intuisi & gaya penulisan","Tidak ilmiah","Hanya khayalan"], c:1, e:"Sejarah juga seni karena memerlukan intuisi, imajinasi, dan gaya bahasa dalam penulisannya."}
+    {q:"Historiografi adalah...", a:["Penulisan sejarah","Pembacaan sejarah","Pengulangan sejarah","Penghapusan sejarah"], c:0, e:"Historiografi = penulisan/karya tulis sejarah."},
+    {q:"Sejarah sebagai kisah berarti sejarah...", a:["Objektif tanpa tafsir","Diceritakan kembali oleh sejarawan","Selalu sama setiap zaman","Tidak bisa berubah"], c:1, e:"Sejarah sebagai kisah = rekonstruksi sejarawan terhadap peristiwa masa lalu."},
+    {q:"Perbedaan utama antara sejarah sebagai ilmu dan sejarah sebagai kisah adalah...", a:["Ilmu bersifat subjektif","Kisah bersifat objektif","Ilmu lebih menekankan metode & teori","Kisah tanpa sumber"], c:2, e:"Sebagai ilmu, sejarah memiliki metode, teori, dan sistematika."},
+    {q:"Fungsi utama historiografi bagi masyarakat adalah...", a:["Hiburan","Pendidikan & identitas bangsa","Alat politik praktis","Media promosi"], c:1, e:"Historiografi berfungsi mendidik dan memperkuat identitas bangsa."},
+    {q:"Sejarah disebut juga sebagai seni karena...", a:["Bebas dari fakta","Memerlukan intuisi & gaya penulisan","Tidak ilmiah","Hanya khayalan"], c:1, e:"Sejarah juga seni karena memerlukan intuisi, imajinasi, dan gaya bahasa dalam penulisannya."}
   ]}
 ]},
 
 /* =========================================================
-   BAB 2 — PENELITIAN SEJARAH (Fase E)
+   BAB 2 — PENELITIAN SEJARAH (Fase E) — dengan game
    ========================================================= */
 {
   id:2, fase:"e", icon:"🔍", badge:"Materi 2",
   title:"Penelitian Sejarah",
   desc:"Heuristik, kritik sumber, interpretasi, dan historiografi.",
+  games:[
+    { name:"🎮 Main Game", url:"https://maedafarhansyah-pixel.github.io/kuismilionersejarah/penelitiansejarah.html" }
+  ],
   kuis:[
   { title:"Langkah-Langkah Penelitian Sejarah", soal:[
     {q:"Urutan langkah penelitian sejarah yang benar adalah...", a:["Interpretasi–Heuristik–Kritik–Historiografi","Heuristik–Kritik–Interpretasi–Historiografi","Kritik–Heuristik–Historiografi–Interpretasi","Historiografi–Heuristik–Kritik–Interpretasi"], c:1, e:"Urutannya: Heuristik → Kritik → Interpretasi → Historiografi."},
-    {q:"Langkah pertama dalam penelitian sejarah adalah...", a:"Menulis kesimpulan","Mencari dan mengumpulkan sumber (heuristik)","Mengkritik sumber","Menafsirkan data"], c:1, e:"Heuristik = mengumpulkan sumber."},
-    {q:"Tujuan heuristik adalah...", a:"Mengumpulkan sumber-sumber sejarah","Menulis kesimpulan","Membandingkan pendapat","Menolak sumber"], c:0, e:"Heuristik bertujuan menghimpun sumber-sumber yang relevan."},
-    {q:"Kegiatan mengumpulkan sumber melalui perpustakaan, arsip, dan wawancara disebut...", a:"Historiografi","Interpretasi","Heuristik","Kritik"], c:2, e:"Semua kegiatan pengumpulan sumber = heuristik."},
-    {q:"Hasil akhir penelitian sejarah berupa...", a:"Data mentah","Karya tulis sejarah (historiografi)","Artefak baru","Prasasti"], c:1, e:"Hasil akhir penelitian sejarah = historiografi (karya tulis)."}
+    {q:"Langkah pertama dalam penelitian sejarah adalah...", a:["Menulis kesimpulan","Mencari dan mengumpulkan sumber (heuristik)","Mengkritik sumber","Menafsirkan data"], c:1, e:"Heuristik = mengumpulkan sumber."},
+    {q:"Tujuan heuristik adalah...", a:["Mengumpulkan sumber-sumber sejarah","Menulis kesimpulan","Membandingkan pendapat","Menolak sumber"], c:0, e:"Heuristik bertujuan menghimpun sumber-sumber yang relevan."},
+    {q:"Kegiatan mengumpulkan sumber melalui perpustakaan, arsip, dan wawancara disebut...", a:["Historiografi","Interpretasi","Heuristik","Kritik"], c:2, e:"Semua kegiatan pengumpulan sumber = heuristik."},
+    {q:"Hasil akhir penelitian sejarah berupa...", a:["Data mentah","Karya tulis sejarah (historiografi)","Artefak baru","Prasasti"], c:1, e:"Hasil akhir penelitian sejarah = historiografi (karya tulis)."}
   ]},
   { title:"Kritik Sumber (Verifikasi)", soal:[
-    {q:"Kritik eksterna bertujuan untuk menguji...", a:"Keaslian sumber","Kesimpulan penulis","Kebenaran isi","Gaya bahasa"], c:0, e:"Kritik eksterna = uji keaslian (otentisitas) sumber."},
-    {q:"Kritik interna bertujuan untuk menguji...", a:"Keaslian fisik sumber","Kredibilitas isi sumber","Warna sumber","Jumlah halaman"], c:1, e:"Kritik interna = uji kredibilitas/kebenaran isi sumber."},
-    {q:"Contoh kritik eksterna adalah...", a:"Meneliti usia kertas prasasti","Menelaah isi naskah","Membandingkan pendapat","Menilai relevansi"], c:0, e:"Meneliti usia, bahan, dan bentuk = kritik eksterna."},
-    {q:"Sejarawan perlu melakukan kritik sumber agar...", a:"Sumber bertambah banyak","Data yang dipakai valid dan dapat dipercaya","Kesimpulan cepat","Biaya murah"], c:1, e:"Kritik sumber memastikan data valid & kredibel."},
-    {q:"Bila terdapat dua sumber yang bertentangan, sejarawan sebaiknya...", a:"Memilih yang paling mudah","Mengabaikan keduanya","Membandingkan dan menguji keduanya","Memilih yang paling populer"], c:2, e:"Sejarawan harus membandingkan & menguji keduanya (kritik)."}
+    {q:"Kritik eksterna bertujuan untuk menguji...", a:["Keaslian sumber","Kesimpulan penulis","Kebenaran isi","Gaya bahasa"], c:0, e:"Kritik eksterna = uji keaslian (otentisitas) sumber."},
+    {q:"Kritik interna bertujuan untuk menguji...", a:["Keaslian fisik sumber","Kredibilitas isi sumber","Warna sumber","Jumlah halaman"], c:1, e:"Kritik interna = uji kredibilitas/kebenaran isi sumber."},
+    {q:"Contoh kritik eksterna adalah...", a:["Meneliti usia kertas prasasti","Menelaah isi naskah","Membandingkan pendapat","Menilai relevansi"], c:0, e:"Meneliti usia, bahan, dan bentuk = kritik eksterna."},
+    {q:"Sejarawan perlu melakukan kritik sumber agar...", a:["Sumber bertambah banyak","Data yang dipakai valid dan dapat dipercaya","Kesimpulan cepat","Biaya murah"], c:1, e:"Kritik sumber memastikan data valid & kredibel."},
+    {q:"Bila terdapat dua sumber yang bertentangan, sejarawan sebaiknya...", a:["Memilih yang paling mudah","Mengabaikan keduanya","Membandingkan dan menguji keduanya","Memilih yang paling populer"], c:2, e:"Sejarawan harus membandingkan & menguji keduanya (kritik)."}
   ]},
   { title:"Interpretasi & Analisis", soal:[
-    {q:"Interpretasi dalam penelitian sejarah berarti...", a:"Menafsirkan fakta yang telah terkumpul","Mengumpulkan sumber","Menulis hasil","Menyebarkan berita"], c:0, e:"Interpretasi = penafsiran terhadap fakta yang telah dikritik."},
-    {q:"Interpretasi dapat berbeda antarsejarawan karena...", a:"Fakta berbeda","Sudut pandang dan paradigma berbeda","Sumber hilang","Waktu tidak ada"], c:1, e:"Perbedaan sudut pandang, teori, dan konteks menyebabkan interpretasi berbeda."},
-    {q:"Tahap setelah kritik sumber dalam penelitian sejarah adalah...", a:"Heuristik","Interpretasi","Historiografi","Publikasi"], c:1, e:"Setelah kritik → interpretasi (penafsiran)."},
-    {q:"Analisis dalam penelitian sejarah meliputi...", a:"Membandingkan dan menghubungkan fakta","Menghapus data","Menambah dongeng","Menyalin apa adanya"], c:0, e:"Analisis = membandingkan & menghubungkan fakta agar bermakna."},
-    {q:"Sifat interpretasi sejarah yang baik adalah...", a:"Subjektif tanpa dasar","Objektif berdasar fakta & logika","Fiktif","Mengikuti selera umum"], c:1, e:"Interpretasi harus objektif, berdasar fakta & logika."}
+    {q:"Interpretasi dalam penelitian sejarah berarti...", a:["Menafsirkan fakta yang telah terkumpul","Mengumpulkan sumber","Menulis hasil","Menyebarkan berita"], c:0, e:"Interpretasi = penafsiran terhadap fakta yang telah dikritik."},
+    {q:"Interpretasi dapat berbeda antarsejarawan karena...", a:["Fakta berbeda","Sudut pandang dan paradigma berbeda","Sumber hilang","Waktu tidak ada"], c:1, e:"Perbedaan sudut pandang, teori, dan konteks menyebabkan interpretasi berbeda."},
+    {q:"Tahap setelah kritik sumber dalam penelitian sejarah adalah...", a:["Heuristik","Interpretasi","Historiografi","Publikasi"], c:1, e:"Setelah kritik → interpretasi (penafsiran)."},
+    {q:"Analisis dalam penelitian sejarah meliputi...", a:["Membandingkan dan menghubungkan fakta","Menghapus data","Menambah dongeng","Menyalin apa adanya"], c:0, e:"Analisis = membandingkan & menghubungkan fakta agar bermakna."},
+    {q:"Sifat interpretasi sejarah yang baik adalah...", a:["Subjektif tanpa dasar","Objektif berdasar fakta & logika","Fiktif","Mengikuti selera umum"], c:1, e:"Interpretasi harus objektif, berdasar fakta & logika."}
   ]},
   { title:"Historiografi & Jenis Sejarah", soal:[
-    {q:"Historiografi tradisional umumnya bersifat...", a:"Kritis dan analitis","Istana-sentris dan religius-magis","Ilmiah penuh data","Netral"], c:1, e:"Historiografi tradisional bersifat istana-sentris dan religius-magis."},
-    {q:"Historiografi kolonial cenderung bersifat...", a:"Netral","Eropasentris","Indonesiasentris","Kritis"], c:1, e:"Historiografi kolonial = Eropasentris (dari kacamata Belanda)."},
-    {q:"Historiografi nasional bersifat...", a:"Indonesiasentris","Eropasentris","Neutral tanpa sudut pandang","Mistis"], c:0, e:"Historiografi nasional bersifat Indonesiasentris."},
-    {q:"Contoh historiografi tradisional adalah...", a:"Babad Tanah Jawi","Sejarah Indonesia Modern","Nusantara: Sejarah Indonesia","Revolusi Pemuda"], c:0, e:"Babad Tanah Jawi = historiografi tradisional."},
-    {q:"Jenis sejarah yang membahas tema tertentu seperti ekonomi atau sosial disebut sejarah...", a:"Nasional","Tematik","Dunia","Kronik"], c:1, e:"Sejarah tematik = fokus pada tema tertentu (ekonomi, sosial, dsb.)."}
+    {q:"Historiografi tradisional umumnya bersifat...", a:["Kritis dan analitis","Istana-sentris dan religius-magis","Ilmiah penuh data","Netral"], c:1, e:"Historiografi tradisional bersifat istana-sentris dan religius-magis."},
+    {q:"Historiografi kolonial cenderung bersifat...", a:["Netral","Eropasentris","Indonesiasentris","Kritis"], c:1, e:"Historiografi kolonial = Eropasentris (dari kacamata Belanda)."},
+    {q:"Historiografi nasional bersifat...", a:["Indonesiasentris","Eropasentris","Netral tanpa sudut pandang","Mistis"], c:0, e:"Historiografi nasional bersifat Indonesiasentris."},
+    {q:"Contoh historiografi tradisional adalah...", a:["Babad Tanah Jawi","Sejarah Indonesia Modern","Nusantara: Sejarah Indonesia","Revolusi Pemuda"], c:0, e:"Babad Tanah Jawi = historiografi tradisional."},
+    {q:"Jenis sejarah yang membahas tema tertentu seperti ekonomi atau sosial disebut sejarah...", a:["Nasional","Tematik","Dunia","Kronik"], c:1, e:"Sejarah tematik = fokus pada tema tertentu (ekonomi, sosial, dsb.)."}
   ]},
   { title:"Metode & Pendekatan Sejarah", soal:[
-    {q:"Metode yang mengandalkan wawancara mendalam disebut...", a:"Metode kuantitatif","Metode lisan (oral history)","Metode arkeologi","Metode statistik"], c:1, e:"Sejarah lisan = metode wawancara untuk menggali masa lalu."},
-    {q:"Pendekatan yang melihat sejarah dari sisi kehidupan sehari-hari rakyat disebut...", a:"Sejarah politik","Sejarah sosial","Sejarah militer","Sejarah diplomatik"], c:1, e:"Sejarah sosial = fokus pada kehidupan masyarakat."},
-    {q:"Sejarah ekonomi banyak menggunakan data...", a:"Wawancara tokoh","Angka & statistik","Mitos","Legenda"], c:1, e:"Sejarah ekonomi memakai data kuantitatif (angka/statistik)."},
-    {q:"Pendekatan interdisipliner dalam sejarah berarti...", a:"Menggunakan satu disiplin","Menggabungkan ilmu lain seperti sosiologi, antropologi","Hanya filsafat","Mengabaikan ilmu lain"], c:1, e:"Interdisipliner = memanfaatkan ilmu bantu lain."},
-    {q:"Ilmu bantu sejarah untuk mengkaji fosil & artefak adalah...", a:"Antropologi","Arkeologi","Sosiologi","Ekonomi"], c:1, e:"Arkeologi membantu mengkaji fosil dan artefak."}
+    {q:"Metode yang mengandalkan wawancara mendalam disebut...", a:["Metode kuantitatif","Metode lisan (oral history)","Metode arkeologi","Metode statistik"], c:1, e:"Sejarah lisan = metode wawancara untuk menggali masa lalu."},
+    {q:"Pendekatan yang melihat sejarah dari sisi kehidupan sehari-hari rakyat disebut...", a:["Sejarah politik","Sejarah sosial","Sejarah militer","Sejarah diplomatik"], c:1, e:"Sejarah sosial = fokus pada kehidupan masyarakat."},
+    {q:"Sejarah ekonomi banyak menggunakan data...", a:["Wawancara tokoh","Angka & statistik","Mitos","Legenda"], c:1, e:"Sejarah ekonomi memakai data kuantitatif (angka/statistik)."},
+    {q:"Pendekatan interdisipliner dalam sejarah berarti...", a:["Menggunakan satu disiplin","Menggabungkan ilmu lain seperti sosiologi, antropologi","Hanya filsafat","Mengabaikan ilmu lain"], c:1, e:"Interdisipliner = memanfaatkan ilmu bantu lain."},
+    {q:"Ilmu bantu sejarah untuk mengkaji fosil & artefak adalah...", a:["Antropologi","Arkeologi","Sosiologi","Ekonomi"], c:1, e:"Arkeologi membantu mengkaji fosil dan artefak."}
   ]}
 ]},
 
 /* =========================================================
-   BAB 3 — MASYARAKAT PRAAKSARA (Fase E)
+   BAB 3 — MASYARAKAT PRAAKSARA (Fase E) — dengan 2 game
    ========================================================= */
 {
   id:3, fase:"e", icon:"🦴", badge:"Materi 3",
   title:"Masyarakat Praaksara",
   desc:"Pembabakan zaman batu, manusia purba, dan kehidupan praaksara.",
+  games:[
+    { name:"🎮 Game 1", url:"https://maedafarhansyah-pixel.github.io/kuismilionersejarah/praaksara.html" },
+    { name:"🎮 Game 2", url:"https://maedafarhansyah-pixel.github.io/kuismilionersejarah/praaksara2.html" }
+  ],
   kuis:[
   { title:"Pembabakan Zaman Praaksara", soal:[
-    {q:"Zaman praaksara adalah zaman...", a:"Sebelum mengenal tulisan","Setelah mengenal tulisan","Zaman modern","Zaman Islam"], c:0, e:"Praaksara = sebelum tulisan (prehistory)."},
-    {q:"Urutan zaman batu dari tua ke muda adalah...", a:"Neolitikum–Mesolitikum–Paleolitikum","Paleolitikum–Mesolitikum–Neolitikum","Mesolitikum–Paleolitikum–Neolitikum","Neolitikum–Paleolitikum–Mesolitikum"], c:1, e:"Paleolitikum (tua) → Mesolitikum (madya) → Neolitikum (muda)."},
-    {q:"Zaman logam di Indonesia dibagi menjadi...", a:"Perunggu dan besi","Tembaga dan seng","Emas dan perak","Baja dan alumunium"], c:0, e:"Zaman logam = zaman perunggu dan zaman besi."},
-    {q:"Zaman Paleolitikum disebut juga zaman...", a:"Batu tua","Batu madya","Batu muda","Logam"], c:0, e:"Paleolitikum = zaman batu tua."},
-    {q:"Alat kebudayaan Paleolitikum yang khas dari Pacitan adalah...", a:"Kapak persegi","Kapak lonjong","Kapak genggam","Beliung"], c:2, e:"Kapak genggam (chopper) khas Pacitan."}
+    {q:"Zaman praaksara adalah zaman...", a:["Sebelum mengenal tulisan","Setelah mengenal tulisan","Zaman modern","Zaman Islam"], c:0, e:"Praaksara = sebelum tulisan (prehistory)."},
+    {q:"Urutan zaman batu dari tua ke muda adalah...", a:["Neolitikum–Mesolitikum–Paleolitikum","Paleolitikum–Mesolitikum–Neolitikum","Mesolitikum–Paleolitikum–Neolitikum","Neolitikum–Paleolitikum–Mesolitikum"], c:1, e:"Paleolitikum (tua) → Mesolitikum (madya) → Neolitikum (muda)."},
+    {q:"Zaman logam di Indonesia dibagi menjadi...", a:["Perunggu dan besi","Tembaga dan seng","Emas dan perak","Baja dan alumunium"], c:0, e:"Zaman logam = zaman perunggu dan zaman besi."},
+    {q:"Zaman Paleolitikum disebut juga zaman...", a:["Batu tua","Batu madya","Batu muda","Logam"], c:0, e:"Paleolitikum = zaman batu tua."},
+    {q:"Alat kebudayaan Paleolitikum yang khas dari Pacitan adalah...", a:["Kapak persegi","Kapak lonjong","Kapak genggam","Beliung"], c:2, e:"Kapak genggam (chopper) khas Pacitan."}
   ]},
   { title:"Manusia Purba Indonesia", soal:[
-    {q:"Fosil Pithecanthropus erectus ditemukan oleh...", a:"Von Koenigswald","Eugene Dubois","Tjokro Handoyo","Van Heekeren"], c:1, e:"Eugene Dubois menemukan Pithecanthropus erectus di Trinil, 1891."},
-    {q:"Pithecanthropus erectus berarti...", a:"Manusia kera berdiri tegak","Manusia raksasa","Manusia cerdas","Manusia purba Jawa"], c:0, e:"Pithecanthropus erectus = manusia kera yang berdiri tegak."},
-    {q:"Manusia purba jenis Homo wajakensis ditemukan di...", a:"Trinil","Wajak, Tulungagung","Sangiran","Ngandong"], c:1, e:"Homo wajakensis ditemukan di Wajak, Tulungagung (1889)."},
-    {q:"Meganthropus paleojavanicus ditemukan oleh...", a:"Eugene Dubois","Von Koenigswald","Teuku Jacob","Tjokro"], c:1, e:"Von Koenigswald menemukan Meganthropus di Sangiran."},
-    {q:"Situs manusia purba paling penting di Indonesia adalah...", a:"Trinil","Sangiran","Wajak","Liang Bua"], c:1, e:"Sangiran = situs manusia purba terpenting di Indonesia."}
+    {q:"Fosil Pithecanthropus erectus ditemukan oleh...", a:["Von Koenigswald","Eugene Dubois","Tjokro Handoyo","Van Heekeren"], c:1, e:"Eugene Dubois menemukan Pithecanthropus erectus di Trinil, 1891."},
+    {q:"Pithecanthropus erectus berarti...", a:["Manusia kera berdiri tegak","Manusia raksasa","Manusia cerdas","Manusia purba Jawa"], c:0, e:"Pithecanthropus erectus = manusia kera yang berdiri tegak."},
+    {q:"Manusia purba jenis Homo wajakensis ditemukan di...", a:["Trinil","Wajak, Tulungagung","Sangiran","Ngandong"], c:1, e:"Homo wajakensis ditemukan di Wajak, Tulungagung (1889)."},
+    {q:"Meganthropus paleojavanicus ditemukan oleh...", a:["Eugene Dubois","Von Koenigswald","Teuku Jacob","Tjokro"], c:1, e:"Von Koenigswald menemukan Meganthropus di Sangiran."},
+    {q:"Situs manusia purba paling penting di Indonesia adalah...", a:["Trinil","Sangiran","Wajak","Liang Bua"], c:1, e:"Sangiran = situs manusia purba terpenting di Indonesia."}
   ]},
   { title:"Fosil, Artefak & Situs", soal:[
-    {q:"Sisa tubuh makhluk hidup yang telah membatu disebut...", a:"Artefak","Fosil","Prasasti","Situs"], c:1, e:"Fosil = sisa tubuh yang membatu."},
-    {q:"Benda buatan manusia dari masa lalu disebut...", a:"Fosil","Artefak","Situs","Naskah"], c:1, e:"Artefak = benda buatan manusia."},
-    {q:"Situs Liang Bua di Flores terkenal karena penemuan...", a:"Homo floresiensis","Pithecanthropus","Meganthropus","Homo soloensis"], c:0, e:"Liang Bua = lokasi penemuan Homo floresiensis (2003)."},
-    {q:"Alat serpih (flakes) banyak ditemukan di...", a:"Sangiran","Ngandong","Sulawesi Selatan & Nusa Tenggara","Kalimantan"], c:2, e:"Alat serpih banyak ditemukan di Sulawesi Selatan dan Nusa Tenggara."},
-    {q:"Njai (perempuan) dan Tjokro Handoyo dikenal sebagai penemu...", a:"Pithecanthropus","Homo soloensis","Meganthropus","Homo wajakensis"], c:1, e:"Tjokro Handoyo menemukan Homo soloensis di Ngandong."}
+    {q:"Sisa tubuh makhluk hidup yang telah membatu disebut...", a:["Artefak","Fosil","Prasasti","Situs"], c:1, e:"Fosil = sisa tubuh yang membatu."},
+    {q:"Benda buatan manusia dari masa lalu disebut...", a:["Fosil","Artefak","Situs","Naskah"], c:1, e:"Artefak = benda buatan manusia."},
+    {q:"Situs Liang Bua di Flores terkenal karena penemuan...", a:["Homo floresiensis","Pithecanthropus","Meganthropus","Homo soloensis"], c:0, e:"Liang Bua = lokasi penemuan Homo floresiensis (2003)."},
+    {q:"Alat serpih (flakes) banyak ditemukan di...", a:["Sangiran","Ngandong","Sulawesi Selatan & Nusa Tenggara","Kalimantan"], c:2, e:"Alat serpih banyak ditemukan di Sulawesi Selatan dan Nusa Tenggara."},
+    {q:"Tjokro Handoyo dikenal sebagai penemu...", a:["Pithecanthropus","Homo soloensis","Meganthropus","Homo wajakensis"], c:1, e:"Tjokro Handoyo menemukan Homo soloensis di Ngandong."}
   ]},
   { title:"Kehidupan Sosial-Ekonomi Praaksara", soal:[
-    {q:"Masyarakat Paleolitikum hidup dengan cara...", a:"Bercocok tanam","Berburu & meramu (food gathering)","Bertani & beternak","Berdagang"], c:1, e:"Paleolitikum = food gathering (berburu & meramu)."},
-    {q:"Masyarakat Neolitikum sudah mengenal...", a:"Bercocok tanam (food producing)","Menulis","Membaca","Bertempur modern"], c:0, e:"Neolitikum = food producing (bercocok tanam)."},
-    {q:"Sistem kepercayaan awal masyarakat praaksara adalah...", a:"Monoteisme","Animisme & dinamisme","Islam","Kristen"], c:1, e:"Animisme & dinamisme adalah kepercayaan awal praaksara."},
-    {q:"Kjökkenmöddinger adalah...", a:"Sampah dapur (timbunan kerang)","Alat berburu","Tempat tinggal","Kapak batu"], c:0, e:"Kjökkenmöddinger = sampah dapur berupa timbunan kulit kerang."},
-    {q:"Abris sous roche adalah...", a:"Alat batu","Gua tempat tinggal manusia praaksara","Perhiasan","Kapak"], c:1, e:"Abris sous roche = gua sebagai tempat tinggal."}
+    {q:"Masyarakat Paleolitikum hidup dengan cara...", a:["Bercocok tanam","Berburu & meramu (food gathering)","Bertani & beternak","Berdagang"], c:1, e:"Paleolitikum = food gathering (berburu & meramu)."},
+    {q:"Masyarakat Neolitikum sudah mengenal...", a:["Bercocok tanam (food producing)","Menulis","Membaca","Bertempur modern"], c:0, e:"Neolitikum = food producing (bercocok tanam)."},
+    {q:"Sistem kepercayaan awal masyarakat praaksara adalah...", a:["Monoteisme","Animisme & dinamisme","Islam","Kristen"], c:1, e:"Animisme & dinamisme adalah kepercayaan awal praaksara."},
+    {q:"Kjökkenmöddinger adalah...", a:["Sampah dapur (timbunan kerang)","Alat berburu","Tempat tinggal","Kapak batu"], c:0, e:"Kjökkenmöddinger = sampah dapur berupa timbunan kulit kerang."},
+    {q:"Abris sous roche adalah...", a:["Alat batu","Gua tempat tinggal manusia praaksara","Perhiasan","Kapak"], c:1, e:"Abris sous roche = gua sebagai tempat tinggal."}
   ]},
   { title:"Sistem Kepercayaan & Warisan Budaya", soal:[
-    {q:"Kepercayaan bahwa benda memiliki kekuatan gaib disebut...", a:"Animisme","Dinamisme","Totemisme","Fetisisme"], c:1, e:"Dinamisme = kepercayaan bahwa benda punya kekuatan gaib."},
-    {q:"Kepercayaan bahwa roh nenek moyang tetap hidup disebut...", a:"Animisme","Dinamisme","Monoteisme","Ateisme"], c:0, e:"Animisme = kepercayaan pada roh."},
-    {q:"Bangunan batu besar untuk pemujaan disebut...", a:"Menhir","Megalitik","Dolmen","Sarkofagus"], c:1, e:"Megalitik = bangunan batu besar."},
-    {q:"Menhir biasanya berfungsi untuk...", a:"Tempat menyimpan mayat","Tanda peringatan/pemujaan roh","Alat berburu","Perhiasan"], c:1, e:"Menhir = tugu batu untuk memuja roh nenek moyang."},
-    {q:"Dolmen adalah...", a:"Meja batu untuk meletakkan sesajen","Tugu batu","Peti mati batu","Kapak batu"], c:0, e:"Dolmen = meja batu untuk sesajen/pemujaan."}
+    {q:"Kepercayaan bahwa benda memiliki kekuatan gaib disebut...", a:["Animisme","Dinamisme","Totemisme","Fetisisme"], c:1, e:"Dinamisme = kepercayaan bahwa benda punya kekuatan gaib."},
+    {q:"Kepercayaan bahwa roh nenek moyang tetap hidup disebut...", a:["Animisme","Dinamisme","Monoteisme","Ateisme"], c:0, e:"Animisme = kepercayaan pada roh."},
+    {q:"Bangunan batu besar untuk pemujaan disebut...", a:["Menhir","Megalitik","Dolmen","Sarkofagus"], c:1, e:"Megalitik = bangunan batu besar."},
+    {q:"Menhir biasanya berfungsi untuk...", a:["Tempat menyimpan mayat","Tanda peringatan/pemujaan roh","Alat berburu","Perhiasan"], c:1, e:"Menhir = tugu batu untuk memuja roh nenek moyang."},
+    {q:"Dolmen adalah...", a:["Meja batu untuk meletakkan sesajen","Tugu batu","Peti mati batu","Kapak batu"], c:0, e:"Dolmen = meja batu untuk sesajen/pemujaan."}
   ]}
 ]},
 
@@ -562,39 +594,39 @@ const BAB = [
   desc:"Masuknya Hindu-Buddha hingga Kutai, Sriwijaya, Majapahit.",
   kuis:[
   { title:"Masuknya Hindu-Buddha", soal:[
-    {q:"Teori yang menyatakan Hindu-Buddha dibawa oleh pedagang India disebut teori...", a:"Waisya","Ksatria","Brahmana","Sudra"], c:0, e:"Teori Waisya = dibawa oleh pedagang (waisya) India."},
-    {q:"Teori Brahmana menyatakan agama Hindu-Buddha dibawa oleh...", a:"Pedagang","Kaum brahmana","Prajurit","Rakyat biasa"], c:1, e:"Teori Brahmana = dibawa oleh kaum brahmana."},
-    {q:"Teori Arus Balik menyatakan peran utama penyebaran Hindu-Buddha dilakukan oleh...", a:"Orang India saja","Orang Nusantara yang belajar ke India","Orang China","Orang Arab"], c:1, e:"Teori Arus Balik = orang Nusantara belajar ke India lalu menyebarkan."},
-    {q:"Bukti tertua pengaruh Hindu-Buddha di Indonesia adalah...", a:"Candi Borobudur","Prasasti Yupa","Kitab Negarakertagama","Babad Tanah Jawi"], c:1, e:"Prasasti Yupa (Kutai) abad ke-5 M = bukti tertua."},
-    {q:"Kerajaan Hindu tertua di Indonesia adalah...", a:"Tarumanegara","Kutai","Sriwijaya","Majapahit"], c:1, e:"Kutai (Kalimantan Timur) = kerajaan Hindu tertua."}
+    {q:"Teori yang menyatakan Hindu-Buddha dibawa oleh pedagang India disebut teori...", a:["Waisya","Ksatria","Brahmana","Sudra"], c:0, e:"Teori Waisya = dibawa oleh pedagang (waisya) India."},
+    {q:"Teori Brahmana menyatakan agama Hindu-Buddha dibawa oleh...", a:["Pedagang","Kaum brahmana","Prajurit","Rakyat biasa"], c:1, e:"Teori Brahmana = dibawa oleh kaum brahmana."},
+    {q:"Teori Arus Balik menyatakan peran utama penyebaran Hindu-Buddha dilakukan oleh...", a:["Orang India saja","Orang Nusantara yang belajar ke India","Orang China","Orang Arab"], c:1, e:"Teori Arus Balik = orang Nusantara belajar ke India lalu menyebarkan."},
+    {q:"Bukti tertua pengaruh Hindu-Buddha di Indonesia adalah...", a:["Candi Borobudur","Prasasti Yupa","Kitab Negarakertagama","Babad Tanah Jawi"], c:1, e:"Prasasti Yupa (Kutai) abad ke-5 M = bukti tertua."},
+    {q:"Kerajaan Hindu tertua di Indonesia adalah...", a:["Tarumanegara","Kutai","Sriwijaya","Majapahit"], c:1, e:"Kutai (Kalimantan Timur) = kerajaan Hindu tertua."}
   ]},
   { title:"Kutai & Tarumanegara", soal:[
-    {q:"Raja terkenal Kutai yang disebut dalam Prasasti Yupa adalah...", a:"Mulawarman","Purnawarman","Kundungga","Aswawarman"], c:0, e:"Mulawarman = raja besar Kutai yang disebut dalam Yupa."},
-    {q:"Prasasti Yupa ditulis dengan huruf...", a:"Latin","Pallawa","Kawi","Arab"], c:1, e:"Prasasti Yupa memakai huruf Pallawa & bahasa Sansekerta."},
-    {q:"Raja Tarumanegara yang terkenal adalah...", a:"Mulawarman","Purnawarman","Aswawarman","Balaputradewa"], c:1, e:"Purnawarman = raja terkenal Tarumanegara."},
-    {q:"Prasasti peninggalan Tarumanegara yang memuat proyek Sungai Gomati adalah...", a:"Prasasti Yupa","Prasasti Tugu","Prasasti Kedukan Bukit","Prasasti Ciaruteun"], c:1, e:"Prasasti Tugu = proyek Sungai Gomati oleh Purnawarman."},
-    {q:"Prasasti Ciaruteun memuat gambar...", a:"Tapak kaki Purnawarman","Gajah","Burung","Kuda"], c:0, e:"Prasasti Ciaruteun memuat tapak kaki Raja Purnawarman."}
+    {q:"Raja terkenal Kutai yang disebut dalam Prasasti Yupa adalah...", a:["Mulawarman","Purnawarman","Kundungga","Aswawarman"], c:0, e:"Mulawarman = raja besar Kutai yang disebut dalam Yupa."},
+    {q:"Prasasti Yupa ditulis dengan huruf...", a:["Latin","Pallawa","Kawi","Arab"], c:1, e:"Prasasti Yupa memakai huruf Pallawa & bahasa Sansekerta."},
+    {q:"Raja Tarumanegara yang terkenal adalah...", a:["Mulawarman","Purnawarman","Aswawarman","Balaputradewa"], c:1, e:"Purnawarman = raja terkenal Tarumanegara."},
+    {q:"Prasasti peninggalan Tarumanegara yang memuat proyek Sungai Gomati adalah...", a:["Prasasti Yupa","Prasasti Tugu","Prasasti Kedukan Bukit","Prasasti Ciaruteun"], c:1, e:"Prasasti Tugu = proyek Sungai Gomati oleh Purnawarman."},
+    {q:"Prasasti Ciaruteun memuat gambar...", a:["Tapak kaki Purnawarman","Gajah","Burung","Kuda"], c:0, e:"Prasasti Ciaruteun memuat tapak kaki Raja Purnawarman."}
   ]},
   { title:"Kerajaan Sriwijaya", soal:[
-    {q:"Sriwijaya merupakan kerajaan maritim yang berpusat di...", a:"Palembang","Kediri","Singasari","Mataram"], c:0, e:"Pusat Sriwijaya di Palembang, Sumatera Selatan."},
-    {q:"Raja terbesar Sriwijaya adalah...", a:"Balaputradewa","Hayam Wuruk","Kertanegara","Raden Wijaya"], c:0, e:"Balaputradewa = raja terbesar Sriwijaya."},
-    {q:"Sriwijaya berperan besar dalam penyebaran agama...", a:"Hindu","Buddha","Islam","Kristen"], c:1, e:"Sriwijaya = pusat agama Buddha di Asia Tenggara."},
-    {q:"Prasasti peninggalan Sriwijaya yang menceritakan ekspedisi adalah...", a:"Prasasti Kedukan Bukit","Prasasti Yupa","Prasasti Tugu","Prasasti Ciaruteun"], c:0, e:"Prasasti Kedukan Bukit (605 Saka/683 M)."},
-    {q:"Faktor kemunduran Sriwijaya antara lain...", a:"Serangan Majapahit & Chola","Bencana gunung","Wabah penyakit","Kekeringan panjang"], c:0, e:"Serangan Chola (1017) & Majapahit melemahkan Sriwijaya."}
+    {q:"Sriwijaya merupakan kerajaan maritim yang berpusat di...", a:["Palembang","Kediri","Singasari","Mataram"], c:0, e:"Pusat Sriwijaya di Palembang, Sumatera Selatan."},
+    {q:"Raja terbesar Sriwijaya adalah...", a:["Balaputradewa","Hayam Wuruk","Kertanegara","Raden Wijaya"], c:0, e:"Balaputradewa = raja terbesar Sriwijaya."},
+    {q:"Sriwijaya berperan besar dalam penyebaran agama...", a:["Hindu","Buddha","Islam","Kristen"], c:1, e:"Sriwijaya = pusat agama Buddha di Asia Tenggara."},
+    {q:"Prasasti peninggalan Sriwijaya yang menceritakan ekspedisi adalah...", a:["Prasasti Kedukan Bukit","Prasasti Yupa","Prasasti Tugu","Prasasti Ciaruteun"], c:0, e:"Prasasti Kedukan Bukit (605 Saka/683 M)."},
+    {q:"Faktor kemunduran Sriwijaya antara lain...", a:["Serangan Majapahit & Chola","Bencana gunung","Wabah penyakit","Kekeringan panjang"], c:0, e:"Serangan Chola (1017) & Majapahit melemahkan Sriwijaya."}
   ]},
   { title:"Mataram Kuno & Kerajaan Medang", soal:[
-    {q:"Wangsa Sanjaya beragama...", a:"Hindu","Buddha","Islam","Kepercayaan lokal"], c:0, e:"Sanjaya = Hindu. Sailendra = Buddha."},
-    {q:"Wangsa Sailendra beragama...", a:"Hindu","Buddha Mahayana","Islam","Animisme"], c:1, e:"Sailendra = Buddha Mahayana."},
-    {q:"Candi Borobudur dibangun oleh Wangsa...", a:"Sanjaya","Sailendra","Isyana","Syailendra Muda"], c:1, e:"Borobudur dibangun wangsa Sailendra."},
-    {q:"Raja Mataram Kuno yang terkenal dan membangun Prambanan adalah...", a:"Rakai Pikatan","Balitung","Dharmawangsa","Ken Arok"], c:0, e:"Rakai Pikatan (Hindu) = era pembangunan Prambanan."},
-    {q:"Prasasti Kedu memuat tentang...", a:"Ekspedisi Sriwijaya","Perkawinan politik Sanjaya–Sailendra","Sumpah Palapa","Pembangunan candi"], c:1, e:"Prasasti Kedu = bukti perkawinan politik Rakai Pikatan."}
+    {q:"Wangsa Sanjaya beragama...", a:["Hindu","Buddha","Islam","Kepercayaan lokal"], c:0, e:"Sanjaya = Hindu. Sailendra = Buddha."},
+    {q:"Wangsa Sailendra beragama...", a:["Hindu","Buddha Mahayana","Islam","Animisme"], c:1, e:"Sailendra = Buddha Mahayana."},
+    {q:"Candi Borobudur dibangun oleh Wangsa...", a:["Sanjaya","Sailendra","Isyana","Syailendra Muda"], c:1, e:"Borobudur dibangun wangsa Sailendra."},
+    {q:"Raja Mataram Kuno yang terkenal dan membangun Prambanan adalah...", a:["Rakai Pikatan","Balitung","Dharmawangsa","Ken Arok"], c:0, e:"Rakai Pikatan (Hindu) = era pembangunan Prambanan."},
+    {q:"Prasasti Kedu memuat tentang...", a:["Ekspedisi Sriwijaya","Perkawinan politik Sanjaya–Sailendra","Sumpah Palapa","Pembangunan candi"], c:1, e:"Prasasti Kedu = bukti perkawinan politik Rakai Pikatan."}
   ]},
   { title:"Majapahit & Kerajaan Akhir", soal:[
-    {q:"Pendiri Majapahit adalah...", a:"Raden Wijaya","Hayam Wuruk","Gajah Mada","Kertanegara"], c:0, e:"Raden Wijaya (Kertarajasa Jayawardhana) mendirikan Majapahit 1293."},
-    {q:"Raja terbesar Majapahit adalah...", a:"Raden Wijaya","Hayam Wuruk","Kertanegara","Kertawijaya"], c:1, e:"Hayam Wuruk = raja terbesar Majapahit."},
-    {q:"Sumpah Palapa diucapkan oleh...", a:"Gajah Mada","Hayam Wuruk","Raden Wijaya","Patih Amangkubhumi"], c:0, e:"Gajah Mada mengucapkan Sumpah Palapa (1336)."},
-    {q:"Kitab karangan Mpu Prapanca yang berisi tentang Majapahit adalah...", a:"Negarakertagama","Sutasoma","Arjunawiwaha","Bharatayuddha"], c:0, e:"Negarakertagama (Mpu Prapanca) = pujangga Majapahit."},
-    {q:"Faktor runtuhnya Majapahit antara lain...", a:"Perang Paregreg & lemahnya raja-raja akhir","Serangan Sriwijaya","Wabah cacar","Gempa besar"], c:0, e:"Perang Paregreg (1401–1406) memicu kemunduran Majapahit."}
+    {q:"Pendiri Majapahit adalah...", a:["Raden Wijaya","Hayam Wuruk","Gajah Mada","Kertanegara"], c:0, e:"Raden Wijaya (Kertarajasa Jayawardhana) mendirikan Majapahit 1293."},
+    {q:"Raja terbesar Majapahit adalah...", a:["Raden Wijaya","Hayam Wuruk","Kertanegara","Kertawijaya"], c:1, e:"Hayam Wuruk = raja terbesar Majapahit."},
+    {q:"Sumpah Palapa diucapkan oleh...", a:["Gajah Mada","Hayam Wuruk","Raden Wijaya","Patih Amangkubhumi"], c:0, e:"Gajah Mada mengucapkan Sumpah Palapa (1336)."},
+    {q:"Kitab karangan Mpu Prapanca yang berisi tentang Majapahit adalah...", a:["Negarakertagama","Sutasoma","Arjunawiwaha","Bharatayuddha"], c:0, e:"Negarakertagama (Mpu Prapanca) = pujangga Majapahit."},
+    {q:"Faktor runtuhnya Majapahit antara lain...", a:["Perang Paregreg & lemahnya raja-raja akhir","Serangan Sriwijaya","Wabah cacar","Gempa besar"], c:0, e:"Perang Paregreg (1401–1406) memicu kemunduran Majapahit."}
   ]}
 ]},
 
@@ -607,39 +639,39 @@ const BAB = [
   desc:"Masuk & penyebaran Islam, Walisongo, hingga Demak & Mataram.",
   kuis:[
   { title:"Masuknya Islam ke Nusantara", soal:[
-    {q:"Teori yang menyatakan Islam masuk ke Indonesia langsung dari Arab disebut teori...", a:"Gujarat","Mekah/Arab","Persia","China"], c:1, e:"Teori Mekah/Arab = dibawa langsung oleh pedagang Arab."},
-    {q:"Teori Gujarat menyatakan Islam dibawa oleh pedagang dari...", a:"Arab","Persia","India (Gujarat)","China"], c:2, e:"Teori Gujarat = dibawa pedagang dari Gujarat, India."},
-    {q:"Bukti tertua kehadiran Islam di Indonesia adalah...", a:"Batu nisan Fatimah binti Maimun","Masjid Demak","Keraton Yogyakarta","Prasasti Kedukan Bukit"], c:0, e:"Nisan Fatimah binti Maimun (Leran, Gresik, 1082 M)."},
-    {q:"Saluran Islamisasi yang paling berpengaruh di Nusantara adalah...", a:"Kekerasan","Perdagangan, perkawinan, tasawuf, dan pendidikan pesantren","Penaklukan militer","Penjajahan"], c:1, e:"Islamisasi lewat perdagangan, perkawinan, tasawuf, & pesantren."},
-    {q:"Salah satu saluran Islamisasi melalui seni adalah...", a:"Wayang","Kaligrafi & gamelan","Arsitektur gereja","Lukisan Eropa"], c:1, e:"Seni kaligrafi & gamelan digunakan untuk dakwah Islam."}
+    {q:"Teori yang menyatakan Islam masuk ke Indonesia langsung dari Arab disebut teori...", a:["Gujarat","Mekah/Arab","Persia","China"], c:1, e:"Teori Mekah/Arab = dibawa langsung oleh pedagang Arab."},
+    {q:"Teori Gujarat menyatakan Islam dibawa oleh pedagang dari...", a:["Arab","Persia","India (Gujarat)","China"], c:2, e:"Teori Gujarat = dibawa pedagang dari Gujarat, India."},
+    {q:"Bukti tertua kehadiran Islam di Indonesia adalah...", a:["Batu nisan Fatimah binti Maimun","Masjid Demak","Keraton Yogyakarta","Prasasti Kedukan Bukit"], c:0, e:"Nisan Fatimah binti Maimun (Leran, Gresik, 1082 M)."},
+    {q:"Saluran Islamisasi yang paling berpengaruh di Nusantara adalah...", a:["Kekerasan","Perdagangan, perkawinan, tasawuf, dan pendidikan pesantren","Penaklukan militer","Penjajahan"], c:1, e:"Islamisasi lewat perdagangan, perkawinan, tasawuf, & pesantren."},
+    {q:"Salah satu saluran Islamisasi melalui seni adalah...", a:["Wayang","Kaligrafi & gamelan","Arsitektur gereja","Lukisan Eropa"], c:1, e:"Seni kaligrafi & gamelan digunakan untuk dakwah Islam."}
   ]},
   { title:"Walisongo & Perannya", soal:[
-    {q:"Jumlah anggota Walisongo adalah...", a:"5","7","9","12"], c:2, e:"Walisongo berjumlah 9 orang."},
-    {q:"Wali yang menyebarkan Islam melalui wayang adalah...", a:"Sunan Kalijaga","Sunan Bonang","Sunan Gresik","Sunan Muria"], c:0, e:"Sunan Kalijaga berdakwah lewat wayang."},
-    {q:"Sunan Gresik dikenal juga sebagai...", a:"Maulana Malik Ibrahim","Raden Rahmat","Raden Said","Ja'far Shadiq"], c:0, e:"Sunan Gresik = Maulana Malik Ibrahim, wali tertua."},
-    {q:"Sunan Ampel memiliki nama asli...", a:"Raden Rahmat","Raden Said","Raden Paku","Maulana Malik Ibrahim"], c:0, e:"Sunan Ampel = Raden Rahmat, dakwah di Surabaya."},
-    {q:"Wali yang berdakwah lewat tembang & seni musik adalah...", a:"Sunan Bonang","Sunan Giri","Sunan Kudus","Sunan Drajat"], c:0, e:"Sunan Bonang berdakwah lewat tembang (Boneka)."}
+    {q:"Jumlah anggota Walisongo adalah...", a:["5","7","9","12"], c:2, e:"Walisongo berjumlah 9 orang."},
+    {q:"Wali yang menyebarkan Islam melalui wayang adalah...", a:["Sunan Kalijaga","Sunan Bonang","Sunan Gresik","Sunan Muria"], c:0, e:"Sunan Kalijaga berdakwah lewat wayang."},
+    {q:"Sunan Gresik dikenal juga sebagai...", a:["Maulana Malik Ibrahim","Raden Rahmat","Raden Said","Ja'far Shadiq"], c:0, e:"Sunan Gresik = Maulana Malik Ibrahim, wali tertua."},
+    {q:"Sunan Ampel memiliki nama asli...", a:["Raden Rahmat","Raden Said","Raden Paku","Maulana Malik Ibrahim"], c:0, e:"Sunan Ampel = Raden Rahmat, dakwah di Surabaya."},
+    {q:"Wali yang berdakwah lewat tembang & seni musik adalah...", a:["Sunan Bonang","Sunan Giri","Sunan Kudus","Sunan Drajat"], c:0, e:"Sunan Bonang berdakwah lewat tembang."}
   ]},
   { title:"Samudera Pasai & Aceh", soal:[
-    {q:"Kerajaan Islam pertama di Indonesia adalah...", a:"Demak","Samudera Pasai","Mataram Islam","Banten"], c:1, e:"Samudera Pasai = kerajaan Islam pertama di Indonesia."},
-    {q:"Raja pertama Samudera Pasai adalah...", a:"Sultan Malik Al-Saleh","Sultan Iskandar Muda","Sultan Trenggana","Sultan Agung"], c:0, e:"Sultan Malik Al-Saleh = raja pertama Samudera Pasai."},
-    {q:"Kerajaan Aceh mencapai puncak kejayaan pada masa...", a:"Sultan Iskandar Muda","Sultan Malik Al-Saleh","Sultan Trenggana","Sultan Agung"], c:0, e:"Sultan Iskandar Muda (1607–1636) = puncak Aceh."},
-    {q:"Samudera Pasai terletak di provinsi...", a:"Sumatera Utara","Aceh","Riau","Sumatera Barat"], c:1, e:"Samudera Pasai terletak di Aceh (Lhokseumawe)."},
-    {q:"Faktor kemunduran Aceh salah satunya adalah...", a:"Wafatnya Iskandar Muda & persaingan dengan Belanda","Gempa besar","Serangan Mongol","Kekeringan panjang"], c:0, e:"Setelah Iskandar Muda wafat, Aceh melemah."}
+    {q:"Kerajaan Islam pertama di Indonesia adalah...", a:["Demak","Samudera Pasai","Mataram Islam","Banten"], c:1, e:"Samudera Pasai = kerajaan Islam pertama di Indonesia."},
+    {q:"Raja pertama Samudera Pasai adalah...", a:["Sultan Malik Al-Saleh","Sultan Iskandar Muda","Sultan Trenggana","Sultan Agung"], c:0, e:"Sultan Malik Al-Saleh = raja pertama Samudera Pasai."},
+    {q:"Kerajaan Aceh mencapai puncak kejayaan pada masa...", a:["Sultan Iskandar Muda","Sultan Malik Al-Saleh","Sultan Trenggana","Sultan Agung"], c:0, e:"Sultan Iskandar Muda (1607–1636) = puncak Aceh."},
+    {q:"Samudera Pasai terletak di provinsi...", a:["Sumatera Utara","Aceh","Riau","Sumatera Barat"], c:1, e:"Samudera Pasai terletak di Aceh (Lhokseumawe)."},
+    {q:"Faktor kemunduran Aceh salah satunya adalah...", a:["Wafatnya Iskandar Muda & persaingan dengan Belanda","Gempa besar","Serangan Mongol","Kekeringan panjang"], c:0, e:"Setelah Iskandar Muda wafat, Aceh melemah."}
   ]},
   { title:"Demak, Banten & Mataram Islam", soal:[
-    {q:"Raden Patah adalah pendiri kerajaan...", a:"Demak","Banten","Mataram Islam","Aceh"], c:0, e:"Raden Patah mendirikan Demak (1478)."},
-    {q:"Kerajaan Demak merupakan kerajaan Islam pertama di...", a:"Sumatera","Jawa","Kalimantan","Sulawesi"], c:1, e:"Demak = kerajaan Islam pertama di Jawa."},
-    {q:"Raja Demak yang terkenal adalah...", a:"Sultan Trenggana","Sultan Agung","Sultan Ageng Tirtayasa","Panembahan Senopati"], c:0, e:"Sultan Trenggana = raja besar Demak, perluasan wilayah."},
-    {q:"Pendiri Kesultanan Banten adalah...", a:"Sultan Hasanuddin","Maulana Hasanuddin","Sultan Ageng Tirtayasa","Sultan Trenggana"], c:1, e:"Maulana Hasanuddin = pendiri Banten."},
-    {q:"Pendiri Mataram Islam adalah...", a:"Sultan Agung","Panembahan Senopati","Amangkurat I","Pakubuwono"], c:1, e:"Panembahan Senopati = pendiri Mataram Islam (1587)."}
+    {q:"Raden Patah adalah pendiri kerajaan...", a:["Demak","Banten","Mataram Islam","Aceh"], c:0, e:"Raden Patah mendirikan Demak (1478)."},
+    {q:"Kerajaan Demak merupakan kerajaan Islam pertama di...", a:["Sumatera","Jawa","Kalimantan","Sulawesi"], c:1, e:"Demak = kerajaan Islam pertama di Jawa."},
+    {q:"Raja Demak yang terkenal adalah...", a:["Sultan Trenggana","Sultan Agung","Sultan Ageng Tirtayasa","Panembahan Senopati"], c:0, e:"Sultan Trenggana = raja besar Demak, perluasan wilayah."},
+    {q:"Pendiri Kesultanan Banten adalah...", a:["Sultan Hasanuddin","Maulana Hasanuddin","Sultan Ageng Tirtayasa","Sultan Trenggana"], c:1, e:"Maulana Hasanuddin = pendiri Banten."},
+    {q:"Pendiri Mataram Islam adalah...", a:["Sultan Agung","Panembahan Senopati","Amangkurat I","Pakubuwono"], c:1, e:"Panembahan Senopati = pendiri Mataram Islam (1587)."}
   ]},
   { title:"Akulturasi Budaya Islam-Nusantara", soal:[
-    {q:"Masjid Agung Demak menunjukkan akulturasi budaya...", a:"Hindu-Buddha & Islam","Barat & Islam","Arab murni","China & Islam"], c:0, e:"Masjid Demak = akulturasi Hindu-Buddha & Islam."},
-    {q:"Tradisi 'sekaten' di Yogyakarta berasal dari tradisi...", a:"Islam","Hindu-Buddha","Belanda","Portugis"], c:1, e:"Sekaten berasal dari tradisi Hindu-Buddha yang diislamkan."},
-    {q:"Bentuk akulturasi dalam sastra berupa...", a:"Babad & hikayat","Prasasti Pallawa","Kitab Weda","Naskah Yunani"], c:0, e:"Babad & hikayat = sastra bercorak Islam."},
-    {q:"Gamelan sekaten digunakan untuk memperingati...", a:"Maulid Nabi","Nyepi","Galungan","Kartini"], c:0, e:"Sekaten = peringatan Maulid Nabi Muhammad SAW."},
-    {q:"Pengaruh Islam dalam seni bangunan tampak pada...", a:"Atap tumpang & mihrab","Candi bertingkat","Menara gereja","Punden berundak"], c:0, e:"Atap tumpang & mihrab = ciri masjid Nusantara."}
+    {q:"Masjid Agung Demak menunjukkan akulturasi budaya...", a:["Hindu-Buddha & Islam","Barat & Islam","Arab murni","China & Islam"], c:0, e:"Masjid Demak = akulturasi Hindu-Buddha & Islam."},
+    {q:"Tradisi 'sekaten' di Yogyakarta berasal dari tradisi...", a:["Islam","Hindu-Buddha","Belanda","Portugis"], c:1, e:"Sekaten berasal dari tradisi Hindu-Buddha yang diislamkan."},
+    {q:"Bentuk akulturasi dalam sastra berupa...", a:["Babad & hikayat","Prasasti Pallawa","Kitab Weda","Naskah Yunani"], c:0, e:"Babad & hikayat = sastra bercorak Islam."},
+    {q:"Gamelan sekaten digunakan untuk memperingati...", a:["Maulid Nabi","Nyepi","Galungan","Kartini"], c:0, e:"Sekaten = peringatan Maulid Nabi Muhammad SAW."},
+    {q:"Pengaruh Islam dalam seni bangunan tampak pada...", a:["Atap tumpang & mihrab","Candi bertingkat","Menara gereja","Punden berundak"], c:0, e:"Atap tumpang & mihrab = ciri masjid Nusantara."}
   ]}
 ]},
 
@@ -652,39 +684,39 @@ const BAB = [
   desc:"Kedatangan Eropa, VOC, kebijakan kolonial, dan tanam paksa.",
   kuis:[
   { title:"Kedatangan Bangsa Eropa", soal:[
-    {q:"Faktor utama bangsa Eropa datang ke Nusantara adalah...", a:"Wisata","Mencari rempah-rempah (gold, glory, gospel)","Mencari lahan pertanian","Menyebarkan demokrasi"], c:1, e:"Motif 3G: gold (kekayaan), glory (kejayaan), gospel (agama)."},
-    {q:"Bangsa Eropa pertama yang sampai di Nusantara adalah...", a:"Belanda","Spanyol","Portugis","Inggris"], c:2, e:"Portugis tiba di Malaka (1511)."},
-    {q:"Tokoh Portugis yang pertama kali sampai Malaka adalah...", a:"Vasco da Gama","Alfonso de Albuquerque","Magelhaens","Cornelis de Houtman"], c:1, e:"Alfonso de Albuquerque menaklukkan Malaka 1511."},
-    {q:"Belanda pertama kali datang ke Nusantara dipimpin oleh...", a:"Cornelis de Houtman","Jan Pieterszoon Coen","Daendels","Raffles"], c:0, e:"Cornelis de Houtman (1596) = ekspedisi pertama Belanda."},
-    {q:"Inggris pernah menguasai Jawa pada masa pemerintahan...", a:"Daendels","Raffles","Van den Bosch","Van Heutz"], c:1, e:"Raffles (1811–1816) = masa pemerintahan Inggris di Jawa."}
+    {q:"Faktor utama bangsa Eropa datang ke Nusantara adalah...", a:["Wisata","Mencari rempah-rempah (gold, glory, gospel)","Mencari lahan pertanian","Menyebarkan demokrasi"], c:1, e:"Motif 3G: gold (kekayaan), glory (kejayaan), gospel (agama)."},
+    {q:"Bangsa Eropa pertama yang sampai di Nusantara adalah...", a:["Belanda","Spanyol","Portugis","Inggris"], c:2, e:"Portugis tiba di Malaka (1511)."},
+    {q:"Tokoh Portugis yang pertama kali sampai Malaka adalah...", a:["Vasco da Gama","Alfonso de Albuquerque","Magelhaens","Cornelis de Houtman"], c:1, e:"Alfonso de Albuquerque menaklukkan Malaka 1511."},
+    {q:"Belanda pertama kali datang ke Nusantara dipimpin oleh...", a:["Cornelis de Houtman","Jan Pieterszoon Coen","Daendels","Raffles"], c:0, e:"Cornelis de Houtman (1596) = ekspedisi pertama Belanda."},
+    {q:"Inggris pernah menguasai Jawa pada masa pemerintahan...", a:["Daendels","Raffles","Van den Bosch","Van Heutz"], c:1, e:"Raffles (1811–1816) = masa pemerintahan Inggris di Jawa."}
   ]},
   { title:"VOC & Kebijakan Dagang", soal:[
-    {q:"VOC didirikan pada tahun...", a:"1600","1602","1619","1799"], c:1, e:"VOC didirikan 20 Maret 1602."},
-    {q:"Tujuan utama pembentukan VOC adalah...", a:"Menyebarkan agama","Menguasai monopoli perdagangan rempah","Mendirikan sekolah","Membantu rakyat"], c:1, e:"VOC = monopoli dagang Belanda di Asia."},
-    {q:"Gubernur Jenderal VOC yang mendirikan Batavia adalah...", a:"Cornelis de Houtman","Jan Pieterszoon Coen","Daendels","Van den Bosch"], c:1, e:"JP Coen mendirikan Batavia (1619)."},
-    {q:"Hak istimewa VOC untuk memonopoli perdagangan disebut...", a:"Octrooi","Ekstirpasi","Plakat","Poenale"], c:0, e:"Octrooi = hak istimewa VOC."},
-    {q:"VOC dibubarkan pada tahun...", a:"1795","1799","1800","1808"], c:1, e:"VOC dibubarkan 31 Desember 1799 karena bangkrut."}
+    {q:"VOC didirikan pada tahun...", a:["1600","1602","1619","1799"], c:1, e:"VOC didirikan 20 Maret 1602."},
+    {q:"Tujuan utama pembentukan VOC adalah...", a:["Menyebarkan agama","Menguasai monopoli perdagangan rempah","Mendirikan sekolah","Membantu rakyat"], c:1, e:"VOC = monopoli dagang Belanda di Asia."},
+    {q:"Gubernur Jenderal VOC yang mendirikan Batavia adalah...", a:["Cornelis de Houtman","Jan Pieterszoon Coen","Daendels","Van den Bosch"], c:1, e:"JP Coen mendirikan Batavia (1619)."},
+    {q:"Hak istimewa VOC untuk memonopoli perdagangan disebut...", a:["Octrooi","Ekstirpasi","Plakat","Poenale"], c:0, e:"Octrooi = hak istimewa VOC."},
+    {q:"VOC dibubarkan pada tahun...", a:["1795","1799","1800","1808"], c:1, e:"VOC dibubarkan 31 Desember 1799 karena bangkrut."}
   ]},
   { title:"Kebijakan Kolonial & Tanam Paksa", soal:[
-    {q:"Sistem tanam paksa (cultuurstelsel) diterapkan oleh...", a:"Daendels","Van den Bosch","Raffles","Van Heutz"], c:1, e:"Van den Bosch menerapkan cultuurstelsel (1830)."},
-    {q:"Tujuan tanam paksa adalah...", a:"Menyejahterakan rakyat","Mengisi kas Belanda yang kosong","Menyebarkan agama","Mendirikan sekolah"], c:1, e:"Tanam paksa mengisi kas Belanda akibat Perang Diponegoro & Belgia."},
-    {q:"Buku Max Havelaar ditulis oleh...", a:"Multatuli","Van den Bosch","Daendels","Raffles"], c:0, e:"Multatuli (Douwes Dekker) menulis Max Havelaar (1860)."},
-    {q:"Kerja paksa tanpa upah pada masa kolonial disebut...", a:"Rodi","Romusha","Poenale","Cultuur"], c:0, e:"Rodi = kerja paksa masa kolonial Belanda."},
-    {q:"Kebijakan 'Politik Etis' (Balas Budi) muncul pada tahun...", a:"1870","1901","1910","1920"], c:1, e:"Politik Etis dicanangkan 1901 oleh Ratu Wilhelmina."}
+    {q:"Sistem tanam paksa (cultuurstelsel) diterapkan oleh...", a:["Daendels","Van den Bosch","Raffles","Van Heutz"], c:1, e:"Van den Bosch menerapkan cultuurstelsel (1830)."},
+    {q:"Tujuan tanam paksa adalah...", a:["Menyejahterakan rakyat","Mengisi kas Belanda yang kosong","Menyebarkan agama","Mendirikan sekolah"], c:1, e:"Tanam paksa mengisi kas Belanda akibat Perang Diponegoro & Belgia."},
+    {q:"Buku Max Havelaar ditulis oleh...", a:["Multatuli","Van den Bosch","Daendels","Raffles"], c:0, e:"Multatuli (Douwes Dekker) menulis Max Havelaar (1860)."},
+    {q:"Kerja paksa tanpa upah pada masa kolonial disebut...", a:["Rodi","Romusha","Poenale","Cultuur"], c:0, e:"Rodi = kerja paksa masa kolonial Belanda."},
+    {q:"Kebijakan 'Politik Etis' (Balas Budi) muncul pada tahun...", a:["1870","1901","1910","1920"], c:1, e:"Politik Etis dicanangkan 1901 oleh Ratu Wilhelmina."}
   ]},
   { title:"Politik Etis & Dampaknya", soal:[
-    {q:"Tiga kebijakan Politik Etis adalah...", a:"Irigasi, emigrasi, edukasi","Tanam paksa, rodi, poenale","Monopoli, ekstirpasi, octrooi","Devide et impera"], c:0, e:"Politik Etis = irigasi, emigrasi (transmigrasi), edukasi."},
-    {q:"Dampak positif Politik Etis bagi Indonesia adalah...", a:"Munculnya kaum terpelajar","Rakyat makin miskin","Tanam paksa meluas","Rodi diperluas"], c:0, e:"Politik Etis memunculkan kaum terpelajar & pergerakan nasional."},
-    {q:"Tokoh Belanda yang mengkritik tanam paksa melalui buku adalah...", a:"Multatuli","Van den Bosch","Daendels","Raffles"], c:0, e:"Multatuli mengkritik tanam paksa melalui Max Havelaar."},
-    {q:"Sekolah STOVIA didirikan untuk mendidik...", a:"Guru","Dokter pribumi","Perwira militer","Insinyur"], c:1, e:"STOVIA = sekolah kedokteran pribumi (1851)."},
-    {q:"Kebijakan 'Devide et Impera' berarti...", a:"Adu domba","Bagi hasil","Tukar guling","Monopoli"], c:0, e:"Devide et impera = politik adu domba Belanda."}
+    {q:"Tiga kebijakan Politik Etis adalah...", a:["Irigasi, emigrasi, edukasi","Tanam paksa, rodi, poenale","Monopoli, ekstirpasi, octrooi","Devide et impera"], c:0, e:"Politik Etis = irigasi, emigrasi (transmigrasi), edukasi."},
+    {q:"Dampak positif Politik Etis bagi Indonesia adalah...", a:["Munculnya kaum terpelajar","Rakyat makin miskin","Tanam paksa meluas","Rodi diperluas"], c:0, e:"Politik Etis memunculkan kaum terpelajar & pergerakan nasional."},
+    {q:"Tokoh Belanda yang mengkritik tanam paksa melalui buku adalah...", a:["Multatuli","Van den Bosch","Daendels","Raffles"], c:0, e:"Multatuli mengkritik tanam paksa melalui Max Havelaar."},
+    {q:"Sekolah STOVIA didirikan untuk mendidik...", a:["Guru","Dokter pribumi","Perwira militer","Insinyur"], c:1, e:"STOVIA = sekolah kedokteran pribumi (1851)."},
+    {q:"Kebijakan 'Devide et Impera' berarti...", a:["Adu domba","Bagi hasil","Tukar guling","Monopoli"], c:0, e:"Devide et impera = politik adu domba Belanda."}
   ]},
   { title:"Peralihan Kekuasaan Kolonial", soal:[
-    {q:"Gubernur Jenderal Belanda yang menerapkan kerja rodi di Jawa adalah...", a:"Daendels","Van den Bosch","Raffles","Van Heutz"], c:0, e:"Daendels (1808–1811) menerapkan kerja rodi (Grote Postweg)."},
-    {q:"Setelah kekuasaan Belanda diambil Inggris, Jawa diperintah oleh...", a:"Daendels","Raffles","Van den Bosch","Janssens"], c:1, e:"Raffles memerintah 1811–1816."},
-    {q:"Sistem sewa tanah (landrente) diterapkan oleh...", a:"Daendels","Raffles","Van den Bosch","Van der Capellen"], c:1, e:"Raffles menerapkan landrente (sewa tanah)."},
-    {q:"Konvensi London (1814) mengembalikan kekuasaan atas Nusantara kepada...", a:"Inggris","Belanda","Portugis","Spanyol"], c:1, e:"Konvensi London mengembalikan Hindia Belanda kepada Belanda."},
-    {q:"Perang Jawa (1825–1830) dipimpin oleh...", a:"Pattimura","Diponegoro","Imam Bonjol","Sultan Hasanuddin"], c:1, e:"Perang Jawa/Diponegoro melawan Belanda 1825–1830."}
+    {q:"Gubernur Jenderal Belanda yang menerapkan kerja rodi di Jawa adalah...", a:["Daendels","Van den Bosch","Raffles","Van Heutz"], c:0, e:"Daendels (1808–1811) menerapkan kerja rodi (Grote Postweg)."},
+    {q:"Setelah kekuasaan Belanda diambil Inggris, Jawa diperintah oleh...", a:["Daendels","Raffles","Van den Bosch","Janssens"], c:1, e:"Raffles memerintah 1811–1816."},
+    {q:"Sistem sewa tanah (landrente) diterapkan oleh...", a:["Daendels","Raffles","Van den Bosch","Van der Capellen"], c:1, e:"Raffles menerapkan landrente (sewa tanah)."},
+    {q:"Konvensi London (1814) mengembalikan kekuasaan atas Nusantara kepada...", a:["Inggris","Belanda","Portugis","Spanyol"], c:1, e:"Konvensi London mengembalikan Hindia Belanda kepada Belanda."},
+    {q:"Perang Jawa (1825–1830) dipimpin oleh...", a:["Pattimura","Diponegoro","Imam Bonjol","Sultan Hasanuddin"], c:1, e:"Perang Jawa/Diponegoro melawan Belanda 1825–1830."}
   ]}
 ]},
 
@@ -697,39 +729,39 @@ const BAB = [
   desc:"Diponegoro, Pattimura, Imam Bonjol, Perang Aceh & Banjar.",
   kuis:[
   { title:"Karakter Perlawanan Awal", soal:[
-    {q:"Ciri perlawanan rakyat sebelum abad XX adalah...", a:"Bersifat nasional","Bersifat kedaerahan & dipimpin tokoh karismatik","Terorganisasi modern","Berdasarkan ideologi"], c:1, e:"Perlawanan pra-1900 bersifat kedaerahan & tokoh karismatik."},
-    {q:"Sebab utama kegagalan perlawanan pra-1900 adalah...", a:"Kurang semangat","Perpecahan & kalah persenjataan","Tidak ada pemimpin","Salah strategi"], c:1, e:"Faktor utama: perpecahan & teknologi persenjataan."},
-    {q:"Strategi Belanda mengadu domba rakyat disebut...", a:"Devide et impera","Cultuurstelsel","Politik Etis","Landrente"], c:0, e:"Devide et impera = adu domba."},
-    {q:"Perlawanan pra-1900 umumnya dipimpin oleh...", a:"Kaum terpelajar","Bangsawan/ulama","Buruh","Pedagang"], c:1, e:"Pemimpin umumnya bangsawan atau ulama."},
-    {q:"Perang yang bersifat gerilya banyak dilakukan oleh...", a:"Pasukan Belanda","Rakyat setempat","Tentara Inggris","VOC"], c:1, e:"Perang gerilya menjadi ciri perlawanan rakyat."}
+    {q:"Ciri perlawanan rakyat sebelum abad XX adalah...", a:["Bersifat nasional","Bersifat kedaerahan & dipimpin tokoh karismatik","Terorganisasi modern","Berdasarkan ideologi"], c:1, e:"Perlawanan pra-1900 bersifat kedaerahan & tokoh karismatik."},
+    {q:"Sebab utama kegagalan perlawanan pra-1900 adalah...", a:["Kurang semangat","Perpecahan & kalah persenjataan","Tidak ada pemimpin","Salah strategi"], c:1, e:"Faktor utama: perpecahan & teknologi persenjataan."},
+    {q:"Strategi Belanda mengadu domba rakyat disebut...", a:["Devide et impera","Cultuurstelsel","Politik Etis","Landrente"], c:0, e:"Devide et impera = adu domba."},
+    {q:"Perlawanan pra-1900 umumnya dipimpin oleh...", a:["Kaum terpelajar","Bangsawan/ulama","Buruh","Pedagang"], c:1, e:"Pemimpin umumnya bangsawan atau ulama."},
+    {q:"Perang yang bersifat gerilya banyak dilakukan oleh...", a:["Pasukan Belanda","Rakyat setempat","Tentara Inggris","VOC"], c:1, e:"Perang gerilya menjadi ciri perlawanan rakyat."}
   ]},
   { title:"Perang Diponegoro (1825–1830)", soal:[
-    {q:"Perang Diponegoro terjadi pada tahun...", a:"1821–1826","1825–1830","1830–1835","1820–1825"], c:1, e:"Perang Diponegoro 1825–1830."},
-    {q:"Sebab utama Perang Diponegoro adalah...", a:"Pajak tinggi & patok jalan di tanah makam","Perang dagang","Perbedaan agama","Serangan luar"], c:0, e:"Pemasangan patok di makam leluhur & pajak = sebab utama."},
-    {q:"Benteng pertahanan Diponegoro yang terkenal adalah...", a:"Benteng Duurstede","Benteng Selarong","Benteng Rotterdam","Benteng Vastenburg"], c:1, e:"Benteng Selarong = markas Diponegoro."},
-    {q:"Perang Diponegoro berakhir dengan...", a:"Kemenangan rakyat","Penangkapan Diponegoro (tipu daya)","Perjanjian damai","Gencatan senjata"], c:1, e:"Diponegoro ditangkap dalam perundingan tipu daya Belanda."},
-    {q:"Dampak Perang Diponegoro bagi Belanda adalah...", a:"Kas Belanda kosong","Belanda untung besar","Belanda mundur","Belanda menang mudah"], c:0, e:"Perang Diponegoro menguras kas Belanda."}
+    {q:"Perang Diponegoro terjadi pada tahun...", a:["1821–1826","1825–1830","1830–1835","1820–1825"], c:1, e:"Perang Diponegoro 1825–1830."},
+    {q:"Sebab utama Perang Diponegoro adalah...", a:["Pajak tinggi & patok jalan di tanah makam","Perang dagang","Perbedaan agama","Serangan luar"], c:0, e:"Pemasangan patok di makam leluhur & pajak = sebab utama."},
+    {q:"Benteng pertahanan Diponegoro yang terkenal adalah...", a:["Benteng Duurstede","Benteng Selarong","Benteng Rotterdam","Benteng Vastenburg"], c:1, e:"Benteng Selarong = markas Diponegoro."},
+    {q:"Perang Diponegoro berakhir dengan...", a:["Kemenangan rakyat","Penangkapan Diponegoro (tipu daya)","Perjanjian damai","Gencatan senjata"], c:1, e:"Diponegoro ditangkap dalam perundingan tipu daya Belanda."},
+    {q:"Dampak Perang Diponegoro bagi Belanda adalah...", a:["Kas Belanda kosong","Belanda untung besar","Belanda mundur","Belanda menang mudah"], c:0, e:"Perang Diponegoro menguras kas Belanda."}
   ]},
   { title:"Pattimura & Perang Maluku", soal:[
-    {q:"Perang Pattimura terjadi di...", a:"Jawa","Maluku (Ambon)","Sumatera","Sulawesi"], c:1, e:"Pattimura memimpin perlawanan di Saparua, Maluku (1817)."},
-    {q:"Nama asli Pattimura adalah...", a:"Thomas Matulessy","Kapitan Paulus","Sultan Hairun","Johannes"], c:0, e:"Pattimura = Thomas Matulessy."},
-    {q:"Sebab perlawanan Pattimura adalah...", a:"Kembalinya kekuasaan Belanda & pajak berat","Penjajahan Inggris","Bencana alam","Perebutan tanah"], c:0, e:"Belanda kembali setelah Inggris pergi, rakyat kecewa."},
-    {q:"Pattimura berhasil menyerang benteng Belanda yaitu...", a:"Benteng Duurstede","Benteng Selarong","Benteng Rotterdam","Benteng Vastenburg"], c:0, e:"Pattimura menyerbu Benteng Duurstede (1817)."},
-    {q:"Akhir perlawanan Pattimura adalah...", a:"Pattimura berhasil menang","Pattimura ditangkap & dihukum gantung","Pattimura kabur","Pattimura bergabung Belanda"], c:1, e:"Pattimura ditangkap dan dihukum gantung (1817)."}
+    {q:"Perang Pattimura terjadi di...", a:["Jawa","Maluku (Ambon)","Sumatera","Sulawesi"], c:1, e:"Pattimura memimpin perlawanan di Saparua, Maluku (1817)."},
+    {q:"Nama asli Pattimura adalah...", a:["Thomas Matulessy","Kapitan Paulus","Sultan Hairun","Johannes"], c:0, e:"Pattimura = Thomas Matulessy."},
+    {q:"Sebab perlawanan Pattimura adalah...", a:["Kembalinya kekuasaan Belanda & pajak berat","Penjajahan Inggris","Bencana alam","Perebutan tanah"], c:0, e:"Belanda kembali setelah Inggris pergi, rakyat kecewa."},
+    {q:"Pattimura berhasil menyerang benteng Belanda yaitu...", a:["Benteng Duurstede","Benteng Selarong","Benteng Rotterdam","Benteng Vastenburg"], c:0, e:"Pattimura menyerbu Benteng Duurstede (1817)."},
+    {q:"Akhir perlawanan Pattimura adalah...", a:["Pattimura berhasil menang","Pattimura ditangkap & dihukum gantung","Pattimura kabur","Pattimura bergabung Belanda"], c:1, e:"Pattimura ditangkap dan dihukum gantung (1817)."}
   ]},
   { title:"Perang Paderi & Imam Bonjol", soal:[
-    {q:"Perang Paderi berlangsung pada tahun...", a:"1821–1838","1820–1830","1800–1810","1830–1840"], c:0, e:"Perang Paderi 1821–1838 di Sumatera Barat."},
-    {q:"Pemimpin utama Perang Paderi adalah...", a:"Tuanku Imam Bonjol","Pattimura","Diponegoro","Sultan Hasanuddin"], c:0, e:"Tuanku Imam Bonjol memimpin Perang Paderi."},
-    {q:"Latar belakang Perang Paderi adalah...", a:"Perbedaan paham keagamaan & campur tangan Belanda","Perebutan tanah","Pajak tinggi","Serangan Portugis"], c:0, e:"Konflik kaum Paderi & Adat, lalu Belanda ikut campur."},
-    {q:"Belanda berhasil menangkap Imam Bonjol pada tahun...", a:"1832","1837","1840","1825"], c:1, e:"Imam Bonjol ditangkap 1837, diasingkan ke Cianjur."},
-    {q:"Setelah Perang Paderi, Sumatera Barat dikuasai oleh...", a:"Inggris","Belanda","Portugis","Aceh"], c:1, e:"Belanda menguasai Sumatera Barat pasca Perang Paderi."}
+    {q:"Perang Paderi berlangsung pada tahun...", a:["1821–1838","1820–1830","1800–1810","1830–1840"], c:0, e:"Perang Paderi 1821–1838 di Sumatera Barat."},
+    {q:"Pemimpin utama Perang Paderi adalah...", a:["Tuanku Imam Bonjol","Pattimura","Diponegoro","Sultan Hasanuddin"], c:0, e:"Tuanku Imam Bonjol memimpin Perang Paderi."},
+    {q:"Latar belakang Perang Paderi adalah...", a:["Perbedaan paham keagamaan & campur tangan Belanda","Perebutan tanah","Pajak tinggi","Serangan Portugis"], c:0, e:"Konflik kaum Paderi & Adat, lalu Belanda ikut campur."},
+    {q:"Belanda berhasil menangkap Imam Bonjol pada tahun...", a:["1832","1837","1840","1825"], c:1, e:"Imam Bonjol ditangkap 1837, diasingkan ke Cianjur."},
+    {q:"Setelah Perang Paderi, Sumatera Barat dikuasai oleh...", a:["Inggris","Belanda","Portugis","Aceh"], c:1, e:"Belanda menguasai Sumatera Barat pasca Perang Paderi."}
   ]},
   { title:"Perang Aceh & Banjar", soal:[
-    {q:"Perang Aceh berlangsung pada tahun...", a:"1873–1904","1800–1810","1830–1840","1825–1830"], c:0, e:"Perang Aceh 1873–1904 (berlanjut sporadis)."},
-    {q:"Sebab utama Perang Aceh adalah...", a:"Perjanjian London 1871 & ambisi Belanda menguasai Aceh","Serangan Portugis","Bencana alam","Konflik internal"], c:0, e:"Perjanjian London membuka jalan Belanda menyerang Aceh."},
-    {q:"Tokoh perempuan pejuang Aceh yang terkenal adalah...", a:"Cut Nyak Dhien & Cut Meutia","R.A. Kartini","Dewi Sartika","Fatmawati"], c:0, e:"Cut Nyak Dhien & Cut Meutia = pejuang perempuan Aceh."},
-    {q:"Perang Banjar terjadi di...", a:"Kalimantan Selatan","Kalimantan Barat","Sumatera","Jawa"], c:0, e:"Perang Banjar (1859–1905) di Kalimantan Selatan."},
-    {q:"Pemimpin Perang Banjar adalah...", a:"Pangeran Antasari","Pattimura","Diponegoro","Imam Bonjol"], c:0, e:"Pangeran Antasari memimpin Perang Banjar."}
+    {q:"Perang Aceh berlangsung pada tahun...", a:["1873–1904","1800–1810","1830–1840","1825–1830"], c:0, e:"Perang Aceh 1873–1904 (berlanjut sporadis)."},
+    {q:"Sebab utama Perang Aceh adalah...", a:["Perjanjian London 1871 & ambisi Belanda menguasai Aceh","Serangan Portugis","Bencana alam","Konflik internal"], c:0, e:"Perjanjian London membuka jalan Belanda menyerang Aceh."},
+    {q:"Tokoh perempuan pejuang Aceh yang terkenal adalah...", a:["Cut Nyak Dhien & Cut Meutia","R.A. Kartini","Dewi Sartika","Fatmawati"], c:0, e:"Cut Nyak Dhien & Cut Meutia = pejuang perempuan Aceh."},
+    {q:"Perang Banjar terjadi di...", a:["Kalimantan Selatan","Kalimantan Barat","Sumatera","Jawa"], c:0, e:"Perang Banjar (1859–1905) di Kalimantan Selatan."},
+    {q:"Pemimpin Perang Banjar adalah...", a:["Pangeran Antasari","Pattimura","Diponegoro","Imam Bonjol"], c:0, e:"Pangeran Antasari memimpin Perang Banjar."}
   ]}
 ]},
 
@@ -742,39 +774,39 @@ const BAB = [
   desc:"Budi Utomo, Sarekat Islam, Sumpah Pemuda, dan PNI.",
   kuis:[
   { title:"Kebangkitan Nasional", soal:[
-    {q:"Kebangkitan Nasional Indonesia ditandai dengan berdirinya...", a:"Budi Utomo","Sarekat Islam","PNI","Indische Partij"], c:0, e:"Budi Utomo (20 Mei 1908) = awal kebangkitan nasional."},
-    {q:"Budi Utomo didirikan oleh...", a:"Soekarno","Wahidin Sudirohusodo & Sutomo","HOS Tjokroaminoto","Ki Hajar Dewantara"], c:1, e:"Budi Utomo didirikan dr. Wahidin & Soetomo."},
-    {q:"Hari Kebangkitan Nasional diperingati setiap...", a:"20 Mei","28 Oktober","17 Agustus","1 Juni"], c:0, e:"20 Mei = Hari Kebangkitan Nasional."},
-    {q:"Ciri pergerakan nasional modern adalah...", a:"Bersifat kedaerahan","Bersifat nasional & terorganisasi modern","Dipimpin raja","Bersenjata"], c:1, e:"Pergerakan modern: nasional, terorganisasi, dan modern."},
-    {q:"Faktor internal munculnya pergerakan nasional adalah...", a:"Kenangan kejayaan masa lalu & penderitaan rakyat","Tekanan Belanda saja","Pengaruh luar saja","Bencana alam"], c:0, e:"Faktor internal: kejayaan masa lalu & penderitaan rakyat."}
+    {q:"Kebangkitan Nasional Indonesia ditandai dengan berdirinya...", a:["Budi Utomo","Sarekat Islam","PNI","Indische Partij"], c:0, e:"Budi Utomo (20 Mei 1908) = awal kebangkitan nasional."},
+    {q:"Budi Utomo didirikan oleh...", a:["Soekarno","Wahidin Sudirohusodo & Sutomo","HOS Tjokroaminoto","Ki Hajar Dewantara"], c:1, e:"Budi Utomo didirikan dr. Wahidin & Soetomo."},
+    {q:"Hari Kebangkitan Nasional diperingati setiap...", a:["20 Mei","28 Oktober","17 Agustus","1 Juni"], c:0, e:"20 Mei = Hari Kebangkitan Nasional."},
+    {q:"Ciri pergerakan nasional modern adalah...", a:["Bersifat kedaerahan","Bersifat nasional & terorganisasi modern","Dipimpin raja","Bersenjata"], c:1, e:"Pergerakan modern: nasional, terorganisasi, dan modern."},
+    {q:"Faktor internal munculnya pergerakan nasional adalah...", a:["Kenangan kejayaan masa lalu & penderitaan rakyat","Tekanan Belanda saja","Pengaruh luar saja","Bencana alam"], c:0, e:"Faktor internal: kejayaan masa lalu & penderitaan rakyat."}
   ]},
   { title:"Sarekat Islam & Organisasi Awal", soal:[
-    {q:"Sarekat Islam awalnya bernama...", a:"Sarekat Dagang Islam","Sarekat Rakyat","Sarekat Islam Indonesia","Sarekat Nasional"], c:0, e:"Awalnya Sarekat Dagang Islam (SDI), lalu jadi SI."},
-    {q:"Pendiri Sarekat Dagang Islam adalah...", a:"Haji Samanhudi","HOS Tjokroaminoto","Soekarno","Ki Hajar"], c:0, e:"Haji Samanhudi mendirikan SDI (1905)."},
-    {q:"Tokoh yang membawa SI menjadi besar adalah...", a:"HOS Tjokroaminoto","Soekarno","Sutomo","Douwes Dekker"], c:0, e:"HOS Tjokroaminoto = pemimpin besar SI."},
-    {q:"Indische Partij didirikan oleh...", a:"Douwes Dekker, Ki Hajar, Cipto","Soekarno, Hatta, Sjahrir","Sutomo, Wahidin","Tjokro, Samanhudi"], c:0, e:"Indische Partij (1912) oleh Tiga Serangkai: Douwes Dekker, Ki Hajar, Cipto."},
-    {q:"Tujuan utama Indische Partij adalah...", a:"Kemerdekaan Indonesia","Kerja sama dengan Belanda","Menolak modernisasi","Mendukung kolonial"], c:0, e:"Indische Partij = partai pertama yang menuntut kemerdekaan."}
+    {q:"Sarekat Islam awalnya bernama...", a:["Sarekat Dagang Islam","Sarekat Rakyat","Sarekat Islam Indonesia","Sarekat Nasional"], c:0, e:"Awalnya Sarekat Dagang Islam (SDI), lalu jadi SI."},
+    {q:"Pendiri Sarekat Dagang Islam adalah...", a:["Haji Samanhudi","HOS Tjokroaminoto","Soekarno","Ki Hajar"], c:0, e:"Haji Samanhudi mendirikan SDI (1905)."},
+    {q:"Tokoh yang membawa SI menjadi besar adalah...", a:["HOS Tjokroaminoto","Soekarno","Sutomo","Douwes Dekker"], c:0, e:"HOS Tjokroaminoto = pemimpin besar SI."},
+    {q:"Indische Partij didirikan oleh...", a:["Douwes Dekker, Ki Hajar, Cipto","Soekarno, Hatta, Sjahrir","Sutomo, Wahidin","Tjokro, Samanhudi"], c:0, e:"Indische Partij (1912) oleh Tiga Serangkai: Douwes Dekker, Ki Hajar, Cipto."},
+    {q:"Tujuan utama Indische Partij adalah...", a:["Kemerdekaan Indonesia","Kerja sama dengan Belanda","Menolak modernisasi","Mendukung kolonial"], c:0, e:"Indische Partij = partai pertama yang menuntut kemerdekaan."}
   ]},
   { title:"Sumpah Pemuda & Persatuan", soal:[
-    {q:"Sumpah Pemuda diikrarkan pada tanggal...", a:"28 Oktober 1928","20 Mei 1908","17 Agustus 1945","1 Juni 1945"], c:0, e:"Sumpah Pemuda 28 Oktober 1928."},
-    {q:"Kongres Pemuda II diselenggarakan di...", a:"Jakarta","Bandung","Surabaya","Yogyakarta"], c:0, e:"Kongres Pemuda II di Jakarta (27–28 Okt 1928)."},
-    {q:"Isi Sumpah Pemuda mencakup...", a:"Satu tanah air, satu bangsa, satu bahasa","Satu agama, satu suku","Satu partai, satu ideologi","Satu raja, satu negara"], c:0, e:"Satu tanah air, satu bangsa, satu bahasa: Indonesia."},
-    {q:"Lagu Indonesia Raya pertama kali diperdengarkan pada...", a:"Sumpah Pemuda 1928","Proklamasi 1945","Kebangkitan Nasional 1908","KMB 1949"], c:0, e:"WR Supratman memainkan Indonesia Raya di Kongres Pemuda II."},
-    {q:"Arti penting Sumpah Pemuda adalah...", a:"Puncak kesadaran persatuan bangsa","Awal penjajahan","Akhir pergerakan","Awal kemerdekaan"], c:0, e:"Sumpah Pemuda = puncak kesadaran kebangsaan."}
+    {q:"Sumpah Pemuda diikrarkan pada tanggal...", a:["28 Oktober 1928","20 Mei 1908","17 Agustus 1945","1 Juni 1945"], c:0, e:"Sumpah Pemuda 28 Oktober 1928."},
+    {q:"Kongres Pemuda II diselenggarakan di...", a:["Jakarta","Bandung","Surabaya","Yogyakarta"], c:0, e:"Kongres Pemuda II di Jakarta (27–28 Okt 1928)."},
+    {q:"Isi Sumpah Pemuda mencakup...", a:["Satu tanah air, satu bangsa, satu bahasa","Satu agama, satu suku","Satu partai, satu ideologi","Satu raja, satu negara"], c:0, e:"Satu tanah air, satu bangsa, satu bahasa: Indonesia."},
+    {q:"Lagu Indonesia Raya pertama kali diperdengarkan pada...", a:["Sumpah Pemuda 1928","Proklamasi 1945","Kebangkitan Nasional 1908","KMB 1949"], c:0, e:"WR Supratman memainkan Indonesia Raya di Kongres Pemuda II."},
+    {q:"Arti penting Sumpah Pemuda adalah...", a:["Puncak kesadaran persatuan bangsa","Awal penjajahan","Akhir pergerakan","Awal kemerdekaan"], c:0, e:"Sumpah Pemuda = puncak kesadaran kebangsaan."}
   ]},
   { title:"Partai & Organisasi Modern", soal:[
-    {q:"PNI didirikan oleh Soekarno pada tahun...", a:"1927","1920","1912","1930"], c:0, e:"PNI didirikan 4 Juli 1927."},
-    {q:"Tujuan PNI adalah...", a:"Kemerdekaan Indonesia","Kerja sama Belanda","Mendukung kolonial","Hiburan"], c:0, e:"PNI = mencapai kemerdekaan Indonesia."},
-    {q:"PKI didirikan pada tahun...", a:"1920","1927","1912","1930"], c:0, e:"PKI didirikan 23 Mei 1920."},
-    {q:"Organisasi perempuan pertama di Indonesia adalah...", a:"Putri Mardika","Aisyiyah","Wanita Indonesia","Kartini Fonds"], c:0, e:"Putri Mardika (1912) = organisasi perempuan pertama."},
-    {q:"Petisi Soetardjo (1936) berisi tuntutan...", a:"Indonesia berparlemen sendiri","Kemerdekaan penuh","Bekerja sama dengan Jepang","Mengusir Belanda"], c:0, e:"Petisi Soetardjo menuntut Indonesia berparlemen."}
+    {q:"PNI didirikan oleh Soekarno pada tahun...", a:["1927","1920","1912","1930"], c:0, e:"PNI didirikan 4 Juli 1927."},
+    {q:"Tujuan PNI adalah...", a:["Kemerdekaan Indonesia","Kerja sama Belanda","Mendukung kolonial","Hiburan"], c:0, e:"PNI = mencapai kemerdekaan Indonesia."},
+    {q:"PKI didirikan pada tahun...", a:["1920","1927","1912","1930"], c:0, e:"PKI didirikan 23 Mei 1920."},
+    {q:"Organisasi perempuan pertama di Indonesia adalah...", a:["Putri Mardika","Aisyiyah","Wanita Indonesia","Kartini Fonds"], c:0, e:"Putri Mardika (1912) = organisasi perempuan pertama."},
+    {q:"Petisi Soetardjo (1936) berisi tuntutan...", a:["Indonesia berparlemen sendiri","Kemerdekaan penuh","Bekerja sama dengan Jepang","Mengusir Belanda"], c:0, e:"Petisi Soetardjo menuntut Indonesia berparlemen."}
   ]},
   { title:"Pergerakan Perempuan & Pendidikan", soal:[
-    {q:"R.A. Kartini dikenal sebagai tokoh...", a:"Emansipasi perempuan","Pahlawan perang","Pendiri partai","Raja"], c:0, e:"R.A. Kartini = pelopor emansipasi perempuan."},
-    {q:"Buku kumpulan surat Kartini berjudul...", a:"Habis Gelap Terbitlah Terang","Max Havelaar","Di Bawah Bendera Revolusi","Indonesia Menggugat"], c:0, e:"Habis Gelap Terbitlah Terang = kumpulan surat Kartini."},
-    {q:"Sekolah perempuan 'Sekolah Kaoetamaan Istri' didirikan oleh...", a:"Dewi Sartika","R.A. Kartini","Cut Nyak Dhien","Fatmawati"], c:0, e:"Dewi Sartika mendirikan Sekolah Kaoetamaan Istri (1904)."},
-    {q:"Ki Hajar Dewantara mendirikan lembaga pendidikan...", a:"Taman Siswa","STOVIA","MULO","AMS"], c:0, e:"Taman Siswa (1922) didirikan Ki Hajar Dewantara."},
-    {q:"Semboyan Ki Hajar Dewantara adalah...", a:"Ing Ngarso Sung Tulodo, Ing Madyo Mangun Karso, Tut Wuri Handayani","Merdeka atau mati","Bhinneka Tunggal Ika","Jalesveva Jayamahe"], c:0, e:"Semboyan pendidikan Taman Siswa: Ing Ngarsa, Ing Madya, Tut Wuri."}
+    {q:"R.A. Kartini dikenal sebagai tokoh...", a:["Emansipasi perempuan","Pahlawan perang","Pendiri partai","Raja"], c:0, e:"R.A. Kartini = pelopor emansipasi perempuan."},
+    {q:"Buku kumpulan surat Kartini berjudul...", a:["Habis Gelap Terbitlah Terang","Max Havelaar","Di Bawah Bendera Revolusi","Indonesia Menggugat"], c:0, e:"Habis Gelap Terbitlah Terang = kumpulan surat Kartini."},
+    {q:"Sekolah perempuan 'Sekolah Kaoetamaan Istri' didirikan oleh...", a:["Dewi Sartika","R.A. Kartini","Cut Nyak Dhien","Fatmawati"], c:0, e:"Dewi Sartika mendirikan Sekolah Kaoetamaan Istri (1904)."},
+    {q:"Ki Hajar Dewantara mendirikan lembaga pendidikan...", a:["Taman Siswa","STOVIA","MULO","AMS"], c:0, e:"Taman Siswa (1922) didirikan Ki Hajar Dewantara."},
+    {q:"Semboyan Ki Hajar Dewantara adalah...", a:["Ing Ngarso Sung Tulodo, Ing Madyo Mangun Karso, Tut Wuri Handayani","Merdeka atau mati","Bhinneka Tunggal Ika","Jalesveva Jayamahe"], c:0, e:"Semboyan pendidikan Taman Siswa: Ing Ngarsa, Ing Madya, Tut Wuri."}
   ]}
 ]},
 
@@ -787,39 +819,39 @@ const BAB = [
   desc:"Pemerintahan militer, romusha, PETA, dan perlawanan rakyat.",
   kuis:[
   { title:"Masuknya Jepang ke Indonesia", soal:[
-    {q:"Jepang mendarat pertama kali di Indonesia pada tahun...", a:"1940","1942","1945","1938"], c:1, e:"Jepang mendarat di Tarakan (Januari 1942)."},
-    {q:"Panglima Belanda yang menyerah tanpa syarat kepada Jepang di Kalijati adalah...", a:"Ter Poorten","Daendels","Raffles","Janssens"], c:0, e:"Jenderal Ter Poorten menyerah di Kalijati (8 Maret 1942)."},
-    {q:"Semboyan Jepang '3A' berarti...", a:"Jepang cahaya Asia, Jepang pelindung Asia, Jepang pemimpin Asia","Jepang, Asia, Amerika","Aman, Adil, Abadi","Asia Afrika Amerika"], c:0, e:"3A = Nippon Cahaya/Pelindung/Pemimpin Asia."},
-    {q:"Gerakan Tiga A dipimpin oleh...", a:"Mr. Syamsuddin","Soekarno","Hatta","Sjahrir"], c:0, e:"Gerakan Tiga A (1942) dipimpin Mr. Syamsuddin."},
-    {q:"Alasan utama Jepang datang ke Indonesia adalah...", a:"Sumber daya alam & tenaga manusia untuk Perang Asia Pasifik","Menyebarkan agama","Wisata","Belajar budaya"], c:0, e:"Jepang butuh SDA & tenaga manusia untuk perang."}
+    {q:"Jepang mendarat pertama kali di Indonesia pada tahun...", a:["1940","1942","1945","1938"], c:1, e:"Jepang mendarat di Tarakan (Januari 1942)."},
+    {q:"Panglima Belanda yang menyerah tanpa syarat kepada Jepang di Kalijati adalah...", a:["Ter Poorten","Daendels","Raffles","Janssens"], c:0, e:"Jenderal Ter Poorten menyerah di Kalijati (8 Maret 1942)."},
+    {q:"Semboyan Jepang '3A' berarti...", a:["Jepang cahaya Asia, Jepang pelindung Asia, Jepang pemimpin Asia","Jepang, Asia, Amerika","Aman, Adil, Abadi","Asia Afrika Amerika"], c:0, e:"3A = Nippon Cahaya/Pelindung/Pemimpin Asia."},
+    {q:"Gerakan Tiga A dipimpin oleh...", a:["Mr. Syamsuddin","Soekarno","Hatta","Sjahrir"], c:0, e:"Gerakan Tiga A (1942) dipimpin Mr. Syamsuddin."},
+    {q:"Alasan utama Jepang datang ke Indonesia adalah...", a:["Sumber daya alam & tenaga manusia untuk Perang Asia Pasifik","Menyebarkan agama","Wisata","Belajar budaya"], c:0, e:"Jepang butuh SDA & tenaga manusia untuk perang."}
   ]},
   { title:"Pemerintahan Militer Jepang", soal:[
-    {q:"Wilayah Indonesia dibagi menjadi tiga pemerintahan militer, salah satunya adalah...", a:"Angkatan Darat ke-16 (Jawa)","Angkatan Laut ke-1","Angkatan Udara ke-3","Angkatan Darat ke-25"], c:0, e:"Jawa = Angkatan Darat ke-16 (Rikugun)."},
-    {q:"Jawa diperintah oleh Angkatan Darat Jepang ke-...", a:"16","25","8","1"], c:0, e:"Jawa = Angkatan Darat ke-16, pusat di Jakarta."},
-    {q:"Sumatera dan Malaya diperintah Angkatan Darat ke-...", a:"25","16","8","2"], c:0, e:"Sumatera = Angkatan Darat ke-25, pusat di Bukittinggi."},
-    {q:"Kalimantan, Sulawesi, Maluku diperintah oleh...", a:"Angkatan Laut (Kaigun)","Angkatan Darat","Kempeitai","Heiho"], c:0, e:"Indonesia Timur = Angkatan Laut (Kaigun)."},
-    {q:"Polisi militer Jepang yang terkenal kejam adalah...", a:"Kempeitai","Heiho","PETA","Seinendan"], c:0, e:"Kempeitai = polisi militer Jepang yang kejam."}
+    {q:"Wilayah Indonesia dibagi menjadi tiga pemerintahan militer, salah satunya adalah...", a:["Angkatan Darat ke-16 (Jawa)","Angkatan Laut ke-1","Angkatan Udara ke-3","Angkatan Darat ke-25"], c:0, e:"Jawa = Angkatan Darat ke-16 (Rikugun)."},
+    {q:"Jawa diperintah oleh Angkatan Darat Jepang ke-...", a:["16","25","8","1"], c:0, e:"Jawa = Angkatan Darat ke-16, pusat di Jakarta."},
+    {q:"Sumatera dan Malaya diperintah Angkatan Darat ke-...", a:["25","16","8","2"], c:0, e:"Sumatera = Angkatan Darat ke-25, pusat di Bukittinggi."},
+    {q:"Kalimantan, Sulawesi, Maluku diperintah oleh...", a:["Angkatan Laut (Kaigun)","Angkatan Darat","Kempeitai","Heiho"], c:0, e:"Indonesia Timur = Angkatan Laut (Kaigun)."},
+    {q:"Polisi militer Jepang yang terkenal kejam adalah...", a:["Kempeitai","Heiho","PETA","Seinendan"], c:0, e:"Kempeitai = polisi militer Jepang yang kejam."}
   ]},
   { title:"Romusha & Eksploitasi", soal:[
-    {q:"Romusha adalah...", a:"Kerja paksa masa Jepang","Tentara Jepang","Pajak","Sekolah"], c:0, e:"Romusha = kerja paksa masa Jepang."},
-    {q:"Tujuan romusha adalah...", a:"Membangun infrastruktur perang Jepang","Mendidik rakyat","Menyebarkan agama","Membantu Belanda"], c:0, e:"Romusha membangun benteng, jembatan, landasan untuk perang."},
-    {q:"Dampak romusha bagi rakyat Indonesia adalah...", a:"Kemiskinan, kelaparan, & kematian","Kemakmuran","Pendidikan tinggi","Kemerdekaan langsung"], c:0, e:"Romusha menyebabkan penderitaan besar rakyat."},
-    {q:"Jalur kereta api Maut dibangun di...", a:"Sumatera","Jawa","Kalimantan","Sulawesi"], c:0, e:"Jalur KA Maut (Pekanbaru–Muaro) di Sumatera, banyak korban."},
-    {q:"Tujuan Jepang melakukan eksploitasi SDA adalah...", a:"Mendukung Perang Asia Pasifik","Mensejahterakan rakyat","Mendirikan sekolah","Membantu Belanda"], c:0, e:"Semua ditujukan untuk Perang Asia Pasifik."}
+    {q:"Romusha adalah...", a:["Kerja paksa masa Jepang","Tentara Jepang","Pajak","Sekolah"], c:0, e:"Romusha = kerja paksa masa Jepang."},
+    {q:"Tujuan romusha adalah...", a:["Membangun infrastruktur perang Jepang","Mendidik rakyat","Menyebarkan agama","Membantu Belanda"], c:0, e:"Romusha membangun benteng, jembatan, landasan untuk perang."},
+    {q:"Dampak romusha bagi rakyat Indonesia adalah...", a:["Kemiskinan, kelaparan, & kematian","Kemakmuran","Pendidikan tinggi","Kemerdekaan langsung"], c:0, e:"Romusha menyebabkan penderitaan besar rakyat."},
+    {q:"Jalur kereta api Maut dibangun di...", a:["Sumatera","Jawa","Kalimantan","Sulawesi"], c:0, e:"Jalur KA Maut (Pekanbaru–Muaro) di Sumatera, banyak korban."},
+    {q:"Tujuan Jepang melakukan eksploitasi SDA adalah...", a:["Mendukung Perang Asia Pasifik","Mensejahterakan rakyat","Mendirikan sekolah","Membantu Belanda"], c:0, e:"Semua ditujukan untuk Perang Asia Pasifik."}
   ]},
   { title:"Organisasi Bentukan Jepang", soal:[
-    {q:"PETA adalah singkatan dari...", a:"Pembela Tanah Air","Persatuan Tanah Air","Pasukan Tanah Air","Pemuda Tanah Air"], c:0, e:"PETA = Pembela Tanah Air (1943)."},
-    {q:"Tujuan pembentukan PETA adalah...", a:"Membantu Jepang menghadapi Sekutu","Mempersiapkan kemerdekaan","Mendidik rakyat","Mengusir Belanda"], c:0, e:"PETA dibentuk untuk membantu Jepang melawan Sekutu."},
-    {q:"Organisasi semi militer untuk pemuda pelajar adalah...", a:"Seinendan","PETA","Heiho","Keibodan"], c:0, e:"Seinendan = barisan pemuda (14–22 tahun)."},
-    {q:"Heiho adalah...", a:"Pembantu prajurit Jepang","Prajurit elite","Polisi","Guru"], c:0, e:"Heiho = pembantu prajurit Jepang."},
-    {q:"PUTERA dibentuk oleh Jepang dipimpin oleh...", a:"Empat Serangkai (Soekarno, Hatta, Ki Hajar, KH Mas Mansur)","Tiga Serangkai","Dwi Tunggal","BPUPKI"], c:0, e:"PUTERA dipimpin Empat Serangkai."}
+    {q:"PETA adalah singkatan dari...", a:["Pembela Tanah Air","Persatuan Tanah Air","Pasukan Tanah Air","Pemuda Tanah Air"], c:0, e:"PETA = Pembela Tanah Air (1943)."},
+    {q:"Tujuan pembentukan PETA adalah...", a:["Membantu Jepang menghadapi Sekutu","Mempersiapkan kemerdekaan","Mendidik rakyat","Mengusir Belanda"], c:0, e:"PETA dibentuk untuk membantu Jepang melawan Sekutu."},
+    {q:"Organisasi semi militer untuk pemuda pelajar adalah...", a:["Seinendan","PETA","Heiho","Keibodan"], c:0, e:"Seinendan = barisan pemuda (14–22 tahun)."},
+    {q:"Heiho adalah...", a:["Pembantu prajurit Jepang","Prajurit elite","Polisi","Guru"], c:0, e:"Heiho = pembantu prajurit Jepang."},
+    {q:"PUTERA dibentuk oleh Jepang dipimpin oleh...", a:["Empat Serangkai (Soekarno, Hatta, Ki Hajar, KH Mas Mansur)","Tiga Serangkai","Dwi Tunggal","BPUPKI"], c:0, e:"PUTERA dipimpin Empat Serangkai."}
   ]},
   { title:"Perlawanan & Akhir Pendudukan", soal:[
-    {q:"Pemberontakan PETA di Blitar dipimpin oleh...", a:"Supriyadi","Pattimura","Diponegoro","Imam Bonjol"], c:0, e:"Supriyadi memimpin pemberontakan PETA Blitar (Feb 1945)."},
-    {q:"Perlawanan rakyat Singaparna dipimpin oleh...", a:"KH Zainal Mustafa","Supriyadi","Soekarno","Hatta"], c:0, e:"KH Zainal Mustafa memimpin perlawanan Singaparna (1944)."},
-    {q:"Perlawanan rakyat Indramayu terjadi karena...", a:"Penderitaan romusha & penyerahan hasil panen","Perang saudara","Serangan Sekutu","Kekeringan"], c:0, e:"Rakyat Indramayu menolak romusha & penyerahan hasil panen."},
-    {q:"Perlawanan rakyat Aceh terhadap Jepang dipimpin oleh...", a:"Cot Plieng","Cut Nyak Dhien","Pattimura","Imam Bonjol"], c:0, e:"Teuku Abdul Jalil (Cot Plieng) memimpin perlawanan Aceh."},
-    {q:"Perlawanan rakyat Papua terhadap Jepang dipimpin oleh...", a:"Simon Dow","Supriyadi","KH Zainal","Pattimura"], c:0, e:"Simon Dow memimpin perlawanan di Biak, Papua."}
+    {q:"Pemberontakan PETA di Blitar dipimpin oleh...", a:["Supriyadi","Pattimura","Diponegoro","Imam Bonjol"], c:0, e:"Supriyadi memimpin pemberontakan PETA Blitar (Feb 1945)."},
+    {q:"Perlawanan rakyat Singaparna dipimpin oleh...", a:["KH Zainal Mustafa","Supriyadi","Soekarno","Hatta"], c:0, e:"KH Zainal Mustafa memimpin perlawanan Singaparna (1944)."},
+    {q:"Perlawanan rakyat Indramayu terjadi karena...", a:["Penderitaan romusha & penyerahan hasil panen","Perang saudara","Serangan Sekutu","Kekeringan"], c:0, e:"Rakyat Indramayu menolak romusha & penyerahan hasil panen."},
+    {q:"Perlawanan rakyat Aceh terhadap Jepang dipimpin oleh...", a:["Cot Plieng","Cut Nyak Dhien","Pattimura","Imam Bonjol"], c:0, e:"Teuku Abdul Jalil (Cot Plieng) memimpin perlawanan Aceh."},
+    {q:"Perlawanan rakyat Papua terhadap Jepang dipimpin oleh...", a:["Simon Dow","Supriyadi","KH Zainal","Pattimura"], c:0, e:"Simon Dow memimpin perlawanan di Biak, Papua."}
   ]}
 ]},
 
@@ -832,39 +864,39 @@ const BAB = [
   desc:"Kekosongan kekuasaan, Rengasdengklok, perumusan teks, & detik proklamasi.",
   kuis:[
   { title:"Kekosongan Kekuasaan", soal:[
-    {q:"Vacuum of power terjadi setelah...", a:"Jepang menyerah kepada Sekutu","Belanda menyerah kepada Jepang","Proklamasi dibacakan","KMB digelar"], c:0, e:"Vacuum of power = pasca Jepang menyerah ke Sekutu (15 Ags 1945)."},
-    {q:"Bom atom dijatuhkan di Hiroshima dan Nagasaki pada tanggal...", a:"6 dan 9 Agustus 1945","15 Agustus 1945","17 Agustus 1945","1 Maret 1945"], c:0, e:"Hiroshima 6 Ags, Nagasaki 9 Ags 1945."},
-    {q:"Berita menyerahnya Jepang pertama kali diketahui pemuda dari...", a:"Radio & surat kabar","Telegram Belanda","Utusan Sekutu","Mata-mata"], c:0, e:"Pemuda mendengar dari siaran radio & koran."},
-    {q:"Syarat penyerahan Jepang kepada Sekutu terkait Indonesia adalah...", a:"Menjaga status quo","Menyerahkan ke Belanda","Membantu kemerdekaan","Membentuk pemerintahan"], c:0, e:"Jepang harus menjaga status quo sampai Sekutu datang."},
-    {q:"Golongan yang mendesak proklamasi segera adalah...", a:"Golongan muda","Golongan tua","Golongan bangsawan","Golongan Belanda"], c:0, e:"Golongan muda mendesak proklamasi segera."}
+    {q:"Vacuum of power terjadi setelah...", a:["Jepang menyerah kepada Sekutu","Belanda menyerah kepada Jepang","Proklamasi dibacakan","KMB digelar"], c:0, e:"Vacuum of power = pasca Jepang menyerah ke Sekutu (15 Ags 1945)."},
+    {q:"Bom atom dijatuhkan di Hiroshima dan Nagasaki pada tanggal...", a:["6 dan 9 Agustus 1945","15 Agustus 1945","17 Agustus 1945","1 Maret 1945"], c:0, e:"Hiroshima 6 Ags, Nagasaki 9 Ags 1945."},
+    {q:"Berita menyerahnya Jepang pertama kali diketahui pemuda dari...", a:["Radio & surat kabar","Telegram Belanda","Utusan Sekutu","Mata-mata"], c:0, e:"Pemuda mendengar dari siaran radio & koran."},
+    {q:"Syarat penyerahan Jepang kepada Sekutu terkait Indonesia adalah...", a:["Menjaga status quo","Menyerahkan ke Belanda","Membantu kemerdekaan","Membentuk pemerintahan"], c:0, e:"Jepang harus menjaga status quo sampai Sekutu datang."},
+    {q:"Golongan yang mendesak proklamasi segera adalah...", a:["Golongan muda","Golongan tua","Golongan bangsawan","Golongan Belanda"], c:0, e:"Golongan muda mendesak proklamasi segera."}
   ]},
   { title:"Peristiwa Rengasdengklok", soal:[
-    {q:"Peristiwa Rengasdengklok terjadi pada tanggal...", a:"16 Agustus 1945","14 Agustus 1945","17 Agustus 1945","15 Agustus 1945"], c:0, e:"Rengasdengklok 16 Agustus 1945."},
-    {q:"Tujuan penculikan Soekarno-Hatta ke Rengasdengklok adalah...", a:"Menjauhkan dari pengaruh Jepang & desak proklamasi","Menyembunyikan dari Belanda","Melindungi dari Sekutu","Berdiskusi strategi perang"], c:0, e:"Tujuan: menjauhkan dari Jepang & mendesak proklamasi."},
-    {q:"Tokoh pemuda yang memimpin Rengasdengklok adalah...", a:"Wikana & Chaeroel Saleh","Sjahrir & Hatta","Soekarno & Yamin","Sayuti & BM Diah"], c:0, e:"Wikana & Chaeroel Saleh = tokoh pemuda Rengasdengklok."},
-    {q:"Rengasdengklok terletak di kabupaten...", a:"Karawang","Bekasi","Subang","Cikampek"], c:0, e:"Rengasdengklok di Karawang, Jawa Barat."},
-    {q:"Tokoh golongan tua yang menjemput Soekarno-Hatta adalah...", a:"Ahmad Soebardjo","Mohammad Yamin","Sukarni","Sayuti Melik"], c:0, e:"Ahmad Soebardjo menjemput dengan jaminan proklamasi."}
+    {q:"Peristiwa Rengasdengklok terjadi pada tanggal...", a:["16 Agustus 1945","14 Agustus 1945","17 Agustus 1945","15 Agustus 1945"], c:0, e:"Rengasdengklok 16 Agustus 1945."},
+    {q:"Tujuan penculikan Soekarno-Hatta ke Rengasdengklok adalah...", a:["Menjauhkan dari pengaruh Jepang & desak proklamasi","Menyembunyikan dari Belanda","Melindungi dari Sekutu","Berdiskusi strategi perang"], c:0, e:"Tujuan: menjauhkan dari Jepang & mendesak proklamasi."},
+    {q:"Tokoh pemuda yang memimpin Rengasdengklok adalah...", a:["Wikana & Chaeroel Saleh","Sjahrir & Hatta","Soekarno & Yamin","Sayuti & BM Diah"], c:0, e:"Wikana & Chaeroel Saleh = tokoh pemuda Rengasdengklok."},
+    {q:"Rengasdengklok terletak di kabupaten...", a:["Karawang","Bekasi","Subang","Cikampek"], c:0, e:"Rengasdengklok di Karawang, Jawa Barat."},
+    {q:"Tokoh golongan tua yang menjemput Soekarno-Hatta adalah...", a:["Ahmad Soebardjo","Mohammad Yamin","Sukarni","Sayuti Melik"], c:0, e:"Ahmad Soebardjo menjemput dengan jaminan proklamasi."}
   ]},
   { title:"Perumusan Teks Proklamasi", soal:[
-    {q:"Perumusan teks proklamasi dilakukan di rumah...", a:"Laksamana Maeda","Soekarno","Hatta","Ahmad Soebardjo"], c:0, e:"Rumah Laksamana Maeda (Jl. Imam Bonjol No. 1)."},
-    {q:"Penyusun naskah proklamasi adalah...", a:"Soekarno, Hatta, Ahmad Soebardjo","Soekarno, Hatta, Sjahrir","Soekarno, Yamin, Maeda","Hatta, Sjahrir, Wikana"], c:0, e:"Tiga penyusun: Soekarno, Hatta, Ahmad Soebardjo."},
-    {q:"Naskah proklamasi ditulis oleh Soekarno pada...", a:"Kertas buram","Kertas folio","Kertas HVS","Kertas karton"], c:0, e:"Ditulis di kertas buram (coretan)."},
-    {q:"Kalimat pertama naskah proklamasi adalah gagasan dari...", a:"Soekarno","Hatta","Ahmad Soebardjo","Sayuti Melik"], c:0, e:"Kalimat pertama = gagasan Soekarno."},
-    {q:"Pengetik naskah proklamasi adalah...", a:"Sayuti Melik","Sukarni","BM Diah","Chaeroel Saleh"], c:0, e:"Sayuti Melik mengetik naskah proklamasi."}
+    {q:"Perumusan teks proklamasi dilakukan di rumah...", a:["Laksamana Maeda","Soekarno","Hatta","Ahmad Soebardjo"], c:0, e:"Rumah Laksamana Maeda (Jl. Imam Bonjol No. 1)."},
+    {q:"Penyusun naskah proklamasi adalah...", a:["Soekarno, Hatta, Ahmad Soebardjo","Soekarno, Hatta, Sjahrir","Soekarno, Yamin, Maeda","Hatta, Sjahrir, Wikana"], c:0, e:"Tiga penyusun: Soekarno, Hatta, Ahmad Soebardjo."},
+    {q:"Naskah proklamasi ditulis oleh Soekarno pada...", a:["Kertas buram","Kertas folio","Kertas HVS","Kertas karton"], c:0, e:"Ditulis di kertas buram (coretan)."},
+    {q:"Kalimat pertama naskah proklamasi adalah gagasan dari...", a:["Soekarno","Hatta","Ahmad Soebardjo","Sayuti Melik"], c:0, e:"Kalimat pertama = gagasan Soekarno."},
+    {q:"Pengetik naskah proklamasi adalah...", a:["Sayuti Melik","Sukarni","BM Diah","Chaeroel Saleh"], c:0, e:"Sayuti Melik mengetik naskah proklamasi."}
   ]},
   { title:"Detik-Detik Proklamasi", soal:[
-    {q:"Proklamasi dibacakan pada tanggal...", a:"17 Agustus 1945","16 Agustus 1945","18 Agustus 1945","15 Agustus 1945"], c:0, e:"17 Agustus 1945, pukul 10.00 WIB."},
-    {q:"Proklamasi dibacakan di...", a:"Jl. Pegangsaan Timur No. 56","Istana Merdeka","Rumah Maeda","Lapangan Ikada"], c:0, e:"Di kediaman Soekarno, Jl. Pegangsaan Timur 56."},
-    {q:"Bendera pusaka dijahit oleh...", a:"Fatmawati","S.K. Trimurti","Siti Soepiah","R.A. Kartini"], c:0, e:"Fatmawati = penjahit bendera pusaka."},
-    {q:"Pengerek bendera pada proklamasi adalah...", a:"Latief Hendraningrat","Suhud","Sayuti Melik","Sukarni"], c:0, e:"Latief Hendraningrat = pengerek; Suhud = pembawa baki."},
-    {q:"Kalimat pertama proklamasi berbunyi...", a:"'Kami bangsa Indonesia dengan ini menjatakan kemerdekaan Indonesia'","'Proklamasi'","'Merdeka!'","'Kemerdekaan adalah hak segala bangsa'"], c:0, e:"Kalimat pertama teks proklamasi tersebut."}
+    {q:"Proklamasi dibacakan pada tanggal...", a:["17 Agustus 1945","16 Agustus 1945","18 Agustus 1945","15 Agustus 1945"], c:0, e:"17 Agustus 1945, pukul 10.00 WIB."},
+    {q:"Proklamasi dibacakan di...", a:["Jl. Pegangsaan Timur No. 56","Istana Merdeka","Rumah Maeda","Lapangan Ikada"], c:0, e:"Di kediaman Soekarno, Jl. Pegangsaan Timur 56."},
+    {q:"Bendera pusaka dijahit oleh...", a:["Fatmawati","S.K. Trimurti","Siti Soepiah","R.A. Kartini"], c:0, e:"Fatmawati = penjahit bendera pusaka."},
+    {q:"Pengerek bendera pada proklamasi adalah...", a:["Latief Hendraningrat","Suhud","Sayuti Melik","Sukarni"], c:0, e:"Latief Hendraningrat = pengerek; Suhud = pembawa baki."},
+    {q:"Kalimat pertama proklamasi berbunyi...", a:["'Kami bangsa Indonesia dengan ini menjatakan kemerdekaan Indonesia'","'Proklamasi'","'Merdeka!'","'Kemerdekaan adalah hak segala bangsa'"], c:0, e:"Kalimat pertama teks proklamasi tersebut."}
   ]},
   { title:"Penyebaran Berita & Dampak", soal:[
-    {q:"Kantor berita yang pertama menyiarkan proklamasi ke luar negeri adalah...", a:"Antara","Domei","Reuters","AP"], c:0, e:"Kantor berita Antara menyiarkan ke luar negeri."},
-    {q:"Tokoh yang menyiarkan proklamasi lewat radio adalah...", a:"Yusuf Ronodipuro","Sukarni","BM Diah","Adam Malik"], c:0, e:"Yusuf Ronodipuro menyiarkan lewat radio."},
-    {q:"Surat kabar pertama yang memuat berita proklamasi adalah...", a:"Soeara Asia","Kompas","Berita Indonesia","Sin Po"], c:0, e:"Soeara Asia (Surabaya) = koran pertama memuat proklamasi."},
-    {q:"Peran BM Diah dalam penyebaran berita proklamasi adalah...", a:"Menyebarkan selebaran berita","Menyiarkan radio","Mengetik naskah","Menjahit bendera"], c:0, e:"BM Diah menyebarkan selebaran berita proklamasi."},
-    {q:"Dampak proklamasi bagi Indonesia adalah...", a:"De facto menyatakan kemerdekaan","Langsung diakui Belanda","Masuk PBB otomatis","Bebas dari ancaman asing"], c:0, e:"Proklamasi = pernyataan de facto kemerdekaan."}
+    {q:"Kantor berita yang pertama menyiarkan proklamasi ke luar negeri adalah...", a:["Antara","Domei","Reuters","AP"], c:0, e:"Kantor berita Antara menyiarkan ke luar negeri."},
+    {q:"Tokoh yang menyiarkan proklamasi lewat radio adalah...", a:["Yusuf Ronodipuro","Sukarni","BM Diah","Adam Malik"], c:0, e:"Yusuf Ronodipuro menyiarkan lewat radio."},
+    {q:"Surat kabar pertama yang memuat berita proklamasi adalah...", a:["Soeara Asia","Kompas","Berita Indonesia","Sin Po"], c:0, e:"Soeara Asia (Surabaya) = koran pertama memuat proklamasi."},
+    {q:"Peran BM Diah dalam penyebaran berita proklamasi adalah...", a:["Menyebarkan selebaran berita","Menyiarkan radio","Mengetik naskah","Menjahit bendera"], c:0, e:"BM Diah menyebarkan selebaran berita proklamasi."},
+    {q:"Dampak proklamasi bagi Indonesia adalah...", a:["De facto menyatakan kemerdekaan","Langsung diakui Belanda","Masuk PBB otomatis","Bebas dari ancaman asing"], c:0, e:"Proklamasi = pernyataan de facto kemerdekaan."}
   ]}
 ]},
 
@@ -877,39 +909,39 @@ const BAB = [
   desc:"Pertempuran Surabaya, Agresi Militer Belanda, & KMB.",
   kuis:[
   { title:"Kedatangan Sekutu & NICA", soal:[
-    {q:"Tugas awal Sekutu di Indonesia adalah...", a:"Melucuti tentara Jepang & membebaskan tawanan","Menduduki Indonesia","Membantu Belanda","Membentuk pemerintahan"], c:0, e:"Tugas Sekutu: melucuti Jepang & bebaskan tawanan."},
-    {q:"NICA adalah...", a:"Netherlands Indies Civil Administration","Tentara Sekutu","Partai Belanda","Organisasi PBB"], c:0, e:"NICA = pemerintahan sipil Belanda yang ikut Sekutu."},
-    {q:"Pertempuran pertama pasca proklamasi terjadi di...", a:"Surabaya","Bandung","Medan","Palembang"], c:0, e:"Pertempuran Surabaya (10 Nov 1945) = pertempuran besar pertama."},
-    {q:"Insiden Bendera di Hotel Yamato terjadi di...", a:"Surabaya","Jakarta","Bandung","Yogyakarta"], c:0, e:"Insiden Bendera di Hotel Yamato (Surabaya, 19 Sep 1945)."},
-    {q:"Tujuan Sekutu membawa NICA adalah...", a:"Mengembalikan kekuasaan Belanda","Membantu Indonesia","Melucuti Jepang saja","Membebaskan tawanan saja"], c:0, e:"Sekutu membawa NICA untuk memulihkan kekuasaan Belanda."}
+    {q:"Tugas awal Sekutu di Indonesia adalah...", a:["Melucuti tentara Jepang & membebaskan tawanan","Menduduki Indonesia","Membantu Belanda","Membentuk pemerintahan"], c:0, e:"Tugas Sekutu: melucuti Jepang & bebaskan tawanan."},
+    {q:"NICA adalah...", a:["Netherlands Indies Civil Administration","Tentara Sekutu","Partai Belanda","Organisasi PBB"], c:0, e:"NICA = pemerintahan sipil Belanda yang ikut Sekutu."},
+    {q:"Pertempuran pertama pasca proklamasi terjadi di...", a:["Surabaya","Bandung","Medan","Palembang"], c:0, e:"Pertempuran Surabaya (10 Nov 1945) = pertempuran besar pertama."},
+    {q:"Insiden Bendera di Hotel Yamato terjadi di...", a:["Surabaya","Jakarta","Bandung","Yogyakarta"], c:0, e:"Insiden Bendera di Hotel Yamato (Surabaya, 19 Sep 1945)."},
+    {q:"Tujuan Sekutu membawa NICA adalah...", a:["Mengembalikan kekuasaan Belanda","Membantu Indonesia","Melucuti Jepang saja","Membebaskan tawanan saja"], c:0, e:"Sekutu membawa NICA untuk memulihkan kekuasaan Belanda."}
   ]},
   { title:"Pertempuran Surabaya & Bandung", soal:[
-    {q:"Pertempuran Surabaya terjadi pada...", a:"10 November 1945","17 Agustus 1945","1 Maret 1949","23 Maret 1946"], c:0, e:"10 November 1945 diperingati sebagai Hari Pahlawan."},
-    {q:"Tokoh yang tewas dalam pertempuran Surabaya adalah...", a:"Bung Tomo","Soekarno","Hatta","Sjahrir"], c:0, e:"Bung Tomo menggerakkan rakyat; tetapi yang tewas adalah AWS Mallaby (Inggris)."},
-    {q:"Bandung Lautan Api terjadi pada...", a:"23 Maret 1946","10 November 1945","1 Maret 1949","19 Desember 1948"], c:0, e:"Bandung Lautan Api 23 Maret 1946."},
-    {q:"Tujuan bumi hangus Bandung adalah...", a:"Mencegah Belanda memakai fasilitas strategis","Balas dendam","Latihan perang","Aksi simbolik"], c:0, e:"Bumi hangus = mencegah Belanda menggunakan fasilitas."},
-    {q:"Panglima Sekutu yang tewas di Surabaya adalah...", a:"AWS Mallaby","Ter Poorten","Lord Mountbatten","Van Mook"], c:0, e:"Brigadir AWS Mallaby tewas di Surabaya."}
+    {q:"Pertempuran Surabaya terjadi pada...", a:["10 November 1945","17 Agustus 1945","1 Maret 1949","23 Maret 1946"], c:0, e:"10 November 1945 diperingati sebagai Hari Pahlawan."},
+    {q:"Panglima Sekutu yang tewas di Surabaya adalah...", a:["AWS Mallaby","Ter Poorten","Lord Mountbatten","Van Mook"], c:0, e:"Brigadir AWS Mallaby tewas di Surabaya."},
+    {q:"Bandung Lautan Api terjadi pada...", a:["23 Maret 1946","10 November 1945","1 Maret 1949","19 Desember 1948"], c:0, e:"Bandung Lautan Api 23 Maret 1946."},
+    {q:"Tujuan bumi hangus Bandung adalah...", a:["Mencegah Belanda memakai fasilitas strategis","Balas dendam","Latihan perang","Aksi simbolik"], c:0, e:"Bumi hangus = mencegah Belanda menggunakan fasilitas."},
+    {q:"Tokoh penggerak rakyat dalam Pertempuran Surabaya adalah...", a:["Bung Tomo","Soekarno","Hatta","Sjahrir"], c:0, e:"Bung Tomo menggerakkan rakyat Surabaya lewat radio."}
   ]},
   { title:"Perjuangan Diplomasi Awal", soal:[
-    {q:"Perjanjian Linggarjati ditandatangani tahun...", a:"1946","1947","1948","1949"], c:0, e:"Linggarjati 15 November 1946, diratifikasi 25 Maret 1947."},
-    {q:"Perjanjian Linggarjati mengakui RI secara de facto atas...", a:"Jawa, Sumatera, Madura","Seluruh Indonesia","Jawa saja","Kalimantan"], c:0, e:"Linggarjati: de facto Jawa, Sumatera, Madura."},
-    {q:"Agresi Militer Belanda I terjadi pada...", a:"21 Juli 1947","19 Desember 1948","1 Maret 1949","23 Agustus 1949"], c:0, e:"Agresi Militer I: 21 Juli 1947."},
-    {q:"Agresi Militer Belanda II terjadi pada...", a:"19 Desember 1948","21 Juli 1947","1 Maret 1949","23 Agustus 1949"], c:0, e:"Agresi Militer II: 19 Desember 1948, Yogyakarta diserang."},
-    {q:"Perjanjian Renville ditandatangani pada...", a:"17 Januari 1948","15 November 1946","1 Maret 1949","23 Agustus 1949"], c:0, e:"Renville 17 Januari 1948 di atas kapal USS Renville."}
+    {q:"Perjanjian Linggarjati ditandatangani tahun...", a:["1946","1947","1948","1949"], c:0, e:"Linggarjati 15 November 1946, diratifikasi 25 Maret 1947."},
+    {q:"Perjanjian Linggarjati mengakui RI secara de facto atas...", a:["Jawa, Sumatera, Madura","Seluruh Indonesia","Jawa saja","Kalimantan"], c:0, e:"Linggarjati: de facto Jawa, Sumatera, Madura."},
+    {q:"Agresi Militer Belanda I terjadi pada...", a:["21 Juli 1947","19 Desember 1948","1 Maret 1949","23 Agustus 1949"], c:0, e:"Agresi Militer I: 21 Juli 1947."},
+    {q:"Agresi Militer Belanda II terjadi pada...", a:["19 Desember 1948","21 Juli 1947","1 Maret 1949","23 Agustus 1949"], c:0, e:"Agresi Militer II: 19 Desember 1948, Yogyakarta diserang."},
+    {q:"Perjanjian Renville ditandatangani pada...", a:["17 Januari 1948","15 November 1946","1 Maret 1949","23 Agustus 1949"], c:0, e:"Renville 17 Januari 1948 di atas kapal USS Renville."}
   ]},
   { title:"Serangan Umum & Diplomasi Akhir", soal:[
-    {q:"Serangan Umum 1 Maret 1949 terjadi di...", a:"Yogyakarta","Surabaya","Bandung","Medan"], c:0, e:"Serangan Umum 1 Maret 1949 di Yogyakarta."},
-    {q:"Pemimpin Serangan Umum 1 Maret 1949 adalah...", a:"Letkol Soeharto","Jenderal Sudirman","Bung Tomo","Sultan Hamengkubuwono IX"], c:0, e:"Letkol Soeharto memimpin Serangan Umum 1 Maret 1949."},
-    {q:"Perundingan Roem-Royen menghasilkan...", a:"Gencatan senjata & pengembalian Yogyakarta","Pengakuan kedaulatan","Pembentukan RIS","KMB"], c:0, e:"Roem-Royen (7 Mei 1949): gencatan senjata & Yogyakarta dikembalikan."},
-    {q:"Konferensi Meja Bundar (KMB) dilaksanakan di...", a:"Den Haag, Belanda","Jakarta","Yogyakarta","New York"], c:0, e:"KMB di Den Haag 23 Agustus–2 November 1949."},
-    {q:"Hasil utama KMB adalah...", a:"Belanda mengakui kedaulatan RIS","Indonesia tetap dijajah","Pembentukan PBB","Perang berlanjut"], c:0, e:"KMB: Belanda mengakui kedaulatan RIS (27 Des 1949)."}
+    {q:"Serangan Umum 1 Maret 1949 terjadi di...", a:["Yogyakarta","Surabaya","Bandung","Medan"], c:0, e:"Serangan Umum 1 Maret 1949 di Yogyakarta."},
+    {q:"Pemimpin Serangan Umum 1 Maret 1949 adalah...", a:["Letkol Soeharto","Jenderal Sudirman","Bung Tomo","Sultan Hamengkubuwono IX"], c:0, e:"Letkol Soeharto memimpin Serangan Umum 1 Maret 1949."},
+    {q:"Perundingan Roem-Royen menghasilkan...", a:["Gencatan senjata & pengembalian Yogyakarta","Pengakuan kedaulatan","Pembentukan RIS","KMB"], c:0, e:"Roem-Royen (7 Mei 1949): gencatan senjata & Yogyakarta dikembalikan."},
+    {q:"Konferensi Meja Bundar (KMB) dilaksanakan di...", a:["Den Haag, Belanda","Jakarta","Yogyakarta","New York"], c:0, e:"KMB di Den Haag 23 Agustus–2 November 1949."},
+    {q:"Hasil utama KMB adalah...", a:["Belanda mengakui kedaulatan RIS","Indonesia tetap dijajah","Pembentukan PBB","Perang berlanjut"], c:0, e:"KMB: Belanda mengakui kedaulatan RIS (27 Des 1949)."}
   ]},
   { title:"Peran Tokoh & Rakyat", soal:[
-    {q:"Panglima Besar TKR/APRIS yang bergerilya adalah...", a:"Jenderal Sudirman","Soekarno","Hatta","Sjahrir"], c:0, e:"Jenderal Sudirman bergerilya meski sakit."},
-    {q:"Organisasi rakyat yang membantu perjuangan fisik adalah...", a:"BPRI & PRI","PBB","ASEAN","NICA"], c:0, e:"BPRI (Bung Tomo) & PRI berperan dalam perjuangan fisik."},
-    {q:"Peran Sultan Hamengkubuwono IX dalam Serangan Umum 1 Maret adalah...", a:"Memberi ide & dukungan logistik","Memimpin pasukan","Menyusun strategi Belanda","Menjadi juru bicara"], c:0, e:"HB IX memberi ide & dukungan logistik."},
-    {q:"Tokoh diplomasi Indonesia dalam KMB adalah...", a:"Mohammad Hatta & Moh. Roem","Soekarno & Sjahrir","Sudirman & Bung Tomo","Yamin & Wongsonegoro"], c:0, e:"Hatta memimpin delegasi Indonesia di KMB."},
-    {q:"Peran PBB dalam konflik Indonesia-Belanda adalah...", a:"Membentuk UNCI untuk mediasi","Mendukung Belanda","Mendukung Indonesia","Tidak ikut campur"], c:0, e:"PBB membentuk UNCI (Komisi Tiga Negara) sebagai mediator."}
+    {q:"Panglima Besar TKR/APRIS yang bergerilya adalah...", a:["Jenderal Sudirman","Soekarno","Hatta","Sjahrir"], c:0, e:"Jenderal Sudirman bergerilya meski sakit."},
+    {q:"Organisasi rakyat yang membantu perjuangan fisik adalah...", a:["BPRI & PRI","PBB","ASEAN","NICA"], c:0, e:"BPRI (Bung Tomo) & PRI berperan dalam perjuangan fisik."},
+    {q:"Peran Sultan Hamengkubuwono IX dalam Serangan Umum 1 Maret adalah...", a:["Memberi ide & dukungan logistik","Memimpin pasukan","Menyusun strategi Belanda","Menjadi juru bicara"], c:0, e:"HB IX memberi ide & dukungan logistik."},
+    {q:"Tokoh diplomasi Indonesia dalam KMB adalah...", a:["Mohammad Hatta & Moh. Roem","Soekarno & Sjahrir","Sudirman & Bung Tomo","Yamin & Wongsonegoro"], c:0, e:"Hatta memimpin delegasi Indonesia di KMB."},
+    {q:"Peran PBB dalam konflik Indonesia-Belanda adalah...", a:["Membentuk UNCI untuk mediasi","Mendukung Belanda","Mendukung Indonesia","Tidak ikut campur"], c:0, e:"PBB membentuk UNCI (Komisi Tiga Negara) sebagai mediator."}
   ]}
 ]},
 
@@ -922,39 +954,39 @@ const BAB = [
   desc:"Demokrasi Liberal, Pemilu 1955, Demokrasi Terpimpin, & G30S/PKI.",
   kuis:[
   { title:"Demokrasi Liberal", soal:[
-    {q:"Demokrasi Liberal di Indonesia berlangsung pada tahun...", a:"1950–1959","1945–1950","1959–1965","1965–1968"], c:0, e:"Demokrasi Liberal 17 Agustus 1950 – 5 Juli 1959."},
-    {q:"Sistem pemerintahan Demokrasi Liberal menganut...", a:"Parlementer","Presidensial","Monarki","Komunis"], c:0, e:"Parlementer: kabinet dipimpin perdana menteri."},
-    {q:"Kabinet pada Demokrasi Liberal sering jatuh karena...", a:"Mosi tidak percaya parlemen","Perang","Bencana","Kudeta militer"], c:0, e:"Kabinet jatuh karena mosi tidak percaya DPR."},
-    {q:"Kabinet pertama Demokrasi Liberal adalah...", a:"Kabinet Natsir","Kabinet Sukiman","Kabinet Wilopo","Kabinet Ali"], c:0, e:"Kabinet Natsir (1950–1951) = kabinet pertama."},
-    {q:"Ciri Demokrasi Liberal Indonesia adalah...", a:"Banyak partai & sering ganti kabinet","Stabil","Satu partai","Militer dominan"], c:0, e:"Banyak partai → kabinet sering jatuh."}
+    {q:"Demokrasi Liberal di Indonesia berlangsung pada tahun...", a:["1950–1959","1945–1950","1959–1965","1965–1968"], c:0, e:"Demokrasi Liberal 17 Agustus 1950 – 5 Juli 1959."},
+    {q:"Sistem pemerintahan Demokrasi Liberal menganut...", a:["Parlementer","Presidensial","Monarki","Komunis"], c:0, e:"Parlementer: kabinet dipimpin perdana menteri."},
+    {q:"Kabinet pada Demokrasi Liberal sering jatuh karena...", a:["Mosi tidak percaya parlemen","Perang","Bencana","Kudeta militer"], c:0, e:"Kabinet jatuh karena mosi tidak percaya DPR."},
+    {q:"Kabinet pertama Demokrasi Liberal adalah...", a:["Kabinet Natsir","Kabinet Sukiman","Kabinet Wilopo","Kabinet Ali"], c:0, e:"Kabinet Natsir (1950–1951) = kabinet pertama."},
+    {q:"Ciri Demokrasi Liberal Indonesia adalah...", a:["Banyak partai & sering ganti kabinet","Stabil","Satu partai","Militer dominan"], c:0, e:"Banyak partai → kabinet sering jatuh."}
   ]},
   { title:"Pemilu 1955 & Konstituante", soal:[
-    {q:"Pemilu pertama Indonesia dilaksanakan pada tahun...", a:"1955","1950","1960","1945"], c:0, e:"Pemilu pertama 29 September & 15 Desember 1955."},
-    {q:"Empat partai besar Pemilu 1955 adalah...", a:"PNI, Masyumi, NU, PKI","Golkar, PDI, PPP, PKB","PNI, Golkar, PPP, PKB","Masyumi, NU, PSI, PKI"], c:0, e:"Empat besar: PNI, Masyumi, NU, PKI."},
-    {q:"Pemilu 1955 bertujuan memilih...", a:"DPR & Konstituante","Presiden","Gubernur","Menteri"], c:0, e:"Memilih anggota DPR & Konstituante."},
-    {q:"Konstituante gagal menyusun UUD baru sehingga...", a:"Dibubarkan & kembali ke UUD 1945","Diganti presiden","Dibekukan militer","Digabung MPR"], c:0, e:"Konstituante dibubarkan lewat Dekrit 5 Juli 1959."},
-    {q:"Pemilu 1955 disebut sebagai pemilu paling demokratis karena...", a:"Bebas, umum, rahasia, & banyak partai ikut","Hanya satu partai","Diintervensi militer","Dimenangkan pemerintah"], c:0, e:"Pemilu 1955 dianggap paling demokratis."}
+    {q:"Pemilu pertama Indonesia dilaksanakan pada tahun...", a:["1955","1950","1960","1945"], c:0, e:"Pemilu pertama 29 September & 15 Desember 1955."},
+    {q:"Empat partai besar Pemilu 1955 adalah...", a:["PNI, Masyumi, NU, PKI","Golkar, PDI, PPP, PKB","PNI, Golkar, PPP, PKB","Masyumi, NU, PSI, PKI"], c:0, e:"Empat besar: PNI, Masyumi, NU, PKI."},
+    {q:"Pemilu 1955 bertujuan memilih...", a:["DPR & Konstituante","Presiden","Gubernur","Menteri"], c:0, e:"Memilih anggota DPR & Konstituante."},
+    {q:"Konstituante gagal menyusun UUD baru sehingga...", a:["Dibubarkan & kembali ke UUD 1945","Diganti presiden","Dibekukan militer","Digabung MPR"], c:0, e:"Konstituante dibubarkan lewat Dekrit 5 Juli 1959."},
+    {q:"Pemilu 1955 disebut sebagai pemilu paling demokratis karena...", a:["Bebas, umum, rahasia, & banyak partai ikut","Hanya satu partai","Diintervensi militer","Dimenangkan pemerintah"], c:0, e:"Pemilu 1955 dianggap paling demokratis."}
   ]},
   { title:"Demokrasi Terpimpin", soal:[
-    {q:"Demokrasi Terpimpin dimulai dengan Dekrit Presiden pada...", a:"5 Juli 1959","17 Agustus 1950","1 Oktober 1965","11 Maret 1966"], c:0, e:"Dekrit Presiden 5 Juli 1959 memulai Demokrasi Terpimpin."},
-    {q:"Isi Dekrit Presiden 5 Juli 1959 adalah...", a:"Bubarkan Konstituante & kembali ke UUD 1945","Bentuk RIS","Bentuk NKRI","Bentuk PKI"], c:0, e:"Dekrit: bubarkan Konstituante, kembali ke UUD 1945."},
-    {q:"Konsep Nasakom adalah...", a:"Nasionalis, Agama, Komunis","Nasional, Sosial, Komunal","Nasional, Suku, Komunis","Nasional, Sekuler, Komunal"], c:0, e:"Nasakom = Nasionalis, Agama, Komunis."},
-    {q:"Indonesia keluar dari PBB pada tahun...", a:"1965","1955","1959","1960"], c:0, e:"Indonesia keluar dari PBB 7 Januari 1965 (konfrontasi Malaysia)."},
-    {q:"Konfrontasi Malaysia (1963) disebut...", a:"Ganyang Malaysia","Berdikari","Dwikora","Tritura"], c:0, e:"'Ganyang Malaysia' = slogan konfrontasi."}
+    {q:"Demokrasi Terpimpin dimulai dengan Dekrit Presiden pada...", a:["5 Juli 1959","17 Agustus 1950","1 Oktober 1965","11 Maret 1966"], c:0, e:"Dekrit Presiden 5 Juli 1959 memulai Demokrasi Terpimpin."},
+    {q:"Isi Dekrit Presiden 5 Juli 1959 adalah...", a:["Bubarkan Konstituante & kembali ke UUD 1945","Bentuk RIS","Bentuk NKRI","Bentuk PKI"], c:0, e:"Dekrit: bubarkan Konstituante, kembali ke UUD 1945."},
+    {q:"Konsep Nasakom adalah...", a:["Nasionalis, Agama, Komunis","Nasional, Sosial, Komunal","Nasional, Suku, Komunis","Nasional, Sekuler, Komunal"], c:0, e:"Nasakom = Nasionalis, Agama, Komunis."},
+    {q:"Indonesia keluar dari PBB pada tahun...", a:["1965","1955","1959","1960"], c:0, e:"Indonesia keluar dari PBB 7 Januari 1965 (konfrontasi Malaysia)."},
+    {q:"Konfrontasi Malaysia (1963) disebut...", a:["Ganyang Malaysia","Berdikari","Dwikora","Tritura"], c:0, e:"'Ganyang Malaysia' = slogan konfrontasi."}
   ]},
   { title:"Konfrontasi & Politik Luar Negeri", soal:[
-    {q:"Konfrontasi Indonesia terhadap Malaysia dilatarbelakangi oleh...", a:"Pembentukan Federasi Malaysia dianggap pro-Barat","Perang dagang","Sengketa wilayah","Perbedaan agama"], c:0, e:"Malaysia dianggap proyek neokolonialisme Inggris."},
-    {q:"Poros Jakarta–Phnom Penh–Hanoi–Peking adalah...", a:"Aliansi politik Sukarno","Organisasi ekonomi","Pakta militer","Organisasi budaya"], c:0, e:"Poros = aliansi politik Sukarno dengan negara-negara sosialis."},
-    {q:"KTT Non-Blok pertama (1961) dihadiri Indonesia dan digelar di...", a:"Beograd","Jakarta","Bandung","Kairo"], c:0, e:"KTT Non-Blok I di Beograd (1961)."},
-    {q:"Konferensi Asia Afrika (1955) diselenggarakan di...", a:"Bandung","Jakarta","Yogyakarta","Surabaya"], c:0, e:"KAA di Bandung 18–24 April 1955."},
-    {q:"Doktrin politik luar negeri Sukarno 'Berdikari' berarti...", a:"Berdiri di atas kaki sendiri","Berpihak Barat","Berpihak Timur","Netral"], c:0, e:"Berdikari = berdiri di atas kaki sendiri."}
+    {q:"Konfrontasi Indonesia terhadap Malaysia dilatarbelakangi oleh...", a:["Pembentukan Federasi Malaysia dianggap pro-Barat","Perang dagang","Sengketa wilayah","Perbedaan agama"], c:0, e:"Malaysia dianggap proyek neokolonialisme Inggris."},
+    {q:"Poros Jakarta–Phnom Penh–Hanoi–Peking adalah...", a:["Aliansi politik Sukarno","Organisasi ekonomi","Pakta militer","Organisasi budaya"], c:0, e:"Poros = aliansi politik Sukarno dengan negara-negara sosialis."},
+    {q:"KTT Non-Blok pertama (1961) dihadiri Indonesia dan digelar di...", a:["Beograd","Jakarta","Bandung","Kairo"], c:0, e:"KTT Non-Blok I di Beograd (1961)."},
+    {q:"Konferensi Asia Afrika (1955) diselenggarakan di...", a:["Bandung","Jakarta","Yogyakarta","Surabaya"], c:0, e:"KAA di Bandung 18–24 April 1955."},
+    {q:"Doktrin politik luar negeri Sukarno 'Berdikari' berarti...", a:["Berdiri di atas kaki sendiri","Berpihak Barat","Berpihak Timur","Netral"], c:0, e:"Berdikari = berdiri di atas kaki sendiri."}
   ]},
   { title:"G30S/PKI & Akhir Kekuasaan", soal:[
-    {q:"Peristiwa G30S/PKI terjadi pada...", a:"30 September 1965","1 Oktober 1965","17 Agustus 1965","5 Juli 1959"], c:0, e:"G30S/PKI 30 September 1965 (dini hari 1 Okt)."},
-    {q:"Korban G30S/PKI antara lain...", a:"Jenderal Ahmad Yani & 6 jenderal lain","Soekarno","Hatta","Sjahrir"], c:0, e:"7 perwira TNI AD menjadi korban (Pahlawan Revolusi)."},
-    {q:"Setelah G30S/PKI, Presiden Sukarno mengeluarkan...", a:"Supersemar","Tritura","Dwikora","Petisi 50"], c:0, e:"Supersemar (11 Maret 1966) kepada Soeharto."},
-    {q:"Tritura berisi tuntutan...", a:"Bubarkan PKI, bersihkan kabinet, turunkan harga","Dukung Sukarno","Bentuk PKI baru","Bentuk DPR"], c:0, e:"Tritura: bubarkan PKI, reshuffle kabinet, turunkan harga."},
-    {q:"Sukarno secara resmi menyerahkan kekuasaan pada...", a:"Soeharto","Hatta","Sjahrir","Nasution"], c:0, e:"Sukarno menyerahkan kekuasaan ke Soeharto (1966–1967)."}
+    {q:"Peristiwa G30S/PKI terjadi pada...", a:["30 September 1965","1 Oktober 1965","17 Agustus 1965","5 Juli 1959"], c:0, e:"G30S/PKI 30 September 1965 (dini hari 1 Okt)."},
+    {q:"Korban G30S/PKI antara lain...", a:["Jenderal Ahmad Yani & 6 jenderal lain","Soekarno","Hatta","Sjahrir"], c:0, e:"7 perwira TNI AD menjadi korban (Pahlawan Revolusi)."},
+    {q:"Setelah G30S/PKI, Presiden Sukarno mengeluarkan...", a:["Supersemar","Tritura","Dwikora","Petisi 50"], c:0, e:"Supersemar (11 Maret 1966) kepada Soeharto."},
+    {q:"Tritura berisi tuntutan...", a:["Bubarkan PKI, bersihkan kabinet, turunkan harga","Dukung Sukarno","Bentuk PKI baru","Bentuk DPR"], c:0, e:"Tritura: bubarkan PKI, reshuffle kabinet, turunkan harga."},
+    {q:"Sukarno secara resmi menyerahkan kekuasaan pada...", a:["Soeharto","Hatta","Sjahrir","Nasution"], c:0, e:"Sukarno menyerahkan kekuasaan ke Soeharto (1966–1967)."}
   ]}
 ]},
 
@@ -967,39 +999,39 @@ const BAB = [
   desc:"Orde Baru, pembangunan ekonomi, hingga krisis 1997.",
   kuis:[
   { title:"Lahirnya Orde Baru", soal:[
-    {q:"Orde Baru lahir sebagai reaksi terhadap...", a:"G30S/PKI & Demokrasi Terpimpin","Kolonialisme","Jepang","Reformasi"], c:0, e:"Orde Baru lahir setelah G30S/PKI (1966)."},
-    {q:"Supersemar diberikan pada tanggal...", a:"11 Maret 1966","30 September 1965","5 Juli 1959","12 Maret 1967"], c:0, e:"Supersemar 11 Maret 1966."},
-    {q:"Presiden Soeharto resmi dilantik pada...", a:"12 Maret 1967","11 Maret 1966","1 Oktober 1965","23 Mei 1998"], c:0, e:"Soeharto dilantik sebagai Pejabat Presiden (1967)."},
-    {q:"Tujuan Orde Baru adalah...", a:"Melaksanakan Pancasila & UUD 1945 secara murni","Bentuk PKI baru","Kembali ke RIS","Bergabung Malaysia"], c:0, e:"Orde Baru: Pancasila & UUD 1945 secara murni dan konsekuen."},
-    {q:"Dwi Fungsi ABRI berarti...", a:"ABRI berperan di bidang pertahanan & sosial-politik","ABRI hanya militer","ABRI hanya politik","ABRI keluar dari pemerintahan"], c:0, e:"Dwi Fungsi ABRI = peran militer + sosial-politik."}
+    {q:"Orde Baru lahir sebagai reaksi terhadap...", a:["G30S/PKI & Demokrasi Terpimpin","Kolonialisme","Jepang","Reformasi"], c:0, e:"Orde Baru lahir setelah G30S/PKI (1966)."},
+    {q:"Supersemar diberikan pada tanggal...", a:["11 Maret 1966","30 September 1965","5 Juli 1959","12 Maret 1967"], c:0, e:"Supersemar 11 Maret 1966."},
+    {q:"Presiden Soeharto resmi dilantik pada...", a:["12 Maret 1967","11 Maret 1966","1 Oktober 1965","23 Mei 1998"], c:0, e:"Soeharto dilantik sebagai Pejabat Presiden (1967)."},
+    {q:"Tujuan Orde Baru adalah...", a:["Melaksanakan Pancasila & UUD 1945 secara murni","Bentuk PKI baru","Kembali ke RIS","Bergabung Malaysia"], c:0, e:"Orde Baru: Pancasila & UUD 1945 secara murni dan konsekuen."},
+    {q:"Dwi Fungsi ABRI berarti...", a:["ABRI berperan di bidang pertahanan & sosial-politik","ABRI hanya militer","ABRI hanya politik","ABRI keluar dari pemerintahan"], c:0, e:"Dwi Fungsi ABRI = peran militer + sosial-politik."}
   ]},
   { title:"Stabilisasi & Pembangunan", soal:[
-    {q:"Program pembangunan lima tahun Orde Baru disebut...", a:"Repelita","Pelita","Pembangunan Jangka Panjang","GBHN"], c:0, e:"Repelita (Rencana Pembangunan Lima Tahun)."},
-    {q:"Repelita I berlangsung pada...", a:"1969–1974","1950–1955","1975–1980","1985–1990"], c:0, e:"Repelita I: 1969/70–1973/74."},
-    {q:"Kebijakan ekonomi Orde Baru awal adalah...", a:"Stabilisasi & rehabilitasi ekonomi","Nasionalisasi","Sosialisasi","Liberalisme penuh"], c:0, e:"Stabilisasi & rehabilitasi ekonomi pasca 1965."},
-    {q:"Keberhasilan swasembada beras dicapai pada tahun...", a:"1984","1970","1990","1998"], c:0, e:"Indonesia swasembada beras 1984, mendapat penghargaan FAO."},
-    {q:"Kebijakan ekonomi yang membuka investasi asing adalah...", a:"UU PMA 1968","UU Pokok Agraria","UU Koperasi","UU Buruh"], c:0, e:"UU PMA 1968 membuka investasi asing."}
+    {q:"Program pembangunan lima tahun Orde Baru disebut...", a:["Repelita","Pelita","Pembangunan Jangka Panjang","GBHN"], c:0, e:"Repelita (Rencana Pembangunan Lima Tahun)."},
+    {q:"Repelita I berlangsung pada...", a:["1969–1974","1950–1955","1975–1980","1985–1990"], c:0, e:"Repelita I: 1969/70–1973/74."},
+    {q:"Kebijakan ekonomi Orde Baru awal adalah...", a:["Stabilisasi & rehabilitasi ekonomi","Nasionalisasi","Sosialisasi","Liberalisme penuh"], c:0, e:"Stabilisasi & rehabilitasi ekonomi pasca 1965."},
+    {q:"Keberhasilan swasembada beras dicapai pada tahun...", a:["1984","1970","1990","1998"], c:0, e:"Indonesia swasembada beras 1984, mendapat penghargaan FAO."},
+    {q:"Kebijakan ekonomi yang membuka investasi asing adalah...", a:["UU PMA 1968","UU Pokok Agraria","UU Koperasi","UU Buruh"], c:0, e:"UU PMA 1968 membuka investasi asing."}
   ]},
   { title:"Politik & Stabilitas Orde Baru", soal:[
-    {q:"Penyederhanaan partai politik pada 1973 menghasilkan...", a:"PPP, Golkar, PDI","PNI, Masyumi, NU","Golkar, PKI, PDI","PPP, PDI, PKI"], c:0, e:"Tiga partai: PPP, Golkar, PDI."},
-    {q:"Asas tunggal Pancasila diterapkan pada tahun...", a:"1985","1973","1966","1990"], c:0, e:"Asas tunggal Pancasila disahkan lewat UU Keormasan 1985."},
-    {q:"Golkar menjadi mesin politik Orde Baru karena...", a:"Didukung birokrasi & militer","Populer di rakyat kecil","Partai oposisi","Partai Islam"], c:0, e:"Golkar didukung birokrasi & militer."},
-    {q:"Pemilu masa Orde Baru dimenangkan oleh...", a:"Golkar","PPP","PDI","PNI"], c:0, e:"Golkar selalu menang Pemilu 1971–1997."},
-    {q:"Kebijakan 'NKK/BKK' berkaitan dengan...", a:"Normalisasi kehidupan kampus","Pertanian","Militer","Pajak"], c:0, e:"NKK/BKK = normalisasi kampus untuk kontrol politik."}
+    {q:"Penyederhanaan partai politik pada 1973 menghasilkan...", a:["PPP, Golkar, PDI","PNI, Masyumi, NU","Golkar, PKI, PDI","PPP, PDI, PKI"], c:0, e:"Tiga partai: PPP, Golkar, PDI."},
+    {q:"Asas tunggal Pancasila diterapkan pada tahun...", a:["1985","1973","1966","1990"], c:0, e:"Asas tunggal Pancasila disahkan lewat UU Keormasan 1985."},
+    {q:"Golkar menjadi mesin politik Orde Baru karena...", a:["Didukung birokrasi & militer","Populer di rakyat kecil","Partai oposisi","Partai Islam"], c:0, e:"Golkar didukung birokrasi & militer."},
+    {q:"Pemilu masa Orde Baru dimenangkan oleh...", a:["Golkar","PPP","PDI","PNI"], c:0, e:"Golkar selalu menang Pemilu 1971–1997."},
+    {q:"Kebijakan 'NKK/BKK' berkaitan dengan...", a:["Normalisasi kehidupan kampus","Pertanian","Militer","Pajak"], c:0, e:"NKK/BKK = normalisasi kampus untuk kontrol politik."}
   ]},
   { title:"Integrasi & Masalah Daerah", soal:[
-    {q:"Integrasi Timor Timur ke Indonesia terjadi pada tahun...", a:"1975","1963","1969","1999"], c:0, e:"Operasi Seroja 7 Desember 1975."},
-    {q:"Jajak pendapat di Timor Timur (1999) menghasilkan...", a:"Kemerdekaan dari Indonesia","Tetap bergabung","Bergabung Portugal","Bergabung Australia"], c:0, e:"Referendum 30 Agustus 1999: Timor Timur merdeka."},
-    {q:"Pemberontakan DI/TII di Aceh dipimpin oleh...", a:"Daud Beureueh","Kartosuwiryo","Kahar Muzakar","Andi Azis"], c:0, e:"Daud Beureueh memimpin DI/TII Aceh."},
-    {q:"Pemberontakan DI/TII Jawa Barat dipimpin oleh...", a:"Kartosuwiryo","Daud Beureueh","Kahar Muzakar","Andi Azis"], c:0, e:"Sekarmadji Maridjan Kartosuwiryo memproklamasikan NII 1949."},
-    {q:"Pemberontakan PRRI/Permesta dilatarbelakangi oleh...", a:"Ketidakpuasan daerah terhadap pusat","Agama","Suku","Ekonomi global"], c:0, e:"Ketidakpuasan daerah atas pusat & alokasi dana."}
+    {q:"Integrasi Timor Timur ke Indonesia terjadi pada tahun...", a:["1975","1963","1969","1999"], c:0, e:"Operasi Seroja 7 Desember 1975."},
+    {q:"Jajak pendapat di Timor Timur (1999) menghasilkan...", a:["Kemerdekaan dari Indonesia","Tetap bergabung","Bergabung Portugal","Bergabung Australia"], c:0, e:"Referendum 30 Agustus 1999: Timor Timur merdeka."},
+    {q:"Pemberontakan DI/TII di Aceh dipimpin oleh...", a:["Daud Beureueh","Kartosuwiryo","Kahar Muzakar","Andi Azis"], c:0, e:"Daud Beureueh memimpin DI/TII Aceh."},
+    {q:"Pemberontakan DI/TII Jawa Barat dipimpin oleh...", a:["Kartosuwiryo","Daud Beureueh","Kahar Muzakar","Andi Azis"], c:0, e:"Sekarmadji Maridjan Kartosuwiryo memproklamasikan NII 1949."},
+    {q:"Pemberontakan PRRI/Permesta dilatarbelakangi oleh...", a:["Ketidakpuasan daerah terhadap pusat","Agama","Suku","Ekonomi global"], c:0, e:"Ketidakpuasan daerah atas pusat & alokasi dana."}
   ]},
   { title:"Krisis 1997 & Akhir Orde Baru", soal:[
-    {q:"Krisis moneter Asia melanda Indonesia pada tahun...", a:"1997","1990","1995","1998"], c:0, e:"Krisis moneter mulai Juli 1997."},
-    {q:"Dampak krisis 1997 di Indonesia adalah...", a:"Rupiah jatuh, harga naik, PHK massal","Rupiah stabil","Ekonomi tumbuh tinggi","Pengangguran turun"], c:0, e:"Rupiah anjlok, harga naik, PHK massal."},
-    {q:"Tuntutan reformasi muncul dengan enam agenda, salah satunya...", a:"Amandemen UUD 1945","Bubarkan MPR","Kembali ke RIS","Bentuk PKI"], c:0, e:"Agenda reformasi termasuk amandemen UUD 1945."},
-    {q:"Kerusuhan Mei 1998 terjadi di beberapa kota, terutama...", a:"Jakarta","Medan","Makassar","Jayapura"], c:0, e:"Kerusuhan Mei 1998 terbesar di Jakarta."},
-    {q:"Presiden Soeharto mengundurkan diri pada...", a:"21 Mei 1998","11 Maret 1966","30 September 1965","1 Oktober 1999"], c:0, e:"Soeharto mengundurkan diri 21 Mei 1998."}
+    {q:"Krisis moneter Asia melanda Indonesia pada tahun...", a:["1997","1990","1995","1998"], c:0, e:"Krisis moneter mulai Juli 1997."},
+    {q:"Dampak krisis 1997 di Indonesia adalah...", a:["Rupiah jatuh, harga naik, PHK massal","Rupiah stabil","Ekonomi tumbuh tinggi","Pengangguran turun"], c:0, e:"Rupiah anjlok, harga naik, PHK massal."},
+    {q:"Tuntutan reformasi muncul dengan enam agenda, salah satunya...", a:["Amandemen UUD 1945","Bubarkan MPR","Kembali ke RIS","Bentuk PKI"], c:0, e:"Agenda reformasi termasuk amandemen UUD 1945."},
+    {q:"Kerusuhan Mei 1998 terjadi di beberapa kota, terutama...", a:["Jakarta","Medan","Makassar","Jayapura"], c:0, e:"Kerusuhan Mei 1998 terbesar di Jakarta."},
+    {q:"Presiden Soeharto mengundurkan diri pada...", a:["21 Mei 1998","11 Maret 1966","30 September 1965","1 Oktober 1999"], c:0, e:"Soeharto mengundurkan diri 21 Mei 1998."}
   ]}
 ]},
 
@@ -1012,39 +1044,39 @@ const BAB = [
   desc:"Tragedi Trisakti, kejatuhan Soeharto, & demokratisasi.",
   kuis:[
   { title:"Latar Belakang Reformasi", soal:[
-    {q:"Reformasi 1998 dilatarbelakangi oleh...", a:"Krisis ekonomi & politik","Perang dunia","Bencana alam","Konflik agama"], c:0, e:"Krisis ekonomi & politik memicu reformasi."},
-    {q:"Tragedi Trisakti terjadi pada...", a:"12 Mei 1998","21 Mei 1998","30 September 1965","1 Oktober 1999"], c:0, e:"Tragedi Trisakti 12 Mei 1998, 4 mahasiswa tewas."},
-    {q:"Empat mahasiswa Trisakti yang gugur dikenal sebagai...", a:"Pahlawan Reformasi","Pahlawan Revolusi","Pahlawan Nasional","Pahlawan Kemerdekaan"], c:0, e:"Mereka dikenal sebagai Pahlawan Reformasi."},
-    {q:"Tuntutan reformasi disuarakan terutama oleh...", a:"Mahasiswa & masyarakat","Militer","Partai Golkar","Birokrat"], c:0, e:"Mahasiswa & masyarakat menjadi motor reformasi."},
-    {q:"Salah satu agenda reformasi adalah...", a:"Penghapusan Dwi Fungsi ABRI","Penguatan Orde Baru","Bubarkan DPR","Kembali RIS"], c:0, e:"Salah satu agenda: hapus Dwi Fungsi ABRI."}
+    {q:"Reformasi 1998 dilatarbelakangi oleh...", a:["Krisis ekonomi & politik","Perang dunia","Bencana alam","Konflik agama"], c:0, e:"Krisis ekonomi & politik memicu reformasi."},
+    {q:"Tragedi Trisakti terjadi pada...", a:["12 Mei 1998","21 Mei 1998","30 September 1965","1 Oktober 1999"], c:0, e:"Tragedi Trisakti 12 Mei 1998, 4 mahasiswa tewas."},
+    {q:"Empat mahasiswa Trisakti yang gugur dikenal sebagai...", a:["Pahlawan Reformasi","Pahlawan Revolusi","Pahlawan Nasional","Pahlawan Kemerdekaan"], c:0, e:"Mereka dikenal sebagai Pahlawan Reformasi."},
+    {q:"Tuntutan reformasi disuarakan terutama oleh...", a:["Mahasiswa & masyarakat","Militer","Partai Golkar","Birokrat"], c:0, e:"Mahasiswa & masyarakat menjadi motor reformasi."},
+    {q:"Salah satu agenda reformasi adalah...", a:["Penghapusan Dwi Fungsi ABRI","Penguatan Orde Baru","Bubarkan DPR","Kembali RIS"], c:0, e:"Salah satu agenda: hapus Dwi Fungsi ABRI."}
   ]},
   { title:"Kejatuhan Soeharto & Pemerintahan Habibie", soal:[
-    {q:"Soeharto mengundurkan diri pada tanggal...", a:"21 Mei 1998","12 Mei 1998","11 Maret 1966","20 Oktober 1999"], c:0, e:"21 Mei 1998."},
-    {q:"Pengganti Soeharto adalah...", a:"B.J. Habibie","Megawati","Gus Dur","SBY"], c:0, e:"B.J. Habibie menjadi presiden (1998–1999)."},
-    {q:"Presiden Habibie membebaskan tahanan politik & mencabut...", a:"UU Subversi","UU PMA","UU Pokok Agraria","UU Buruh"], c:0, e:"Habibie mencabut UU Subversi & bebaskan tahanan politik."},
-    {q:"Referendum Timor Timur dilaksanakan pada masa pemerintahan...", a:"Habibie","Soeharto","Gus Dur","Megawati"], c:0, e:"Referendum Timor Timur 30 Agustus 1999 masa Habibie."},
-    {q:"Habibie memberikan kebebasan pers dengan mencabut...", a:"SIUPP","UU PMA","UU Subversi","UU Pokok Agraria"], c:0, e:"Habibie mencabut SIUPP (izin usaha penerbitan pers)."}
+    {q:"Soeharto mengundurkan diri pada tanggal...", a:["21 Mei 1998","12 Mei 1998","11 Maret 1966","20 Oktober 1999"], c:0, e:"21 Mei 1998."},
+    {q:"Pengganti Soeharto adalah...", a:["B.J. Habibie","Megawati","Gus Dur","SBY"], c:0, e:"B.J. Habibie menjadi presiden (1998–1999)."},
+    {q:"Presiden Habibie membebaskan tahanan politik & mencabut...", a:["UU Subversi","UU PMA","UU Pokok Agraria","UU Buruh"], c:0, e:"Habibie mencabut UU Subversi & bebaskan tahanan politik."},
+    {q:"Referendum Timor Timur dilaksanakan pada masa pemerintahan...", a:["Habibie","Soeharto","Gus Dur","Megawati"], c:0, e:"Referendum Timor Timur 30 Agustus 1999 masa Habibie."},
+    {q:"Habibie memberikan kebebasan pers dengan mencabut...", a:["SIUPP","UU PMA","UU Subversi","UU Pokok Agraria"], c:0, e:"Habibie mencabut SIUPP (izin usaha penerbitan pers)."}
   ]},
   { title:"Pemerintahan Gus Dur & Megawati", soal:[
-    {q:"Gus Dur (Abdurrahman Wahid) menjadi presiden pada tahun...", a:"1999","1998","2001","2004"], c:0, e:"Gus Dur dilantik 20 Oktober 1999."},
-    {q:"Gus Dur dikenal sebagai tokoh yang...", a:"Menghapus diskriminasi etnis Tionghoa","Menghidupkan Orde Baru","Mendukung PKI","Mendukung Dwi Fungsi"], c:0, e:"Gus Dur menghapus diskriminasi Tionghoa (2000)."},
-    {q:"Gus Dur dimakzulkan pada tahun...", a:"2001","2000","2002","2004"], c:0, e:"Gus Dur dimakzulkan melalui Sidang Istimewa MPR 2001."},
-    {q:"Megawati Soekarnoputri menjadi presiden pada...", a:"23 Juli 2001","20 Oktober 1999","21 Mei 1998","20 Oktober 2004"], c:0, e:"Megawati dilantik 23 Juli 2001."},
-    {q:"Pada masa Megawati, dilaksanakan amandemen UUD 1945 untuk...", a:"Pembatasan kekuasaan presiden","Memperkuat presiden","Menghapus MPR","Kembali RIS"], c:0, e:"Amandemen membatasi kekuasaan presiden & memperkuat DPR."}
+    {q:"Gus Dur (Abdurrahman Wahid) menjadi presiden pada tahun...", a:["1999","1998","2001","2004"], c:0, e:"Gus Dur dilantik 20 Oktober 1999."},
+    {q:"Gus Dur dikenal sebagai tokoh yang...", a:["Menghapus diskriminasi etnis Tionghoa","Menghidupkan Orde Baru","Mendukung PKI","Mendukung Dwi Fungsi"], c:0, e:"Gus Dur menghapus diskriminasi Tionghoa (2000)."},
+    {q:"Gus Dur dimakzulkan pada tahun...", a:["2001","2000","2002","2004"], c:0, e:"Gus Dur dimakzulkan melalui Sidang Istimewa MPR 2001."},
+    {q:"Megawati Soekarnoputri menjadi presiden pada...", a:["23 Juli 2001","20 Oktober 1999","21 Mei 1998","20 Oktober 2004"], c:0, e:"Megawati dilantik 23 Juli 2001."},
+    {q:"Pada masa Megawati, dilaksanakan amandemen UUD 1945 untuk...", a:["Pembatasan kekuasaan presiden","Memperkuat presiden","Menghapus MPR","Kembali RIS"], c:0, e:"Amandemen membatasi kekuasaan presiden & memperkuat DPR."}
   ]},
   { title:"Amandemen UUD 1945 & Demokratisasi", soal:[
-    {q:"Amandemen UUD 1945 dilakukan MPR pada tahun...", a:"1999–2002","1997–1998","2003–2005","2005–2008"], c:0, e:"Amandemen 1999, 2000, 2001, 2002."},
-    {q:"Salah satu perubahan penting amandemen adalah...", a:"Presiden dipilih langsung oleh rakyat","Presiden dipilih MPR","Presiden seumur hidup","Presiden ditunjuk militer"], c:0, e:"Sejak 2004 presiden dipilih langsung oleh rakyat."},
-    {q:"Lembaga baru pasca-amandemen adalah...", a:"MK (Mahkamah Konstitusi)","DPA","BPK","MA"], c:0, e:"MK, KY, dan DPD dibentuk setelah amandemen."},
-    {q:"Pemilu langsung pertama kali dilaksanakan pada...", a:"2004","1999","2009","2014"], c:0, e:"Pemilu legislatif & pilpres langsung 2004."},
-    {q:"Kebebasan pers di era Reformasi ditandai dengan...", a:"Lahirnya banyak media baru","Penghapusan media","Sensor ketat","Monopoli pers"], c:0, e:"Reformasi melahirkan banyak media & kebebasan pers."}
+    {q:"Amandemen UUD 1945 dilakukan MPR pada tahun...", a:["1999–2002","1997–1998","2003–2005","2005–2008"], c:0, e:"Amandemen 1999, 2000, 2001, 2002."},
+    {q:"Salah satu perubahan penting amandemen adalah...", a:["Presiden dipilih langsung oleh rakyat","Presiden dipilih MPR","Presiden seumur hidup","Presiden ditunjuk militer"], c:0, e:"Sejak 2004 presiden dipilih langsung oleh rakyat."},
+    {q:"Lembaga baru pasca-amandemen adalah...", a:["MK (Mahkamah Konstitusi)","DPA","BPK","MA"], c:0, e:"MK, KY, dan DPD dibentuk setelah amandemen."},
+    {q:"Pemilu langsung pertama kali dilaksanakan pada...", a:["2004","1999","2009","2014"], c:0, e:"Pemilu legislatif & pilpres langsung 2004."},
+    {q:"Kebebasan pers di era Reformasi ditandai dengan...", a:["Lahirnya banyak media baru","Penghapusan media","Sensor ketat","Monopoli pers"], c:0, e:"Reformasi melahirkan banyak media & kebebasan pers."}
   ]},
   { title:"Dampak & Tantangan Reformasi", soal:[
-    {q:"Dampak positif reformasi adalah...", a:"Demokratisasi & kebebasan berpendapat","Kembali otoriter","Militer dominan","Sentralisasi kuat"], c:0, e:"Reformasi memperkuat demokrasi & kebebasan."},
-    {q:"Tantangan reformasi antara lain...", a:"Korupsi, konflik horizontal, & disintegrasi","Kemiskinan hilang","Ekonomi meroket","Stabilitas total"], c:0, e:"Korupsi, konflik, & disintegrasi menjadi tantangan."},
-    {q:"Otonomi daerah digulirkan sebagai bagian dari...", a:"Reformasi & desentralisasi","Sentralisasi","Militerisasi","Kolonialisasi"], c:0, e:"Otonomi daerah = bagian desentralisasi reformasi."},
-    {q:"Lembaga pemberantasan korupsi yang lahir di era Reformasi adalah...", a:"KPK","BPK","MA","MK"], c:0, e:"KPK dibentuk 2002 untuk memberantas korupsi."},
-    {q:"Harapan utama Reformasi 1998 adalah...", a:"Indonesia lebih demokratis, adil, & sejahtera","Kembali ke Orde Baru","Presiden seumur hidup","Bubarkan DPR"], c:0, e:"Reformasi bertujuan mewujudkan Indonesia demokratis, adil, sejahtera."}
+    {q:"Dampak positif reformasi adalah...", a:["Demokratisasi & kebebasan berpendapat","Kembali otoriter","Militer dominan","Sentralisasi kuat"], c:0, e:"Reformasi memperkuat demokrasi & kebebasan."},
+    {q:"Tantangan reformasi antara lain...", a:["Korupsi, konflik horizontal, & disintegrasi","Kemiskinan hilang","Ekonomi meroket","Stabilitas total"], c:0, e:"Korupsi, konflik, & disintegrasi menjadi tantangan."},
+    {q:"Otonomi daerah digulirkan sebagai bagian dari...", a:["Reformasi & desentralisasi","Sentralisasi","Militerisasi","Kolonialisasi"], c:0, e:"Otonomi daerah = bagian desentralisasi reformasi."},
+    {q:"Lembaga pemberantasan korupsi yang lahir di era Reformasi adalah...", a:["KPK","BPK","MA","MK"], c:0, e:"KPK dibentuk 2002 untuk memberantas korupsi."},
+    {q:"Harapan utama Reformasi 1998 adalah...", a:["Indonesia lebih demokratis, adil, & sejahtera","Kembali ke Orde Baru","Presiden seumur hidup","Bubarkan DPR"], c:0, e:"Reformasi bertujuan mewujudkan Indonesia demokratis, adil, sejahtera."}
   ]}
 ]}
 ];
@@ -1053,9 +1085,9 @@ const BAB = [
    STATE & RENDER
    ===================================================== */
 let currentBab = null;
-let currentKuisIdx = 0;   // 0..4
-let currentSoalIdx = 0;   // 0..4
-let scoreBab = 0;         // total benar lintas kuis (0..25)
+let currentKuisIdx = 0;
+let currentSoalIdx = 0;
+let scoreBab = 0;
 let answered = false;
 
 /* ---------- Render kartu landing ---------- */
@@ -1069,12 +1101,22 @@ function renderLanding(){
     const card = document.createElement('div');
     card.className = 'card';
     card.onclick = ()=>startBab(b.id);
+
+    // Tombol game eksternal (jika bab punya properti `games`)
+    const gamesHtml = (b.games && b.games.length)
+      ? `<div class="game-links">${b.games.map(g=>
+          `<a class="game-btn" href="${g.url}" target="_blank" rel="noopener noreferrer"
+              onclick="event.stopPropagation()">${g.name}</a>`
+        ).join('')}</div>`
+      : '';
+
     card.innerHTML = `
       <span class="badge ${b.fase==='f'?'gold':''}">${b.badge}</span>
       <span class="ico">${b.icon}</span>
       <h3>${b.title}</h3>
       <p class="desc">${b.desc}</p>
       <span class="mini-btn"><span class="play">▶</span> Mulai 5 Kuis</span>
+      ${gamesHtml}
     `;
     (b.fase==='e' ? gridE : gridF).appendChild(card);
   });
