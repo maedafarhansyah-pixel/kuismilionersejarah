@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 /* ============================================================
    ROOT & RESET
@@ -183,7 +184,7 @@ body{
    ============================================================ */
 .start-screen{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  min-height:calc(100vh - 100px);text-align:center;gap:18px;
+  min-height:calc(100vh - 100px);text-align:center;gap:16px;
   padding:20px 0;
 }
 .hero-badge{
@@ -209,7 +210,7 @@ body{
 }
 .hero-sub{
   font-size:clamp(.9rem,2vw,1.05rem);
-  color:var(--text-dim);max-width:560px;line-height:1.75;
+  color:var(--text-dim);max-width:600px;line-height:1.75;
   font-weight:400;
 }
 .hero-sub strong{color:var(--primary-light);font-weight:700}
@@ -233,29 +234,73 @@ body{
 .stat-pill .pi-emerald i{color:var(--emerald)}
 .stat-pill .pi-violet i{color:var(--violet)}
 
+/* Player Name Input */
+.name-input-wrap{
+  display:flex;flex-direction:column;gap:8px;
+  width:100%;max-width:440px;margin-top:10px;text-align:left;
+}
+.name-input-wrap label{
+  font-size:.72rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary-light);
+  display:flex;align-items:center;gap:8px;
+}
+.name-input-wrap label i{color:var(--primary)}
+.name-input-wrap input{
+  width:100%;padding:15px 22px;border-radius:16px;
+  border:1.5px solid var(--glass-border);
+  background:rgba(255,255,255,.04);
+  color:var(--text);font-family:var(--font-display);
+  font-size:.98rem;font-weight:600;outline:none;
+  transition:all .3s var(--ease-out);
+}
+.name-input-wrap input:focus{
+  border-color:var(--primary);
+  background:rgba(245,158,11,.08);
+  box-shadow:0 0 0 4px rgba(245,158,11,.15);
+}
+.name-input-wrap input::placeholder{color:var(--text-mute);font-weight:400}
+.name-input-hint{
+  font-size:.7rem;color:var(--text-mute);padding-left:4px;
+  display:flex;align-items:center;gap:6px;
+}
+
+/* Rules card */
 .rules-card{
   background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
   border:1px solid var(--glass-border);
   border-radius:var(--radius);
-  padding:22px 24px;max-width:520px;width:100%;
-  text-align:left;margin-top:6px;
+  padding:24px 26px;max-width:600px;width:100%;
+  text-align:left;margin-top:10px;
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   box-shadow:var(--shadow-card);
 }
 .rules-card h4{
-  font-size:.85rem;font-weight:800;color:var(--primary-light);
-  margin-bottom:12px;display:flex;align-items:center;gap:9px;
-  letter-spacing:.5px;text-transform:uppercase;
+  font-size:.88rem;font-weight:900;color:var(--primary-light);
+  margin-bottom:16px;display:flex;align-items:center;gap:10px;
+  letter-spacing:.8px;text-transform:uppercase;
+  padding-bottom:12px;
+  border-bottom:1px dashed rgba(255,255,255,.10);
 }
-.rules-card ul{list-style:none;display:grid;gap:10px}
-.rules-card li{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-dim);line-height:1.6}
+.rules-card h4 i{color:var(--primary)}
+.rules-card ul{list-style:none;display:grid;gap:14px}
+.rules-card li{
+  display:flex;align-items:flex-start;gap:14px;
+  font-size:.88rem;color:var(--text-dim);line-height:1.65;
+}
 .rule-num{
   display:inline-flex;align-items:center;justify-content:center;
-  width:26px;height:26px;border-radius:9px;flex-shrink:0;
+  width:30px;height:30px;border-radius:10px;flex-shrink:0;
   background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-  color:#0b0d1c;font-size:.72rem;font-weight:900;
+  color:#0b0d1c;font-size:.8rem;font-weight:900;
   box-shadow:0 4px 14px rgba(245,158,11,.4);
 }
+.rule-content{flex:1;min-width:0}
+.rule-content strong{
+  display:block;color:var(--text);font-weight:800;
+  font-size:.92rem;margin-bottom:3px;letter-spacing:.2px;
+}
+.rule-content p{font-size:.82rem;color:var(--text-dim);line-height:1.6}
+.rule-content b{color:var(--primary-light);font-weight:800}
 
 .btn-play{
   position:relative;
@@ -342,7 +387,7 @@ body{
 .hud-middle{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
   font-size:.75rem;color:var(--text-mute);font-weight:700;
-  padding:0 4px;
+  padding:0 4px;flex-wrap:wrap;
 }
 .hud-middle .combo-tag{
   display:inline-flex;align-items:center;gap:6px;
@@ -486,7 +531,7 @@ body{
   box-shadow:0 0 24px rgba(244,63,94,.7);
 }
 
-.opt.locked{pointer-events:none}
+.opt.locked{pointer-events:none;cursor:default}
 .opt.disabled-50{opacity:.2;pointer-events:none;filter:grayscale(1) blur(.5px)}
 
 /* ============================================================
@@ -604,7 +649,14 @@ body{
   background:rgba(255,255,255,.04);color:var(--text-dim);
   border:1px solid var(--glass-border);
 }
-.btn-ghost:hover{background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(245,158,11,.4);transform:translateY(-2px)}
+.btn-ghost:hover:not(:disabled){background:rgba(255,255,255,.08);color:var(--text);border-color:rgba(245,158,11,.4);transform:translateY(-2px)}
+.btn-ghost:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.btn-cyan{
+  background:linear-gradient(135deg,var(--accent),#0891b2);
+  color:#fff;
+  box-shadow:0 10px 32px rgba(6,182,212,.4);
+}
+.btn-cyan:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 16px 44px rgba(6,182,212,.6)}
 
 /* ============================================================
    RESULT SCREEN
@@ -641,6 +693,22 @@ body{
   margin-bottom:6px;
 }
 .result-sub{font-size:.9rem;color:var(--text-dim);margin-bottom:6px}
+
+/* Player badge on result */
+.player-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:9px 20px;border-radius:40px;
+  background:linear-gradient(135deg,rgba(6,182,212,.14),rgba(139,92,246,.10));
+  border:1px solid rgba(6,182,212,.35);
+  font-size:.88rem;font-weight:700;color:var(--text);
+  margin:6px 0 4px;
+  box-shadow:0 4px 20px rgba(6,182,212,.15);
+}
+.player-badge i{color:var(--accent);font-size:.95rem}
+.player-badge .pb-label{
+  font-size:.62rem;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--text-mute);
+}
 
 .grade-ring{
   position:relative;width:130px;height:130px;margin:16px auto;
@@ -687,10 +755,63 @@ body{
 .rs-val.violet{color:#C4B5FD;text-shadow:0 0 20px rgba(139,92,246,.5)}
 .rs-lbl{font-size:.62rem;font-weight:800;letter-spacing:1.5px;color:var(--text-mute);text-transform:uppercase;margin-top:6px}
 
-.result-msg{font-size:.92rem;color:var(--text-dim);line-height:1.7;padding:14px 18px;border-radius:12px;
-  background:rgba(245,158,11,.06);border-left:3px solid var(--primary);margin-top:6px;text-align:left}
+/* Achievements */
+.achievements-section{
+  margin-top:16px;text-align:left;
+  padding:18px 20px;border-radius:var(--radius-sm);
+  background:linear-gradient(145deg,rgba(245,158,11,.06),rgba(245,158,11,.02));
+  border:1px solid rgba(245,158,11,.20);
+}
+.achievements-section h4{
+  font-size:.78rem;font-weight:900;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--primary-light);
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.achievements-section h4 i{color:var(--primary)}
+.achievements-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+  gap:8px;
+}
+.achievement-card{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 13px;border-radius:12px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  animation:fadeSlideIn .5s var(--ease-out);
+  transition:all .3s var(--ease-out);
+}
+.achievement-card:hover{transform:translateY(-2px);border-color:rgba(245,158,11,.4)}
+.achievement-card .ac-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:grid;place-items:center;flex-shrink:0;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#0b0d1c;font-size:1.05rem;
+  box-shadow:0 4px 14px rgba(245,158,11,.4);
+}
+.achievement-card .ac-text{min-width:0;flex:1}
+.achievement-card .ac-title{
+  font-size:.78rem;font-weight:900;color:var(--text);
+  letter-spacing:.3px;line-height:1.2;
+}
+.achievement-card .ac-desc{
+  font-size:.68rem;color:var(--text-dim);
+  line-height:1.4;margin-top:2px;
+}
+.no-achievement{
+  font-size:.8rem;color:var(--text-dim);
+  text-align:center;padding:10px;
+  background:rgba(255,255,255,.02);border-radius:10px;
+}
 
-.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.result-msg{
+  font-size:.92rem;color:var(--text-dim);line-height:1.7;
+  padding:16px 20px;border-radius:12px;
+  background:rgba(245,158,11,.06);
+  border-left:3px solid var(--primary);
+  margin-top:16px;text-align:left;
+}
+
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
 
 /* Review */
 .review-panel{
@@ -719,6 +840,12 @@ body{
   font-family:var(--font-mono);font-size:.78rem;min-width:26px;
 }
 .review-item .ri-text{flex:1;color:var(--text-dim)}
+.review-item .ri-q{margin-bottom:3px}
+.review-item .ri-meta{
+  font-size:.7rem;color:var(--text-mute);margin-top:3px;
+  display:flex;flex-wrap:wrap;gap:8px;
+}
+.review-item .ri-meta b{color:var(--primary-light);font-weight:800}
 .review-item .ri-status{
   font-size:.68rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
   padding:3px 10px;border-radius:20px;flex-shrink:0;
@@ -788,23 +915,35 @@ body{
   .hud-timer{padding:6px 11px;font-size:.78rem}
   .hud-hp .heart{font-size:1rem}
   .power-btn{padding:9px 14px;font-size:.72rem}
-  .btn{padding:12px 22px;font-size:.82rem;width:100%;justify-content:center}
-  .action-bar{flex-direction:column}
+  .btn{padding:12px 22px;font-size:.82rem;flex:1;justify-content:center;min-width:0}
+  .action-bar{flex-direction:column;width:100%}
+  .action-bar .btn{width:100%}
   .result-hero{padding:28px 18px}
   .grade-ring{width:110px;height:110px}
   .grade-letter{font-size:2.2rem}
   .rs-val{font-size:1.4rem}
   .toast{max-width:calc(100vw - 24px);padding:12px 14px}
   .toast-icon{width:36px;height:36px;font-size:1rem}
+  .rules-card{padding:20px 18px}
+  .rule-content strong{font-size:.86rem}
+  .rule-content p{font-size:.78rem}
+  .result-actions .btn{flex:1;min-width:0}
+  .achievements-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:380px){
   .opt-letter{width:28px;height:28px;font-size:.72rem}
   .hud-timer{font-size:.72rem}
+  .brand-text .t1{display:none}
 }
 
 @media print{
-  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap{display:none!important}
+  .game-header,.power-bar,.action-bar,.bg-layer,.bg-grid,#particles,#confettiCanvas,#loader,.toast-wrap,
+  .result-actions,.icon-btn{display:none!important}
   body{background:#fff;color:#000}
+  .result-hero,.review-panel{background:#fff!important;border:1px solid #ccc!important;color:#000!important}
+  .result-title,.result-title-text,.grade-letter,.rs-val,.player-badge{color:#000!important;-webkit-text-fill-color:#000!important;background:none!important}
+  .rs-lbl,.result-sub,.result-msg,.review-item .ri-text{color:#333!important}
+  .review-item{background:#f9f9f9!important;border:1px solid #ddd!important}
 }
 </style>
 </head>
@@ -837,6 +976,7 @@ body{
     </div>
   </div>
   <div class="header-actions">
+    <button class="icon-btn" onclick="goHome()" title="Halaman Awal"><i class="fas fa-home"></i></button>
     <button class="icon-btn" id="soundBtn" onclick="toggleSound()" title="Suara"><i class="fas fa-volume-up"></i></button>
     <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema"><i class="fas fa-sun"></i></button>
   </div>
@@ -863,13 +1003,45 @@ body{
       <span class="stat-pill pi-violet"><i class="fas fa-bolt"></i> Combo &amp; XP</span>
     </div>
 
+    <!-- PLAYER NAME -->
+    <div class="name-input-wrap">
+      <label for="playerNameInput"><i class="fas fa-user"></i> Nama Pemain</label>
+      <input type="text" id="playerNameInput" maxlength="30" placeholder="Masukkan nama kamu di sini..." autocomplete="off" />
+      <div class="name-input-hint"><i class="fas fa-info-circle"></i> Nama akan ditampilkan pada hasil akhir dan sertifikat PDF.</div>
+    </div>
+
+    <!-- RULES -->
     <div class="rules-card">
       <h4><i class="fas fa-list-check"></i> Cara Bermain</h4>
       <ul>
-        <li><span class="rule-num">1</span> Jawab 15 soal HOTS — soal dipilih acak dari bank 30 soal.</li>
-        <li><span class="rule-num">2</span> Jawaban benar memberi <strong>XP</strong> + memicu <strong>combo</strong>. Jawaban salah mengurangi <strong>1 nyawa</strong>.</li>
-        <li><span class="rule-num">3</span> Gunakan <strong>power-up</strong>: 50:50, Petunjuk, Lewati (masing-masing 1×).</li>
-        <li><span class="rule-num">4</span> Raih skor tertinggi untuk membuka <strong>achievement</strong> eksklusif!</li>
+        <li>
+          <span class="rule-num">1</span>
+          <div class="rule-content">
+            <strong>Jawab 15 Soal Pilihan Ganda</strong>
+            <p>Soal dipilih secara acak dari bank 30 soal HOTS tentang Pengertian Sejarah dan Konsep Dasarnya.</p>
+          </div>
+        </li>
+        <li>
+          <span class="rule-num">2</span>
+          <div class="rule-content">
+            <strong>Sistem Nyawa &amp; Combo</strong>
+            <p>Kamu memiliki 3 nyawa. Jawaban benar menambah <b>XP</b> dan membangun <b>combo</b>; jawaban salah mengurangi <b>1 nyawa</b>.</p>
+          </div>
+        </li>
+        <li>
+          <span class="rule-num">3</span>
+          <div class="rule-content">
+            <strong>Power-Up Spesial (Masing-masing 1×)</strong>
+            <p><b>50:50</b> menghapus 2 jawaban salah · <b>Petunjuk</b> menampilkan klu · <b>Lewati</b> melihat jawaban benar.</p>
+          </div>
+        </li>
+        <li>
+          <span class="rule-num">4</span>
+          <div class="rule-content">
+            <strong>Navigasi Bebas &amp; Raih Predikat</strong>
+            <p>Gunakan tombol <b>Sebelumnya</b> dan <b>Selanjutnya</b> untuk meninjau jawaban. Kumpulkan skor setinggi mungkin untuk membuka pencapaian eksklusif!</p>
+          </div>
+        </li>
       </ul>
     </div>
 
@@ -936,6 +1108,9 @@ body{
         </button>
       </div>
       <div class="action-bar">
+        <button class="btn btn-ghost" id="btnPrev" onclick="prevQuestion()" disabled>
+          <i class="fas fa-arrow-left"></i> Sebelumnya
+        </button>
         <button class="btn btn-primary" id="btnNext" onclick="nextQuestion()" disabled>
           Selanjutnya <i class="fas fa-arrow-right"></i>
         </button>
@@ -954,6 +1129,14 @@ body{
       <h2 class="result-title" id="rTitle">Luar Biasa!</h2>
       <p class="result-sub" id="rSub">Kuis 1 · Pertemuan 1</p>
 
+      <div class="player-badge" id="rPlayerBadge">
+        <i class="fas fa-user-circle"></i>
+        <div>
+          <div class="pb-label">Pemain</div>
+          <div id="rPlayerNameText">Pemain</div>
+        </div>
+      </div>
+
       <div class="grade-ring" id="gradeRing">
         <div class="grade-inner">
           <div class="grade-letter" id="gradeLetter">A</div>
@@ -971,11 +1154,18 @@ body{
         <div class="rs-box"><div class="rs-val violet" id="rXpTotal">0</div><div class="rs-lbl">XP Total</div></div>
       </div>
 
+      <!-- ACHIEVEMENTS -->
+      <div class="achievements-section" id="achievementsSection">
+        <h4><i class="fas fa-medal"></i> Pencapaian</h4>
+        <div class="achievements-grid" id="achievementsList"></div>
+      </div>
+
       <div class="result-msg" id="rMsg"></div>
 
       <div class="result-actions">
         <button class="btn btn-primary" onclick="resetGame()"><i class="fas fa-redo"></i> Main Lagi</button>
-        <button class="btn btn-ghost" onclick="window.location.reload()"><i class="fas fa-home"></i> Menu Awal</button>
+        <button class="btn btn-cyan" onclick="savePDF()"><i class="fas fa-file-pdf"></i> Simpan PDF</button>
+        <button class="btn btn-ghost" onclick="goHome()"><i class="fas fa-home"></i> Menu Awal</button>
       </div>
     </div>
 
@@ -1294,6 +1484,33 @@ const BANK_SOAL = [
 ];
 
 /* ============================================================
+   SEBAR MERATA JAWABAN BENAR (A–E)
+   Setiap soal digilirkan: soal ke-1 → A, ke-2 → B, dst.
+   ============================================================ */
+(function spreadCorrectAnswers(){
+  const LETTERS = ['A','B','C','D','E'];
+  BANK_SOAL.forEach((q, i) => {
+    const targetLetter = LETTERS[i % 5];
+    const targetIdx = LETTERS.indexOf(targetLetter);
+    const correctOpt = q.options.find(o => o.correct);
+    const wrongOpts = q.options.filter(o => !o.correct);
+    // Fisher-Yates shuffle untuk variasi urutan pilihan salah
+    for (let k = wrongOpts.length - 1; k > 0; k--) {
+      const j = Math.floor(Math.random() * (k + 1));
+      [wrongOpts[k], wrongOpts[j]] = [wrongOpts[j], wrongOpts[k]];
+    }
+    const newOpts = [];
+    let wi = 0;
+    for (let j = 0; j < 5; j++) {
+      if (j === targetIdx) newOpts.push(correctOpt);
+      else newOpts.push(wrongOpts[wi++]);
+    }
+    newOpts.forEach((o, idx) => { o.letter = LETTERS[idx]; });
+    q.options = newOpts;
+  });
+})();
+
+/* ============================================================
    CONSTANTS & STATE
    ============================================================ */
 const TOTAL_Q = 15;
@@ -1315,7 +1532,9 @@ const state = {
   started: false,
   finished: false,
   powers: { p50:1, hint:1, skip:1 },
-  soundOn: true
+  soundOn: true,
+  playerName: 'Pemain',
+  result: null
 };
 
 /* ============================================================
@@ -1515,7 +1734,6 @@ function showToast(icon, title, desc, variant){
   }, 3200);
 }
 
-/* Floating score popup */
 function scorePopup(text, x, y, color){
   const el = document.createElement('div');
   el.className = 'score-pop';
@@ -1568,12 +1786,31 @@ function updateComboHud(){
 }
 
 function updatePowers(){
+  const q = state.questions[state.currentIndex];
+  const answered = q && state.answers.find(a => a.qid === q.id);
   document.getElementById('c50').textContent = state.powers.p50;
   document.getElementById('chint').textContent = state.powers.hint;
   document.getElementById('cskip').textContent = state.powers.skip;
-  document.getElementById('p50').disabled = state.powers.p50 <= 0;
-  document.getElementById('phint').disabled = state.powers.hint <= 0;
-  document.getElementById('pskip').disabled = state.powers.skip <= 0;
+  document.getElementById('p50').disabled = state.powers.p50 <= 0 || !!answered;
+  document.getElementById('phint').disabled = state.powers.hint <= 0 || !!answered;
+  document.getElementById('pskip').disabled = state.powers.skip <= 0 || !!answered;
+}
+
+/* ============================================================
+   HOME / NAVIGATION
+   ============================================================ */
+function goHome(){
+  if (state.started && !state.finished) {
+    if (!confirm('Kembali ke halaman awal? Progres kuis akan hilang.')) return;
+  }
+  clearInterval(state.timer);
+  state.timer = null;
+  state.started = false;
+  state.finished = false;
+  document.getElementById('gameHud').classList.remove('active');
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('startScreen').style.display = 'flex';
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 /* ============================================================
@@ -1581,6 +1818,12 @@ function updatePowers(){
    ============================================================ */
 function startGame(){
   ensureAudio();
+
+  // Ambil nama pemain
+  const nameInput = document.getElementById('playerNameInput');
+  const name = (nameInput && nameInput.value.trim()) || 'Pemain';
+  state.playerName = name;
+
   document.getElementById('startScreen').style.display = 'none';
   document.getElementById('gameHud').classList.add('active');
 
@@ -1596,6 +1839,7 @@ function startGame(){
   state.timeLeft = TIME_LIMIT;
   state.started = true;
   state.finished = false;
+  state.result = null;
   state.powers = { p50:1, hint:1, skip:1 };
 
   updateHpHud();
@@ -1603,7 +1847,7 @@ function startGame(){
   updateComboHud();
   updatePowers();
 
-  showToast('🚀', 'Arena Dimulai!', 'Semoga beruntung, pejuang sejarah!', '');
+  showToast('🚀', `Selamat datang, ${name}!`, 'Semoga beruntung, pejuang sejarah!', '');
   sfxClick();
 
   startTimer();
@@ -1642,6 +1886,8 @@ function renderQuestion(){
   document.getElementById('qText').textContent = q.question;
   document.getElementById('hudQNum').textContent = state.currentIndex+1;
 
+  const existingAnswer = state.answers.find(a => a.qid === q.id);
+
   const opts = document.getElementById('options');
   opts.innerHTML = '';
   q.options.forEach(o => {
@@ -1649,25 +1895,54 @@ function renderQuestion(){
     btn.className = 'opt';
     btn.dataset.letter = o.letter;
     btn.innerHTML = `<span class="opt-letter">${o.letter}</span><span class="opt-text">${o.text}</span>`;
-    btn.addEventListener('click', () => selectOption(o.letter, btn));
+    if (!existingAnswer) {
+      btn.addEventListener('click', () => selectOption(o.letter, btn));
+    }
     opts.appendChild(btn);
   });
 
-  document.getElementById('feedback').classList.remove('show');
-  document.getElementById('btnNext').disabled = true;
-  document.getElementById('btnNext').style.display = '';
-  document.getElementById('btnFinish').style.display = 'none';
-  document.getElementById('qCard').classList.remove('shake');
+  const feedback = document.getElementById('feedback');
+  feedback.classList.remove('show');
+
+  if (existingAnswer) {
+    // Lock & tandai jawaban
+    document.querySelectorAll('#options .opt').forEach(b => {
+      b.classList.add('locked');
+      const l = b.dataset.letter;
+      const o = q.options.find(x => x.letter === l);
+      if (o.correct) b.classList.add('correct');
+      else if (existingAnswer.selected === l && !existingAnswer.correct) b.classList.add('wrong');
+    });
+    if (existingAnswer.skipped) {
+      showFeedback(false, q, null, true);
+    } else {
+      const selectedOpt = q.options.find(o => o.letter === existingAnswer.selected);
+      showFeedback(existingAnswer.correct, q, selectedOpt);
+    }
+  }
+
+  // Tombol navigasi
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+  const btnFinish = document.getElementById('btnFinish');
+
+  btnPrev.disabled = state.currentIndex === 0;
+
+  if (state.currentIndex === TOTAL_Q - 1) {
+    btnNext.style.display = 'none';
+    btnFinish.style.display = existingAnswer ? '' : 'none';
+  } else {
+    btnNext.style.display = '';
+    btnFinish.style.display = 'none';
+    btnNext.disabled = !existingAnswer;
+  }
+
+  updatePowers();
 
   const card = document.getElementById('qCard');
   card.style.animation = 'none';
   void card.offsetWidth;
   card.style.animation = 'qEnter .55s cubic-bezier(.16,1,.3,1)';
-
-  if (state.currentIndex === TOTAL_Q - 1){
-    document.getElementById('btnNext').style.display = 'none';
-    document.getElementById('btnFinish').style.display = '';
-  }
 }
 
 function selectOption(letter, btnEl){
@@ -1741,7 +2016,7 @@ function selectOption(letter, btnEl){
     setTimeout(() => card.classList.remove('shake'), 550);
 
     if (state.hp <= 0){
-      showToast('💔', 'Nyawa Habis!', 'Kamu kehilangan semua nyawa. Skor tetap dihitung.', 'violet');
+      showToast('💫', 'Tetap Semangat!', 'Nyawa habis, tapi skormu tetap dihitung. Kamu sudah berusaha!', 'violet');
     }
   }
 
@@ -1750,16 +2025,26 @@ function selectOption(letter, btnEl){
   updateComboHud();
   showFeedback(correct, q, selected);
   document.getElementById('btnNext').disabled = false;
+  if (state.currentIndex === TOTAL_Q - 1){
+    document.getElementById('btnFinish').style.display = '';
+  }
+  updatePowers();
 }
 
-function showFeedback(correct, q, selected){
+function showFeedback(correct, q, selected, isSkipped){
   const panel = document.getElementById('feedback');
   const icon = document.getElementById('fbIcon');
   const title = document.getElementById('fbTitle');
   const body = document.getElementById('fbBody');
 
   panel.classList.add('show');
-  if (correct){
+
+  if (isSkipped) {
+    icon.className = 'fb-icon info';
+    icon.innerHTML = '<i class="fas fa-forward"></i>';
+    title.className = 'fb-title info';
+    title.textContent = 'SOAL DILEWATI';
+  } else if (correct){
     icon.className = 'fb-icon correct';
     icon.innerHTML = '<i class="fas fa-check"></i>';
     title.className = 'fb-title correct';
@@ -1776,13 +2061,21 @@ function showFeedback(correct, q, selected){
   html += `<p><strong>Jawaban benar: ${correctOpt.letter}.</strong> ${correctOpt.text}</p>`;
   html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-lightbulb"></i> Mengapa Jawaban Ini Benar</div><p>${correctOpt.explanation || ''}</p></div>`;
 
-  if (!correct && selected){
+  if (!correct && !isSkipped && selected){
     html += `<div class="fb-sec"><div class="fb-label"><i class="fas fa-exclamation-triangle"></i> Analisis Pilihanmu</div><p>Pilihan ${selected.letter} kurang tepat: ${selected.explanation || ''}</p></div>`;
   }
 
   html += `<div class="fb-points"><div class="fb-label"><i class="fas fa-star"></i> Poin Kunci</div><p>${q.hint || ''}</p></div>`;
 
   body.innerHTML = html;
+}
+
+function prevQuestion(){
+  if (state.currentIndex > 0){
+    state.currentIndex--;
+    renderQuestion();
+    document.getElementById('qCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
 }
 
 function nextQuestion(){
@@ -1849,7 +2142,7 @@ function usePower(type){
       const o = q.options.find(x => x.letter === l);
       if (o.correct) b.classList.add('correct');
     });
-    showFeedback(false, q, null);
+    showFeedback(false, q, null, true);
     document.getElementById('btnNext').disabled = false;
     state.powers.skip = 0;
     updatePowers();
@@ -1864,7 +2157,7 @@ function usePower(type){
 }
 
 /* ============================================================
-   FINISH
+   FINISH — Kategori Akhir yang Positif
    ============================================================ */
 function finishGame(timeout){
   if (state.finished) return;
@@ -1888,27 +2181,69 @@ function finishGame(timeout){
     }
   });
 
-  let benar = 0, salah = 0;
+  let benar = 0, salah = 0, dilewati = 0;
   state.answers.forEach(a => {
-    if (a.skipped) return;
+    if (a.skipped) { dilewati++; return; }
     if (a.correct) benar++;
     else salah++;
   });
 
   const maxScore = state.questions.reduce((s, q) => s + (q.points || 50), 0);
-  const finalScore = Math.round((state.score / maxScore) * 100);
-  const grade = finalScore >= 90 ? 'A' : finalScore >= 80 ? 'B' : finalScore >= 70 ? 'C' : finalScore >= 60 ? 'D' : 'E';
-  const gradeLabel = finalScore >= 90 ? 'Sangat Baik' : finalScore >= 80 ? 'Baik' : finalScore >= 70 ? 'Cukup' : finalScore >= 60 ? 'Perlu Bimbingan' : 'Remedial';
-  const rank = finalScore >= 90 ? 'SEJARAWAN MUDA' : finalScore >= 80 ? 'PENELITI SEJARAH' : finalScore >= 70 ? 'PELAJAR SEJARAH' : 'PEMULA SEJARAH';
-  const trophy = finalScore >= 90 ? '🏆' : finalScore >= 80 ? '🥇' : finalScore >= 70 ? '🥈' : finalScore >= 60 ? '🥉' : '📚';
-  const title = finalScore >= 90 ? 'Luar Biasa!' : finalScore >= 80 ? 'Kerja Bagus!' : finalScore >= 70 ? 'Terus Belajar!' : 'Jangan Menyerah!';
+  const finalScore = Math.min(100, Math.round((state.score / maxScore) * 100));
 
+  // ==================== KATEGORI POSITIF ====================
+  // Berdasarkan tingkatan, semua kalimat bernada positif & membangun
+  let grade, gradeLabel, rank, trophy, title, msg;
+  if (finalScore >= 90) {
+    grade = 'A'; gradeLabel = 'Istimewa'; rank = 'SEJARAWAN MUDA';
+    trophy = '🏆'; title = 'Luar Biasa!';
+    msg = '🌟 Sempurna! Kamu benar-benar menguasai materi Pengertian Sejarah. Pertahankan pencapaian luar biasa ini dan bagikan semangat belajarmu kepada teman-teman!';
+  } else if (finalScore >= 80) {
+    grade = 'B'; gradeLabel = 'Sangat Baik'; rank = 'PENELITI SEJARAH';
+    trophy = '🥇'; title = 'Hebat!';
+    msg = '✨ Pemahamanmu sangat baik! Kamu sudah menguasai sebagian besar materi. Sedikit lagi latihan akan membawa kamu ke tingkat istimewa!';
+  } else if (finalScore >= 70) {
+    grade = 'C'; gradeLabel = 'Baik'; rank = 'PELAJAR SEJARAH';
+    trophy = '🥈'; title = 'Bagus!';
+    msg = '👏 Kamu sudah memahami sebagian besar materi dengan baik. Terus asah kemampuanmu, kamu pasti bisa mencapai level yang lebih tinggi!';
+  } else if (finalScore >= 60) {
+    grade = 'D'; gradeLabel = 'Cukup Baik'; rank = 'PENJELAJAH SEJARAH';
+    trophy = '🥉'; title = 'Kerja Bagus!';
+    msg = '💪 Usahamu sudah menunjukkan hasil yang positif! Kamu sedang membangun dasar yang kuat untuk pemahaman sejarah yang lebih dalam.';
+  } else if (finalScore >= 50) {
+    grade = 'D'; gradeLabel = 'Mulai Berkembang'; rank = 'PEMUDA SEJARAH';
+    trophy = '📚'; title = 'Langkah Awal yang Baik!';
+    msg = '🌱 Kamu sudah mulai memahami materinya! Setiap langkah belajar membawa kamu lebih dekat ke penguasaan. Terus semangat, ya!';
+  } else {
+    grade = 'E'; gradeLabel = 'Awal yang Baik'; rank = 'CALON SEJARAWAN';
+    trophy = '🌱'; title = 'Tetap Semangat!';
+    msg = '🌈 Setiap usaha adalah langkah maju yang berharga! Kamu sudah menunjukkan keberanian untuk mencoba. Ayo lanjutkan belajar, kamu pasti bisa!';
+  }
+
+  // ==================== ACHIEVEMENTS ====================
+  const achievements = [];
+  if (benar === TOTAL_Q) achievements.push({icon:'🌟', title:'Sempurna', desc:'Semua 15 soal terjawab benar'});
+  if (state.bestCombo >= 5) achievements.push({icon:'🔥', title:'Combo Master', desc:`Combo terbaik ${state.bestCombo}× berturut-turut`});
+  if (state.bestCombo >= 3 && state.bestCombo < 5) achievements.push({icon:'⚡', title:'Combo Builder', desc:`Combo ${state.bestCombo}× berturut-turut`});
+  if (state.powers.p50 === 1 && state.powers.hint === 1 && state.powers.skip === 1) achievements.push({icon:'🎯', title:'Mandiri', desc:'Tanpa menggunakan power-up'});
+  if (finalScore >= 90) achievements.push({icon:'👑', title:'Sejarawan Muda', desc:'Skor di atas 90'});
+  if (state.hp === state.maxHp && benar > 0) achievements.push({icon:'💚', title:'Tak Tercela', desc:'Nyawa tetap utuh hingga akhir'});
+  if (state.timeLeft > TIME_LIMIT * 0.5 && finalScore >= 70) achievements.push({icon:'⏱️', title:'Cepat & Tepat', desc:'Selesai dengan sisa waktu banyak'});
+  if (finalScore >= 80 && state.bestCombo >= 3) achievements.push({icon:'🏅', title:'High Achiever', desc:'Skor tinggi dengan combo'});
+
+  state.result = {
+    benar, salah, dilewati, finalScore, grade, gradeLabel, rank, trophy, title, msg,
+    achievements, playerName: state.playerName
+  };
+
+  // Update UI
   document.getElementById('gameHud').classList.remove('active');
   document.getElementById('resultScreen').classList.add('active');
 
   document.getElementById('rTrophy').textContent = trophy;
   document.getElementById('rTitle').textContent = title;
   document.getElementById('rSub').textContent = 'Kuis 1 · Pertemuan 1 · Pengertian Sejarah & Konsep Dasar';
+  document.getElementById('rPlayerNameText').textContent = state.playerName;
   document.getElementById('gradeLetter').textContent = grade;
   document.getElementById('gradeLabel').textContent = gradeLabel;
   document.getElementById('rRank').textContent = rank;
@@ -1923,11 +2258,28 @@ function finishGame(timeout){
   const deg = (finalScore / 100) * 360;
   ring.style.setProperty('--grade-deg', deg + 'deg');
 
-  const msg = finalScore >= 70
-    ? '🎯 Pertahankan semangat belajarmu! Lanjutkan ke Kuis 2 untuk materi Berpikir Sejarah & Definisi Ahli (1).'
-    : '📚 Pelajari kembali materi Pertemuan 1, lalu coba lagi! Kamu pasti bisa!';
   document.getElementById('rMsg').textContent = msg;
 
+  // Achievements render
+  const achList = document.getElementById('achievementsList');
+  achList.innerHTML = '';
+  if (achievements.length === 0) {
+    achList.innerHTML = '<div class="no-achievement">Terus belajar untuk membuka pencapaian eksklusif! 🌟</div>';
+  } else {
+    achievements.forEach(a => {
+      const card = document.createElement('div');
+      card.className = 'achievement-card';
+      card.innerHTML = `
+        <div class="ac-icon">${a.icon}</div>
+        <div class="ac-text">
+          <div class="ac-title">${a.title}</div>
+          <div class="ac-desc">${a.desc}</div>
+        </div>`;
+      achList.appendChild(card);
+    });
+  }
+
+  // Review list
   const reviewList = document.getElementById('reviewList');
   reviewList.innerHTML = '';
   state.answers.forEach((a, i) => {
@@ -1936,8 +2288,17 @@ function finishGame(timeout){
     const status = a.skipped ? '<span class="ri-status skipped">Dilewati</span>' :
                    a.correct ? '<span class="ri-status correct">Benar</span>' :
                    '<span class="ri-status wrong">Salah</span>';
-    const q = a.questionText.length > 80 ? a.questionText.substring(0, 80) + '...' : a.questionText;
-    div.innerHTML = `<span class="ri-num">${i+1}.</span><span class="ri-text">${q}</span>${status}`;
+    const q = a.questionText.length > 100 ? a.questionText.substring(0, 100) + '...' : a.questionText;
+    div.innerHTML = `
+      <span class="ri-num">${i+1}.</span>
+      <div class="ri-text">
+        <div class="ri-q">${q}</div>
+        <div class="ri-meta">
+          <span><i class="fas fa-tag"></i> ${a.topic || '-'}</span>
+          <span>Jawaban benar: <b>${a.correctLetter}</b></span>
+        </div>
+      </div>
+      ${status}`;
     reviewList.appendChild(div);
   });
 
@@ -1945,7 +2306,10 @@ function finishGame(timeout){
   if (finalScore >= 70){
     fireConfetti(180);
     setTimeout(() => fireConfetti(120), 400);
-    setTimeout(() => showToast('🏆', 'Achievement Unlocked!', rank, ''), 500);
+    setTimeout(() => showToast('🏆', 'Pencapaian Terbuka!', rank, ''), 500);
+  } else {
+    fireConfetti(60);
+    setTimeout(() => showToast('🌟', 'Kerja Bagus!', 'Terus semangat belajar, ya!', 'cyan'), 500);
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1967,7 +2331,170 @@ function resetGame(){
   state.currentIndex = 0;
   state.finished = false;
   state.started = false;
+  state.result = null;
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============================================================
+   SIMPAN PDF — Hasil untuk Dikirim ke Guru
+   ============================================================ */
+function savePDF(){
+  if (!state.result) {
+    showToast('⚠️', 'Belum Ada Hasil', 'Selesaikan kuis terlebih dahulu.', '');
+    return;
+  }
+
+  const r = state.result;
+  const dateStr = new Date().toLocaleDateString('id-ID', {
+    weekday:'long', day:'numeric', month:'long', year:'numeric'
+  });
+  const timeStr = new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'});
+  const safeName = (r.playerName || 'Pemain').replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+
+  // Bangun rincian jawaban
+  let reviewRows = '';
+  state.answers.forEach((a, i) => {
+    const status = a.skipped ? 'Dilewati' : (a.correct ? 'Benar' : 'Salah');
+    const statusColor = a.skipped ? '#6b7280' : (a.correct ? '#059669' : '#dc2626');
+    const qShort = a.questionText.length > 90 ? a.questionText.substring(0, 90) + '...' : a.questionText;
+    reviewRows += `
+      <tr>
+        <td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;font-weight:bold;">${i+1}</td>
+        <td style="padding:6px 8px;border:1px solid #e5e7eb;font-size:10px;color:#555;">${a.topic || '-'}</td>
+        <td style="padding:6px 8px;border:1px solid #e5e7eb;">${qShort}</td>
+        <td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;font-weight:bold;">${a.correctLetter}</td>
+        <td style="padding:6px 8px;border:1px solid #e5e7eb;text-align:center;color:${statusColor};font-weight:bold;">${status}</td>
+      </tr>`;
+  });
+
+  // Bangun achievements
+  let achHtml = '';
+  if (r.achievements && r.achievements.length > 0) {
+    achHtml = r.achievements.map(a =>
+      `<span style="display:inline-block;padding:6px 12px;margin:4px;background:#fff7ed;border:1px solid #fed7aa;border-radius:20px;font-size:11px;color:#9a3412;">
+        <b>${a.icon} ${a.title}</b> · ${a.desc}
+      </span>`
+    ).join('');
+  } else {
+    achHtml = '<span style="font-size:11px;color:#666;">Terus belajar untuk membuka pencapaian eksklusif.</span>';
+  }
+
+  const html = `
+    <div style="font-family: 'Helvetica', 'Arial', sans-serif; color:#111; background:#fff; padding:30px;">
+      <!-- Header -->
+      <div style="text-align:center;border-bottom:3px solid #F59E0B;padding-bottom:16px;margin-bottom:20px;">
+        <div style="font-size:11px;letter-spacing:4px;color:#B45309;font-weight:bold;">🎮 HISTOEXPLORER · PREMIUM GAME</div>
+        <h1 style="font-size:24px;margin:8px 0 4px;color:#111;">Laporan Hasil Kuis Sejarah</h1>
+        <div style="font-size:12px;color:#666;">Kuis 1 · Pertemuan 1 · Pengertian Sejarah &amp; Konsep Dasar</div>
+      </div>
+
+      <!-- Info Pemain -->
+      <table style="width:100%;font-size:12px;margin-bottom:16px;">
+        <tr>
+          <td style="padding:6px 0;width:25%;"><b>Nama Pemain</b></td>
+          <td style="padding:6px 0;width:25%;color:#111;">${r.playerName}</td>
+          <td style="padding:6px 0;width:25%;"><b>Tanggal</b></td>
+          <td style="padding:6px 0;width:25%;color:#111;">${dateStr}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 0;"><b>Pencapaian</b></td>
+          <td style="padding:6px 0;color:#B45309;font-weight:bold;">${r.rank}</td>
+          <td style="padding:6px 0;"><b>Waktu</b></td>
+          <td style="padding:6px 0;color:#111;">${timeStr}</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 0;"><b>Predikat</b></td>
+          <td style="padding:6px 0;">Grade ${r.grade} — ${r.gradeLabel}</td>
+          <td style="padding:6px 0;"><b>Skor Akhir</b></td>
+          <td style="padding:6px 0;color:#0891b2;font-weight:bold;">${r.finalScore} / 100</td>
+        </tr>
+      </table>
+
+      <!-- Statistik -->
+      <div style="background:#FFF7ED;padding:16px;border-radius:10px;border-left:5px solid #F59E0B;margin-bottom:16px;">
+        <div style="font-size:11px;font-weight:bold;color:#B45309;letter-spacing:2px;margin-bottom:10px;">📊 STATISTIK KUIS</div>
+        <table style="width:100%;text-align:center;font-size:11px;">
+          <tr>
+            <td><div style="font-size:22px;font-weight:bold;color:#059669;">${r.benar}</div><div style="color:#666;">BENAR</div></td>
+            <td><div style="font-size:22px;font-weight:bold;color:#dc2626;">${r.salah}</div><div style="color:#666;">SALAH</div></td>
+            <td><div style="font-size:22px;font-weight:bold;color:#6b7280;">${r.dilewati}</div><div style="color:#666;">DILEWATI</div></td>
+            <td><div style="font-size:22px;font-weight:bold;color:#0891b2;">${r.finalScore}</div><div style="color:#666;">SKOR</div></td>
+            <td><div style="font-size:22px;font-weight:bold;color:#7c3aed;">${state.xp}</div><div style="color:#666;">XP</div></td>
+            <td><div style="font-size:22px;font-weight:bold;color:#B45309;">${state.bestCombo}×</div><div style="color:#666;">COMBO</div></td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Pencapaian -->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;font-weight:bold;color:#B45309;letter-spacing:2px;margin-bottom:8px;">🏅 PENCAPAIAN</div>
+        <div style="padding:10px;background:#fafafa;border-radius:8px;">
+          ${achHtml}
+        </div>
+      </div>
+
+      <!-- Catatan -->
+      <div style="background:#f0f9ff;padding:12px;border-radius:8px;border-left:4px solid #0891b2;font-size:11px;color:#0c4a6e;margin-bottom:16px;">
+        <b>Catatan:</b> ${r.msg}
+      </div>
+
+      <!-- Rincian Jawaban -->
+      <div style="font-size:11px;font-weight:bold;color:#B45309;letter-spacing:2px;margin-bottom:8px;">📝 RINCIAN JAWABAN</div>
+      <table style="width:100%;font-size:10px;border-collapse:collapse;">
+        <thead>
+          <tr style="background:#f3f4f6;">
+            <th style="padding:6px;border:1px solid #e5e7eb;">No</th>
+            <th style="padding:6px;border:1px solid #e5e7eb;">Topik</th>
+            <th style="padding:6px;border:1px solid #e5e7eb;">Pertanyaan</th>
+            <th style="padding:6px;border:1px solid #e5e7eb;">Kunci</th>
+            <th style="padding:6px;border:1px solid #e5e7eb;">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${reviewRows}
+        </tbody>
+      </table>
+
+      <!-- Footer -->
+      <div style="text-align:center;font-size:10px;color:#999;margin-top:24px;padding-top:12px;border-top:1px solid #e5e7eb;">
+        Dokumen ini digenerate otomatis oleh <b>HistoExplorer Premium Game</b> · ${dateStr} ${timeStr}
+        <br>Dikirim sebagai bukti pengerjaan Kuis 1 · Pertemuan 1 — Pengertian Sejarah &amp; Konsep Dasar
+      </div>
+    </div>
+  `;
+
+  // Wrapper untuk html2pdf
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'position:fixed;top:0;left:0;width:794px;background:#ffffff;color:#111;z-index:-9999;';
+  wrap.innerHTML = html;
+  document.body.appendChild(wrap);
+
+  if (typeof html2pdf === 'undefined') {
+    // Fallback: print dialog
+    document.body.removeChild(wrap);
+    window.print();
+    showToast('🖨️', 'Dialog Cetak', 'Pilih "Simpan sebagai PDF" pada dialog.', 'cyan');
+    return;
+  }
+
+  showToast('📄', 'Menyiapkan PDF...', 'Mohon tunggu sebentar.', 'cyan');
+
+  html2pdf().set({
+    margin: [10, 8, 10, 8],
+    filename: `Hasil-Kuis-Sejarah_${safeName}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: false, windowWidth: 794 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+  }).from(wrap).save().then(() => {
+    document.body.removeChild(wrap);
+    showToast('✅', 'PDF Tersimpan!', `File: Hasil-Kuis-Sejarah_${safeName}.pdf`, 'green');
+  }).catch(err => {
+    console.error(err);
+    document.body.removeChild(wrap);
+    window.print();
+    showToast('🖨️', 'Menggunakan Dialog Cetak', 'Pilih "Simpan sebagai PDF".', 'cyan');
+  });
 }
 
 /* ============================================================
@@ -1983,7 +2510,16 @@ document.addEventListener('keydown', e => {
   else if (['d','D','4'].includes(e.key)) selectOption('D', document.querySelector('#options .opt[data-letter="D"]'));
   else if (['e','E','5'].includes(e.key)) selectOption('E', document.querySelector('#options .opt[data-letter="E"]'));
   else if (e.key === 'ArrowRight' || e.key === 'Enter'){
-    if (!document.getElementById('btnNext').disabled) nextQuestion();
+    const btn = document.getElementById('btnNext');
+    if (!btn.disabled && btn.style.display !== 'none') nextQuestion();
+    else {
+      const btnF = document.getElementById('btnFinish');
+      if (btnF.style.display !== 'none') finishGame();
+    }
+  }
+  else if (e.key === 'ArrowLeft'){
+    const btn = document.getElementById('btnPrev');
+    if (!btn.disabled) prevQuestion();
   }
 });
 </script>
